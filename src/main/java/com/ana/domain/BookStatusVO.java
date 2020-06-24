@@ -6,8 +6,10 @@ import lombok.Data;
 
 @Data
 public class BookStatusVO {
+
    private String bookNum;
    private String bookStatus;
    private Date updateDate;
 
 }
+

@@ -18,6 +18,5 @@ public class RoomVO {
    private int price;
    private String romUrl;
    private String romLocainfo;
-
-
 }
+

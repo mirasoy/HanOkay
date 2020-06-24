@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class AcmPicVO {
+
    private String acmNum;
    private String acmPurl;
    private String picTitle;
@@ -11,3 +12,4 @@ public class AcmPicVO {
    private int acmPnum;
 
 }
+

@@ -14,4 +14,5 @@ public class PostVO {
 	private String pContent;
 	private Date pRegDate;
 	private Date pUpdateDate;
+
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class BookingVO {
+
 	private String bookInt;
 	private String userInt;
 	private String romInt;
