@@ -19,23 +19,23 @@ public class AcmMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private AcmMapper mapper;
 	
-	@Test
+	//@Test
     public void testGetList() {
 		mapper.getList().forEach(board -> log.info(board));
 	}
 	
-	@Test
+	//@Test
 	public void testRead() {
 		AcmVO acm = mapper.read("A5");
 		log.info(acm);
 	}
 	
-	@Test
+	//@Test
 	public void testDelete() {
 		log.info("DELETE COUNT: " + mapper.delete("A3"));
 	}
 	
-    @Test
+  //  @Test
 	public void testUpdate() {
 		AcmVO acm = new AcmVO();
 		
@@ -55,7 +55,7 @@ public class AcmMapperTests {
     }
 	
 	
-	@Test
+	//@Test
 	public void testInsert() {
 		AcmVO acm = new AcmVO();
 		acm.setAcm_Name("새로 추가한 숙소");
@@ -71,6 +71,7 @@ public class AcmMapperTests {
 		
 		log.info(acm);
 	}
+	
 	
 	@Test
 	public void testInsertSelectKey() {
