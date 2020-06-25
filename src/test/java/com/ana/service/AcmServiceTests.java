@@ -12,6 +12,10 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class AcmServiceTests {
 	
+<<<<<<< HEAD
 //	@Setter(onMethod_= {@Autowired})
+=======
+	//@Setter(onMethod_= {@Autowired})
+>>>>>>> 0fb3344a08a410ad36c622457a722000a6b6136c
 	
 }
