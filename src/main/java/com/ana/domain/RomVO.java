@@ -4,7 +4,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class RoomVO {
+public class RomVO {
    
    private String romNum;
    private String acmNum;
