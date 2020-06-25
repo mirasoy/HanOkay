@@ -19,32 +19,33 @@ public class AcmServiceImpl implements AcmService{
 	
 	@Override
 	public void register(AcmVO acm) {
-		// TODO Auto-generated method stub
+		log.info("register......" + acm);
 		
+		mapper.insertSelectKey(acm);
 	}
 
 	@Override
-	public AcmVO get(String Acm_Num) {
-		// TODO Auto-generated method stub
-		return null;
+	public AcmVO get(String acmNum) {
+		log.info("get......"+acmNum);
+		return mapper.read(acmNum);
 	}
 
 	@Override
 	public boolean modify(AcmVO acm) {
-		// TODO Auto-generated method stub
-		return false;
+		log.info("modify......" + acm);
+		return mapper.update(acm)==1;
 	}
 
 	@Override
-	public boolean remove(String Acm_Num) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean remove(String acmNum) {
+		log.info("remove......" + acmNum);
+		return mapper.delete(acmNum)==1;
 	}
 
 	@Override
 	public List<AcmVO> getList() {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("getList...........");
+		return mapper.getList();
 	}
 
 }
