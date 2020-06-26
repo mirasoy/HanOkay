@@ -1,5 +1,9 @@
 package com.ana.mapper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,35 +23,35 @@ public class AcmMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private AcmMapper mapper;
 	
-	//@Test
+	@Test
     public void testGetList() {
 		mapper.getList().forEach(board -> log.info(board));
 	}
 	
-	//@Test
+	@Test
 	public void testRead() {
 		AcmVO acm = mapper.read("A5");
 		log.info(acm);
 	}
 	
-	//@Test
+	@Test
 	public void testDelete() {
 		log.info("DELETE COUNT: " + mapper.delete("A3"));
 	}
 	
-  //  @Test
+    @Test
 	public void testUpdate() {
 		AcmVO acm = new AcmVO();
 		
-		acm.setAcm_Num("A5");
-		acm.setAcm_Name("수정된 숙소이름");
-		acm.setAcm_City("수정된 숙소도시");
-		acm.setAcm_Distr("수정된 숙소 동");
-		acm.setAcm_Detailaddr("수정된 숙소 상세주소");
-		acm.setRep_Phone(8200000000L);
-		acm.setBiz_Regnum(11000000L);
-		acm.setCheckin_Time("pm12");
-		acm.setCheckout_Time("pm06");
+		acm.setAcmNum("A5");
+		acm.setAcmName("수정된 숙소이름");
+		acm.setAcmCity("수정된 숙소도시");
+		acm.setAcmDistr("수정된 숙소 동");
+		acm.setAcmDetailaddr("수정된 숙소 상세주소");
+		acm.setRepPhone(8200000000L);
+		acm.setBizRegnum(11000000L);
+		acm.setCheckinTime("pm12");
+		acm.setCheckoutTime("pm06");
 		
 		int count = mapper.update(acm);
 		log.info("UPDATE COUNT: " + count);
@@ -55,17 +59,17 @@ public class AcmMapperTests {
     }
 	
 	
-	//@Test
+	@Test
 	public void testInsert() {
 		AcmVO acm = new AcmVO();
-		acm.setAcm_Name("새로 추가한 숙소");
-		acm.setAcm_City("새로운 숙소 시");
-		acm.setAcm_Distr("새로운 숙소 동");
-		acm.setAcm_Detailaddr("새로운 숙소 상세주소");
-		acm.setRep_Phone(8212341234L);
-		acm.setBiz_Regnum(56785678L);
-		acm.setCheckin_Time("AM11");
-		acm.setCheckout_Time("PM04");
+		acm.setAcmName("새로 추가한 숙소");
+		acm.setAcmCity("새로운 숙소 시");
+		acm.setAcmDistr("새로운 숙소 동");
+		acm.setAcmDetailaddr("새로운 숙소 상세주소");
+		acm.setRepPhone(8212341234L);
+		acm.setBizRegnum(56785678L);
+		acm.setCheckinTime("AM11");
+		acm.setCheckoutTime("PM04");
 		
 		mapper.insert(acm);
 		
@@ -76,14 +80,14 @@ public class AcmMapperTests {
 	@Test
 	public void testInsertSelectKey() {
 		AcmVO acm = new AcmVO();
-		acm.setAcm_Name("새로 추가한 숙소 select key");
-		acm.setAcm_City("새로운 숙소 시selectkey");
-		acm.setAcm_Distr("새로운 숙소 동");
-		acm.setAcm_Detailaddr("새로운 숙소 상세주소");
-		acm.setRep_Phone(8212341234L);
-		acm.setBiz_Regnum(56785678L);
-		acm.setCheckin_Time("AM11");
-		acm.setCheckout_Time("PM04");
+		acm.setAcmName("새로 추가한 숙소 select key");
+		acm.setAcmCity("새로운 숙소 시selectkey");
+		acm.setAcmDistr("새로운 숙소 동");
+		acm.setAcmDetailaddr("새로운 숙소 상세주소");
+		acm.setRepPhone(8212341234L);
+		acm.setBizRegnum(56785678L);
+		acm.setCheckinTime("AM11");
+		acm.setCheckoutTime("PM04");
 		
 		mapper.insertSelectKey(acm);
 		
