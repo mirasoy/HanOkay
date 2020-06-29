@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.RomMapper">
+
+	<resultMap type="com.ana.domain.RomVO" id="RomVO">
+		<result column="ROM_NUM" property="romNum" />
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="ROOM_NAME" property="roomName" />
+		<result column="CAPACITY" property="capacity" />
+		<result column="BED_TYPE" property="bedType" />
+		<result column="BED_CNT" property="bedCnt" />
+		<result column="ROM_SIZE" property="romSize" />
+		<result column="PRICE" property="price" />
+		<result column="ROM_PURL" property="romUrl" />
+		<result column="ROM_LOCAINFO" property="romLocainfo" />
+	</resultMap>
+
+	<select id="getList" resultMap="RomVO">
+	<![CDATA[
+		select * from TROM
+		]]>
+		<!-- where rom_num > 0 -->
+	</select>
+
+	<insert id="insert">
+		<selectKey keyProperty="romNum" order="BEFORE"
+			resultType="String">
+			select concat('R',seq_trom.nextval) from dual
+		</selectKey>
+
+		insert into TROM(ROM_NUM, ACM_NUM, ROOM_NAME,
+		CAPACITY, BED_TYPE,
+		BED_CNT, ROM_SIZE, PRICE,
+		ROM_PURL, ROM_LOCAINFO)
+		values (#{romNum},
+		#{acmNum}, #{roomName}, #{capacity},
+		#{bedType}, #{bedCnt}, #{romSize},
+		#{price}, #{romUrl}, #{romLocainfo})
+	</insert>
+
+	<select id="read" resultMap="RomVO">
+		select * from TROM where ROM_NUM =
+		#{romNum}
+	</select>
+
+	<update id="update">
+		update TROM
+		set ROOM_NAME = #{roomName},
+		CAPACITY = #{capacity},
+		BED_TYPE = #{bedType},
+		BED_CNT = #{bedCnt},
+		PRICE = #{price},
+		ROM_PURL = #{romUrl}
+		where ROM_NUM = #{romNum}
+	</update>
+	
+	<delete id="delete">
+		delete TROM where ROM_NUM = #{romNum}
+	</delete>
+	
+</mapper>

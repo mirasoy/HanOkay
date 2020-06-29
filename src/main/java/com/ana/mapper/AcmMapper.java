@@ -15,9 +15,9 @@ public interface AcmMapper {
 	
 	public void insertSelectKey(AcmVO acm);
 	
-	public AcmVO read(String acm_Num);
+	public AcmVO read(String acmNum);
 	
-	public int delete(String acm_Num);
+	public int delete(String acmNum);
 	
 	public int update(AcmVO acm);
 
