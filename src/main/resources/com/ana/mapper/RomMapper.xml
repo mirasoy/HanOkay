@@ -18,9 +18,7 @@
 	</resultMap>
 
 	<select id="getList" resultMap="RomVO">
-	<![CDATA[
-		select * from TROM
-		]]>
+		select * from TROM where ACM_NUM = #{acmNum}
 		<!-- where rom_num > 0 -->
 	</select>
 

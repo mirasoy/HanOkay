@@ -1,6 +1,5 @@
 package com.ana.domain;
 
-import java.util.Date;
 import lombok.Data;
 
 @Data
