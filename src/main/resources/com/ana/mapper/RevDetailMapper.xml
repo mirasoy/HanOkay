@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.RevDetailMapper">
+
+<resultMap id="RevDetailVOResult" type="com.ana.domain.RevDetailVO">
+		<result column="PST_NUM" property="pstNum" />
+		<result column="REV_PURL" property="revPurl" />
+		<result column="STISF" property="stisf" />
+		<result column="ACM_NUM" property="acmNum" />	
+		<result column="BOOK_NUM" property="bookNum" />	
+		<result column="CONTENT" property="content" />
+		
+		
+</resultMap>
+
+<select id="read" resultMap="RevDetailVOResult">
+	select * from TREV_DETAIL where PST_NUM = #{pstNum}
+</select>
+
+<delete id="delete">
+	delete from TREV_DETAIL where PST_NUM = #{pstNum}
+</delete>
+
+<update id="update">
+	update TREV_DETAIL
+	set REV_PURL=#{revPurl},
+		STISF=#{stisf},
+		ACM_NUM=#{acmNum},
+		BOOK_NUM=#{bookNum},
+		CONTENT=#{content}
+		where PST_NUM = #{pstNum}
+</update>
+
+<select id="getList" resultMap="RevDetailVOResult" >
+<![CDATA[
+select * from TREV_DETAIL
+]]>
+</select>
+
+<insert id="insert">
+
+<selectKey keyProperty="pstNum" order="BEFORE" resultType="String">
+select SEQ_REV.nextval from dual
+     
+</selectKey>
+INSERT INTO TREV_DETAIL(PST_NUM, REV_PURL, STISF, ACM_NUM,BOOK_NUM,CONTENT) 
+VALUES(#{pstNum},#{revPurl},#{stisf},#{acmNum},#{bookNum},#{content}) 
+
+</insert>
+
+</mapper>

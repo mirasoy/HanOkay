@@ -3,11 +3,14 @@ package com.ana.domain;
 import lombok.Data;
 
 @Data
-public class RevPostVO {
+public class RevDetailVO {
 	
-	private String brdCode;
+	
+	private String pstNum;
 	private String revPurl;
-	private int stisf;
+	private Integer stisf;
+	private String acmNum;
 	private String bookNum;
+	private String content;
 
 }

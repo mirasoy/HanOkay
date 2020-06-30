@@ -5,16 +5,18 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class RevPostVO {
+public class RevVO {
 	
 	private String pstNum;
 	private String brdCode;
 	private String pTitle;
 	private String userNum;
-	private String pRegDate;
+	private Date pRegDate;
 	private Date pUpdateDate;
-	private RevDetailVO revDetail;
-	{revDetail = new RevDetailVO();}
-	
-	
+	private String revPurl;
+	private Integer stisf;
+	private String acmNum;
+	private String bookNum;
+	private String content;
+
 }
