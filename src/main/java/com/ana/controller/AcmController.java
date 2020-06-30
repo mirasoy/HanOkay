@@ -22,11 +22,12 @@ public class AcmController {
 	
 	private AcmService service;
 	
-	@GetMapping("/list")
+	@GetMapping({"/list","/index"})
 	public void list(Model model) {
 		
 		log.info("list");
 		model.addAttribute("list", service.getList());
+	
 	}
 	
 	@PostMapping("/register")
@@ -51,6 +52,7 @@ public class AcmController {
 		if(service.modify(acm)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
 		return "redirect:/acm/list";
 	}
 	
@@ -61,5 +63,10 @@ public class AcmController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/acm/list";
+	}
+	
+	@GetMapping("/register")
+	public void register() {
+		
 	}
 }
