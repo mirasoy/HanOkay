@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ana.mapper.BookingMapper">
+
+
+ <resultMap id="BookingVOResult" type="com.ana.domain.BookingVO">
+      <result column="book_num" property="bookNum" />
+      <result column="user_num" property="userNum" />
+      <result column="rom_num" property="romNum" />
+      <result column="book_Date" property="bookDate" />   
+      <result column="checkin_Date" property="checkinDate" />   
+      <result column="chekout_Date" property="chekoutDate" />   
+      <result column="staydays" property="staydays" />   
+      <result column="guest" property="guest" />   
+      <result column="book_Price" property="bookPrice" />   
+      <result column="deposit" property="deposit" />   
+      <result column="canceled" property="canceled" />   
+      <result column="expected_Arr" property="expectedArr" />   
+      <result column="smoking" property="smoking" />   
+      <result column="request" property="request" />   
+      <result column="real_Arr" property="realArr" />   
+</resultMap>
+
+
+
+	<delete id="delete">
+		delete from tbooking where book_Num = #{bookNum}
+	</delete>
+
+
+	<update id="update" >
+		update tbooking
+		set 
+			user_num = #{userNum},
+			rom_num =#{romNum},
+			book_Date=#{bookDate},
+			checkin_Date=#{checkinDate},
+			chekout_Date=#{chekoutDate},
+			staydays=#{staydays},
+			guest=#{guest},
+			book_Price=#{bookPrice},
+			deposit=#{deposit},
+			canceled=#{canceled},
+			expected_Arr=#{expectedArr},
+			smoking=#{smoking},
+			request=#{request},
+			real_Arr=#{realArr}		
+
+			where book_num=#{bookNum}
+	</update>
+
+
+
+	<select id="read" resultMap="BookingVOResult">
+		select * from tbooking where book_Num = #{bookNum}
+
+	
+	</select>
+
+
+
+	<select id="getList" resultMap="BookingVOResult">
+	
+	<![CDATA[
+
+	select * from tbooking where user_num='A1'
+	
+
+	]]>
+	
+	</select>
+
+
+</mapper>

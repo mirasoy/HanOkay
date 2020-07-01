@@ -7,20 +7,21 @@ import lombok.Data;
 @Data
 public class BookingVO {
 
-	private String bookInt;
-	private String userInt;
-	private String romInt;
+	private String bookNum;
+	private String userNum;
+	private String romNum;
 	private Date bookDate;
 	private Date checkinDate;
 	private Date chekoutDate;
-	private int staydays;
-	private int guest;
-	private int bookPrice;
-	private int deposit;
-	private char canceled;
+	private Integer staydays;
+	private Integer guest;
+	private Integer bookPrice;
+	private Integer deposit;
+	private Character canceled;
 	private String expectedArr;
-	private char smoking;
+	private Character smoking;
 	private String request;
 	private String realArr;
-
+	
+	
 }
