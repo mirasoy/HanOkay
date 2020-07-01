@@ -37,7 +37,7 @@ public class RevPostServiceTests {
 	public void testRegister() {
 		RevPostVO post = new RevPostVO();
 		post.setBrdCode("rev");
-		post.setPTitle("서비스제목");
+		post.setTitle("서비스제목");
 		post.setUserNum("서비스작성자");
 
 		// service.register(post);
