@@ -15,6 +15,6 @@ public interface RevPostService {
 	
 	public boolean remove(String postNum);
 	
-	public List<RevPostVO> getList();
+	public List<RevVO> getList();
 
 }

@@ -35,7 +35,7 @@ public class RevServiceTests {
 	public void testRegister() {
 		RevVO post = new RevVO();
 		post.setBrdCode("rev");
-		post.setPTitle("서비스제목");
+		post.setTitle("서비스제목");
 		post.setUserNum("서비스작성자");
 		post.setAcmNum("A1");
 		post.setBookNum("B12");
@@ -48,7 +48,7 @@ public class RevServiceTests {
 		log.info("생성된 리뷰의 번호: " + post.getPstNum());
 	}
 	
-	//@Test
+//	@Test
 	public void testGetList() {
 		service.getList().forEach(post->log.info(post));
 	}
@@ -64,7 +64,7 @@ public class RevServiceTests {
 		log.info("REMOVE RESULT: " + service.remove("12"));
 	}
 	
-	@Test
+//	@Test
 	public void testUpdate() {
 		RevVO post = service.get("34");
 		
@@ -72,8 +72,13 @@ public class RevServiceTests {
 			return;
 		}
 		
-		post.setPTitle("제목 수정합니다. ");
+		post.setTitle("제목 수정합니다. ");
 		log.info("MODIFY RESULT: "+service.modify(post));
+	}
+	
+	@Test
+	public void testGetMyList() {
+		service.getUserList("U1").forEach(post->log.info(post));
 	}
 	
 }

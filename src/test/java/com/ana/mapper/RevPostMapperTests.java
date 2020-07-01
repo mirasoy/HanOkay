@@ -32,9 +32,15 @@ public class RevPostMapperTests {
 		mapper.getList().forEach(post -> log.info(post));
 	}
 	
+@Test
+public void testGetMyList() {
+	mapper.getMyList("U2").forEach(post -> log.info(post));
+}
+
+
 
  
-   @Test
+  // @Test
 	public void testRead() {
 		RevVO post = mapper.read("5");
 			log.info(post);
@@ -49,7 +55,7 @@ public class RevPostMapperTests {
 	public void testUpdate() {
 		RevVO post = new RevVO();
 		post.setBrdCode("rev");
-		post.setPTitle("수정한 제목제목");
+		post.setTitle("수정한 제목제목");
 		post.setUserNum("추가된작성자");
 		post.setPstNum("33");
 		post.setAcmNum("a18");
@@ -68,7 +74,7 @@ public class RevPostMapperTests {
 	public void testInsert() {
 		RevVO post = new RevVO();
 		post.setBrdCode("rev");
-		post.setPTitle("추가제목");
+		post.setTitle("추가제목");
 		post.setUserNum("추가된작성자");
 		
 		post.setAcmNum("a18");

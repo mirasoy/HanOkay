@@ -8,7 +8,9 @@ import com.ana.domain.RevVO;
 
 public interface RevPostMapper {
 
-	public List<RevPostVO> getList();
+	public List<RevVO> getList();
+	
+	public List<RevVO> getMyList(String loginUser);
 	
 	public void insert(RevVO RevVO);
 	

@@ -49,7 +49,7 @@ public class RevServiceImpl implements RevService{
 		revPost.setPstNum(post.getPstNum());
 		revPost.setUserNum(post.getUserNum());
 		revPost.setBrdCode(post.getBrdCode());
-		revPost.setPTitle(post.getPTitle());
+		revPost.setPTitle(post.getTitle());
 		revPost.setPRegDate(beforeFormat.format(post.getPRegDate()));
 
 		
@@ -75,9 +75,15 @@ public class RevServiceImpl implements RevService{
 	}
 
 	@Override
-	public List<RevPostVO> getList() {
+	public List<RevVO> getList() {
 		log.info("getList...........");
 		return mapper.getList();
+	}
+
+	@Override
+	public List<RevVO> getUserList(String loginUser) {
+		
+		return mapper.getMyList(loginUser);
 	}
 	
 
