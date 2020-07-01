@@ -3,6 +3,7 @@ package com.ana.mapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -23,23 +25,24 @@ public class AcmMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private AcmMapper mapper;
 	
-	@Test
+	//@Test
     public void testGetList() {
 		mapper.getList().forEach(board -> log.info(board));
 	}
 	
-	@Test
+
+	//@Test
 	public void testRead() {
 		AcmVO acm = mapper.read("A5");
 		log.info(acm);
 	}
 	
-	@Test
+	//@Test
 	public void testDelete() {
 		log.info("DELETE COUNT: " + mapper.delete("A3"));
 	}
 	
-    @Test
+    //@Test
 	public void testUpdate() {
 		AcmVO acm = new AcmVO();
 		
@@ -59,7 +62,7 @@ public class AcmMapperTests {
     }
 	
 	
-	@Test
+	//@Test
 	public void testInsert() {
 		AcmVO acm = new AcmVO();
 		acm.setAcmName("새로 추가한 숙소");
@@ -77,7 +80,7 @@ public class AcmMapperTests {
 	}
 	
 	
-	@Test
+	//@Test
 	public void testInsertSelectKey() {
 		AcmVO acm = new AcmVO();
 		acm.setAcmName("새로 추가한 숙소 select key");
@@ -94,6 +97,27 @@ public class AcmMapperTests {
 		log.info(acm);
 	}
 	
+	@Test
+	public void testPaging() {
+		Criteria cri = new Criteria();
+		//10개씩 3페이지
+		cri.setPageNum(3);
+		cri.setAmount(10);
+		
+		List<AcmVO> list = mapper.getListWithPaging(cri);
+		list.forEach(acm -> log.info(acm.getAcmNum()));
+	}
+	
+	@Test
+	public void testSearch() {
+		Criteria cri = new Criteria();
+		cri.setKeyword("북촌");
+		cri.setType("TC");
+		List<AcmVO> list = mapper.getListWithPaging(cri);
+		list.forEach(acm -> log.info(acm));
+	}
+	
+
 	/*acmname      |acmcity |acmdistr |acmdetailaddr |repphone    |
 	bizregnum  |checkintime |checkouttime |acmregdate            |
 	acmupdatedate         |phone2     |acmfax      |acmemail     |acmdesc*/

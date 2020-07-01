@@ -20,7 +20,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="acm_Fax" property="acmFax" />	
 		<result column="acm_Email" property="acmEmail" />	
 		<result column="acm_Desc" property="acmDesc" />	
+		<result column="acm_Purl" property="acmPurl" />	
 </resultMap>
+
+<sql id="criteria">
+<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<foreach item='type' collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'T'.toString()">
+						acm_name like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'C'.toString()">
+						acm_city like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'W'.toString()">
+						checkin_time like '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
+
+
+
+<select id="getListWithPaging" resultMap="AcmVOResult">
+<![CDATA[
+select
+acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc
+from
+	(
+	select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
+		rownum rn, acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc
+	from
+		tacm
+	where
+]]>
+	
+	<include refid="criteria"></include>
+	<![CDATA[
+	rownum <= #{pageNum} * #{amount}
+	)
+	where rn > (#{pageNum}-1) * #{amount}
+]]>
+</select>
+
+<select id="getTotalCount" resultType="int">
+select count(*) from tacm
+where
+<include refid="criteria"></include>
+ to_number(substr(acm_num,2))>0
+</select>
+
 <select id="read" resultMap="AcmVOResult">
 	select * from tacm where acm_Num = #{acmNum}
 </select>

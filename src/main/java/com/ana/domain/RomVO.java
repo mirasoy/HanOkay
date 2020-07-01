@@ -9,6 +9,7 @@ public class RomVO {
    private String romNum;
    private String acmNum;
    private String roomName;
+
    private Integer capacity;
    private String bedType;
 
@@ -18,5 +19,6 @@ public class RomVO {
 
    private String romUrl;
    private String romLocainfo;
+
 }
 
