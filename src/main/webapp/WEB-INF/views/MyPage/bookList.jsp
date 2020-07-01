@@ -73,7 +73,7 @@
 							<td><c:out value="${board.smoking}" /></td>		
 							<td><c:out value="${board.request}" /></td>		
 							<td><c:out value="${board.realArr}" /></td>		
-							<td><a href="/MyPage/info?book_Num=${board.bookNum}">예약정보</a></td>
+							<td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td>
 					
 						</tr>
 						

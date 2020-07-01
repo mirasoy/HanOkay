@@ -45,18 +45,18 @@
         
         <div class ="form-group">
        		<label>예약일자</label>
-       		<input class="form-control" name='bookDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.bookDate}" />' readonly> 
+       		<input class="form-control" name='bookDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${info.bookDate}" />' readonly> 
         </div>
 
       
         <div class ="form-group">
        		<label>체크인날짜</label>
-       		<input class="form-control" name='checkinDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkinDate}" />' readonly> 
+       		<input class="form-control" name='checkinDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${info.checkinDate}" />' readonly> 
         </div>
         
         <div class ="form-group">
        		<label>체크아웃날짜</label>
-       		<input class="form-control" name='chekoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.chekoutDate}" />' readonly> 
+       		<input class="form-control" name='chekoutDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${info.chekoutDate}" />' readonly> 
         </div>                   
       
         <div class="form-group">
@@ -165,7 +165,12 @@ $(document).ready(function() {
 	  if(operation==='remove'){
 		  formObj.attr("action", "/MyPage/remove"); 
 		 
-	  }else if(operation === 'bookList'){
+	  }else if(operation === 'modify'){
+		  formObj.attr("action", "/MyPage/modify"); 
+		  formObj.attr("method", "post"); 
+		
+	  }
+	  else if(operation === 'bookList'){
 		  self.location="/MyPage/bookList";
 		  return;
 	  }

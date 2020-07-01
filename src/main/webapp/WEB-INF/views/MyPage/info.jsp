@@ -98,7 +98,7 @@
         </div> 
 
 
-<button data-oper='modify' class="btn btn-default" onclick="location.href='/MyPage/modify?book_Num=<c:out value="${info.bookNum}"/>'">Modify</button>
+<button data-oper='modify' class="btn btn-default" onclick="location.href='/MyPage/modify?bookNum=<c:out value="${info.bookNum}"/>'">Modify</button>
 <button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/bookList'">List</button>
 
 

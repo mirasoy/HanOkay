@@ -1,5 +1,7 @@
 package com.ana.controller;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +31,8 @@ public class BookingController {
 	}
 	
 	//예약 조회 페이지와 이동	
-	@GetMapping({"/info", "modify"})
-	public void get(@RequestParam("book_Num") String bookNum, Model model) {
+	@GetMapping({"/info", "/modify"})
+	public void get(@RequestParam("bookNum") String bookNum, Model model) {
 		log.info("/info or modify");
 		model.addAttribute("info", service.get(bookNum));
 	}
@@ -38,10 +40,11 @@ public class BookingController {
 
 	
 	@PostMapping("/modify")
-	public String modify(BookingVO board, RedirectAttributes rttr) {
-		log.info("modify:"+board);
-		
-		if(service.modify(board)) {
+	public String modify(BookingVO info, RedirectAttributes rttr) {
+	//public String modify(String canceled, RedirectAttributes rttr) {
+		log.info("modify:"+info);		
+		if(service.modify(info)) {
+		//if(service.modify(null)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/MyPage/bookList";

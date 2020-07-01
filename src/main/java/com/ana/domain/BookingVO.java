@@ -17,9 +17,9 @@ public class BookingVO {
 	private Integer guest;
 	private Integer bookPrice;
 	private Integer deposit;
-	private Character canceled;
+	private String canceled;
 	private String expectedArr;
-	private Character smoking;
+	private String smoking;
 	private String request;
 	private String realArr;
 	

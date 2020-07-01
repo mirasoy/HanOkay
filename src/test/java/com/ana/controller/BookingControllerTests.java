@@ -83,22 +83,21 @@ public class BookingControllerTests {
 		
 		String resultPage = mockMvc
 				.perform(MockMvcRequestBuilders.post("/MyPage/modify")
-						.param("book_Num", "B2")
-						.param("user_Num", "수정된 회원번호")
-						.param("rom_num", "수정된 방번호")						
+						.param("bookNum", "B2")
+						.param("userNum", "수정된 회원번호")
+						.param("romNum", "수정된 방번호")						
 						.param("staydays", "1")
 						.param("guest", "1")
-						.param("book_Price", "123")
+						.param("bookPrice", "123")
 						.param("deposit", "1")
 						.param("canceled", "1")
-						.param("expected_Arr", "수정")
+						.param("expectedArr", "수정")
 						.param("smoking", "1")
 						.param("request", "수정")
-						.param("real_Arr", "수정된 도착시간")														
-						.param("book_Date", "2020/02/02")
-						.param("checkin_Date", "2020/02/02")
-						.param("chekout_Date", "2020/02/02")						
-						
+						.param("realArr", "수정된 도착시간")														
+						.param("bookDate", "2020/02/02")
+						.param("checkinDate", "2020/02/02")
+						.param("chekoutDate", "2020/02/02")						
 						)
 				.andReturn().getModelAndView().getViewName();
 		

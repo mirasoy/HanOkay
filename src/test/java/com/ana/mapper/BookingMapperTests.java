@@ -56,8 +56,8 @@ public class BookingMapperTests {
 		}
 		
 		
-		board.setCanceled('1');
-		board.setSmoking('1');
+		board.setCanceled("1");
+		board.setSmoking("1");
 		
 		
 		int count = mapper.update(board);
