@@ -11,8 +11,8 @@ public class RevVO {
 	private String brdCode;
 	private String title;
 	private String userNum;
-	private Date pRegDate;
-	private Date pUpdateDate;
+	private Date regDate;
+	private Date updateDate;
 	private String revPurl;
 	private Integer stisf;
 	private String acmNum;

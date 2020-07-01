@@ -25,9 +25,13 @@ public class RevPostMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private RevPostMapper mapper;
 		
+	@Test
+	public void testGetList2() {
+		mapper.getAcmList("A2").forEach(post -> log.info(post));
+	}
 	
 	
-//@Test
+//	@Test
     public void testGetList() {
 		mapper.getList().forEach(post -> log.info(post));
 	}
@@ -40,7 +44,7 @@ public void testGetMyList() {
 
 
  
-  // @Test
+//   @Test
 	public void testRead() {
 		RevVO post = mapper.read("5");
 			log.info(post);
@@ -89,9 +93,5 @@ public void testGetMyList() {
 	}
 	
 	
-
-	/*postname      |postcity |postdistr |postdetailaddr |repphone    |
-	bizregnum  |checkintime |checkouttime |postregdate            |
-	postupdatedate         |phone2     |postfax      |postemail     |postdesc*/
 
 }

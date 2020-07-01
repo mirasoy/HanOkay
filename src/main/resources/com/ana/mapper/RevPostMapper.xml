@@ -11,17 +11,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ACM_NUM" property="acmNum" />	
 		<result column="BOOK_NUM" property="bookNum" />	
 		<result column="CONTENT" property="content" />
-		
-		
 </resultMap>
 
 <resultMap id="RevPostVOResult" type="com.ana.domain.RevPostVO">
 		<result column="PST_NUM" property="pstNum" />
 		<result column="BRD_CODE" property="brdCode" />
-		<result column="P_TITLE" property="pTitle" />
+		<result column="P_TITLE" property="title" />
 		<result column="USER_NUM" property="userNum" />	
-		<result column="P_REGDATE" property="pRegDate" />	
-		<result column="P_UPDATEDATE" property="pUpdateDate" />
+		<result column="P_REGDATE" property="regDate" />	
+		<result column="P_UPDATEDATE" property="updateDate" />
 		<collection property="revDetail" resultMap="RevDetailVOResult"/>
 		
 </resultMap>
@@ -32,8 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="BRD_CODE" property="brdCode" />
 		<result column="P_TITLE" property="title" />
 		<result column="USER_NUM" property="userNum" />	
-		<result column="P_REGDATE" property="pRegDate" />	
-		<result column="P_UPDATEDATE" property="pUpdateDate" />
+		<result column="P_REGDATE" property="regDate" />	
+		<result column="P_UPDATEDATE" property="updateDate" />
 		<result column="REV_PURL" property="revPurl" />
 		<result column="STISF" property="stisf" />
 		<result column="ACM_NUM" property="acmNum" />	
@@ -42,8 +40,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ACM_NAME" property="acmName" />
 		<result column="CHECKIN_DATE" property="checkInDay" />
 		<result column="CHEKOUT_DATE" property="CheckOutDay" />
-<!-- 		<result column="loginUser" property="loginUser" /> -->
-		
 </resultMap>
 
 
@@ -161,7 +157,7 @@ SET
     brd_code = #{brdCode},
     p_title =#{title},
     user_num =#{userNum},
-    p_regdate = #{pRegDate}
+    p_regdate = #{regDate}
 WHERE
     PST_NUM = #{pstNum}
 		
@@ -188,7 +184,6 @@ LEFT JOIN
 ON 
     a.pst_num = b.pst_num
     
-    
 </select>
 
 <insert id="insert" >
@@ -200,7 +195,7 @@ select SEQ_REV.nextval from dual
 
     INSERT ALL
     INTO TREV_POST(PST_NUM, BRD_CODE, P_TITLE, USER_NUM)
-    VALUES(#{pstNum},#{brdCode},#{pTitle},#{userNum})  
+    VALUES(#{pstNum},#{brdCode},#{title},#{userNum})  
     INTO TREV_DETAIL(pst_num,  REV_PURL , STISF , ACM_NUM ,BOOK_NUM, CONTENT  )
     VALUES(#{pstNum},#{revPurl},#{stisf},#{acmNum},#{bookNum},#{content}) 
     SELECT * 
@@ -208,5 +203,29 @@ select SEQ_REV.nextval from dual
 
 
 </insert>
+
+<select id="getAcmList" resultMap="RevPostVOResult" >
+	select 
+	A.PST_NUM,
+	A.BRD_CODE,
+	a.p_title,
+	a.p_regdate,
+	a.p_updatedate,
+	a.user_num,
+	b.rev_purl,
+	B.STISF,
+	b.acm_num,
+	b.book_num,
+	b.content
+	
+	FROM
+	    TREV_POST A
+	LEFT JOIN
+	    trev_detail B
+	ON 
+	    a.pst_num = b.pst_num
+    
+    WHERE b.acm_num = #{acmNum}
+</select>
 
 </mapper>

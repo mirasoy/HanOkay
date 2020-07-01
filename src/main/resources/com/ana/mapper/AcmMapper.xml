@@ -4,48 +4,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ana.mapper.AcmMapper">
 
-<resultMap id="AcmVOResult" type="com.ana.domain.AcmVO">
+	<resultMap id="AcmVOResult" type="com.ana.domain.AcmVO">
 		<result column="acm_Num" property="acmNum" />
 		<result column="acm_Name" property="acmName" />
 		<result column="acm_City" property="acmCity" />
-		<result column="acm_Distr" property="acmDistr" />	
-		<result column="acm_Detailaddr" property="acmDetailaddr" />	
-		<result column="rep_Phone" property="repPhone" />	
-		<result column="biz_Regnum" property="bizRegnum" />	
-		<result column="checkin_Time" property="checkinTime" />	
-		<result column="checkout_Time" property="checkoutTime" />	
-		<result column="acm_Regdate" property="acmRegdate" />	
-		<result column="acm_Updatedate" property="acmUpdatedate" />	
-		<result column="acm_Phone2" property="acmPhone2" />	
-		<result column="acm_Fax" property="acmFax" />	
-		<result column="acm_Email" property="acmEmail" />	
-		<result column="acm_Desc" property="acmDesc" />	
-		<result column="acm_Purl" property="acmPurl" />	
-</resultMap>
+		<result column="acm_Distr" property="acmDistr" />
+		<result column="acm_Detailaddr" property="acmDetailaddr" />
+		<result column="rep_Phone" property="repPhone" />
+		<result column="biz_Regnum" property="bizRegnum" />
+		<result column="checkin_Time" property="checkinTime" />
+		<result column="checkout_Time" property="checkoutTime" />
+		<result column="acm_Regdate" property="acmRegdate" />
+		<result column="acm_Updatedate" property="acmUpdatedate" />
+		<result column="acm_Phone2" property="acmPhone2" />
+		<result column="acm_Fax" property="acmFax" />
+		<result column="acm_Email" property="acmEmail" />
+		<result column="acm_Desc" property="acmDesc" />
+		<result column="acm_Purl" property="acmPurl" />
+		<result column="acm_Purl1" property="acmPurl1" />
+		<result column="acm_Purl2" property="acmPurl2" />
+		<result column="acm_Purl3" property="acmPurl3" />
+		<result column="acm_Purl4" property="acmPurl4" />
+		<result column="acm_Purl5" property="acmPurl5" />
+		<result column="acm_Purl6" property="acmPurl6" />
+	</resultMap>
 
-<sql id="criteria">
-<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-		<foreach item='type' collection="typeArr">
-			<trim prefix="OR">
-				<choose>
-					<when test="type == 'T'.toString()">
-						acm_name like '%'||#{keyword}||'%'
-					</when>
-					<when test="type == 'C'.toString()">
-						acm_city like '%'||#{keyword}||'%'
-					</when>
-					<when test="type == 'W'.toString()">
-						checkin_time like '%'||#{keyword}||'%'
-					</when>
-				</choose>
-			</trim>
-		</foreach>
-	</trim>
-</sql>
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							acm_name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							acm_city like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							checkin_time like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 
 
 
-<select id="getListWithPaging" resultMap="AcmVOResult">
+	<select id="getListWithPaging" resultMap="AcmVOResult">
 <![CDATA[
 select
 acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc
@@ -57,33 +63,33 @@ from
 		tacm
 	where
 ]]>
-	
-	<include refid="criteria"></include>
+
+		<include refid="criteria"></include>
 	<![CDATA[
 	rownum <= #{pageNum} * #{amount}
 	)
 	where rn > (#{pageNum}-1) * #{amount}
 ]]>
-</select>
+	</select>
 
-<select id="getTotalCount" resultType="int">
-select count(*) from tacm
-where
-<include refid="criteria"></include>
- to_number(substr(acm_num,2))>0
-</select>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from tacm
+		where
+		<include refid="criteria"></include>
+		to_number(substr(acm_num,2))>0
+	</select>
 
-<select id="read" resultMap="AcmVOResult">
-	select * from tacm where acm_Num = #{acmNum}
-</select>
+	<select id="read" resultMap="AcmVOResult">
+		select * from tacm where acm_Num = #{acmNum}
+	</select>
 
-<delete id="delete">
-	delete from tacm where acm_Num = #{acmNum}
-</delete>
+	<delete id="delete">
+		delete from tacm where acm_Num = #{acmNum}
+	</delete>
 
-<update id="update">
-	update tacm
-	set acm_Name=#{acmName},
+	<update id="update">
+		update tacm
+		set acm_Name=#{acmName},
 		acm_City=#{acmCity},
 		acm_Distr=#{acmDistr},
 		acm_Detailaddr=#{acmDetailaddr},
@@ -92,31 +98,38 @@ where
 		checkin_Time=#{checkinTime},
 		checkout_Time=#{checkoutTime},
 		acm_Updatedate = sysdate
-		where acm_Num = #{acmNum}
-</update>
+		where acm_Num =
+		#{acmNum}
+	</update>
 
-<select id="getList" resultMap="AcmVOResult" >
+	<select id="getList" resultMap="AcmVOResult">
 <![CDATA[
 select * from tacm
 ]]>
-</select>
+	</select>
 
-<insert id="insert">
-INSERT INTO TACM(acm_Num, acm_Name, acm_City, acm_Distr, acm_Detailaddr,
- rep_Phone, biz_Regnum, checkin_Time, checkout_Time) 
- VALUES(concat('A',seq_tacm.nextval),#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone}, 
- #{bizRegnum},#{checkinTime},#{checkoutTime})
-</insert>
+	<insert id="insert">
+		INSERT INTO TACM(acm_Num, acm_Name, acm_City,
+		acm_Distr, acm_Detailaddr,
+		rep_Phone, biz_Regnum, checkin_Time,
+		checkout_Time)
+		VALUES(concat('A',seq_tacm.nextval),#{acmName},#{acmCity},
+		#{acmDistr}, #{acmDetailaddr},#{repPhone},
+		#{bizRegnum},#{checkinTime},#{checkoutTime})
+	</insert>
 
-<insert id = "insertSelectKey">
-<selectKey keyProperty="acmNum" order="BEFORE" resultType="String">
-select concat('A',seq_tacm.nextval) from dual
-</selectKey>
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="acmNum" order="BEFORE"
+			resultType="String">
+			select concat('A',seq_tacm.nextval) from dual
+		</selectKey>
 
-INSERT INTO TACM(acm_Num, acm_Name, acm_City, acm_Distr, acm_Detailaddr,
- rep_Phone, biz_Regnum, checkin_Time, checkout_Time) 
- VALUES(#{acmNum},#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone}, 
- #{bizRegnum},#{checkinTime},#{checkoutTime})
-</insert>
+		INSERT INTO TACM(acm_Num, acm_Name, acm_City, acm_Distr,
+		acm_Detailaddr,
+		rep_Phone, biz_Regnum, checkin_Time, checkout_Time)
+		VALUES(#{acmNum},#{acmName},#{acmCity}, #{acmDistr},
+		#{acmDetailaddr},#{repPhone},
+		#{bizRegnum},#{checkinTime},#{checkoutTime})
+	</insert>
 
 </mapper>

@@ -17,4 +17,5 @@ public interface RevPostService {
 	
 	public List<RevVO> getList();
 
+	public List<RevPostVO> getAcmList(String acmNum);
 }

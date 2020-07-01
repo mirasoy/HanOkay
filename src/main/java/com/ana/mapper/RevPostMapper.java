@@ -20,4 +20,6 @@ public interface RevPostMapper {
 	
 	public int update(RevPostVO repost);
 
+	public List<RevPostVO> getAcmList(String acmNum);
+
 }

@@ -9,10 +9,10 @@ public class RevPostVO {
 	
 	private String pstNum;
 	private String brdCode;
-	private String pTitle;
+	private String title;
 	private String userNum;
-	private String pRegDate;
-	private Date pUpdateDate;
+	private String regDate;
+	private Date updateDate;
 	private RevDetailVO revDetail;
 	{revDetail = new RevDetailVO();}
 	

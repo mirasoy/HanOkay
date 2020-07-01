@@ -49,19 +49,15 @@ public class RevServiceImpl implements RevService{
 		revPost.setPstNum(post.getPstNum());
 		revPost.setUserNum(post.getUserNum());
 		revPost.setBrdCode(post.getBrdCode());
-		revPost.setPTitle(post.getTitle());
-		revPost.setPRegDate(beforeFormat.format(post.getPRegDate()));
+		revPost.setTitle(post.getTitle());
+		revPost.setRegDate(beforeFormat.format(post.getRegDate()));
 
-		
-		
-		
 		detailPost.setAcmNum(post.getAcmNum());
 		detailPost.setBookNum(post.getBookNum());
 		detailPost.setContent(post.getContent());
 		detailPost.setPstNum(post.getPstNum());
 		detailPost.setRevPurl(post.getRevPurl());
 		detailPost.setStisf(post.getStisf());
-		
 		
 		log.info("modify......" + post);
 		

@@ -49,7 +49,10 @@ public class RevPostServiceImpl implements RevPostService{
 		return mapper.getList();
 	}
 
-	
-	
+	@Override
+	public List<RevPostVO> getAcmList(String acmNum) {
+		log.info("getList...........");
+		return mapper.getAcmList(acmNum);
+	}
 
 }

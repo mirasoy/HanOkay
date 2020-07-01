@@ -9,7 +9,6 @@ import com.ana.domain.Criteria;
 
 public interface AcmMapper {
 	
-	//@Select("select * from tacm")
 	public List<AcmVO> getList();
 	
 	public List<AcmVO> getListWithPaging(Criteria cri);

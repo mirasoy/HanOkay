@@ -42,8 +42,8 @@ public class RomMapperTests {
 
 	@Test
 	public void testRead() {
-		RomVO Rom = mapper.read("R27");
-		log.info(Rom);
+		RomVO rom = mapper.read("R27");
+		log.info(rom);
 	}
 
 	@Test
@@ -60,12 +60,12 @@ public class RomMapperTests {
 		rom.setPrice(9999);
 		rom.setRomPurl("수정테스트");
 		rom.setRomLocaInfo("수정테스트");
-		
+
 		int count = mapper.update(rom);
 
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■UPDATE COUNT: " + count);
 	}
-	
+
 	@Test
 	public void testDelete() {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■DELETE COUNT: " + mapper.delete("R31"));
@@ -73,6 +73,6 @@ public class RomMapperTests {
 
 	@Test
 	public void testGetList() {
-		mapper.getList().forEach(rom -> log.info(rom));
+		mapper.getList("A3").forEach(rom -> log.info(rom));
 	}
 }
