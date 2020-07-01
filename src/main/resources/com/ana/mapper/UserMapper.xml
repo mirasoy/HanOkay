@@ -4,65 +4,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ana.mapper.UserMapper">
 
-<resultMap type= "com.ana.domain.UserVO" id="UserVO">
-<result column="USER_NUM" property= "userNum" />
-<result column="EMAIL" property= "email" />
-<result column="PWD" property= "pwd" />
-<result column="U_LASTNAME" property= "uLastname" />
-<result column="U_FSTNAME" property= "uFstname" />
-<result column="U_PHONE" property= "uPhone" />
-<result column="U_REGDATE" property= "uRegdate" />
-<result column="U_BIRTHDAY" property= "uBirthday" />
-<result column="FACEBOOKID" property= "facebookId" />
-<result column="GOOGLEID" property= "googleId" />
-</resultMap>
+	<resultMap type="com.ana.domain.UserVO" id="UserVO">
+		<result column="USER_NUM" property="userNum" />
+		<result column="EMAIL" property="email" />
+		<result column="PWD" property="pwd" />
+		<result column="U_LASTNAME" property="uLastname" />
+		<result column="U_FSTNAME" property="uFstname" />
+		<result column="U_PHONE" property="uPhone" />
+		<result column="U_REGDATE" property="uRegdate" />
+		<result column="U_BIRTHDAY" property="uBirthday" />
+		<result column="FACEBOOKID" property="facebookId" />
+		<result column="GOOGLEID" property="googleId" />
+	</resultMap>
+
+	<select id="checkEmail" resultType="int">
+		select count(*) from tuser
+		where EMAIL= #{email}
+	</select> 
 
 
-<select id="read" resultType ="com.ana.domain.UserVO">
-	select * from tuser where USER_NUM = #{userNum}
-</select>
+	<select id="readUser" resultMap="UserVO">
+		select * from tuser where USER_NUM = #{userNum} 
+		 
+	</select>
 
-<!-- 
-<delete id="delete">
-	delete from tuser where USER_NUM = #{userNum}
-</delete>
 
-<update id="update">
-	update tuser
-	set acm_Name=#{acm_Name},
-		acm_City=#{acm_City},
-		acm_Distr=#{acm_Distr},
-		acm_Detailaddr=#{acm_Detailaddr},
-		rep_Phone=#{rep_Phone},
-		biz_Regnum=#{biz_Regnum},
-		checkin_Time=#{checkin_Time},
-		checkout_Time=#{checkout_Time},
-		acm_Updatedate = sysdate
-		where acm_Num = #{acm_Num}
-</update>
+	<select id="getListOfUsers" resultMap="UserVO">
+		select * from tuser
+	</select>
 
-<select id="getList" resultType = "com.ana.domain.AcmVO">
-<![CDATA[
-select * from tacm
-]]>
-</select>
+	<insert id="insertUser">
+		insert into tuser(USER_NUM, EMAIL, PWD, U_LASTNAME, U_FSTNAME, U_PHONE,
+		U_REGDATE, U_BIRTHDAY, FACEBOOKID, GOOGLEID)
+		values(concat('U',SEQ_USER.nextval),#{email}, #{pwd}, #{uLastname},
+		#{uFstname}, #{uPhone}, #{uRegdate}, #{uBirthday}, #{facebookId}, #{googleId})
+	</insert>
 
-<insert id="insert">
-INSERT INTO TACM(acm_Num, acm_Name, acm_City, acm_Distr, acm_Detailaddr,
- rep_Phone, biz_Regnum, checkin_Time, checkout_Time) 
- VALUES(concat('A',seq_tacm.nextval),#{acm_Name},#{acm_City}, #{acm_Distr}, #{acm_Detailaddr},#{rep_Phone}, 
- #{biz_Regnum},#{checkin_Time},#{checkout_Time})
-</insert>
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="userNum" order="BEFORE"
+			resultType="String">	
+		select concat('U',seq_user.nextval) from dual
+		</selectKey>
+		insert into tuser(USER_NUM, EMAIL, PWD, U_LASTNAME, U_FSTNAME, U_PHONE,
+		U_REGDATE, U_BIRTHDAY, FACEBOOKID, GOOGLEID)
+		values(#{userNum},#{email}, #{pwd}, #{uLastname}, #{uFstname}, #{uPhone}, 
+		#{uRegdate}, #{uBirthday}, #{facebookId}, #{googleId})
+	</insert>
 
-<insert id = "insertSelectKey">
-<selectKey keyProperty="acm_Num" order="BEFORE" resultType="String">
-select concat('A',seq_tacm.nextval) from dual
-</selectKey>
+	<delete id="deleteUser">
+		delete from tuser where USER_NUM = #{userNum}
+	</delete>
 
-INSERT INTO TACM(acm_Num, acm_Name, acm_City, acm_Distr, acm_Detailaddr,
- rep_Phone, biz_Regnum, checkin_Time, checkout_Time) 
- VALUES(#{acm_Num},#{acm_Name},#{acm_City}, #{acm_Distr}, #{acm_Detailaddr},#{rep_Phone}, 
- #{biz_Regnum},#{checkin_Time},#{checkout_Time})
-</insert> -->
+	<update id="updateUser">
+		update tuser
+		set
+		EMAIL=#{email},
+		PWD=#{pwd},
+		U_LASTNAME=#{uLastname},
+		U_FSTNAME=#{uFstname},
+		U_PHONE=#{uPhone},
+		U_REGDATE=#{uRegdate},
+		U_BIRTHDAY=#{uBirthday},
+		FACEBOOKID=#{facebookId},
+		GOOGLEID=#{googleId}
+		where USER_NUM=#{userNum}
+	</update>
 
 </mapper>

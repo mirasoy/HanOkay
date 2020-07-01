@@ -12,7 +12,7 @@ public class UserVO {
    private String pwd;
    private String uLastname;
    private String uFstname;
-   private Long uPhone;
+   private String uPhone;
    private Date uRegdate;
    private Date uBirthday;
    private String facebookId;
