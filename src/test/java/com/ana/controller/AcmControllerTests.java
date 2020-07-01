@@ -32,6 +32,15 @@ public class AcmControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
+	@Test
+	public void testListPaging() throws Exception {
+		log.info(mockMvc.perform(
+				MockMvcRequestBuilders.get("/acm/list")
+				.param("pageNum", "1")
+				.param("amount", "50"))
+				.andReturn().getModelAndView().getModelMap());
+	}
+	
 	//@Test
 	public void testList() throws Exception {
 		log.info(
@@ -57,7 +66,7 @@ public class AcmControllerTests {
 		log.info(resultPage);
 	}
 	
-	@Test
+	//@Test
 	public void testGet() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders
 				.get("/acm/get")
@@ -83,7 +92,7 @@ public class AcmControllerTests {
 		log.info(resultPage);
 	}
 	
-	@Test
+	//@Test
 	public void testRemove() throws Exception {
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/acm/remove")
 				.param("acmNum", "A33")

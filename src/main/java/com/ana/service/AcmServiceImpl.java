@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.Criteria;
 import com.ana.mapper.AcmMapper;
 
 import lombok.AllArgsConstructor;
@@ -42,10 +43,22 @@ public class AcmServiceImpl implements AcmService{
 		return mapper.delete(acmNum)==1;
 	}
 
+//	@Override
+//	public List<AcmVO> getList() {
+//		log.info("getList...........");
+//		return mapper.getList();
+//	}
+
 	@Override
-	public List<AcmVO> getList() {
-		log.info("getList...........");
-		return mapper.getList();
+	public List<AcmVO> getList(Criteria cri) {
+		log.info("get List with criteria: " + cri);
+		return mapper.getListWithPaging(cri);
+	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+		return mapper.getTotalCount(cri);
 	}
 
 }

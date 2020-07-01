@@ -22,5 +22,6 @@ public class AcmVO {
 	private Long acmFax;
 	private String acmEmail;
 	private String acmDesc;
+	private String acmPurl;
 
 }
