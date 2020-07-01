@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.Criteria;
 import com.ana.mapper.AcmMapper;
 
 import lombok.AllArgsConstructor;
@@ -19,32 +20,45 @@ public class AcmServiceImpl implements AcmService{
 	
 	@Override
 	public void register(AcmVO acm) {
-		// TODO Auto-generated method stub
+		log.info("register......" + acm);
 		
+		mapper.insertSelectKey(acm);
 	}
 
 	@Override
-	public AcmVO get(String Acm_Num) {
-		// TODO Auto-generated method stub
-		return null;
+	public AcmVO get(String acmNum) {
+		log.info("get......"+acmNum);
+		return mapper.read(acmNum);
 	}
 
 	@Override
 	public boolean modify(AcmVO acm) {
-		// TODO Auto-generated method stub
-		return false;
+		log.info("modify......" + acm);
+		return mapper.update(acm)==1;
 	}
 
 	@Override
-	public boolean remove(String Acm_Num) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean remove(String acmNum) {
+		log.info("remove......" + acmNum);
+		return mapper.delete(acmNum)==1;
+	}
+
+//	@Override
+//	public List<AcmVO> getList() {
+//		log.info("getList...........");
+//		return mapper.getList();
+//	}
+
+	@Override
+	public List<AcmVO> getList(Criteria cri) {
+		log.info("get List with criteria: " + cri);
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
-	public List<AcmVO> getList() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+		return mapper.getTotalCount(cri);
 	}
 
 }
