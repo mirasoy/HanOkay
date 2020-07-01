@@ -2,6 +2,7 @@ package com.ana.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
@@ -24,15 +25,20 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/review/*")
 @AllArgsConstructor
+
 public class RevController {
 	
 	private RevService service;
 	
 	@GetMapping("/list")
-	public void list(Model model, @SessionAttribute("userNum") String userNum) {
-		
+	public void list(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        String member = (String) session.getAttribute("member");
+
+
 		log.info("list");
-		model.addAttribute("list", service.getUserList(userNum));
+		model.addAttribute("list", service.getUserList(member));
 	}
 	
 	@PostMapping("/register")

@@ -1,9 +1,13 @@
 package com.ana.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -26,21 +30,30 @@ public class RevControllerTests {
 	@Setter(onMethod_= {@Autowired})
 	private WebApplicationContext ctx;
 	private MockMvc mockMvc;
-	
+	private MockHttpSession session;
+	private MockHttpServletRequest request;
 	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
+		this.request = new MockHttpServletRequest();
+		
 	}
 	
 	@Test
 	public void testList() throws Exception {
+	
+		session.setAttribute("userNum", "U1");
 		log.info(
+				
 				mockMvc.perform(MockMvcRequestBuilders.get("/review/list"))
 				.andReturn()
 				.getModelAndView()
 				.getModelMap());
 	}
 
+	
+	
+	
 	//@Test
 	public void testRegister() throws Exception{
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/review/register")
@@ -66,7 +79,7 @@ public class RevControllerTests {
 				.getModelAndView().getModelMap());
 	}
 	
- @Test
+// @Test
 	public void testModify() throws Exception {
 		String resultPage = mockMvc
 				.perform(MockMvcRequestBuilders.post("/review/modify")
