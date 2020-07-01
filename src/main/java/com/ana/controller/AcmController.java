@@ -22,7 +22,7 @@ public class AcmController {
 	
 	private AcmService service;
 	
-	@GetMapping({"/list","/index"})
+	@GetMapping({"/list"})
 	public void list(Model model) {
 		
 		log.info("list");
