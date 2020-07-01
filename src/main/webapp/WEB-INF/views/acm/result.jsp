@@ -33,6 +33,70 @@
 </head>
 
 <body>
+<div class="row">
+					<div class="booking-form">
+						<form action="/acm/result" method='get'>
+							<div class="row no-margin">
+								<div class="col-md-3">
+									<div class="form-header">
+										<h2>Book Now</h2>
+									</div>
+								</div>
+								<div class="col-md-7">
+									<div class="row no-margin">
+										<div class="col-md-4">
+											<div class="form-group">
+												<span class="form-label">Location</span>
+												<input class="form-control" type="text" name="keyword">
+												<input type="hidden" value="C" name="type">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<span class="form-label">Check In</span>
+												<input class="form-control" type="date">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<span class="form-label">Check out</span>
+												<input class="form-control" type="date">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<span class="form-label">Guests</span>
+												<select class="form-control">
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+												</select>
+												<span class="select-arrow"></span>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<span class="form-label">Kids</span>
+												<select class="form-control">
+													<option>0</option>
+													<option>1</option>
+													<option>2</option>
+												</select>
+												<span class="select-arrow"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-btn">
+								
+										<button class="submit-btn" type="submit">Check availability</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div><!-- end of row -->
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
@@ -58,7 +122,33 @@
 						</tr>
 					</c:forEach>
 				</table>
-	
+	<div class='pull-right'>
+					<ul class="pagination">
+
+						<c:if test="${pageMaker.prev}">
+							<li class="paginate_button previous"><a
+								href="${pageMaker.startPage -1}">Previous</a></li>
+						</c:if>
+
+						<c:forEach var="num" begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}">
+							<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active":""} "><a
+								href="${num}">${num}</a></li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next}">
+							<li class="paginate_button next"><a
+								href="${pageMaker.endPage +1 }">Next</a></li>
+						</c:if>
+					</ul>
+				</div>
+				
+				<form id='actionForm' action="/acm/result" method='get'>
+	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+	<input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+	<input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+</form>
 <script type="text/javascript">
 	$(document)
 			.ready(

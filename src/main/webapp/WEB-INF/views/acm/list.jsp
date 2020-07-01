@@ -92,13 +92,15 @@
 								</div>
 								<div class="col-md-2">
 									<div class="form-btn">
+									
+						
 										<button class="submit-btn" type="submit">Check availability</button>
 									</div>
 								</div>
 							</div>
 						</form>
 					</div>
-				</div>
+				</div><!-- end of row -->
 			</div>
 		</div>
 	</div>
@@ -207,7 +209,7 @@
 		<!-- /.panel -->
 	</div>
 </div>
-<form id='actionForm' action="/acm/list" method='get'>
+<form id='actionForm' action="/acm/result" method='get'>
 	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 	<input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
