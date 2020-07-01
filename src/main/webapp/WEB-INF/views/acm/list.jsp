@@ -38,7 +38,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="booking-form">
-						<form>
+						<form action="/acm/result" method='get'>
 							<div class="row no-margin">
 								<div class="col-md-3">
 									<div class="form-header">
@@ -50,7 +50,8 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<span class="form-label">Location</span>
-												<input class="form-control" type="search">
+												<input class="form-control" type="text" name="keyword">
+												<input type="hidden" value="C" name="type">
 											</div>
 										</div>
 										<div class="col-md-4">
@@ -91,13 +92,15 @@
 								</div>
 								<div class="col-md-2">
 									<div class="form-btn">
-										<button class="submit-btn">Check availability</button>
+									
+						
+										<button class="submit-btn" type="submit">Check availability</button>
 									</div>
 								</div>
 							</div>
 						</form>
 					</div>
-				</div>
+				</div><!-- end of row -->
 			</div>
 		</div>
 	</div>
@@ -117,8 +120,8 @@
 						<tr>
 							<th>#숙소번호</th>
 							<th>숙소 이름</th>
-							<th>체크인시간</th>
-							<th>체크아웃시간</th>
+							<th>지역</th>
+							<th>번호</th>
 							<th>숙소설명</th>
 						</tr>
 					</thead>
@@ -129,8 +132,8 @@
 							<td><a class='move' href='<c:out value="${acm.acmNum}"/>'>
 									<c:out value="${acm.acmName}" />
 							</a></td>
-							<td><c:out value="${acm.checkinTime }" /></td>
-							<td><c:out value="${acm.checkoutTime }" /></td>
+							<td><c:out value="${acm.acmCity }" /></td>
+							<td><c:out value="${acm.repPhone }" /></td>
 							<td><c:out value="${acm.acmDesc }" /></td>
 						</tr>
 					</c:forEach>
@@ -139,21 +142,17 @@
 				<div class='row'>
 					<div class="col-lg-12">
 					
-					<form id='searchForm' action="/board/list" method='get'>
+					<form id='searchForm' action="/acm/list" method='get'>
 						<select name = 'type'>
-							<option value=""
-								<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-							<option value="T"
-								<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
-							<option value="C"
-								<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
-								<option value="W"<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
-								<option value="TC"<c:out value="${pageMaker.cri.type eq 'TC'?'selected':''}"/>>제목 or 내용</option>
-								<option value="TW"<c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목 or 작성자</option>
-								<option value="TWC"<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>제목 or 내용 or 작성자</option>
+							<option value=""<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+							<option value="T"<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>숙소이름</option>
+							<option value="C"<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>숙소지역</option>
+							<option value="W"<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
+							<option value="TC"<c:out value="${pageMaker.cri.type eq 'TC'?'selected':''}"/>>숙소이름 or 숙소지역</option>
+							<option value="TW"<c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>숙소이름 or 작성자</option>
+							<option value="TWC"<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>숙소이름 or 숙소지역 or 작성자</option>
 						</select>
-						<input type='text' name='keyword'
-						value='<c:out value="${pageMaker.cri.keyword }"/>'/>
+						<input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword }"/>'/>
 						<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum }"/>'/>
 						<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount }"/>'/>
 						<button class='btn btn-default'>Search</button>
@@ -210,7 +209,7 @@
 		<!-- /.panel -->
 	</div>
 </div>
-<form id='actionForm' action="/board/list" method='get'>
+<form id='actionForm' action="/acm/result" method='get'>
 	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 	<input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
@@ -240,7 +239,7 @@
 						}
 
 						$("#regBtn").on("click", function() {
-							self.location = "/board/register";
+							self.location = "/acm/register";
 						});
 
 						var actionForm = $("#actionForm");
@@ -256,8 +255,8 @@
 
 						$(".move").on("click", function(e){
 							e.preventDefault();
-							actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
-							actionForm.attr("action","/board/get");
+							actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
+							actionForm.attr("action","/acm/get");
 							actionForm.submit();
 						});
 						

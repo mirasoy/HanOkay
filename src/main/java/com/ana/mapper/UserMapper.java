@@ -7,14 +7,19 @@ public interface UserMapper {
 
 	public List<UserVO> getList();
 	
-	public void insert(UserVO user);
+	public void insertUser(UserVO user);
 	
 	public void insertSelectKey(UserVO user);
 	
-	public UserVO read(String userNum);
+	//userNum으로 user 정보 가져오는 메서드
+	public UserVO readUser(String userNum);
 	
-	public int delete(String userNum);
+	//userNum을 가진 user 없애는 메서드
+	public int deleteUser(String userNum);
 	
-	public int update(UserVO user);
-
+	//user정보 업데이트하는 메서드
+	public int updateUser(UserVO user);
+	
+	//email로 중복되는 값이 있는 지 확인하는 메서드
+	public int checkEmail(String email);
 }

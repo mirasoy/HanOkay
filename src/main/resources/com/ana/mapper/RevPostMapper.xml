@@ -37,7 +37,89 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ACM_NUM" property="acmNum" />	
 		<result column="BOOK_NUM" property="bookNum" />	
 		<result column="CONTENT" property="content" />
+		<result column="ACM_NAME" property="acmName" />
+		<result column="CHECKIN_DATE" property="checkInDay" />
+		<result column="CHEKOUT_DATE" property="CheckOutDay" />
 </resultMap>
+
+
+
+
+<select id="getMyList" resultMap="RevVOResult">
+SELECT
+rev.PST_NUM,
+rev.BRD_CODE,
+rev.p_title,
+rev.p_regdate,
+rev.p_updatedate,
+rev.user_num,
+rev.rev_purl,
+rev.STISF,
+rev.acm_num,
+rev.book_num,
+rev.content,
+rev.acm_name,
+bk.CHECKIN_DATE,
+bk.CHEKOUT_DATE
+from
+(SELECT
+r.PST_NUM,
+r.BRD_CODE,
+r.p_title,
+r.p_regdate,
+r.p_updatedate,
+r.user_num,
+r.rev_purl,
+r.STISF,
+r.acm_num,
+r.book_num,
+r.content,
+t.acm_name
+FROM
+(select 
+A.PST_NUM,
+A.BRD_CODE,
+a.p_title,
+a.p_regdate,
+a.p_updatedate,
+a.user_num,
+b.rev_purl,
+B.STISF,
+b.acm_num,
+b.book_num,
+b.content
+FROM
+    TREV_POST A
+LEFT JOIN
+    trev_detail B
+ON 
+    a.pst_num = b.pst_num) R
+,
+    TACM T
+where
+    r.acm_num = t.acm_num
+ ) rev,
+
+tbooking bk
+ 
+where
+rev.book_num = bk.book_num
+AND
+rev.user_num = #{loginUser}
+
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <select id="read" resultMap="RevVOResult">
 select 
@@ -81,7 +163,7 @@ WHERE
 		
 </update>
 
-<select id="getList" resultMap="RevPostVOResult" >
+<select id="getList" resultMap="RevVOResult" >
 select 
 A.PST_NUM,
 A.BRD_CODE,

@@ -1,11 +1,18 @@
 package com.ana.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.domain.RevVO;
@@ -18,15 +25,20 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/review/*")
 @AllArgsConstructor
+
 public class RevController {
 	
 	private RevService service;
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		
+	public void list(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        String member = (String) session.getAttribute("member");
+
+
 		log.info("list");
-		model.addAttribute("list", service.getList());
+		model.addAttribute("list", service.getUserList(member));
 	}
 	
 	@PostMapping("/register")

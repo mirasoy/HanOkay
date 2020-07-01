@@ -44,7 +44,7 @@ public class RevPostServiceImpl implements RevPostService{
 	}
 
 	@Override
-	public List<RevPostVO> getList() {
+	public List<RevVO> getList() {
 		log.info("getList...........");
 		return mapper.getList();
 	}

@@ -22,16 +22,24 @@
 			</tr>
 		</thead>
 
-		<c:forEach items="${list}" var="review">
+		<c:forEach items="${list }" var="rev">
 
 
 			<tr>
 				
 			
-				<td><c:out value="${review.pstNum }" /></td>
-				<td><c:out value="${review.userNum}" /></td>
-				
-				<td><c:out value="${review.stisf }" /></td>
+				<td><c:out value="${rev.pstNum }" /></td>
+				<td><c:out value="${rev.brdCode }" /></td>
+				<td><c:out value="${rev.userNum }" /></td>
+				<td><c:out value="${rev.revPurl }" /></td>
+				<td><c:out value="${rev.stisf }" /></td>
+				<td><c:out value="${rev.acmNum }" /></td>
+				<td><c:out value="${rev.bookNum }" /></td>
+				<td><c:out value="${rev.content }" /></td>
+				<td><c:out value="${rev.title }" /></td>
+				<%-- 
+				<td><c:out value="${rev.pRegDate }" /></td>
+				<td><c:out value="${rev.pUpdateDate }" /></td> --%>
 			</tr>
 		</c:forEach>
 		</table>

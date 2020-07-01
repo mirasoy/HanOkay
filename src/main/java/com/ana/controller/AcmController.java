@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.Criteria;
+import com.ana.domain.PageDTO;
 import com.ana.service.AcmService;
 
 import lombok.AllArgsConstructor;
@@ -22,12 +24,14 @@ public class AcmController {
 	
 	private AcmService service;
 	
-	@GetMapping({"/list"})
-	public void list(Model model) {
-		
-		log.info("list");
-		model.addAttribute("list", service.getList());
-	
+	@GetMapping({"/list","/result"})
+	public void list(Criteria cri, Model model) {
+		log.info("list: "+cri);
+		model.addAttribute("list",service.getList(cri));
+		//model.addAttribute("pageMaker", new PageDTO(cri, 123));
+		int total = service.getTotal(cri);
+		log.info("total: " + total);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
 	@PostMapping("/register")
