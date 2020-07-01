@@ -12,11 +12,13 @@ public class RomVO {
 
    private Integer capacity;
    private String bedType;
+
    private Integer bedCnt;
    private Integer romSize;
    private Integer price;
-   private String romPurl;
-   private String romLocaInfo;
+
+   private String romUrl;
+   private String romLocainfo;
 
 }
 
