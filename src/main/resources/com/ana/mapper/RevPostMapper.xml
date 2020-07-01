@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.RevPostMapper">
+
+<resultMap id="RevDetailVOResult" type="com.ana.domain.RevDetailVO">
+		<result column="PST_NUM" property="pstNum" />
+		<result column="REV_PURL" property="revPurl" />
+		<result column="STISF" property="stisf" />
+		<result column="ACM_NUM" property="acmNum" />	
+		<result column="BOOK_NUM" property="bookNum" />	
+		<result column="CONTENT" property="content" />
+</resultMap>
+
+<resultMap id="RevPostVOResult" type="com.ana.domain.RevPostVO">
+		<result column="PST_NUM" property="pstNum" />
+		<result column="BRD_CODE" property="brdCode" />
+		<result column="P_TITLE" property="title" />
+		<result column="USER_NUM" property="userNum" />	
+		<result column="P_REGDATE" property="regDate" />	
+		<result column="P_UPDATEDATE" property="updateDate" />
+		<collection property="revDetail" resultMap="RevDetailVOResult"/>
+		
+</resultMap>
+
+
+<resultMap id="RevVOResult" type="com.ana.domain.RevVO">
+		<result column="PST_NUM" property="pstNum" />
+		<result column="BRD_CODE" property="brdCode" />
+		<result column="P_TITLE" property="title" />
+		<result column="USER_NUM" property="userNum" />	
+		<result column="P_REGDATE" property="regDate" />	
+		<result column="P_UPDATEDATE" property="updateDate" />
+		<result column="REV_PURL" property="revPurl" />
+		<result column="STISF" property="stisf" />
+		<result column="ACM_NUM" property="acmNum" />	
+		<result column="BOOK_NUM" property="bookNum" />	
+		<result column="CONTENT" property="content" />
+</resultMap>
+
+<select id="read" resultMap="RevVOResult">
+select 
+A.PST_NUM,
+A.BRD_CODE,
+a.p_title,
+a.p_regdate,
+a.p_updatedate,
+a.user_num,
+b.rev_purl,
+B.STISF,
+b.acm_num,
+b.book_num,
+b.content
+
+FROM
+    TREV_POST A
+LEFT JOIN
+    trev_detail B
+ON 
+    a.pst_num = b.pst_num
+      
+where a.PST_NUM = #{pstNum}
+</select>
+
+<delete id="delete">
+	delete from TREV_POST where PST_NUM = #{pstNum}
+</delete>
+
+<update id="update">
+	
+UPDATE
+    TREV_POST
+SET
+    brd_code = #{brdCode},
+    p_title =#{title},
+    user_num =#{userNum},
+    p_regdate = #{regDate}
+WHERE
+    PST_NUM = #{pstNum}
+		
+</update>
+
+<select id="getList" resultMap="RevPostVOResult" >
+select 
+A.PST_NUM,
+A.BRD_CODE,
+a.p_title,
+a.p_regdate,
+a.p_updatedate,
+a.user_num,
+b.rev_purl,
+B.STISF,
+b.acm_num,
+b.book_num,
+b.content
+
+FROM
+    TREV_POST A
+LEFT JOIN
+    trev_detail B
+ON 
+    a.pst_num = b.pst_num
+    
+</select>
+
+<insert id="insert" >
+
+
+<selectKey keyProperty="pstNum" order="BEFORE" resultType="String">
+select SEQ_REV.nextval from dual
+</selectKey>
+
+    INSERT ALL
+    INTO TREV_POST(PST_NUM, BRD_CODE, P_TITLE, USER_NUM)
+    VALUES(#{pstNum},#{brdCode},#{title},#{userNum})  
+    INTO TREV_DETAIL(pst_num,  REV_PURL , STISF , ACM_NUM ,BOOK_NUM, CONTENT  )
+    VALUES(#{pstNum},#{revPurl},#{stisf},#{acmNum},#{bookNum},#{content}) 
+    SELECT * 
+    FROM DUAL
+
+
+</insert>
+
+<select id="getAcmList" resultMap="RevPostVOResult" >
+	select 
+	A.PST_NUM,
+	A.BRD_CODE,
+	a.p_title,
+	a.p_regdate,
+	a.p_updatedate,
+	a.user_num,
+	b.rev_purl,
+	B.STISF,
+	b.acm_num,
+	b.book_num,
+	b.content
+	
+	FROM
+	    TREV_POST A
+	LEFT JOIN
+	    trev_detail B
+	ON 
+	    a.pst_num = b.pst_num
+    
+    WHERE b.acm_num = #{acmNum}
+</select>
+
+</mapper>

@@ -2,8 +2,9 @@
     <wb-module deploy-name="controller-1.0.0-BUILD-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="context-root" value="controller"/>
-        <property name="java-output-path" value="/projectAna/target/classes"/>
+        <property name="java-output-path" value="/ana/target/classes"/>
     </wb-module>
 </project-modules>

@@ -22,5 +22,12 @@ public class AcmVO {
 	private Long acmFax;
 	private String acmEmail;
 	private String acmDesc;
-
+	private String acmPurl;
+	private String acmPurl1;
+	private String acmPurl2;
+	private String acmPurl3;
+	private String acmPurl4;
+	private String acmPurl5;
+	private String acmPurl6;
+	private RomVO rom;
 }

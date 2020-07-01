@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 	"file:src/main/webapp/WEB-INF/spring/root-context.xml",
 	"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
 @Log4j
-public class AcmControllerTests {
+public class RevControllerTests {
 	
 	@Setter(onMethod_= {@Autowired})
 	private WebApplicationContext ctx;
@@ -32,47 +32,64 @@ public class AcmControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
-	@Test
+	//@Test
 	public void testList() throws Exception {
 		log.info(
-				mockMvc.perform(MockMvcRequestBuilders.get("/acm/list"))
+				mockMvc.perform(MockMvcRequestBuilders.get("/review/list"))
 				.andReturn()
 				.getModelAndView()
 				.getModelMap());
 	}
 
-	@Test
+	//@Test
 	public void testRegister() throws Exception{
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/acm/register")
-				.param("acmNum", "A1")
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/review/register")
+				.param("brdCode", "rev" )
+				.param("pTitle", "여기 개추천")
+				.param("userNum", "u1919")
+				.param("revPurl", "/1234.png")
+				.param("stisf", "4")
+				.param("acmNum", "a17")
+				.param("bookNum", "b123")
+				.param("content", "젋뒙옺쥡맙")
 				).andReturn().getModelAndView().getViewName();
+		
 		log.info(resultPage);
 	}
 	
-	@Test
+	//	@Test
 	public void testGet() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders
-				.get("/acm/get")
-				.param("acmNum", "A1"))
+				.get("/review/get")
+				.param("pstNum", ""))
 				.andReturn()
 				.getModelAndView().getModelMap());
 	}
 	
-	@Test
+ @Test
 	public void testModify() throws Exception {
 		String resultPage = mockMvc
-				.perform(MockMvcRequestBuilders.post("/acm/modify")
-						.param("acmNum", "A10")
-						.param("acmName", "수정된 숙소 새 이름" )
-				).andReturn().getModelAndView().getViewName();
+				.perform(MockMvcRequestBuilders.post("/review/modify")
+						.param("pstNum", "39")
+						.param("brdCode", "rev" )
+						.param("pTitle", "여기 개추천")
+						.param("pRegDate", "20/05/12")
+						.param("userNum", "u1919")
+						.param("revPurl", "/1234.png")
+						.param("stisf", "4")
+						.param("acmNum", "a17")
+						.param("bookNum", "b123")
+						.param("content", "젋뒙옺쥡맙"))
+				.andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 	}
 	
-	@Test
+//	@Test
 	public void testRemove() throws Exception {
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/acm/remove")
-				.param("acmNum", "A33")
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/review/remove")
+				.param("pstNum", "39")
 				).andReturn().getModelAndView().getViewName();
+		
 		log.info(resultPage);
 	}
 
