@@ -9,11 +9,13 @@ public class RomVO {
    private String romNum;
    private String acmNum;
    private String roomName;
-   private Integer capacity;
+   private int capacity;
    private String bedType;
-   private Integer bedCnt;
-   private Integer romSize;
-   private Integer price;
+   private int bedCnt;
+   private int romSize;
+   private Date startDate;
+   private Date endDate;
+   private int price;
    private String romPurl;
    private String romLocaInfo;
 }
