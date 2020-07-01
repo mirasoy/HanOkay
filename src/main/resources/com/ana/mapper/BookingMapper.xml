@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result column="rom_num" property="romNum" />
       <result column="book_Date" property="bookDate" />   
       <result column="checkin_Date" property="checkinDate" />   
-      <result column="chekout_Date" property="chekoutDate" />   
+      <result column="checkout_Date" property="checkoutDate" />   
       <result column="staydays" property="staydays" />   
       <result column="guest" property="guest" />   
       <result column="book_Price" property="bookPrice" />   
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			rom_num =#{romNum},
 			book_Date=#{bookDate},
 			checkin_Date=#{checkinDate},
-			chekout_Date=#{chekoutDate},
+			checkout_Date=#{checkoutDate},
 			staydays=#{staydays},
 			guest=#{guest},
 			book_Price=#{bookPrice},

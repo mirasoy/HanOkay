@@ -11,7 +11,7 @@ public interface BookingMapper {
 	
 	public BookingVO read(String bookNum);
 			
-	public int update(BookingVO board);
+	public int update(BookingVO info);
 		
 	public int delete(String bookNum);
 	

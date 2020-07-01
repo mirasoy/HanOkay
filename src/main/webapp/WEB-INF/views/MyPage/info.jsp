@@ -52,7 +52,7 @@
         
         <div class ="form-group">
        		<label>체크아웃날짜</label>
-       		<input class="form-control" name='chekoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.chekoutDate}" />' readonly> 
+       		<input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkoutDate}" />' readonly> 
         </div>                   
       
         <div class="form-group">
@@ -98,7 +98,7 @@
         </div> 
 
 
-<button data-oper='modify' class="btn btn-default" onclick="location.href='/MyPage/modify?book_Num=<c:out value="${info.bookNum}"/>'">Modify</button>
+<button data-oper='modify' class="btn btn-default" onclick="location.href='/MyPage/modify?bookNum=<c:out value="${info.bookNum}"/>'">Modify</button>
 <button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/bookList'">List</button>
 
 

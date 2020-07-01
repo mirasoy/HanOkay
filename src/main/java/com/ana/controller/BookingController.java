@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.domain.BookingVO;
@@ -30,18 +31,21 @@ public class BookingController {
 	
 	//예약 조회 페이지와 이동	
 	@GetMapping({"/info", "modify"})
-	public void get(@RequestParam("book_Num") String bookNum, Model model) {
+	public void get(@RequestParam("bookNum") String bookNum, Model model) {
 		log.info("/info or modify");
+		
 		model.addAttribute("info", service.get(bookNum));
 	}
+	
 	
 
 	
 	@PostMapping("/modify")
-	public String modify(BookingVO board, RedirectAttributes rttr) {
-		log.info("modify:"+board);
+	public String modify(BookingVO info, RedirectAttributes rttr) {
+		log.info("modify:"+info);
+		log.info("되었습니다.");
 		
-		if(service.modify(board)) {
+		if(service.modify(info)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/MyPage/bookList";

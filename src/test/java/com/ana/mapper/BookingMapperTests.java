@@ -49,15 +49,15 @@ public class BookingMapperTests {
 		try {
 			board.setBookDate(beforeFormat.parse("2020/02/02"));
 			board.setCheckinDate(beforeFormat.parse("2020/02/02"));
-			board.setChekoutDate(beforeFormat.parse("2020/02/02"));
+			board.setCheckoutDate(beforeFormat.parse("2020/02/02"));
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
 		
-		board.setCanceled('1');
-		board.setSmoking('1');
+		board.setCanceled("1");
+		board.setSmoking("1");
 		
 		
 		int count = mapper.update(board);

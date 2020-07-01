@@ -9,7 +9,7 @@ public interface BookingService {
 	
 	public BookingVO get(String book_Num);
 	
-	public boolean modify(BookingVO board);
+	public boolean modify(BookingVO info);
 	
 	public boolean remove(String book_Num);
 	
