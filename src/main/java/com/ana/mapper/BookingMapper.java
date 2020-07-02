@@ -6,7 +6,6 @@ import com.ana.domain.BookingVO;
 
 public interface BookingMapper {
 	
-	
 	public List<BookingVO> getList();
 	
 	public BookingVO read(String bookNum);
