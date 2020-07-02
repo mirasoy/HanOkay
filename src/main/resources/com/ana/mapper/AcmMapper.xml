@@ -27,6 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="acm_Purl4" property="acmPurl4" />
 		<result column="acm_Purl5" property="acmPurl5" />
 		<result column="acm_Purl6" property="acmPurl6" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
 	</resultMap>
 
 	<sql id="criteria">
@@ -54,11 +56,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getListWithPaging" resultMap="AcmVOResult">
 <![CDATA[
 select
-acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc
+acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
 from
 	(
 	select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
-		rownum rn, acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc
+		rownum rn, acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
 	from
 		tacm
 	where
