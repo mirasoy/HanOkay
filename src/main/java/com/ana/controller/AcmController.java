@@ -24,14 +24,6 @@ public class AcmController {
 	
 	private AcmService service;
 	
-//	@GetMapping({"/list","/index"})
-//	public void list(Model model) {
-//		
-//		log.info("list");
-//		model.addAttribute("list", service.getList());
-//	
-//	}
-	
 	@GetMapping({"/list","/result"})
 	public void list(Criteria cri, Model model) {
 		log.info("list: "+cri);
