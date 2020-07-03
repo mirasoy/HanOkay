@@ -26,7 +26,9 @@ public class AcmDatailController {
 	
 	
 	@RequestMapping(value = "accommodation", method = RequestMethod.GET)
-	public void accomodation(@RequestParam("acmNum") String acmNum, Model model) {		log.info("accommodation");
+	public void accomodation(@RequestParam("acmNum") String acmNum, Model model) {
+		log.info("accommodation");
+		
 		model.addAttribute("acm", acmService.get(acmNum))
 		.addAttribute("rev", revService.getAcmList(acmNum))
 		.addAttribute("opt", optService.getList(acmNum))
