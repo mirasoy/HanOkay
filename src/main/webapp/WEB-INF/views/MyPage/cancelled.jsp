@@ -68,7 +68,7 @@
 					
 				<!-- 취소된 리스트 불러오기 -->
 						
-					<c:forEach items="${cancelled}" var="board">
+					<c:forEach items="${bookList}" var="board">
 						<tr>
 							<td><c:out value="${board.acmName}" /></td>																			
 							<td><c:out value="${board.bookNum}" /></td>																
