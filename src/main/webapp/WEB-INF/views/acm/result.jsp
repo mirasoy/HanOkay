@@ -251,7 +251,6 @@
 			<c:forEach items="${list }" var="acm">
 			if("${acm.acmNum}"===acmNum){
 				
-				
 				var latitude = ${acm.latitude};
 				var longitude = ${acm.longitude};
 			}
@@ -311,7 +310,6 @@
 
 			<c:forEach items="${list }" var="acm">
 			var latLng = {lat: parseFloat(${acm.latitude}), lng: parseFloat(${acm.longitude})};
-			console.log(latLng);
 			
 			var marker;
 
