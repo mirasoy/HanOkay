@@ -35,9 +35,16 @@
 		<![endif]-->
 <style>
 #map {
-	width: 100%;
-	height: 400px;
-	background-color: grey;
+	width: 33%;
+    height: 990px;
+    background-color: grey;
+    display: inline-block;
+}
+
+#myTable {
+	width: 65%;
+	height: 990px;
+	display: inline-block;
 }
 </style>
 <script
@@ -45,6 +52,7 @@
 </head>
 
 <body>
+
 	<div class="row">
 		<div class="booking-form">
 			<form action="/acm/result" method='get'>
@@ -109,6 +117,10 @@
 		</div>
 	</div>
 	<!-- end of row -->
+	
+	
+	
+	<div id="myTable">
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
@@ -168,12 +180,14 @@
 			type='hidden' name='keyword'
 			value='<c:out value="${pageMaker.cri.keyword}"/>'>
 	</form>
-
-
-	<!-- GoogleMap API 연동(황영롱) -->
-	<h3>글쓴이 위치</h3>
+	
+	</div>
+<!-- GoogleMap API 연동(황영롱) -->
+	
 	<div id="map"></div>
 	<!-- 지도가 붙을 위치 -->
+
+	
 	<script>
 	
 		var address = null;
@@ -236,6 +250,8 @@
 			
 			<c:forEach items="${list }" var="acm">
 			if("${acm.acmNum}"===acmNum){
+				
+				
 				var latitude = ${acm.latitude};
 				var longitude = ${acm.longitude};
 			}
@@ -401,7 +417,7 @@
 												actionForm.append("<input type='hidden' name='acmNum' value='"
 																+ $(this).attr("href")
 																+ "'>");
-												actionForm.attr("action","/acm/result");
+												actionForm.attr("action","/acm/accommodation");
 												actionForm.submit();
 											}); 
 						/* 	$(".move").on("click",function(e) {
