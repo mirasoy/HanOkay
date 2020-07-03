@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ana.domain.Criteria;
 import com.ana.service.AcmOptionService;
 import com.ana.service.AcmService;
 import com.ana.service.RevPostService;
@@ -27,8 +26,7 @@ public class AcmDatailController {
 	
 	
 	@RequestMapping(value = "accommodation", method = RequestMethod.GET)
-	public void accomodation(@RequestParam("acmNum") String acmNum, Model model,Criteria cri) {
-		log.info("accommodation");
+	public void accomodation(@RequestParam("acmNum") String acmNum, Model model) {		log.info("accommodation");
 		model.addAttribute("acm", acmService.get(acmNum))
 		.addAttribute("rev", revService.getAcmList(acmNum))
 		.addAttribute("opt", optService.getList(acmNum))
