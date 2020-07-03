@@ -29,5 +29,7 @@ public class AcmVO {
 	private String acmPurl4;
 	private String acmPurl5;
 	private String acmPurl6;
+	private String latitude;
+	private String longitude;
 	private RomVO rom;
 }

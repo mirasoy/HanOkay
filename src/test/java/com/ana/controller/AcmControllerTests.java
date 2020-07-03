@@ -41,7 +41,7 @@ public class AcmControllerTests {
 				.andReturn().getModelAndView().getModelMap());
 	}
 	
-	//@Test
+	@Test
 	public void testList() throws Exception {
 		log.info(
 				mockMvc.perform(MockMvcRequestBuilders.get("/acm/list"))
@@ -50,15 +50,15 @@ public class AcmControllerTests {
 				.getModelMap());
 	}
 
-	@Test
+	//@Test
 	public void testRegister() throws Exception{
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/acm/register")
-				.param("acmNum", "A1")
+				.param("acmNum", "A100")
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 	}
 	
-	//@Test
+	@Test
 	public void testGet() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders
 				.get("/acm/get")
@@ -67,7 +67,7 @@ public class AcmControllerTests {
 				.getModelAndView().getModelMap());
 	}
 	
-	@Test
+	//@Test
 	public void testModify() throws Exception {
 		String resultPage = mockMvc
 				.perform(MockMvcRequestBuilders.post("/acm/modify")
@@ -77,7 +77,7 @@ public class AcmControllerTests {
 		log.info(resultPage);
 	}
 	
-	//@Test
+	@Test
 	public void testRemove() throws Exception {
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/acm/remove")
 				.param("acmNum", "A33")
