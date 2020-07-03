@@ -2,6 +2,8 @@ package com.ana.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -12,7 +14,7 @@ public class BookingVO {
 	private String romNum;
 	private Date bookDate;
 	private Date checkinDate;
-	private Date chekoutDate;
+	private Date checkoutDate;
 	private Integer staydays;
 	private Integer guest;
 	private Integer bookPrice;
@@ -22,6 +24,8 @@ public class BookingVO {
 	private String smoking;
 	private String request;
 	private String realArr;
+	
+	
 	
 	
 }

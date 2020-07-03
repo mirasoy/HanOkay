@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.BookCancelVO;
+import com.ana.domain.BookVO;
 import com.ana.domain.BookingVO;
 import com.ana.mapper.AcmMapper;
 import com.ana.mapper.BookingMapper;
@@ -48,6 +50,21 @@ public class BookingServiceImpl implements BookingService{
 		log.info("remove...."+ book_Num);
 		return mapper.delete(book_Num) ==1;
  	}
+
+
+	@Override
+	public List<BookVO> getBookList(String loginUserNum) {
+		log.info("예약중인 회원의 리스트......");
+		return mapper.getBookList(loginUserNum);
+	}
+
+
+	@Override
+	public List<BookCancelVO> getCancelList(String loginUserNum) {
+		// TODO Auto-generated method stub
+		log.info("취소중인 회원의 리스트......");
+		return mapper.getCancelList(loginUserNum);
+	}
 
 	
 	

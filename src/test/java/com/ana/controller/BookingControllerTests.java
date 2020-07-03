@@ -40,44 +40,64 @@ public class BookingControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
-	
+
+	//취소된 예약에 대한 테스트
 	@Test
+	public void testCancelList() throws Exception{
+		log.info(
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/cancelled"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+//	@Test
 	public void testRemove()throws Exception{
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/MyPage/remove")
-				.param("book_Num", "B14")
+				.param("bookNum", "B14")
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 				
 				
 	}
 
-//	@Test
-//	public void testList() throws Exception{
-//		
-//		log.info(
-//		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookList"))
-//		.andReturn()
-//		.getModelAndView()
-//		.getModelMap());
-//
-//	}
-//	
-//	
-//
-//	
-//	@Test
-//	public void testGet() throws Exception {
-//
-//		log.info(mockMvc.perform(MockMvcRequestBuilders
-//				.get("/MyPage/info")
-//				.param("book_Num", "B1"))
-//				.andReturn()
-//				.getModelAndView().getModelMap());
-//	}
-//	
-	
-	
 	@Test
+	public void testList() throws Exception{
+		
+		log.info(
+		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookList"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+
+	}
+	
+	
+
+	
+//	@Test
+	public void testGet() throws Exception {
+
+		log.info(mockMvc.perform(MockMvcRequestBuilders
+				.get("/MyPage/info")
+				.param("bookNum", "B1"))
+				.andReturn()
+				.getModelAndView().getModelMap());
+	}
+	
+
+	
+	
+	
+//	@Test
 	public void testModify() throws Exception {
 				
 		
@@ -97,7 +117,10 @@ public class BookingControllerTests {
 						.param("realArr", "수정된 도착시간")														
 						.param("bookDate", "2020/02/02")
 						.param("checkinDate", "2020/02/02")
-						.param("chekoutDate", "2020/02/02")						
+
+						.param("checkoutDate", "2020/02/02")						
+						
+
 						)
 				.andReturn().getModelAndView().getViewName();
 		

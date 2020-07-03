@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ana.mapper.RomMapper">
 
-	<resultMap type="com.ana.domain.RomVO" id="RomVO">
+	<resultMap id="RomVOResult" type="com.ana.domain.RomVO">
 		<result column="ROM_NUM" property="romNum" />
 		<result column="ACM_NUM" property="acmNum" />
 		<result column="ROOM_NAME" property="roomName" />
@@ -13,14 +13,12 @@
 		<result column="BED_CNT" property="bedCnt" />
 		<result column="ROM_SIZE" property="romSize" />
 		<result column="PRICE" property="price" />
-		<result column="ROM_PURL" property="romUrl" />
+		<result column="ROM_PURL" property="romPurl" />
 		<result column="ROM_LOCAINFO" property="romLocainfo" />
 	</resultMap>
 
-	<select id="getList" resultMap="RomVO">
-	<![CDATA[
-		select * from TROM
-		]]>
+	<select id="getList" resultMap="RomVOResult">
+		select * from TROM where ACM_NUM = #{acmNum}
 		<!-- where rom_num > 0 -->
 	</select>
 
@@ -37,10 +35,10 @@
 		values (#{romNum},
 		#{acmNum}, #{roomName}, #{capacity},
 		#{bedType}, #{bedCnt}, #{romSize},
-		#{price}, #{romUrl}, #{romLocainfo})
+		#{price}, #{romPurl}, #{romLocaInfo})
 	</insert>
 
-	<select id="read" resultMap="RomVO">
+	<select id="read" resultMap="RomVOResult">
 		select * from TROM where ROM_NUM =
 		#{romNum}
 	</select>
@@ -48,16 +46,18 @@
 	<update id="update">
 		update TROM
 		set ROOM_NAME = #{roomName},
-		CAPACITY = #{capacity},
+		CAPACITY =
+		#{capacity},
 		BED_TYPE = #{bedType},
 		BED_CNT = #{bedCnt},
-		PRICE = #{price},
-		ROM_PURL = #{romUrl}
+		PRICE =
+		#{price},
+		ROM_PURL = #{romPurl}
 		where ROM_NUM = #{romNum}
 	</update>
-	
+
 	<delete id="delete">
 		delete TROM where ROM_NUM = #{romNum}
 	</delete>
-	
+
 </mapper>

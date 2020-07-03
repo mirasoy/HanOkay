@@ -30,6 +30,8 @@ public class AcmMapperTests {
 		mapper.getList().forEach(board -> log.info(board));
 	}
 	
+
+
 	//@Test
 	public void testRead() {
 		AcmVO acm = mapper.read("A5");
@@ -116,6 +118,8 @@ public class AcmMapperTests {
 		list.forEach(acm -> log.info(acm));
 	}
 	
+
+
 	/*acmname      |acmcity |acmdistr |acmdetailaddr |repphone    |
 	bizregnum  |checkintime |checkouttime |acmregdate            |
 	acmupdatedate         |phone2     |acmfax      |acmemail     |acmdesc*/

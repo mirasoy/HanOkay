@@ -56,7 +56,9 @@
         
         <div class ="form-group">
        		<label>체크아웃날짜</label>
-       		<input class="form-control" name='chekoutDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${info.chekoutDate}" />' readonly> 
+
+       		<input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${info.checkoutDate}" />' readonly> 
+
         </div>                   
       
         <div class="form-group">
@@ -107,16 +109,6 @@
 <button type="submit" data-oper='bookList' class="btn btn-info" >리스트</button>
 
 </form>
-<%-- <form id='operForm' action="/boad/modify" method="get">
-  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
-  <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
-  <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-  <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-  <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
- 
-</form> --%>
-
-
 
 
       </div>
@@ -128,27 +120,6 @@
 </div>
 <!-- /.row -->
 
-<!-- <script type="text/javascript">
-$(document).ready(function() {
-  
-  var operForm = $("#operForm"); 
-  
-  $("button[data-oper='modify']").on("click", function(e){
-    
-    operForm.attr("action","/board/modify").submit();
-    
-  });
-  
-    
-  $("button[data-oper='list']").on("click", function(e){
-    
-    operForm.find("#bno").remove();
-    operForm.attr("action","/board/list")
-    operForm.submit();
-    
-  });  
-});
-</script> -->
 
 
 <script type="text/javascript">
@@ -174,6 +145,7 @@ $(document).ready(function() {
 		  self.location="/MyPage/bookList";
 		  return;
 	  }
+	 
 	  formObj.submit();
   });
     
