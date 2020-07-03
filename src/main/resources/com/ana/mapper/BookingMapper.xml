@@ -124,6 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
  	<select id="getCancelList" resultMap="BookCancelVOResult">
+ 	<![CDATA[
 	SELECT
 	A.ACM_NAME,
     B.BOOK_NUM,
@@ -133,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
 	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND S.BOOK_STATUS='RS_STT_BC' AND B.user_num=#{loginUserNum}
 	order by to_number(substr(B.BOOK_NUM,2)) 
-	
+	]]>	
 		
 	</select> 
 

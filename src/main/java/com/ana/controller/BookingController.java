@@ -35,10 +35,11 @@ public class BookingController {
 	}
 	
 	@GetMapping("/cancelled")
-	public void list2(Model model2, HttpSession session) {
+	public void list2(Model model, HttpSession session) {
 		String loginUserNum = (String) session.getAttribute("loginUserNum");
 		log.info("cancelled 취소된 예약입니다.");
-		model2.addAttribute("cancelled", service.getCancelList("A1"));		
+		model.addAttribute("bookList", service.getBookList("A1"));
+		model.addAttribute("cancelled", service.getCancelList("A1"));		
 	}
 	
 	

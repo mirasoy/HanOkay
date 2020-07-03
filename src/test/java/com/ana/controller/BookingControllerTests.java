@@ -69,7 +69,7 @@ public class BookingControllerTests {
 				
 	}
 
-	@Test
+	//@Test
 	public void testList() throws Exception{
 		
 		log.info(
