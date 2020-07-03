@@ -25,6 +25,7 @@ public class BookingVO {
 	private String request;
 	private String realArr;
 	
-
+	
+	
 	
 }

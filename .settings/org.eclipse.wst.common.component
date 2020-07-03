@@ -4,12 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<<<<<<< HEAD
         <property name="java-output-path" value="/projectAna/target/classes"/>
         <property name="context-root" value="/"/>
-=======
-        <property name="java-output-path" value="/ana/target/classes"/>
-        <property name="context-root" value="controller"/>
->>>>>>> 3fec589f85dcb1197aca5ab8bf9ecd664c96332b
     </wb-module>
 </project-modules>

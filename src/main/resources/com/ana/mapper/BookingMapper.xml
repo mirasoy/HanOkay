@@ -24,10 +24,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result column="real_Arr" property="realArr" />   
 </resultMap>
 
+<!-- 예약상태 -->
+<resultMap id="BookVOResult" type="com.ana.domain.BookVO">
+	<result column="acm_Name" property="acmName" />
+	<result column="book_num" property="bookNum" />
+	<result column="rom_Num" property="romNum" />
+	<result column="checkin_Date" property="checkinDate" />
+	<result column="checkout_Date" property="checkoutDate" />
+	<result column="book_Price" property="bookPrice" />
+</resultMap>
 
 
+<!-- 예약취소상태 -->
+<resultMap id="BookCancelVOResult" type="com.ana.domain.BookCancelVO">
+	<result column="acm_Name" property="acmName" />
+	<result column="book_num" property="bookNum" />
+	<result column="rom_Num" property="romNum" />
+	<result column="checkin_Date" property="checkinDate" />
+	<result column="checkout_Date" property="checkoutDate" />
+	<result column="book_Price" property="bookPrice" />
+</resultMap>
+
+
+
+
+
+<!-- 이거 지우는게 아니라, 예약 취소한거로 상태변화하는거임 - 이름 바꾸기 귀찮아서 그냥 냅뒀음 나중에 고쳐야겠지....군데 지금은 걍 냅둘래 -->
 	<delete id="delete">
-		delete from tbooking where book_Num = #{bookNum}
+		<!-- delete from tbooking where book_Num = #{bookNum} -->
+		update TBOOK_STATUS
+		set 			
+			BOOK_STATUS='RS_STT_BC',
+			UPDATEDATE = sysdate
+			where book_num=#{bookNum}
+	<!-- update TBOOK_STATUS set BOOK_STATUS='RS_STT_BC', UPDATEDATE= sysdate where book_num='B13' -->	
+		
 	</delete>
 
 
@@ -72,6 +103,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	
 	</select>
+	
+	<!-- 회원 A1의 예약중인 리스트 -->
+	
+	<select id="getBookList" resultMap="BookVOResult">
+	
+	<![CDATA[
+	SELECT
+    A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND S.BOOK_STATUS='RS_STT_BK' AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 
+	]]>	
+	</select>
+
+
+
+ 	<select id="getCancelList" resultMap="BookCancelVOResult">
+	SELECT
+	A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND S.BOOK_STATUS='RS_STT_BC' AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 
+	
+		
+	</select> 
+
 
 
 </mapper>

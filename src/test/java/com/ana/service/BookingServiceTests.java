@@ -21,26 +21,41 @@ public class BookingServiceTests {
 	
 	@Setter(onMethod_= {@Autowired})
 	private BookingService service;
+
 	
 	@Test
-	public void testDelete() {
-		
-		log.info("REMOVE RESULT: "+ service.remove("B14"));
-		
+	public void testCancleList() {
+		service.getCancelList("A1").forEach(board2-> log.info(board2));
 	}
 	
+
 	@Test
-	public void testUpdate() {
-		BookingVO board = service.get("B8");
-		if(board == null) {
-			return;
-		}
-		
-		board.setRequest("요청사항 수정합니다.");
-		log.info("MODIFY RESULT: " + service.modify(board));
-		
-		
+	public void testgetBookList() {
+		service.getBookList("A1").forEach(board-> log.info(board));
 	}
+	
+	
+	
+	
+//	@Test
+//	public void testDelete() {
+//		
+//		log.info("REMOVE RESULT: "+ service.remove("B14"));
+//		
+//	}
+//	
+//	@Test
+//	public void testUpdate() {
+//		BookingVO board = service.get("B8");
+//		if(board == null) {
+//			return;
+//		}
+//		
+//		board.setRequest("요청사항 수정합니다.");
+//		log.info("MODIFY RESULT: " + service.modify(board));
+//		
+//		
+//	}
 	
 	
 	
