@@ -74,15 +74,15 @@ public class BookingController {
 		return "redirect:/MyPage/bookList";
 	}
 	
-	@PostMapping("/remove")
-	public String remove(@RequestParam("bookNum") String bookNum, RedirectAttributes rttr) {
-		log.info("remove...." + bookNum);
-		if(service.remove(bookNum)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		return "redirect:/MyPage/bookList";
-	}
-	
+//	@PostMapping("/remove")
+//	public String remove(@RequestParam("bookNum") String bookNum, RedirectAttributes rttr) {
+//		log.info("remove...." + bookNum);
+//		if(service.remove(bookNum)) {
+//			rttr.addFlashAttribute("result", "success");
+//		}
+//		return "redirect:/MyPage/bookList";
+//	}
+//	
 
 	
 }
