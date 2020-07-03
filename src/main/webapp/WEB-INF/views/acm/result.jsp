@@ -309,7 +309,7 @@
 					new google.maps.Size(size_x, size_y));
 
 			<c:forEach items="${list }" var="acm">
-			var latLng = {lat: parseFloat(${acm.latitude}), lng: parseFloat(${acm.longitude})};
+			var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
 			
 			var marker;
 
@@ -451,7 +451,7 @@
 												e.preventDefault();
 
 												searchForm.submit();
-											})
+											});
 						});
 	</script>
 	<%@include file="../includes/footer.jsp"%>
