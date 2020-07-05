@@ -35,12 +35,17 @@
 <body>
 	<div>
 		<div>
+			[숙소정보]</br>
 			<c:out value="${acm.acmName}" /></br>
 			<c:out value="${acm.acmCity}" /><c:out value="${acm.acmDistr}" /><c:out value="${acm.acmDetailaddr}" /></br>
 			<c:out value="${acm.acmDesc}" /></br>
-			
+
+</br>
+</br>
+</br>
 			<table>
 				<tr>
+					[숙소사진]</br>
 				  	<td rowspan="3"><img alt="대표사진" src="<c:out value="${acm.acmPurl}" />"></td>
 				  	<td><img alt="사진1" src="<c:out value="${acm.acmPurl1}" />"></td>
 				    <td><img alt="사진2" src="<c:out value="${acm.acmPurl2}" />"></td>
@@ -66,6 +71,7 @@
 </br>
 		
 		<div>
+			[숙소리뷰]</br>
 			<table>
 				<thead>
 					<tr>
@@ -92,6 +98,7 @@
 </br>
 		
 		<div>
+			[편의시설]</br>
 			<table>
 				<thead>
 					<tr>
@@ -111,6 +118,7 @@
 </br>
 		
 		<div>
+			[객실정보]</br>
 			<table>
 				<thead>
 					<tr>
@@ -126,13 +134,20 @@
 							
 				<c:forEach items="${rom }" var="rom">
 					<tr>
+						<td><img alt="객실 사진" src="<c:out value="${rom.romPurl}" />"></td>
 						<td><c:out value="${rom.roomName}" /></td>
 						<td><c:out value="${rom.capacity}" /></td>
 						<td><c:out value="${rom.bedType}" /></td>
 						<td><c:out value="${rom.bedCnt}" /></td>
 						<td><c:out value="${rom.romSize}" /></td>
 						<td><c:out value="${rom.price}" /></td>
-						<td><img alt="객실 사진" src="<c:out value="${rom.romPurl}" />"></td>
+						
+						<td><a type="button" href="">예약하기</a></td>
+<!-- 						
+												<form name="select" method="post">
+								<input type='submit'>예약하기
+								<input type='hidden' name='' value=''>
+						</form></td> -->
 					</tr>
 				</c:forEach>
 			</table>
@@ -140,6 +155,10 @@
 	</div>
 	<!-- GoogleMap API 연동(황영롱) -->
 	
+</br>
+</br>
+</br>
+	[위치정보]</br>
 	<div id="map"></div>
 	<!-- 지도가 붙을 위치 -->
 	<script>
