@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.RomVO;
 
 public interface BookingService {
 	
@@ -15,8 +16,5 @@ public interface BookingService {
 	
 	public List<BookingVO> getList();
 
-
-	
-	
-	
+	public int register(BookingVO book);
 }

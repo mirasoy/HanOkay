@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.RomVO;
 import com.ana.mapper.AcmMapper;
 import com.ana.mapper.BookingMapper;
 
@@ -49,7 +50,10 @@ public class BookingServiceImpl implements BookingService{
 		return mapper.delete(book_Num) ==1;
  	}
 
-	
-	
-	
+
+	@Override
+	public int register(BookingVO book) {
+		log.info("register......" + book);
+		return mapper.insert(book);
+	}
 }

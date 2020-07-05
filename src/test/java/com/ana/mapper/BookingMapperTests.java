@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.RomVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -24,13 +25,13 @@ public class BookingMapperTests {
 	private BookingMapper mapper;
 	
 	
-	@Test
+	//@Test
 	public void testDelete() {
 		log.info("DELETE COUNT: " + mapper.delete("B13"));
 	}
 	
 	
-	@Test
+	//@Test
 	public void testUpdate() {
 		BookingVO board = new BookingVO();
 	
@@ -81,4 +82,28 @@ public class BookingMapperTests {
 //		
 //		
 //	}
+	
+	
+	@Test
+	public void testInsert() {
+		BookingVO book = new BookingVO();
+		book.setUserNum("U999");
+		book.setRomNum("R999");
+		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
+		try {
+			book.setCheckinDate(beforeFormat.parse("2020/8/1"));
+			book.setCheckoutDate(beforeFormat.parse("2020/8/3"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		book.setStaydays(2);
+		book.setGuest(2);
+		book.setBookPrice(1004);
+		book.setExpectedArr("PM02");
+		book.setSmoking("1");
+		book.setRequest("뷰 좋은 방 주세요");
+		mapper.insert(book);
+
+		log.info(book);
+	}
 }
