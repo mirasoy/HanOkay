@@ -17,14 +17,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="staydays" property="staydays" />
 		<result column="guest" property="guest" />
 		<result column="book_Price" property="bookPrice" />
-		<result column="deposit" property="deposit" />
-		<result column="canceled" property="canceled" />
 		<result column="expected_Arr" property="expectedArr" />
 		<result column="smoking" property="smoking" />
 		<result column="request" property="request" />
 		<result column="real_Arr" property="realArr" />
+		<result column="room_Name" property="roomName" />
+		<result column="u_LastName" property="lastName" />
+		<result column="u_FstName" property="firstName" />
+		<result column="book_Status" property="bookStatus" />
 	</resultMap>
-
 
 
 	<delete id="delete">
@@ -83,7 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		insert into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
 		CHECKOUT_DATE,
-		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING, REQUEST)
+		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING, REQUEST,
+		room_Name, u_LastName, u_FstName, book_Status)
 		values (
 		#{bookNum},
 		#{userNum},
@@ -95,7 +97,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{bookPrice},
 		#{expectedArr},
 		#{smoking},
-		#{request})
+		#{request},
+		(select room_name from trom where rom_num= #{romNum}),
+		(select u_LastName from tuser where user_num= #{userNum}),
+		(select u_FstName from tuser where user_num= #{userNum}),
+		#{bookStatus})
 		
 	</insert>
 </mapper>

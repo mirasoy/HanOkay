@@ -36,7 +36,6 @@ public class RevController {
         HttpSession session = request.getSession();
         String member = (String) session.getAttribute("member");
 
-
 		log.info("list");
 		model.addAttribute("list", service.getUserList(member));
 	}

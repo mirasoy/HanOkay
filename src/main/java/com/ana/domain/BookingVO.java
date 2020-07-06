@@ -18,13 +18,12 @@ public class BookingVO {
 	private Integer staydays;
 	private Integer guest;
 	private Integer bookPrice;
-	private Integer deposit;
-	private String canceled;
 	private String expectedArr;
 	private String smoking;
 	private String request;
 	private String realArr;
-	
-
-	
+	private String roomName;
+	private String lastName;
+	private String firstName;
+	private String bookStatus;
 }

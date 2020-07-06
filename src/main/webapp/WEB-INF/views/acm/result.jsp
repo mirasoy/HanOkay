@@ -179,6 +179,7 @@
 			value='<c:out value="${pageMaker.cri.type}"/>'> <input
 			type='hidden' name='keyword'
 			value='<c:out value="${pageMaker.cri.keyword}"/>'>
+		
 	</form>
 	
 	</div>
@@ -412,14 +413,17 @@
 												.val($(this).attr("href"));
 										actionForm.submit();
 									});
-							 $(".move").on("click",function(e) {
-												e.preventDefault();
-												actionForm.append("<input type='hidden' name='acmNum' value='"
-																+ $(this).attr("href")
-																+ "'>");
-												actionForm.attr("action","/acm/accommodation");
-												actionForm.submit();
-											}); 
+							$(".move").on("click",function(e) {
+                                e.preventDefault();
+                                actionForm.append("<input type='hidden' name='acmNum' value='"
+                                            + $(this).attr("href")
+                                            + "'>");
+                                actionForm.append("<input type='hidden' name='in' value='2020-08-01'>");
+                                actionForm.append("<input type='hidden' name='out' value='2020-08-03'>");
+                                actionForm.append("<input type='hidden' name='person' value='2'>");
+                                actionForm.attr("action","/acm/get");
+                                actionForm.submit();
+                             }); 
 						/* 	$(".move").on("click",function(e) {
 								e.preventDefault();
 								var acmnum= ${acm.acmNum};
