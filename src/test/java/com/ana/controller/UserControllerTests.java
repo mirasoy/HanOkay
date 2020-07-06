@@ -17,50 +17,43 @@ import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", 
-"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"	
-})
+@ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",
+		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 @Log4j
 public class UserControllerTests {
-	@Setter(onMethod_= {@Autowired})
+	@Setter(onMethod_ = { @Autowired })
 	private WebApplicationContext ctx;
-	
+
 	private MockMvc mockMvc;
-	
+
 	@Before
 	public void setup() {
-		this.mockMvc= MockMvcBuilders.webAppContextSetup(ctx).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
-	
+
 //	@Test
-	public void testList() throws Exception{
+	public void testList() throws Exception {
 		log.info(
-				mockMvc.perform(MockMvcRequestBuilders.get("/index/list"))
-				.andReturn()
-				.getModelAndView()
-				.getModelMap());
+				mockMvc.perform(MockMvcRequestBuilders.get("/index/list")).andReturn().getModelAndView().getModelMap());
 	}
-	
+
 	@Test
 	public void testCheckEmail() throws Exception {
-		log.info(
-				mockMvc.perform(MockMvcRequestBuilders.post("/register/checkEmail")
-				.param("email", "jiha@naver.com"))
-				.andReturn()
-				.getModelAndView()
-				.getModelMap());
-		
+		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/register/checkEmail").param("email", "jiha@naver.com"))
+				.andReturn().getModelAndView().getModelMap());
+
 	}
-	
+
 	@Test
 	public void testShowPage() throws Exception {
-		log.info(
-				mockMvc.perform(MockMvcRequestBuilders.get("/register/signUp"))
-						.andReturn()
-						.getModelAndView()
-						.getModelMap());	
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/register/signUp")).andReturn().getModelAndView()
+				.getModelMap());
 	}
-	
 
-	
+	@Test
+	public void testRegister() throws Exception {
+		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/register/register")).andReturn().getModelAndView()
+				.getModel());
+	}
+
 }

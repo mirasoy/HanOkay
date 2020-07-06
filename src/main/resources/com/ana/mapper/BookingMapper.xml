@@ -6,23 +6,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ana.mapper.BookingMapper">
 
 
- <resultMap id="BookingVOResult" type="com.ana.domain.BookingVO">
-      <result column="book_num" property="bookNum" />
-      <result column="user_num" property="userNum" />
-      <result column="rom_num" property="romNum" />
-      <result column="book_Date" property="bookDate" />   
-      <result column="checkin_Date" property="checkinDate" />   
-      <result column="checkout_Date" property="checkoutDate" />   
-      <result column="staydays" property="staydays" />   
-      <result column="guest" property="guest" />   
-      <result column="book_Price" property="bookPrice" />   
-      <result column="deposit" property="deposit" />   
-      <result column="canceled" property="canceled" />   
-      <result column="expected_Arr" property="expectedArr" />   
-      <result column="smoking" property="smoking" />   
-      <result column="request" property="request" />   
-      <result column="real_Arr" property="realArr" />   
-</resultMap>
+	<resultMap id="BookingVOResult"
+		type="com.ana.domain.BookingVO">
+		<result column="book_num" property="bookNum" />
+		<result column="user_num" property="userNum" />
+		<result column="rom_num" property="romNum" />
+		<result column="book_Date" property="bookDate" />
+		<result column="checkin_Date" property="checkinDate" />
+		<result column="checkout_Date" property="checkoutDate" />
+		<result column="staydays" property="staydays" />
+		<result column="guest" property="guest" />
+		<result column="book_Price" property="bookPrice" />
+		<result column="deposit" property="deposit" />
+		<result column="canceled" property="canceled" />
+		<result column="expected_Arr" property="expectedArr" />
+		<result column="smoking" property="smoking" />
+		<result column="request" property="request" />
+		<result column="real_Arr" property="realArr" />
+	</resultMap>
 
 
 
@@ -31,33 +32,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 
-	<update id="update" >
+	<update id="update">
 		update tbooking
-		set 
-			user_num = #{userNum},
-			rom_num =#{romNum},
-			book_Date=#{bookDate},
-			checkin_Date=#{checkinDate},
-			checkout_Date=#{checkoutDate},
-			staydays=#{staydays},
-			guest=#{guest},
-			book_Price=#{bookPrice},
-			deposit=#{deposit},
-			canceled=#{canceled},
-			expected_Arr=#{expectedArr},
-			smoking=#{smoking},
-			request=#{request},
-			real_Arr=#{realArr}		
+		set
+		user_num = #{userNum},
+		rom_num =#{romNum},
+		book_Date=#{bookDate},
+		checkin_Date=#{checkinDate},
+		checkout_Date=#{checkoutDate},
+		staydays=#{staydays},
+		guest=#{guest},
+		book_Price=#{bookPrice},
+		deposit=#{deposit},
+		canceled=#{canceled},
+		expected_Arr=#{expectedArr},
+		smoking=#{smoking},
+		request=#{request},
+		real_Arr=#{realArr}
 
-			where book_num=#{bookNum}
+		where book_num=#{bookNum}
 	</update>
 
 
 
 	<select id="read" resultMap="BookingVOResult">
-		select * from tbooking where book_Num = #{bookNum}
+		select * from tbooking where
+		book_Num = #{bookNum}
 
-	
+
 	</select>
 
 
@@ -70,8 +72,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	]]>
-	
+
 	</select>
 
+	<insert id="insert">
+		<selectKey keyProperty="bookNum" order="BEFORE"
+			resultType="String">
+			select concat('B',seq_tbook.nextval) from dual
+		</selectKey>
 
+		insert into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
+		CHECKOUT_DATE,
+		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING, REQUEST)
+		values (
+		#{bookNum},
+		#{userNum},
+		#{romNum},
+		#{checkinDate},
+		#{checkoutDate},
+		#{staydays},
+		#{guest},
+		#{bookPrice},
+		#{expectedArr},
+		#{smoking},
+		#{request})
+		
+	</insert>
 </mapper>

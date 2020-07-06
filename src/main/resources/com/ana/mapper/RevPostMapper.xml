@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CONTENT" property="content" />
 		<result column="ACM_NAME" property="acmName" />
 		<result column="CHECKIN_DATE" property="checkInDay" />
-		<result column="CHEKOUT_DATE" property="CheckOutDay" />
+		<result column="CHECKOUT_DATE" property="checkOutDay" />
 </resultMap>
 
 
@@ -60,7 +60,7 @@ rev.book_num,
 rev.content,
 rev.acm_name,
 bk.CHECKIN_DATE,
-bk.CHEKOUT_DATE
+bk.CHECKOUT_DATE
 from
 (SELECT
 r.PST_NUM,
@@ -100,13 +100,78 @@ where
     r.acm_num = t.acm_num
  ) rev,
 
-tbooking bk
+tbooking bk,
+ TBOOK_STATUS BS
  
 where
-rev.book_num = bk.book_num
+rev.book_num = bk.book_num 
+AND
+rev.book_num = bs.book_num 
+AND
+bs.book_status = 'RS_STT_AC'
 AND
 rev.user_num = #{loginUser}
+     
+        ORDER BY
+         bk.checkin_Date
 
+</select>
+
+
+<select id="getBookingList" resultMap="RevVOResult">
+SELECT 
+  AL.ACM_NAME,
+    AL.BOOK_NUM,
+       AL.checkin_Date,
+        AL.cheCkout_Date,
+        AL.pst_num,
+        al.user_nuM
+FROM
+    (SElECT
+    
+        J.ACM_NAME,
+        J.BOOK_NUM,
+        J.checkin_Date,
+        J.cheCkout_Date,
+        J.USER_NUM,
+        t.pst_num
+        
+        FROM
+        (
+            SELECT
+                A.ACM_NAME,
+                B.BOOK_NUM,
+                B.checkin_Date,
+                B.cheCkout_Date,
+                b.user_num
+                
+            FROM 
+                TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+            WHERE 
+                B.BOOK_NUM=S.BOOK_NUM
+            AND 
+                B.ROM_NUM=R.ROM_NUM 
+            AND 
+                R.ACM_NUM=A.ACM_NUM 
+            AND 
+                S.BOOK_STATUS='RS_STT_AC'
+        )J,
+        trev_detail T
+        
+        WHERE
+        j.book_num= t.book_num(+)
+        ) AL,
+        TREV_POST PST
+        
+        WHERE
+        al.pst_num = pst.pst_num(+)
+        AND
+        al.user_num =  #{loginUser}
+        
+          
+        ORDER BY
+         AL.checkin_Date
+        
 </select>
 
 
@@ -118,7 +183,64 @@ rev.user_num = #{loginUser}
 
 
 
-
+<select id="readByBookNum" resultMap="RevVOResult">
+SELECT 
+  AL.ACM_NAME,
+    AL.BOOK_NUM,
+       AL.checkin_Date,
+        AL.cheCkout_Date,
+        AL.pst_num,
+        al.user_nuM,
+        AL.acm_num
+FROM
+    (SElECT
+    
+        J.ACM_NAME,
+        J.BOOK_NUM,
+        J.checkin_Date,
+        J.cheCkout_Date,
+        J.USER_NUM,
+        j.acm_num,
+        t.pst_num
+        
+        FROM
+        (
+            SELECT
+                A.ACM_NAME,
+                B.BOOK_NUM,
+                B.checkin_Date,
+                B.cheCkout_Date,
+                a.acm_num,
+                b.user_num
+                
+            FROM 
+                TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+            WHERE 
+                B.BOOK_NUM=S.BOOK_NUM
+            AND 
+                B.ROM_NUM=R.ROM_NUM 
+            AND 
+                R.ACM_NUM=A.ACM_NUM 
+            AND 
+                S.BOOK_STATUS='RS_STT_AC'
+        )J,
+        trev_detail T
+        
+        WHERE
+        j.book_num= t.book_num(+)
+        ) AL,
+        TREV_POST PST
+        
+        
+        WHERE
+        al.pst_num = pst.pst_num(+)
+        AND
+        al.book_num =  #{bookNum}
+          
+        ORDER BY
+         AL.checkin_Date
+        
+</select>
 
 
 <select id="read" resultMap="RevVOResult">
@@ -164,25 +286,22 @@ WHERE
 </update>
 
 <select id="getList" resultMap="RevVOResult" >
-select 
-A.PST_NUM,
-A.BRD_CODE,
-a.p_title,
-a.p_regdate,
-a.p_updatedate,
-a.user_num,
-b.rev_purl,
-B.STISF,
-b.acm_num,
-b.book_num,
-b.content
 
-FROM
-    TREV_POST A
-LEFT JOIN
-    trev_detail B
-ON 
-    a.pst_num = b.pst_num
+SELECT
+    A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date
+FROM 
+	TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+WHERE 
+	B.BOOK_NUM=S.BOOK_NUM 
+AND 
+	B.ROM_NUM=R.ROM_NUM 
+AND 
+	R.ACM_NUM=A.ACM_NUM 
+AND 
+	S.BOOK_STATUS='RS_STT_AC'
     
 </select>
 
@@ -195,7 +314,7 @@ select SEQ_REV.nextval from dual
 
     INSERT ALL
     INTO TREV_POST(PST_NUM, BRD_CODE, P_TITLE, USER_NUM)
-    VALUES(#{pstNum},#{brdCode},#{title},#{userNum})  
+    VALUES(#{pstNum},'rev',#{title},#{userNum})  
     INTO TREV_DETAIL(pst_num,  REV_PURL , STISF , ACM_NUM ,BOOK_NUM, CONTENT  )
     VALUES(#{pstNum},#{revPurl},#{stisf},#{acmNum},#{bookNum},#{content}) 
     SELECT * 

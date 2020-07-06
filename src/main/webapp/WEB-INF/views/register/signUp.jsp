@@ -58,7 +58,6 @@
 
 		</table>
 		<input type="hidden" id="uBirthday" name="uBirthday" value="">
-		<!-- input type="hidden" id="uPhone" name="uPhone" value=""-->
 	</form>
 
 	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>

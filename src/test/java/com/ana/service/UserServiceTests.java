@@ -18,24 +18,24 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
 public class UserServiceTests {
-	
-	@Setter(onMethod_= {@Autowired })
+
+	@Setter(onMethod_ = { @Autowired })
 	private UserService service;
-	
+
 	@Test
 	public void testExist() {
 		log.info(service);
-		
+
 		assertNotNull(service);
 	}
-	
+
 	@Test
 	public void testRegister() {
-		UserVO user= new UserVO();
-		
+		UserVO user = new UserVO();
+
 		user.setEmail("jiha@naver.com");
 		user.setPwd("Bimil123@");
-		
+
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
 			user.setUBirthday(beforeFormat.parse("2010/11/11"));
@@ -48,38 +48,40 @@ public class UserServiceTests {
 //		user.setRegMethod("m");
 		user.setUPhone("");
 		service.register(user);
-		log.info("생성된 회원번호: "+user.getUserNum());
-		
+		log.info("생성된 회원번호: " + user.getUserNum());
+
 	}
-	
+
 	@Test
 	public void testGet() {
-		if(service.get("U1") ==null) {
+		if (service.get("U1") == null) {
 			log.info("********없는 회원입니다!***********");
-		}
-		else {
+		} else {
 			log.info(service.get("U1"));
 		}
 	}
-	
-	@Test 
+
+	@Test
 	public void testDelete() {
-		log.info("REMOVE RESULT: "+ service.remove("U1"));
+		log.info("REMOVE RESULT: " + service.remove("U1"));
 
 	}
-	
+
 	@Test
 	public void testUpdate() {
-		
-		UserVO user= service.get("U10");
-		
-		if(user == null) {
+
+		UserVO user = service.get("U10");
+
+		if (user == null) {
 			return;
 		}
-		
-		log.info("MOODIFY RESULT: "+ service.modify(user));
+
+		log.info("MOODIFY RESULT: " + service.modify(user));
 	}
 
-	
-	
+	@Test
+	public void testIsValidUser() {
+		assertTrue(service.isValidUser("serin9811@naver.com", "Serin9811@"));
+	}
+
 }

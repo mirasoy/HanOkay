@@ -16,10 +16,14 @@ public interface RevPostMapper {
 	
 	public RevVO read(String pstNum);
 	
+	public RevVO readByBookNum(String bookNum);
+	
 	public int delete(String pstNum);
 	
 	public int update(RevPostVO repost);
 
 	public List<RevPostVO> getAcmList(String acmNum);
+	
+	public List<RevVO> getBookingList(String loginUser);
 
 }

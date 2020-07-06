@@ -24,7 +24,13 @@ public interface UserService {
 	//email로 중복체크하기 메서드
 	public boolean checkEmail(String email);
 	
-
+	//로그인 하는 메서드
+	public void checkLogin(UserVO user, HttpSession session);
 	
+	//로그아웃하는 메서드
+	public void logout(HttpSession session);
+
+	//유효한 회원인지 확인하는 메서드
+	public boolean isValidUser(String email, String pwd);
 	
 }

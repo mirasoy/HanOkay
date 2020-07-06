@@ -25,12 +25,13 @@ public class AcmController {
 	private AcmService service;
 	
 	@GetMapping({"/list","/result"})
-	public void list(Criteria cri, Model model) {
+	public void list(Criteria cri, String acmNum, Model model) {
 		log.info("list: "+cri);
 		model.addAttribute("list",service.getList(cri));
 		//model.addAttribute("pageMaker", new PageDTO(cri, 123));
 		int total = service.getTotal(cri);
 		log.info("total: " + total);
+		model.addAttribute("acmNum",acmNum);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
@@ -43,7 +44,7 @@ public class AcmController {
 		return "redirect:/acm/list";
 	}
 	
-	@GetMapping("/get")
+	//@GetMapping("/get")
 	public void get(@RequestParam("acmNum") String acmNum, Model model) {
 		log.info("/get");
 		model.addAttribute("acm", service.get(acmNum));

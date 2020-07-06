@@ -48,7 +48,7 @@ public class RevServiceTests {
 		log.info("생성된 리뷰의 번호: " + post.getPstNum());
 	}
 	
-//	@Test
+	//@Test
 	public void testGetList() {
 		service.getList().forEach(post->log.info(post));
 	}
@@ -58,10 +58,10 @@ public class RevServiceTests {
 		log.info(service.get("8"));
 	}
 	
-//@Test
+	@Test
 	public void testDelete() {
 		//게시물\의 존재 여부를 확인하고 테스트할 것
-		log.info("REMOVE RESULT: " + service.remove("12"));
+		log.info("REMOVE RESULT: " + service.remove("78"));
 	}
 	
 //	@Test
@@ -76,7 +76,12 @@ public class RevServiceTests {
 		log.info("MODIFY RESULT: "+service.modify(post));
 	}
 	
-	@Test
+	//@Test
+	public void testReadByBookNum() {
+		log.info("MODIFY RESULT: "+service.getByBooknum("B15"));
+	}
+	
+	//@Test
 	public void testGetMyList() {
 		service.getUserList("U1").forEach(post->log.info(post));
 	}

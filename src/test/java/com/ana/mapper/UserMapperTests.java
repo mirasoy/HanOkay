@@ -111,6 +111,12 @@ public class UserMapperTests {
 		int count = mapper.checkEmail("a2@naver.com");
 		log.info("*******DUPLICATED ID COUNT: " + count);
 	}
-	
+
+	// 로그인 할 떄 회원 정보 일치하는지 확인하는 메서드
+	@Test
+	public void testIsValidUser() {
+		int count = mapper.isValidUser("serin9811@naver.com", "Serin9811@");
+		log.info("*****THIS ACCOUNT EXIST: " + count);
+	}
 
 }

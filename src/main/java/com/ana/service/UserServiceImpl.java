@@ -56,6 +56,32 @@ public class UserServiceImpl implements UserService{
 		return mapper.checkEmail(email)==0;
 	}
 
+	//로그아웃하는 메서드 구현
+	@Override
+	public void logout(HttpSession session) {
+		//세션 변수 개별 삭제
+		session.removeAttribute("email");
+		//세션 정보 초기화
+	}
+
+	//로그인하는 메서드 구현
+	@Override
+	public void checkLogin(UserVO user, HttpSession session) {
+		//메퍼에서 아이디 비번 일치하는 지 확인
+		boolean result= mapper.checkLogin(user);
+		//일치하면 세션 생성하기 welcome 뷰 보여주기
+		
+		if(result) {
+			
+		}
+	}
+
+	//유효한 회원인지 확인하는 메서드
+	@Override
+	public boolean isValidUser(String email, String pwd) {
+		return mapper.isValidUser(email, pwd) >0;
+		
+	}
 
  
 }
