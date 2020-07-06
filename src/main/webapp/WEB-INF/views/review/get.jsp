@@ -25,6 +25,7 @@ String name = (String) session.getAttribute("userNum");
 <link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
 
 </head>
+
 <body>
 
 	<div class="row">
@@ -34,21 +35,27 @@ String name = (String) session.getAttribute("userNum");
 					<h1>나의 예약 목록</h1>
 				</div>
 				<div class="panel-body">
-					<table
-						class="table table-striped table-bordered table-hover bookList">
-						<thead>
-							<tr>
-								<th>숙소이름</th>
-								<th>예약번호</th>
-								<th>체크인</th>
-								<th>체크아웃</th>
-								<th>리뷰</th>
-							</tr>
-						</thead>
+					<form id="operForm">
+						<table
+							class="table table-striped table-bordered table-hover bookList">
+							<thead>
+								<tr>
+									<td><c:out value="${review.pstNum }" /></td>
+									<td><c:out value="${review.title }" /></td>
+									<td id="star"></td>
+								</tr>
+								<tr>
+									<td><c:out value="${review.content }" /></td>
+									<td><c:out value="${review.pstNum }" /></td>
 
+								</tr>
+							</thead>
 
-					</table>
+							<button data-oper="delete" id="delete">리뷰삭제</button>
+							<button data-oper="modify" id="modify">리뷰수정</button>
 
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -56,28 +63,25 @@ String name = (String) session.getAttribute("userNum");
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
 	<script>
-		<c:forEach items="${list }" var="rev">
+	$(document).ready(function(){
 
-		$(".bookList").append("<tr>");
-		$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
-		$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
-		$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
-		$(".bookList")
-				.append("<td ><c:out value="${rev.checkOutDay }" /></td>");
-
-		if ("<c:out value="${rev.pstNum }" />" == "") {
-			$(".bookList").append("<button class='button'><a href='/review/register?bookNum=<c:out value="${rev.bookNum }" />'>리뷰쓰기</button></a>");
-		} else {
-			$(".bookList").append("<button class='button'><a href='/review/get?pstNum=<c:out value="${rev.pstNum }" />'>리뷰보기</button></a>");
+		let star = "";
+		for (let a = 0; a < <c:out value="${review.stisf }" />; a++) {
+			star = star + '★';
 		}
+		document.getElementById('star').innerHTML = star;
+		
+		var operForm = $("#operForm");
 
-		$(".bookList").append("</tr>");
+		$("button[data-oper='delete']").on("click",function(e){
+			operForm.attr("action",'/review/delete?pstNum=78');
+		})
 
-		</c:forEach>
+	})
+		
 	</script>
+
 </body>
 
 

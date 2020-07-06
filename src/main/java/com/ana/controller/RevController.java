@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ana.domain.BookingVO;
+import com.ana.domain.RevDetailVO;
+import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
+import com.ana.service.BookingService;
 import com.ana.service.RevService;
 
 import lombok.AllArgsConstructor;
@@ -31,30 +35,51 @@ public class RevController {
 	private RevService service;
 	
 	@GetMapping("/list")
-	public void list(Model model, HttpServletRequest request) {
-
-        HttpSession session = request.getSession();
-        String member = (String) session.getAttribute("member");
-
+	public void list(Model model, HttpSession session) {
+ 
+      String userNum = (String) session.getAttribute("userNum");
 
 		log.info("list");
-		model.addAttribute("list", service.getUserList(member));
+//		model.addAttribute("list", service.getBookingList(userNum));
+		model.addAttribute("list", service.getBookingList("U3"));
+	}
+	
+	@GetMapping("/register")
+	public void register(@RequestParam("bookNum") String bookNum, Model model) {
+		
+		log.info("어떤 예약을 쓸거냐?? ?? >> "+ bookNum);
+		log.info("어떤 예약을 쓸거냐?? ?? >> "+ service.getByBooknum(bookNum));
+		model.addAttribute("booking", service.getByBooknum(bookNum));	
 	}
 	
 	@PostMapping("/register")
-	public String register(RevVO review, RedirectAttributes rttr) {
-		log.info("register: " + review);
-		service.register(review);
-		rttr.addFlashAttribute("result", review.getPstNum());
+	public String register(RevPostVO revP, RevDetailVO reDetail, RedirectAttributes rttr) {
+		
+		
+		
+		
+		RevVO rev = service.getByBooknum(reDetail.getBookNum());
+		
+		log.info("register:1>>>>>>>> " + rev);
+		rev.setRevPurl("사진임시");
+		rev.setTitle(revP.getTitle());
+		rev.setContent(reDetail.getContent());
+		rev.setStisf(reDetail.getStisf());
+		
+		log.info("register:2>>>>>>>> " + rev);
+		service.register(rev);
+//		rttr.addFlashAttribute("result", review.getPstNum());
 		
 		return "redirect:/review/list";
 	}
 	
 	@GetMapping("/get")
-	public String get(@RequestParam("pstNum") String pstNum, Model model) {
+	public void get(@RequestParam("pstNum") String pstNum, Model model) {
+		
 		log.info("/get");
+		
 		model.addAttribute("review", service.get(pstNum));
-		return "redirect:/review/list";
+		
 	}
 	
 	@PostMapping("/modify")
@@ -67,12 +92,11 @@ public class RevController {
 		return "redirect:/review/list";
 	}
 	
-	@PostMapping("/remove")
-	public String remove(@RequestParam("pstNum") String pstNum, RedirectAttributes rttr) {
+	@GetMapping("/delete")
+	public String remove(@RequestParam("pstNum") String pstNum, Model model) {
 		log.info("remove..."+pstNum);
-		if(service.remove(pstNum)) {
-			rttr.addFlashAttribute("result", "success");
-		}
+		service.remove(pstNum);
+		
 		return "redirect:/review/list";
 	}
 }
