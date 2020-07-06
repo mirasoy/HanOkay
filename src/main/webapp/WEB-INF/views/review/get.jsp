@@ -35,7 +35,7 @@ String name = (String) session.getAttribute("userNum");
 					<h1>나의 예약 목록</h1>
 				</div>
 				<div class="panel-body">
-					<form id="operForm">
+					<form id="operForm" action="/review/modify" method="get">
 						<table
 							class="table table-striped table-bordered table-hover bookList">
 							<thead>
@@ -50,9 +50,9 @@ String name = (String) session.getAttribute("userNum");
 
 								</tr>
 							</thead>
-
-							<button data-oper="delete" id="delete">리뷰삭제</button>
-							<button data-oper="modify" id="modify">리뷰수정</button>
+							<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
+							<button type="submit" >리뷰수정/삭제</button>
+							
 
 						</table>
 					</form>
@@ -64,22 +64,19 @@ String name = (String) session.getAttribute("userNum");
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-	$(document).ready(function(){
+		$(document)
+				.ready(
+						function() {
 
-		let star = "";
-		for (let a = 0; a < <c:out value="${review.stisf }" />; a++) {
-			star = star + '★';
-		}
-		document.getElementById('star').innerHTML = star;
-		
-		var operForm = $("#operForm");
+							let star = "";
+							for (let a = 0; a < <c:out value="${review.stisf }" />; a++) {
+								star = star + '★';
+							}
+							
+							document.getElementById('star').innerHTML = star;
+					
 
-		$("button[data-oper='delete']").on("click",function(e){
-			operForm.attr("action",'/review/delete?pstNum=78');
-		})
-
-	})
-		
+						})
 	</script>
 
 </body>
