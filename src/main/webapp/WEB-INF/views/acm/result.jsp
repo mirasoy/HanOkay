@@ -58,9 +58,11 @@
 			<form action="/acm/result" method='get'>
 				<div class="row no-margin">
 					<div class="col-md-3">
+					<a href="/acm/list">
 						<div class="form-header">
 							<h2>Book Now</h2>
 						</div>
+						</a>
 					</div>
 					<div class="col-md-7">
 						<div class="row no-margin">
@@ -415,7 +417,10 @@
 												actionForm.append("<input type='hidden' name='acmNum' value='"
 																+ $(this).attr("href")
 																+ "'>");
-												actionForm.attr("action","/acm/accommodation");
+												actionForm.append("<input type='hidden' name='in' value='2020-08-01'>");
+												actionForm.append("<input type='hidden' name='out' value='2020-08-03'>");
+												actionForm.append("<input type='hidden' name='person' value='2'>");
+												actionForm.attr("action","/acm/get");
 												actionForm.submit();
 											}); 
 						/* 	$(".move").on("click",function(e) {

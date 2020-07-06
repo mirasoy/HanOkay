@@ -217,6 +217,25 @@
 </form>
 <!-- /.row -->
 <script type="text/javascript">
+//참고
+function initAutocomplete(){
+autocomplete = new google.maps.places.Autocomplete(
+		/** @type{!HTMLInputElement} */(document.getElementById('autocomplete')),
+		{types: ['geocode'],componentRestrictions: {country: 'kr'}});
+autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function fillInAddress(){
+	var place = autocomplete.getPlace();
+	$('#lat').prop('value',place.geometry.location.lat());
+	$('#lng').prop('value',place.geometry.location.lng());
+	console.log(place.formatted_address);
+	console.log('?');
+	if(document.getElementById('country')!=null){
+		fill_addr();
+	}
+}
+//참고 끝
 	$(document)
 			.ready(
 					function() {
