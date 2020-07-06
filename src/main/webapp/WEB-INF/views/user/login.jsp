@@ -70,7 +70,7 @@
 				// js로 이메일과 비밀번호 정규식이 일치하는지 확인
 				if (checkEmail($("input[id='email']").val()) && checkPassword($("input[id='pwd']").val())) {
 					//controller에서 service.login()을 시킴
-					formObj.attr("action", "/register/executeLogin");
+					formObj.attr("action", "/user/executeLogin");
 					formObj.submit();
 				}
 				else {

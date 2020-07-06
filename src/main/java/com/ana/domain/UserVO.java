@@ -13,8 +13,8 @@ public class UserVO {
    private String uLastname;
    private String uFstname;
    private String uPhone;
-   private Date uRegdate;
    private Date uBirthday;
-   private String facebookId;
-   private String googleId;
+   private String uPriv;
+   private String regMethod;
+  
 }
