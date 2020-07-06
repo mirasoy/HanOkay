@@ -1,6 +1,8 @@
 package com.ana.service;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.junit.Test;
@@ -32,21 +34,19 @@ public class UserServiceTests {
 		UserVO user= new UserVO();
 		
 		user.setEmail("jiha@naver.com");
-		user.setPwd("bimilyiya@");
+		user.setPwd("Bimil123@");
 		
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
 			user.setUBirthday(beforeFormat.parse("2010/11/11"));
-			user.setURegdate(beforeFormat.parse("2020/06/29"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		user.setULastname("Jiha");
 		user.setUFstname("Kim");
-		user.setFacebookId("");
-		user.setGoogleId("");
+//		user.setUPriv("GU");
+//		user.setRegMethod("m");
 		user.setUPhone("");
-		
 		service.register(user);
 		log.info("생성된 회원번호: "+user.getUserNum());
 		
@@ -64,7 +64,7 @@ public class UserServiceTests {
 	
 	@Test 
 	public void testDelete() {
-		log.info("REMOVE RESULT: "+ service.remove("U2"));
+		log.info("REMOVE RESULT: "+ service.remove("U1"));
 
 	}
 	
@@ -77,11 +77,9 @@ public class UserServiceTests {
 			return;
 		}
 		
-		user.setFacebookId("melong@dsas.com");
-		user.setGoogleId("melong@dsas.com");
 		log.info("MOODIFY RESULT: "+ service.modify(user));
 	}
-	
+
 	
 	
 }

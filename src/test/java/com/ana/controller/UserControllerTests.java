@@ -47,7 +47,20 @@ public class UserControllerTests {
 				mockMvc.perform(MockMvcRequestBuilders.post("/register/checkEmail")
 				.param("email", "jiha@naver.com"))
 				.andReturn()
-				);
+				.getModelAndView()
+				.getModelMap());
 		
 	}
+	
+	@Test
+	public void testShowPage() throws Exception {
+		log.info(
+				mockMvc.perform(MockMvcRequestBuilders.get("/register/signUp"))
+						.andReturn()
+						.getModelAndView()
+						.getModelMap());	
+	}
+	
+
+	
 }
