@@ -25,7 +25,7 @@ public class AcmController {
 	private AcmService service;
 	
 
-	@GetMapping({"/list","/result","/accommodation"})
+	@GetMapping({"/list","/result"})
 	public void list(Criteria cri, String acmNum, Model model) {
 		log.info("list: "+cri);
 		model.addAttribute("list",service.getList(cri));
@@ -45,7 +45,7 @@ public class AcmController {
 		return "redirect:/acm/list";
 	}
 	
-	@GetMapping("/get")
+	//@GetMapping("/get")
 	public void get(@RequestParam("acmNum") String acmNum, Model model) {
 		log.info("/get");
 		model.addAttribute("acm", service.get(acmNum));

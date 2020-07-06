@@ -16,6 +16,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
+@RequestMapping("/acm/*")
 @AllArgsConstructor
 public class AcmDatailController {
 
@@ -25,7 +26,7 @@ public class AcmDatailController {
 	private RomService romService;
 	
 	
-	@RequestMapping(value = "accommodation", method = RequestMethod.GET)
+	@RequestMapping(value = "get", method = RequestMethod.GET)
 	public void accomodation(@RequestParam("acmNum") String acmNum, Model model) {
 		log.info("accommodation");
 		
@@ -36,5 +37,3 @@ public class AcmDatailController {
 	}
 
 }
-
-
