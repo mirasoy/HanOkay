@@ -29,6 +29,9 @@ public interface UserMapper {
 
 	// 해당 회원이 있는지 확인하는 메서드
 	public int isValidUser(@Param("email") String email, @Param("pwd") String pwd);
+	
+	//해당 회원의 userNum을 반환
+	public String getUserNumById(String email);
 
 	// 로그인 정보 일치하는 지 확인하는 메서드
 	public boolean checkLogin(UserVO user);
