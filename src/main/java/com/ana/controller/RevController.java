@@ -39,9 +39,10 @@ public class RevController {
  
       String userNum = (String) session.getAttribute("userNum");
 
+      log.info("userNum>>>>>>"+userNum);
 		log.info("list");
-//		model.addAttribute("list", service.getBookingList(userNum));
-		model.addAttribute("list", service.getBookingList("U3"));
+		model.addAttribute("list", service.getBookingList(userNum));
+//		model.addAttribute("list", service.getBookingList("U3"));
 	}
 	
 	@GetMapping("/register")
@@ -82,21 +83,43 @@ public class RevController {
 		
 	}
 	
+	@GetMapping("/modify")
+	public void getModifyPage(@RequestParam("pstNum") String pstNum, Model model) {
+
+		log.info("/open modi page");
+			
+		model.addAttribute("review", service.get(pstNum));
+	}
+	
+
+	
+
+	
 	@PostMapping("/modify")
 	public String modify(RevVO review, RedirectAttributes rttr) {
 		log.info("modify:" + review);
+		RevVO rv = service.get(review.getPstNum());
 		
-		if(service.modify(review)) {
+		rv.setTitle(review.getTitle());
+		rv.setContent(review.getContent());
+		rv.setStisf(review.getStisf());
+		
+		
+		if(service.modify(rv)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/review/list";
 	}
 	
-	@GetMapping("/delete")
-	public String remove(@RequestParam("pstNum") String pstNum, Model model) {
-		log.info("remove..."+pstNum);
-		service.remove(pstNum);
+	@PostMapping("/delete")
+	public String remove( String pstNum, RedirectAttributes rttr) {
 		
+		log.info("delete"+pstNum);
+		
+		service.remove(pstNum);
 		return "redirect:/review/list";
 	}
+	
+
 }
+	
