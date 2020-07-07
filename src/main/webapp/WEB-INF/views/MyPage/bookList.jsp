@@ -3,8 +3,70 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
+<%
+	session.setAttribute("loginUserNum", "A1");
+String name = (String) session.getAttribute("loginUserNum");
+%>
 <%@include file="../includes/header.jsp"%>
+
+<style>
+.bookbar {
+	width: 100%;
+	height: 40px;
+	list-style: none;
+	padding: 0;
+}
+
+.bookbar>li {
+	float: left;
+	width: 110px;
+	height: 30px;
+	margin: 0;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.panel-heading {
+	padding-left: 25px;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%;
+}
+
+/* The Close Button */
+#close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+#close:hover, #close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+</style>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">나의 예약</h1>
@@ -16,273 +78,328 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-		
-		<div class="panel-heading">
-				당신의 예약 목록입니다			
+
+			<div>
+				<ul class="bookbar">
+					<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
+					<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
+					<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
+					<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>
+
+
+				</ul>
 			</div>
-			
+
+			<div class="panel-heading">
+				<%=name%>의 예약 중인 목록입니다. (숙박예정)
+			</div>
+
 
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
+							<th>숙소이름</th>
 							<th>#예약번호</th>
-							<th>#회원번호</th>
-							<th>방번호</th>
-							<th>예약일자</th>
 							<th>체크인날짜</th>
 							<th>체크아웃날짜</th>
-							<th>예약숙박일수</th>
-							<th>예약인원수</th>
-							<th>객실요금</th>					
-							<th>계약금</th>
-							<th>예약취소여부</th>
-							<th>도착예정시간</th>
-							<th>흡연여부</th>
-							<th>요구사항</th>
-							<th>실제도착시간</th>
-							<th>예약정보</th>
-							
+							<th>객실요금</th>
+							<th>버튼1</th>
+							<th>버튼2</th>
+							<th>버튼3</th>
 						</tr>
 					</thead>
 
 					<c:forEach items="${bookList}" var="board">
 						<tr>
-							<td><c:out value="${board.bookNum}" /></td>							
-<%-- 							<td><a href="/MyPage/info?book_Num=${board.bookNum}"><c:out value="${board.bookNum}" /></a></td>							 --%>
-													
+							<td><c:out value="${board.acmName}" /></td>
+							<td><c:out value="${board.bookNum}" /></td>
 
-							<td><c:out value="${board.userNum}" /></td>
-							<td><c:out value="${board.romNum}" /></td>				
-						
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.bookDate}" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.checkinDate}" /></td>
-									
+
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.checkoutDate}" /></td>
-									
-							<td><c:out value="${board.staydays}" /></td>		
-							<td><c:out value="${board.guest}" /></td>		
-							<td><c:out value="${board.bookPrice}" /></td>		
-							<td><c:out value="${board.deposit}" /></td>		
-							<td><c:out value="${board.canceled}" /></td>		
-							<td><c:out value="${board.expectedArr}" /></td>		
-							<td><c:out value="${board.smoking}" /></td>		
-							<td><c:out value="${board.request}" /></td>		
-							<td><c:out value="${board.realArr}" /></td>		
+							<td><c:out value="${board.bookPrice}" /></td>
+
 							<td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td>
-					
+							<td><button id="myBtn">예약 확정서 받기</button></td>
+							<td><button id="myMap">
+									숙소 위치 확인</a></td>
+
 						</tr>
-						
-<%-- 	<tr>
-							<td><c:out value="${board.bookNum}" /></td>
-							<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td>
-
-							<td><a class='move' href='<c:out value="${board.bno}"/>'>
-									<c:out value="${board.title}" />
-							</a></td>
-
-							<td><c:out value="${board.writer}" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.regdate}" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.updateDate}" /></td>
-						</tr> --%>					
-						
-						
 					</c:forEach>
 				</table>
 
-			
-<%-- 
-				<div class='pull-right'>
-					<ul class="pagination">
 
-						<c:if test="${pageMaker.prev}">
-							<li class="paginate_button previous"><a
-								href="${pageMaker.startPage -1}">Previous</a></li>
-						</c:if>
+				<!-- The Modal (메일) -->
+				<div id="myModal" class="modal">
 
-						<c:forEach var="num" begin="${pageMaker.startPage}"
-							end="${pageMaker.endPage}">
-							<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-								<a href="${num}">${num}</a>
-							</li>
-						</c:forEach>
-
-						<c:if test="${pageMaker.next}">
-							<li class="paginate_button next"><a
-								href="${pageMaker.endPage +1 }">Next</a></li>
-						</c:if>
-
-
-					</ul>
-				</div>
-				<!--  end Pagination -->
-				
-			<div class="panel-heading">
-			
-				<button id='regBtn' type="button" class="btn btn-xs pull-right">정보수정</button>
-				<button id='regBtn' type="button" class="btn btn-xs pull-right">리스트</button>
-			</div>
-				
-			</div>
-
-			<form id='actionForm' action="/board/list" method='get'>
-				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-
-				<input type='hidden' name='type'
-					value='<c:out value="${ pageMaker.cri.type }"/>'> <input
-					type='hidden' name='keyword'
-					value='<c:out value="${ pageMaker.cri.keyword }"/>'>
-
-
-			</form> --%>
-
-<!-- 
-			Modal  추가
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
+					<!-- Modal content -->
 					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-						</div>
-						<div class="modal-body">처리가 완료되었습니다.</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
-								changes</button>
-						</div>
+						<span id="close" class="close">&times;</span>
+						<h1>예약 확정서 받기</h1>
+						<!-- 				  <form action="mailSending.do" method="post">
+					  <div>
+					        <input type="text" name="tomail" size="120"
+					        style="width: 100%" placeholder="당신의 이메일"
+					        class="form-control">
+					      </div> <br>
+					      <div align="center">
+					        <input type="submit" value="메일 보내기" class="btn btn-warning">
+					      </div>
+					</form> -->
+						<form action="mailSending.jsp" method="post">
+							<div>
+								<input type="text" name="tomail" size="120" style="width: 100%"
+									placeholder="상대의 이메일" class="form-control">
+							</div>
+							<div align="center">
+								<!-- 제목 -->
+								<input type="text" name="title" size="120" style="width: 100%"
+									placeholder="제목을 입력해주세요" class="form-control">
+							</div>
+							<p>
+							<div align="center">
+								<!-- 내용 -->
+								<textarea name="content" cols="120" rows="12"
+									style="width: 100%; resize: none" placeholder="내용#"
+									class="form-control"></textarea>
+							</div>
+							<p>
+							<div align="center">
+								<input type="submit" value="메일 보내기" class="btn btn-warning">
+							</div>
+						</form>
 					</div>
-					/.modal-content
 				</div>
-				/.modal-dialog
-			</div> -->
-			<!-- /.modal -->
+				<!-- end of myModal -->
+
+				<!-- The Modal (맵) -->
+				<div id="myModal2" class="modal">
+
+					<!-- Modal content -->
+					<div class="modal-content">
+						<span id="close" class="close2">&times;</span>
+						<h1>지도 확인하기</h1>
+						<div id="map"></div>
+						<!-- 지도가 붙을 위치 -->
+					</div>
+					<!-- end of myModal -->
 
 
+				</div>
+				<!--  end panel-body -->
+			</div>
+			<!-- end panel -->
 		</div>
-		<!--  end panel-body -->
 	</div>
-	
-	<!-- end panel -->
-</div>
+	<!-- /.row -->
+
+	<script>
+		var address = null;
+
+		function getAddr() {
+
+			$.ajax({
+
+				type : 'post',
+
+				headers : {
+
+					"Content-Type" : "application/json"
+
+				},
+
+				async : false, // ajax를 동기화(순서대로) 처리해야하는 경우 true로하거나 기술하지 않으면 비동기로 작동한다.
+
+				url : "/board/category/getAddr?userId=${boardDTO.userId}",
+
+				dataType : "text",
+
+				success : function(result) {
+
+					if (result != null) {
+
+						console.log("넘어온 값 : " + result);
+
+						address = result;
+
+					}
+
+				}
+
+			});
+
+		};
+
+		function initMap() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수
+
+			getAddr();
+
+			var latVal = $
+			{
+				boardDTO.lat
+			}
+			; // 게시글 DTO에서 위도값을 가져옴
+
+			var lngVal = $
+			{
+				boardDTO.lon
+			}
+			; // 게시글 DTO에서 경도값을 가져옴
+
+			var mapLocation = {
+				lat : latVal,
+				lng : lngVal
+			}; // 위도, 경도를 가지는 객체를 생성
+
+			/*     var map = new google.maps.Map(document.getElementById('map'), { // 위의 div id="map" 부분에 지도를 추가하는 부분
+			
+			      zoom: 18, // 확대 정도(ZOOM)
+			
+			      center: uluru // 지도에 표시해주는 중심이 우리가 만든 객체의 위치를 지정해주도록 함
+			
+			    });
+			
+			 */
+
+			var mapOptions = {
+
+				center : mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
+
+				zoom : 18, // 지도 zoom단계
+
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+
+			};
+
+			var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
+
+			mapOptions);
+
+			var size_x = 60; // 마커로 사용할 이미지의 가로 크기
+
+			var size_y = 60; // 마커로 사용할 이미지의 세로 크기
+
+			// 마커로 사용할 이미지 주소
+
+			var image = new google.maps.MarkerImage(
+					'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
+
+					new google.maps.Size(size_x, size_y),
+
+					'',
+
+					'',
+
+					new google.maps.Size(size_x, size_y));
+
+			var marker;
+
+			marker = new google.maps.Marker({
+
+				position : mapLocation, // 마커가 위치할 위도와 경도(변수)
+
+				map : map,
+
+				icon : image, // 마커로 사용할 이미지(변수)
+
+				title : "${boardDTO.userId}(님) 의 거래 희망 위치" // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+
+			});
+
+			var content = "${boardDTO.userId} 님은 " + address
+					+ " 근처에서 거래를 희망합니다."; // 말풍선 안에 들어갈 내용
+
+			// 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+
+			var infowindow = new google.maps.InfoWindow({
+				content : content
+			});
+
+			google.maps.event.addListener(marker, "click", function() {
+
+				infowindow.open(map, marker);
+
+			});
+
+			/*
+			
+			 단순한 마커로 default로 표시할 때 쓰는 마커 세팅
+			
+			var marker = new google.maps.Marker({
+			
+			    position: uluru,
+			
+			    map: map
+			
+			  });
+			
+			  
+			
+			 */
+
+		}
+	</script>
 
 
-	
-
-</div>
-<!-- /.row -->
-
-
-
-
-<!-- 
-
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-
-						var result = '<c:out value="${result}"/>';
-
-						checkModal(result);
-
-						history.replaceState({}, null, null);
-
-						function checkModal(result) {
-
-							if (result === '' || history.state) {
-								return;
-							}
-
-							if (parseInt(result) > 0) {
-								$(".modal-body").html(
-										"게시글 " + parseInt(result)
-												+ " 번이 등록되었습니다.");
-							}
-
-							$("#myModal").modal("show");
-						}
-
-						$("#regBtn").on("click", function() {
-
-							self.location = "/board/register";
-
-						});
-
-						var actionForm = $("#actionForm");
-
-						$(".paginate_button a").on(
-								"click",
-								function(e) {
-
-									e.preventDefault();
-
-									console.log('click');
-
-									actionForm.find("input[name='pageNum']")
-											.val($(this).attr("href"));
-									actionForm.submit();
-								});
-
-						$(".move")
-								.on(
-										"click",
-										function(e) {
-
-											e.preventDefault();
-											actionForm
-													.append("<input type='hidden' name='bno' value='"
-															+ $(this).attr(
-																	"href")
-															+ "'>");
-											actionForm.attr("action",
-													"/board/get");
-											actionForm.submit();
-
-										});
-
-						var searchForm = $("#searchForm");
-
-						$("#searchForm button").on(
-								"click",
-								function(e) {
-
-									if (!searchForm.find("option:selected")
-											.val()) {
-										alert("검색종류를 선택하세요");
-										return false;
-									}
-
-									if (!searchForm.find(
-											"input[name='keyword']").val()) {
-										alert("키워드를 입력하세요");
-										return false;
-									}
-
-									searchForm.find("input[name='pageNum']")
-											.val("1");
-									e.preventDefault();
-
-									searchForm.submit();
-
-								});
-
-					});
-</script>
- -->
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9doHEOny5z2QCXaCBWMm84aCRbPs0YVA&callback=initMap">
+		
+	</script>
 
 
 
+	<script>
+		// Get the modal
+		var modal = document.getElementById("myModal");
+		var modal2 = document.getElementById("myModal2");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+		var btn2 = document.getElementById("myMap");
+
+		var nav = document.getElementById("side-menu");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		var span2 = document.getElementsByClassName("close2")[0];
+
+		// When the user clicks the button, open the modal 
+		btn.onclick = function() {
+			modal.style.display = "block";
+			nav.style.display = "none";
+
+		}
+
+		btn2.onclick = function() {
+			modal2.style.display = "block";
+			nav.style.display = "none";
+
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+
+		}
+
+		span2.onclick = function() {
+			modal2.style.display = "none";
+		}
+
+		/* 
+		
+		 /// When the user clicks anywhere outside of the modal, close it
+		 window.onclick = function(event) {
+		 if (event.target == modal) {
+		 modal.style.display = "none";
+		 }
+		 } 
+		 */
+	</script>
 
 
-<%@include file="../includes/footer.jsp"%>
+	<%@include file="../includes/footer.jsp"%>

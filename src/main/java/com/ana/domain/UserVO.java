@@ -10,11 +10,11 @@ public class UserVO {
    private String userNum;
    private String email;
    private String pwd;
-   private String uLastname;
-   private String uFstname;
-   private String uPhone;
-   private Date uRegdate;
-   private Date uBirthday;
+   private String lastname;
+   private String fstname;
+   private String userPhone;
+   private Date regdate;
+   private Date birthday;
    private String facebookId;
    private String googleId;
 }

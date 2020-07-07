@@ -49,13 +49,12 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j
 @RequestMapping("/review/*")
 @AllArgsConstructor
-
 public class RevController {
 
 	private RevService service;
 
 	@GetMapping("/list")
-	public void list(Model model, HttpSession session) {
+ 	public void list(Model model, HttpSession session) {
 
 		String userNum = (String) session.getAttribute("userNum");
 
@@ -129,6 +128,8 @@ public class RevController {
 		service.remove(pstNum);
 		return "redirect:/review/list";
 	}
+	
+	
 //이미지 업로드 테스트 단
 //	@GetMapping("/uploadForm")
 //	public void uploadForm() {

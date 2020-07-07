@@ -10,8 +10,8 @@
 </head>
 <body>
 
-	<h1>signIn2</h1>
-	<label>성:<c:out value="${uFstname}" /></label>
+	<h1>Registerrrr</h1>
+	<label>성:<c:out value="${m}" /></label>
 	<label>이름:<c:out value="${uLastname}" /></label>
 	
 	
