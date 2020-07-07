@@ -32,7 +32,7 @@ public class BookingMapperTests {
 
 	@Test
 	public void testInsert() {								
-		mapper.insert("B1", "예약완료");		
+		mapper.changeStatus("B1", "예약완료");		
 	}
 	
 
