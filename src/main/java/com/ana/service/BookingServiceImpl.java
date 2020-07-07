@@ -84,7 +84,7 @@ public class BookingServiceImpl implements BookingService{
 	@Override
 	public boolean reserveCancel(String bookNum, String bookStatus) {
 	
-		return mapper.delete(bookNum) ==1 && mapper.insert(bookNum, bookStatus)==1;
+		return mapper.delete(bookNum) ==1 && mapper.changeStatus(bookNum, bookStatus)==1;
 	}
 
 

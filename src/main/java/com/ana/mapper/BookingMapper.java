@@ -29,7 +29,7 @@ public interface BookingMapper {
 		
 	public int delete(String bookNum); //예약 취소를 위함	
 	
-	public int insert(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
+	public int changeStatus(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
 	
 	public int insert(BookingVO booking);
 }
