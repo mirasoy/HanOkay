@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ana.mapper.UserMapper">
+
+	<resultMap id="UserVO" type="com.ana.domain.UserVO">
+		<result property="userNum" column="USER_NUM"/>
+		<result property="email" column="EMAIL"/>
+		<result property="pwd" column="PWD"/>
+		<result property="lastname" column="U_LASTNAME"/>
+		<result property="fstname" column="U_FSTNAME"/>
+		<result property="userPhone" column="U_PHONE"/>
+		<result property="birthday" column="U_BIRTHDAY"/>
+		<result property="userPriv" column="U_PRIV"/>
+		<result property="regMethod" column="REG_METHOD"/>
+	</resultMap>
+
+<!-- id와 pwd가 일치하는 user의 모든 정보를 읽어오는 쿼리 -->
+<select id="getUserById" resultMap="UserVO">
+select * from tuser where email=#{email}
+</select>
+
+
+<!-- DB에 존재하는 id와 pwd인지 확인하는 쿼리 -->
+<select id="isValidUser" resultType="int">
+select count(*) from tuser
+where EMAIL=#{email} and PWD= #{pwd}
+</select>
+
+<!-- 이메일 중복 검사 쿼리 -->
+<select id="checkEmail" resultType="int">
+select count(*) from tuser
+where EMAIL= #{email}
+</select>
+
+<!-- 유저 정보 읽어오는 쿼리 -->
+<select id="readUser" resultMap="UserVO">
+select * from tuser where USER_NUM = #{userNum}
+</select>
+
+<!-- 유저 테이블의 모든 유저 정보 가져오는 쿼리 -->
+<select id="getListOfUsers" resultMap="UserVO">
+select * from tuser
+</select>
+
+<!-- 유저 테이블에 한 행 삽입하는 쿼리 -->
+<insert id="insertUser">
+insert into tuser(USER_NUM, EMAIL, PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY)
+values(concat('U',SEQ_USER.nextval),#{email}, #{pwd}, #{lastname}, #{fstname}, #{birthday})
+</insert>
+
+
+<insert id="insertSelectKey">
+<selectKey resultType="String" order="BEFORE" keyProperty="userNum">
+select concat('U',seq_user.nextval) from dual 
+</selectKey>
+insert into tuser(USER_NUM, EMAIL, PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY) 
+values(#{userNum},#{email}, #{pwd}, #{lastname}, #{fstname}, #{birthday}) 
+</insert>
+
+<!-- 유저 테이블에 해당 유저 번호가진 행 삭제하는 쿼리 -->
+<delete id="deleteUser">
+delete from tuser where USER_NUM = #{userNum}
+</delete>
+
+<!-- 유저 테이블에 해당 유저 번호 가진 유저 정보 업데이트 하는 쿼리 -->
+<update id="updateUser">
+update tuser
+set
+EMAIL=#{email}, PWD=#{pwd}, U_LASTNAME=#{lastname}, U_FSTNAME=#{fstname}, U_BIRTHDAY=#{birthday}
+where USER_NUM=#{userNum}
+</update>
+
+</mapper>

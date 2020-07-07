@@ -2,6 +2,8 @@ package com.ana.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +28,7 @@ public class BookingController2 {
 	private RomService romService;
 	private BookingService bookService;
 	
-	@RequestMapping(value = "new", method = RequestMethod.GET)
+	@GetMapping("/new")
 	public void getInfo(
 			@RequestParam("romNum") String romNum,
 			@RequestParam("in") String checkin,
@@ -40,11 +42,11 @@ public class BookingController2 {
 		.addAttribute("rom", romService.get(romNum));
 	}
 	
-//	@RequestMapping(value = "new", method = {RequestMethod.GET, RequestMethod.POST})
-	@RequestMapping(value = "new", method = RequestMethod.POST)
+	@PostMapping("/new")
 	public String booking(
 			BookingVO book, 
 			RedirectAttributes rttr) {
+		System.out.println("띠용");
 		log.info("booking"+book);
 
 		bookService.register(book);
@@ -53,7 +55,7 @@ public class BookingController2 {
 		return "redirect:/booking/get?bookNum="+book.getBookNum();
 	}
 	
-	@RequestMapping(value = "get", method = RequestMethod.GET)
+	@GetMapping("/get")
 	public void get(
 			@RequestParam("bookNum") String bookNum,
 			Model model) {
