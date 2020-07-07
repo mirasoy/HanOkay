@@ -29,17 +29,16 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/review/*")
 @AllArgsConstructor
-
 public class RevController {
 	
 	private RevService service;
 	
 	@GetMapping("/list")
+
 	public void list(Model model, HttpSession session) {
  
       String userNum = (String) session.getAttribute("userNum");
 
-      log.info("userNum>>>>>>"+userNum);
 		log.info("list");
 		model.addAttribute("list", service.getBookingList(userNum));
 //		model.addAttribute("list", service.getBookingList("U3"));

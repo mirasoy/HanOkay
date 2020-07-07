@@ -41,7 +41,6 @@ public class BookingMapperTests {
 		board.setStaydays(1);
 		board.setGuest(22);
 		board.setBookPrice(123);
-		board.setDeposit(1);
 		board.setExpectedArr("수정된 예정시간");
 		board.setRequest("수정된 요청사항");
 		board.setRealArr("수정된 도착시간");
@@ -57,7 +56,6 @@ public class BookingMapperTests {
 		}
 		
 		
-		board.setCanceled("1");
 		board.setSmoking("1");
 		
 		
@@ -87,8 +85,8 @@ public class BookingMapperTests {
 	@Test
 	public void testInsert() {
 		BookingVO book = new BookingVO();
-		book.setUserNum("U999");
-		book.setRomNum("R999");
+		book.setUserNum("U1");
+		book.setRomNum("R9");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
 			book.setCheckinDate(beforeFormat.parse("2020/8/1"));
@@ -102,6 +100,7 @@ public class BookingMapperTests {
 		book.setExpectedArr("PM02");
 		book.setSmoking("1");
 		book.setRequest("뷰 좋은 방 주세요");
+		book.setBookStatus("RS_STT_BK");
 		mapper.insert(book);
 
 		log.info(book);
