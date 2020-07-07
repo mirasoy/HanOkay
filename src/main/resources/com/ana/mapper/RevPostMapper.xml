@@ -154,7 +154,7 @@ FROM
             AND 
                 R.ACM_NUM=A.ACM_NUM 
             AND 
-                S.BOOK_STATUS='RS_STT_AC'
+                B.BOOK_STATUS='RS_STT_AC'
         )J,
         trev_detail T
         

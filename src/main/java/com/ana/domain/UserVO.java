@@ -16,5 +16,4 @@ public class UserVO {
 	private Date birthday;
 	private String userPriv;
 	private String regMethod;
-
 }

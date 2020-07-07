@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
-	session.setAttribute("userNum", "U2");
+	session.setAttribute("userNum", "U1");
 String name = (String) session.getAttribute("userNum");
 %>
 <!DOCTYPE html>
@@ -32,6 +32,7 @@ String name = (String) session.getAttribute("userNum");
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h1>나의 예약 목록</h1>
+					<h1><%=name %> </h1>
 				</div>
 				<div class="panel-body">
 					<table
@@ -39,6 +40,7 @@ String name = (String) session.getAttribute("userNum");
 						<thead>
 							<tr>
 								<th>숙소이름</th>
+								<th>임시</th>
 								<th>예약번호</th>
 								<th>체크인</th>
 								<th>체크아웃</th>
@@ -63,6 +65,7 @@ String name = (String) session.getAttribute("userNum");
 
 		$(".bookList").append("<tr>");
 		$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
+		$(".bookList").append("<td ><c:out value="${rev.userNum }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
 		$(".bookList")

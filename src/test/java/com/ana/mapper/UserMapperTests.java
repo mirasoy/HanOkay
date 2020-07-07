@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class UserMapperTests {
 
-	@Setter(onMethod_ = @Autowired)
+
 	private UserMapper mapper;
 
 	@Test
@@ -37,6 +37,7 @@ public class UserMapperTests {
 	public void testInsert() {
 		UserVO user = new UserVO();
 		// user.setUserNum("10");
+
 		user.setEmail("suHee@gmail.com");
 		user.setPwd("1aA2@5678_");
 		user.setLastname("Suhee");
@@ -76,6 +77,7 @@ public class UserMapperTests {
 			e.printStackTrace();
 		}
 
+
 //		user.setUserPriv("GU");
 //		user.setRegMethod("M");
 
@@ -86,7 +88,6 @@ public class UserMapperTests {
 	@Test
 	public void testUpdate() {
 		UserVO user = new UserVO();
-
 		user.setUserNum("U1");
 		user.setEmail("edited@google.com");
 		user.setPwd("SSAw223@@@ee");
@@ -100,6 +101,7 @@ public class UserMapperTests {
 		}
 //		user.setUserPriv("GU");
 //		user.setRegMethod("g");
+
 
 		int count = mapper.updateUser(user);
 		log.info("*******UPDATE COUNT: " + count);

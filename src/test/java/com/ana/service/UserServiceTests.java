@@ -88,3 +88,4 @@ public class UserServiceTests {
 		log.info("GET USER BY EMAIL: "+ service.getUserById("mira@naver.com"));
 	}
 }
+
