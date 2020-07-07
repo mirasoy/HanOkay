@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/booking/*")
 @AllArgsConstructor
-public class BookingController2 {
+public class BookinController {
 	// 0705 추가: 예약페이지와 예약확인페이지
 	
 	private AcmService acmService;

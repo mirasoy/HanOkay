@@ -5,7 +5,9 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date"%>
 <%
-	String checkin = request.getParameter("in");
+
+String romNum = request.getParameter("romNum");
+String checkin = request.getParameter("in");
 String checkout = request.getParameter("out");
 String person = request.getParameter("person");
 String price = request.getParameter("price");
@@ -44,7 +46,17 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 </head>
 
 <body>
-	<form name="booking" action="/booking/new" method="post">
+<%-- 	<form action="/booking/new" method="post">
+		<input type="hidden" name='userNum' value='<%=userNum%>'> 
+		<input type="hidden" name='romNum' value='<%=romNum%>'> 
+		<input type="hidden" name='checkinDate' value='2020/03/01'> 
+		<input type="hidden" name='checkoutDate' value='2020/03/02'> 
+ 		
+		
+		<button type="submit">예약하기</button>
+	</form>
+ --%>
+	 <form name="form" method="post">
 		[숙소정보]</br>
 		<c:out value="${rom.romPurl}" /></br>
 		<c:out value="${acm.acmName}" /></br>
@@ -53,8 +65,8 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		<%=person%>명 / (최대 인원<c:out value="${rom.capacity}" />명)</br> [회원정보]</br>
 		<%=userNum%>
 		<input type="hidden" name='userNum' value='<%=userNum%>'> 
-		<input type="hidden" name='checkinDate' value='<%=checkin%>'> 
-		<input type="hidden" name='checkoutDate' value='<%=checkout%>'> 
+		<input type="hidden" name='checkinDate' value='2020/03/01'> 
+		<input type="hidden" name='checkoutDate' value='2020/03/02'> 
 		<input type="hidden" name='staydays' value='<%=staydays%>'> 
 		<input type="hidden" name='guest' value='<%=person%>'> 
 		<input type="hidden" name='bookPrice' value='<%=bookPrice%>'> 
@@ -63,31 +75,31 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		[요청사항]</br>
 		도착 예정시간: <select name="expectedArr">
 			<option value="">-----</option>
-			<option value="1">PM02</option>
-			<option value="2">PM03</option>
-			<option value="3">PM04</option>
-			<option value="4">PM05</option>
-			<option value="5">PM06</option>
-			<option value="6">PM07</option>
-			<option value="7">PM08</option>
-			<option value="8">PM09</option>
-			<option value="9">PM10</option>
-			<option value="10">PM11</option>
-			<option value="11">PM12</option>
-			<option value="12">AM01</option>
-			<option value="13">AM02</option>
-			<option value="14">AM03</option>
-			<option value="15">AM04</option>
-			<option value="16">AM05</option>
-			<option value="17">AM06</option>
-			<option value="18">AM07</option>
-			<option value="19">AM08</option>
-			<option value="20">AM09</option>
-			<option value="21">AM10</option>
-			<option value="22">AM11</option>
-			<option value="23">AM12</option>
+			<option value="PM02">PM02</option>
+			<option value="PM03">PM03</option>
+			<option value="PM04">PM04</option>
+			<option value="PM05">PM05</option>
+			<option value="PM06">PM06</option>
+			<option value="PM07">PM07</option>
+			<option value="PM08">PM08</option>
+			<option value="PM09">PM09</option>
+			<option value="PM10">PM10</option>
+			<option value="PM11">PM11</option>
+			<option value="PM12">PM12</option>
+			<option value="AM01">AM01</option>
+			<option value="AM02">AM02</option>
+			<option value="AM03">AM03</option>
+			<option value="AM04">AM04</option>
+			<option value="AM05">AM05</option>
+			<option value="AM06">AM06</option>
+			<option value="AM07">AM07</option>
+			<option value="AM08">AM08</option>
+			<option value="AM09">AM09</option>
+			<option value="AM10">AM10</option>
+			<option value="AM11">AM11</option>
+			<option value="AM12">AM12</option>
 		</select></br> 
-		흡연여부: 금연객실<input type="radio" name="smoking" value="0">
+		흡연여부: 금연객실<input type="radio" name="smoking" value="0" checked="checked">
 			흡연객실<input type="radio" name="smoking" value="1"></br> 
 		특별 요청사항: <input type="text" size="100" name="request" value=""></br> 
 			<input type="hidden" name="bookStatus" value="RS_STT_BK"> 
@@ -102,8 +114,12 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		(1박 평균) </br> 
 		합계
 		</br></br></br>
-		<button type="submit" data-oper='booking'>예약하기</button>
+		<button data-oper='booking'>예약하기</button>
 	</form>
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+
+	</script>
 </body>
 
 </html>

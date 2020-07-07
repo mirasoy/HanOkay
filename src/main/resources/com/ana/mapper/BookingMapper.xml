@@ -26,7 +26,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="u_FstName" property="firstName" />
 		<result column="book_Status" property="bookStatus" />
 	</resultMap>
-
+	
+	<resultMap id="BookStatusVOResult"
+		type="com.ana.domain.BookStatusVO">
+		<result column="book_num" property="bookNum" />
+		<result column="book_Status" property="bookStatus" />
+		<result column="updatedate" property="updatedate" />
+	</resultMap>
 
 	<delete id="delete">
 		delete from tbooking where book_Num = #{bookNum}
@@ -81,8 +87,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			resultType="String">
 			select concat('B',seq_tbook.nextval) from dual
 		</selectKey>
-
-		insert into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
+		
+		insert all
+		into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
 		CHECKOUT_DATE,
 		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING, REQUEST,
 		room_Name, u_LastName, u_FstName, book_Status)
@@ -102,6 +109,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select u_LastName from tuser where user_num= #{userNum}),
 		(select u_FstName from tuser where user_num= #{userNum}),
 		#{bookStatus})
+		into tbook_status(book_num, book_status)
+		values (#{bookNum}, #{bookStatus})
+		select * from dual
 		
 	</insert>
 </mapper>
