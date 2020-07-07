@@ -1,3 +1,4 @@
+
 package com.ana.domain;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import lombok.Data;
 
 @Data
 public class BookingVO {
+
 
 	private String bookNum;
 	private String userNum;
@@ -26,4 +28,5 @@ public class BookingVO {
 	private String lastName;
 	private String firstName;
 	private String bookStatus;
+
 }

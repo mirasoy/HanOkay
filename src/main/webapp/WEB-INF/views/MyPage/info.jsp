@@ -67,14 +67,7 @@
           <label>객실요금</label> <input class="form-control" name='bookPrice'
             value='<c:out value="${info.bookPrice} "/>' readonly="readonly">
         </div>
-        <div class="form-group">
-          <label>계약금</label> <input class="form-control" name='deposit'
-            value='<c:out value="${info.deposit} "/>' readonly="readonly">
-        </div>
-       <div class="form-group">
-          <label>예약취소여부</label> <input class="form-control" name='canceled'
-            value='<c:out value="${info.canceled} "/>' readonly="readonly">
-        </div>
+   
         <div class="form-group">
           <label>도착예정시간</label> <input class="form-control" name='expectedArr'
             value='<c:out value="${info.expectedArr} "/>' readonly="readonly">
@@ -96,22 +89,27 @@
           <label>실제도착시간</label> <input class="form-control" name='realArr'
             value='<c:out value="${info.realArr} "/>' readonly="readonly">
         </div> 
+        
+        <div class="form-group">
+          <label>방이름</label> <input class="form-control" name='roomName'
+            value='<c:out value="${info.roomName} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>이름</label> <input class="form-control" name='lastName'
+            value='<c:out value="${info.lastName} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>성</label> <input class="form-control" name='firstName'
+            value='<c:out value="${info.firstName} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>예약상태</label> <input class="form-control" name='bookStatus'
+            value='<c:out value="${info.bookStatus} "/>' readonly="readonly">
+        </div>
 
 
 <button data-oper='modify' class="btn btn-default" onclick="location.href='/MyPage/modify?bookNum=<c:out value="${info.bookNum}"/>'">Modify</button>
 <button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/bookList'">List</button>
-
-
-<%-- <form id='operForm' action="/boad/modify" method="get">
-  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
-  <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
-  <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-  <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-  <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
- 
-</form> --%>
-
-
 
 
       </div>
@@ -123,27 +121,6 @@
 </div>
 <!-- /.row -->
 
-<!-- <script type="text/javascript">
-$(document).ready(function() {
-  
-  var operForm = $("#operForm"); 
-  
-  $("button[data-oper='modify']").on("click", function(e){
-    
-    operForm.attr("action","/board/modify").submit();
-    
-  });
-  
-    
-  $("button[data-oper='list']").on("click", function(e){
-    
-    operForm.find("#bno").remove();
-    operForm.attr("action","/board/list")
-    operForm.submit();
-    
-  });  
-});
-</script> -->
 
 
 <%@include file="../includes/footer.jsp"%>

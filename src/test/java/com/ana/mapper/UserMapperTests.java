@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class UserMapperTests {
 
-	@Setter(onMethod_ = @Autowired)
+
 	private UserMapper mapper;
 
 //	@Test
@@ -37,16 +37,18 @@ public class UserMapperTests {
 	public void testInsert() {
 		UserVO user = new UserVO();
 		// user.setUserNum("10");
+
 		user.setEmail("suHee@gmail.com");
 		user.setPwd("1aA2@5678_");
-		user.setULastname("Suhee");
-		user.setUFstname("Kim");
-		user.setUPhone("82111341234");
+		user.setLastname("Suhee");
+		user.setFstname("Kim");
+		user.setUserPhone("82111341234");
 //		user.setUPriv("GU");
 //		user.setRegMethod("m");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setUBirthday(beforeFormat.parse("1992/10/01"));
+			user.setBirthday(beforeFormat.parse("1992/10/01"));
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -63,21 +65,22 @@ public class UserMapperTests {
 	@Test
 	public void testInsertSelectKey() {
 		UserVO user = new UserVO();
-		user.setEmail("serin9811@naver.com");
-		user.setPwd("Serin9811@");
-		user.setULastname("Serin");
-		user.setUFstname("Heo");
-		user.setUPhone("821067409811");
+		user.setEmail("새로추가 newAdded@sss.com");
+		user.setPwd("새로 @@ww223@@@ee");
+		user.setLastname("새로 Jessi");
+		user.setFstname("새로 Kim");
+		user.setUserPhone("821067409811");
 
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setUBirthday(beforeFormat.parse("1994/08/06"));
+			user.setBirthday(beforeFormat.parse("2010/11/11"));
+			user.setRegdate(beforeFormat.parse("2020/06/29"));
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-		user.setUPriv("GU");
-		user.setRegMethod("M");
+	
 
 		mapper.insertSelectKey(user);
 		log.info(user);
@@ -86,20 +89,21 @@ public class UserMapperTests {
 	@Test
 	public void testUpdate() {
 		UserVO user = new UserVO();
-
-		user.setUserNum("U1");
-		user.setEmail("edited@google.com");
-		user.setPwd("SSAw223@@@ee");
-		user.setULastname("수정");
-		user.setUFstname("최");
+		user.setUserNum("U9");
+		user.setEmail("수정된 newAdded@sss.com");
+		user.setPwd("수정된 @@ww223@@@ee");
+		user.setLastname("수정");
+		user.setFstname("최");
+		user.setUserPhone("821067409811");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setUBirthday(beforeFormat.parse("1990/11/01"));
+			user.setBirthday(beforeFormat.parse("1990/10/01"));
+			user.setRegdate(beforeFormat.parse("2020/06/30"));
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		user.setUPriv("GU");
-		user.setRegMethod("g");
+
 
 		int count = mapper.updateUser(user);
 		log.info("*******UPDATE COUNT: " + count);
