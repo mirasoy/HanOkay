@@ -15,23 +15,18 @@
 				<label style="color: red;" id="msg"><c:out value="${msg}" /></label>
 				<br>
 				<td>Email: <input type="text" size="40" name="email" id="email"
-					value="${email }" ><br>
+					value="${email }" placeholder="이메일을 입력하세요" >
+					<button name="sendEmail" id="sendEmail">발송하기</button>
 				</td>
 			</tr>
-			<tr>
-				<td>비밀번호: <input type="password" size="50" name="pwd" id="pwd"
-					value="${pwd }" placeholder="영문 대소문자/특수기호/숫자 반드시 포함 8자~20자" ><br>
-					<button data-oper='signIn' class="btn btn-default">로그인</button>
-					<button data-oper='findPwd' class="btn btn-default">비밀번호 찾기</button>
-				</td>
-			</tr>
+			
 
 		</table>
 		
 	</form>
 
 
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	
 </body>
 </html>

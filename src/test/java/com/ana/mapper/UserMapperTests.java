@@ -22,18 +22,18 @@ public class UserMapperTests {
 
 	private UserMapper mapper;
 
-//	@Test
+	@Test
 	public void testRead() {
 		UserVO user = mapper.readUser("U1");
 		log.info(user);
 	}
 
-//	@Test
+	@Test
 	public void testGetList() {
 		mapper.getListOfUsers().forEach(user -> log.info(user));
 	}
 
-//	@Test
+	@Test
 	public void testInsert() {
 		UserVO user = new UserVO();
 		// user.setUserNum("10");
@@ -48,7 +48,6 @@ public class UserMapperTests {
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
 			user.setBirthday(beforeFormat.parse("1992/10/01"));
-
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -65,22 +64,22 @@ public class UserMapperTests {
 	@Test
 	public void testInsertSelectKey() {
 		UserVO user = new UserVO();
-		user.setEmail("새로추가 newAdded@sss.com");
-		user.setPwd("새로 @@ww223@@@ee");
-		user.setLastname("새로 Jessi");
-		user.setFstname("새로 Kim");
+		user.setEmail("serin9811@naver.com");
+		user.setPwd("Serin9811@");
+		user.setLastname("Serin");
+		user.setFstname("Heo");
 		user.setUserPhone("821067409811");
 
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setBirthday(beforeFormat.parse("2010/11/11"));
-			user.setRegdate(beforeFormat.parse("2020/06/29"));
-
+			user.setBirthday(beforeFormat.parse("1994/08/06"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-	
+
+//		user.setUserPriv("GU");
+//		user.setRegMethod("M");
 
 		mapper.insertSelectKey(user);
 		log.info(user);
@@ -89,20 +88,19 @@ public class UserMapperTests {
 	@Test
 	public void testUpdate() {
 		UserVO user = new UserVO();
-		user.setUserNum("U9");
-		user.setEmail("수정된 newAdded@sss.com");
-		user.setPwd("수정된 @@ww223@@@ee");
+		user.setUserNum("U1");
+		user.setEmail("edited@google.com");
+		user.setPwd("SSAw223@@@ee");
 		user.setLastname("수정");
 		user.setFstname("최");
-		user.setUserPhone("821067409811");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setBirthday(beforeFormat.parse("1990/10/01"));
-			user.setRegdate(beforeFormat.parse("2020/06/30"));
-
+			user.setBirthday(beforeFormat.parse("1990/11/01"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+//		user.setUserPriv("GU");
+//		user.setRegMethod("g");
 
 
 		int count = mapper.updateUser(user);
@@ -110,17 +108,24 @@ public class UserMapperTests {
 	}
 
 	// 이메일로 중복확인 하는 인터페이스 테스트
-	@Test
+//	@Test
 	public void testIdCheck() {
 		int count = mapper.checkEmail("a2@naver.com");
 		log.info("*******DUPLICATED ID COUNT: " + count);
 	}
 
 	// 로그인 할 떄 회원 정보 일치하는지 확인하는 메서드
-	@Test
+//	@Test
 	public void testIsValidUser() {
 		int count = mapper.isValidUser("serin9811@naver.com", "Serin9811@");
 		log.info("*****THIS ACCOUNT EXIST: " + count);
+	}
+	
+	//해당 유저의 유저번호를 반환하는 메서드 테스트
+	@Test
+	public void testGetUserById() {
+		UserVO user = mapper.getUserById("mira@naver.com");
+		log.info("@@@@@@@@@UserNum: "+user);
 	}
 
 }

@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -20,7 +19,8 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 @Log4j
-public class UserControllerTests {
+public class LoginControllerTests {
+
 	@Setter(onMethod_ = { @Autowired })
 	private WebApplicationContext ctx;
 
@@ -30,26 +30,10 @@ public class UserControllerTests {
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
-
-//	@Test
+	
+	@Test
 	public void testList() throws Exception {
 		log.info(
 				mockMvc.perform(MockMvcRequestBuilders.get("/index/list")).andReturn().getModelAndView().getModelMap());
 	}
-
-	@Test
-	public void testCheckEmail() throws Exception {
-		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/register/checkEmail").param("email", "jiha@naver.com"))
-				.andReturn().getModelAndView().getModelMap());
-
-	}
-
-	@Test
-	public void testShowPage() throws Exception {
-		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/register/signUp")).andReturn().getModelAndView()
-				.getModelMap());
-	}
-
-
-
 }
