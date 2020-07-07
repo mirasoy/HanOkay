@@ -71,11 +71,9 @@ String name = (String) session.getAttribute("userNum");
 							let star = "";
 							for (let a = 0; a < <c:out value="${review.stisf }" />; a++) {
 								star = star + '★';
-							}
-							
+							}		
 							document.getElementById('star').innerHTML = star;
 					
-
 						})
 	</script>
 
