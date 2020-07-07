@@ -200,6 +200,12 @@
             <version>${org.springframework-version}</version>
         </dependency>   
 
+   <!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+<dependency>
+    <groupId>net.coobird</groupId>
+    <artifactId>thumbnailator</artifactId>
+    <version>0.4.8</version>
+</dependency>
    
       
 
