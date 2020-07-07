@@ -34,6 +34,6 @@ public interface UserService {
 	public boolean isValidUser(String email, String pwd);
 	
 	//email과 pw 일치하는 userNum가져오는 메서드
-	public String getUserNumById(String email);
+	public UserVO getUserById(String email);
 	
 }

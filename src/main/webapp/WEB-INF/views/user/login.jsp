@@ -29,7 +29,7 @@
 		</table>
 	</form>
 
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="../../../resources/js/login.js"></script>
 </body>
 </html>

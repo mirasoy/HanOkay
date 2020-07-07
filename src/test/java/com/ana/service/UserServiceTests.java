@@ -71,11 +71,9 @@ public class UserServiceTests {
 	public void testUpdate() {
 
 		UserVO user = service.get("U10");
-
 		if (user == null) {
 			return;
 		}
-
 		log.info("MOODIFY RESULT: " + service.modify(user));
 	}
 
@@ -85,4 +83,8 @@ public class UserServiceTests {
 		assertTrue(service.isValidUser("serin9811@naver.com", "Serin9811@"));
 	}
 
+	@Test
+	public void testGetUserById() {
+		log.info("GET USER BY EMAIL: "+ service.getUserById("mira@naver.com"));
+	}
 }
