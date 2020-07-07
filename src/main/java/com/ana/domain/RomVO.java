@@ -7,14 +7,15 @@ public class RomVO {
    
    private String romNum;
    private String acmNum;
-   private String roomName;
+   private String romName;
 
-   private Integer capacity;
+   private Integer romCapa;
    private String bedType;
    private Integer bedCnt;
    private Integer romSize;
-   private Integer price;
+   private Integer romPrice;
    private String romPurl;
-   private String romLocaInfo;
+   private String romLoca;
+   private String romType;
 }
 
