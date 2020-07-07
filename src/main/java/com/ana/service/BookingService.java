@@ -9,6 +9,7 @@ import com.ana.domain.BookCancelVO;
 import com.ana.domain.BookStatusVO;
 import com.ana.domain.BookVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.RomVO;
 
 public interface BookingService {
 	
@@ -33,6 +34,7 @@ public interface BookingService {
 	
 	public boolean reserveCancel(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
 	
-	
-	
+
+	public int register(BookingVO book);
+
 }

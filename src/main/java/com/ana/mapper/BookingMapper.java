@@ -9,6 +9,7 @@ import com.ana.domain.BookCancelVO;
 import com.ana.domain.BookStatusVO;
 import com.ana.domain.BookVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.RomVO;
 
 public interface BookingMapper {
 	
@@ -30,5 +31,5 @@ public interface BookingMapper {
 	
 	public int insert(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
 	
-	
+	public int insert(BookingVO booking);
 }

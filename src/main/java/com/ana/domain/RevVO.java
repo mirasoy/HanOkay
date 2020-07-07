@@ -21,6 +21,6 @@ public class RevVO {
 	private String loginUser;
 	private String acmName;
 	private String checkInDay;
-	private String CheckOutDay;
+	private String checkOutDay;
 	
 }

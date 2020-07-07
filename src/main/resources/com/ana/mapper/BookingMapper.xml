@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.ana.mapper.BookingMapper">
 
+
 <!-- 예약을 위한 모든 준비물 -->
  <resultMap id="BookingVOResult" type="com.ana.domain.BookingVO">
       <result column="book_num" property="bookNum" />
@@ -59,6 +60,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
+	<resultMap id="BookingVOResult"
+		type="com.ana.domain.BookingVO">
+		<result column="book_num" property="bookNum" />
+		<result column="user_num" property="userNum" />
+		<result column="rom_num" property="romNum" />
+		<result column="book_Date" property="bookDate" />
+		<result column="checkin_Date" property="checkinDate" />
+		<result column="checkout_Date" property="checkoutDate" />
+		<result column="staydays" property="staydays" />
+		<result column="guest" property="guest" />
+		<result column="book_Price" property="bookPrice" />
+		<result column="expected_Arr" property="expectedArr" />
+		<result column="smoking" property="smoking" />
+		<result column="request" property="request" />
+		<result column="real_Arr" property="realArr" />
+		<result column="room_Name" property="roomName" />
+		<result column="u_LastName" property="lastName" />
+		<result column="u_FstName" property="firstName" />
+		<result column="book_Status" property="bookStatus" />
+	</resultMap>
+	
+	<resultMap id="BookStatusVOResult"
+		type="com.ana.domain.BookStatusVO">
+		<result column="book_num" property="bookNum" />
+		<result column="book_Status" property="bookStatus" />
+		<result column="updatedate" property="updatedate" />
+	</resultMap>
+
+
+
 <!-- 상태에 추가하는 메서드 -->
 	<insert id="insert">		
 		insert into TBOOK_STATUS(book_Num, book_Status)		
@@ -81,7 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 
-	<update id="update" >
+	<update id="update">
 		update tbooking
 		set 
 			user_num = #{userNum},
@@ -103,15 +134,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			book_Status=#{bookStatus}				
 
 			where book_num=#{bookNum}
+
 	</update>
 
 
 
 
 	<select id="read" resultMap="BookingVOResult">
-		select * from tbooking where book_Num = #{bookNum}
+		select * from tbooking where
+		book_Num = #{bookNum}
 
-	
+
 	</select>
 
 
@@ -124,6 +157,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	]]>
+
 	
 	</select>
 	
@@ -192,5 +226,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-
+	<insert id="insert">
+		<selectKey keyProperty="bookNum" order="BEFORE"
+			resultType="String">
+			select concat('B',seq_tbook.nextval) from dual
+		</selectKey>
+		
+		insert all
+		into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
+		CHECKOUT_DATE,
+		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING, REQUEST,
+		room_Name, u_LastName, u_FstName, book_Status)
+		values (
+		#{bookNum},
+		#{userNum},
+		#{romNum},
+		#{checkinDate},
+		#{checkoutDate},
+		#{staydays},
+		#{guest},
+		#{bookPrice},
+		#{expectedArr},
+		#{smoking},
+		#{request},
+		(select room_name from trom where rom_num= #{romNum}),
+		(select u_LastName from tuser where user_num= #{userNum}),
+		(select u_FstName from tuser where user_num= #{userNum}),
+		#{bookStatus})
+		into tbook_status(book_num, book_status)
+		values (#{bookNum}, #{bookStatus})
+		select * from dual
+		
+	</insert>
 </mapper>
