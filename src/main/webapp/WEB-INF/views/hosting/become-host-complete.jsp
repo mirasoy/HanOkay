@@ -47,8 +47,7 @@
                             
                         </li>
                         <li>
-                            <a href="/hosting/become-host_complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                            
+                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                         
                         
@@ -62,9 +61,11 @@
 <div id="page-wrapper" style="padding-bottom:50px;">
 			<br>	
 			 <!-- 숙소설명 -->
-			 <form action="" method="post">
+			 <form action="/hosting/listings" method="post">
 			 		<h4>확정된 전체 정보 뿌리기</h4>
 			 	
+			 	
+			 		<button type="submit">객실 등록하기</button>
 			 </form>
 			
 		</div>

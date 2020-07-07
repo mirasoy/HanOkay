@@ -26,14 +26,14 @@ public class RomMapperTests {
 		RomVO rom = new RomVO();
 		rom.setRomNum("R999");
 		rom.setAcmNum("A999");
-		rom.setRoomName("테스트 객실 이름");
-		rom.setCapacity(9);
+		rom.setRomName("테스트 객실 이름");
+		rom.setRomCapa(9);
 		rom.setBedType("테스트 객실 타입");
 		rom.setBedCnt(9);
 		rom.setRomSize(99);
-		rom.setPrice(9999);
+		rom.setRomPrice(9999);
 		rom.setRomPurl("테스트 사진 URL");
-		rom.setRomLocaInfo("테스트 객실 위치");
+		rom.setRomLoca("테스트 객실 위치");
 
 		mapper.insert(rom);
 
@@ -52,14 +52,14 @@ public class RomMapperTests {
 
 		rom.setRomNum("R27");
 		rom.setAcmNum("A999");
-		rom.setRoomName("수정테스트");
-		rom.setCapacity(9);
+		rom.setRomName("수정테스트");
+		rom.setRomCapa(9);
 		rom.setBedType("수정테스트");
 		rom.setBedCnt(9);
 		rom.setRomSize(99);
-		rom.setPrice(9999);
+		rom.setRomPrice(9999);
 		rom.setRomPurl("수정테스트");
-		rom.setRomLocaInfo("수정테스트");
+		rom.setRomLoca("수정테스트");
 
 		int count = mapper.update(rom);
 

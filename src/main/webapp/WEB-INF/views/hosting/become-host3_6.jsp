@@ -47,8 +47,7 @@
                             
                         </li>
                         <li>
-                            <a href="/hosting/become-host_complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                            
+                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                         
                         
@@ -62,7 +61,7 @@
 <div id="page-wrapper" style="padding-bottom:50px;">
 			<br>	
 			 <!-- 숙소설명 -->
-			 <form action="" method="post">
+			 <form action="/hosting/become-host4_6" method="post">
 			 	<h4>3-1. 게스트에게 숙소에 대해 설명해주세요</h4>
 			 	<div class="exp">숙소에 대해 간략히 설명해 주세요.<br> 
 			 	숙소와 주변 지역에 대한 정보에서 시작해 게스트와 어떻게 소통하고 싶은지 등의 내용을 적어주세요 </div>
@@ -82,6 +81,8 @@
 			 	<textarea id="exp3_3" cols="25" rows="5"></textarea>
 			 	
 			 
+				 <br>
+				 <button type="submit">다음으로</button>
 			 </form>
 			
 		</div>

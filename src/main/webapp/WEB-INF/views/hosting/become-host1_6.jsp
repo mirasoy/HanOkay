@@ -37,7 +37,7 @@
                             
                         </li>
                         <li>
-                            <a href="/hosting/become-host_complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                             
                         </li>
                         
@@ -53,6 +53,7 @@
 
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
 			<br><br>
+			<form action="/hosting/become-host2_6" method="post">
 			  <h4>1.숙소에서 공통적으로 제공하는 옵션</h4><br>
 			  
 			  <h4>1-1.시설 옵션</h4>
@@ -91,6 +92,7 @@
 			  
 			  <!-- 총 검토 -->
 			  <br>
+			  <button type="submit">다음으로</button>
 			</form>
 		</div>
 
