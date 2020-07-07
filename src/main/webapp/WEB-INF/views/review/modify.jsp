@@ -54,10 +54,10 @@ String name = (String) session.getAttribute("userNum");
 								<tr>
 									<P id="star">
 
-										<a href="#" value="1">★</a> <a href="#" value="2">★</a> <a href="#"
+										<a href="#" value="1">★</a> <a href="#" id="2" value="2">★</a> <a href="#"
 											value="3">★</a> <a href="#" value="4">★</a> <a href="#" value="5">★</a>
 									<p>
-										<input type="hidden" name="stisf" id="stisf" value=""><br />
+										<input type="hidden" name="stisf" id="stisf" value="<c:out value="${review.stisf }" />"><br />
 								</tr>
 								<tr>
 									<input type="text" name='title' value='<c:out value="${review.title }" />'/>
@@ -68,6 +68,7 @@ String name = (String) session.getAttribute("userNum");
 									<br />
 								</tr>
 								<input type="hidden" name="bookNum" value='<c:out value="${review.bookNum }" />'>
+								<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
 								
 								<button data-oper = "delete">삭제하기</button>
 								<button  data-oper = "modify">수정하기</button>
@@ -83,13 +84,14 @@ String name = (String) session.getAttribute("userNum");
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
+	 
+	$('#star').children().eq(<c:out value="${review.stisf }" />-1).addClass("on").prevAll("a").addClass("on");
+	
 	$('#star a').click(function() {
 		$(this).parent().children("a").removeClass("on");
 		$(this).addClass("on").prevAll("a").addClass("on");
-
 		$('#stisf').val($(this).attr("value"));
 	});
-	
 	
 		let formObj = $("form");
 
@@ -100,6 +102,9 @@ String name = (String) session.getAttribute("userNum");
 
 			if (operation === 'delete') {
 				formObj.attr("action", "/review/delete");
+			}
+			if (operation === 'modify') {
+				formObj.attr("action", "/review/modify");
 			}
 			formObj.submit();
 		}); 
