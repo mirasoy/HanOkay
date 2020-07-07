@@ -46,14 +46,14 @@ String name = (String)session.getAttribute("loginUserNum");
 				<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
 				<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
 				<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>		
+				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>	
 
 						
 			</ul>
 		</div>
 		
 		<div class="panel-heading">
-				    <%=name %>의 예약취소 목록입니다.	
+				    <%=name %>의 예약 목록입니다.	
 			</div>
 			
 
@@ -71,7 +71,7 @@ String name = (String)session.getAttribute("loginUserNum");
 						</tr>
 					</thead>
 
-					<c:forEach items="${cancelled}" var="board">
+					<c:forEach items="${bookListAll}" var="board">
 						<tr>
 							<td><c:out value="${board.acmName}" /></td>																			
 							<td><c:out value="${board.bookNum}" /></td>																

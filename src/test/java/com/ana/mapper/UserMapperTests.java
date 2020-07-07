@@ -39,13 +39,13 @@ public class UserMapperTests {
 		// user.setUserNum("10");
 		user.setEmail("ss@sss.com");
 		user.setPwd("@@ww223@@@ee");
-		user.setULastname("Jessica");
-		user.setUFstname("Kang");
-		user.setUPhone("821067409811");
+		user.setLastname("Jessica");
+		user.setFstname("Kang");
+		user.setUserPhone("821067409811");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setUBirthday(beforeFormat.parse("2000/10/01"));
-			user.setURegdate(beforeFormat.parse("2020/10/11"));
+			user.setBirthday(beforeFormat.parse("2000/10/01"));
+			user.setRegdate(beforeFormat.parse("2020/10/11"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -66,14 +66,14 @@ public class UserMapperTests {
 		UserVO user = new UserVO();
 		user.setEmail("새로추가 newAdded@sss.com");
 		user.setPwd("새로 @@ww223@@@ee");
-		user.setULastname("새로 Jessi");
-		user.setUFstname("새로 Kim");
-		user.setUPhone("821067409811");
+		user.setLastname("새로 Jessi");
+		user.setFstname("새로 Kim");
+		user.setUserPhone("821067409811");
 
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setUBirthday(beforeFormat.parse("2010/11/11"));
-			user.setURegdate(beforeFormat.parse("2020/06/29"));
+			user.setBirthday(beforeFormat.parse("2010/11/11"));
+			user.setRegdate(beforeFormat.parse("2020/06/29"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -92,13 +92,13 @@ public class UserMapperTests {
 		user.setUserNum("U9");
 		user.setEmail("수정된 newAdded@sss.com");
 		user.setPwd("수정된 @@ww223@@@ee");
-		user.setULastname("수정");
-		user.setUFstname("최");
-		user.setUPhone("821067409811");
+		user.setLastname("수정");
+		user.setFstname("최");
+		user.setUserPhone("821067409811");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setUBirthday(beforeFormat.parse("1990/10/01"));
-			user.setURegdate(beforeFormat.parse("2020/06/30"));
+			user.setBirthday(beforeFormat.parse("1990/10/01"));
+			user.setRegdate(beforeFormat.parse("2020/06/30"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

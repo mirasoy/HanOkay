@@ -22,6 +22,16 @@ public class BookingServiceTests {
 	@Setter(onMethod_= {@Autowired})
 	private BookingService service;
 
+	@Test
+	public void TestgetBookListAll() {
+		service.getBookListAll("A1").forEach(board2-> log.info(board2));
+	}
+	
+	@Test
+	public void testCheckout() {
+		service.getCheckoutList("A1").forEach(board2-> log.info(board2));
+	}
+	
 	
 	@Test
 	public void testCancleList() {
@@ -36,11 +46,11 @@ public class BookingServiceTests {
 	
 	
 	
-	
+//	
 //	@Test
 //	public void testDelete() {
 //		
-//		log.info("REMOVE RESULT: "+ service.remove("B14"));
+//		log.info("REMOVE RESULT: "+ service.remove("B1"));
 //		
 //	}
 //	

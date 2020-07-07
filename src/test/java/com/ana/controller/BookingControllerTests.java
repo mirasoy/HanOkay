@@ -41,6 +41,33 @@ public class BookingControllerTests {
 	}
 	
 
+	//모든 예약에 대한 테스트
+	@Test
+	public void TestgetBookListAll() throws Exception{
+		log.info(
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookListAll"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+		
+	}	
+
+	//예약 완료에 대한 테스트
+	@Test
+	public void testCheckout() throws Exception{
+		log.info(
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/checkout"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+		
+	}	
+	
+	
+	
+	
 	//취소된 예약에 대한 테스트
 	@Test
 	public void testCancelList() throws Exception{
@@ -57,12 +84,12 @@ public class BookingControllerTests {
 	
 	
 	
+	//예약취소를 위한 테스트
 	
-	
-//	@Test
+	@Test
 	public void testRemove()throws Exception{
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/MyPage/remove")
-				.param("bookNum", "B14")
+				.param("bookNum", "B1")
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 				

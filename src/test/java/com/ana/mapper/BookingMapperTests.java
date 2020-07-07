@@ -3,6 +3,7 @@ package com.ana.mapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.BookStatusVO;
 import com.ana.domain.BookingVO;
 
 import lombok.Setter;
@@ -23,22 +25,48 @@ public class BookingMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private BookingMapper mapper;
 	
-	
+
+
 	
 	@Test
+	public void testInsert() {								
+		mapper.insert("B1", "예약완료");		
+	}
+	
+
+
+	//1. 모든 예약 목록을 가져오기 위한 리스트 테스트
+	@Test
+	public void getBookListAll() {
+		mapper.getBookListAll("A1").forEach(board->log.info(board));
+	}
+		
+	
+	//2. 예약중인 목록을 가져오기 위한 리스트 테스트	
+	//@Test
+	public void getBookList() {
+		mapper.getBookList("A1").forEach(board->log.info(board));
+	}
+	
+	
+	//3. 취소한 내역으로 상태변화를 업데이트 하는 코드
+	//@Test
 	public void testCancel() {
 		mapper.getCancelList("A1").forEach(board2->log.info(board2));
 	}
 	
 	
-	//예약중인 목록을 가져오기 위한 리스트 테스트	
+	//4. 예약 완료한 리스트
 	@Test
-	public void getBookList() {
-		mapper.getBookList("A1").forEach(board->log.info(board));
+	public void testCheckout() {
+		mapper.getCheckoutList("A1").forEach(board->log.info(board));
 	}
 	
-	//취소한 내역으로 상태변화를 업데이트 하는 코드	
-	@Test
+	
+	
+	
+	// 취소한 내역으로 상태변화를 업데이트 하는 코드	
+	//@Test
 	public void testDelete() {
 		log.info("DELETE COUNT: " + mapper.delete("B13"));
 	}

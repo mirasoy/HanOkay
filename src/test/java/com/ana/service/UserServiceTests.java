@@ -36,16 +36,16 @@ public class UserServiceTests {
 		
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setUBirthday(beforeFormat.parse("2010/11/11"));
-			user.setURegdate(beforeFormat.parse("2020/06/29"));
+			user.setBirthday(beforeFormat.parse("2010/11/11"));
+			user.setRegdate(beforeFormat.parse("2020/06/29"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		user.setULastname("Jiha");
-		user.setUFstname("Kim");
+		user.setLastname("Jiha");
+		user.setFstname("Kim");
 		user.setFacebookId("");
 		user.setGoogleId("");
-		user.setUPhone("");
+		user.setUserPhone("");
 		
 		service.register(user);
 		log.info("생성된 회원번호: "+user.getUserNum());

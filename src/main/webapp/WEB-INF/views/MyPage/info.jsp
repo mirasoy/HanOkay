@@ -67,14 +67,7 @@
           <label>객실요금</label> <input class="form-control" name='bookPrice'
             value='<c:out value="${info.bookPrice} "/>' readonly="readonly">
         </div>
-        <div class="form-group">
-          <label>계약금</label> <input class="form-control" name='deposit'
-            value='<c:out value="${info.deposit} "/>' readonly="readonly">
-        </div>
-       <div class="form-group">
-          <label>예약취소여부</label> <input class="form-control" name='canceled'
-            value='<c:out value="${info.canceled} "/>' readonly="readonly">
-        </div>
+   
         <div class="form-group">
           <label>도착예정시간</label> <input class="form-control" name='expectedArr'
             value='<c:out value="${info.expectedArr} "/>' readonly="readonly">
@@ -96,6 +89,23 @@
           <label>실제도착시간</label> <input class="form-control" name='realArr'
             value='<c:out value="${info.realArr} "/>' readonly="readonly">
         </div> 
+        
+        <div class="form-group">
+          <label>방이름</label> <input class="form-control" name='roomName'
+            value='<c:out value="${info.roomName} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>이름</label> <input class="form-control" name='lastName'
+            value='<c:out value="${info.lastName} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>성</label> <input class="form-control" name='firstName'
+            value='<c:out value="${info.firstName} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>예약상태</label> <input class="form-control" name='bookStatus'
+            value='<c:out value="${info.bookStatus} "/>' readonly="readonly">
+        </div>
 
 
 <button data-oper='modify' class="btn btn-default" onclick="location.href='/MyPage/modify?bookNum=<c:out value="${info.bookNum}"/>'">Modify</button>
