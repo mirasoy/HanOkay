@@ -16,17 +16,22 @@ session.setAttribute("userNum", "U1"); //테스트용(로그인 구현 후 수�
 String userNum = (String) session.getAttribute("userNum");
 
 // 숙박일 계산: get방식으로 가져온 날짜 String을 Date로 변환하여 계산
-SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-Date FirstDate = format.parse(checkin);
-Date SecondDate = format.parse(checkout);
-long calDate = FirstDate.getTime() - SecondDate.getTime();
+SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+Date firstDate = format.parse(checkin);
+Date lastDate = format.parse(checkout);
+long calDate = firstDate.getTime() - lastDate.getTime();
 int staydays = (int) (Math.abs(calDate / (24 * 60 * 60 * 1000)));
 
+// 쿼리에 넣기 위해 날짜 패턴 변경
+String inDate = checkin.replace('-', '/');
+String outDate = checkout.replace('-', '/');
+
+// 예약금액 = 방가격 x 숙박일
 int bookPrice = (int) (Integer.parseInt(price) * staydays);
 %>
 <!DOCTYPE html>
 <html lang="en">
-
+뽕
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,8 +70,8 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		<%=person%>명 / (최대 인원<c:out value="${rom.capacity}" />명)</br> [회원정보]</br>
 		<%=userNum%>
 		<input type="hidden" name='userNum' value='<%=userNum%>'> 
-		<input type="hidden" name='checkinDate' value='2020/03/01'> 
-		<input type="hidden" name='checkoutDate' value='2020/03/02'> 
+		<input type="hidden" name='checkinDate' value='<%=inDate%>'> 
+		<input type="hidden" name='checkoutDate' value='<%=outDate%>'> 
 		<input type="hidden" name='staydays' value='<%=staydays%>'> 
 		<input type="hidden" name='guest' value='<%=person%>'> 
 		<input type="hidden" name='bookPrice' value='<%=bookPrice%>'> 
