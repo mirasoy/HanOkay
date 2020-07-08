@@ -34,9 +34,9 @@ public class BookingServiceImpl implements BookingService{
 
 	
 	@Override
-	public BookingVO get(String book_Num) {
-		log.info("get......"+ book_Num);
-		return mapper.read(book_Num);
+	public BookingVO get(String bookNum) {
+		log.info("get......"+ bookNum);
+		return mapper.read(bookNum);
 	}
 
 

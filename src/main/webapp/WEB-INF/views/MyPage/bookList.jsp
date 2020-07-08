@@ -10,6 +10,8 @@ String name = (String) session.getAttribute("loginUserNum");
 <%@include file="../includes/header.jsp"%>
 
 <style>
+
+
 .bookbar {
 	width: 100%;
 	height: 40px;
@@ -68,7 +70,7 @@ String name = (String) session.getAttribute("loginUserNum");
 }
 </style>
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-lg-12 title">
 		<h1 class="page-header">나의 예약</h1>
 	</div>
 	<!-- /.col-lg-12 -->
