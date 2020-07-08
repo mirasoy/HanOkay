@@ -155,7 +155,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#">
+                            <a href="/acm/list">
                                 <div>
                                     	게스트 모드 전환
                                 </div>

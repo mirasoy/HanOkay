@@ -20,7 +20,7 @@
 				
 			  <!-- 숙소 방 추가 모달로 띄우기-->
 			  <form action="/hosting/become-host2_6pop" method="post">
-				  <h4>2.개별객실 추가하기</h4><input type="text" name="ACM_NUM" id="ACM_NUM" value="ACM0001" readonly="readonly">
+				  <h4>2.개별객실 추가하기</h4><input type="text" name="ACM_NUM" id="ACM_NUM" value="A1" readonly="readonly">
 				
 				  <div id="image_container" style="width:200px;height:200px;"></div>
 				  <input type="file" id="ROM_PURL" name="ROM_PURL" placeholder="객실 사진" onchange="setThumbnail(event);">
@@ -94,7 +94,7 @@
 		});
 		
 		//name/value 형태로 담는다
-		var allData={"acmNum":acmNum, "romType":romType,"romName":romName, "romNum":"T0111",
+		var allData={"acmNum":acmNum, "romType":romType,"romName":romName, "romNum":"R05",
 				"romCapa":romCapa, "bedType":bedType, "bedCnt":bedCnt, "romSize":romSize, 
 				"romLoca":romLoca,"romPrice":romPrice,"romPurl":"rom.jpg",
 				"romOptArr":chkArr		

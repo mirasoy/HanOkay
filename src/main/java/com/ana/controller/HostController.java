@@ -55,9 +55,10 @@ public class HostController {
 	
 	@GetMapping("/become-host2_6")//뿌려주기
 	public void becomeHostGet2_6(Model model) {
-		String acmNum = "ACM0001";
+		String acmNum = "A1";
 		List<RomVO> romList=service.getList(acmNum);
 		
+		System.out.println("A1에 대한 롬리스트 들어오나아ㅏㅏ~~"+romList.toString());
 		model.addAttribute("list", romList);
 		model.addAttribute("size", romList.size());
 		
@@ -96,13 +97,44 @@ public class HostController {
 
 
 	
-	@GetMapping("/getRom")
+	@GetMapping("/getRom")//숙소 상세보기
 	public String getRomGet(@RequestParam("romNum") String romNum, Model model) {
 		//System.out.println("롬넘이 넘어온다~~~"+romNum);
 		
 		model.addAttribute("thisrom",service.get(romNum));//RomVO가 나온다
 		System.out.println("==========여기 넘어오냐앗========");
 		return "/hosting/getRom";
+	}
+	
+	@GetMapping("/modifyRom")//내용 전체를 받아서 (Post)숙소 수정하기
+	public String modifyRomGet(@RequestParam("romNum") String romNum, Model model) {
+		model.addAttribute("thisrom",service.get(romNum));
+		return "/hosting/modifyRom";
+	}
+	
+	@PostMapping("/modifyRom")//내용 전체를 받아서 (Post)숙소 수정하기
+	public String modifyRomPost(RomVO vo, Model model) {
+		System.out.println("수정한 정보가 들어왔느냐"+vo.toString());
+		
+		service.modify(vo);//수정된 정보값을 넣어줌
+		List<RomVO> romList=service.getList(vo.getAcmNum());
+		
+		model.addAttribute("list", romList);
+		model.addAttribute("size", romList.size());
+	
+		return "/hosting/become-host2_6";
+	}
+	
+	@GetMapping("/removeRom")//숙소 삭제버튼을 받으면
+	public String removeRomGet(@RequestParam("romNum") String romNum,@RequestParam("acmNum") String acmNum, Model model) {
+		//System.out.println("롬넘이 넘어온다~~~"+romNum);
+		service.remove(romNum);
+		
+		List<RomVO> romList=service.getList(acmNum);
+		
+		model.addAttribute("list", romList);
+		model.addAttribute("size", romList.size());
+		return "/hosting/become-host2_6";
 	}
 	
 	//post단
@@ -128,8 +160,8 @@ public class HostController {
 			@RequestParam(value="romSize") int romSize,//객실사이즈
 			@RequestParam(value="romPrice") int romPrice,//객실단가
 			@RequestParam(value="romLoca") String romLoca,//객실
-			@RequestParam(value="romPurl") String romPurl//객실
-
+			@RequestParam(value="romPurl") String romPurl,//객실
+			Model model
 		) {
 		
 //		System.out.println("====== 컨트롤러 작동 =======");
@@ -157,7 +189,14 @@ public class HostController {
 		
 		System.out.println("여기까지온댯");
 		
-		return "/hosting/become-host2_6pop";
+		
+		List<RomVO> romList=service.getList(acmNum);
+		
+		model.addAttribute("list", romList);
+		model.addAttribute("size", romList.size());
+		
+		
+		return "/hosting/become-host2_6";
 	}
 
 	

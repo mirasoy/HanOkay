@@ -19,16 +19,16 @@
 	</resultMap>
 
 	<!-- 호스트단 -->
+	<!-- 한숙소에 포함되어있는 객실 다 가져오기 -->
 	<select id="getList" resultMap="RomVOResult">
 		<![CDATA[
-		select * from TROM
+		select * from TROM where ACM_NUM=#{acmNum}
 		]]>
 	</select>
 	
 	<!-- 객실 하나하나의 정보 가져오기 -->
 	<select id="read" resultMap="RomVOResult">
-		select * from TROM where ROM_NUM =
-		#{romNum}
+		select * from TROM where ROM_NUM =#{romNum}
 	</select>
 	
 	
@@ -42,11 +42,26 @@
 		#{romPrice}, #{romPurl}, #{romLoca})
 	</insert>
 
-	
-	
+	<!-- 객실 삭제 -->
+	<delete id="remove">
+		delete from trom where rom_Num = #{romNum}
+	</delete>
 
-
-
+	<!-- 객실 수정 -->
+	<update id="modify">
+		update trom
+		set rom_name=#{romName},
+		rom_type=#{romType},
+		rom_capa=#{romCapa},
+		bed_type=#{bedType},
+		bed_cnt=#{bedCnt},
+		rom_size=#{romSize},
+		rom_price=#{romPrice},
+		rom_purl=#{romPurl},
+		rom_loca = #{romLoca}
+		where rom_Num = #{romNum} 
+		
+	</update>
 
 
 
