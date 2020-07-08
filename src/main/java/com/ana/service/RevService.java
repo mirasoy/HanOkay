@@ -11,11 +11,15 @@ public interface RevService {
 	
 	public RevVO get(String postNum);
 	
+	public RevVO getByBooknum(String bookNum);
+	
 	public boolean modify(RevVO post);
 	
 	public boolean remove(String postNum);
 	
 	public List<RevVO> getUserList(String loginUser);
+	
+//	public List<RevVO> getBookingList(String loginUser);
 	
 	public List<RevVO> getList();
 

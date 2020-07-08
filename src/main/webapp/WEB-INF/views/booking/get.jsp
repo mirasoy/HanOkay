@@ -44,12 +44,13 @@
 				<tr><td>(<c:out value="${book.checkinDate}"/>&nbsp;-&nbsp;<c:out value="${book.checkoutDate}"/>)</td></tr>
 				<tr><td>&nbsp;</td></tr>
 				<tr>
-					<td rowspan="7"><c:out value="${acm.acmPurl}" /></td>
+					<td rowspan="8"><c:out value="${acm.acmPurl}" /></td>
 				</tr>
 				<tr><td>예약번호&emsp;</td><td><c:out value="${book.bookNum}"/></td></tr>
 				<tr><td>체크인&emsp;</td><td><c:out value="${book.checkinDate}"/></td></tr>
 				<tr><td>체크아웃&emsp;</td><td><c:out value="${book.checkoutDate}"/></td></tr>
-				<tr><td>예약 객실&emsp;</td><td><c:out value="${book.romNum}"/></td></tr>
+				<tr><td>예약자&emsp;</td><td><c:out value="${book.lastName}${book.firstName}"/></td></tr>
+				<tr><td>예약 객실&emsp;</td><td><c:out value="${book.roomName}"/></td></tr>
 				<tr><td>예약 인원&emsp;</td><td><c:out value="${book.guest}"/></td></tr>
 				<tr><td>결제 금액&emsp;</td><td><c:out value="${book.bookPrice}"/></td></tr>
 		</table>			

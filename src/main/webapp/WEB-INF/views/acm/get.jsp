@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%
+	String checkin = request.getParameter("in");
+	String checkout = request.getParameter("out");
+	String person = request.getParameter("person");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -141,13 +146,10 @@
 						<td><c:out value="${rom.bedCnt}" /></td>
 						<td><c:out value="${rom.romSize}" /></td>
 						<td><c:out value="${rom.price}" /></td>
-						
-						<td><a type="button" href="">예약하기</a></td>
-<!-- 						
-												<form name="select" method="post">
-								<input type='submit'>예약하기
-								<input type='hidden' name='' value=''>
-						</form></td> -->
+						<td><a type="button" href="
+						/booking/new?romNum=<c:out value="${rom.romNum}"/>
+						&in=<%=checkin%>&out=<%=checkout%>&person=<%=person%>&price=<c:out value="${rom.price}"/>
+						">예약하기</a></td>
 					</tr>
 				</c:forEach>
 			</table>

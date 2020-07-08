@@ -25,26 +25,27 @@ public class RevPostMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private RevPostMapper mapper;
 		
-	@Test
+	//@Test
 	public void testGetList2() {
 		mapper.getAcmList("A2").forEach(post -> log.info(post));
 	}
 	
-	
-//	@Test
+	//	@Test
     public void testGetList() {
 		mapper.getList().forEach(post -> log.info(post));
 	}
 	
-@Test
+//@Test
 public void testGetMyList() {
-	mapper.getMyList("U2").forEach(post -> log.info(post));
+	mapper.getMyList("U1").forEach(post -> log.info(post));
 }
 
 
 
+
+
  
-//   @Test
+   @Test
 	public void testRead() {
 		RevVO post = mapper.read("5");
 			log.info(post);

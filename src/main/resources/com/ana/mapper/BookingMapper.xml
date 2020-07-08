@@ -6,52 +6,101 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ana.mapper.BookingMapper">
 
 
-	<resultMap id="BookingVOResult"
-		type="com.ana.domain.BookingVO">
-		<result column="book_num" property="bookNum" />
-		<result column="user_num" property="userNum" />
-		<result column="rom_num" property="romNum" />
-		<result column="book_Date" property="bookDate" />
-		<result column="checkin_Date" property="checkinDate" />
-		<result column="checkout_Date" property="checkoutDate" />
-		<result column="staydays" property="staydays" />
-		<result column="guest" property="guest" />
-		<result column="book_Price" property="bookPrice" />
-		<result column="deposit" property="deposit" />
-		<result column="canceled" property="canceled" />
-		<result column="expected_Arr" property="expectedArr" />
-		<result column="smoking" property="smoking" />
-		<result column="request" property="request" />
-		<result column="real_Arr" property="realArr" />
-	</resultMap>
+<!-- 예약을 위한 모든 준비물 -->
+ <resultMap id="BookingVOResult" type="com.ana.domain.BookingVO">
+      <result column="book_num" property="bookNum" />
+      <result column="user_num" property="userNum" />
+      <result column="rom_num" property="romNum" />
+      <result column="book_Date" property="bookDate" />   
+      <result column="checkin_Date" property="checkinDate" />   
+      <result column="checkout_Date" property="checkoutDate" />   
+      <result column="staydays" property="staydays" />   
+      <result column="guest" property="guest" />   
+      <result column="book_Price" property="bookPrice" />   
+      <result column="expected_Arr" property="expectedArr" />   
+      <result column="smoking" property="smoking" />   
+      <result column="request" property="request" />   
+      <result column="real_Arr" property="realArr" />   
+      <result column="room_Name" property="roomName" />
+      <result column="u_lastName" property="lastName" /> 
+      <result column="u_fstName" property="firstName" />
+      <result column="book_Status" property="bookStatus" />
+</resultMap>
 
 
 
-	<delete id="delete">
-		delete from tbooking where book_Num = #{bookNum}
-	</delete>
+<!-- 예약중인 리스트 -->
+<resultMap id="BookVOResult" type="com.ana.domain.BookVO">
+	<result column="acm_Name" property="acmName" />
+	<result column="book_num" property="bookNum" />
+	<result column="rom_Num" property="romNum" />
+	<result column="checkin_Date" property="checkinDate" />
+	<result column="checkout_Date" property="checkoutDate" />
+	<result column="book_Price" property="bookPrice" />
+</resultMap>
+
+
+<!-- 예약취소상태 -->
+<resultMap id="BookCancelVOResult" type="com.ana.domain.BookCancelVO">
+	<result column="acm_Name" property="acmName" />
+	<result column="book_num" property="bookNum" />
+	<result column="rom_Num" property="romNum" />
+	<result column="checkin_Date" property="checkinDate" />
+	<result column="checkout_Date" property="checkoutDate" />
+	<result column="book_Price" property="bookPrice" />
+</resultMap>
+
+
+<resultMap id="BookStatusVOResult" type="com.ana.domain.BookStatusVO">
+	<result column="book_Num" property="bookNum" />
+	<result column="book_Status" property="bookStatus" />
+	<result column="updateDate" property="updateDate" />
+</resultMap>
+
+
+<!-- 상태에 추가하는 메서드 -->
+	<insert id="changeStatus">		
+		insert into TBOOK_STATUS(book_Num, book_Status)		
+		VALUES(#{bookNum},'RS_STT_BC') 		
+	</insert>
+
+	
+	 
+<!-- 취소버튼 클릭시 변경됨	 -->
+	<update id ="delete">
+		update tbooking
+			set book_Status='RS_STT_BC'
+			where book_num=#{bookNum}
+	</update>
+	
+	
 
 
 	<update id="update">
 		update tbooking
-		set
-		user_num = #{userNum},
-		rom_num =#{romNum},
-		book_Date=#{bookDate},
-		checkin_Date=#{checkinDate},
-		checkout_Date=#{checkoutDate},
-		staydays=#{staydays},
-		guest=#{guest},
-		book_Price=#{bookPrice},
-		deposit=#{deposit},
-		canceled=#{canceled},
-		expected_Arr=#{expectedArr},
-		smoking=#{smoking},
-		request=#{request},
-		real_Arr=#{realArr}
+		set 
+			user_num = #{userNum},
+			rom_num =#{romNum},
+			book_Date=#{bookDate},
+			checkin_Date=#{checkinDate},
+			checkout_Date=#{checkoutDate},
+			staydays=#{staydays},
+			guest=#{guest},
+			book_Price=#{bookPrice},			
+			expected_Arr=#{expectedArr},
+			smoking=#{smoking},
+			request=#{request},
+			real_Arr=#{realArr},
+			
+			room_Name=#{roomName},
+			U_LASTNAME=#{lastName},
+			U_FSTNAME=#{firstName},
+			book_Status=#{bookStatus}				
 
-		where book_num=#{bookNum}
+			where book_num=#{bookNum}
+
 	</update>
+
 
 
 
@@ -73,17 +122,85 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	]]>
 
+	
 	</select>
+	
+<!-- 회원 A1의 예약중인 리스트 -->
+	
+<!-- 1. 예약 모든 리스트 -->
+	<select id="getBookListAll" resultMap="BookVOResult">	
+	<![CDATA[
+	SELECT distinct
+    A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 
+	]]>	
+	</select>
+
+
+	
+	
+	
+<!-- 2. 예약예정 리스트 -->
+	<select id="getBookList" resultMap="BookVOResult">	
+	<![CDATA[
+	SELECT
+    A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BK' AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 
+	]]>	
+	</select>
+
+
+<!-- 3. 예약취소 리스트 -->
+ 	<select id="getCancelList" resultMap="BookVOResult">
+	SELECT distinct
+	A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BC' AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 			
+	</select> 
+	
+<!-- 4. 예약완료 리스트 -->
+ 	<select id="getCheckoutList" resultMap="BookVOResult">
+	SELECT
+	A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_AC' AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 			
+	</select> 
+
+
 
 	<insert id="insert">
 		<selectKey keyProperty="bookNum" order="BEFORE"
 			resultType="String">
 			select concat('B',seq_tbook.nextval) from dual
 		</selectKey>
-
-		insert into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
+		
+		insert all
+		into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
 		CHECKOUT_DATE,
-		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING, REQUEST)
+		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING, REQUEST,
+		room_Name, u_LastName, u_FstName, book_Status)
 		values (
 		#{bookNum},
 		#{userNum},
@@ -95,7 +212,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{bookPrice},
 		#{expectedArr},
 		#{smoking},
-		#{request})
+		#{request},
+		(select room_name from trom where rom_num= #{romNum}),
+		(select u_LastName from tuser where user_num= #{userNum}),
+		(select u_FstName from tuser where user_num= #{userNum}),
+		#{bookStatus})
+		into tbook_status(book_num, book_status)
+		values (#{bookNum}, #{bookStatus})
+		select * from dual
 		
 	</insert>
 </mapper>
