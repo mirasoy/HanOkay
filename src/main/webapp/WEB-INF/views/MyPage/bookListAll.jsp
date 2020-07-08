@@ -28,9 +28,13 @@ String name = (String)session.getAttribute("loginUserNum");
 	.panel-heading{
 	    padding-left: 25px;
 	}
+	
+	
+	
+	
 </style>
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-lg-12 title">
 		<h1 class="page-header">나의 예약</h1>
 	</div>
 	<!-- /.col-lg-12 -->

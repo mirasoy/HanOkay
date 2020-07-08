@@ -18,9 +18,15 @@ public class RomServiceImpl implements RomService{
 	private RomMapper mapper;
 
 	@Override
-	public List<RomVO> getList(String acmNum) {
+	public List<RomVO> getList(String acmNum, String person) {
 		log.info("getList...........");
-		return mapper.getList(acmNum);
+		return mapper.getList(acmNum, person);
+	}
+	
+	@Override
+	public List<RomVO> getAll(String acmNum) {
+		log.info("getList...........");
+		return mapper.getAll(acmNum);
 	}
 	
 	@Override

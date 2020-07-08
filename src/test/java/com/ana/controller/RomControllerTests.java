@@ -34,24 +34,16 @@ public class RomControllerTests {
 	@Test
 	public void testList() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/rom/list")
-				.param("acmNum", "A9999")
+				.param("acmNum", "A4")
+				.param("person", "3")
 				).andReturn().getModelAndView().getModelMap());
 	}
-
+	
 	@Test
-	public void testRegister() throws Exception {
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/rom/register")
-				   .param("acmNum", "A9999")
-				   .param("roomName", "컨트롤러 테스트")
-				   .param("capacity", "2")
-				   .param("bedType", "테스트")
-				   .param("bedCnt", "1")
-				   .param("romSize", "99")
-				   .param("price", "1004")
-				   .param("romUrl", "abc.png")
-				   .param("romLocainfo", "C102")
-				).andReturn().getModelAndView().getViewName();
- 		log.info(resultPage);
+	public void testAll() throws Exception {
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/rom/all")
+				.param("acmNum", "A9999")
+				).andReturn().getModelAndView().getModelMap());
 	}
 
 	@Test
@@ -60,32 +52,6 @@ public class RomControllerTests {
 				.param("romNum", "R10"))
 				.andReturn()
 				.getModelAndView().getModelMap());
-	}
-
-	@Test
-	public void testModify() throws Exception {
-		String resultPage = mockMvc
-				.perform(MockMvcRequestBuilders.post("/rom/modify")
-						.param("romNum", "R30")
-					   .param("acmNum", "A9999")
-					   .param("roomName", "컨트롤러 수정 테스트")
-					   .param("capacity", "2")
-					   .param("bedType", "수정 테스트")
-					   .param("bedCnt", "1")
-					   .param("romSize", "99")
-					   .param("price", "1004")
-					   .param("romUrl", "abc.png")
-					   .param("romLocainfo", "C102")
-				).andReturn().getModelAndView().getViewName();
-		log.info(resultPage);
-	}
-
-	@Test
-	public void testRemove() throws Exception {
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/rom/remove")
-				.param("romNum", "A5"))
-				.andReturn().getModelAndView().getViewName();
-		log.info(resultPage);
 	}
 }
 

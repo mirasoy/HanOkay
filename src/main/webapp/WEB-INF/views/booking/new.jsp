@@ -1,9 +1,11 @@
+<%@page import="java.nio.channels.SeekableByteChannel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date"%>
+<%@ page import="com.ana.domain.UserVO"%>
 <%
 
 String romNum = request.getParameter("romNum");
@@ -12,8 +14,13 @@ String checkout = request.getParameter("out");
 String person = request.getParameter("person");
 String price = request.getParameter("price");
 
-session.setAttribute("userNum", "U1"); //테스트용(로그인 구현 후 수정 예정)
-String userNum = (String) session.getAttribute("userNum");
+// 세션 로그인값 저장하기(테스트용)
+Date birthday = new Date(2020/12/12);
+UserVO user = new UserVO("U1", "test@ana.com", "", "성", "냄쿵", "112", birthday, "E", "GU");
+session.setAttribute("user", user);
+
+// 세션 로그인값 불러오기
+user = (UserVO)session.getAttribute("user");
 
 // 숙박일 계산: get방식으로 가져온 날짜 String을 Date로 변환하여 계산
 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -31,7 +38,6 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 %>
 <!DOCTYPE html>
 <html lang="en">
-뽕
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,25 +57,26 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 </head>
 
 <body>
-<%-- 	<form action="/booking/new" method="post">
-		<input type="hidden" name='userNum' value='<%=userNum%>'> 
-		<input type="hidden" name='romNum' value='<%=romNum%>'> 
-		<input type="hidden" name='checkinDate' value='2020/03/01'> 
-		<input type="hidden" name='checkoutDate' value='2020/03/02'> 
- 		
-		
-		<button type="submit">예약하기</button>
-	</form>
- --%>
-	 <form name="form" method="post">
+
 		[숙소정보]</br>
 		<c:out value="${rom.romPurl}" /></br>
 		<c:out value="${acm.acmName}" /></br>
-		<%=checkin%>~<%=checkout%></br>
-		<c:out value="${rom.roomName}" /></br>
-		<%=person%>명 / (최대 인원<c:out value="${rom.capacity}" />명)</br> [회원정보]</br>
-		<%=userNum%>
-		<input type="hidden" name='userNum' value='<%=userNum%>'> 
+		<%=checkin%> ~ <%=checkout%></br>
+		<c:out value="${rom.romName}" />
+		(<c:out value="${rom.romType}" />)</br>
+		<%=person%>명 (최대 <c:out value="${rom.romCapa}" />명)</br> 
+		
+		</br></br></br>
+		[회원정보]</br>
+	 <form name="form" method="post">
+		<input type="checkbox" id="cb" checked="checked" onclick="setInfo()">예약자 == 회원</br>
+	
+		이름*<input type="text" id="u1" name='bookerFirstname' value='<%=user.getFstname() %>' readonly="readonly"> 
+		성*<input type="text" id="u2"  name='bookerLastname' value='<%=user.getLastname()%>' readonly="readonly"></br>
+		이메일*<input type="text" id="u3"  name='bookerEmail' value='<%=user.getEmail()%>' readonly="readonly"></br> 
+		전화번호<input type="text" id="u4" name='bookerPhone' value='<%=user.getUserPhone()%>' readonly="readonly">
+		
+		<input type="hidden" name='userNum' value='<%=user.getUserNum() %>'> 
 		<input type="hidden" name='checkinDate' value='<%=inDate%>'> 
 		<input type="hidden" name='checkoutDate' value='<%=outDate%>'> 
 		<input type="hidden" name='staydays' value='<%=staydays%>'> 
@@ -108,22 +115,39 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 			흡연객실<input type="radio" name="smoking" value="1"></br> 
 		특별 요청사항: <input type="text" size="100" name="request" value=""></br> 
 			<input type="hidden" name="bookStatus" value="RS_STT_BK"> 
+			
 		</br></br></br>	
 		[요금정보]</br>
-		<c:out value="${rom.price}" />원 X <%=staydays%>박 <%=bookPrice%></br> 
-		세금 및 봉사료 <%=bookPrice / 10%></br> 
-		총 할인 금액 </br> 
-		회원 등급 할인 </br> 
-		보유쿠폰 할인 </br> 
-		적립금 사용 </br> 
-		(1박 평균) </br> 
-		합계
+		<label ></label>
+		₩<c:out value="${rom.romPrice}" /> X <%=staydays%>박 &emsp;&emsp;₩<%=bookPrice%></br> 
+		세금 및 봉사료 &emsp;&emsp;₩<%=bookPrice / 10%></br> 
+		총 할인 금액 &emsp;&emsp;₩0</br> 
+		회원 등급 할인 &emsp;&emsp;₩0</br> 
+		보유쿠폰 할인 &emsp;&emsp;₩0</br> 
+		적립금 사용 &emsp;&emsp;₩0</br> 
+		</br>
+		합계&emsp;&emsp;₩</br> 
+		(1박 평균) &emsp;&emsp;₩</br> 
 		</br></br></br>
 		<button data-oper='booking'>예약하기</button>
 	</form>
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
-
+		// 체크박스를 눌렀을 때 실행되는 메서드
+		function setInfo() {
+			if(document.getElementById("cb").checked){
+				// 예약자 정보가 리셋된다
+				document.getElementById("u1").value='<%=user.getFstname() %>';
+				document.getElementById("u2").value='<%=user.getLastname()%>';
+				document.getElementById("u3").value='<%=user.getEmail()%>';
+				document.getElementById("u4").value='<%=user.getUserPhone()%>';
+			}else{
+				for(let i = 1; i <= 4; i++){
+					document.getElementById("u"+i).value="";
+					document.getElementById("u"+1).readonly="";
+				}	
+			}
+		}
 	</script>
 </body>
 

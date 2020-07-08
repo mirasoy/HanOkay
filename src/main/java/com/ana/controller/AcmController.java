@@ -1,5 +1,7 @@
 package com.ana.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +26,13 @@ public class AcmController {
 	
 	private AcmService service;
 	
+
 	@GetMapping({"/list","/result"})
 	public void list(Criteria cri, String acmNum, Model model) {
 		log.info("list: "+cri);
+		
+		//session.setAttribute("location", cri.getKeyword());
+		//model.addAttribute("cri",cri);
 		model.addAttribute("list",service.getList(cri));
 		//model.addAttribute("pageMaker", new PageDTO(cri, 123));
 		int total = service.getTotal(cri);

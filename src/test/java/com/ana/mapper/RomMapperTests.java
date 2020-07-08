@@ -67,12 +67,13 @@ public class RomMapperTests {
 	}
 
 	@Test
-	public void testDelete() {
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■DELETE COUNT: " + mapper.delete("R31"));
+	public void testGetAll() {
+		mapper.getAll("A4").forEach(rom -> log.info(rom));
 	}
-
+	
 	@Test
 	public void testGetList() {
-		mapper.getList("A3").forEach(rom -> log.info(rom));
+		mapper.getList("A4", "3").forEach(rom -> log.info(rom));
 	}
+	
 }

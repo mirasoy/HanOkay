@@ -6,20 +6,16 @@
 	session.setAttribute("userNum", "U1");
 String name = (String) session.getAttribute("userNum");
 %>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <%@include file="../includes/header.jsp"%>
 <head>
-<title>review List</title>
 
 </head>
 
 <body>
 
-	
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
@@ -56,7 +52,6 @@ String name = (String) session.getAttribute("userNum");
 		</div>
 	</div>
 	<!-- /.row -->
-
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -64,19 +59,14 @@ String name = (String) session.getAttribute("userNum");
 	<script>
 		<c:forEach items="${list }" var="rev">
 
-		$(".bookList").append("<tr>");
-		$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
-		$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
-		$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
-		$(".bookList")
-				.append("<td ><c:out value="${rev.checkOutDay }" /></td>");
-
 		if ("<c:out value="${rev.pstNum }" />" == "") {
+			$(".bookList").append("<tr>");
+			$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
+			$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
+			$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
+			$(".bookList").append("<td ><c:out value="${rev.checkOutDay }" /></td>");
 			$(".bookList").append("<button class='button'><a href='/review/register?bookNum=<c:out value="${rev.bookNum }" />'>리뷰쓰기</button></a>");
-		} else {
-			$(".bookList").append("<button class='button'><a href='/review/get?pstNum=<c:out value="${rev.pstNum }" />'>리뷰보기</button></a>");
-		}
-
+		} 
 		$(".bookList").append("</tr>");
 
 		</c:forEach>

@@ -34,7 +34,7 @@ public class RevServiceImpl implements RevService {
 
 	@Override
 	public RevVO get(String postNum) {
-		log.info("get......" + postNum);
+		log.info("get......" );
 
 		return mapper.read(postNum);
 	}
@@ -120,29 +120,29 @@ public class RevServiceImpl implements RevService {
 		return list;
 	}
 
-	@Override
-	public List<RevVO> getBookingList(String loginUser) {
-		List<RevVO> list = mapper.getBookingList(loginUser);
-
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat fm2 = new SimpleDateFormat("yyyy-MM-dd");
-
-		for (RevVO rev : list) {
-			try {
-				Date checkIn = fm.parse(rev.getCheckInDay());
-				Date checkOut = fm.parse(rev.getCheckOutDay());
-				rev.setCheckInDay(fm2.format(checkIn));
-				rev.setCheckOutDay(fm2.format(checkOut));
-
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-		return list;
-	}
+//	@Override
+//	public List<RevVO> getBookingList(String loginUser) {
+//		List<RevVO> list = mapper.getBookingList(loginUser);
+//
+//		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		SimpleDateFormat fm2 = new SimpleDateFormat("yyyy-MM-dd");
+//
+//		for (RevVO rev : list) {
+//			try {
+//				Date checkIn = fm.parse(rev.getCheckInDay());
+//				Date checkOut = fm.parse(rev.getCheckOutDay());
+//				rev.setCheckInDay(fm2.format(checkIn));
+//				rev.setCheckOutDay(fm2.format(checkOut));
+//
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		}
+//
+//		return list;
+//	}
 
 	@Override
 	public RevVO getByBooknum(String bookNum) {

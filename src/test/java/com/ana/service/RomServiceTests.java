@@ -28,9 +28,14 @@ public class RomServiceTests {
 
 	@Test
 	public void testGetList() {
-		service.getList("A1").forEach(rom -> log.info(rom));
+		service.getList("A4", "3").forEach(rom -> log.info(rom));
 	}
-
+	
+	@Test
+	public void testGetAll() {
+		service.getAll("A1").forEach(rom -> log.info(rom));
+	}
+	
 	@Test
 	public void testRegister() {
 		RomVO rom = new RomVO();

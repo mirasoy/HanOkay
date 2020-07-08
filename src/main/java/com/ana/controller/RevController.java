@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -57,12 +58,37 @@ public class RevController {
 
 		String userNum = (String) session.getAttribute("userNum");
 
+		log.info("userNum>>>>>>" +  service.getUserList("U1").size());
+		log.info("list");
+		// model.addAttribute("list", service.getBookingList(userNum));
+		model.addAttribute("list", service.getUserList("U1"));
+	}
+
+	@GetMapping("/unwrittenReviewlist")
+	public void unwrittenReviewlist(Model model, HttpSession session) {
+
+		String userNum = (String) session.getAttribute("userNum");
+
 		log.info("userNum>>>>>>" + userNum);
 		log.info("list");
 		// model.addAttribute("list", service.getBookingList(userNum));
-		model.addAttribute("list", service.getBookingList("U1"));
+		model.addAttribute("list", service.getUserList("U1"));
 	}
 
+	@GetMapping("/writtenReviewlist")
+	public void writtenReviewlist(Model model, HttpSession session) {
+
+		String userNum = (String) session.getAttribute("userNum");
+
+		log.info("userNum>>>>>>" + userNum);
+		for(RevVO rev :service.getUserList("U1")) {
+			log.info("list>>"+ rev.getTitle());
+		}
+		// model.addAttribute("list", service.getBookingList(userNum));
+		model.addAttribute("list", service.getUserList("U1"));
+	}
+
+	
 	@GetMapping("/register")
 	public void register(@RequestParam("bookNum") String bookNum, Model model) {
 
@@ -92,7 +118,7 @@ public class RevController {
 	@GetMapping("/get")
 	public void get(@RequestParam("pstNum") String pstNum, Model model) {
 
-		log.info("/get");
+		log.info("/get"+service.get(pstNum));
 
 		model.addAttribute("review", service.get(pstNum));
 
@@ -108,13 +134,18 @@ public class RevController {
 
 	@PostMapping("/modify")
 	public String modify(RevVO review, RedirectAttributes rttr) {
-		log.info("modify:::::::::::::::::::::::::::::::::::::::" + review);
+		log.info("modify::::::::::"+review.getPstNum()+":::::::::::::::::::::::::::::" + review);
 		RevVO rv = service.get(review.getPstNum());
-
+		log.info("modify::::>>>::::::::" + rv);
+		//임시설정
+		rv.setRevPurl("_");
+		
 		rv.setTitle(review.getTitle());
 		rv.setContent(review.getContent());
 		rv.setStisf(review.getStisf());
 
+		
+		
 		if (service.modify(rv)) {
 			rttr.addFlashAttribute("result", "success");
 		}
@@ -127,6 +158,7 @@ public class RevController {
 		service.remove(pstNum);
 		return "redirect:/review/list";
 	}
+	
 	
 	
 //이미지 업로드 테스트 단

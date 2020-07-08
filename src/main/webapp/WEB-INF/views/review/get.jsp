@@ -8,21 +8,9 @@ String name = (String) session.getAttribute("userNum");
 %>
 <!DOCTYPE html>
 <html lang="en">
-
+<%@include file="../includes/header.jsp"%>
 <head>
 <title>review List</title>
-
-<link href="https://fonts.googleapis.com/css?family=Alegreya:700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-	rel="stylesheet">
-
-<!-- Bootstrap -->
-<link type="text/css" rel="stylesheet"
-	href="../resources/css/bootstrap.min.css" />
-
-<!-- Custom stlylesheet -->
-<link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
 
 </head>
 
@@ -39,23 +27,25 @@ String name = (String) session.getAttribute("userNum");
 						<table
 							class="table table-striped table-bordered table-hover bookList">
 							<thead>
-								<tr>
+									<tr><td colspan = "2"><c:out value="${review.title }" /></td></tr>
+									<tr>
 									<td><c:out value="${review.pstNum }" /></td>
-									<td><c:out value="${review.title }" /></td>
 									<td id="star"></td>
-								</tr>
-								<tr>
-									<td><c:out value="${review.content }" /></td>
-									<td><c:out value="${review.pstNum }" /></td>
-
-								</tr>
+									</tr>
+									<tr>
+									<td><c:out value="${review.checkInDay }" /></td>
+									<td><c:out value="${review.checkOutDay }" /></td>
+									</tr>
+									<tr><td colspan = "2"><c:out value="${review.content }" /></td></tr>
+									
 							</thead>
 							<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
-							<button type="submit" >리뷰수정/삭제</button>
 							
 
 						</table>
+							<button type="submit" >리뷰수정/삭제</button>
 					</form>
+							<a href="/review/list"><button type="submit" >리스트로 돌아가기</button></a>
 				</div>
 			</div>
 		</div>
@@ -79,5 +69,5 @@ String name = (String) session.getAttribute("userNum");
 
 </body>
 
-
+<%@include file="../includes/footer.jsp"%>
 </html>

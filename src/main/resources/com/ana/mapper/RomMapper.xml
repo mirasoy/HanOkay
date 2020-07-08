@@ -18,35 +18,12 @@
 		<result column="ROM_TYPE" property="romType" />
 	</resultMap>
 
-	<!-- 호스트단 -->
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!--  -->
-	<select id="getList" resultMap="RomVOResult">
+	<select id="getAll" resultMap="RomVOResult">
 		select * from TROM where ACM_NUM = #{acmNum}
-		<!-- where rom_num > 0 -->
+	</select>
+	
+	<select id="getList" resultMap="RomVOResult">
+		select * from (select * from TROM where ACM_NUM = #{acmNum}) where ROM_CAPA >= #{person}
 	</select>
 
 	<insert id="insert">
