@@ -28,21 +28,26 @@ public class RomServiceTests {
 
 	@Test
 	public void testGetList() {
-		service.getList("A1").forEach(rom -> log.info(rom));
+		service.getList("A4", "3").forEach(rom -> log.info(rom));
 	}
-
+	
+	@Test
+	public void testGetAll() {
+		service.getAll("A1").forEach(rom -> log.info(rom));
+	}
+	
 	@Test
 	public void testRegister() {
 		RomVO rom = new RomVO();
 		rom.setAcmNum("A123");
-		rom.setRoomName("test");
-		rom.setCapacity(99);
+		rom.setRomName("test");
+		rom.setRomCapa(99);
 		rom.setBedType("싱글사이즈");
 		rom.setBedCnt(1);
 		rom.setRomSize(1);
-		rom.setPrice(99999);
+		rom.setRomPrice(99999);
 		rom.setRomPurl("test");
-		rom.setRomLocaInfo("test");
+		rom.setRomLoca("test");
 		service.register(rom);
 		log.info("생성된 숙소의 번호: " + rom.getRomNum());
 	}
@@ -64,14 +69,14 @@ public class RomServiceTests {
 		if (rom == null)
 			return;
 		rom.setAcmNum("A123");
-		rom.setRoomName("수정");
-		rom.setCapacity(99);
+		rom.setRomName("수정");
+		rom.setRomCapa(99);
 		rom.setBedType("싱글사이즈");
 		rom.setBedCnt(1);
 		rom.setRomSize(1);
-		rom.setPrice(99999);
+		rom.setRomPrice(99999);
 		rom.setRomPurl("test");
-		rom.setRomLocaInfo("test");
+		rom.setRomLoca("test");
 		log.info("MODIFY RESULT: " + service.modify(rom));
 	}
 

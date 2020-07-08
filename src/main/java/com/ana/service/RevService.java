@@ -19,7 +19,7 @@ public interface RevService {
 	
 	public List<RevVO> getUserList(String loginUser);
 	
-	public List<RevVO> getBookingList(String loginUser);
+//	public List<RevVO> getBookingList(String loginUser);
 	
 	public List<RevVO> getList();
 

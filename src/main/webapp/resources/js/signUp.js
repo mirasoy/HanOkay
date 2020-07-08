@@ -1,7 +1,7 @@
 	function call() {
-			var kcyear = document.getElementsByName("birthYear")[0], 
-			   kcmonth = document.getElementsByName("birthMonth")[0], 
-			   kcday = document.getElementsByName("birthday")[0];
+			var kcyear = document.getElementsByName("selectBirthYear")[0], 
+			   kcmonth = document.getElementsByName("selectBirthMonth")[0], 
+			   kcday = document.getElementsByName("selectBirthday")[0];
 
 			var d = new Date();
 			var n = d.getFullYear();
@@ -91,11 +91,11 @@
 					console.log("비번 정규식 통과");
 					
 					//생년월일 정해주기
-					let bmonth=document.getElementById("birthMonth").value;
+					let bmonth=document.getElementById("selectBirthMonth").value;
 					console.log(bmonth);
-					let byear=document.getElementById("birthYear").value;
+					let byear=document.getElementById("selectBirthYear").value;
 					console.log(byear);
-					let bday=document.getElementById("birthday").value;
+					let bday=document.getElementById("selectBirthday").value;
 					console.log(bday);
 					
 					let b= new Date(byear, bmonth-1, bday );
@@ -104,7 +104,7 @@
 					let formatted_date = b.getFullYear() + "/" + (b.getMonth() + 1) + "/" + b.getDate() ;
 					console.log(formatted_date);
 					
-					$("input[id='uBirthday']").val(formatted_date);
+					$("input[id='birthday']").val(formatted_date);
 				//	$("input[id='uPhone']").val("821067409811");
 					
 					

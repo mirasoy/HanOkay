@@ -47,8 +47,7 @@
                             
                         </li>
                         <li>
-                            <a href="/hosting/become-host_complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                            
+                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                         
                         
@@ -62,34 +61,33 @@
 <div id="page-wrapper" style="padding-bottom:50px;">
 			<br>	
 			 <!-- 숙소설명 -->
-			 <form action="" method="post">
+			 <form action="/hosting/become-host5_6" method="post">
 			 	<h4>4-1. 게스트가 지켜야할 숙소 이용규칙을 정하세요</h4>
 			 	<div class="exp">게스트는 예약하기 전에 숙소 이용규칙에 동의해야합니다.</div>
 			 	
-			 	<div>어린이(2~12세) 숙박에 적합함 <button type="button">ok</button></div>
-			 	<div>유아(2세 미만) 숙박에 적합함 <button type="button">ok</button></div>
-			 	<div>행사나 파티 허용 <button type="button">ok</button></div>
-			 	
-			 	<br><br>
-			 	
-			 	<h4>추가 규칙</h4>
-			 	<input type="text" class="addrules" id="op_addedrule" placeholder="조용히 해야하는 시간, 실내 신발 착용여부.."><button id="ruleadd" type="button">추가</button>
-			 	
-			 	<br><br>
-			 	
-			 	<h4>게스트가 숙소에 대해 알아두어야할 세부 사항</h4>
 			 	<input type="checkbox" id="op_detail1" name="op_detail1"><label for="op_detail1">계단을 올라가야 함</label>
 			  	<input type="checkbox" id="op_detail2" name="op_detail2"><label for="op_detail2">소음이 발생할 수 있음</label>
 			  	<input type="checkbox" id="op_detail3" name="op_detail3"><label for="op_detail3">숙소에 반려동물 있음</label>
 			  	<input type="checkbox" id="op_detail4" name="op_detail4"><label for="op_detail4">숙소에 감시 또는 녹화 장치 설치</label>
+			 	<input type="checkbox" id="op_detail5" name="op_detail5"><label for="op_detail5">파티 불가</label>
+			 	
 			 	
 			 	<br><br>
 			 	
-			 	<h4>4-2. 체크인/ 체크아웃</h4>
-			 	<label for="checkin">체크인 가능시간</label><input type="text" id="checkin" name="chekin" placeholder="3시이후"><br>
-			  	<label for="checkout">체크아웃 시간</label><input type="text" id="checkout" name="chekout" placeholder="12시이전"><br>
-			  	
+			 	<h4>추가 규칙</h4>
+			 	<input type="text" class="addrules" id="ACM_RULESEXP" placeholder="조용히 해야하는 시간, 실내 신발 착용여부.."><button id="ruleadd" type="button">추가</button>
 			 	
+			 	<br><br>
+			 	
+			 	<h4>게스트가 숙소에 대해 알아두어야할 세부 사항</h4>
+			 	<br><br>
+			 	
+			 	<h4>4-2. 체크인/ 체크아웃</h4>
+			 	<label for="CHECKIN_TIME">체크인 가능 시간 :&nbsp;</label><input type="text" id="CHECKIN_TIME" size="5" name="CHECKIN_TIME" placeholder="3">&nbsp;시 이후<br>
+			  	<label for="CHECKOUT_TIME">체크아웃 가능시간 :&nbsp;</label><input type="text" id="CHECKOUT_TIME" size="5" name="CHECKOUT_TIME" placeholder="12">&nbsp;시 이전<br>
+			  	
+			 	<br>
+			 	<button type="submit">다음으로</button>
 			 
 			 </form>
 			

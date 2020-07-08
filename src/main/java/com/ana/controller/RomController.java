@@ -24,9 +24,15 @@ public class RomController {
 	private RomService service;
 	
 	@GetMapping("/list")
-	public void list(@RequestParam("acmNum") String acmNum, Model model) {
+	public void list(@RequestParam("acmNum") String acmNum, String person, Model model) {
 		log.info("list");
-		model.addAttribute("list", service.getList(acmNum));
+		model.addAttribute("list", service.getList(acmNum, person));
+	}
+	
+	@GetMapping("/all")
+	public void listAll(@RequestParam("acmNum") String acmNum, Model model) {
+		log.info("listAll");
+		model.addAttribute("listAll", service.getAll(acmNum));
 	}
 
 	@PostMapping("/register")

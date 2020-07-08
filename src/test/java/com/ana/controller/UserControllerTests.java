@@ -50,10 +50,6 @@ public class UserControllerTests {
 				.getModelMap());
 	}
 
-	@Test
-	public void testRegister() throws Exception {
-		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/register/register")).andReturn().getModelAndView()
-				.getModel());
-	}
+
 
 }

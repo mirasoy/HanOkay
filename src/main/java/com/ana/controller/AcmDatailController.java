@@ -27,13 +27,15 @@ public class AcmDatailController {
 	
 	
 	@RequestMapping(value = "get", method = RequestMethod.GET)
-	public void accomodation(@RequestParam("acmNum") String acmNum, Model model) {
+	public void accomodation(@RequestParam("acmNum") String acmNum, 
+			@RequestParam("person") String person,
+			Model model) {
 		log.info("accommodation");
 		
 		model.addAttribute("acm", acmService.get(acmNum))
 		.addAttribute("rev", revService.getAcmList(acmNum))
 		.addAttribute("opt", optService.getList(acmNum))
-		.addAttribute("rom", romService.getList(acmNum));
+		.addAttribute("rom", romService.getList(acmNum, person));
 	}
 
 }

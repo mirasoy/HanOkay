@@ -17,6 +17,13 @@
       <org.slf4j-version>1.6.6</org.slf4j-version>
    </properties>
    <dependencies>
+
+      <dependency>
+         <groupId>commons-fileupload</groupId>
+         <artifactId>commons-fileupload</artifactId>
+         <version>1.4</version>
+      </dependency>
+
       <!-- Spring -->
       <dependency>
          <groupId>org.springframework</groupId>
@@ -198,8 +205,19 @@
             <version>${org.springframework-version}</version>
         </dependency>   
 
+   <!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+<dependency>
+    <groupId>net.coobird</groupId>
+    <artifactId>thumbnailator</artifactId>
+    <version>0.4.8</version>
+</dependency>
    
       
+   <dependency>
+         <groupId>commons-fileupload</groupId>
+         <artifactId>commons-fileupload</artifactId>
+         <version>1.4</version>
+      </dependency>
 
    </dependencies>
    <build>
@@ -240,4 +258,5 @@
          </plugin>
       </plugins>
    </build>
+
 </project>

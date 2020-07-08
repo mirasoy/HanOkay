@@ -40,15 +40,12 @@ public void testGetMyList() {
 	mapper.getMyList("U1").forEach(post -> log.info(post));
 }
 
-@Test
-public void testGetMBookList() {
-	mapper.getBookingList("U1").forEach(post -> log.info(post));
-}
+
 
 
 
  
-//   @Test
+   @Test
 	public void testRead() {
 		RevVO post = mapper.read("5");
 			log.info(post);
