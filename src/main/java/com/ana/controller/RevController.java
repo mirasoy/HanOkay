@@ -59,7 +59,7 @@ public class RevController {
 
 		String userNum = (String) session.getAttribute("userNum");
 
-		log.info("userNum>>>>>>" + userNum);
+		log.info("userNum>>>>>>" +  service.getUserList("U1").size());
 		log.info("list");
 		// model.addAttribute("list", service.getBookingList(userNum));
 		model.addAttribute("list", service.getUserList("U1"));
