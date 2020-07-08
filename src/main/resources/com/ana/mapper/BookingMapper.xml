@@ -90,9 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		request=#{request},
 		real_Arr=#{realArr},
 
-		rom_Name=#{roomName},
-		booker_lastname=#{bookerLastName},
-		booker_firstname=#{bookerLastName},
+		rom_Name=#{romName},
+		booker_lastname=#{bookerLastname},
+		booker_firstname=#{bookerFirstname},
 		booker_email=#{bookerEmail},
 		booker_phone=#{bookerPhone},
 		book_Status=#{bookStatus}

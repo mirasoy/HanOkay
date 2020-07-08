@@ -40,10 +40,6 @@
 		<nature>org.springframework.ide.eclipse.core.springnature</nature>
 		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
-<<<<<<< HEAD
-		<nature>org.eclipse.jdt.core.javanature</nature>
-=======
->>>>>>> 6b3f903fae1b40b128531276fb019fcafa6e69b1
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>

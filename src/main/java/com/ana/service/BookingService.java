@@ -10,7 +10,7 @@ import com.ana.domain.BookingVO;
 
 public interface BookingService {
 
-	public BookingVO get(String book_Num);
+	public BookingVO get(String bookNum);
 
 	public boolean modify(BookingVO info);
 
