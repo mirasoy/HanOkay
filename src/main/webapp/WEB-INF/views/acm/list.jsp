@@ -51,28 +51,33 @@
 											<div class="form-group">
 												<span class="form-label">Location</span>
 												<input class="form-control" type="text" name="keyword">
-												<input type="hidden" value="C" name="type">
+												<input type="hidden" value="CW" name="type">
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<span class="form-label">Check In</span>
-												<input class="form-control" type="date">
+												<input class="form-control" type="date" name="in">
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<span class="form-label">Check out</span>
-												<input class="form-control" type="date">
+												<input class="form-control" type="date" name="out">
 											</div>
 										</div>
 										<div class="col-md-2">
 											<div class="form-group">
 												<span class="form-label">Guests</span>
-												<select class="form-control">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
+												<select class="form-control" name="person">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
 												</select>
 												<span class="select-arrow"></span>
 											</div>
@@ -214,9 +219,31 @@
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 	<input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
 	<input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+	<input type='hidden' name='person' value='<c:out value="${pageMaker.cri.person}"/>'>
+	<input type='hidden' name='in' value='<c:out value="${pageMaker.cri.in}"/>'>
+	<input type='hidden' name='out' value='<c:out value="${pageMaker.cri.out}"/>'>
 </form>
 <!-- /.row -->
 <script type="text/javascript">
+//참고
+function initAutocomplete(){
+autocomplete = new google.maps.places.Autocomplete(
+		/** @type{!HTMLInputElement} */(document.getElementById('autocomplete')),
+		{types: ['geocode'],componentRestrictions: {country: 'kr'}});
+autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function fillInAddress(){
+	var place = autocomplete.getPlace();
+	$('#lat').prop('value',place.geometry.location.lat());
+	$('#lng').prop('value',place.geometry.location.lng());
+	console.log(place.formatted_address);
+	console.log('?');
+	if(document.getElementById('country')!=null){
+		fill_addr();
+	}
+}
+//참고 끝
 	$(document)
 			.ready(
 					function() {

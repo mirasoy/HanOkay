@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ana.mapper.AcmMapper">
-
+	
 	<resultMap id="AcmVOResult" type="com.ana.domain.AcmVO">
 		<result column="acm_Num" property="acmNum" />
 		<result column="acm_Name" property="acmName" />
@@ -32,18 +32,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<sql id="criteria">
-		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
 			<foreach item='type' collection="typeArr">
-				<trim prefix="OR">
+				<trim prefix="AND">
 					<choose>
 						<when test="type == 'T'.toString()">
-							acm_name like '%'||#{keyword}||'%'
+							e.acm_name like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'C'.toString()">
-							acm_city like '%'||#{keyword}||'%'
+							e.acm_city like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'W'.toString()">
-							checkin_time like '%'||#{keyword}||'%'
+							e.capacity >= #{person}
 						</when>
 					</choose>
 				</trim>
@@ -56,13 +56,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getListWithPaging" resultMap="AcmVOResult">
 <![CDATA[
 select
-acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
+DISTINCT acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
 from
 	(
 	select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
-		rownum rn, acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
+		rownum rn, e.acm_purl, e.acm_num, e.acm_name, e.acm_city, e.rep_phone,e.acm_desc, e.latitude, e.longitude, e.capacity
 	from
-		tacm
+		(select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.capacity
+        from trom r, tacm a
+        where r.acm_num = a.acm_num) e
 	where
 ]]>
 
@@ -75,7 +77,9 @@ from
 	</select>
 
 	<select id="getTotalCount" resultType="int">
-		select count(*) from tacm
+		select count(*) from (select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.capacity
+        from trom r, tacm a
+        where r.acm_num = a.acm_num) e
 		where
 		<include refid="criteria"></include>
 		to_number(substr(acm_num,2))>0

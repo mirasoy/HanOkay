@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<% String location = (String)session.getAttribute("location"); %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,39 +59,47 @@
 			<form action="/acm/result" method='get'>
 				<div class="row no-margin">
 					<div class="col-md-3">
+					<a href="/acm/list">
 						<div class="form-header">
 							<h2>Book Now</h2>
 						</div>
+						</a>
 					</div>
 					<div class="col-md-7">
 						<div class="row no-margin">
 							<div class="col-md-4">
 								<div class="form-group">
-									<span class="form-label">Location</span> <input
-										class="form-control" type="text" name="keyword"> <input
-										type="hidden" value="C" name="type">
+									<span class="form-label">Location</span> 
+									<input class="form-control" type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
+									<input type="hidden" value="CW" name="type">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<span class="form-label">Check In</span> <input
-										class="form-control" type="date">
+										class="form-control" type="date" name="in"  value='<c:out value="${pageMaker.cri.in}"/>'>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<span class="form-label">Check out</span> <input
-										class="form-control" type="date">
+										class="form-control" type="date" name="out" value='<c:out value="${pageMaker.cri.out}"/>'>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<span class="form-label">Guests</span> <select
-										class="form-control">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-									</select> <span class="select-arrow"></span>
+									<span class="form-label">Guests</span>
+												<select class="form-control" id="person" name="person">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+												</select>
+									<span class="select-arrow"></span>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -175,11 +184,16 @@
 	<form id='actionForm' action="/acm/result" method='get'>
 		<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 		<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-		<input type='hidden' name='type'
+		<input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+		<input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+		<input type='hidden' name='person' value='<c:out value="${pageMaker.cri.person}"/>'>
+		<input type='hidden' name='in' value='<c:out value="${pageMaker.cri.in}"/>'>
+		<input type='hidden' name='out' value='<c:out value="${pageMaker.cri.out}"/>'>	
+<!-- 		<input type='hidden' name='type'
 			value='<c:out value="${pageMaker.cri.type}"/>'> <input
 			type='hidden' name='keyword'
 			value='<c:out value="${pageMaker.cri.keyword}"/>'>
-		
+		 -->
 	</form>
 	
 	</div>
@@ -252,7 +266,6 @@
 			<c:forEach items="${list }" var="acm">
 			if("${acm.acmNum}"===acmNum){
 				
-				
 				var latitude = ${acm.latitude};
 				var longitude = ${acm.longitude};
 			}
@@ -311,8 +324,7 @@
 					new google.maps.Size(size_x, size_y));
 
 			<c:forEach items="${list }" var="acm">
-			var latLng = {lat: parseFloat(${acm.latitude}), lng: parseFloat(${acm.longitude})};
-			console.log(latLng);
+			var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
 			
 			var marker;
 
@@ -377,6 +389,8 @@
 		
 	</script>
 	<script type="text/javascript">
+		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
+	
 		$(document)
 				.ready(
 						function() {
@@ -413,17 +427,28 @@
 												.val($(this).attr("href"));
 										actionForm.submit();
 									});
-							$(".move").on("click",function(e) {
-                                e.preventDefault();
-                                actionForm.append("<input type='hidden' name='acmNum' value='"
-                                            + $(this).attr("href")
-                                            + "'>");
-                                actionForm.append("<input type='hidden' name='in' value='2020-08-01'>");
-                                actionForm.append("<input type='hidden' name='out' value='2020-08-03'>");
-                                actionForm.append("<input type='hidden' name='person' value='2'>");
-                                actionForm.attr("action","/acm/get");
-                                actionForm.submit();
-                             }); 
+
+							 $(".move").on("click",function(e) {
+												e.preventDefault();
+												actionForm.append("<input type='hidden' name='acmNum' value='"
+																+ $(this).attr("href")
+																+ "'>");
+												actionForm.attr("action","/acm/get");
+												actionForm.submit();
+											}); 
+
+// 							$(".move").on("click",function(e) {
+//                                 e.preventDefault();
+//                                 actionForm.append("<input type='hidden' name='acmNum' value='"
+//                                             + $(this).attr("href")
+//                                             + "'>");
+//                                 actionForm.append("<input type='hidden' name='in' value='2020-08-01'>");
+//                                 actionForm.append("<input type='hidden' name='out' value='2020-08-03'>");
+//                                 actionForm.append("<input type='hidden' name='person' value='2'>");
+//                                 actionForm.attr("action","/acm/get");
+//                                 actionForm.submit();
+//                              }); 
+// >>>>>>> develop
 						/* 	$(".move").on("click",function(e) {
 								e.preventDefault();
 								var acmnum= ${acm.acmNum};
@@ -457,7 +482,7 @@
 												e.preventDefault();
 
 												searchForm.submit();
-											})
+											});
 						});
 	</script>
 	<%@include file="../includes/footer.jsp"%>

@@ -17,6 +17,13 @@
       <org.slf4j-version>1.6.6</org.slf4j-version>
    </properties>
    <dependencies>
+
+      <dependency>
+         <groupId>commons-fileupload</groupId>
+         <artifactId>commons-fileupload</artifactId>
+         <version>1.4</version>
+      </dependency>
+
       <!-- Spring -->
       <dependency>
          <groupId>org.springframework</groupId>
@@ -211,6 +218,7 @@
          <artifactId>commons-fileupload</artifactId>
          <version>1.4</version>
       </dependency>
+
    </dependencies>
    <build>
       <plugins>
@@ -252,4 +260,3 @@
    </build>
 
 </project>
-

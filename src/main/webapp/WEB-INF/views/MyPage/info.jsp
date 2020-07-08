@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 
-
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">예약 상세 페이지</h1>
@@ -14,15 +13,15 @@
 <!-- /.row -->
 
 <div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				예약 수정 가능				
-			</div>
+   <div class="col-lg-12">
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            예약 수정 가능            
+         </div>
 
       
       <div class="panel-body">
-    	
+       
 
         <div class="form-group">
           <label>#예약번호</label> <input class="form-control" name='bookNum'
@@ -40,19 +39,19 @@
         </div>
         
         <div class ="form-group">
-       		<label>예약일자</label>
-       		<input class="form-control" name='bookDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.bookDate}" />' readonly> 
+             <label>예약일자</label>
+             <input class="form-control" name='bookDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.bookDate}" />' readonly> 
         </div>
 
       
         <div class ="form-group">
-       		<label>체크인날짜</label>
-       		<input class="form-control" name='checkinDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkinDate}" />' readonly> 
+             <label>체크인날짜</label>
+             <input class="form-control" name='checkinDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkinDate}" />' readonly> 
         </div>
         
         <div class ="form-group">
-       		<label>체크아웃날짜</label>
-       		<input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkoutDate}" />' readonly> 
+             <label>체크아웃날짜</label>
+             <input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkoutDate}" />' readonly> 
         </div>                   
       
         <div class="form-group">
@@ -91,16 +90,24 @@
         </div> 
         
         <div class="form-group">
-          <label>방이름</label> <input class="form-control" name='roomName'
-            value='<c:out value="${info.roomName} "/>' readonly="readonly">
+          <label>방이름</label> <input class="form-control" name='romName'
+            value='<c:out value="${info.romName} "/>' readonly="readonly">
         </div>
         <div class="form-group">
-          <label>이름</label> <input class="form-control" name='lastName'
-            value='<c:out value="${info.lastName} "/>' readonly="readonly">
+          <label>예약자 이름</label> <input class="form-control" name='bookerLastname'
+            value='<c:out value="${info.bookerLastname} "/>' readonly="readonly">
         </div>
         <div class="form-group">
-          <label>성</label> <input class="form-control" name='firstName'
-            value='<c:out value="${info.firstName} "/>' readonly="readonly">
+          <label>예약자 성</label> <input class="form-control" name='bookerFirstname'
+            value='<c:out value="${info.bookerFirstname} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>이메일</label> <input class="form-control" name='bookerEmail'
+            value='<c:out value="${info.bookerEmail} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>연락처</label> <input class="form-control" name='bookerPhone'
+            value='<c:out value="${info.bookerPhone} "/>' readonly="readonly">
         </div>
         <div class="form-group">
           <label>예약상태</label> <input class="form-control" name='bookStatus'

@@ -18,4 +18,3 @@ public class RomVO {
    private String romLoca;
    private String romType;
 }
-
