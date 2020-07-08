@@ -8,40 +8,11 @@ String name = (String) session.getAttribute("userNum");
 %>
 <!DOCTYPE html>
 <html lang="en">
-
+<%@include file="../includes/header.jsp"%>
 <head>
-<title>review List</title>
-
-<link href="https://fonts.googleapis.com/css?family=Alegreya:700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-	rel="stylesheet">
-
-<!-- Bootstrap -->
-<link type="text/css" rel="stylesheet"
-	href="../resources/css/bootstrap.min.css" />
-
-<!-- Custom stlylesheet -->
-<link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
 
 </head>
-<style>
-.bookbar {
-	width: 100%;
-	height: 40px;
-	list-style: none;
-	padding: 0;
-}
 
-.bookbar>li {
-	float: left;
-	width: 110px;
-	height: 30px;
-	margin: 0;
-	text-align: center;
-	padding-top: 15px;
-}
-</style>
 <body>
 
 
@@ -101,6 +72,6 @@ String name = (String) session.getAttribute("userNum");
 		</c:forEach>
 	</script>
 </body>
-
+<%@include file="../includes/footer.jsp"%>
 
 </html>

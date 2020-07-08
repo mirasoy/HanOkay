@@ -11,7 +11,7 @@ if(user != null){
 userLastName= user.getLastname();
 userFstName=user.getFstname();
 userPwd= user.getPwd();
-userNum= user.getUserNum();
+
 } 
 
 %>
@@ -346,11 +346,9 @@ body {
 <script type="text/javascript">
 	$(document).ready(function(){
         if('<%=userNum %>'==""){
-            $("#loginout").append("<a href='/user/login'>로그인</a>")
-           
+           document.getElementById("loginout").innerHTML="로그인";
         }else{
-            $("#loginout").append("<a href='/user/logout'>로그아웃</a>")
-        	   
+        	   document.getElementById("loginout").innerHTML="로그아웃";
         };
 
     });

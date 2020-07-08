@@ -9,7 +9,7 @@
 %>
 <!DOCTYPE html>
 <html lang="en">
-
+<%@include file="../includes/header.jsp"%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -239,5 +239,5 @@
 	</script>
 	
 </body>
-	
+	<%@include file="../includes/footer.jsp"%>
 </html>
