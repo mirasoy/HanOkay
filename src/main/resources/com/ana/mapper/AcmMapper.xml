@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							e.acm_city like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'W'.toString()">
-							e.capacity >= #{person}
+							e.rom_capa >= #{person}
 						</when>
 					</choose>
 				</trim>
@@ -60,9 +60,9 @@ DISTINCT acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, lo
 from
 	(
 	select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
-		rownum rn, e.acm_purl, e.acm_num, e.acm_name, e.acm_city, e.rep_phone,e.acm_desc, e.latitude, e.longitude, e.capacity
+		rownum rn, e.acm_purl, e.acm_num, e.acm_name, e.acm_city, e.rep_phone,e.acm_desc, e.latitude, e.longitude, e.rom_capa
 	from
-		(select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.capacity
+		(select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.rom_capa
         from trom r, tacm a
         where r.acm_num = a.acm_num) e
 	where
@@ -77,7 +77,7 @@ from
 	</select>
 
 	<select id="getTotalCount" resultType="int">
-		select count(*) from (select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.capacity
+		select count(*) from (select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.rom_capa
         from trom r, tacm a
         where r.acm_num = a.acm_num) e
 		where

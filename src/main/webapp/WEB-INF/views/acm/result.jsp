@@ -5,7 +5,7 @@
 <% String location = (String)session.getAttribute("location"); %>
 <!DOCTYPE html>
 <html lang="en">
-
+<%@include file="../includes/header.jsp"%>
 <head>
 
 <meta charset="utf-8">
