@@ -14,6 +14,9 @@ public class Criteria {
 	
 	private String type;
 	private String keyword;
+	private String person;
+	private String in;
+	private String out;
 	
 	public Criteria() {
 		this(1,10);
