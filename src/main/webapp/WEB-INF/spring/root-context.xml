@@ -30,12 +30,36 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
+
+	
+	<!-- 이메일 발송 bean 설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	        <property name="host" value="smtp.gmail.com" /> <!-- gmail을 사용 -->
+	        <property name="port" value="587" />
+	        <property name="username" value="tmpProjAna@gmail.com" />
+	        <property name="password" value="djajsk11^^" />
+	        <property name="javaMailProperties">
+	            <props>
+	                <prop key="mail.transport.protocol">smtp</prop>
+	                <prop key="mail.smtp.auth">true</prop>
+	                <prop key="mail.smtp.starttls.enable">true</prop>
+	                <prop key="mail.debug">true</prop>
+	            </props>
+	        </property>
+	</bean>
+
+
 
 	<mybatis-spring:scan
 		base-package="com.ana.mapper" />
-
 	<context:component-scan
 		base-package="com.ana.service"></context:component-scan>
 
+	<!-- 파일 업로드 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	  <property name="maxUploadSize" value="100000000" />
+	  <property name="maxInMemorySize" value="100000000" />
+	</bean>
 
 </beans>

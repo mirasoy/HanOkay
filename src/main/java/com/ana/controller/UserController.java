@@ -1,7 +1,5 @@
 package com.ana.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,9 +41,10 @@ public class UserController {
 
 	// 회원가입 하기
 	@PostMapping("/register")
-	public void register(UserVO user) {
+	public String register(UserVO user) {
 		log.info("user: " + user);
 		service.register(user);
+		return "register/register";
 	}
 
 

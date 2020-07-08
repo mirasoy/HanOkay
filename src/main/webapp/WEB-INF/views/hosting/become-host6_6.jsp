@@ -47,8 +47,7 @@
                             
                         </li>
                         <li>
-                            <a href="/hosting/become-host_complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                            
+                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                         
                         
@@ -62,7 +61,7 @@
 <div id="page-wrapper" style="padding-bottom:50px;">
 			<br>	
 			 <!-- 숙소설명 -->
-			 <form action="" method="post">
+			 <form action="/hosting/become-host-complete" method="post">
 			 	<h4>6-1.숙소 요금 설정하기</h4>
 			 	객실별 기본요금 책정-DB연동 필요
 			 	
@@ -78,13 +77,13 @@
 			 		<option>RUB 러시아 루블</option>
 			 	</select>
 			 	
-			 	</div>
 			 	
-			 	
+			 	<br><br><br>
+			 	<button type="submit">다음으로</button>
 			 	
 			 </form>
 			
-		</div>
+			 	</div>
 
 
 <%@include file="../includes/footer.jsp"%>

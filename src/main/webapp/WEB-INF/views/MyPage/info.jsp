@@ -91,6 +91,7 @@
         </div> 
         
         <div class="form-group">
+<<<<<<< HEAD
           <label>방이름</label> <input class="form-control" name='romName'
             value='<c:out value="${info.romName} "/>' readonly="readonly">
         </div>
@@ -109,6 +110,18 @@
         <div class="form-group">
           <label>연락처</label> <input class="form-control" name='bookerPhone'
             value='<c:out value="${info.bookerPhone} "/>' readonly="readonly">
+=======
+          <label>방이름</label> <input class="form-control" name='roomName'
+            value='<c:out value="${info.roomName} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>이름</label> <input class="form-control" name='lastName'
+            value='<c:out value="${info.lastName} "/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>성</label> <input class="form-control" name='firstName'
+            value='<c:out value="${info.firstName} "/>' readonly="readonly">
+>>>>>>> 6b3f903fae1b40b128531276fb019fcafa6e69b1
         </div>
         <div class="form-group">
           <label>예약상태</label> <input class="form-control" name='bookStatus'

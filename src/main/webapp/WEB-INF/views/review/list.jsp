@@ -25,22 +25,46 @@ String name = (String) session.getAttribute("userNum");
 <link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
 
 </head>
+<style>
+
+.bookbar {
+	width: 100%;
+	height: 40px;
+	list-style: none;
+	padding: 0;
+}
+
+.bookbar>li {
+	float: left;
+	width: 110px;
+	height: 30px;
+	margin: 0;
+	text-align: center;
+	padding-top: 15px;
+}
+</style>
 <body>
 
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h1>나의 예약 목록</h1>
-					<h1><%=name %> </h1>
-				</div>
-				<div class="panel-body">
+	
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<ul class="bookbar">
+					<li class="item1"><a href="/review/list">전체목록</a></li>
+					<li class="item2"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
+					<li class="item3"><a href="/review/unwrittenReviewlist">미작성 리뷰</a></li>
+				</ul>
+			</div>
+
+
+			<!-- /.panel-heading -->
+			<div class="panel-body">
 					<table
 						class="table table-striped table-bordered table-hover bookList">
 						<thead>
 							<tr>
 								<th>숙소이름</th>
-								<th>임시</th>
 								<th>예약번호</th>
 								<th>체크인</th>
 								<th>체크아웃</th>
@@ -52,9 +76,12 @@ String name = (String) session.getAttribute("userNum");
 					</table>
 
 				</div>
+				<!--  end panel-body -->
 			</div>
+			<!-- end panel -->
 		</div>
 	</div>
+	<!-- /.row -->
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -65,7 +92,6 @@ String name = (String) session.getAttribute("userNum");
 
 		$(".bookList").append("<tr>");
 		$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
-		$(".bookList").append("<td ><c:out value="${rev.userNum }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
 		$(".bookList")

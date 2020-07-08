@@ -30,5 +30,4 @@ public class UserVO {
 		this.userPriv = userPriv;
 		this.regMethod = regMethod;
 	}
-	
 }

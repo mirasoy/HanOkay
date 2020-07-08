@@ -9,29 +9,27 @@ import com.ana.domain.BookVO;
 import com.ana.domain.BookingVO;
 
 public interface BookingService {
-   
-   public BookingVO get(String book_Num);
-   
-   public boolean modify(BookingVO info);
-   
-   //public boolean remove(String book_Num);
-   
-   public List<BookingVO> getList();
-   
-   public List<BookVO> getBookListAll(String loginUserNum); //모든 예약 목록 리스트
 
-   public List<BookVO> getBookList(String loginUserNum); //새로 가져올 리스트
-   
-   public List<BookVO> getCheckoutList(String loginUserNum); //예약완료 리스트
-   
-   public List<BookCancelVO> getCancelList(String loginUserNum); //취소중인 상태
-   
-//   public boolean insert(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
-   
-   
-   public boolean reserveCancel(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
-   
+	public BookingVO get(String book_Num);
 
-   public int register(BookingVO book);
+	public boolean modify(BookingVO info);
+
+	// public boolean remove(String book_Num);
+
+	public List<BookingVO> getList();
+
+	public List<BookVO> getBookListAll(String loginUserNum); // 모든 예약 목록 리스트
+
+	public List<BookVO> getBookList(String loginUserNum); // 새로 가져올 리스트
+
+	public List<BookVO> getCheckoutList(String loginUserNum); // 예약완료 리스트
+
+	public List<BookCancelVO> getCancelList(String loginUserNum); // 취소중인 상태
+
+//	public boolean insert(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
+
+	public boolean reserveCancel(@Param("bookNum") String bookNum, @Param("bookStatus") String bookStatus);
+
+	public int register(BookingVO book);
 
 }

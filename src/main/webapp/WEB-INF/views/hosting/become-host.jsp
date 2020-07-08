@@ -39,7 +39,7 @@
                             
                         </li>
                         <li>
-                            <a href="/hosting/become-host_complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                             
                         </li>
                         
@@ -49,13 +49,13 @@
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
-        </nav>
+        </nav> 
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;">
 		
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
-			<h4><br><br>0-1.게스트가 묵게 될 숙소의 유형을 골라주세요(중복허용)</h4><br>
-			<form action="/become-host1_6.php" method="post">
+			<form action="/hosting/become-host1_6" method="post">
+				<h4><br><br>0-1.게스트가 묵게 될 숙소의 유형을 골라주세요(중복허용)</h4><br>
 				<input type="checkbox" id="rentType1" name="rentType1" value="house"><label for="rentType1">집 천제</label> 
 				<input type="checkbox" id="rentType2" name="rentType2" value="priv"><label for="rentType2">개인실</label> 
 				<input type="checkbox" id="rentType3" name="rentType3" value="multi"><label for="rentType3">도미토리</label> 

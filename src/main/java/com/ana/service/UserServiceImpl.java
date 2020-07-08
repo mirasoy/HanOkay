@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService{
 	public void checkLogin(UserVO user, HttpSession session) {
 		//메퍼에서 아이디 비번 일치하는 지 확인
 		boolean result= mapper.checkLogin(user);
-		//일치하면 세션 생성하기 welcome 뷰 보여주기
+		
 		
 		if(result) {
 			
@@ -79,8 +79,14 @@ public class UserServiceImpl implements UserService{
 	//유효한 회원인지 확인하는 메서드
 	@Override
 	public boolean isValidUser(String email, String pwd) {
-		return mapper.isValidUser(email, pwd) >0;
+		return mapper.isValidUser(email, pwd) != 0;
 		
+	}
+
+	//email과 pw가 일치하는 user의 userNum을 반환하는 메서드
+	@Override 
+	public UserVO getUserById(String email) {
+		return mapper.getUserById(email);
 	}
 
  

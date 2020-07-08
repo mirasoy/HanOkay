@@ -71,16 +71,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 
-
-
 	<update id="update">
-	
+
 
 
 		update tbooking
 		set
 		user_num = #{userNum},
-		rom_num	=#{romNum},
+		rom_num =#{romNum},
 		book_Date=#{bookDate},
 		checkin_Date=#{checkinDate},
 		checkout_Date=#{checkoutDate},
@@ -99,7 +97,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		booker_phone=#{bookerPhone},
 		book_Status=#{bookStatus}
 
-		where book_num=#{bookNum}
+		where
+		book_num=#{bookNum}
 
 	</update>
 
@@ -225,7 +224,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{expectedArr},
 		#{smoking},
 		#{request},
-		(select	ROM_NAME from TROM where ROM_NUM= #{romNum}),
+		(select ROM_NAME from TROM where
+		ROM_NUM= #{romNum}),
 		#{bookerLastname},
 		#{bookerFirstname},
 		#{bookerEmail},

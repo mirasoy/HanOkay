@@ -47,8 +47,7 @@
                             
                         </li>
                         <li>
-                            <a href="/hosting/become-host_complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                            
+                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                         
                         
@@ -62,7 +61,7 @@
 <div id="page-wrapper" style="padding-bottom:50px;">
 			<br>	
 			 <!-- 숙소설명 -->
-			 <form action="" method="post">
+			 <form action="/hosting/become-host6_6" method="post">
 			 	<h4>5-1. 체크인까지 최소한 어느 정도의 시간 여유가 있어야 하나요?</h4>
 			 	<div class="exp">팁: 늦어도 2일 전까지만 예약할 수 있도록 설정하면 호스팅 준비 시간을 확보할 수 있지만, 막바지 예약은 놓칠수있습니다.<br> 
 			 	숙소와 주변 지역에 대한 정보에서 시작해 게스트와 어떻게 소통하고 싶은지 등의 내용을 적어주세요 </div>
@@ -99,6 +98,9 @@
 			 	<label for="minrsv">최소</label><input type="text" id="minrsv" name="minrsv" size="5" placeholder="1">박<br>
 			  	<label for="maxrsv">최대</label><input type="text" id="maxrsv" name="maxrsv" size="5" placeholder="2">박<br>
 			  	
+			  	
+			  	<br>
+			  	<button type="submit">다음으로</button>
 			 </form>
 			
 		</div>

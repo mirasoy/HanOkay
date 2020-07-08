@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.RomRegMapper">
+
+	<resultMap id="RomVOResult" type="com.ana.domain.RomVO">
+		<result column="ROM_NUM" property="romNum" />
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="ROM_NAME" property="romName" />
+		<result column="ROM_CAPA" property="romCapa" />
+		<result column="BED_TYPE" property="bedType" />
+		<result column="BED_CNT" property="bedCnt" />
+		<result column="ROM_SIZE" property="romSize" />
+		<result column="ROM_PRICE" property="romPrice" />
+		<result column="ROM_PURL" property="romPurl" />
+		<result column="ROM_LOCA" property="romLoca" />
+		<result column="ROM_TYPE" property="romType" />
+	</resultMap>
+
+	<!-- 호스트단 -->
+	<select id="getList" resultMap="RomVOResult">
+		<![CDATA[
+		select * from TROM
+		]]>
+	</select>
+	
+	<!-- 객실 하나하나의 정보 가져오기 -->
+	<select id="read" resultMap="RomVOResult">
+		select * from TROM where ROM_NUM =
+		#{romNum}
+	</select>
+	
+	
+	<!-- 객실추가하기 -->
+	<insert id="insert">
+		insert into TROM(ROM_NUM,ROM_TYPE,ACM_NUM,ROM_NAME,
+		ROM_CAPA,BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_LOCA)
+		values (#{romNum}, #{romType},
+		#{acmNum}, #{romName}, #{romCapa},
+		#{bedType}, #{bedCnt}, #{romSize},
+		#{romPrice}, #{romPurl}, #{romLoca})
+	</insert>
+
+	
+	
+
+
+
+
+
+
+
+
+
+</mapper>

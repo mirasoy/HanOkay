@@ -47,32 +47,77 @@ public class BookingControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
+
+	//모든 예약에 대한 테스트
+	@Test
+	public void TestgetBookListAll() throws Exception{
+		log.info(
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookListAll"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+		
+	}	
+
+	//예약 완료에 대한 테스트
+	@Test
+	public void testCheckout() throws Exception{
+		log.info(
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/checkout"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+		
+	}	
+	
+	
+	
+	
+	//취소된 예약에 대한 테스트
+	@Test
+	public void testCancelList() throws Exception{
+		log.info(
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/cancelled"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+		
+	}
+	
+	
+	
+	
+	
+	//예약취소를 위한 테스트
 	
 	@Test
 	public void testRemove()throws Exception{
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/MyPage/remove")
-				.param("bookNum", "B14")
+				.param("bookNum", "B1")
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 				
 				
 	}
 
-//	@Test
-//	public void testList() throws Exception{
-//		
-//		log.info(
-//		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookList"))
-//		.andReturn()
-//		.getModelAndView()
-//		.getModelMap());
-//
-//	}
-//	
-//	
-//
-//	
 	@Test
+	public void testList() throws Exception{
+		
+		log.info(
+		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookList"))
+		.andReturn()
+		.getModelAndView()
+		.getModelMap());
+
+	}
+	
+	
+
+	
+//	@Test
 	public void testGet() throws Exception {
 
 		log.info(mockMvc.perform(MockMvcRequestBuilders
@@ -86,7 +131,7 @@ public class BookingControllerTests {
 	
 	
 	
-	@Test
+//	@Test
 	public void testModify() throws Exception {
 				
 		

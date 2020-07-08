@@ -25,13 +25,13 @@
 				<td>비밀번호: <input type="password" size="50" name="pwd" id="pwd"
 					value="${pwd }"> <br> <label style="color: red;"
 					id="msg2"><c:out value="${msg2}" /></label><br> 성: <input
-					type="text" size=10 name="uFstname" value="${uFstname }"> <br>
-					이름: <input type="text" size=20 name="uLastname"
-					value="${uLastname }">
+					type="text" size=10 name="fstname" value="${fstname }"> <br>
+					이름: <input type="text" size=20 name="lastname"
+					value="${lastname }">
 				</td>
 			</tr>
 			<tr>
-				<td><select name="birthMonth" id="birthMonth" onchange="call()">
+				<td><select name="selectBirthMonth" id="selectBirthMonth" onchange="call()">
 						<option value="">--생월--</option>
 						<option value="1">Jan</option>
 						<option value="2">Feb</option>
@@ -45,9 +45,9 @@
 						<option value="10">Oct</option>
 						<option value="11">Nov</option>
 						<option value="12">Dec</option>
-				</select> <select name="birthday" id="birthday">
+				</select> <select name="selectBirthday" id="selectBirthday">
 						<option value="">--생일--</option>
-				</select> <select name="birthYear" id="birthYear">
+				</select> <select name="selectBirthYear" id="selectBirthYear">
 						<option value="">--생년--</option>
 				</select>
 
@@ -57,7 +57,7 @@
 			</tr>
 
 		</table>
-		<input type="hidden" id="uBirthday" name="uBirthday" value="">
+		<input type="hidden" id="birthday" name="birthday" value="">
 	</form>
 
 	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>

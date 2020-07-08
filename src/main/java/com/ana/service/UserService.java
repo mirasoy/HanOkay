@@ -33,4 +33,7 @@ public interface UserService {
 	//유효한 회원인지 확인하는 메서드
 	public boolean isValidUser(String email, String pwd);
 	
+	//email과 pw 일치하는 userNum가져오는 메서드
+	public UserVO getUserById(String email);
+	
 }

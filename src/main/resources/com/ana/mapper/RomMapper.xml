@@ -26,9 +26,38 @@
 		select * from (select * from TROM where ACM_NUM = #{acmNum}) where ROM_CAPA >= #{person}
 	</select>
 
+	<insert id="insert">
+	
+		insert into TROM(ROM_NUM, ACM_NUM, ROM_NAME,
+		ROM_CAPA, BED_TYPE,
+		BED_CNT, ROM_SIZE, ROM_PRICE,
+		ROM_PURL, ROM_LOCA)
+		values (#{romNum},
+		#{acmNum}, #{romName}, #{romCapa},
+		#{bedType}, #{bedCnt}, #{romSize},
+		#{romPrice}, #{romPurl}, #{romLoca})
+	</insert>
+
 	<select id="read" resultMap="RomVOResult">
 		select * from TROM where ROM_NUM =
 		#{romNum}
 	</select>
+
+	<update id="update">
+		update TROM
+		set ROOM_NAME = #{roomName},
+		ROM_CAPA =
+		#{romCapa},
+		BED_TYPE = #{bedType},
+		BED_CNT = #{bedCnt},
+		ROM_PRICE =
+		#{romPrice},
+		ROM_PURL = #{romPurl}
+		where ROM_NUM = #{romNum}
+	</update>
+
+	<delete id="delete">
+		delete TROM where ROM_NUM = #{romNum}
+	</delete>
 
 </mapper>

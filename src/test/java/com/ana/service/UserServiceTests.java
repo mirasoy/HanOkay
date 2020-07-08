@@ -38,15 +38,15 @@ public class UserServiceTests {
 
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setUBirthday(beforeFormat.parse("2010/11/11"));
+			user.setBirthday(beforeFormat.parse("2010/11/11"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		user.setULastname("Jiha");
-		user.setUFstname("Kim");
-//		user.setUPriv("GU");
-//		user.setRegMethod("m");
-		user.setUPhone("");
+		user.setLastname("Jiha");
+		user.setFstname("Kim");
+		user.setUserPriv("GU");
+		user.setRegMethod("m");
+		user.setUserPhone("");
 		service.register(user);
 		log.info("생성된 회원번호: " + user.getUserNum());
 
@@ -71,17 +71,21 @@ public class UserServiceTests {
 	public void testUpdate() {
 
 		UserVO user = service.get("U10");
-
 		if (user == null) {
 			return;
 		}
-
 		log.info("MOODIFY RESULT: " + service.modify(user));
 	}
 
+	
 	@Test
 	public void testIsValidUser() {
 		assertTrue(service.isValidUser("serin9811@naver.com", "Serin9811@"));
 	}
 
+	@Test
+	public void testGetUserById() {
+		log.info("GET USER BY EMAIL: "+ service.getUserById("mira@naver.com"));
+	}
 }
+
