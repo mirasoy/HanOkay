@@ -22,8 +22,10 @@ public class BookingVO {
 	private String smoking;
 	private String request;
 	private String realArr;
-	private String roomName;
-	private String lastName;
-	private String firstName;
+	private String romName;
+	private String bookerLastname;
+	private String bookerFirstname;
+	private String bookerEmail;
+	private Integer bookerPhone;
 	private String bookStatus;
 }

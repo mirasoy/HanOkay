@@ -22,57 +22,19 @@ public class RomMapperTests {
 	private RomMapper mapper;
 
 	@Test
-	public void testInsert() {
-		RomVO rom = new RomVO();
-		rom.setRomNum("R999");
-		rom.setAcmNum("A999");
-		rom.setRoomName("테스트 객실 이름");
-		rom.setCapacity(9);
-		rom.setBedType("테스트 객실 타입");
-		rom.setBedCnt(9);
-		rom.setRomSize(99);
-		rom.setPrice(9999);
-		rom.setRomPurl("테스트 사진 URL");
-		rom.setRomLocaInfo("테스트 객실 위치");
-
-		mapper.insert(rom);
-
-		log.info(rom);
-	}
-
-	@Test
 	public void testRead() {
 		RomVO rom = mapper.read("R27");
 		log.info(rom);
 	}
-
+	
 	@Test
-	public void testUpdate() {
-		RomVO rom = new RomVO();
-
-		rom.setRomNum("R27");
-		rom.setAcmNum("A999");
-		rom.setRoomName("수정테스트");
-		rom.setCapacity(9);
-		rom.setBedType("수정테스트");
-		rom.setBedCnt(9);
-		rom.setRomSize(99);
-		rom.setPrice(9999);
-		rom.setRomPurl("수정테스트");
-		rom.setRomLocaInfo("수정테스트");
-
-		int count = mapper.update(rom);
-
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■UPDATE COUNT: " + count);
+	public void testGetAll() {
+		mapper.getAll("A4").forEach(rom -> log.info(rom));
 	}
-
-	@Test
-	public void testDelete() {
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■DELETE COUNT: " + mapper.delete("R31"));
-	}
-
+	
 	@Test
 	public void testGetList() {
-		mapper.getList("A3").forEach(rom -> log.info(rom));
+		mapper.getList("A4", "3").forEach(rom -> log.info(rom));
 	}
+	
 }

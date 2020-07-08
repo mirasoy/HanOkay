@@ -86,7 +86,7 @@ public class BookingMapperTests {
 	public void testInsert() {
 		BookingVO book = new BookingVO();
 		book.setUserNum("U1");
-		book.setRomNum("R9");
+		book.setRomNum("R1");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
 			book.setCheckinDate(beforeFormat.parse("2020/8/1"));
@@ -100,6 +100,11 @@ public class BookingMapperTests {
 		book.setExpectedArr("PM02");
 		book.setSmoking("1");
 		book.setRequest("뷰 좋은 방 주세요");
+		book.setRomName("테스트");
+		book.setBookerLastname("테스트");
+		book.setBookerFirstname("테스트");
+		book.setBookerEmail("test@ana.com");
+		book.setBookerPhone(010);
 		book.setBookStatus("RS_STT_BK");
 		mapper.insert(book);
 

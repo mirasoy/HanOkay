@@ -7,57 +7,28 @@
 	<resultMap id="RomVOResult" type="com.ana.domain.RomVO">
 		<result column="ROM_NUM" property="romNum" />
 		<result column="ACM_NUM" property="acmNum" />
-		<result column="ROOM_NAME" property="roomName" />
-		<result column="CAPACITY" property="capacity" />
+		<result column="ROM_NAME" property="romName" />
+		<result column="ROM_CAPA" property="romCapa" />
 		<result column="BED_TYPE" property="bedType" />
 		<result column="BED_CNT" property="bedCnt" />
 		<result column="ROM_SIZE" property="romSize" />
-		<result column="PRICE" property="price" />
+		<result column="ROM_PRICE" property="romPrice" />
 		<result column="ROM_PURL" property="romPurl" />
-		<result column="ROM_LOCAINFO" property="romLocainfo" />
+		<result column="ROM_LOCA" property="romLoca" />
+		<result column="ROM_TYPE" property="romType" />
 	</resultMap>
 
-	<select id="getList" resultMap="RomVOResult">
+	<select id="getAll" resultMap="RomVOResult">
 		select * from TROM where ACM_NUM = #{acmNum}
-		<!-- where rom_num > 0 -->
 	</select>
-
-	<insert id="insert">
-		<selectKey keyProperty="romNum" order="BEFORE"
-			resultType="String">
-			select concat('R',seq_trom.nextval) from dual
-		</selectKey>
-
-		insert into TROM(ROM_NUM, ACM_NUM, ROOM_NAME,
-		CAPACITY, BED_TYPE,
-		BED_CNT, ROM_SIZE, PRICE,
-		ROM_PURL, ROM_LOCAINFO)
-		values (#{romNum},
-		#{acmNum}, #{roomName}, #{capacity},
-		#{bedType}, #{bedCnt}, #{romSize},
-		#{price}, #{romPurl}, #{romLocaInfo})
-	</insert>
+	
+	<select id="getList" resultMap="RomVOResult">
+		select * from (select * from TROM where ACM_NUM = #{acmNum}) where ROM_CAPA >= #{person}
+	</select>
 
 	<select id="read" resultMap="RomVOResult">
 		select * from TROM where ROM_NUM =
 		#{romNum}
 	</select>
-
-	<update id="update">
-		update TROM
-		set ROOM_NAME = #{roomName},
-		CAPACITY =
-		#{capacity},
-		BED_TYPE = #{bedType},
-		BED_CNT = #{bedCnt},
-		PRICE =
-		#{price},
-		ROM_PURL = #{romPurl}
-		where ROM_NUM = #{romNum}
-	</update>
-
-	<delete id="delete">
-		delete TROM where ROM_NUM = #{romNum}
-	</delete>
 
 </mapper>

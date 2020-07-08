@@ -29,7 +29,7 @@ public class BookingServiceTests {
 	//@Test
 	public void testDelete() {
 		
-		log.info("REMOVE RESULT: "+ service.remove("B14"));
+//		log.info("REMOVE RESULT: "+ service.remove("B14"));
 		
 	}
 	
@@ -84,6 +84,12 @@ public class BookingServiceTests {
 		book.setExpectedArr("PM02");
 		book.setSmoking("1");
 		book.setRequest("뷰 좋은 방 주세요");
+		book.setRomName("테스트");
+		book.setBookerLastname("테스트");
+		book.setBookerFirstname("테스트");
+		book.setBookerEmail("test@ana.com");
+		book.setBookerPhone(010);
+		book.setBookStatus("RS_STT_BK");
 		service.register(book);
 		log.info("생성된 예약 번호: " + book.getBookNum());
 	}

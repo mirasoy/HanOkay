@@ -13,7 +13,14 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.ana.domain.BookingVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -110,4 +117,17 @@ public class BookingControllerTests {
 
 	}
 	
- }
+	@Test
+	public void testGetInfo() throws Exception {
+
+	}
+	
+	@Test
+	public String testBooking() throws Exception {
+		return null;
+	}
+	
+	@Test
+	public void testGetS() throws Exception {
+	}
+}
