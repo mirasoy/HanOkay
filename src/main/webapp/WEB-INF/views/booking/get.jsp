@@ -47,12 +47,20 @@
 					<td rowspan="8"><c:out value="${acm.acmPurl}" /></td>
 				</tr>
 				<tr><td>예약번호&emsp;</td><td><c:out value="${book.bookNum}"/></td></tr>
-				<tr><td>체크인&emsp;</td><td><c:out value="${book.checkinDate}"/></td></tr>
-				<tr><td>체크아웃&emsp;</td><td><c:out value="${book.checkoutDate}"/></td></tr>
-				<tr><td>예약자&emsp;</td><td><c:out value="${book.lastName}${book.firstName}"/></td></tr>
-				<tr><td>예약 객실&emsp;</td><td><c:out value="${book.roomName}"/></td></tr>
+				<tr><td>예약일&emsp;</td><td><c:out value="${book.bookDate}"/></td></tr>
+				<tr><td>체크인 날짜&emsp;</td><td><c:out value="${book.checkinDate}"/></td></tr>
+				<tr><td>체크아웃 날짜&emsp;</td><td><c:out value="${book.checkoutDate}"/></td></tr>
+				<tr><td>숙박일&emsp;</td><td><c:out value="${book.staydays}"/></td></tr>
 				<tr><td>예약 인원&emsp;</td><td><c:out value="${book.guest}"/></td></tr>
-				<tr><td>결제 금액&emsp;</td><td><c:out value="${book.bookPrice}"/></td></tr>
+				<tr><td>예약 금액&emsp;</td><td><c:out value="${book.bookPrice}"/></td></tr>
+				<tr><td>예약 객실&emsp;</td><td><c:out value="${book.romName}"/></td></tr>
+				<tr><td>도착 예상시간&emsp;</td><td><c:out value="${book.expectedArr}"/></td></tr>
+				<tr><td>흡연여부&emsp;</td><td><c:out value="${book.smoking}"/></td></tr>
+				<tr><td>특별 요청사항&emsp;</td><td><c:out value="${book.request}"/></td></tr>
+				<tr><td>객실 이름&emsp;</td><td><c:out value="${book.romName}"/></td></tr>
+				<tr><td>예약자&emsp;</td><td><c:out value="${book.bookerFirstname}		${book.bookerLastname}"/></td></tr>
+				<tr><td>예약자 이메일&emsp;</td><td><c:out value="${book.bookerEmail}"/></td></tr>
+				<tr><td>예약자 연락처&emsp;</td><td><c:out value="${book.bookerPhone}"/></td></tr>
 		</table>			
 	</div>
 </body>

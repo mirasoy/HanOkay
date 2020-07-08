@@ -13,6 +13,7 @@ public interface RomService {
 
 	public boolean remove(String romNum);
 
-	public List<RomVO> getList(String acmNum);
-
+	public List<RomVO> getAll(String acmNum);
+	
+	public List<RomVO> getList(String acmNum, String person);
 }
