@@ -62,6 +62,7 @@ String name = (String) session.getAttribute("userNum");
 
 
 	<script>
+	//append로 리스트목록 붙이기
 		<c:forEach items="${list }" var="rev">
 
 		$(".bookList").append("<tr>");

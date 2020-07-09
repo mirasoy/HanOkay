@@ -9,19 +9,21 @@ String name = (String) session.getAttribute("userNum");
 <!DOCTYPE html>
 <html lang="en">
 <%@include file="../includes/header.jsp"%>
+
 <head>
 
-<style>
-#star a {
-	text-decoration: none;
-	color: gray;
-}
+	<style>
+		#star a {
+			text-decoration: none;
+			color: gray;
+		}
 
-#star a.on {
-	color: red;
-}
-</style>
+		#star a.on {
+			color: red;
+		}
+	</style>
 </head>
+
 <body>
 
 	<div class="row">
@@ -31,34 +33,40 @@ String name = (String) session.getAttribute("userNum");
 					<h1>Write Review</h1>
 				</div>
 				<div class="panel-body">
-					<form role="form" action="/review/register" method="post">
-						<table
-							class="table table-striped table-bordered table-hover bookList">
-							<thead>
+					<form id="form" action="/review/register" method="post">
+						<table class="table table-striped table-bordered table-hover bookList">
+							
 								<tr>
-									<td><c:out value="${booking.acmName }" /></td>
+									<td colspan="2">
+										<c:out value="${booking.acmName }" />
+									</td>
 								</tr>
 								<tr>
-									<P id="star">
+									<td><label>별점</label></td>
+									<td>
+										<P id="star">
+											<a href="#" value="1">★</a> <a href="#" id="2" value="2">★</a> <a href="#"
+												value="3">★</a> <a href="#" value="4">★</a> <a href="#" value="5">★</a>
+										<p>
+											<input type="hidden" name="stisf" id="stisf">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="text" name='title' required />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<textarea name='content' style="resize: none;" required></textarea>
 
-										<a href="#" value="1">★</a> <a href="#" value="2">★</a> <a
-											href="#" value="3">★</a> <a href="#" value="4">★</a> <a
-											href="#" value="5">★</a>
-									<p>
-										<input type="hidden" name="stisf" id="stisf" value=""><br />
-								</tr>
-								<tr>
-									<input type="text" name='title' />
-									<br />
-								</tr>
-								<tr>
-									<textarea name='content' style="resize: none;"></textarea>
-									<br />
-									<input type="hidden" name="bookNum" value ='<c:out value="${booking.bookNum }" />' >
-								</tr>
-								<button type="submit">등록하기</button>
-							</thead>
 
+										<input type="hidden" name="bookNum"
+											value='<c:out value="${booking.bookNum }" />'>
+								</tr>
+								<button  id="submit">등록하기</button>
+		
+								<a href="/review/list"><button type="button" >리스트로 돌아가기</button></a>
 
 						</table>
 					</form>
@@ -67,14 +75,35 @@ String name = (String) session.getAttribute("userNum");
 		</div>
 	</div>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-		$('#star a').click(function() {
-			$(this).parent().children("a").removeClass("on");
-			$(this).addClass("on").prevAll("a").addClass("on");
-
-			$('#stisf').val($(this).attr("value"));
+		$(document).ready(function () {
+			//별점주는메서드
+			$('#star a').click(function () {
+				$(this).parent().children("a").removeClass("on");
+				$(this).addClass("on").prevAll("a").addClass("on");
+				$('#stisf').val($(this).attr("value"));
+			});
+			//폼 객체화 
+			let formObj = $("#form");
+			//유효성검사 (공백없이)
+			$('#submit').click(function () {
+					if($('#stisf').val()==""){
+						$(this).attr("type","button")
+						alert("별점을 입력해주세요");
+					}else if( $('input[name=title]').val().trim()==""){	
+						$(this).attr("type","button")
+						alert("제목을 입력해주세요");
+					}else if( $('textarea[name=content]').val().trim()==""){
+						$(this).attr("type","button")
+						alert("내용을 입력해주세요");
+					}else{
+				 		$(this).attr("type","submit")
+						alert("별점ok");
+						
+					} 
+				
+			});
 		});
 	</script>
 
