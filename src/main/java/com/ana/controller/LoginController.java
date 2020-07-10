@@ -12,7 +12,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ana.domain.UserVO;
-import com.ana.service.EmailService;
 import com.ana.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;

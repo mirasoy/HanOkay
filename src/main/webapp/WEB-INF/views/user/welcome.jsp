@@ -26,7 +26,7 @@ userPwd= user.getPwd();
 			<tr>
 				<td>
 				<label>	<%=userLastname %><%=userFstname %>님 환영합니다. </label>
-				<p>Ana에서 우리나라 여행에 대해 더 많은 것을 나누고 누려보세요! </p>
+				<p>오늘은 우리나라의  어느 곳을 여행하고 싶으신가요?</p>
 				<br>
 				<a href="../acm/list">숙소 검색 홈으로 </a>
 				<!-- <a href="logout">로그아웃하기</a> -->
