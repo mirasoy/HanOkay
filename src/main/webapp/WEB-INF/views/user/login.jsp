@@ -55,7 +55,12 @@
 	}
 	$(document).ready(function() {
 		let formObj = $("form");
-
+		//페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
+		if ( window.history.replaceState ) {
+	        window.history.replaceState( null, null, window.location.href );
+	    }
+	
+		
 		//버튼에 따라 컨트롤러에서 다른 서비스를 부르게함
 		$('button').on("click", function(e) {
 			e.preventDefault();
