@@ -27,7 +27,6 @@ public class BookingMapperTests {
 	private BookingMapper mapper;
 	
 
-
 	
 
 	@Test
@@ -40,7 +39,7 @@ public class BookingMapperTests {
 	//1. 모든 예약 목록을 가져오기 위한 리스트 테스트
 	@Test
 	public void getBookListAll() {
-		mapper.getBookListAll("A1").forEach(board->log.info(board));
+		mapper.getBookListAll("U1").forEach(board->log.info(board));
 	}
 
 	//@Test

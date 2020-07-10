@@ -3,6 +3,8 @@ package com.ana.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Email;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
@@ -27,6 +29,7 @@ public class BookingVO {
 	private String romName;
 	private String bookerLastname;
 	private String bookerFirstname;
+	@Email()
 	private String bookerEmail;
 	private Integer bookerPhone;
 	private String bookStatus;

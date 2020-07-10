@@ -34,7 +34,7 @@ String name = (String)session.getAttribute("loginUserNum");
 	
 </style>
 <div class="row">
-	<div class="col-lg-12 title">
+	<div class="col-lg-12">
 		<h1 class="page-header">나의 예약</h1>
 	</div>
 	<!-- /.col-lg-12 -->
@@ -69,9 +69,8 @@ String name = (String)session.getAttribute("loginUserNum");
 							<th>숙소이름</th>
 							<th>#예약번호</th>										
 							<th>체크인날짜</th>
-							<th>체크아웃날짜</th>							
-							<th>객실요금</th>																
-							<th>버튼</th>																
+							<th>체크아웃날짜</th>																											
+							<th>상태</th>																
 						</tr>
 					</thead>
 
@@ -85,9 +84,10 @@ String name = (String)session.getAttribute("loginUserNum");
 									
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.checkoutDate}" /></td>
-							<td><c:out value="${board.bookPrice}" /></td>			
 							
-							<td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td>
+							<td><c:out value="${board.bookStatus}" /></td>		
+							
+							<%-- <td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td> --%>
 					
 						</tr>																				
 					</c:forEach>

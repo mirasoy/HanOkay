@@ -204,6 +204,20 @@
             <artifactId>spring-context-support</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>   
+        
+        
+        
+     <!-- 유효성 검사 관련 라이브러리 -->
+     <!-- validation -->
+
+	      <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.10.Final</version>
+        </dependency>
+
+        
+        
 
    <!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
 <dependency>
