@@ -25,7 +25,7 @@ public class LoginController {
 
 	@Autowired
 	UserService service;
-
+	
 	// login 페이지 보여주기
 	@RequestMapping("/login")
 	public String showLoginPage() {
@@ -63,24 +63,28 @@ public class LoginController {
 	
 	//로그아웃을 하는 기능(=세션에서 user를 제거하는 기능)
 	@GetMapping("/logout")
-	public ModelAndView logout(SessionStatus status) {
+	public ModelAndView logout(SessionStatus status, HttpServletRequest request) {
 		log.info("session 시작: "+status);
-		//session.
+		//session을 모두 없애줘
 		status.setComplete();
-		
+		ModelAndView mv= new ModelAndView();
+		StringBuffer contextPath= request.getRequestURL();
+		log.info("ContextPath: "+contextPath);
+		//없애기가 성공 되었으면 로그를 찍어줘
 		if(status.isComplete() == true) {
 			log.info("Session removed successfully");
 		}
-		
-		ModelAndView mv= new ModelAndView();
-		mv.setViewName("/user/welcome");
+		//그리고 acm/list 페이지로 가줘
+		//하지만 다른 페이지의 헤더에서 로그아웃을 한 경우에 돌아가는 뷰는 해당 뷰여야함...(수정해야해!!)
+		mv.setViewName("/acm/list");
 		return mv;
 	}
 	
+	//welcome 페이지 보여주는 기능
 	@RequestMapping("/welcome")
 	public String showWelcome() {
 		return "user/welcome";
 	}
-	
+
 	
 }

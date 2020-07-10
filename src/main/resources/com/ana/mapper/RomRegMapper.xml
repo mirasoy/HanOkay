@@ -19,21 +19,39 @@
 	</resultMap>
 
 	<!-- 호스트단 -->
+	<!-- 한숙소에 포함되어있는 객실 다 가져오기 -->
 	<select id="getList" resultMap="RomVOResult">
 		<![CDATA[
-		select * from TROM
+		select * from TROM where ACM_NUM=#{acmNum}
 		]]>
 	</select>
 	
 	<!-- 객실 하나하나의 정보 가져오기 -->
 	<select id="read" resultMap="RomVOResult">
-		select * from TROM where ROM_NUM =
-		#{romNum}
+		select * from TROM where ROM_NUM =#{romNum}
 	</select>
 	
 	
 	<!-- 객실추가하기 -->
 	<insert id="insert">
+	<selectKey keyProperty="romNum" order="BEFORE"
+			resultType="String">
+			select concat('R',seq_trom.nextval) from dual
+		</selectKey>
+		insert into TROM(ROM_NUM,ROM_TYPE,ACM_NUM,ROM_NAME,
+		ROM_CAPA,BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_LOCA)
+		values (concat('R',seq_tacm.nextval), #{romType},
+		#{acmNum}, #{romName}, #{romCapa},
+		#{bedType}, #{bedCnt}, #{romSize},
+		#{romPrice}, #{romPurl}, #{romLoca})
+	</insert>
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="romNum" order="BEFORE"
+			resultType="String">
+			select concat('R',seq_tacm.nextval) from dual
+		</selectKey>
+
 		insert into TROM(ROM_NUM,ROM_TYPE,ACM_NUM,ROM_NAME,
 		ROM_CAPA,BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_LOCA)
 		values (#{romNum}, #{romType},
@@ -41,12 +59,28 @@
 		#{bedType}, #{bedCnt}, #{romSize},
 		#{romPrice}, #{romPurl}, #{romLoca})
 	</insert>
-
 	
 	
+	<!-- 객실 삭제 -->
+	<delete id="remove">
+		delete from trom where rom_Num = #{romNum}
+	</delete>
 
-
-
+	<!-- 객실 수정 -->
+	<update id="modify">
+		update trom
+		set rom_name=#{romName},
+		rom_type=#{romType},
+		rom_capa=#{romCapa},
+		bed_type=#{bedType},
+		bed_cnt=#{bedCnt},
+		rom_size=#{romSize},
+		rom_price=#{romPrice},
+		rom_purl=#{romPurl},
+		rom_loca = #{romLoca}
+		where rom_Num = #{romNum} 
+		
+	</update>
 
 
 

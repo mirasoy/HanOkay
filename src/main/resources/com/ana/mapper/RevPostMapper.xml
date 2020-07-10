@@ -55,10 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 b.user_num
                 
             FROM 
-                TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+                TBOOKING B, TACM A, TROM R
             WHERE 
-                B.BOOK_NUM=S.BOOK_NUM
-            AND 
                 B.ROM_NUM=R.ROM_NUM 
             AND 
                 R.ACM_NUM=A.ACM_NUM 
@@ -178,15 +176,13 @@ FROM
                 b.user_num
                 
             FROM 
-                TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+                TBOOKING B, TACM A, TROM R
             WHERE 
-                B.BOOK_NUM=S.BOOK_NUM
-            AND 
                 B.ROM_NUM=R.ROM_NUM 
             AND 
                 R.ACM_NUM=A.ACM_NUM 
             AND 
-                S.BOOK_STATUS='RS_STT_AC'
+                B.BOOK_STATUS='RS_STT_AC'
         )J,
         trev_detail T
         
@@ -251,15 +247,13 @@ FROM
                 b.user_num
                 
             FROM 
-                TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+                TBOOKING B,TACM A, TROM R
             WHERE 
-                B.BOOK_NUM=S.BOOK_NUM
-            AND 
+             
                 B.ROM_NUM=R.ROM_NUM 
             AND 
                 R.ACM_NUM=A.ACM_NUM 
-            AND 
-                S.BOOK_STATUS='RS_STT_AC'
+                
         )J,
         trev_detail T
         

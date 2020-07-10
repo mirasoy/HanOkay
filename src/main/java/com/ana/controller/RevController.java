@@ -44,7 +44,6 @@ import com.ana.service.RevService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-//import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j
@@ -54,68 +53,71 @@ public class RevController {
 
 	private RevService service;
 
+	
+	//내 예약목록 전체보기
 	@GetMapping("/list")
  	public void list(Model model, HttpSession session) {
 
 		String userNum = (String) session.getAttribute("userNum");
 
 		log.info("userNum>>>>>>" +  service.getUserList("U1").size());
-		log.info("list");
-		// model.addAttribute("list", service.getBookingList(userNum));
+		log.info("의 리스트 list");
+		
+		
 		model.addAttribute("list", service.getUserList("U1"));
 	}
 
+	//아직 쓰지않은 예약완료 리스트
 	@GetMapping("/unwrittenReviewlist")
 	public void unwrittenReviewlist(Model model, HttpSession session) {
 
 		String userNum = (String) session.getAttribute("userNum");
 
-		log.info("userNum>>>>>>" + userNum);
-		log.info("list");
-		// model.addAttribute("list", service.getBookingList(userNum));
+		log.info("unwrittenReviewlist>>>>>>" + userNum);
+		
 		model.addAttribute("list", service.getUserList("U1"));
 	}
 
+	//작성완료 리뷰
 	@GetMapping("/writtenReviewlist")
 	public void writtenReviewlist(Model model, HttpSession session) {
 
 		String userNum = (String) session.getAttribute("userNum");
 
-		log.info("userNum>>>>>>" + userNum);
-		for(RevVO rev :service.getUserList("U1")) {
-			log.info("list>>"+ rev.getTitle());
-		}
-		// model.addAttribute("list", service.getBookingList(userNum));
+		log.info("writtenReviewlist>>>>>>" + userNum);
+	
 		model.addAttribute("list", service.getUserList("U1"));
 	}
 
-	
+	//리뷰등록페이지 열기
 	@GetMapping("/register")
 	public void register(@RequestParam("bookNum") String bookNum, Model model) {
 
-		log.info("어떤 예약을 쓸거냐?? ?? >> " + bookNum);
-		log.info("어떤 예약을 쓸거냐?? ?? >> " + service.getByBooknum(bookNum));
+		log.info("register bookNum>> " + bookNum);
+		log.info("register >> " + service.getByBooknum(bookNum));
+		
 		model.addAttribute("booking", service.getByBooknum(bookNum));
 	}
 
+	//리뷰등록하기
 	@PostMapping("/register")
 	public String register(RevPostVO revP, RevDetailVO reDetail, RedirectAttributes rttr) {
 
 		RevVO rev = service.getByBooknum(reDetail.getBookNum());
-
-		log.info("register:1>>>>>>>> " + rev);
+		//임시설정
 		rev.setRevPurl("사진임시");
+		//임시설정
 		rev.setTitle(revP.getTitle());
 		rev.setContent(reDetail.getContent());
 		rev.setStisf(reDetail.getStisf());
 
-		log.info("register:2>>>>>>>> " + rev);
+		log.info("register:>>>>>>>> " + rev);
 		service.register(rev);
-//		rttr.addFlashAttribute("result", review.getPstNum());
 
 		return "redirect:/review/list";
 	}
 
+	//리뷰하나 열어서 보기
 	@GetMapping("/get")
 	public void get(@RequestParam("pstNum") String pstNum, Model model) {
 
@@ -124,15 +126,19 @@ public class RevController {
 		model.addAttribute("review", service.get(pstNum));
 
 	}
-
+	
+	//리뷰수정페이지열기
 	@GetMapping("/modify")
 	public void getModifyPage(@RequestParam("pstNum") String pstNum, Model model) {
 
 		log.info("/open modi page");
-
+		log.info("/modi THAT >> "+ service.get(pstNum));
+		
 		model.addAttribute("review", service.get(pstNum));
 	}
-
+	
+	
+	//리뷰 수정하기
 	@PostMapping("/modify")
 	public String modify(RevVO review, RedirectAttributes rttr) {
 		log.info("modify::::::::::"+review.getPstNum()+":::::::::::::::::::::::::::::" + review);
@@ -140,23 +146,22 @@ public class RevController {
 		log.info("modify::::>>>::::::::" + rv);
 		//임시설정
 		rv.setRevPurl("_");
-		
+		//임시설정
 		rv.setTitle(review.getTitle());
 		rv.setContent(review.getContent());
 		rv.setStisf(review.getStisf());
 
-		
-		
 		if (service.modify(rv)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/review/list";
 	}
 
+	//리뷰삭제하기
 	@PostMapping("/delete")
-	public String remove(String pstNum, RedirectAttributes rttr) {
-		log.info("delete" + pstNum);
-		service.remove(pstNum);
+	public String remove(RevVO review, RedirectAttributes rttr) {
+		log.info("delete" + review.getPstNum());
+		service.remove(review.getPstNum());
 		return "redirect:/review/list";
 	}
 	
