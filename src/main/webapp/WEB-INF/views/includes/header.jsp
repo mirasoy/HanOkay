@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 	<%@ page import="com.ana.domain.UserVO"%>
+	<!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
 	<% UserVO user= (UserVO)session.getAttribute("user"); 
-String userLastName="";
-String userFstName="";
+String userLastname="";
+String userFstname="";
 String userPwd="";
 String userNum="";
-userNum = "U1";
+//userNum = "U1";
+
+//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if(user != null){
-userLastName= user.getLastname();
-userFstName=user.getFstname();
+userLastname= user.getLastname();
+userFstname=user.getFstname();
 userPwd= user.getPwd();
 userNum= user.getUserNum();
 } 
@@ -20,6 +25,8 @@ userNum= user.getUserNum();
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" >
 <html>
 <head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta charset="utf-8">
@@ -28,8 +35,7 @@ userNum= user.getUserNum();
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Ana -korea homestay</title>
-
+<title>Ana -Make yourself at home in Korea!</title>
 <!-- Bootstrap Core CSS -->
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -61,9 +67,6 @@ body {
 	 margin-top: 120px;
 	
 }
-
-
-
 
 #wrapper {
 	width: 100%;
@@ -335,29 +338,32 @@ body {
 	.panel-heading{
 	    padding-left: 25px;
 	}
-	
-
-
-
 
 </style>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script type="text/javascript">
 	$(document).ready(function(){
-        if('<%=userNum %>'==""){
-            $("#loginout").append("<a href='/user/login'>로그인</a>")
-           
-        }else{
+		//만약 user에 해당하는 세션이 없으면 
+        if(<%=user == null %>){
+           // $("#loginout").append("<a href='/user/login'>로그인</a>");
+           //알림 드랍 다운 내부 텍스트를 모두 지우고
+            $('#notification').empty();
+           //회원 가입하라고 메세지 주기
+           //드랍 다운 상자를 responsive로 변경하면 좋겠다
+            $('#notification').append("<li><a href='#'>ana의 회원이 되셔서 <br>더 많은 혜택을 누려보세요!</a></li>");
+            
+           //내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
+           	$('#myMenuIcon').removeAttr("data-toggle");
+        	$('#myMenuIcon').attr("href", "../user/login");
+		
+        }
+        else{
             $("#loginout").append("<a href='/user/logout'>로그아웃</a>")
         	   
         };
 
     });
 </script>
-
 
 </head>
 
@@ -379,40 +385,44 @@ body {
 					<!-- navbar -->
 					<ul class="navbar-top-links">
 						<!-- dropdown -->
-
 						<li class="menu1"><a href="#"> <i
 								class="fa fa-globe fa-2x"></i></a></li>
 						<!-- <li class="menu2"><a href="#"> <i
 								class="fa fa-bell fa-2x"></i></a></li> -->
 
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-2x"></i></a>
-							<ul class="dropdown-menu">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+								<i class="fa fa-bell fa-2x"></i>
+							</a>
+							<ul class="dropdown-menu" id="notification" >
 								<li><a href="#">저세상 숙소의 예약이 완료되었습니다</a></li>
 								<li><a href="#">ana의 회원가입을 환영합니다!</a></li>
+							</ul>
+						</li>
 
-							</ul></li>
 
-
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#"> <i class="fa fa-user fa-2x"></i></a>
-							<ul class="dropdown-menu">
+						<li class="dropdown">
+							<a class="dropdown-toggle" id="myMenuIcon" data-toggle="dropdown" href="#">
+								<i class="fa fa-user fa-2x"></i>
+							</a>
+							<ul class="dropdown-menu" id="myMenu">
 								<li><a href="#">계정</a></li>
 								<li><a href="/MyPage/bookListAll">나의 예약</a></li>
 								<li><a href="/review/list">나의 리뷰</a></li>
 								<li><a href="#">내 관심 숙소</a></li>
 								<li><a href="/hosting/hostindex">호스트 모드</a></li>
 
-								<li id="header-menu"><a href="/user/login" id="sign-out-btn"
-										data-selenium="sign-out" data-element-name="sign-out-btn"
-										color="primary">
+								<li id="header-menu">
+								 	<a href="/user/login" id="sign-out-btn" data-selenium="sign-out" data-element-name="sign-out-btn" color="primary">
 										<div>
 											<div id="loginout">
 												<span ></span>
 											</div>
 										</div>
-									</a></li>
-							</ul></li>
+									 </a>
+								</li>
+							</ul>
+						</li>
 					</ul>
 					</nav>
 				</div>

@@ -46,7 +46,6 @@ public class BookingController2 {
 	public String booking(
 			BookingVO book, 
 			RedirectAttributes rttr) {
-		System.out.println("띠용");
 		log.info("booking"+book);
 
 		bookService.register(book);

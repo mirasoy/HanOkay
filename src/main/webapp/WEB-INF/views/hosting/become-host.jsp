@@ -14,36 +14,18 @@
                         <li>
                            <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
                         </li>
-                        
                         <li>
-                            <a href="/hosting/become-host"><i class="fa fa- fa-fw"></i> 시작하기</a>
+                            <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host1_6"><i class="fa fa-gear fa-fw"></i> 숙소 정보</a>
+                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host2_6"><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host3_6"><i class="fa fa-map fa-fw"></i> 숙소 설명</a>
+                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
-                        <li>
-                            <a href="/hosting/become-host4_6"><i class="fa fa-male fa-fw"></i> 게스트 설정</a>
-                            
-                        </li>
-                        <li>
-                            <a href="/hosting/become-host5_6"><i class="fa fa-calendar fa-fw"></i> 달력 및 예약 가능여부</a>
-                        </li>
-                        <li>
-                            <a href="/hosting/become-host6_6"><i class="fa fa-credit-card fa-fw"></i> 요금</a>
-                            
-                        </li>
-                        <li>
-                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                            
-                        </li>
-                        
-                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -54,48 +36,107 @@
 <div id="page-wrapper" style="padding-bottom:50px;">
 		
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
-			<form action="/hosting/become-host1_6" method="post">
-				<h4><br><br>0-1.게스트가 묵게 될 숙소의 유형을 골라주세요(중복허용)</h4><br>
-				<input type="checkbox" id="rentType1" name="rentType1" value="house"><label for="rentType1">집 천제</label> 
-				<input type="checkbox" id="rentType2" name="rentType2" value="priv"><label for="rentType2">개인실</label> 
-				<input type="checkbox" id="rentType3" name="rentType3" value="multi"><label for="rentType3">도미토리</label> 
+			<form action="/hosting/become-host" method="post">
+				<h4><br><br>1.게스트가 묵게 될 숙소의 유형을 골라주세요(중복허용)</h4><br>
+				<input type="checkbox" id="acmType_house" name="acmType" value="house"><label for="rentType1">집 천제</label> 
+				<input type="checkbox" id="acmType_priv" name="acmType" value="priv"><label for="rentType2">개인실</label> 
+				<input type="checkbox" id="acmType_multi" name="acmType" value="multi"><label for="rentType3">도미토리</label> 
 			
 				
-			    
-			  
-			  <!-- 설명넣기<span>
-			  	게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로<br>
-			  	일반적으로 침실, 욕실, 부엌이 포함됩니다.
-			  </span>
-			  <span>
-			  	게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용 일 수 있습니다.
-			  </span>
-			  <span>
-			  	게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다. 
-			  </span>-->
-			  <br><br>
-			  
-			  <h4>0-2.숙소 이름과 정보</h4><br>
-			   <input type="text" id="stayname" name="stayname" placeholder="숙소의 이름"><br>
-			   <input type="text" id="stayloca" name="stayloca" placeholder="숙소의  간략한 위치 예)강남구"><br>
-			   <input type="text" id="staytel" name="staytel" placeholder="숙소의  대표번호"><br>
-			   <input type="text" id="stayFax" name="stayFax" placeholder="숙소의  팩스번호"><br>
-			   <input type="text" id="stayEmail" name="stayEmail" placeholder="숙소의  이메일 주소"><br>
+						  
+			  <h4>2.숙소 이름과 정보</h4><br>
+			   <input type="text" id="acmName" name="acmName" placeholder="숙소의 이름"><br>
+			   <!-- 구글 API추가해야함 -->
+			   <input type="text" id="acmCity" name="acmCity" placeholder="숙소 시도"><br>
+			   <input type="text" id="acmDistr" name="acmDistr" placeholder="숙소 구군"><br>
+			   <input type="text" id="acmDetailaddr" name="acmDetailaddr" placeholder="숙소 상세주소"><br>
+			   <input type="text" id="repPhone" name="repPhone" placeholder="숙소 대표번호"><br>
+			   <input type="text" id="acmFax" name="acmFax" placeholder="숙소  팩스번호"><br>
+			   <input type="text" id="acmEmail" name="acmEmail" placeholder="숙소  이메일 주소"><br>
 			  
 			  <br><br>
-			  <h4>0-3.Ana에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4><br>
-			  <input type="text" id="businame" name="businame" placeholder="사업자이름"><br>
-			  <input type="text" id="busicode" name="busicode" placeholder="사업자등록번호"><br>
-			  <input type="file" id="busifile" name="busifile" placeholder="사업자등록증"><br>
+			  <h4>3.Ana에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4><br>
+			  <input type="text" id="bizRegnum" name="bizRegnum" placeholder="사업자등록번호"><br>
+			  <input type="file" id="bizRegpurl" name="bizRegpurl" placeholder="사업자등록증"><br>
+			  
+			  <h4>4.숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
+			  <label for="checkinTime">체크인시간</label>
+				<select name="checkinTime" id="checkinTime">
+				  <option value="pm12">점심12시이후</option>
+				  <option value="pm01">1시이후</option>
+				  <option value="pm02">2시이후</option>
+				  <option value="pm03">3시이후</option>
+				  <option value="pm04">4시이후</option>
+				  <option value="pm05">5시이후</option>
+				  <option value="pm06">6시이후</option>
+				  <option value="pm07">7시이후</option>
+				  <option value="pm08">8시이후</option>
+				  <option value="pm09">9시이후</option>
+				  <option value="pm10">10시이후</option>
+				  <option value="anytime">상관없음</option>
+				</select>
+			  <label for="checkouTime">체크아웃시간</label>
+				<select name="checkoutTime" id="checkoutTime">
+				  <option value="am09">오전9시이전</option>
+				  <option value="am10">오전10시이전</option>
+				  <option value="am11">오전11시이전</option>
+				  <option value="pm12">12시이전</option>
+				  <option value="pm01">1시이전</option>
+				  <option value="pm02">2시이전</option>
+				  <option value="pm03">3시이전</option>
+				  <option value="pm04">4시이전</option>
+				  <option value="pm05">5시이전</option>
+				</select>
 			  
 			  
-			  <br>
-			  <button type="submit">다음으로</button>
+			  <br><br><br>
+			  <button type="submit" onclick="">다음으로</button><!-- ajax처리안함 -->
 			</form>
 		</div>
 
 
-<%@include file="../includes/footer.jsp"%>
-<script>
-	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+	function acmRegitstart(){
+		var chkArr=[];
+		
+		var acmName=$("#acmName").val();
+		var acmCity=$("#acmCity").val();
+		var acmDistr=$("#acmDistr").val();
+		var acmDetailaddr=$("#acmDetailaddr").val();
+		var repPhone=$("#repPhone").val();
+		var acmFax=$("#acmFax").val();
+		var acmEmail=$("#acmEmail").val();
+		var bizRegnum=$("#bizRegnum").val();
+		//var bizRegpurl=$("#bizRegpurl").val();
+		
+		$("input[name=acmType]:checked").each(function(i){//체크박스값들을 모조리 배열에 담는다
+			console.log('checkbox값:'+$(this).val());//크롬쪽에서 확인할수있다
+			chkArr.push($(this).val());
+		});
+		
+		var allData={"acmName":acmName, "acmCity":acmCity, "acmDistr":acmDistr, "acmDetailaddr":acmDetailaddr,
+				"repPhone":repPhone,"acmFax":acmFax, "acmEmail":acmEmail, "bizRegnum":bizRegnum, //"bizRegpurl":"-",
+				"acmTypeArr":chkArr		
+		}
+		
+		$.ajax({
+			url:"/hosting/become-host",
+			type:"POST",
+			data:allData,
+			success: function(data){
+				alert("객실 등록을 시작합니다.");
+				//window.location.href = "/hosting/become-host1_6";
+
+			}, error:function(){
+	            alert("에러 발생~~ ");
+	        }
+		});
+		
+	}
+
+
+
 </script>
+
