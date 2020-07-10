@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.AcmRegMapper">
+
+	<resultMap id="AcmVOResult" type="com.ana.domain.AcmVO">
+		<result column="acm_Num" property="acmNum" />
+		<result column="acm_Name" property="acmName" />
+		<result column="acm_City" property="acmCity" />
+		<result column="acm_Distr" property="acmDistr" />
+		<result column="acm_Detailaddr" property="acmDetailaddr" />
+		<result column="rep_Phone" property="repPhone" />
+		<result column="biz_Regnum" property="bizRegnum" />
+		<result column="checkin_Time" property="checkinTime" />
+		<result column="checkout_Time" property="checkoutTime" />
+		<result column="acm_Regdate" property="acmRegdate" />
+		<result column="acm_Updatedate" property="acmUpdatedate" />
+		<result column="acm_Phone2" property="acmPhone2" />
+		<result column="acm_Fax" property="acmFax" />
+		<result column="acm_Email" property="acmEmail" />
+		<result column="acm_Desc" property="acmDesc" />
+		<result column="acm_Purl" property="acmPurl" />
+		<result column="acm_Purl1" property="acmPurl1" />
+		<result column="acm_Purl2" property="acmPurl2" />
+		<result column="acm_Purl3" property="acmPurl3" />
+		<result column="acm_Purl4" property="acmPurl4" />
+		<result column="acm_Purl5" property="acmPurl5" />
+		<result column="acm_Purl6" property="acmPurl6" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+	</resultMap>
+
+	<!-- 호스트단에서 숙소등록 -->
+	<!-- 한회원이 운영하는 숙소 다 가져오기 -->
+	<select id="getList" resultMap="AcmVOResult">
+		<![CDATA[
+		select * from TROM where ACM_NUM=#{acmNum}
+		]]>
+	</select>
+	
+	<!-- 객실 하나하나의 정보 가져오기 -->
+	<select id="read" resultMap="AcmVOResult">
+		select * from TROM where ROM_NUM =#{romNum}
+	</select>
+	
+	
+	<!-- 숙소추가하기 -->
+	<insert id="insert">
+		INSERT INTO TACM(acm_Num, acm_Name, acm_City,
+		acm_Distr, acm_Detailaddr,
+		rep_Phone, acm_fax, acm_email,
+		biz_regnum,checkin_time, checkout_time,acm_regdate,acm_updatedate)
+		VALUES(concat('A',seq_tacm.nextval),#{acmName},#{acmCity},
+		#{acmDistr}, #{acmDetailaddr},#{repPhone},
+		#{acmFax},#{acmEmail},#{bizRegnum},#{checkoutTime},#{checkinTime},sysdate,sysdate)
+	</insert>
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="acmNum" order="BEFORE"
+			resultType="String">
+			select concat('A',seq_tacm.nextval) from dual
+		</selectKey>
+
+		INSERT INTO TACM(acm_Num, acm_Name, acm_City,
+		acm_Distr, acm_Detailaddr,
+		rep_Phone, acm_fax, acm_email,
+		biz_regnum,checkin_time, checkout_time,acm_regdate,acm_updatedate)
+		VALUES(#{acmNum},#{acmName},#{acmCity},
+		#{acmDistr}, #{acmDetailaddr},#{repPhone},
+		#{acmFax},#{acmEmail},#{bizRegnum},#{checkoutTime},#{checkinTime},sysdate,sysdate)
+	</insert>
+
+
+	<!-- 객실 삭제 -->
+	<delete id="remove">
+		delete from trom where rom_Num = #{romNum}
+	</delete>
+
+	<!-- 객실 수정 -->
+	<update id="updateDesc">
+		update tacm
+		set acm_desc=#{acmDesc}
+		
+		where acm_Num = #{acmNum} 
+		
+	</update>
+
+
+
+
+
+
+</mapper>

@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ana.domain.AcmVO;
 import com.ana.domain.RomVO;
+import com.ana.service.AcmRegService;
 import com.ana.service.RomRegService;
+import com.ana.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -27,8 +32,17 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/hosting/*")
 @AllArgsConstructor
 public class HostController {
-	@Setter(onMethod_= {@Autowired})
-	private RomRegService service;
+	
+	@Autowired
+	private RomRegService service;//객실관련서비스
+	
+	@Autowired
+	private AcmRegService aservice;//숙소등록관련서비스
+	
+	@Autowired
+	private UserService uservice;//호스트 사업등록증관련
+	
+	
 	
 	@GetMapping("/hostindex")
 	public void indexGet() {
@@ -42,67 +56,12 @@ public class HostController {
 	
 	
 	//become-host단
-	//get단
-	@GetMapping("/become-host")
-	public void becomeHostGet() {
-
-	}
-	
-	@GetMapping("/become-host1_6")
-	public void becomeHostGet1_6() {
-
-	}
-	
-	@GetMapping("/become-host2_6")//뿌려주기
-	public void becomeHostGet2_6(Model model) {
-		String acmNum = "A1";
-		List<RomVO> romList=service.getList(acmNum);
-		
-		System.out.println("A1에 대한 롬리스트 들어오나아ㅏㅏ~~"+romList.toString());
-		model.addAttribute("list", romList);
-		model.addAttribute("size", romList.size());
-		
-	}
-	
-	@GetMapping("/become-host2_6pop")
-	public void becomeHostGet2_6pop() {
-		
-	}
-	
-	
-	@GetMapping("/become-host3_6")
-	public void becomeHostGet3_6() {
-
-	}
-	
-	@GetMapping("/become-host4_6")
-	public void becomeHostGet4_6() {
-
-	}
-	
-	@GetMapping("/become-host5_6")
-	public void becomeHostGet5_6() {
-
-	}
-	
-	@GetMapping("/become-host6_6")
-	public void becomeHostGet6_6() {
-
-	}
-	
-	@GetMapping("/become-host-complete")
-	public void becomeHostGet_complete() {
-
-	}
-
-
 	
 	@GetMapping("/getRom")//숙소 상세보기
 	public String getRomGet(@RequestParam("romNum") String romNum, Model model) {
 		//System.out.println("롬넘이 넘어온다~~~"+romNum);
 		
 		model.addAttribute("thisrom",service.get(romNum));//RomVO가 나온다
-		System.out.println("==========여기 넘어오냐앗========");
 		return "/hosting/getRom";
 	}
 	
@@ -114,8 +73,6 @@ public class HostController {
 	
 	@PostMapping("/modifyRom")//내용 전체를 받아서 (Post)숙소 수정하기
 	public String modifyRomPost(RomVO vo, Model model) {
-		System.out.println("수정한 정보가 들어왔느냐"+vo.toString());
-		
 		service.modify(vo);//수정된 정보값을 넣어줌
 		List<RomVO> romList=service.getList(vo.getAcmNum());
 		
@@ -137,15 +94,73 @@ public class HostController {
 		return "/hosting/become-host2_6";
 	}
 	
-	//post단
+	@GetMapping("/become-host")
+	public void becomeHostGet() {
+		System.out.println("become-host페이지를 띄운다**");
+	}
+	
 	@PostMapping("/become-host")
-	public String becomeHostPost() {
+	public String becomeHostPost(
+			Model model,AcmVO vo
+	) {
+		System.out.println("post-become-host로넘어오십니까!");
+		vo.toString();
+		aservice.register(vo);
+		model.addAttribute("acmNum", vo.getAcmNum());
+		System.out.println(vo.getAcmNum());
 		return "/hosting/become-host1_6";
 	}
 	
-	@PostMapping("/become-host1_6")
-	public String becomeHostPost1_6() {
-		return "/hosting/become-host1_6";
+	
+	
+	@GetMapping("/become-host1_6")
+	public void becomeHostGet1_6(Model model) {
+		System.out.println("become-hos1_6창 열림~");
+	
+	}
+	
+	
+	@PostMapping("/become-host1_6")//입력한 상세 숙소정보를 db에 넣자
+	public String becomeHostPost1_6(@RequestParam(value="acmOptcode") List<String> acmOptcode,
+			String acmNum,String acmDesc,Model model){
+		System.out.println(acmNum+"====================");
+		System.out.println("become-host1_6이 post로 받고 열렸다");
+		System.out.println(acmOptcode+"무엇이들ㅇ오는가");
+		System.out.println(acmDesc);
+		model.addAttribute("acmNum", acmNum);//여기가 안되는가
+		
+		System.out.println("여기와?1");
+		aservice.update(acmNum,acmOptcode,acmDesc);
+		System.out.println("여기와?2");
+		return "/hosting/become-host2_6";
+	}
+
+	@GetMapping("/become-host2_6")//뿌려주기
+	public void becomeHostGet2_6(String acmNum,Model model) {
+		
+		List<RomVO> romList=service.getList(acmNum);
+		model.addAttribute("acmNum",acmNum);
+		model.addAttribute("list", romList);
+		model.addAttribute("size", romList.size());
+		
+	}
+	
+	@PostMapping("/become-host2_6")
+	public String becomeHostPost2_6() {
+
+		return "/hosting/become-host2_6";
+	}
+	
+
+	@GetMapping("/become-host-complete")
+	public void becomeHostGet_complete() {
+
+	}
+	
+	
+	@GetMapping("/become-host2_6pop")
+	public void becomeHostGet2_6pop(String acmNum) {
+		System.out.println("pop열림!");
 	}
 	
 	@PostMapping("/become-host2_6pop")//객실추가할때
@@ -163,14 +178,14 @@ public class HostController {
 			@RequestParam(value="romPurl") String romPurl,//객실
 			Model model
 		) {
-		
+			
 //		System.out.println("====== 컨트롤러 작동 =======");
 //		System.out.println("****룸이름");
 //		System.out.println(romName);
 //		System.out.println("****룸타입");
 //		System.out.println(romType);
 //		
-//		System.out.println("=======romOptArr======:"+romOptArr.toString());
+		System.out.println("=======romOptArr======:"+romOptArr.toString());
 		
 		RomVO rom = new RomVO();
 		rom.setAcmNum(acmNum);
@@ -180,7 +195,7 @@ public class HostController {
 		rom.setBedType(bedType);
 		rom.setBedCnt(bedCnt);
 		rom.setRomSize(romSize);
-		rom.setRomPrice(70000);
+		rom.setRomPrice(romPrice);
 		rom.setRomLoca(romLoca);
 		rom.setRomPurl("RoomPic");
 		rom.setRomType(romType);
@@ -200,38 +215,15 @@ public class HostController {
 	}
 
 	
-	
-	@PostMapping("/become-host2_6")
-	public String becomeHostPost2_6() {
 
-		return "/hosting/become-host2_6";
-	}
-	
-	@PostMapping("/become-host3_6")
-	public String becomeHostPost3_6() {
-		return "/hosting/become-host3_6";
-	}
-	
-	@PostMapping("/become-host4_6")
-	public String becomeHostPost4_6() {
-		return "/hosting/become-host4_6";
-	}
-	
-	@PostMapping("/become-host5_6")
-	public String becomeHostPost5_6() {
-		return "/hosting/become-host5_6";
-	}
-	
-	@PostMapping("/become-host6_6")
-	public String becomeHostPost6_6() {
-		return "/hosting/become-host6_6";
-	}
-	
 	@PostMapping("/become-host-complete")
 	public String becomeHostPost_complete() {
 		return "/hosting/become-host-complete";//호스트가 가진 숙소 쪽으로 감
 	}
 	
+	
+	
+	///////////////////////
 	@PostMapping("/listings")
 	public String listingsPost() {
 		return "/hosting/listings";
@@ -258,26 +250,58 @@ public class HostController {
 	public void helpGet() {
 
 	}
+		
 	
+	
+	///////////////////////아마도 안쓸듯 ////////////////
+	
+	@PostMapping("/become-host3_6")
+	public String becomeHostPost3_6() {
+		return "/hosting/become-host3_6";
+	}
+	
+	@PostMapping("/become-host4_6")
+	public String becomeHostPost4_6() {
+		return "/hosting/become-host4_6";
+	}
+	
+	@PostMapping("/become-host5_6")
+	public String becomeHostPost5_6() {
+		return "/hosting/become-host5_6";
+	}
+	
+	@PostMapping("/become-host6_6")
+	public String becomeHostPost6_6() {
+		return "/hosting/become-host6_6";
+	}
+
+	@GetMapping("/become-host3_6")
+	public void becomeHostGet3_6() {
+
+	}
+	
+	@GetMapping("/become-host4_6")
+	public void becomeHostGet4_6() {
+
+	}
+	
+	@GetMapping("/become-host5_6")
+	public void becomeHostGet5_6() {
+
+	}
+	
+	@GetMapping("/become-host6_6")
+	public void becomeHostGet6_6() {
+
+	}
+	
+	
+	///////////////////////////////////////////////////////////
+	
+	
+
 	//Request
 	
 	
-	//파일 업로드
-	@RequestMapping(value = "/upload" , method = RequestMethod.POST)
-	public String upload(MultipartHttpServletRequest mtf) throws Exception {
-		// 파일 태그
-		String fileTag = "file";
-	    	// 업로드 파일이 저장될 경로
-		String filePath = "C:\\temp\\";
-		// 파일 이름	
-		MultipartFile file = mtf.getFile(fileTag);
-		String fileName = file.getOriginalFilename();
-		// 파일 전송
-		try {
-		    file.transferTo(new File(filePath + fileName));
-		} catch(Exception e) {
-		    System.out.println("업로드 오류");
-		}
-			     return "";//돌려보낼 주소    
-	}
+	
 }

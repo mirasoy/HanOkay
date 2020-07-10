@@ -8,12 +8,14 @@ public interface AcmOptionMapper {
 
 	public List<AcmOptionVO> getList(String acmNum);
 	
-	public int insert(AcmOptionVO option);
+	public int insert(AcmOptionVO vo);
 	
 	public AcmOptionVO read(String acmNum);
 	
 	public int delete(String acmNum, String acmOptcode);
 	
-	public int update(AcmOptionVO option);
+	public int updateNew(String acmNum,String option);//숙소등록할떄옵션추가
+	public int update(AcmOptionVO acm);
+	
 	
 }
