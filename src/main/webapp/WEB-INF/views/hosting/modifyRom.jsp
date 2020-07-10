@@ -65,7 +65,7 @@
   		  
 	<div class="row">
   <div class="col-lg-12">
-    <h4><c:out value="${thisrom.romName }"/>의  정보</h4>
+    <h4><c:out value="${thisrom.romName }"/>의  정보 수정하기</h4>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -75,66 +75,69 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
 
-      <div class="panel-heading">객실 상세보기</div>
+      <div class="panel-heading">객실 수정하기</div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-		<div class="form-group">
-          <label>소속숙소번호</label> <input class="form-control" name='acmNum' id='acmNum'
-            value='<c:out value="${thisrom.acmNum }"/>' readonly="readonly">
-        </div>	
-        <div class="form-group">
-          <label>객실번호</label> <input class="form-control" name='romNum' id='romNum'
-            value='<c:out value="${thisrom.romNum }"/>' readonly="readonly">
-        </div>
-
-        <div class="form-group">
-          <label>객실이름</label> <input class="form-control" name='romName'
-            value='<c:out value="${thisrom.romName }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 타입</label> <input class="form-control" name='romType'
-            value='<c:out value="${thisrom.romType }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실최대수용인원</label> <input class="form-control" name='romCapa'
-            value='<c:out value="${thisrom.romCapa }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>침대 타입</label> <input class="form-control" name='bedType'
-            value='<c:out value="${thisrom.bedType }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>침대 갯수</label> <input class="form-control" name='bedCnt'
-            value='<c:out value="${thisrom.bedCnt }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>객실 크기</label> <input class="form-control" name='romSize'
-            value='<c:out value="${thisrom.romSize }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 1박요금</label> <input class="form-control" name='romPrice'
-            value='<c:out value="${thisrom.romPrice }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 사진</label> <input class="form-control" name='romPurl'
-            value='<c:out value="${thisrom.romPurl }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>객실 위치</label> <input class="form-control" name='romPurl'
-            value='<c:out value="${thisrom.romLoca }"/>' readonly="readonly">
-        </div>
-
-
-		<button data-oper='modify' class="btn btn-default">수정하기</button>
-		<button data-oper='remove' class="btn btn-danger">삭제하기</button>
-		<button data-oper='list' class="btn btn-info" o>뒤로가기</button>
+		<form id="actionForm" method="post">
+			<div class="form-group">
+	          <label>소속숙소번호</label> <input class="form-control" name='acmNum' id='acmNum'
+	            value='<c:out value="${thisrom.acmNum }"/>' readonly="readonly">
+	        </div>	
+	        <div class="form-group">
+	          <label>객실번호</label> <input class="form-control" name='romNum' id='romNum'
+	            value='<c:out value="${thisrom.romNum }"/>' readonly="readonly">
+	        </div>
+	
+	        <div class="form-group">
+	          <label>객실이름</label> <input class="form-control" name='romName' id='romName'
+	            value='<c:out value="${thisrom.romName }"/>'>
+	        </div>
+	        <div class="form-group">
+	          <label>객실 타입</label> <input class="form-control" name='romType' id='romType'
+	            value='<c:out value="${thisrom.romType }"/>'>
+	        </div>
+	        <div class="form-group">
+	          <label>객실최대수용인원</label> <input class="form-control" name='romCapa' id='romCapa'
+	            value='<c:out value="${thisrom.romCapa }"/>'>
+	        </div>
+	        <div class="form-group">
+	          <label>침대 타입</label> <input class="form-control" name='bedType' id='bedType'
+	            value='<c:out value="${thisrom.bedType }"/>'>
+	        </div>
+			<div class="form-group">
+	          <label>침대 갯수</label> <input class="form-control" name='bedCnt' id='bedCnt'
+	            value='<c:out value="${thisrom.bedCnt }"/>' >
+	        </div>
+			<div class="form-group">
+	          <label>객실 크기</label> <input class="form-control" name='romSize' id='romSize'
+	            value='<c:out value="${thisrom.romSize }"/>' >
+	        </div>
+	        <div class="form-group">
+	          <label>객실 1박요금</label> <input class="form-control" name='romPrice' id=romPrice'
+	            value='<c:out value="${thisrom.romPrice }"/>' >
+	        </div>
+	        <div class="form-group">
+	          <label>객실 사진</label> <input class="form-control" name='romPurl' id='romPurl'
+	            value='<c:out value="${thisrom.romPurl }"/>'>
+	        </div>
+			<div class="form-group">
+	        <label>객실 위치</label> <input class="form-control" name='romLoca' id='romLoca'
+	            value='<c:out value="${thisrom.romLoca }"/>'>
+    	    </div>
 			
-	</div>
-
-
-		<!-- 빈 폼 -->
-		<form id="actionForm">
+	
+	
+			<button data-oper='modify' class="btn btn-default">수정완료</button>
+			<button data-oper='list' class="btn btn-info">뒤로가기</button>
+				
 		</form>
+		</div>
+</div>
+</div>
+</div>
+</div>
+
+	
 				
 
 <%@include file="../includes/footer.jsp"%>
@@ -153,18 +156,10 @@
 				alert("목록으로 돌아갑니다");
 				formObj.attr("action","/hosting/become-host2_6");	
 			} else if(operation==='modify'){
-				alert("객실을 수정합니다");
-				formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-				formObj.attr("action","/hosting/modifyRom");
-			} else if(operation==='remove'){
-				if(confirm("정말 삭제하시겠습니까??")==true){
-					formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
-					formObj.attr("action","/hosting/removeRom");
-				} else {
-					return false;
-				}
+				alert("객실 수정이 완료되었습니다");
+				formObj.attr("action","/hosting/modifyRom");//홈의 내용과 다같이 들어간다
 			}
+			
 			actionForm.submit();
 		});
 	});

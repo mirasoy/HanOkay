@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <style>
 	.room{
 		width:350px;
@@ -17,14 +18,14 @@
 </style>
 
 <div id="page-wrapper" style="padding-bottom:50px;">
-				
+			<input type="text" id="ACM_NUM" name="ACM_NUM" value=" <c:out value='${acmNum }'/>" readonly="readonly">
 			  <!-- 숙소 방 추가 모달로 띄우기-->
 			  <form action="/hosting/become-host2_6pop" method="post">
-				  <h4>2.개별객실 추가하기</h4><input type="text" name="ACM_NUM" id="ACM_NUM" value="ACM0001" readonly="readonly">
+				  <h4>6-2.개별객실 추가하기</h4>
 				
 				  <div id="image_container" style="width:200px;height:200px;"></div>
 				  <input type="file" id="ROM_PURL" name="ROM_PURL" placeholder="객실 사진" onchange="setThumbnail(event);">
-				  <div id="rooms">
+				  
 					  <div class="room" id="room">
 						  <select name="ROM_TYPE" id="ROM_TYPE">
 						  	<option value="single">싱글</option>
@@ -94,7 +95,7 @@
 		});
 		
 		//name/value 형태로 담는다
-		var allData={"acmNum":acmNum, "romType":romType,"romName":romName, "romNum":"T0111",
+		var allData={"acmNum":acmNum, "romType":romType,"romName":romName, "romNum":"R310",
 				"romCapa":romCapa, "bedType":bedType, "bedCnt":bedCnt, "romSize":romSize, 
 				"romLoca":romLoca,"romPrice":romPrice,"romPurl":"rom.jpg",
 				"romOptArr":chkArr		
@@ -102,12 +103,15 @@
 		
 		$.ajax({
 			url:'become-host2_6pop',
-			type:'post',
+			type:"POST",
 			data:allData,
 			success: function(data){
 				alert("객실이 추가되었습니다.");
 				self.close();
-			}
+			}, error:function(jqXHR, textStatus, errorThrown){
+	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+	            self.close();
+	        }
 		});
 		
 	}

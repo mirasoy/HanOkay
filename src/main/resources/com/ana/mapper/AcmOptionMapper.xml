@@ -13,7 +13,7 @@
 		select * from TACM_OPTION where ACM_NUM = #{acmNum}
 	</select>
 
-	<insert id="insert">
+	<insert id="updateNew">
 		insert into TACM_OPTION(ACM_NUM, ACM_OPTCODE)
 		values (#{acmNum}, #{acmOptcode})
 	</insert>

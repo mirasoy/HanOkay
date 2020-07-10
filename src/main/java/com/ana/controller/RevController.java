@@ -44,7 +44,6 @@ import com.ana.service.RevService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-//import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j

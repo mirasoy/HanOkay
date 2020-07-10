@@ -27,6 +27,7 @@ public class RomRegServiceImpl implements RomRegService{
 	
 	@Override//뿌려주기
 	public List<RomVO> getList(String acmNum) {
+		System.out.println("A1들어오나아아"+acmNum);
 		return mapper.getList(acmNum);
 	}
 	
@@ -52,9 +53,20 @@ public class RomRegServiceImpl implements RomRegService{
 
 	@Override
 	public RomVO get(String romNum) {
-		System.out.println("오나ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 		RomVO vo = mapper.read(romNum); 
 		return vo;
+	}
+
+
+	@Override
+	public boolean remove(String romNum) {//객실 지우기
+		return mapper.remove(romNum)==1;
+	}
+
+
+	@Override
+	public boolean modify(RomVO rom) {
+		return mapper.modify(rom)==1;
 	}
 
 	
