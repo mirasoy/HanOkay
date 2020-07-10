@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%-- <%@ page import="com.ana.domain.UserVO"%>
 <% UserVO user= (UserVO)session.getAttribute("user"); 
-String userLastName="";
-String userFstName="";
+String userLastname="";
+String userFstname="";
 String userPwd="";
 if(user != null){
-userLastName= user.getLastname();
-userFstName=user.getFstname();
+userLastname= user.getLastname();
+userFstname=user.getFstname();
 userPwd= user.getPwd();
 } 
 
@@ -21,11 +21,11 @@ userPwd= user.getPwd();
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>환영합니다</title>
 </head>
-<body>
+	<body>
 		<table border="1" width="500px">
 		<tr>
 		<td>
-			<label>	<%=userLastName %><%=userFstName %>님 환영합니다. </label>
+			<label>	<%=userLastname %><%=userFstname %>님 환영합니다. </label>
 			<label style="color: red;" id="msg"><c:out value="" /></label>
 				<br>
 				<a href="logout">로그아웃하기</a>
@@ -33,7 +33,6 @@ userPwd= user.getPwd();
 			</tr>
 		</table>
 	
-	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	<!--script type="text/javascript">
 	$(document).ready(function() {
 		let formObj = $("form");
@@ -52,6 +51,6 @@ userPwd= user.getPwd();
 		});
 	}
 	</script-->
-</body>
+	</body>
 <%@include file="../includes/footer.jsp"%>
 </html>

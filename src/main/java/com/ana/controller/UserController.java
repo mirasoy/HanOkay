@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ana.domain.UserVO;
+import com.ana.service.EmailService;
 import com.ana.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -19,6 +21,9 @@ public class UserController {
 	@Autowired
 	private UserService service;
 
+	@Autowired
+	EmailService emailService;
+	
 	// 회원가입 페이지 보여주기
 	@RequestMapping("/signUp")
 	public String showPage() {
@@ -47,6 +52,15 @@ public class UserController {
 		return "register/register";
 	}
 
-
+	
+	//인증메일을 발송하는 기능
+	@PostMapping("/EmailAuth")
+	public void sendAuthEmail(String email, RedirectAttributes rttr) {
+		log.info("입력된 email: "+ email);
+		emailService.sendAuthEmail(email);
+		ModelAndView mv = new ModelAndView();
+	
+				
+	}
 
 }
