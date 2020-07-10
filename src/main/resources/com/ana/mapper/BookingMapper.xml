@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="checkin_Date" property="checkinDate" />
 		<result column="checkout_Date" property="checkoutDate" />
 		<result column="book_Price" property="bookPrice" />
+		<result column="book_Status" property="bookStatus" />
 	</resultMap>
 
 	<!-- 예약취소상태 -->
@@ -117,7 +118,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getList" resultMap="BookingVOResult">
 	
 	<![CDATA[
-	select * from tbooking where user_num='A1'
+	select * from tbooking where user_num='U1'
+<!-- 	select * from tbooking where user_num='A1' -->
 	
 	]]>
 
@@ -134,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     B.BOOK_NUM,
     B.checkin_Date,
     B.cheCkout_Date,
-    B.book_Price
+    B.book_Status
 	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
 	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.user_num=#{loginUserNum}
 	order by to_number(substr(B.BOOK_NUM,2)) 
@@ -148,7 +150,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 2. 예약예정 리스트 -->
 	<select id="getBookList" resultMap="BookVOResult">	
 	<![CDATA[
-	SELECT
+	SELECT distinct
     A.ACM_NAME,
     B.BOOK_NUM,
     B.checkin_Date,
@@ -181,7 +183,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 4. 예약완료 리스트 -->
 	<select id="getCheckoutList" resultMap="BookVOResult">
-		SELECT
+		SELECT distinct
 		A.ACM_NAME,
 		B.BOOK_NUM,
 		B.checkin_Date,

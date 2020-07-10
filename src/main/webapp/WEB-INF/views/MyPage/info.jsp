@@ -73,7 +73,7 @@
         </div>
         <div class="form-group">
           <label>흡연여부</label> <input class="form-control" name='smoking'
-            value='<c:out value="${info.smoking} "/>' readonly="readonly">
+            value='' readonly="readonly">
         </div> 
  
         
@@ -127,7 +127,15 @@
   <!-- end panel -->
 </div>
 <!-- /.row -->
-
+<script>
+	var s = '<c:out value="${info.smoking} "/>';
+	var s2 = s.trim();
+	if(s2=='1'){
+		$('input[name=smoking]').val("YES, 흡연을 원합니다.");
+	}else{
+		$('input[name=smoking]').val("NO, 금연을 원합니다.");
+	}
+</script>
 
 
 <%@include file="../includes/footer.jsp"%>

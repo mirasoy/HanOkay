@@ -6,6 +6,21 @@
 <html lang="en">
 <%@include file="../includes/header.jsp"%>
 
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css?family=Alegreya:700"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
+	rel="stylesheet">
+
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet"
+	href="/resources/css/bootstrap.min.css" />
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
+
+
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,6 +47,8 @@
 		<![endif]-->
 
 </head>
+
+
 
 <body>
 	<div id="booking" class="section">

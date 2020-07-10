@@ -117,7 +117,7 @@ public class BookingControllerTests {
 	
 
 	
-//	@Test
+	@Test
 	public void testGet() throws Exception {
 
 		log.info(mockMvc.perform(MockMvcRequestBuilders
@@ -162,17 +162,5 @@ public class BookingControllerTests {
 
 	}
 	
-	@Test
-	public void testGetInfo() throws Exception {
 
-	}
-	
-	@Test
-	public String testBooking() throws Exception {
-		return null;
-	}
-	
-	@Test
-	public void testGetS() throws Exception {
-	}
 }

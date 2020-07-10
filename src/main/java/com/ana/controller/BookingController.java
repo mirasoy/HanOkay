@@ -27,11 +27,7 @@ import lombok.extern.log4j.Log4j;
 public class BookingController {
 	private BookingService service;
 
-	
-	@PostMapping("/sendMail")
-	public void sendMail(String bookNum,String email) {
-		
-	}
+
 	
 	//모든 목록
 	@GetMapping("/bookListAll")
@@ -76,6 +72,10 @@ public class BookingController {
 		log.info("/info or modify");
 		
 		model.addAttribute("info", service.get(bookNum));
+			
+		
+		
+		
 	}
 	
 	
@@ -83,12 +83,15 @@ public class BookingController {
 //예약 수정	
 	@PostMapping("/modify")
 	public String modify(BookingVO info, RedirectAttributes rttr) {
+		
+		
 		log.info("modify:"+info);
 		log.info("되었습니다.");
 		
 		if(service.modify(info)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
 		return "redirect:/MyPage/bookList";
 	}
 

@@ -12,6 +12,7 @@ public class BookVO {
 	private String acmName;	
 	private String bookNum;
 	private String romNum;	
+	private String bookStatus;	
 	private Date checkinDate;
 	private Date checkoutDate;
 	private Integer bookPrice;
