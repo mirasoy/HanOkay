@@ -2,6 +2,7 @@ package com.ana.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.ana.domain.AcmVO;
@@ -24,5 +25,10 @@ public interface AcmMapper {
 	public int update(AcmVO acm);
 	
 	public int getTotalCount(Criteria cri);
-
+	
+	public List<String> getAcmNum(String person);
+	
+	public List<AcmVO> getListPaging(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
+	
+	
 }

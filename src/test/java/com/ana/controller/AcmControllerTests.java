@@ -37,11 +37,13 @@ public class AcmControllerTests {
 		log.info(mockMvc.perform(
 				MockMvcRequestBuilders.get("/acm/list")
 				.param("pageNum", "1")
+				.param("person", "8")
+				.param("keyword", "대구광역시")
 				.param("amount", "50"))
 				.andReturn().getModelAndView().getModelMap());
 	}
 	
-	@Test
+	//@Test
 	public void testList() throws Exception {
 		log.info(
 				mockMvc.perform(MockMvcRequestBuilders.get("/acm/list"))
@@ -58,7 +60,7 @@ public class AcmControllerTests {
 		log.info(resultPage);
 	}
 	
-	@Test
+	//@Test
 	public void testGet() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders
 				.get("/acm/get")
@@ -77,7 +79,7 @@ public class AcmControllerTests {
 		log.info(resultPage);
 	}
 	
-	@Test
+	//@Test
 	public void testRemove() throws Exception {
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/acm/remove")
 				.param("acmNum", "A33")

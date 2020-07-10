@@ -2,6 +2,7 @@ package com.ana.mapper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -97,7 +98,7 @@ public class AcmMapperTests {
 		log.info(acm);
 	}
 	
-	@Test
+	//@Test
 	public void testPaging() {
 		Criteria cri = new Criteria();
 		//10개씩 3페이지
@@ -108,12 +109,26 @@ public class AcmMapperTests {
 		list.forEach(acm -> log.info(acm.getAcmNum()));
 	}
 	
-	@Test
+	//@Test
 	public void testSearch() {
 		Criteria cri = new Criteria();
 		cri.setKeyword("북촌");
 		cri.setType("TC");
 		List<AcmVO> list = mapper.getListWithPaging(cri);
+		list.forEach(acm -> log.info(acm));
+	}
+	
+	@Test
+	public void testGetAcmNum() {
+		Criteria cri = new Criteria();
+		cri.setKeyword("대구");
+		cri.setPerson("8");
+		List<String> acmNumList = mapper.getAcmNum(cri.getPerson());
+		acmNumList.forEach(acm -> log.info(acm));
+		List<AcmVO> list = new ArrayList<>();
+	
+		list = mapper.getListPaging(cri, acmNumList);
+		
 		list.forEach(acm -> log.info(acm));
 	}
 	

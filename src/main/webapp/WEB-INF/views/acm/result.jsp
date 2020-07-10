@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <% String location = (String)session.getAttribute("location"); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,9 +46,13 @@
 	height: 990px;
 	display: inline-block;
 }
+
+.row {
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 50px;
+}
 </style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -72,18 +75,19 @@
 									<span class="form-label">Location</span> 
 									<input class="form-control" type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
 									<input type="hidden" value="CW" name="type">
+									
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<span class="form-label">Check In</span> <input
-										class="form-control" type="date" name="in"  value='<c:out value="${pageMaker.cri.in}"/>'>
+										class="form-control" type="date" name="in" id="datePickerId"  value='<c:out value="${pageMaker.cri.in}"/>'>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<span class="form-label">Check out</span> <input
-										class="form-control" type="date" name="out" value='<c:out value="${pageMaker.cri.out}"/>'>
+										class="form-control" type="date" name="out" id="datePickerId2" value='<c:out value="${pageMaker.cri.out}"/>'>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -189,11 +193,6 @@
 		<input type='hidden' name='person' value='<c:out value="${pageMaker.cri.person}"/>'>
 		<input type='hidden' name='in' value='<c:out value="${pageMaker.cri.in}"/>'>
 		<input type='hidden' name='out' value='<c:out value="${pageMaker.cri.out}"/>'>	
-<!-- 		<input type='hidden' name='type'
-			value='<c:out value="${pageMaker.cri.type}"/>'> <input
-			type='hidden' name='keyword'
-			value='<c:out value="${pageMaker.cri.keyword}"/>'>
-		 -->
 	</form>
 	
 	</div>
@@ -205,6 +204,44 @@
 	
 	<script>
 	
+	datePickerId.min = new Date().toISOString().split("T")[0];
+	
+	document.getElementById("datePickerId2").disabled = true;
+	$("#datePickerId").on("change paste keyup", function() {
+	      console.log($(this).val()); 
+	     var testDate= $(this).val();
+	     var date_regex = /^\d{4}-\d{2}-\d{2}$/;
+	     if((date_regex.test(testDate)))
+	      document.getElementById("datePickerId2").disabled = false;
+	     
+	     var end_ymd= document.getElementById("datePickerId").value;
+	     
+	     var yyyy = end_ymd.substr(0,4);
+	     var mm = end_ymd.substr(5,2);
+	     var dd = end_ymd.substr(8,2);
+	     var com_ymd = new Date(yyyy,mm-1,dd);
+	     
+	     com_ymd.setDate(com_ymd.getDate() + 1);
+	     var yyyy= com_ymd.getFullYear();
+	     var mm = com_ymd.getMonth()+1;
+	     var dd = com_ymd.getDate();
+	     
+	     function dateToYYYYMMDD(date){
+	    	    function pad(num) {
+	    	        num = num + '';
+	    	        return num.length < 2 ? '0' + num : num;
+	    	    }
+	    	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
+	    	}
+	     
+	     
+	     var checkout = yyyy+"-"+mm+"-"+dd; 120-7-21 
+	     
+	 	 datePickerId2.min = dateToYYYYMMDD(com_ymd);
+	});
+	
+	
+
 		var address = null;
 		
 
@@ -386,7 +423,6 @@
 
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9doHEOny5z2QCXaCBWMm84aCRbPs0YVA&callback=initMap">
-		
 	</script>
 	<script type="text/javascript">
 		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');

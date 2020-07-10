@@ -3,6 +3,7 @@ package com.ana.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import oracle.sql.DATE;
 
 @Getter
 @Setter
@@ -25,6 +26,8 @@ public class Criteria {
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
 		this.amount= amount;
+		this.keyword="";
+		this.person="1";
 	}
 	
 	public String[] getTypeArr() {

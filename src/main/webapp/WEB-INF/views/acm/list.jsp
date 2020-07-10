@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,13 +58,13 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<span class="form-label">Check In</span>
-												<input class="form-control" type="date" name="in">
+												<input class="form-control" type="date" name="in" id="datePickerId">
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<span class="form-label">Check out</span>
-												<input class="form-control" type="date" name="out">
+												<input class="form-control" type="date" name="out" id="datePickerId2">
 											</div>
 										</div>
 										<div class="col-md-2">
@@ -246,6 +245,43 @@ function fillInAddress(){
 	}
 }
 //참고 끝
+
+
+datePickerId.min = new Date().toISOString().split("T")[0];
+	
+	document.getElementById("datePickerId2").disabled = true;
+	$("#datePickerId").on("change paste keyup", function() {
+	      console.log($(this).val()); 
+	     var testDate= $(this).val();
+	     var date_regex = /^\d{4}-\d{2}-\d{2}$/;
+	     if((date_regex.test(testDate)))
+	      document.getElementById("datePickerId2").disabled = false;
+	     
+	     var end_ymd= document.getElementById("datePickerId").value;
+	     
+	     var yyyy = end_ymd.substr(0,4);
+	     var mm = end_ymd.substr(5,2);
+	     var dd = end_ymd.substr(8,2);
+	     var com_ymd = new Date(yyyy,mm-1,dd);
+	     
+	     com_ymd.setDate(com_ymd.getDate() + 1);
+	     var yyyy= com_ymd.getFullYear();
+	     var mm = com_ymd.getMonth()+1;
+	     var dd = com_ymd.getDate();
+	     
+	     function dateToYYYYMMDD(date){
+	    	    function pad(num) {
+	    	        num = num + '';
+	    	        return num.length < 2 ? '0' + num : num;
+	    	    }
+	    	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
+	    	}
+	     
+	     
+	     var checkout = yyyy+"-"+mm+"-"+dd; 120-7-21 
+	     
+	 	 datePickerId2.min = dateToYYYYMMDD(com_ymd);
+	});
 	$(document)
 			.ready(
 					function() {
