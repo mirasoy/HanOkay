@@ -16,11 +16,12 @@ String price = request.getParameter("price");
 
 // 세션 로그인값 저장하기(테스트용)
 Date birthday = new Date(2020/12/12);
-UserVO user = new UserVO("U1", "test@ana.com", "", "성", "냄쿵", "112", birthday, "E", "GU");
-session.setAttribute("user", user);
+UserVO userTmp = new UserVO("U1", "test@ana.com", "", "성", "냄쿵", "112", birthday, "E", "GU");
+session.setAttribute("userTmp", userTmp);
 
 // 세션 로그인값 불러오기
-user = (UserVO)session.getAttribute("user");
+userTmp = (UserVO)session.getAttribute("userTmp"); 
+
 
 // 숙박일 계산: get방식으로 가져온 날짜 String을 Date로 변환하여 계산
 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -38,45 +39,38 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 %>
 <!DOCTYPE html>
 <html lang="en">
+<%@include file="../includes/header.jsp"%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>예약 페이지</title>
-
-<link href="https://fonts.googleapis.com/css?family=Alegreya:700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-	rel="stylesheet">
-<link type="text/css" rel="stylesheet"
-	href="../resources/css/bootstrap.min.css" />
-<link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-
 		[숙소정보]</br>
 		<c:out value="${rom.romPurl}" /></br>
 		<c:out value="${acm.acmName}" /></br>
-		<%=checkin%> ~ <%=checkout%></br>
+		<%=checkin%> ~ <%=checkout%> (<%=staydays%>박)</br>
 		<c:out value="${rom.romName}" />
 		(<c:out value="${rom.romType}" />)</br>
 		<%=person%>명 (최대 <c:out value="${rom.romCapa}" />명)</br> 
 		
 		</br></br></br>
-		[회원정보]</br>
-	 <form name="form" method="post">
-		<input type="checkbox" id="cb" checked="checked" onclick="setInfo()">예약자 == 회원</br>
+		[예약자 정보]</br>
+		*필수 입력사항</br>
+	 	<form name="form" method="post" onsubmit="return checkValidation()">
+		<input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</br>
 	
-		이름*<input type="text" id="u1" name='bookerFirstname' value='<%=user.getFstname() %>' readonly="readonly"> 
-		성*<input type="text" id="u2"  name='bookerLastname' value='<%=user.getLastname()%>' readonly="readonly"></br>
-		이메일*<input type="text" id="u3"  name='bookerEmail' value='<%=user.getEmail()%>' readonly="readonly"></br> 
-		전화번호<input type="text" id="u4" name='bookerPhone' value='<%=user.getUserPhone()%>' readonly="readonly">
+		이름*<input type="text" id="userInfo1" name='bookerFirstname' value='<%=userTmp.getFstname() %>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"> 
+		성*<input type="text" id="userInfo2"  name='bookerLastname' value='<%=userTmp.getLastname()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
+		<label id="nameMsg" >&nbsp</label></br>
+		이메일*<input type="text" id="userInfo3"  name='bookerEmail' value='<%=userTmp.getEmail()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br> 
+		<label id="emailMsg" >&nbsp</label></br>
+		전화번호<input type="text" id="userInfo4" name='bookerPhone' value='<%=userTmp.getUserPhone()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
+		<label id="phoneMsg" >&nbsp</label></br>
 		
-		<input type="hidden" name='userNum' value='<%=user.getUserNum() %>'> 
+		<input type="hidden" name='userNum' value='<%=userTmp.getUserNum() %>'> 
 		<input type="hidden" name='checkinDate' value='<%=inDate%>'> 
 		<input type="hidden" name='checkoutDate' value='<%=outDate%>'> 
 		<input type="hidden" name='staydays' value='<%=staydays%>'> 
@@ -113,13 +107,15 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		</select></br> 
 		흡연여부: 금연객실<input type="radio" name="smoking" value="0" checked="checked">
 			흡연객실<input type="radio" name="smoking" value="1"></br> 
-		특별 요청사항: <input type="text" size="100" name="request" value=""></br> 
+		특별 요청사항: <input type="text" size="100" id="request" name="request" value=""></br> 
 			<input type="hidden" name="bookStatus" value="RS_STT_BK"> 
-			
+					
 		</br></br></br>	
 		[요금정보]</br>
-		<label ></label>
-		₩<c:out value="${rom.romPrice}" /> X <%=staydays%>박 &emsp;&emsp;₩<%=bookPrice%></br> 
+		<table>
+			<tr><td>₩<c:out value="${rom.romPrice}" /> X <%=staydays%>박</td><td id="total"></td></tr>
+			
+		</table>
 		세금 및 봉사료 &emsp;&emsp;₩<%=bookPrice / 10%></br> 
 		총 할인 금액 &emsp;&emsp;₩0</br> 
 		회원 등급 할인 &emsp;&emsp;₩0</br> 
@@ -133,22 +129,100 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 	</form>
 	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
+	
+		const regFirstnameKo = /^[가-힣]{1,20}$/; //   "U_FSTNAME" Varchar2(60 ) NOT NULL,
+		const regFirstnameEn = /^[a-zA-Z]{1,60}$/; //   "U_FSTNAME" Varchar2(60 ) NOT NULL,
+		const regLastnameKo = /^[가-힣]{1,13}$/; //  "U_LASTNAME" Varchar2(40 ) NOT NULL,
+		const regLastnameEn = /^[a-zA-Z]{1,40}$/; //  "U_LASTNAME" Varchar2(40 ) NOT NULL,
+		const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;   // "EMAIL" Varchar2(800 ) NOT NULL,
+		const regPhone = /^[0-9]{0,15}$/; //  "U_PHONE" Number(15,0),
+	
+		const firstname = document.getElementById("userInfo1");
+		const lastname = document.getElementById("userInfo2");
+		const email = document.getElementById("userInfo3");
+		const phone = document.getElementById("userInfo4");
+		const request = document.getElementById("request");
+		
+		function firstnameValid() {
+			if (!firstname.value) {
+				firstname.placeholder = "이름을 입력하지 않았습니다.";
+				return false;
+			} else if ((!regFirstnameKo.test(firstname.value)&&(!regFirstnameEn.test(firstname.value))) ) {
+				document.getElementById("nameMsg").innerText = "이름은 1~60자의 영문 또는 1~20자의 한글만 사용 가능합니다.";
+				return false;
+			}else{
+				document.getElementById("nameMsg").innerHTML = '&nbsp';
+				return true;
+			}
+		}
+		
+		function lastnameValid() {
+			if (!lastname.value) {
+				lastname.placeholder = "성을 입력하지 않았습니다.";
+				return false;
+			} else if ((!regLastnameKo.test(lastname.value)&&(!regLastnameEn.test(lastname.value))) ) {
+				document.getElementById("nameMsg").innerText = "성은 1~40자의 영문 또는 1~13자의 한글만 사용 가능합니다.";
+				return false; 
+			}else{
+				document.getElementById("nameMsg").innerHTML = '&nbsp';
+				return true;
+			}
+		}
+		
+		function emailValid() {
+			if (!email.value) {
+				email.placeholder = "이메일을 입력하지 않았습니다.";
+				return false;
+			} else if (!regEmail.test(email.value) ) {
+				document.getElementById("emailMsg").innerText = "올바른 이메일 형식이 아닙니다.";
+				return false;
+			}else{
+				document.getElementById("emailMsg").innerHTML = '&nbsp';
+				return true;
+			}
+		}
+		
+		function phoneValid() {
+			if (!regPhone.test(phone.value) ) {
+				document.getElementById("phoneMsg").innerText = "연락처는 1~15자의 숫자만 가능합니다.";
+				return false;
+			}else{
+				document.getElementById("phoneMsg").innerHTML = '&nbsp';
+				return true;
+			}
+		}
+		
+		function checkValidation() {
+			return firstnameValid()&&lastnameValid()&&emailValid()&&phoneValid();
+		}
+		
 		// 체크박스를 눌렀을 때 실행되는 메서드
 		function setInfo() {
 			if(document.getElementById("cb").checked){
-				// 예약자 정보가 리셋된다
-				document.getElementById("u1").value='<%=user.getFstname() %>';
-				document.getElementById("u2").value='<%=user.getLastname()%>';
-				document.getElementById("u3").value='<%=user.getEmail()%>';
-				document.getElementById("u4").value='<%=user.getUserPhone()%>';
-			}else{
+				
+				// 예약자 정보를 로드하고 입력이 불가능한 상태가 된다
+				document.getElementById("userInfo1").value='<%=userTmp.getFstname() %>';
+				document.getElementById("userInfo2").value='<%=userTmp.getLastname()%>';
+				document.getElementById("userInfo3").value='<%=userTmp.getEmail()%>';
+				document.getElementById("userInfo4").value='<%=userTmp.getUserPhone()%>';
+				
 				for(let i = 1; i <= 4; i++){
-					document.getElementById("u"+i).value="";
-					document.getElementById("u"+1).readonly="";
+					document.getElementById("userInfo"+i).setAttribute('readonly', 'readonly');
+					document.getElementById("userInfo"+i).style.opacity=0.5;
+				}	
+			}else{
+				
+				// 예약자 정보를 입력 가능한 상태가 된다
+				for(let i = 1; i <= 4; i++){
+					document.getElementById("userInfo"+i).removeAttribute('readonly');
+					document.getElementById("userInfo"+i).style.opacity=1;
+					document.getElementById("userInfo"+i).style.backgroundColor="";
 				}	
 			}
 		}
+		
+		
 	</script>
+<%@include file="../includes/footer.jsp"%>
 </body>
-
 </html>

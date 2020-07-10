@@ -1,5 +1,9 @@
 package com.ana.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -26,11 +30,63 @@ public class AcmController {
 	
 	private AcmService service;
 	
-
 	@GetMapping({"/list","/result"})
 	public void list(Criteria cri, String acmNum, Model model) {
 		log.info("list: "+cri);
 		
+//		cri.setKeyword("대구광역시");
+//		cri.setPerson("8");
+		if(!(cri.getIn()==null||cri.getIn().equals("")) && !(cri.getOut()==null||cri.getOut().equals(""))) {
+			int cin = Integer.parseInt(cri.getIn().replace("-", ""));
+			int cout = Integer.parseInt(cri.getOut().replace("-", ""));
+				if(cin>=cout) {
+					return;
+				}
+		}
+		
+		try {
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat df = new SimpleDateFormat ("yyyy-MM-dd");
+			Date date =null;
+			String in="", out="";
+			//1. 체크인x 체크아웃 x 오늘내일
+			if( (cri.getIn()==null||cri.getIn().equals("")) && (cri.getOut()==null||cri.getOut().equals("")) ) {
+						
+				in = df.format(cal.getTime());
+				cal.add(Calendar.DATE, 1);
+				out = df.format(cal.getTime());
+				cri.setIn(in);
+				cri.setOut(out);
+				//2. 체크인 x 체크아웃 o 체크인=체크아웃-1
+			}else if( (cri.getIn()==null||cri.getIn().equals("")) && !(cri.getOut()==null||cri.getOut().equals("")) ) {
+				date = df.parse(cri.getOut());
+				cal.setTime(date);
+				
+				out = df.format(cal.getTime());
+				cal.add(Calendar.DATE, -1);
+				in = df.format(cal.getTime());
+				
+				cri.setIn(in);
+				cri.setOut(out);
+				//3. 체크인 o 체크아웃 x 체크아웃=체크인+1
+			}else if( !(cri.getIn()==null||cri.getIn().equals("")) && (cri.getOut()==null||cri.getOut().equals("")) ) {
+				date = df.parse(cri.getIn());
+				cal.setTime(date);
+				
+				in = df.format(cal.getTime());
+				cal.add(Calendar.DATE, 1);
+				out = df.format(cal.getTime());
+				
+				cri.setIn(in);
+				cri.setOut(out);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		log.info("list: "+cri);
+			
 		//session.setAttribute("location", cri.getKeyword());
 		//model.addAttribute("cri",cri);
 		model.addAttribute("list",service.getList(cri));

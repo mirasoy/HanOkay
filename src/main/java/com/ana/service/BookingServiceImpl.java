@@ -14,6 +14,7 @@ import com.ana.domain.BookingVO;
 import com.ana.mapper.BookingMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder.ObtainVia;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -86,8 +87,19 @@ public class BookingServiceImpl implements BookingService{
 	}
 
 
-
+	@Override
 	public int register(BookingVO book) {
+		if(!(book.getBookerFirstname().length() <= 50 && 
+				book.getBookerLastname().length() <= 50 && 
+				book.getBookerEmail().length() <= 100 && 
+				book.getBookerEmail().contains("@") &&
+				(Integer.toString(book.getBookerPhone()).length() <= 15 ||
+				Integer.toString(book.getBookerPhone()).length() > 0 ))
+		){
+			System.out.println("올바르지 않은 접근으로 입력 시도!!!");
+			log.info("올바르지 않은 접근으로 입력 시도!!! register......" + book);
+			return 0;
+		}
 		log.info("register......" + book);
 		return mapper.insert(book);
 	}

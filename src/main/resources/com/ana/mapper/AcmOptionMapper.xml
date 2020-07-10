@@ -17,6 +17,8 @@
 		insert into TACM_OPTION(ACM_NUM, ACM_OPTCODE)
 		values (#{acmNum}, #{acmOptcode})
 	</insert>
+	
+	
 
 	<select id="read" resultMap="AcmOptionVOResult">
 		select * from TACM_OPTION where ACM_NUM =

@@ -31,8 +31,6 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-
-	
 	<!-- 이메일 발송 bean 설정 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	        <property name="host" value="smtp.gmail.com" /> <!-- gmail을 사용 -->
@@ -48,8 +46,6 @@
 	            </props>
 	        </property>
 	</bean>
-
-
 
 	<mybatis-spring:scan
 		base-package="com.ana.mapper" />

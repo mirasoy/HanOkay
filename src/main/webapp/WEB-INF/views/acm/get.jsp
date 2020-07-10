@@ -2,10 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	String checkin = request.getParameter("in");
-	String checkout = request.getParameter("out");
-	String person = request.getParameter("person");
+<% 
+	String person = (String)request.getAttribute("person");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,23 +14,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>호텔 상세페이지</title>
-
-<link href="https://fonts.googleapis.com/css?family=Alegreya:700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-	rel="stylesheet">
-<link type="text/css" rel="stylesheet"
-	href="../resources/css/bootstrap.min.css" />
-
-<link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<style>
+<style>
 #map {
 	width: 33%;
-    height: 600px;
-    background-color: grey;
-    display: inline-block;
+	height: 600px; background-color : grey;
+	display: inline-block;
+	background-color: grey;
 }
 </style>
 </head>
@@ -40,39 +27,49 @@
 <body>
 	<div>
 		<div>
-			[숙소정보]</br>
-			<c:out value="${acm.acmName}" /></br>
-			<c:out value="${acm.acmCity}" /><c:out value="${acm.acmDistr}" /><c:out value="${acm.acmDetailaddr}" /></br>
-			<c:out value="${acm.acmDesc}" /></br>
+			[객실 선택]</br> <input type="date" name="in" id="in" value="${srh[0]}">
+			<input type="date" name="out" id="out" value="${srh[1]}">
+			<input type="hidden" id="person" value="<%=person%>">
 
-</br>
-</br>
-</br>
+			<button type="submit" onclick="setDate()">선택</button>
+		</div>
+		</br> </br> </br>
+
+		<div>
+			[숙소정보]</br>
+			<c:out value="${acm.acmName}" />
+			</br>
+			<c:out value="${acm.acmCity}" />
+			<c:out value="${acm.acmDistr}" />
+			<c:out value="${acm.acmDetailaddr}" />
+			</br>
+			<c:out value="${acm.acmDesc}" />
+			</br> </br> </br> </br>
 			<table>
 				<tr>
-					[숙소사진]</br>
-				  	<td rowspan="3"><img alt="대표사진" src="<c:out value="${acm.acmPurl}" />"></td>
-				  	<td><img alt="사진1" src="<c:out value="${acm.acmPurl1}" />"></td>
-				    <td><img alt="사진2" src="<c:out value="${acm.acmPurl2}" />"></td>
-				  	<td><img alt="사진3" src="<c:out value="${acm.acmPurl3}" />"></td>
+					[숙소사진]
+					</br>
+					<td rowspan="3"><img alt="대표사진"
+						src="<c:out value="${acm.acmPurl}" />"></td>
+					<td><img alt="사진1" src="<c:out value="${acm.acmPurl1}" />"></td>
+					<td><img alt="사진2" src="<c:out value="${acm.acmPurl2}" />"></td>
+					<td><img alt="사진3" src="<c:out value="${acm.acmPurl3}" />"></td>
 				</tr>
 				<tr>
-				    <td><img alt="사진4" src="<c:out value="${acm.acmPurl4}" />"></td>
-				  	<td><img alt="사진5" src="<c:out value="${acm.acmPurl5}" />"></td>
-				    <td><img alt="사진6" src="<c:out value="${acm.acmPurl6}" />"></td>
+					<td><img alt="사진4" src="<c:out value="${acm.acmPurl4}" />"></td>
+					<td><img alt="사진5" src="<c:out value="${acm.acmPurl5}" />"></td>
+					<td><img alt="사진6" src="<c:out value="${acm.acmPurl6}" />"></td>
 				</tr>
 			</table>
-				<%--<c:out value="${acm.repPhone}" /></br>
+			<%--<c:out value="${acm.repPhone}" /></br>
 					<c:out value="${acm.acmPhone2}" /></br>
 					<c:out value="${acm.acmFax}" /></br>
 					<c:out value="${acm.acmEmail}" /></br>
 					<c:out value="${acm.checkinTime}" /></br>
 					<c:out value="${acm.checkoutTime}" /></br> --%>
 		</div>
-</br>
-</br>
-</br>
-		
+		</br> </br> </br>
+
 		<div>
 			[숙소리뷰]</br>
 			<table>
@@ -84,7 +81,7 @@
 						<th>등록일&emsp;</th>
 					</tr>
 				</thead>
-							
+
 				<c:forEach items="${rev }" var="rev">
 					<tr>
 						<td><c:out value="${rev.title}" /></td>
@@ -95,25 +92,21 @@
 				</c:forEach>
 			</table>
 		</div>
-		
-</br>
-</br>
-</br>
-		
+
+		</br> </br> </br>
+
 		<div>
 			[편의시설]</br>
 			<table>
 				<c:forEach items="${opt }" var="opt">
 					<td><c:out value="${opt.acmOptcode}" />&emsp;</td>
 				</c:forEach>
-			</table>		
-			
+			</table>
+
 		</div>
-		
-</br>
-</br>
-</br>
-		
+
+		</br> </br> </br>
+
 		<div>
 			[객실정보]</br>
 			<table>
@@ -128,35 +121,76 @@
 						<th>1박이용료&emsp;</th>
 					</tr>
 				</thead>
-							
 				<c:forEach items="${rom }" var="rom">
 					<tr>
-						<td><img alt="객실 사진"  src="<c:out value="${rom.romPurl}" />"></td>
+						<td><img alt="객실 사진" src="<c:out value="${rom.romPurl}" />"></td>
 						<td><c:out value="${rom.romName}" />&emsp;</td>
 						<td><c:out value="${rom.romType}" /></td>
-						<td><c:out value="${rom.bedType}" />
-						 x <c:out value="${rom.bedCnt}" />&emsp;</td>
+						<td><c:out value="${rom.bedType}" /> x <c:out
+								value="${rom.bedCnt}" />&emsp;</td>
 						<td><c:out value="${rom.romCapa}" />&emsp;</td>
 						<td><c:out value="${rom.romSize}" />&emsp;</td>
 						<td><c:out value="${rom.romPrice}" /></td>
-						<td><a type="button" href="
-						/booking/new?romNum=<c:out value="${rom.romNum}"/>
-						&in=<%=checkin%>&out=<%=checkout%>&person=<%=person%>&price=<c:out value="${rom.romPrice}"/>
-						">예약하기</a></td>
+						<td><button class="reservBtn" value="&price=<c:out value="${rom.romPrice}"/>" data-romNum="${rom.romNum}">예약하기</button></td>
+<%-- 						<a id="<c:out value='${rom.romNum}'/>" onclick="return checkValidationDate()" onhref="
+						/booking/new?romNum=<c:out value='${rom.romNum}'/>
+						=
+						&price=<c:out value='${rom.romPrice}'/>">예약하기</a> --%>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
 
-</br>
-</br>
-</br>
-
-	[위치정보]</br>
+	</br>
+	</br>
+	</br> [위치정보]
+	</br>
 	<div id="map"></div>
 	<script>
-	
+		let person = document.getElementById("person").value;
+		let reservBtns = document.getElementsByClassName("reservBtn");
+		
+		for(let i = 0; i<reservBtns.length; i++){
+			let reservBtn = reservBtns[i];
+			reservBtn.addEventListener("click", function(){
+				/* alert(this.getAttribute("data-romNum")) */
+				let checkin = document.getElementById("in").value;
+				let checkout = document.getElementById("out").value;
+				
+				if(person == "null" || person == ""){
+					person = 0;
+				}
+				
+				if(checkin+""=="" || checkout+""==""){
+					alert("날짜를 입력해주세요!");
+					return false;
+				}else if(checkin >= checkout){
+					alert("날짜를 확인해주세요!");
+					return false;
+				}else{
+					document.location = '../../booking/new?romNum='+this.getAttribute("data-romNum") 
+						+ this.value + "&in=" + checkin +"&out=" + checkout +"&person=" + person;
+					return true;
+				}
+			});
+		}
+l
+		
+		// 날짜를 선택한다
+		function setDate() {
+			let checkin = document.getElementById("in").value;
+			let checkout = document.getElementById("out").value;
+			checkin = document.getElementById("in").value;
+			checkout = document.getElementById("out").value;
+		}
+		
+		// 체크인, 체크아웃 파라미터 누락시 확인 요청을 보낸다
+		function checkValidationDate(){
+			
+		}
+			
+		// 경원찡 만든 구글맵 api
 		var address = null;
 		
 		function initMap() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수
@@ -237,7 +271,7 @@
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9doHEOny5z2QCXaCBWMm84aCRbPs0YVA&callback=initMap">
 	</script>
-	
+
 </body>
-	<%@include file="../includes/footer.jsp"%>
+<%@include file="../includes/footer.jsp"%>
 </html>
