@@ -2,6 +2,9 @@ package com.ana.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
+import com.ana.mapper.AcmMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -48,23 +52,23 @@ public class AcmServiceTests {
 	}
 	
 	//@Test
-	public void testGetList() {
-		//service.getList().forEach(acm->log.info(acm));
-		service.getList(new Criteria(2,10)).forEach(acm -> log.info(acm));
-	}
+//	public void testGetList() {
+//		//service.getList().forEach(acm->log.info(acm));
+//		service.getList(new Criteria(2,10)).forEach(acm -> log.info(acm));
+//	}
 	
-	@Test
+	//@Test
 	public void testGet() {
 		log.info(service.get("A7"));
 	}
 	
-	@Test
+	//@Test
 	public void testDelete() {
 		//게시물의 존재 여부를 확인하고 테스트할 것
 		log.info("REMOVE RESULT: " + service.remove("A2"));
 	}
 	
-	@Test
+	//@Test
 	public void testUpdate() {
 		AcmVO acm = service.get("A6");
 		
@@ -74,6 +78,16 @@ public class AcmServiceTests {
 		
 		acm.setAcmName("숙소이름 수정합니다. ");
 		log.info("MODIFY RESULT: "+service.modify(acm));
+	}
+	
+	
+	@Test
+	public void testGetList() {
+		Criteria cri = new Criteria();
+		cri.setKeyword("대구");
+		cri.setPerson("8");
+	
+		service.getList(cri).forEach(acm -> log.info(acm));;
 	}
 	
 }

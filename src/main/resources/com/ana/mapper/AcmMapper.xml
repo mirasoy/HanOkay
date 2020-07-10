@@ -77,12 +77,15 @@ from
 	</select>
 
 	<select id="getTotalCount" resultType="int">
+	
 		select count(*) from (select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.rom_capa
         from trom r, tacm a
         where r.acm_num = a.acm_num) e
 		where
 		<include refid="criteria"></include>
+		<![CDATA[
 		to_number(substr(acm_num,2))>0
+		]]>
 	</select>
 
 	<select id="read" resultMap="AcmVOResult">
@@ -137,5 +140,39 @@ select * from tacm
 		#{acmDetailaddr},#{repPhone},
 		#{bizRegnum},#{checkinTime},#{checkoutTime})
 	</insert>
+
+
+<select id="getAcmNum" resultType="String">
+<![CDATA[
+select distinct acm_num
+	from trom
+	where rom_capa >= to_number(#{cri.person})
+	]]>
+</select>
+
+	
+<select id="getListPaging" resultMap="AcmVOResult">
+<![CDATA[
+select 
+    acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
+from 
+(
+   select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
+      rownum rn, acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
+   from
+      tacm
+   where (acm_city like '%'||#{cri.keyword}||'%' and
+]]>   
+   acm_num in
+   <foreach collection='acmNum' index='index' item='acmNum' open='(' close=')' separator=','>
+      #{acmNum}
+   </foreach>
+      <![CDATA[
+      ) and 
+       rownum<= #{cri.pageNum} * #{cri.amount}
+       )
+   where rn> (#{cri.pageNum}-1) * #{cri.amount}
+]]>   
+</select>
 
 </mapper>
