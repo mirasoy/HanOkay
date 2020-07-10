@@ -2,26 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
-
+<%@include file="../includes/header.jsp"%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>예약 완료 페이지</title>
-
-<link href="https://fonts.googleapis.com/css?family=Alegreya:700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-	rel="stylesheet">
-<link type="text/css" rel="stylesheet"
-	href="../resources/css/bootstrap.min.css" />
-
-<link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 #map {
 	width: 33%;
@@ -44,7 +33,7 @@
 				<tr><td>(<c:out value="${book.checkinDate}"/>&nbsp;-&nbsp;<c:out value="${book.checkoutDate}"/>)</td></tr>
 				<tr><td>&nbsp;</td></tr>
 				<tr>
-					<td rowspan="8"><c:out value="${acm.acmPurl}" /></td>
+					<td rowspan="16"><c:out value="${acm.acmPurl}" /></td>
 				</tr>
 				<tr><td>예약번호&emsp;</td><td><c:out value="${book.bookNum}"/></td></tr>
 				<tr><td>예약일&emsp;</td><td><c:out value="${book.bookDate}"/></td></tr>
@@ -61,8 +50,11 @@
 				<tr><td>예약자&emsp;</td><td><c:out value="${book.bookerFirstname}		${book.bookerLastname}"/></td></tr>
 				<tr><td>예약자 이메일&emsp;</td><td><c:out value="${book.bookerEmail}"/></td></tr>
 				<tr><td>예약자 연락처&emsp;</td><td><c:out value="${book.bookerPhone}"/></td></tr>
-		</table>			
+		</table>	
+		<%-- <button><a href="../../acm/get?acmNum=${acm.acmNum}">숙소 상세페이지</a></button> --%>	
+		<button><a href="../../MyPage/bookListAll">나의 예약</a></button>	
+		<button><a href="../../home">홈</a></button>	
 	</div>
 </body>
-
+<%@include file="../includes/footer.jsp"%>
 </html>
