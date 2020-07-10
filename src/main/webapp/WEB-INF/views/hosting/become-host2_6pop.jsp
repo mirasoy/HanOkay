@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <style>
+<<<<<<< HEAD
    .room {
       width: 350px;
    }
@@ -41,6 +42,7 @@
 	    var acmNum = document.querySelector('#ACM_NUM');
 	    acmNum.value=getData.acmNum.trim();
 //	    acmNum.innerText=getData.acmNum;
+
 	}
 	
 </script>
@@ -50,6 +52,7 @@
 
 
 <div id="page-wrapper" style="padding-bottom:50px;">
+<<<<<<< HEAD
    <input type="text" id="ACM_NUM" name="ACM_NUM" value="" readonly="readonly">
    <!-- 숙소 방 추가 모달로 띄우기-->
    <form action="/hosting/become-host2_6" method="get">
@@ -214,4 +217,108 @@
    
 
 
+=======
+
+	var chkArr = []; //배열 초기화
+
+	function readyForreg() {
+		
+		var roomNotNull = $(".room input");
+		var flag = true;
+		 chkArr = [];
+		$(".room input").each(function () {
+			val = $(this).val().trim();
+			if (val == '') {
+				alert('모든 항목을 입력해주십시오.');
+				$(this).focus();
+				flag = false;
+				return false; // break
+			}
+		});
+
+		
+		$("input[name=ROM_OPTCODE]:checked").each(function (i) {//체크박스값들을 모조리 배열에 담는다
+			//console.log('checkbox값:'+$(this).val());
+			chkArr.push($(this).val());
+		});
+
+		if(chkArr.length==0){
+			alert('하나 이상의 옵션을 선택해주세요.');
+			$(this).focus();
+			flag = false;
+			
+		}
+		if($("#ROM_CAPA").val() > 100){
+			alert('100명 이하의 숫자만 등록 가능합니다.');
+			flag = false;
+		};//객실최대인원수
+		if($("#ROM_SIZE").val()> 1000){
+			alert('1000이하의 숫자만 등록 가능합니다.');
+			flag = false;
+		};//객실크기
+		
+		
+		
+		return flag;
+	}
+
+	function romRegit() {
+		
+
+		var acmNum = $("#ACM_NUM").val();//숙소번호
+		var romType = $("#ROM_TYPE").val();//룸타입
+		var romName = $("#ROM_NAME").val();//객실이름
+		var romCapa = $("#ROM_CAPA").val();//객실최대인원수
+		var bedType = $("#BED_TYPE").val();//침대유형
+		var bedCnt = $("#BED_CNT").val();//침대갯수
+		var romSize = $("#ROM_SIZE").val();//객실크기
+		var romLoca = $("#ROM_LOCA").val();//객실위치
+		var romPrice = $("#ROM_PRICE").val();//객실가격
+
+		
+
+		//name/value 형태로 담는다
+		var allData = {
+			"acmNum": acmNum, "romType": romType, "romName": romName,
+			"romCapa": romCapa, "bedType": bedType, "bedCnt": bedCnt, "romSize": romSize,
+			"romLoca": romLoca, "romPrice": romPrice, "romPurl": "rom.jpg",
+			"romOptArr": chkArr
+		}
+
+		$.ajax({
+			url: 'become-host2_6pop',
+			type: "POST",
+			data: allData,
+			success: function (data) {
+				alert("객실이 추가되었습니다.");
+				self.close();
+			}, error: function (jqXHR, textStatus, errorThrown) {
+				/*   alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+				  self.close(); */
+			}
+		});
+
+	}
+
+	function setThumbnail(event) {
+		var reader = new FileReader();
+		reader.onload = function (event) {
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.style.width = "200px";
+			img.style.height = "200px";
+			document.querySelector("#image_container").appendChild(img);
+		};
+
+		reader.readAsDataURL(event.target.files[0]);
+	}
+
+	//숫자만 입력가능하게만드는 부분
+	$("input:text[numberOnly]").on("keyup", function () {
+		$(this).val($(this).val().replace(/[^0-9]/g, ""));
+	});
+
+
+
+>>>>>>> 406625472c79f8fd22317021d14abdbdef737c15
 </script>

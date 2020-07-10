@@ -61,8 +61,8 @@ String name = (String) session.getAttribute("userNum");
 										<textarea name='content' style="resize: none;" required></textarea>
 
 
-										<input type="hidden" name="bookNum"
-											value='<c:out value="${booking.bookNum }" />'>
+										<input type="hidden" name="bookNum"	value='<c:out value="${booking.bookNum }" />'>
+										<input type="hidden" name="pstNum"	value='<c:out value="${booking.pstNum }" />'>
 								</tr>
 								<button  id="submit">등록하기</button>
 		
@@ -78,6 +78,27 @@ String name = (String) session.getAttribute("userNum");
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function () {
+			$('input[name=title]').on('keyup', function () {
+
+			if ($(this).val().length > 20) {
+				alert("글자수는 20자로 이내로 제한됩니다.");
+				$(this).val($(this).val().substring(0, 20));
+
+			}
+
+		});
+			
+			$('textarea[name=content]').on('keyup', function () {
+
+
+			if ($(this).val().length > 500) {
+				alert("글자수는 500자로 이내로 제한됩니다.");
+				$(this).val($(this).val().substring(0, 500));
+
+			}
+
+		});
+			
 			//별점주는메서드
 			$('#star a').click(function () {
 				$(this).parent().children("a").removeClass("on");

@@ -34,6 +34,10 @@
 	
 	<!-- 객실추가하기 -->
 	<insert id="insert">
+	<selectKey keyProperty="romNum" order="BEFORE"
+			resultType="String">
+			select concat('R',seq_trom.nextval) from dual
+		</selectKey>
 		insert into TROM(ROM_NUM,ROM_TYPE,ACM_NUM,ROM_NAME,
 		ROM_CAPA,BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_LOCA)
 		values (concat('R',seq_tacm.nextval), #{romType},

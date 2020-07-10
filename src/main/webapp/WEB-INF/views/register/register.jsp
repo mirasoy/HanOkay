@@ -7,16 +7,17 @@
 <%@include file="../includes/header.jsp"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원가입 완료</title>
 </head>
 <body>
 
-	<h1>Registerrrr</h1>
-	<label>성:<c:out value="${m}" /></label>
-	<label>이름:<c:out value="${uLastname}" /></label>
-	
-	
-	
+		<h1>회원 가입 완료 되었습니다!</h1>
+	<h2>ana의 다양한 서비스를 알아보세요!</h2>
+	<script> 
+	$(document).ready(function() {
+		
+	});
+	</script>
 </body>
 <%@include file="../includes/footer.jsp"%>
 </html>

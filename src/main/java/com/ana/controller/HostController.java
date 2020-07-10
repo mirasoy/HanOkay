@@ -1,7 +1,5 @@
 package com.ana.controller;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.RomVO;
@@ -24,7 +17,6 @@ import com.ana.service.RomRegService;
 import com.ana.service.UserService;
 
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -163,6 +155,7 @@ public class HostController {
 	
 	@GetMapping("/become-host2_6pop")
 	public void becomeHostGet2_6pop(String acmNum) {
+		
 		System.out.println("pop열림!");
 	}
 	
@@ -191,6 +184,7 @@ public class HostController {
 		
 		RomVO rom = new RomVO();
 		rom.setAcmNum(acmNum);
+
 		rom.setRomName(romName);
 		rom.setRomCapa(romCapa);
 		rom.setBedType(bedType);
