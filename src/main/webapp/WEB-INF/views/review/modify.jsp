@@ -33,7 +33,7 @@ String name = (String) session.getAttribute("userNum");
 					<h1>Write Review</h1>
 				</div>
 				<div class="panel-body">
-					<form id="form" method="post">
+					<form id="form" >
 						<table class="table table-striped table-bordered table-hover bookList">
 							<tr>
 								<td colspan="2">
@@ -46,14 +46,14 @@ String name = (String) session.getAttribute("userNum");
 									<P id="star">
 										<a href="#" value="1">★</a> <a href="#" id="2" value="2">★</a> <a href="#"
 											value="3">★</a> <a href="#" value="4">★</a> <a href="#" value="5">★</a>
-									<p>
+									</p>
 										<input type="hidden" name="stisf" id="stisf"
 											value='<c:out value="${review.stisf }" />'>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<input type="text" name='title' value='<c:out value="${review.title }" />' required
+									<input type="text"  name='title' id='title' value='<c:out value="${review.title }" />' required
 										autofocus />
 								</td>
 							</tr>
@@ -66,11 +66,9 @@ String name = (String) session.getAttribute("userNum");
 									<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
 								</td>
 							</tr>
-
-
-						<button class="btn" data-oper="delete">삭제하기</button>
-						<button class="btn" data-oper="modify">수정하기</button>
-						<a href="/review/list"><button type="button" >리스트로</button></a>
+							<button class="btn" data-oper="delete">삭제하기</button>
+							<button class="btn" data-oper="modify">수정하기</button>
+							<a href="/review/list"><button type="button">리스트로</button></a>
 						</table>
 
 
@@ -90,31 +88,59 @@ String name = (String) session.getAttribute("userNum");
 			$(this).addClass("on").prevAll("a").addClass("on");
 			$('#stisf').val($(this).attr("value"));
 		});
+		
+		//글자수 제한
+		$('input[name=title]').on('keyup', function () {
+			if ($(this).val().length > 20) {
+				alert("글자수는 20자로 이내로 제한됩니다.");
+				$(this).val($(this).val().substring(0, 20));
 
+			}
+
+		});
+			
+		$('input[name=content]').on('keyup', function () {
+			if ($(this).val().length > 500) {
+				alert("글자수는 500자로 이내로 제한됩니다.");
+				$(this).val($(this).val().substring(0, 500));
+
+			}
+
+		});
+		
+		
 		let formObj = $("form");
 
+	
 		//버튼에 따라 컨트롤러에서 다른 서비스를 부르게함
-		$('#btn').on("click", function (e) {
+		$('.btn').on("click", function (e) {
 			e.preventDefault();
 			let operation = $(this).data("oper");
 			//지울때
 			if (operation === 'delete') {
-				$(this).attr("type", "submit");
+				
 				formObj.attr("action", "/review/delete");
+				formObj.attr("method","post");
+				$(this).attr("type", "submit");
 				formObj.submit();
 			}
 			//수정할때
 			if (operation === 'modify') {
 				formObj.attr("action", "/review/modify");
 				//내용여부 유효성검사
+
 				if ($('input[name=title]').val().trim() == "") {
 					$(this).attr("type", "button")
 					alert("제목을 입력해주세요");
 				} else if ($('textarea[name=content]').val().trim() == "") {
 					$(this).attr("type", "button")
 					alert("내용을 입력해주세요");
+				} else if ($('textarea[name=content]').val().trim() == "") {
+					$(this).attr("type", "button")
+					alert("내용을 입력해주세요");
 				} else {
-					$(this).attr("type", "submit")
+					formObj.attr("method","post");
+					$(this).attr("type", "submit");
 					formObj.submit();
 				}
 
