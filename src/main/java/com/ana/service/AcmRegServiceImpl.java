@@ -46,12 +46,28 @@ public class AcmRegServiceImpl implements AcmRegService{
 	@Transactional
 	@Override
 	public boolean update(String acmNum, List<String> acmOptcode,String acmDesc) {
+		System.out.println("서비스단 acmNum:"+acmNum);
 		
+		AcmOptionVO vo = new AcmOptionVO();
+		vo.setAcmNum(acmNum);
 		for(int i=0;i<acmOptcode.size();i++) {
-			omapper.updateNew(acmNum,acmOptcode.get(i)); //순차적으로 옵션디비에 저장
+			System.out.println(acmOptcode.get(i));
+			vo.setAcmOptcode(acmOptcode.get(i));
+			omapper.insert(vo); //순차적으로 옵션디비에 저장
 		}
 		
-		return amapper.updateDesc(acmNum,acmDesc)*acmOptcode.size()==acmOptcode.size();
+		System.out.println("한옥에 대한 설명"+acmDesc);
+		System.out.println(acmNum);
+		
+		AcmVO acm = new AcmVO();
+		acm.setAcmNum(acmNum);
+		acm.setAcmDesc(acmDesc);
+		System.out.println("acm리스트"+acm.toString());
+		
+		int rs=amapper.updateDesc(acm);//작동안함1200
+		System.out.println("결과:"+rs);
+		
+		return true;
 	}
 
 

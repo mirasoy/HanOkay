@@ -27,18 +27,23 @@ public class RomRegServiceImpl implements RomRegService{
 	
 	@Override//뿌려주기
 	public List<RomVO> getList(String acmNum) {
-		System.out.println("A1들어오나아아"+acmNum);
-		return mapper.getList(acmNum);
+		System.out.println("service단에서"+acmNum);
+		
+		List<RomVO> lists=mapper.getList(acmNum);
+		return lists;
 	}
 	
 	
 	@Transactional
 	@Override
 	public int register(RomVO rom, List<String> romOptArr) {
-		mapper.insert(rom);//객실추가
+		
+//		System.out.println("reg:"+rom.toString());
+		mapper.insertSelectKey(rom);//객실추가
 	
 		RomOptVO vo = new RomOptVO();
 		vo.setRomNum(rom.getRomNum());
+//		System.out.println(rom.getRomNum()+"을 가져오자");
 		
 		for(int i=0;i<romOptArr.size();i++) {//그 객실에 대한 
 			System.out.println("romOptMapper에 들어간다***"+i+"번째: "+romOptArr.get(i));
