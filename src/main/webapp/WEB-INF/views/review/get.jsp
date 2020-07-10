@@ -9,8 +9,9 @@ String name = (String) session.getAttribute("userNum");
 <!DOCTYPE html>
 <html lang="en">
 <%@include file="../includes/header.jsp"%>
+
 <head>
-<title>review List</title>
+	<title>review List</title>
 
 </head>
 
@@ -24,50 +25,64 @@ String name = (String) session.getAttribute("userNum");
 				</div>
 				<div class="panel-body">
 					<form id="operForm" action="/review/modify" method="get">
-						<table
-							class="table table-striped table-bordered table-hover bookList">
+						<table class="table table-striped table-bordered table-hover bookList">
 							<thead>
-									<tr><td colspan = "2"><c:out value="${review.title }" /></td></tr>
-									<tr>
-									<td><c:out value="${review.pstNum }" /></td>
+								<tr>
+									<td colspan="2">
+										<c:out value="${review.title }" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<c:out value="${review.pstNum }" />
+									</td>
 									<td id="star"></td>
-									</tr>
-									<tr>
-									<td><c:out value="${review.checkInDay }" /></td>
-									<td><c:out value="${review.checkOutDay }" /></td>
-									</tr>
-									<tr><td colspan = "2"><c:out value="${review.content }" /></td></tr>
-									
+								</tr>
+								<tr>
+									<td>
+										<c:out value="${review.checkInDay }" />
+									</td>
+									<td>
+										<c:out value="${review.checkOutDay }" />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<c:out value="${review.content }" />
+									</td>
+								</tr>
+
 							</thead>
 							<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
-							
+
 
 						</table>
-							<button type="submit" >리뷰수정/삭제</button>
+						<button type="submit">리뷰수정/삭제</button>
 					</form>
-							<a href="/review/list"><button type="submit" >리스트로 돌아가기</button></a>
+					<a href="/review/list"><button type="submit">리스트로 돌아가기</button></a>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		$(document)
-				.ready(
-						function() {
+			.ready(
+				//숫자를 별로 변경하기 
+				function () {
 
-							let star = "";
-							for (let a = 0; a < <c:out value="${review.stisf }" />; a++) {
-								star = star + '★';
-							}		
-							document.getElementById('star').innerHTML = star;
-					
-						})
+					let star = "";
+					for (let a = 0; a < <c:out value="${review.stisf }" />; a++) {
+						star = star + '★';
+					}
+					document.getElementById('star').innerHTML = star;
+
+				});
 	</script>
 
 </body>
 
 <%@include file="../includes/footer.jsp"%>
+
 </html>
