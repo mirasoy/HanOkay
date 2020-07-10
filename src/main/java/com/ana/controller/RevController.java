@@ -132,6 +132,8 @@ public class RevController {
 	public void getModifyPage(@RequestParam("pstNum") String pstNum, Model model) {
 
 		log.info("/open modi page");
+		log.info("/modi THAT >> "+ service.get(pstNum));
+		
 		model.addAttribute("review", service.get(pstNum));
 	}
 	
@@ -157,9 +159,9 @@ public class RevController {
 
 	//리뷰삭제하기
 	@PostMapping("/delete")
-	public String remove(String pstNum, RedirectAttributes rttr) {
-		log.info("delete" + pstNum);
-		service.remove(pstNum);
+	public String remove(RevVO review, RedirectAttributes rttr) {
+		log.info("delete" + review.getPstNum());
+		service.remove(review.getPstNum());
 		return "redirect:/review/list";
 	}
 	
