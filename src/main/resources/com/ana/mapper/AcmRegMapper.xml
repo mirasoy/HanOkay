@@ -81,9 +81,7 @@
 	<update id="updateDesc">
 		update tacm
 		set acm_desc=#{acmDesc}
-		
 		where acm_Num = #{acmNum} 
-		
 	</update>
 
 

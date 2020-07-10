@@ -106,7 +106,7 @@ public class HostController {
 		System.out.println("post-become-host로넘어오십니까!");
 		vo.toString();
 		aservice.register(vo);
-		model.addAttribute("acmNum", vo.getAcmNum());
+		model.addAttribute("acmNum", vo.getAcmNum().trim());
 		System.out.println(vo.getAcmNum());
 		return "/hosting/become-host1_6";
 	}
@@ -127,7 +127,7 @@ public class HostController {
 		System.out.println("become-host1_6이 post로 받고 열렸다");
 		System.out.println(acmOptcode+"무엇이들ㅇ오는가");
 		System.out.println(acmDesc);
-		model.addAttribute("acmNum", acmNum);//여기가 안되는가
+		model.addAttribute("acmNum", acmNum.trim());//여기가 안되는가
 		
 		System.out.println("여기와?1");
 		aservice.update(acmNum,acmOptcode,acmDesc);
@@ -137,12 +137,15 @@ public class HostController {
 
 	@GetMapping("/become-host2_6")//뿌려주기
 	public void becomeHostGet2_6(String acmNum,Model model) {
+		System.out.println("겟2_6");
+		System.out.println(acmNum);
+
 		
-		List<RomVO> romList=service.getList(acmNum);
-		model.addAttribute("acmNum",acmNum);
+		List<RomVO> romList=service.getList(acmNum);///??
+		System.out.println(romList);
 		model.addAttribute("list", romList);
+		model.addAttribute("acmNum", acmNum);
 		model.addAttribute("size", romList.size());
-		
 	}
 	
 	@PostMapping("/become-host2_6")
@@ -166,7 +169,6 @@ public class HostController {
 	@PostMapping("/become-host2_6pop")//객실추가할때
 	public String becomeHostPost2_6pop(@RequestParam(value="romOptArr[]") List<String> romOptArr,
 			@RequestParam(value="acmNum") String acmNum,//숙소번호, +객실번호 생성해야함
-			@RequestParam(value="romNum") String romNum,//객실타입
 			@RequestParam(value="romType") String romType,//객실타입
 			@RequestParam(value="romName") String romName,//객실이름
 			@RequestParam(value="romCapa") int romCapa,//객실최대수용인원
@@ -182,14 +184,13 @@ public class HostController {
 //		System.out.println("====== 컨트롤러 작동 =======");
 //		System.out.println("****룸이름");
 //		System.out.println(romName);
-//		System.out.println("****룸타입");
+//		System.out.println(acmNum);
 //		System.out.println(romType);
-//		
-		System.out.println("=======romOptArr======:"+romOptArr.toString());
+//		System.out.println(romCapa);
+//		System.out.println("=======romOptArr======:"+romOptArr.toString());
 		
 		RomVO rom = new RomVO();
 		rom.setAcmNum(acmNum);
-		rom.setRomNum(romNum);
 		rom.setRomName(romName);
 		rom.setRomCapa(romCapa);
 		rom.setBedType(bedType);
@@ -200,18 +201,21 @@ public class HostController {
 		rom.setRomPurl("RoomPic");
 		rom.setRomType(romType);
 		
-		service.register(rom,romOptArr);
+//		System.out.println(rom.toString());
+		
+		service.register(rom,romOptArr);//여기서 롬넘발생
 		
 		System.out.println("여기까지온댯");
 		
-		
-		List<RomVO> romList=service.getList(acmNum);
-		
+		System.out.println(acmNum);
+		List<RomVO> romList=service.getList(acmNum);///??
+		System.out.println(romList);
 		model.addAttribute("list", romList);
+		model.addAttribute("acmNum", acmNum);
 		model.addAttribute("size", romList.size());
+		System.out.println("후..");
 		
-		
-		return "/hosting/become-host2_6";
+		return "/hosting/become-host2_6"; //겟인가
 	}
 
 	

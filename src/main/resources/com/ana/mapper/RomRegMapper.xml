@@ -36,12 +36,27 @@
 	<insert id="insert">
 		insert into TROM(ROM_NUM,ROM_TYPE,ACM_NUM,ROM_NAME,
 		ROM_CAPA,BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_LOCA)
-		values (#{romNum}, #{romType},
+		values (concat('R',seq_tacm.nextval), #{romType},
 		#{acmNum}, #{romName}, #{romCapa},
 		#{bedType}, #{bedCnt}, #{romSize},
 		#{romPrice}, #{romPurl}, #{romLoca})
 	</insert>
 
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="romNum" order="BEFORE"
+			resultType="String">
+			select concat('R',seq_tacm.nextval) from dual
+		</selectKey>
+
+		insert into TROM(ROM_NUM,ROM_TYPE,ACM_NUM,ROM_NAME,
+		ROM_CAPA,BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_LOCA)
+		values (#{romNum}, #{romType},
+		#{acmNum}, #{romName}, #{romCapa},
+		#{bedType}, #{bedCnt}, #{romSize},
+		#{romPrice}, #{romPurl}, #{romLoca})
+	</insert>
+	
+	
 	<!-- 객실 삭제 -->
 	<delete id="remove">
 		delete from trom where rom_Num = #{romNum}

@@ -9,20 +9,20 @@
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
+                       <li>
                            <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
                         </li>
                         <li>
-                            <a href="/hosting/become-host"><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
+                            <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host1_6"><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host2_6"><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                     </ul>
                 </div>
@@ -37,7 +37,7 @@
 			<br><br>
 			<form action="/hosting/become-host1_6" method="post">
 			  
-			  <input type="text" id="acmNum" name="acmNum" value=" <c:out value='${acmNum }'/>" readonly="readonly">
+			  <input type="text" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
 			  <h4>5.숙소에서 공통적으로 제공하는 옵션</h4><br>
 			  
 			  <h4>5-1.시설 옵션</h4> <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->	

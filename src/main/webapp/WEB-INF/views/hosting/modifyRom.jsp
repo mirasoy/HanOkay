@@ -23,35 +23,18 @@
                         <li>
                            <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
                         </li>
-                        
                         <li>
-                            <a href="/hosting/become-host"><i class="fa fa- fa-fw"></i> 시작하기</a>
+                            <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host1_6"><i class="fa fa-gear fa-fw"></i> 숙소 정보</a>
+                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host2_6"><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host3_6"><i class="fa fa-map fa-fw"></i> 숙소 설명</a>
+                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
-                        <li>
-                            <a href="/hosting/become-host4_6"><i class="fa fa-male fa-fw"></i> 게스트 설정</a>
-                            
-                        </li>
-                        <li>
-                            <a href="/hosting/become-host5_6"><i class="fa fa-calendar fa-fw"></i> 달력 및 예약 가능여부</a>
-                        </li>
-                        <li>
-                            <a href="/hosting/become-host6_6"><i class="fa fa-credit-card fa-fw"></i> 요금</a>
-                            
-                        </li>
-                        <li>
-                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                        </li>
-                        
-                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

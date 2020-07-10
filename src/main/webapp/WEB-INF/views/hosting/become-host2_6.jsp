@@ -20,22 +20,21 @@
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
+                       <li>
                            <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
                         </li>
                         <li>
-                            <a href="/hosting/become-host"><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
+                            <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host1_6"><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host2_6"><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
                         </li>
                         <li>
-                            <a href="/hosting/become-host-complete"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
-                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -45,9 +44,10 @@
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;">
 	<br>			
+  <form action="become-host-complete" method="post">
   <!-- 숙소 방 추가 모달로 띄우기-->
-  <h4>6.개별객실 추가하기</h4><input type="text" id="acmNum" name="acmNum" value=" <c:out value='${acmNum }'/>" readonly="readonly">
-  <h3 align="left">총 <c:out value="${size }"/>개의 방</h3>
+  <h4>6.개별객실 추가하기</h4><input type="text" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
+  <h3 align="left">총 <c:out value="${size}"/>개의 방</h3>
 			
 			  
 		
@@ -86,10 +86,6 @@
 					</c:forEach>
 				</table>
 				
-				<!-- 빈 폼 -->
-				<form id="actionForm">
-				</form>
-				
 				
 				  <br>
 				</div>
@@ -99,9 +95,13 @@
 		</div>
 			
 			
-		<button type="submit">다음으로</button>
+		<button type="submit" onclick="">다음으로</button>
+		</form>	
 			
-			
+		<!-- 빈 폼 -->
+		<form id="actionForm">
+		</form>
+				
 			
 		</div>
 
@@ -110,7 +110,7 @@
 
 <script type="text/javascript">
 	
-	var openWin;
+	var openWin;//자식창
 	function openPop(){
 		// window.name = "부모창 이름"; 
 		
@@ -123,12 +123,18 @@
 		var acmNum=$('#acmNum').val();
 		
         window.name = "parentForm";
+        
+
         // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-        openWin = window.open('/hosting/become-host2_6pop?acmNum='+acmNum,
-                'childForm', 'width='+_width+', height='+_height+', left='+_left+', top='+_top+', resizable = no, scrollbars = no');   
-		
+        openWin = window.open('/hosting/become-host2_6pop?acmNum='+acmNum,'childForm',
+        		'width='+_width+', height='+_height+', left='+_left+', top='+_top+', resizable = no, scrollbars = no');   
+        
 	}
 
+	
+	
+	
+	
 	$(document).ready(function(){
 		$(".move").on("click", function(e){
 			var actionForm = $("#actionForm");
