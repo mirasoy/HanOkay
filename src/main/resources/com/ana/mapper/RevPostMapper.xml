@@ -320,7 +320,7 @@ select SEQ_REV.nextval from dual
 
     INSERT ALL
     INTO TREV_POST(PST_NUM, BRD_CODE, P_TITLE, USER_NUM)
-    VALUES(#{pstNum},'rev',#{title},#{userNum})  
+    VALUES(#{pstNum},'RV',#{title},#{userNum})  
     INTO TREV_DETAIL(pst_num,  REV_PURL , STISF , ACM_NUM ,BOOK_NUM, CONTENT  )
     VALUES(#{pstNum},#{revPurl},#{stisf},#{acmNum},#{bookNum},#{content}) 
     SELECT * 

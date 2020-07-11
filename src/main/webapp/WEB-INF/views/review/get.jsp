@@ -28,26 +28,35 @@ String name = (String) session.getAttribute("userNum");
 						<table class="table table-striped table-bordered table-hover bookList">
 							<thead>
 								<tr>
-									<td colspan="2">
-										<c:out value="${review.title }" />
+									<td colspan="1">
+										<c:out value="${review.bookNum }" />
 									</td>
-								</tr>
-								<tr>
-									<td>
-										<c:out value="${review.pstNum }" />
+									<td colspan="2">
+										<c:out value="${review.acmName }" />
 									</td>
 									<td id="star"></td>
 								</tr>
 								<tr>
 									<td>
+										<b>체크인</b>
+									</td>
+									<td>
 										<c:out value="${review.checkInDay }" />
+									</td>
+									<td>
+										<b>체크아웃</b>
 									</td>
 									<td>
 										<c:out value="${review.checkOutDay }" />
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2">
+									<td colspan="4">
+										<B><c:out value="${review.title }" /></B>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
 										<c:out value="${review.content }" />
 									</td>
 								</tr>
