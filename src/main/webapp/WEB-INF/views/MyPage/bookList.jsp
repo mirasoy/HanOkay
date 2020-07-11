@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%
-	session.setAttribute("loginUserNum", "A1");
+	session.setAttribute("loginUserNum", "U1");
 String name = (String) session.getAttribute("loginUserNum");
 %>
 <%@include file="../includes/header.jsp"%>
@@ -137,44 +137,15 @@ String name = (String) session.getAttribute("loginUserNum");
 
 				<!-- The Modal (메일) -->
 				<div id="myModal" class="modal">
-
 					<!-- Modal content -->
 					<div class="modal-content">
 						<span id="close" class="close">&times;</span>
-						<h1>예약 확정서 받기</h1>
-						<!-- 				  <form action="mailSending.do" method="post">
-					  <div>
-					        <input type="text" name="tomail" size="120"
-					        style="width: 100%" placeholder="당신의 이메일"
-					        class="form-control">
-					      </div> <br>
-					      <div align="center">
-					        <input type="submit" value="메일 보내기" class="btn btn-warning">
-					      </div>
-					</form> -->
-						<form action="mailSending.jsp" method="post">
-							<div>
-								<input type="text" name="tomail" size="120" style="width: 100%"
-									placeholder="상대의 이메일" class="form-control">
-							</div>
-							<div align="center">
-								<!-- 제목 -->
-								<input type="text" name="title" size="120" style="width: 100%"
-									placeholder="제목을 입력해주세요" class="form-control">
-							</div>
-							<p>
-							<div align="center">
-								<!-- 내용 -->
-								<textarea name="content" cols="120" rows="12"
-									style="width: 100%; resize: none" placeholder="내용#"
-									class="form-control"></textarea>
-							</div>
-							<p>
-							<div align="center">
-								<input type="submit" value="메일 보내기" class="btn btn-warning">
-							</div>
-						</form>
+						<h1>메일 보내기</h1>
+						<h1>미구현 (2차 개발 예정 사항입니다.)</h1>
+						<div id="map"></div>
+						<!-- 지도가 붙을 위치 -->
 					</div>
+				
 				</div>
 				<!-- end of myModal -->
 
@@ -185,6 +156,7 @@ String name = (String) session.getAttribute("loginUserNum");
 					<div class="modal-content">
 						<span id="close" class="close2">&times;</span>
 						<h1>지도 확인하기</h1>
+						<h1>미구현 (2차 개발 예정 사항입니다.)</h1>
 						<div id="map"></div>
 						<!-- 지도가 붙을 위치 -->
 					</div>
@@ -238,6 +210,12 @@ String name = (String) session.getAttribute("loginUserNum");
 			modal2.style.display = "none";
 		}
 
+		
+	
+		
+		
+		
+		
 	</script>
 
 

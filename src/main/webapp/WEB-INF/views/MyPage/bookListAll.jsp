@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<% session.setAttribute("loginUserNum", "A1"); 
+<% session.setAttribute("loginUserNum", "U1"); 
 String name = (String)session.getAttribute("loginUserNum");
 %>
 <%@include file="../includes/header.jsp"%>
@@ -85,9 +85,10 @@ String name = (String)session.getAttribute("loginUserNum");
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.checkoutDate}" /></td>
 							
-							<td><c:out value="${board.bookStatus}" /></td>		
-							
-							<%-- <td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td> --%>
+							<td><c:out value="${board.bookStatus}" />
+							<input class="form-control" name='status' value='' readonly="readonly">
+							</td>		
+						
 					
 						</tr>																				
 					</c:forEach>
@@ -101,6 +102,20 @@ String name = (String)session.getAttribute("loginUserNum");
 <!-- /.row -->
 
 
+<script>
+	
+	var s = '<c:out value="${board.bookStatus}"/>';
+	alert(s);
+	var s2 = s.trim();
+	if(s2=='RS_STT_BK'){
+		$('input[name=status]').val("투숙예정"); 
+	}else if(s2=='RS_STT_BC'){
+		$('input[name=status]').val("예약취소"); 
+	}else{
+		$('input[name=status]').val("투숙완료"); 
+	}
+	
+</script>
 
 
 <%@include file="../includes/footer.jsp"%>

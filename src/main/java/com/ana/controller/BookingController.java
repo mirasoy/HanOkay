@@ -24,14 +24,24 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/MyPage/*")
 @AllArgsConstructor
 
+
+
+
+
+
+
 public class BookingController {
 	private BookingService service;
 
 
 	
+	
+	
+	
 	//모든 목록
 	@GetMapping("/bookListAll")
 	public void list(Model model, HttpSession session) {
+		
 		String loginUserNum = (String) session.getAttribute("loginUserNum");
 		log.info("bookListAll");
 		model.addAttribute("bookListAll", service.getBookListAll("U1"));
@@ -67,7 +77,7 @@ public class BookingController {
 	
 	
 	//예약 조회 페이지와 이동	
-	@GetMapping({"/info", "modify"})
+	@GetMapping({"/info", "/info2","modify"})
 	public void get(@RequestParam("bookNum") String bookNum, Model model) {
 		log.info("/info or modify");
 		

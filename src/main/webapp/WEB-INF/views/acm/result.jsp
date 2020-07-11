@@ -14,18 +14,6 @@
 
 <title>Booking Form HTML Template</title>
 
-<!-- Google font -->
-<link href="https://fonts.googleapis.com/css?family=Alegreya:700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-	rel="stylesheet">
-
-<!-- Bootstrap -->
-<link type="text/css" rel="stylesheet"
-	href="/resources/css/bootstrap.min.css" />
-
-<!-- Custom stlylesheet -->
-<link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,11 +35,7 @@
 	display: inline-block;
 }
 
-.row {
-	margin-right: 50px;
-	margin-left: 50px;
-	margin-top: 50px;
-}
+
 </style>
 
 <link href="../resources/css/select2.css" rel="stylesheet">
@@ -67,13 +51,7 @@
 		<div class="booking-form">
 			<form action="/acm/result" method='get'>
 				<div class="row no-margin">
-					<div class="col-md-3">
-					<a href="/acm/list">
-						<div class="form-header">
-							<h2>Book Now</h2>
-						</div>
-						</a>
-					</div>
+				
 					<div class="col-md-7">
 						<div class="row no-margin">
 							<div class="col-md-4">
@@ -126,16 +104,7 @@
 									<span class="select-arrow"></span>
 								</div>
 							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<span class="form-label">Kids</span> <select
-										class="form-control">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-									</select> <span class="select-arrow"></span>
-								</div>
-							</div>
+						
 						</div>
 					</div>
 					<div class="col-md-2">
