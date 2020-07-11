@@ -37,7 +37,7 @@
 			<br><br>
 			<form action="/hosting/become-host1_6" method="post">
 			  
-			  <input type="text" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
+			  <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
 			  <h4>5.숙소에서 공통적으로 제공하는 옵션</h4><br>
 			  
 			  <h4>5-1.시설 옵션</h4> <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->	

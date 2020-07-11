@@ -52,8 +52,7 @@
 
 
 <div id="page-wrapper" style="padding-bottom:50px;">
-<<<<<<< HEAD
-   <input type="text" id="ACM_NUM" name="ACM_NUM" value="" readonly="readonly">
+   <input type="hidden" id="ACM_NUM" name="ACM_NUM" value="" readonly="readonly">
    <!-- 숙소 방 추가 모달로 띄우기-->
    <form action="/hosting/become-host2_6" method="get">
       <h4>6-2.개별객실 추가하기</h4>
@@ -184,11 +183,11 @@
          data: allData,
          success: function (data) {
             alert("객실이 추가되었습니다.");
-            window.opener.parent.location.href='/hosting/become-host2_6?acmNum='+acmNum 
             self.close();         
          }
       });
          
+            window.opener.parent.location.href='/hosting/become-host2_6?acmNum='+acmNum 
    		  // opener.parent.location.reload();
    }
    
@@ -214,10 +213,6 @@
    });
 
 
-   
-
-
-=======
 
 	var chkArr = []; //배열 초기화
 
@@ -292,11 +287,10 @@
 			success: function (data) {
 				alert("객실이 추가되었습니다.");
 				self.close();
-			}, error: function (jqXHR, textStatus, errorThrown) {
-				/*   alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
-				  self.close(); */
 			}
 		});
+		
+		window.opener.parent.location.href='/hosting/become-host2_6?acmNum='+acmNum		
 
 	}
 
@@ -320,5 +314,4 @@
 
 
 
->>>>>>> 406625472c79f8fd22317021d14abdbdef737c15
 </script>
