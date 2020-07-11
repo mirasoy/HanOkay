@@ -144,11 +144,11 @@ public class BookingMapperTests {
 	
 	
 	
-//	@Test
-//    public void testGetList() {
-//		mapper.getList().forEach(board -> log.info(board));
-//	}
-//	
+	@Test
+    public void testGetList() {
+		mapper.getList().forEach(board -> log.info(board));
+	}
+	
 //	@Test
 //	public void testRead() {
 //	

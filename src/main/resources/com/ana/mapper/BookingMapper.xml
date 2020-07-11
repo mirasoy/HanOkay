@@ -119,7 +119,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<![CDATA[
 	select * from tbooking where user_num='U1'
-<!-- 	select * from tbooking where user_num='A1' -->
 	
 	]]>
 

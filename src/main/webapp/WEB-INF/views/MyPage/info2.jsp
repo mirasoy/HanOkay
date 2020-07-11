@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">예약 상세 페이지</h1>
+    <h1 class="page-header">예약 상세 페이지 (수정 불가능)</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -72,8 +72,8 @@
             value='<c:out value="${info.expectedArr} "/>' readonly="readonly">
         </div>
         <div class="form-group">
-          <label>흡연여부</label> 
-          <input class="form-control" name='smoking' value='' readonly="readonly">
+          <label>흡연여부</label> <input class="form-control" name='smoking'
+            value='' readonly="readonly">
         </div> 
  
         
@@ -110,12 +110,11 @@
             value='<c:out value="${info.bookerPhone} "/>' readonly="readonly">
         </div>
         <div class="form-group">
-          <label>예약상태</label>           
-          <input class="form-control" name='bookStatus' value='' readonly="readonly">
+          <label>예약상태</label> <input class="form-control" name='bookStatus'
+            value='<c:out value="${info.bookStatus} "/>' readonly="readonly">
         </div>
 
 
-<button data-oper='modify' class="btn btn-default" onclick="location.href='/MyPage/modify?bookNum=<c:out value="${info.bookNum}"/>'">Modify</button>
 <button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/bookList'">List</button>
 
 
@@ -129,30 +128,12 @@
 <!-- /.row -->
 <script>
 	var s = '<c:out value="${info.smoking} "/>';
-	
 	var s2 = s.trim();
 	if(s2=='1'){
 		$('input[name=smoking]').val("YES, 흡연을 원합니다.");
 	}else{
 		$('input[name=smoking]').val("NO, 금연을 원합니다.");
 	}
-	
-	
-	var bookStatus = '<c:out value="${info.bookStatus} "/>';
-	var bookStatus2 = bookStatus.trim();
-	alert(bookStatus2);
-	
-	if(bookStatus=='RS_STT_BK'){
-		$('input[name=bookStatus]').val("투숙예정"); 
-	}else if(bookStatus=='RS_STT_BC'){
-		$('input[name=bookStatus]').val("예약취소"); 
-	}else if(bookStatus=='RS_STT_AC'){
-		$('input[name=bookStatus]').val("투숙완료"); 
-	}
-	
-	
-	
-	
 </script>
 
 
