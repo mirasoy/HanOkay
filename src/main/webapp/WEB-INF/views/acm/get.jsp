@@ -312,7 +312,7 @@
 	</script>
 
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9doHEOny5z2QCXaCBWMm84aCRbPs0YVA&callback=initMap">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
 	</script>
 	<script src="resources/js/bootstrap-datepicker.js"></script>
 

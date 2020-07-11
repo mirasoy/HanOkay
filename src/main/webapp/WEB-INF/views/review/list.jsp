@@ -66,7 +66,7 @@ String name = (String) session.getAttribute("userNum");
 		<c:forEach items="${list }" var="rev">
 
 		$(".bookList").append("<tr>");
-		$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
+		$(".bookList").append("<a href='/acm/get?type=&keyword=&person=1&in=&out=&acmNum=<c:out value="${rev.acmNum }" />'><td ><c:out value="${rev.acmName }" /></td><a>");
 		$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
 		$(".bookList")

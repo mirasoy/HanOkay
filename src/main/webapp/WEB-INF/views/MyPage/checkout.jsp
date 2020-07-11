@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<% session.setAttribute("loginUserNum", "A1"); 
+<% session.setAttribute("loginUserNum", "U1"); 
 String name = (String)session.getAttribute("loginUserNum");
 %>
 <%@include file="../includes/header.jsp"%>
@@ -83,7 +83,7 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkoutDate}" /></td>
 							<td><c:out value="${board.bookPrice}" /></td>			
 							
-							<td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td>
+							<td><a href="/MyPage/info2?bookNum=${board.bookNum}">예약정보</a></td>
 					
 						</tr>																				
 					</c:forEach>
