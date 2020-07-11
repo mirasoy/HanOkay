@@ -24,7 +24,7 @@ public interface AcmMapper {
 	
 	public int update(AcmVO acm);
 	
-	public int getTotalCount(Criteria cri);
+	public int getTotalCount(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
 	
 	public List<String> getAcmNum(String person);
 	
