@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 <% 
-	String person = (String)request.getAttribute("person");
+	String person = (String)request.getParameter("person");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,8 @@
 <style>
 #map {
 	width: 33%;
-	height: 600px; background-color : grey;
+	height: 600px;
+	background-color: grey;
 	display: inline-block;
 	background-color: grey;
 }
@@ -27,11 +28,36 @@
 <body>
 	<div>
 		<div>
-			[객실 선택]</br> <input type="date" name="in" id="in" value="${srh[0]}">
-			<input type="date" name="out" id="out" value="${srh[1]}">
+			</br>
+			</br>
+			</br>
+			</br>
+			</br> </br>
+			<link
+				href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+				rel="stylesheet" type="text/css" />
+			<script
+				src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+			<div>
+				[객실 선택] 체크인
+				<div class="ui calendar" id="rangestart">
+					<div class="ui input left icon">
+						<i class="calendar icon"></i> 
+						<input type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
+					</div>
+				</div>
+				체크아웃
+				<div class="ui calendar" id="rangeend">
+					<div class="ui input left icon">
+						<i class="calendar icon"></i> 
+						<input type="text" placeholder="End" id="out" name="out" value="<%=request.getParameter("out")%>">
+					</div>
+				</div>
+				
+			</div>
+			
 			<input type="hidden" id="person" value="<%=person%>">
 
-			<button type="submit" onclick="setDate()">선택</button>
 		</div>
 		</br> </br> </br>
 
@@ -61,12 +87,6 @@
 					<td><img alt="사진6" src="<c:out value="${acm.acmPurl6}" />"></td>
 				</tr>
 			</table>
-			<%--<c:out value="${acm.repPhone}" /></br>
-					<c:out value="${acm.acmPhone2}" /></br>
-					<c:out value="${acm.acmFax}" /></br>
-					<c:out value="${acm.acmEmail}" /></br>
-					<c:out value="${acm.checkinTime}" /></br>
-					<c:out value="${acm.checkoutTime}" /></br> --%>
 		</div>
 		</br> </br> </br>
 
@@ -90,6 +110,10 @@
 						<td><c:out value="${rev.regDate}" /></td>
 					</tr>
 				</c:forEach>
+				
+				<c:if test="${empty rev}">
+					<tr><td>(리스트가 없습니다)</td></tr>
+				</c:if>
 			</table>
 		</div>
 
@@ -101,6 +125,10 @@
 				<c:forEach items="${opt }" var="opt">
 					<td><c:out value="${opt.acmOptcode}" />&emsp;</td>
 				</c:forEach>
+				
+				<c:if test="${empty opt}">
+					<td>(리스트가 없습니다)</td>
+				</c:if>
 			</table>
 
 		</div>
@@ -131,9 +159,14 @@
 						<td><c:out value="${rom.romCapa}" />&emsp;</td>
 						<td><c:out value="${rom.romSize}" />&emsp;</td>
 						<td><c:out value="${rom.romPrice}" /></td>
-						<td><button class="reservBtn" value="&price=<c:out value="${rom.romPrice}"/>" data-romNum="${rom.romNum}">예약하기</button></td>
+						<td><button class="reservBtn"
+								value="&price=<c:out value="${rom.romPrice}"/>"
+								data-romNum="${rom.romNum}">예약하기</button></td>
 					</tr>
 				</c:forEach>
+				<c:if test="${empty rom}">
+					<tr><td>(리스트가 없습니다)</td></tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
@@ -143,6 +176,39 @@
 	</br>
 	<div id="map"></div>
 	<script>
+	
+		// 날짜 선택
+		var today = new Date();
+		$('#rangestart').calendar({
+		  type: 'date',
+		  minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+		  endCalendar: $('#rangeend'),
+		  formatter: {
+			    date: function (date, settings) {
+			      if (!date) return '';
+			      var day = date.getDate();
+			      var month = date.getMonth() + 1;
+			      var year = date.getFullYear();
+			      return year + '-' + month + '-' + day;
+			    }
+			}
+		});
+		$('#rangeend').calendar({
+		  type: 'date',
+		  startCalendar: $('#rangestart'),
+		  formatter: {
+			    date: function (date, settings) {
+			      if (!date) return '';
+			      var day = date.getDate();
+			      var month = date.getMonth() + 1;
+			      var year = date.getFullYear();
+			      return year + '-' + month + '-' + day;
+			    }
+			}
+		});
+		
+	
+		// 페이지 이동
 		let person = document.getElementById("person").value;
 		let reservBtns = document.getElementsByClassName("reservBtn");
 		
@@ -158,13 +224,10 @@
 					return false;
 				}
 				
-				if(person == "null" || person == "") person = 0;
+				if(person == "null" || person == "") person = 1;
 				
-				if(checkin+""=="" || checkout+""==""){
-					alert("날짜를 입력해주세요!");
-					return false;
-				}else if(checkin >= checkout){
-					alert("날짜를 확인해주세요!");
+				if(document.getElementById("in").value == document.getElementById("out").value){
+					alert("1박 이상 선택해주세요!");
 					return false;
 				}else{
 					document.location = '../../booking/new?romNum='+this.getAttribute("data-romNum") 
@@ -173,22 +236,9 @@
 				}
 			});
 		}
-l
 		
-		// 날짜를 선택한다
-		function setDate() {
-			let checkin = document.getElementById("in").value;
-			let checkout = document.getElementById("out").value;
-			checkin = document.getElementById("in").value;
-			checkout = document.getElementById("out").value;
-		}
 		
-		// 체크인, 체크아웃 파라미터 누락시 확인 요청을 보낸다
-		function checkValidationDate(){
-			
-		}
-			
-		// 경원찡 만든 구글맵 api
+		//***************** 경원찡 만든 구글맵 api
 		var address = null;
 		
 		function initMap() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수
@@ -234,7 +284,7 @@ l
 					'',
 					new google.maps.Size(size_x, size_y));
 
-			var latLng = {lat: parseFloat(${acm.latitude}), lng: parseFloat(${acm.longitude})};
+			var latLng = {lat: parseFloat(${acm.latitude }), lng: parseFloat(${acm.longitude})};
 
 			var marker;
 
@@ -264,6 +314,7 @@ l
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
 	</script>
+	<script src="resources/js/bootstrap-datepicker.js"></script>
 
 </body>
 <%@include file="../includes/footer.jsp"%>

@@ -40,7 +40,7 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 
 <body>
 		[숙소정보]</br>
-		<c:out value="${rom.romPurl}" /></br>
+		<img alt="숙소사진" src='<c:out value="${rom.romPurl}" />'></br>
 		<c:out value="${acm.acmName}" /></br>
 		<%=checkin%> ~ <%=checkout%> (<%=staydays%>박)</br>
 		<c:out value="${rom.romName}" />
@@ -66,7 +66,7 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		<input type="hidden" name='checkoutDate' value='<%=outDate%>'> 
 		<input type="hidden" name='staydays' value='<%=staydays%>'> 
 		<input type="hidden" name='guest' value='<%=person%>'> 
-		<input type="hidden" name='bookPrice' value='<%=bookPrice%>'> 
+		<input type="hidden" name='bookPrice' value='<%=bookPrice + (bookPrice / 10)%>'> 
 		
 		</br></br></br>
 		[요청사항]</br>
@@ -99,20 +99,20 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		흡연여부: 금연객실<input type="radio" name="smoking" value="0" checked="checked">
 			흡연객실<input type="radio" name="smoking" value="1"></br> 
 		특별 요청사항: <input type="text" size="100" id="request" name="request" value=""></br> 
-			<input type="hidden" name="bookStatus" value="RS_STT_BK"> 
+			<input type="hidden" name="bookStatus" value="RS_STT_BK" maxlength="100"> 
 					
 		</br></br></br>	
 		[요금정보]</br>
 		<table>
 			<tr><td>₩<c:out value="${rom.romPrice}" /> X <%=staydays%>박</td><td>&emsp;</td><td>₩ <%=bookPrice%></td></tr>
 			<tr><td>세금 및 봉사료</td><td> &emsp;</td><td>₩ <%=bookPrice / 10%></td></tr>
-			<tr><td>총 할인 금액</td><td> &emsp;</td><td>₩</td></tr>
-			<tr><td>회원 등급 할인</td><td> &emsp;</td><td>₩</td></tr>
-			<tr><td>보유쿠폰 할인</td><td> &emsp;</td><td>₩</td></tr>
-			<tr><td>적립금 사용</td><td> &emsp;</td><td>₩</td></tr>
+			<tr><td>총 할인 금액</td><td> &emsp;</td><td>₩ 0</td></tr>
+			<tr><td>회원 등급 할인</td><td> &emsp;</td><td>₩ 0</td></tr>
+			<tr><td>보유쿠폰 할인</td><td> &emsp;</td><td>₩ 0</td></tr>
+			<tr><td>적립금 사용</td><td> &emsp;</td><td>₩ 0</td></tr>
 			<tr><td></td><td> &emsp;</td><td></td></tr>
-			<tr><td>합계</td><td> &emsp;</td><td>₩</td></tr>
-			<tr><td>(1박 평균)</td><td> &emsp;</td><td>₩</td></tr>
+			<tr><td>합계</td><td> &emsp;</td><td>₩ <%=bookPrice + (bookPrice / 10) %></td></tr>
+			<tr><td>(1박 평균)</td><td> &emsp;</td><td>₩ <%= (bookPrice + (bookPrice / 10)) / staydays %></td></tr>
 		</table>
 		</br></br></br>
 		<button data-oper='booking'>예약하기</button>
@@ -129,7 +129,7 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		const regFirstnameEn = /^[a-zA-Z]{1,60}$/; //   "U_FSTNAME" Varchar2(60 ) NOT NULL,
 		const regLastnameKo = /^[가-힣]{1,13}$/; //  "U_LASTNAME" Varchar2(40 ) NOT NULL,
 		const regLastnameEn = /^[a-zA-Z]{1,40}$/; //  "U_LASTNAME" Varchar2(40 ) NOT NULL,
-		const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;   // "EMAIL" Varchar2(800 ) NOT NULL,
+		const regEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;   // "EMAIL" Varchar2(800 ) NOT NULL,
 		const regPhone = /^[0-9]{0,15}$/; //  "U_PHONE" Number(15,0),
 	
 		const firstname = document.getElementById("userInfo1");
