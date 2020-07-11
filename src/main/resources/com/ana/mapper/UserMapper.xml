@@ -8,8 +8,8 @@
 		<result property="userNum" column="USER_NUM"/>
 		<result property="email" column="EMAIL"/>
 		<result property="pwd" column="PWD"/>
-		<result property="lastname" column="U_LASTNAME"/>
 		<result property="fstname" column="U_FSTNAME"/>
+		<result property="lastname" column="U_LASTNAME"/>
 		<result property="userPhone" column="U_PHONE"/>
 		<result property="birthday" column="U_BIRTHDAY"/>
 		<result property="userPriv" column="U_PRIV"/>
@@ -56,7 +56,7 @@ values(concat('U',SEQ_USER.nextval),#{email}, #{pwd}, #{lastname}, #{fstname}, #
 select concat('U',seq_user.nextval) from dual 
 </selectKey>
 insert into tuser(USER_NUM, EMAIL, PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY) 
-values(#{userNum},#{email}, #{pwd}, #{lastname}, #{fstname}, #{birthday}) 
+values(#{userNum}, #{email}, #{pwd}, #{lastname}, #{fstname}, #{birthday}) 
 </insert>
 
 <!-- 유저 테이블에 해당 유저 번호가진 행 삭제하는 쿼리 -->

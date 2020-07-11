@@ -71,9 +71,9 @@ public class UserServiceImpl implements UserService{
 		boolean result= mapper.checkLogin(user);
 		
 		
-		if(result) {
-			
-		}
+//		if(result) {
+//			
+//		}
 	}
 
 	//유효한 회원인지 확인하는 메서드
