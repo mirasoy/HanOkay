@@ -51,7 +51,7 @@
 				<tr><td>예약자 이메일&emsp;</td><td><c:out value="${book.bookerEmail}"/></td></tr>
 				<tr><td>예약자 연락처&emsp;</td><td><c:out value="${book.bookerPhone}"/></td></tr>
 		</table>	
-		<%-- <button><a href="../../acm/get?acmNum=${acm.acmNum}">숙소 상세페이지</a></button> --%>	
+		<button><a href="../../acm/get?pageNum=&amount=&type=&keyword=&person=&in=&out=&acmNum=${acm.acmNum}">숙소 상세페이지</a></button>	
 		<button><a href="../../MyPage/bookListAll">나의 예약</a></button>	
 		<button><a href="../../home">홈</a></button>	
 	</div>

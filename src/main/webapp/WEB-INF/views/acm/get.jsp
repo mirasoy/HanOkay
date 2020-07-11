@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@include file="../includes/header.jsp"%>
 <% 
 	String person = (String)request.getAttribute("person");
 %>
 <!DOCTYPE html>
 <html lang="en">
-<%@include file="../includes/header.jsp"%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -132,16 +132,11 @@
 						<td><c:out value="${rom.romSize}" />&emsp;</td>
 						<td><c:out value="${rom.romPrice}" /></td>
 						<td><button class="reservBtn" value="&price=<c:out value="${rom.romPrice}"/>" data-romNum="${rom.romNum}">예약하기</button></td>
-<%-- 						<a id="<c:out value='${rom.romNum}'/>" onclick="return checkValidationDate()" onhref="
-						/booking/new?romNum=<c:out value='${rom.romNum}'/>
-						=
-						&price=<c:out value='${rom.romPrice}'/>">예약하기</a> --%>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
-
 	</br>
 	</br>
 	</br> [위치정보]
@@ -158,9 +153,12 @@
 				let checkin = document.getElementById("in").value;
 				let checkout = document.getElementById("out").value;
 				
-				if(person == "null" || person == ""){
-					person = 0;
+				if('<%=user%>'=="null" || '<%=user%>' == null){
+					alert("로그인이 필요합니다!");
+					return false;
 				}
+				
+				if(person == "null" || person == "") person = 0;
 				
 				if(checkin+""=="" || checkout+""==""){
 					alert("날짜를 입력해주세요!");
@@ -197,10 +195,8 @@ l
 
 			var acmNum = "${acm.acmNum}";
 			
-			console.log(acmNum);
 			var latitude="";
 			var longitude="";
-			console.log(latitude);
 			
 			if("${acm.acmNum}"===acmNum){
 				console.log("true");
@@ -208,10 +204,8 @@ l
 				longitude = ${acm.longitude};
 			}
 			
-			console.log(latitude);
 			var latVal = parseFloat(latitude);
 			var lngVal = parseFloat(longitude);
-			console.log('initMap');
 			
 			var mapLocation = {
 				lat : latVal,
@@ -241,7 +235,6 @@ l
 					new google.maps.Size(size_x, size_y));
 
 			var latLng = {lat: parseFloat(${acm.latitude}), lng: parseFloat(${acm.longitude})};
-			console.log(latLng);
 
 			var marker;
 

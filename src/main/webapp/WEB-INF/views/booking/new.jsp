@@ -6,6 +6,7 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="com.ana.domain.UserVO"%>
+<%@include file="../includes/header.jsp"%>
 <%
 
 String romNum = request.getParameter("romNum");
@@ -13,15 +14,6 @@ String checkin = request.getParameter("in");
 String checkout = request.getParameter("out");
 String person = request.getParameter("person");
 String price = request.getParameter("price");
-
-// 세션 로그인값 저장하기(테스트용)
-Date birthday = new Date(2020/12/12);
-UserVO userTmp = new UserVO("U1", "test@ana.com", "", "성", "냄쿵", "112", birthday, "E", "GU");
-session.setAttribute("userTmp", userTmp);
-
-// 세션 로그인값 불러오기
-userTmp = (UserVO)session.getAttribute("userTmp"); 
-
 
 // 숙박일 계산: get방식으로 가져온 날짜 String을 Date로 변환하여 계산
 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -39,7 +31,6 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 %>
 <!DOCTYPE html>
 <html lang="en">
-<%@include file="../includes/header.jsp"%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,15 +53,15 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 	 	<form name="form" method="post" onsubmit="return checkValidation()">
 		<input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</br>
 	
-		이름*<input type="text" id="userInfo1" name='bookerFirstname' value='<%=userTmp.getFstname() %>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"> 
-		성*<input type="text" id="userInfo2"  name='bookerLastname' value='<%=userTmp.getLastname()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
+		이름*<input type="text" id="userInfo1" name='bookerFirstname' value='<%=user.getFstname() %>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"> 
+		성*<input type="text" id="userInfo2"  name='bookerLastname' value='<%=user.getLastname()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
 		<label id="nameMsg" >&nbsp</label></br>
-		이메일*<input type="text" id="userInfo3"  name='bookerEmail' value='<%=userTmp.getEmail()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br> 
+		이메일*<input type="text" id="userInfo3"  name='bookerEmail' value='<%=user.getEmail()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br> 
 		<label id="emailMsg" >&nbsp</label></br>
-		전화번호<input type="text" id="userInfo4" name='bookerPhone' value='<%=userTmp.getUserPhone()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
+		전화번호<input type="text" id="userInfo4" name='bookerPhone' value='<%=user.getUserPhone()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
 		<label id="phoneMsg" >&nbsp</label></br>
 		
-		<input type="hidden" name='userNum' value='<%=userTmp.getUserNum() %>'> 
+		<input type="hidden" name='userNum' value='<%=user.getUserNum() %>'> 
 		<input type="hidden" name='checkinDate' value='<%=inDate%>'> 
 		<input type="hidden" name='checkoutDate' value='<%=outDate%>'> 
 		<input type="hidden" name='staydays' value='<%=staydays%>'> 
@@ -113,23 +104,27 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		</br></br></br>	
 		[요금정보]</br>
 		<table>
-			<tr><td>₩<c:out value="${rom.romPrice}" /> X <%=staydays%>박</td><td id="total"></td></tr>
-			
+			<tr><td>₩<c:out value="${rom.romPrice}" /> X <%=staydays%>박</td><td>&emsp;</td><td>₩ <%=bookPrice%></td></tr>
+			<tr><td>세금 및 봉사료</td><td> &emsp;</td><td>₩ <%=bookPrice / 10%></td></tr>
+			<tr><td>총 할인 금액</td><td> &emsp;</td><td>₩</td></tr>
+			<tr><td>회원 등급 할인</td><td> &emsp;</td><td>₩</td></tr>
+			<tr><td>보유쿠폰 할인</td><td> &emsp;</td><td>₩</td></tr>
+			<tr><td>적립금 사용</td><td> &emsp;</td><td>₩</td></tr>
+			<tr><td></td><td> &emsp;</td><td></td></tr>
+			<tr><td>합계</td><td> &emsp;</td><td>₩</td></tr>
+			<tr><td>(1박 평균)</td><td> &emsp;</td><td>₩</td></tr>
 		</table>
-		세금 및 봉사료 &emsp;&emsp;₩<%=bookPrice / 10%></br> 
-		총 할인 금액 &emsp;&emsp;₩0</br> 
-		회원 등급 할인 &emsp;&emsp;₩0</br> 
-		보유쿠폰 할인 &emsp;&emsp;₩0</br> 
-		적립금 사용 &emsp;&emsp;₩0</br> 
-		</br>
-		합계&emsp;&emsp;₩</br> 
-		(1박 평균) &emsp;&emsp;₩</br> 
 		</br></br></br>
 		<button data-oper='booking'>예약하기</button>
 	</form>
 	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
+		
+		window.onload = function() {
+			document.getElementById("userInfo4").value= '<%=user.getUserPhone()%>' == "null" ? "" : '<%=user.getUserPhone()%>';
+		}
 	
+		// 유효성검사 정규식
 		const regFirstnameKo = /^[가-힣]{1,20}$/; //   "U_FSTNAME" Varchar2(60 ) NOT NULL,
 		const regFirstnameEn = /^[a-zA-Z]{1,60}$/; //   "U_FSTNAME" Varchar2(60 ) NOT NULL,
 		const regLastnameKo = /^[가-힣]{1,13}$/; //  "U_LASTNAME" Varchar2(40 ) NOT NULL,
@@ -159,7 +154,7 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		function lastnameValid() {
 			if (!lastname.value) {
 				lastname.placeholder = "성을 입력하지 않았습니다.";
-				return false;
+				return false; 
 			} else if ((!regLastnameKo.test(lastname.value)&&(!regLastnameEn.test(lastname.value))) ) {
 				document.getElementById("nameMsg").innerText = "성은 1~40자의 영문 또는 1~13자의 한글만 사용 가능합니다.";
 				return false; 
@@ -193,6 +188,12 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		}
 		
 		function checkValidation() {
+			
+			// css 반영 후 제거 부분(단순 나열형식 때문에 페이지가 너무 길어져서 띄우는 알림창..)
+			if(!(firstnameValid()&&lastnameValid()&&emailValid()&&phoneValid())){
+				alert("예약 정보 입력창의 메세지를 확인하세요(임시 알림창)");
+			}
+			
 			return firstnameValid()&&lastnameValid()&&emailValid()&&phoneValid();
 		}
 		
@@ -201,10 +202,10 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 			if(document.getElementById("cb").checked){
 				
 				// 예약자 정보를 로드하고 입력이 불가능한 상태가 된다
-				document.getElementById("userInfo1").value='<%=userTmp.getFstname() %>';
-				document.getElementById("userInfo2").value='<%=userTmp.getLastname()%>';
-				document.getElementById("userInfo3").value='<%=userTmp.getEmail()%>';
-				document.getElementById("userInfo4").value='<%=userTmp.getUserPhone()%>';
+				document.getElementById("userInfo1").value='<%=user.getFstname() %>';
+				document.getElementById("userInfo2").value='<%=user.getLastname()%>';
+				document.getElementById("userInfo3").value='<%=user.getEmail()%>';
+				document.getElementById("userInfo4").value= '<%=user.getUserPhone()%>' == "null" ? "" : '<%=user.getUserPhone()%>';
 				
 				for(let i = 1; i <= 4; i++){
 					document.getElementById("userInfo"+i).setAttribute('readonly', 'readonly');

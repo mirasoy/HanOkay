@@ -200,7 +200,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<insert id="insert">
+	<insert id="insert" parameterType="hashmap">
 		<selectKey keyProperty="bookNum" order="BEFORE"
 			resultType="String">
 			select concat('B',seq_tbook.nextval) from dual
@@ -231,7 +231,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{bookerLastname},
 		#{bookerFirstname},
 		#{bookerEmail},
-		#{bookerPhone},
+		#{bookerPhone, jdbcType=VARCHAR},
 		#{bookStatus})
 		into
 		tbook_status(book_num, book_status)
