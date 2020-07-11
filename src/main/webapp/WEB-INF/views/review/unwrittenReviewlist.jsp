@@ -57,11 +57,12 @@ String name = (String) session.getAttribute("userNum");
 
 
 	<script>
+		//테이블 리스트 만들기
 		<c:forEach items="${list }" var="rev">
-
+		//리뷰유무확인
 		if ("<c:out value="${rev.pstNum }" />" == "") {
 			$(".bookList").append("<tr>");
-			$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
+			$(".bookList").append("<a href='/acm/get?type=&keyword=&person=1&in=&out=&acmNum=<c:out value="${rev.acmNum }" />'><td ><c:out value="${rev.acmName }" /></td><a>");
 			$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
 			$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
 			$(".bookList").append("<td ><c:out value="${rev.checkOutDay }" /></td>");

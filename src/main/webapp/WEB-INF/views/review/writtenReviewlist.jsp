@@ -32,7 +32,7 @@ String name = (String) session.getAttribute("userNum");
 						class="table table-striped table-bordered table-hover bookList">
 						<thead>
 								<th>숙소이름</th>
-								<th>리뷰타이틀</th>
+								<th>리뷰 제목</th>
 								<th>예약번호</th>
 								<th>별점</th>
 								<th>체크인</th>
@@ -61,9 +61,9 @@ String name = (String) session.getAttribute("userNum");
 	$(document).ready(
 			function() {
 		
-			
+			//테이블 리스트 만들기
 		<c:forEach items="${list }" var="rev">
-		
+		//리뷰유무확인
 		if ("<c:out value="${rev.pstNum }" />" != "") {
 			let star = "";
 			for (let a = 0; a < <c:out value="${rev.stisf }" />+0; a++) {
@@ -71,7 +71,7 @@ String name = (String) session.getAttribute("userNum");
 			}		
 			 
 		$(".bookList").append("<tr>");
-		$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
+		$(".bookList").append("<a href='/acm/get?type=&keyword=&person=1&in=&out=&acmNum=<c:out value="${rev.acmNum }" />'><td ><c:out value="${rev.acmName }" /></td><a>");
 		$(".bookList").append("<td ><c:out value="${rev.title }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
 		$(".bookList").append("<td >"+star+"</td>");
@@ -84,7 +84,13 @@ String name = (String) session.getAttribute("userNum");
 		$(".bookList").append("</tr>");
 
 		</c:forEach>
+		
+		let msg = '<c:out value="${msg }" />'
+		if(msg!=''){
+		alert(msg);
+		}
 	});
+	
 	</script>
 </body>
 

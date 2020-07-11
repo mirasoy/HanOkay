@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.domain.BookingVO;
+import com.ana.domain.UserVO;
 import com.ana.service.BookingService;
 //import com.ana.service.MailService;
 
@@ -43,8 +44,24 @@ public class BookingController {
 	public void list(Model model, HttpSession session) {
 		
 		String loginUserNum = (String) session.getAttribute("loginUserNum");
+		
+		UserVO user= (UserVO)session.getAttribute("user"); 
+		String userLastname="";
+		String userFstname="";
+		String userPwd="";
+		String userNum="";
+		//userNum = "U1";
+
+		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if(user != null){
+		userLastname= user.getLastname();
+		userFstname=user.getFstname();
+		userPwd= user.getPwd();
+		userNum= user.getUserNum();
+		} 
+		
 		log.info("bookListAll");
-		model.addAttribute("bookListAll", service.getBookListAll("U1"));
+		model.addAttribute("bookListAll", service.getBookListAll(userNum));
 	}
 	
 	//예약 예정 목록

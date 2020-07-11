@@ -114,9 +114,9 @@ public class RevServiceImpl implements RevService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			System.out.println("서비스 리스트"+rev);
 		}
-
+		
 		return list;
 	}
 

@@ -53,7 +53,17 @@ String name = (String) session.getAttribute("userNum");
 								</tr>
 								<tr>
 									<td colspan="2">
+										리뷰 제목
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
 										<input type="text" name='title' required />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										리뷰 내용
 									</td>
 								</tr>
 								<tr>
@@ -120,7 +130,6 @@ String name = (String) session.getAttribute("userNum");
 						alert("내용을 입력해주세요");
 					}else{
 				 		$(this).attr("type","submit")
-						alert("별점ok");
 						
 					} 
 				
