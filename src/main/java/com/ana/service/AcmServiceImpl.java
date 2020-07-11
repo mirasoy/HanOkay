@@ -61,7 +61,8 @@ public class AcmServiceImpl implements AcmService{
 	@Override
 	public int getTotal(Criteria cri) {
 		log.info("get total count");
-		return mapper.getTotalCount(cri);
+		List<String> acmNumList = mapper.getAcmNum(cri.getPerson());
+		return mapper.getTotalCount(cri, acmNumList);
 	}
 
 }
