@@ -274,8 +274,10 @@
 			/** @type{!HTMLInputElement} */(document.getElementById('autocomplete')),
 			{types: ['geocode'],componentRestrictions: {country: 'kr'}});
 	autocomplete.addListener('place_changed', fillInAddress);
+
 	}
 	
+
 	function fillInAddress(){
 		var place = autocomplete.getPlace();
 		$('#lat').prop('value',place.geometry.location.lat());
@@ -325,4 +327,5 @@
    });
 		
 	</script>
+
 </html>
