@@ -39,10 +39,13 @@ public class UserController {
 		log.info("email check: " + email);
 		if (service.checkEmail(email)) {
 			rttr.addFlashAttribute("msg1", "해당 이메일 사용가능");
+			rttr.addFlashAttribute("assureEmailCheck", "pass");
 
 		} else {
 			rttr.addFlashAttribute("msg1", "사용불가! 중복된 이메일이 있습니다");
+			//rttr.addFlashAttribute("assureEmailCheck", "fail");
 		}
+		
 		rttr.addFlashAttribute("email", email);
 		return "redirect:/register/signUp";
 	}
@@ -50,9 +53,9 @@ public class UserController {
 	// 회원가입 하기
 	@PostMapping("/register")
 	public ModelAndView register(UserVO user, Model model) {
-		//log.info("user: " + user);
+		log.info("register user: " + user);
 		service.register(user);
-
+		//세션에 user라는 키로 user객체를 담아주기
 		model.addAttribute("user", user);
 		log.info("user가 세션에 담겼으면 조켔당"+ user);
 		ModelAndView mv= new ModelAndView();
@@ -62,7 +65,7 @@ public class UserController {
 	}
 
 	
-	//인증메일을 발송하는 기능
+	//인증메일을 발송하는 기능(미구현)
 	@PostMapping("/EmailAuth")
 	public void sendAuthEmail(String email, RedirectAttributes rttr) {
 		log.info("입력된 email: "+ email);
