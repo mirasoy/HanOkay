@@ -182,7 +182,7 @@ public class BookingMapperTests {
 		book.setBookerLastname("테스트");
 		book.setBookerFirstname("테스트");
 		book.setBookerEmail("test@ana.com");
-		book.setBookerPhone(010);
+		book.setBookerPhone("010");
 		book.setBookStatus("RS_STT_BK");
 		mapper.insert(book);
 

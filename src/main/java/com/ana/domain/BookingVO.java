@@ -29,9 +29,8 @@ public class BookingVO {
 	private String romName;
 	private String bookerLastname;
 	private String bookerFirstname;
-	@Email()
 	private String bookerEmail;
-	private Integer bookerPhone;
+	private String bookerPhone;
 	private String bookStatus;
 
 }
