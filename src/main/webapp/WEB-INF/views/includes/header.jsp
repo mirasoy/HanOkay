@@ -31,7 +31,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Ana - korea homstay</title>
-           
+ 
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>          
    
         <!-- load stylesheets -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  <!-- Google web font "Open Sans" -->
@@ -93,7 +94,6 @@ body {
 }
 
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
    $(document).ready(function(){
       //만약 user에 해당하는 세션이 없으면 
