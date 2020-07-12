@@ -61,7 +61,8 @@
 		<script
 			src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 	  
-
+<link href="../resources/css/select2.css" rel="stylesheet">
+   <script src="../resources/js/select2.js"></script>
 <style>
 body {
     background: #f8f9fa;
@@ -115,6 +116,8 @@ body {
               
         };
     });
+   
+       
 </script>
 
     </head>
