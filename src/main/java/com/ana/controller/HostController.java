@@ -35,14 +35,12 @@ public class HostController {
 	
 	@Autowired
 	private RomRegService service;//객실관련서비스
-	
 	@Autowired
 	private AcmRegService aservice;//숙소등록관련서비스
-	
 	@Autowired
 	private UserService uservice;//호스트 사업등록증관련
 	
-	
+
 	@GetMapping("/hostindex")
 	public void indexGet() {
 
@@ -53,6 +51,17 @@ public class HostController {
 
 	}
 	
+	//세션에서 유저이름 가져오는 메서드
+	public String getUsername(HttpSession session) {
+		UserVO user=(UserVO)session.getAttribute("user");
+		String userFstname="";
+		
+		if(user!=null) {
+			userFstname=user.getFstname();
+		}
+		
+		return userFstname;
+	}
 	
 	//become-host단
 	
@@ -78,17 +87,10 @@ public class HostController {
 		model.addAttribute("list", romList);
 		model.addAttribute("size", romList.size());
 		
-		///////////////
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
 		
-		if(user!=null) {
-			System.out.println("첫페이지에 유저세션있다");
-			userFstname=user.getFstname();
-		}
 		
-		model.addAttribute("userFstname", userFstname);
-		/////////////////
+		model.addAttribute("userFstname", getUsername(session));
+		
 	
 		return "/hosting/become-host2_6";
 	}
@@ -103,17 +105,9 @@ public class HostController {
 		model.addAttribute("list", romList);
 		model.addAttribute("size", romList.size());
 		
-		///////////////
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
 		
-		if(user!=null) {
-			System.out.println("첫페이지에 유저세션있다");
-			userFstname=user.getFstname();
-		}
-		
-		model.addAttribute("userFstname", userFstname);
-		/////////////////
+		model.addAttribute("userFstname", getUsername(session));
+	
 		
 		
 		return "/hosting/become-host2_6";
@@ -123,21 +117,9 @@ public class HostController {
 	public void becomeHostGet(Model model,HttpSession session) {
 		System.out.println("become-host페이지를 띄운다**");
 		
+						
+		model.addAttribute("userFstname", getUsername(session));
 		
-		///////////////
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
-		
-		if(user!=null) {
-			System.out.println("첫페이지에 유저세션있다");
-			userFstname=user.getFstname();
-		}
-		
-		model.addAttribute("userFstname", userFstname);
-		/////////////////
-	
-	
-	
 	}
 	
 	@PostMapping("/become-host")
@@ -150,17 +132,7 @@ public class HostController {
 		model.addAttribute("acmNum", vo.getAcmNum().trim());
 		System.out.println(vo.getAcmNum());
 		
-		///////////////
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
-		
-		if(user!=null) {
-			System.out.println("첫페이지에 유저세션있다");
-			userFstname=user.getFstname();
-		}
-		
-		model.addAttribute("userFstname", userFstname);
-		/////////////////
+		model.addAttribute("userFstname", getUsername(session));
 		
 		return "/hosting/become-host1_6";
 	}
@@ -173,17 +145,7 @@ public class HostController {
 		System.out.println("become-host페이지를 띄운다**");
 		
 		
-		/////////////
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
-		
-		if(user!=null) {
-			System.out.println("1_6겟에 유저세션있다");
-			userFstname=user.getFstname();
-		}
-		
-		model.addAttribute("userFstname", userFstname);
-		////////////////
+		model.addAttribute("userFstname", getUsername(session));
 	}
 	
 	
@@ -209,17 +171,7 @@ public class HostController {
 		model.addAttribute("size", romList.size());
 		
 		
-		//////세셔언
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
-		
-		if(user!=null) {
-			System.out.println("1_6포스트에 유저세션있다");
-			userFstname=user.getFstname();
-		}
-		
-		model.addAttribute("userFstname", userFstname);
-		//////////////////
+		model.addAttribute("userFstname", getUsername(session));
 		
 		return "/hosting/become-host2_6";
 	}
@@ -232,17 +184,9 @@ public class HostController {
 		System.out.println("겟2_6");
 		System.out.println(acmNum);
 
-		//////////////////
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
+
 		
-		if(user!=null) {
-			System.out.println("2_6겟에 유저세션있다");
-			userFstname=user.getFstname();
-		}
-		
-		model.addAttribute("userFstname", userFstname);
-		/////////////////
+		model.addAttribute("userFstname", getUsername(session));
 		
 		
 		List<RomVO> romList=service.getList(acmNum);///??
@@ -256,17 +200,7 @@ public class HostController {
 	public String becomeHostPost2_6(String acmNum,Model model,HttpSession session) {
 		System.out.println("2_6포스트");
 		
-		//////세셔언
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
-		
-		if(user!=null) {
-			System.out.println("2_6post에 유저세션있다");
-			userFstname=user.getFstname();
-		}
-		
-		model.addAttribute("userFstname", userFstname);
-		//////////////////
+		model.addAttribute("userFstname", getUsername(session));
 		
 		return "/hosting/become-host2_6";
 	}
@@ -339,15 +273,7 @@ public class HostController {
 
 	@PostMapping("/become-host-complete")
 	public String becomeHostPost_complete(Model model,HttpSession session) {
-		UserVO user=(UserVO)session.getAttribute("user");
-		String userFstname="";
-		
-		if(user!=null) {
-			System.out.println("complete에 유저세션있다");
-			userFstname=user.getFstname();
-		}
-		
-		model.addAttribute("userFstname", userFstname);
+		model.addAttribute("userFstname", getUsername(session));
 		return "/hosting/become-host-complete";//호스트가 가진 숙소 쪽으로 감
 	}
 	
