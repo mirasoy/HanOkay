@@ -30,7 +30,7 @@
                             
 
 
-                                <form action="/acm/result" method="get" class="search-form section-pad-2">
+                                <form action="/acm/result" method="get" class="search-form section-pad-2" onsubmit="return checkValidation()">
                                     <div class="form-row search-form-row">                                
                                         <div class="form-group form-group-pad form-group-1">
                                             <label for="inputCity">Choose Your Destination</label>
@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="form-group form-group-1">
                                             <label for="btnSubmit">&nbsp;</label>
-                                            <button type="submit" class="submit-btn btn btn-primary btn btn-search text-uppercase" id="btnSubmit">Check Availability</button>
+                                            <button type="submit" class="submit-btn btn btn-primary btn btn-search text-uppercase" id="submitBtn">Check Availability</button>
                                         </div>
                                     </div>           
 								</div>
@@ -300,6 +300,17 @@
 			    }
 			}
 		});
+		 function checkValidation() {
+	         alert("!");
+	            if(document.getElementById("in").value == document.getElementById("out").value){
+	               alert("1박 이상 선택해주세요!");
+	               return false;
+	            }else{
+	            return true;
+	         }
+	      }
+
+	);
 		</script>            
 		<script src="resources/js/bootstrap-datepicker.js"></script>
 		
