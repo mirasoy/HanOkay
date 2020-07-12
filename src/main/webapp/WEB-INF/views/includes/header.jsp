@@ -50,8 +50,17 @@
         <script src="../resources/js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
         <script src="../resources/slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->
         <script src="../resources/js/jquery.scrollTo.min.js"></script>           <!-- https://github.com/flesler/jquery.scrollTo -->
-        <script src="../resources/js/index.js"></script>                       <!-- 메인 js -->
-     
+
+        <script src="../resources/js/index.js"></script>          				 <!-- 메인 js -->
+
+		<!-- 달력 변경(수희) -->
+		<link
+			href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+			rel="stylesheet" type="text/css" />
+		<script
+			src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+	  
+
 <style>
 body {
     background: #f8f9fa;
