@@ -32,7 +32,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Ana - korea homstay</title>
  
- 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>          
    
         <!-- load stylesheets -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  <!-- Google web font "Open Sans" -->
@@ -54,6 +53,7 @@
 
         <script src="../resources/js/index.js"></script>          				 <!-- 메인 js -->
 
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>          
 		<!-- 달력 변경(수희) -->
 		<link
 			href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
@@ -155,7 +155,7 @@ body {
                                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
                                         data-toggle="dropdown" href="#"> <i class="fa fa-globe fa-2x"></i></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">ENGLISH</a></li>
+                                            <li><a href="#">ENGLISH(미구현)</a></li>
                                             <li><a href="#">KOREAN</a></li>        
                                         </ul>
                                     </li>                                    
@@ -187,7 +187,6 @@ body {
                                                 <a onclick="location.href='/user/login'" style="cursor:pointer" id="sign-out-btn" data-selenium="sign-out" data-element-name="sign-out-btn" color="primary">
                                                     <div>
                                                         <div id="loginout">
-                                                            <span>로그아웃</span>
                                                         </div>
                                                     </div>
                                                 </a>

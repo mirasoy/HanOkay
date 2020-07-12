@@ -309,7 +309,6 @@
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
 	</script>
-	<script src="resources/js/bootstrap-datepicker.js"></script>
 
 </body>
 <%@include file="../includes/footer.jsp"%>
