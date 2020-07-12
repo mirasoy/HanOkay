@@ -13,12 +13,14 @@ String name = (String) session.getAttribute("userNum");
 <head>
 
 	<style>
-		#star a {
+			#star a {
+		font-size :2em;
 			text-decoration: none;
 			color: gray;
 		}
 
 		#star a.on {
+		font-size :2em;
 			color: red;
 		}
 	</style>
@@ -59,16 +61,18 @@ String name = (String) session.getAttribute("userNum");
 							</tr>
 							<tr>
 								<td colspan="2">
-									<textarea name='content'
-										style="resize: none;"><c:out value="${review.content } " /></textarea>
+								<textarea name='content' rows="10" style="resize: none; width:100%;" required><c:out value="${review.content } " /></textarea>
 
 									<input type="hidden" name="bookNum" value='<c:out value="${review.bookNum }" />'>
 									<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
 								</td>
 							</tr>
-							<button class="btn" data-oper="delete">삭제하기</button>
-							<button class="btn" data-oper="modify">수정하기</button>
-							<a href="/review/list"><button type="button">리스트로</button></a>
+							<tr><td colspan="2">
+							<button class="btn movebtn" data-oper="delete">삭제하기</button>
+							<button class="btn movebtn" data-oper="modify">수정하기</button>
+							<a href="/review/list"><button class="btn" type="button">리스트로</button></a>
+							</td>
+							</tr>
 						</table>
 
 
@@ -113,7 +117,7 @@ String name = (String) session.getAttribute("userNum");
 
 	
 		//버튼에 따라 컨트롤러에서 다른 서비스를 부르게함
-		$('.btn').on("click", function (e) {
+		$('.movebtn').on("click", function (e) {
 			e.preventDefault();
 			let operation = $(this).data("oper");
 			//지울때
