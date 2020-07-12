@@ -52,7 +52,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 B.BOOK_NUM,
                 B.checkin_Date,
                 B.cheCkout_Date,
-                b.user_num
+                b.user_num,
+                a.acm_num
                 
             FROM 
                 TBOOKING B, TACM A, TROM R
@@ -72,7 +73,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 a.user_num,
                 b.rev_purl,
                 B.STISF,
-                b.acm_num,
                 b.book_num,
                 b.content
                 
@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 LEFT JOIN
                     trev_detail B
                 ON 
-                    a.pst_num = b.pst_num)bk
+                    a.pst_num = b.pst_num) bk
         
         where al.book_num = bk.book_num(+)
         and al.user_num = #{loginUser}
