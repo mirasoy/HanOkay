@@ -119,21 +119,6 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    	한국어(KR) <!-- 추후에 언어설정이 들어가면 글자가 바뀌어야함 -->
-                                </div>
-                            </a>
-                        </li>    
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	$WON
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
                                     	커뮤니티 센터
                                 </div>
                             </a>

@@ -56,18 +56,24 @@ public class AcmRegServiceImpl implements AcmRegService{
 			omapper.insert(vo); //순차적으로 옵션디비에 저장
 		}
 		
-		System.out.println("한옥에 대한 설명"+acmDesc);
+		System.out.println("한옥acmNum:"+acmNum);
+		System.out.println("한옥에 대한 설명:"+acmDesc);
 		System.out.println(acmNum);
+		acmNum=acmNum.trim();
+		System.out.println("트림한 acmNum:"+acmNum);
+//		AcmVO acm = new AcmVO();
+//		acm.setAcmNum(acmNum);
+//		acm.setAcmDesc(acmDesc);
+//		System.out.println("acm리스트"+acm.toString());
 		
-		AcmVO acm = new AcmVO();
-		acm.setAcmNum(acmNum);
-		acm.setAcmDesc(acmDesc);
-		System.out.println("acm리스트"+acm.toString());
+		//int rs=amapper.updateDesc(acm);//작동안함1200
+		int rs=amapper.updateDesc(acmNum, acmDesc);
 		
-		int rs=amapper.updateDesc(acm);//작동안함1200
+		
+		
 		System.out.println("결과:"+rs);
 		
-		return true;
+		return rs==1;
 	}
 
 

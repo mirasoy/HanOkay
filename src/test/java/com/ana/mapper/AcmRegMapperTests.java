@@ -26,16 +26,6 @@ public class AcmRegMapperTests {
 	private AcmRegMapper mapper;
 
 	
-    @Test
-	public void testUpdate() {
-		AcmVO acm = new AcmVO();
-		
-		acm.setAcmNum("A263");
-		acm.setAcmDesc("뭐이놈암?");
-		
-		int count = mapper.updateDesc(acm);
-		log.info("UPDATE COUNT: " + count);
-		
-    }
+   
 
 }

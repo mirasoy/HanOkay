@@ -2,6 +2,7 @@ package com.ana.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 
 import com.ana.domain.AcmVO;
 
@@ -19,5 +20,8 @@ public interface AcmRegMapper {
 	
 	public int update(AcmVO acm);
 	
-	public int updateDesc(AcmVO acm);//작동안함1200
+	//public int updateDesc(AcmVO acm);//
+	public int updateDesc(@Param("acmNum") String acmNum, @Param("acmDesc") String acmDesc);
+
+
 }

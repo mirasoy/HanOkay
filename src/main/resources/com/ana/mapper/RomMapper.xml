@@ -51,8 +51,8 @@
 		BED_TYPE = #{bedType},
 		BED_CNT = #{bedCnt},
 		ROM_PRICE =
-		#{romPrice},
-		ROM_PURL = #{romPurl}
+		#{romPrice}
+		
 		where ROM_NUM = #{romNum}
 	</update>
 

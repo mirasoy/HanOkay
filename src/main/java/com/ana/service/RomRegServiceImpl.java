@@ -65,12 +65,15 @@ public class RomRegServiceImpl implements RomRegService{
 
 	@Override
 	public boolean remove(String romNum) {//객실 지우기
+		omapper.delete(romNum);
 		return mapper.remove(romNum)==1;
 	}
 
 
 	@Override
 	public boolean modify(RomVO rom) {
+		
+		
 		return mapper.modify(rom)==1;
 	}
 

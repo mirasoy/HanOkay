@@ -21,7 +21,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                        <li>
-                           <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
+                           <a><c:out value="${userFstname}"/>님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
                         </li>
                         <li>
                             <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
@@ -55,7 +55,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				객실 목록
-				<button id='regBtn' type="button" class="btn btn-xs pull-right" onclick='openPop()'>새객실 등록</button>
+				<button id='regBtn' type="button" class="btn btn-xs pull-right" onclick='openPop()'>새 객실 등록</button>
 			</div>
 
 			<!-- /.panel-heading -->
@@ -109,6 +109,7 @@
 <%@include file="../includes/footer.jsp"%>
 
 <script type="text/javascript">
+	
 	
 	var openWin;//자식창
 	function openPop(){

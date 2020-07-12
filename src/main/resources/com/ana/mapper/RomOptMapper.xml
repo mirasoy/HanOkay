@@ -14,4 +14,8 @@
 		values (#{romNum}, #{romOptcode})
 	</insert>
 	
+	<delete id="delete">
+		delete TROM_OPTION where ROM_NUM = #{romNum}
+	</delete>
+	
 </mapper>

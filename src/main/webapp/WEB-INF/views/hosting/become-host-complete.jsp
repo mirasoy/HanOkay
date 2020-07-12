@@ -20,7 +20,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                          <li>
-                           <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
+                           <a><c:out value="${userFstname}"/>님 안녕하세요!<br> 숙소 등록이 완료되었습니다</a> 
                         </li>
                         <li>
                             <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
@@ -45,10 +45,10 @@
 			<br>	
 			 <!-- 숙소설명 -->
 			 <form action="/hosting/listings" method="post">
-			 		<h4>확정된 전체 정보 뿌리기</h4>
+			 		<h4><c:out value="${userFstname}"/>님의 새 숙소가 등록되었습니다</h4>
 			 	
 			 	
-			 		<button type="submit">객실 등록하기</button>
+			 		<button type="submit">숙소관리 페이지로</button>
 			 </form>
 			
 		</div>

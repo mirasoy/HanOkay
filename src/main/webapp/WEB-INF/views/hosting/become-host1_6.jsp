@@ -10,7 +10,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                        <li>
-                           <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
+                           <a><c:out value="${userFstname}"/>님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
                         </li>
                         <li>
                             <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
@@ -34,13 +34,17 @@
 <div id="page-wrapper" style="padding-bottom:50px;">
 
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
-			<br><br>
-			<form action="/hosting/become-host1_6" method="post">
+		<br><br>
+		<form id="actionForm" action="/hosting/become-host1_6" method="post">
+			  
+			  
+			<div class="opt" id="opt">  
 			  
 			  <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
 			  <h4>5.숙소에서 공통적으로 제공하는 옵션</h4><br>
+			  <h6>한개 이상의 옵션을 선택하셔야합니다</h6>	
 			  
-			  <h4>5-1.시설 옵션</h4> <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->	
+			  <h4>5-1.시설 옵션</h4> <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->
 			  	<input type="checkbox" id="SW" name="acmOptcode" value="SW"><label for="SW">수영장</label>
 			   <input type="checkbox" id="PK" name="acmOptcode" value="PK"><label for="PK">주차장</label>
 			   <input type="checkbox" id="PU" name="acmOptcode" value="PU"><label for="PU">공항 등 교통편 서비스</label>
@@ -64,23 +68,76 @@
 			   <input type="checkbox" id="LC" name="acmOptcode" value="LC"><label for="LC">중식</label>
 			   <input type="checkbox" id="DN" name="acmOptcode" value="DN"><label for="DN">석식</label>
 			   
+			 </div>
 			   
+
 			   <br><br>
-					
 			  <h4>6.숙소에 대한 설명과 교통편,지켜야할 사항 등을 적어주세요</h4>
-			  <textarea name="acmDesc" id="acmDesc" cols="50" rows="5"></textarea>
+			  <textarea name="acmDesc" id="acmDesc" placeholder="꼼꼼한 숙소설명은 고객들이 숙소를 더 많이 찾게하는 요소입니다"cols="50" rows="5"></textarea>
 			 	
-			
 			  
 				  
-			  <!-- 총 검토 -->
-			  <br><br><br>
-			  <button type="submit">다음으로</button>
-			</form>
+		  <!-- 총 검토 -->
+		  <br><br><br>
+		  <button type="button" onclick="if(readyForreg()){romRegit()}">다음으로</button>
+		</form>
 		</div>
 
+<!-- return readyForreg() -->
 
-<%@include file="../includes/footer.jsp"%>
-<script>
+
+<script type="text/javascript">
+	var chkArr = []; //배열 초기화
+
+	function readyForreg() {
+	    
+	    $("input[name=acmOptcode]:checked").each(function (i) {//체크박스값들을 모조리 배열에 담는다
+	       //console.log('checkbox값:'+$(this).val());
+	       chkArr.push($(this).val());
+	    });
 	
+	    if(chkArr.length==0){
+	       alert('하나 이상의 숙소유형을 골라주셔야합니다');
+	       $(this).focus();
+			return false;	       
+	    }
+	    
+	    return true;
+	 }
+	
+	//안쓴다앗
+	function romRegit(){
+		/*var acmNum=$("#acmNum").val();
+		var acmDesc=$("#acmDesc").val();
+		
+		
+		
+		$.ajax({
+			url: 'updateAcmDesc',
+			type: "POST",
+			data: {acmNum: acmNum, acmDesc:acmDesc},
+			success: function (data) {
+				alert("객실이 추가되었습니다.");
+			}
+		});*/
+		
+		alert("숙소 옵션이 추가되었습니다");
+		document.getElementById('actionForm').submit();
+	}
+	
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

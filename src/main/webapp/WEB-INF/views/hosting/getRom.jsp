@@ -21,7 +21,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                    		<li>
-                           <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
+                           <a></a> 
                         </li>
                         <li>
                             <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
@@ -99,18 +99,18 @@
             value='<c:out value="${thisrom.romPrice }"/>' readonly="readonly">
         </div>
         <div class="form-group">
-          <label>객실 사진</label> <input class="form-control" name='romPurl'
+          <label></label> <input class="form-control" name='romPurl'
             value='<c:out value="${thisrom.romPurl }"/>' readonly="readonly">
         </div>
 		<div class="form-group">
-          <label>객실 위치</label> <input class="form-control" name='romPurl'
+          <label>객실 위치</label> <input class="form-control" name='romLoca'
             value='<c:out value="${thisrom.romLoca }"/>' readonly="readonly">
         </div>
 
 
 		<button data-oper='modify' class="btn btn-default">수정하기</button>
 		<button data-oper='remove' class="btn btn-danger">삭제하기</button>
-		<button data-oper='list' class="btn btn-info" o>뒤로가기</button>
+		<button data-oper='list' class="btn btn-info" >뒤로가기</button>
 			
 	</div>
 
@@ -120,7 +120,6 @@
 		</form>
 				
 
-<%@include file="../includes/footer.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
