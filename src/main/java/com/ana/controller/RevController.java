@@ -53,100 +53,131 @@ public class RevController {
 
 	private RevService service;
 
-	
-	//내 예약목록 전체보기
+	// 내 예약목록 전체보기
 	@GetMapping("/list")
- 	public void list(Model model, HttpSession session) {
+	public String list(Model model, HttpSession session) {
 
-		String userNum = (String) session.getAttribute("userNum");
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userNum = "";
 
-		log.info("userNum>>>>>>" +  service.getUserList("U1").size());
-		log.info("의 리스트 list");
-		
-		
-		model.addAttribute("list", service.getUserList("U1"));
+		// user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if (user != null) {
+			userNum = user.getUserNum();
+			log.info("list Size>>>>>>" + service.getUserList(userNum).size());
+			log.info(userNum + "의 리스트 list");
+			model.addAttribute("list", service.getUserList(userNum));
+			return "/review/list";
+		} else {
+			return "redirect:/acm/list";
+		}
+
 	}
 
-	//아직 쓰지않은 예약완료 리스트
+	// 아직 쓰지않은 예약완료 리스트
 	@GetMapping("/unwrittenReviewlist")
-	public void unwrittenReviewlist(Model model, HttpSession session) {
+	public String unwrittenReviewlist(Model model, HttpSession session) {
 
-		String userNum = (String) session.getAttribute("userNum");
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userNum = "";
 
-		log.info("unwrittenReviewlist>>>>>>" + userNum);
-		
-		model.addAttribute("list", service.getUserList("U1"));
+		// user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if (user != null) {
+			userNum = user.getUserNum();
+			log.info("list Size>>>>>>" + service.getUserList(userNum).size());
+			log.info(userNum + "의 리스트 list");
+			model.addAttribute("list", service.getUserList(userNum));
+			return "/review/unwrittenReviewlist";
+
+		} else {
+			return "redirect:/acm/list";
+		}
+
 	}
 
-	//작성완료 리뷰
+	// 작성완료 리뷰
 	@GetMapping("/writtenReviewlist")
-	public void writtenReviewlist(Model model, HttpSession session) {
+	public String writtenReviewlist(Model model, HttpSession session) {
 
-		String userNum = (String) session.getAttribute("userNum");
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userNum = "";
 
-		log.info("writtenReviewlist>>>>>>" + userNum);
-	
-		model.addAttribute("list", service.getUserList("U1"));
+		// user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if (user != null) {
+			userNum = user.getUserNum();
+			log.info("list Size>>>>>>" + service.getUserList(userNum).size());
+			log.info(userNum + "의 리스트 list");
+			model.addAttribute("list", service.getUserList(userNum));
+			return "/review/writtenReviewlist";
+		} else {
+			return "redirect:/acm/list";
+		}
+
 	}
 
-	//리뷰등록페이지 열기
+	// 리뷰등록페이지 열기
 	@GetMapping("/register")
 	public void register(@RequestParam("bookNum") String bookNum, Model model) {
 
 		log.info("register bookNum>> " + bookNum);
-		log.info("register >> " + service.getByBooknum(bookNum));
-		
+		log.info(" >> " + service.getByBooknum(bookNum));
+
 		model.addAttribute("booking", service.getByBooknum(bookNum));
 	}
 
-	//리뷰등록하기
+	// 리뷰등록하기
 	@PostMapping("/register")
 	public String register(RevPostVO revP, RevDetailVO reDetail, RedirectAttributes rttr) {
 
-		RevVO rev = service.getByBooknum(reDetail.getBookNum());
-		//임시설정
-		rev.setRevPurl("사진임시");
-		//임시설정
-		rev.setTitle(revP.getTitle());
-		rev.setContent(reDetail.getContent());
-		rev.setStisf(reDetail.getStisf());
+		boolean registrationStatus = service.getByBooknum(reDetail.getBookNum()).getPstNum() == null;
+		log.info("먼저 등록되엇던 리뷰인지 확인>>" + registrationStatus);
+		// 먼저 등록되엇던 리뷰인지 확인하기
+		if (registrationStatus) {
+			RevVO rev = service.getByBooknum(reDetail.getBookNum());
+			// 임시설정
+			rev.setRevPurl("사진임시");
+			// 임시설정
+			rev.setTitle(revP.getTitle());
+			rev.setContent(reDetail.getContent());
+			rev.setStisf(reDetail.getStisf());
 
-		log.info("register:>>>>>>>> " + rev);
-		service.register(rev);
+			log.info("다음리뷰를 등록합니다>>>>>> " + rev);
+			service.register(rev);
 
-		return "redirect:/review/list";
+			return "redirect:/review/writtenReviewlist";
+		}
+		rttr.addFlashAttribute("msg", "이미 리뷰가 등록된 예약입니다.");
+		return "redirect:/review/writtenReviewlist";
 	}
 
-	//리뷰하나 열어서 보기
+	// 리뷰하나 열어서 보기
 	@GetMapping("/get")
 	public void get(@RequestParam("pstNum") String pstNum, Model model) {
 
-		log.info("/get"+service.get(pstNum));
+		log.info("/get" + service.get(pstNum));
 
 		model.addAttribute("review", service.get(pstNum));
 
 	}
-	
-	//리뷰수정페이지열기
+
+	// 리뷰수정페이지열기
 	@GetMapping("/modify")
 	public void getModifyPage(@RequestParam("pstNum") String pstNum, Model model) {
 
 		log.info("/open modi page");
-		log.info("/modi THAT >> "+ service.get(pstNum));
-		
+		log.info("/modi THAT >> " + service.get(pstNum));
+
 		model.addAttribute("review", service.get(pstNum));
 	}
-	
-	
-	//리뷰 수정하기
+
+	// 리뷰 수정하기
 	@PostMapping("/modify")
 	public String modify(RevVO review, RedirectAttributes rttr) {
-		log.info("modify::::::::::"+review.getPstNum()+":::::::::::::::::::::::::::::" + review);
+		log.info("modify::::::::::" + review.getPstNum() + ":::::::::::::::::::::::::::::" + review);
 		RevVO rv = service.get(review.getPstNum());
 		log.info("modify::::>>>::::::::" + rv);
-		//임시설정
+		// 임시설정
 		rv.setRevPurl("_");
-		//임시설정
+		// 임시설정
 		rv.setTitle(review.getTitle());
 		rv.setContent(review.getContent());
 		rv.setStisf(review.getStisf());
@@ -154,19 +185,17 @@ public class RevController {
 		if (service.modify(rv)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/review/list";
+		return "redirect:/review/writtenReviewlist";
 	}
 
-	//리뷰삭제하기
+	// 리뷰삭제하기
 	@PostMapping("/delete")
 	public String remove(RevVO review, RedirectAttributes rttr) {
 		log.info("delete" + review.getPstNum());
 		service.remove(review.getPstNum());
 		return "redirect:/review/list";
 	}
-	
-	
-	
+
 //이미지 업로드 테스트 단
 //	@GetMapping("/uploadForm")
 //	public void uploadForm() {

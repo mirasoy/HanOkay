@@ -10,6 +10,28 @@ String name = (String) session.getAttribute("userNum");
 <html lang="en">
 <%@include file="../includes/header.jsp"%>
 <head>
+
+<style type="text/css">
+.bookbar {
+	width: 100%;
+	height: 40px;
+	list-style: none;
+	padding: 0;
+}
+
+.bookbar>li {
+	float: left;
+	width: 110px;
+	height: 30px;
+	margin: 0;
+	text-align: center;
+	padding-top: 15px;
+}
+.on{
+	font-weight: bold;
+}
+
+</style>
 </head>
 
 <body>
@@ -21,7 +43,7 @@ String name = (String) session.getAttribute("userNum");
 			<div class="panel-heading">
 				<ul class="bookbar">
 					<li class="item1"><a href="/review/list">전체목록</a></li>
-					<li class="item2"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
+					<li class="item2 on"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
 					<li class="item3"><a href="/review/unwrittenReviewlist">미작성 리뷰</a></li>
 				</ul>
 			</div>
@@ -32,7 +54,7 @@ String name = (String) session.getAttribute("userNum");
 						class="table table-striped table-bordered table-hover bookList">
 						<thead>
 								<th>숙소이름</th>
-								<th>리뷰타이틀</th>
+								<th>리뷰 제목</th>
 								<th>예약번호</th>
 								<th>별점</th>
 								<th>체크인</th>
@@ -61,9 +83,9 @@ String name = (String) session.getAttribute("userNum");
 	$(document).ready(
 			function() {
 		
-			
+			//테이블 리스트 만들기
 		<c:forEach items="${list }" var="rev">
-		
+		//리뷰유무확인
 		if ("<c:out value="${rev.pstNum }" />" != "") {
 			let star = "";
 			for (let a = 0; a < <c:out value="${rev.stisf }" />+0; a++) {
@@ -71,20 +93,26 @@ String name = (String) session.getAttribute("userNum");
 			}		
 			 
 		$(".bookList").append("<tr>");
-		$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
+		$(".bookList").append("<td><a href='/acm/get?type=&keyword=&person=1&in=&out=&acmNum=<c:out value="${rev.acmNum }" />'><c:out value="${rev.acmName }" /><a></td>");
 		$(".bookList").append("<td ><c:out value="${rev.title }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
 		$(".bookList").append("<td >"+star+"</td>");
 		$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.checkOutDay }" /></td>");
-		$(".bookList").append("<button class='button'><a href='/review/get?pstNum=<c:out value="${rev.pstNum }" />'>자세히보기</button></a>");
+		$(".bookList").append("<button class='button btn'><a href='/review/get?pstNum=<c:out value="${rev.pstNum }" />'>자세히보기</button></a>");
 
 		} 
 
 		$(".bookList").append("</tr>");
 
 		</c:forEach>
+		
+		let msg = '<c:out value="${msg }" />'
+		if(msg!=''){
+		alert(msg);
+		}
 	});
+	
 	</script>
 </body>
 

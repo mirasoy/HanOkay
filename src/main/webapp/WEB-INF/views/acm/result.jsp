@@ -14,18 +14,6 @@
 
 <title>Booking Form HTML Template</title>
 
-<!-- Google font -->
-<link href="https://fonts.googleapis.com/css?family=Alegreya:700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-	rel="stylesheet">
-
-<!-- Bootstrap -->
-<link type="text/css" rel="stylesheet"
-	href="/resources/css/bootstrap.min.css" />
-
-<!-- Custom stlylesheet -->
-<link type="text/css" rel="stylesheet" href="/resources/css/style.css" />
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,12 +35,14 @@
 	display: inline-block;
 }
 
-.row {
-	margin-right: 50px;
-	margin-left: 50px;
-	margin-top: 50px;
-}
+
 </style>
+
+<link href="../resources/css/select2.css" rel="stylesheet">
+<script src="../resources/js/select2.js"></script>
+    <script>
+        $(document).ready(function() { $("#e1").select2(); });
+    </script>
 </head>
 
 <body>
@@ -61,33 +51,52 @@
 		<div class="booking-form">
 			<form action="/acm/result" method='get'>
 				<div class="row no-margin">
-					<div class="col-md-3">
-					<a href="/acm/list">
-						<div class="form-header">
-							<h2>Book Now</h2>
-						</div>
-						</a>
-					</div>
+				
 					<div class="col-md-7">
 						<div class="row no-margin">
 							<div class="col-md-4">
 								<div class="form-group">
 									<span class="form-label">Location</span> 
-									<input class="form-control" type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'>
 									<input type="hidden" value="CW" name="type">
-									
+									<select class="form-control" name="keyword" id="e1" value='<c:out value="${pageMaker.cri.keyword}"/>' >
+        								<option value="서울">서울특별시</option>
+        								<option value="경기">경기도</option>
+        								<option value="충북">충청북도</option>
+        								<option value="충남">충청남도</option>
+        								<option value="경북">경상북도</option>
+        								<option value="경남">경상남도</option>
+        								<option value="대구">대구광역시</option>
+        								<option value="대전">대전광역시</option>
+        								<option value="부산">부산광역시</option>
+        								<option value="인천">인천광역시</option>
+        								<option value="강원">강원도</option>
+        								<option value="전북">전라북도</option>
+        								<option value="전남">전라남도</option>
+        								<option value="제주">제주특별자치도</option>
+    								</select>
+								</div>
+							</div>
+							
+							<div class="col-md-4">
+								<div class="form-group">
+									<span class="form-label">Check In</span> 
+									<div class="ui calendar" id="rangestart">
+										<div class="ui input left icon">
+											<i class="calendar icon"></i> 
+											<input type="text" placeholder="Start" id="in" name="in" value="<c:out value="${pageMaker.cri.in}"/>">
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<span class="form-label">Check In</span> <input
-										class="form-control" type="date" name="in" id="datePickerId"  value='<c:out value="${pageMaker.cri.in}"/>'>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<span class="form-label">Check out</span> <input
-										class="form-control" type="date" name="out" id="datePickerId2" value='<c:out value="${pageMaker.cri.out}"/>'>
+									<span class="form-label">Check out</span> 
+									<div class="ui calendar" id="rangeend">
+										<div class="ui input left icon">
+											<i class="calendar icon"></i> 
+											<input type="text" placeholder="End" id="out" name="out" value="<c:out value="${pageMaker.cri.out}"/>">
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -106,16 +115,7 @@
 									<span class="select-arrow"></span>
 								</div>
 							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<span class="form-label">Kids</span> <select
-										class="form-control">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-									</select> <span class="select-arrow"></span>
-								</div>
-							</div>
+						
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -137,25 +137,19 @@
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>#숙소사진</th>
-				<th>#숙소번호</th>
+				<th>숙소사진</th>
 				<th>숙소 이름</th>
-				<th>지역</th>
-				<th>번호</th>
+				<th>주소</th>
 				<th>숙소설명</th>
 			</tr>
 		</thead>
 
 		<c:forEach items="${list }" var="acm">
-			<tr>
-				<td><a href="#"><img alt=""
-						src="<c:out value="${acm.acmPurl}"/>" width="100"></a></td>
-				<td><c:out value="${acm.acmNum }" /></td>
-				<td><a class='move' href='<c:out value="${acm.acmNum}"/>'>
-						<c:out value="${acm.acmName}" />
-				</a></td>
-				<td><c:out value="${acm.acmCity }" /></td>
-				<td><c:out value="${acm.repPhone }" /></td>
+		  
+			<tr class='move' href='<c:out value="${acm.acmNum}"/>' onclick="location.href='<c:out value="${acm.acmNum}"/>'" style="cursor:pointer;"> 
+				<td><img alt="" src="<c:out value="${acm.acmPurl}"/>" width="100"></td>
+				<td><c:out value="${acm.acmName}" /></td>
+				<td><c:out value="${acm.acmCity }" /> <c:out value="${acm.acmDistr }" /> <c:out value="${acm.acmDetailaddr }" /></td>
 				<td><c:out value="${acm.acmDesc }" /></td>
 			</tr>
 			<input type="hidden" id="latitude"
@@ -203,11 +197,45 @@
 
 	
 	<script>
-	
+	<!-- 달력 변경(수희) -->
+	var today = new Date();
+	$('#rangestart').calendar({
+	  type: 'date',
+	  minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+	  endCalendar: $('#rangeend'),
+	  formatter: {
+		    date: function (date, settings) {
+		      if (!date) return '';
+		      var day = date.getDate();
+		      var month = date.getMonth() + 1;
+		      var year = date.getFullYear();
+		      return year + '-' + month + '-' + day;
+		    }
+		}
+	});
+	$('#rangeend').calendar({
+	  type: 'date',
+	  startCalendar: $('#rangestart'),
+	  formatter: {
+		    date: function (date, settings) {
+		      if (!date) return '';
+		      var day = date.getDate();
+		      var month = date.getMonth() + 1;
+		      var year = date.getFullYear();
+		      return year + '-' + month + '-' + day;
+		    }
+		}
+	});
+	</script>            
+	<script src="resources/js/bootstrap-datepicker.js"></script>
+	<!-- 달력 변경. 끝 -->
+
+	<script>	
+	/* 
 	datePickerId.min = new Date().toISOString().split("T")[0];
 	
 	document.getElementById("datePickerId2").disabled = true;
-	$("#datePickerId").on("change paste keyup", function() {
+	$("#datePickerId").on("change", function() {
 	      console.log($(this).val()); 
 	     var testDate= $(this).val();
 	     var date_regex = /^\d{4}-\d{2}-\d{2}$/;
@@ -234,11 +262,9 @@
 	    	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
 	    	}
 	     
-	     
-	     var checkout = yyyy+"-"+mm+"-"+dd; 120-7-21 
-	     
 	 	 datePickerId2.min = dateToYYYYMMDD(com_ymd);
-	});
+	}); 
+	*/
 	
 	
 
@@ -333,7 +359,7 @@
 
 				center : mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
 
-				zoom : 18, // 지도 zoom단계
+				zoom : 15, // 지도 zoom단계
 
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 
@@ -422,10 +448,11 @@
                  -->
 
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9doHEOny5z2QCXaCBWMm84aCRbPs0YVA&callback=initMap">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
 	</script>
 	<script type="text/javascript">
 		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
+		$("#e1").val('<c:out value="${pageMaker.cri.keyword}"/>');
 	
 		$(document)
 				.ready(

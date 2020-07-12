@@ -76,17 +76,7 @@ from
 ]]>
 	</select>
 
-	<select id="getTotalCount" resultType="int">
 	
-		select count(*) from (select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.rom_capa
-        from trom r, tacm a
-        where r.acm_num = a.acm_num) e
-		where
-		<include refid="criteria"></include>
-		<![CDATA[
-		to_number(substr(acm_num,2))>0
-		]]>
-	</select>
 
 	<select id="read" resultMap="AcmVOResult">
 		select * from tacm where acm_Num = #{acmNum}
@@ -154,11 +144,11 @@ select distinct acm_num
 <select id="getListPaging" resultMap="AcmVOResult">
 <![CDATA[
 select 
-    acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
+    acm_purl, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
 from 
 (
    select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
-      rownum rn, acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
+      rownum rn, acm_purl, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
    from
       tacm
    where (acm_city like '%'||#{cri.keyword}||'%' and
@@ -174,5 +164,36 @@ from
    where rn> (#{cri.pageNum}-1) * #{cri.amount}
 ]]>   
 </select>
+
+<select id="getTotalCount" resultType="int">
+<![CDATA[
+select 
+    count(*)
+from 
+(
+   select
+      rownum rn, acm_purl, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
+   from
+      tacm
+   where (acm_city like '%'||#{cri.keyword}||'%' and
+]]>   
+   acm_num in
+   <foreach collection='acmNum' index='index' item='acmNum' open='(' close=')' separator=','>
+      #{acmNum}
+   </foreach>
+   ))
+</select>
+	
+<select id="getTotalCount2" resultType="int">
+	
+		select count(*) from (select distinct a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.rom_capa
+        from trom r, tacm a
+        where r.acm_num = a.acm_num) e
+		where
+		<include refid="criteria"></include>
+		<![CDATA[
+		to_number(substr(acm_num,2))>0
+		]]>
+	</select>
 
 </mapper>

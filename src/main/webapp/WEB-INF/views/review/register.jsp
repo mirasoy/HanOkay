@@ -14,11 +14,13 @@ String name = (String) session.getAttribute("userNum");
 
 	<style>
 		#star a {
+		font-size :2em;
 			text-decoration: none;
 			color: gray;
 		}
 
 		#star a.on {
+		font-size :2em;
 			color: red;
 		}
 	</style>
@@ -53,22 +55,28 @@ String name = (String) session.getAttribute("userNum");
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="text" name='title' required />
+										리뷰 제목
 									</td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<textarea name='content' style="resize: none;" required></textarea>
-
-
+										<input type="text" name='title' style="width:100%;" required />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										리뷰 내용
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<textarea name='content' rows="10" style="resize: none; width:100%;" required></textarea>
 										<input type="hidden" name="bookNum"	value='<c:out value="${booking.bookNum }" />'>
 										<input type="hidden" name="pstNum"	value='<c:out value="${booking.pstNum }" />'>
 								</tr>
-								<button  id="submit">등록하기</button>
-		
-								<a href="/review/list"><button type="button" >리스트로 돌아가기</button></a>
-
 						</table>
+								<button class='btn' id="submit">등록하기</button>
+								<a href="/review/list"><button type="button"  class='btn' >리스트로 돌아가기</button></a>
 					</form>
 				</div>
 			</div>
@@ -120,7 +128,6 @@ String name = (String) session.getAttribute("userNum");
 						alert("내용을 입력해주세요");
 					}else{
 				 		$(this).attr("type","submit")
-						alert("별점ok");
 						
 					} 
 				

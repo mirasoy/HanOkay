@@ -28,26 +28,35 @@ String name = (String) session.getAttribute("userNum");
 						<table class="table table-striped table-bordered table-hover bookList">
 							<thead>
 								<tr>
-									<td colspan="2">
-										<c:out value="${review.title }" />
+									<td colspan="1">
+										<c:out value="${review.bookNum }" />
 									</td>
-								</tr>
-								<tr>
-									<td>
-										<c:out value="${review.pstNum }" />
+									<td colspan="2">
+										<c:out value="${review.acmName }" />
 									</td>
 									<td id="star"></td>
 								</tr>
 								<tr>
 									<td>
+										<b>체크인</b>
+									</td>
+									<td>
 										<c:out value="${review.checkInDay }" />
+									</td>
+									<td>
+										<b>체크아웃</b>
 									</td>
 									<td>
 										<c:out value="${review.checkOutDay }" />
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2">
+									<td colspan="4">
+										<B><c:out value="${review.title }" /></B>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
 										<c:out value="${review.content }" />
 									</td>
 								</tr>
@@ -57,9 +66,9 @@ String name = (String) session.getAttribute("userNum");
 
 
 						</table>
-						<button type="submit">리뷰수정/삭제</button>
+						<button class='btn' type="submit">리뷰수정/삭제</button>
+						<a href="/review/list"><button type="button" class='btn'>리스트로 돌아가기</button></a>
 					</form>
-					<a href="/review/list"><button type="submit">리스트로 돌아가기</button></a>
 				</div>
 			</div>
 		</div>

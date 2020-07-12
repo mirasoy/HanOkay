@@ -15,6 +15,26 @@ String name = (String) session.getAttribute("userNum");
 <head>
 <title>review List</title>
 
+<style type="text/css">
+.bookbar {
+	width: 100%;
+	height: 40px;
+	list-style: none;
+	padding: 0;
+}
+.bookbar>li {
+	float: left;
+	width: 110px;
+	height: 30px;
+	margin: 0;
+	text-align: center;
+	padding-top: 15px;
+}
+.on{
+	font-weight: bold;
+}
+
+</style>
 </head>
 
 <body>
@@ -25,7 +45,7 @@ String name = (String) session.getAttribute("userNum");
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<ul class="bookbar">
-					<li class="item1"><a href="/review/list">전체목록</a></li>
+					<li class="item1 on"><a href="/review/list">전체목록</a></li>
 					<li class="item2"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
 					<li class="item3"><a href="/review/unwrittenReviewlist">미작성 리뷰</a></li>
 				</ul>
@@ -66,16 +86,16 @@ String name = (String) session.getAttribute("userNum");
 		<c:forEach items="${list }" var="rev">
 
 		$(".bookList").append("<tr>");
-		$(".bookList").append("<td ><c:out value="${rev.acmName }" /></td>");
+		$(".bookList").append("<td><a href='/acm/get?type=&keyword=&person=1&in=&out=&acmNum=<c:out value="${rev.acmNum }" />'><c:out value="${rev.acmName }" /><a></td>");
 		$(".bookList").append("<td ><c:out value="${rev.bookNum }" /></td>");
 		$(".bookList").append("<td ><c:out value="${rev.checkInDay }" /></td>");
 		$(".bookList")
 				.append("<td ><c:out value="${rev.checkOutDay }" /></td>");
 
 		if ("<c:out value="${rev.pstNum }" />" == "") {
-			$(".bookList").append("<button class='button'><a href='/review/register?bookNum=<c:out value="${rev.bookNum }" />'>리뷰쓰기</button></a>");
+			$(".bookList").append("<button class='button btn'><a href='/review/register?bookNum=<c:out value="${rev.bookNum }" />'>리뷰쓰기</button></a>");
 		} else {
-			$(".bookList").append("<button class='button'><a href='/review/get?pstNum=<c:out value="${rev.pstNum }" />'>리뷰보기</button></a>");
+			$(".bookList").append("<button class='button btn'><a href='/review/get?pstNum=<c:out value="${rev.pstNum }" />'>리뷰보기</button></a>");
 		}
 
 		$(".bookList").append("</tr>");
