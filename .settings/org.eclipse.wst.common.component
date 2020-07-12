@@ -24,8 +24,8 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <property name="java-output-path" value="/projectAna/target/classes"/>
         <property name="context-root" value="controller"/>
+        <property name="java-output-path" value="/projectAna/target/classes"/>
              
 
     </wb-module>
