@@ -49,7 +49,7 @@
 
 	<div class="row">
 		<div class="booking-form">
-			<form action="/acm/result" method='get'>
+			<form action="/acm/result" method='get' onsubmit="return checkValidation()">
 				<div class="row no-margin">
 				
 					<div class="col-md-7">
@@ -121,7 +121,7 @@
 					<div class="col-md-2">
 						<div class="form-btn">
 
-							<button class="submit-btn" type="submit">Check
+							<button class="submit-btn" id="submitBtn" type="submit">Check
 								availability</button>
 						</div>
 					</div>
@@ -226,6 +226,15 @@
 		    }
 		}
 	});
+	
+	function checkValidation() {
+        if(document.getElementById("in").value == document.getElementById("out").value){
+           alert("1박 이상 선택해주세요!");
+           return false;
+        }else{
+			return true;
+		}
+	}
 	</script>            
 	<script src="resources/js/bootstrap-datepicker.js"></script>
 	<!-- 달력 변경. 끝 -->
@@ -475,10 +484,6 @@
 								$("#myModal").modal("show");
 							}
 
-							$("#regBtn").on("click", function() {
-								self.location = "/acm/register";
-							});
-
 							var actionForm = $("#actionForm");
 							$(".paginate_button a").on(
 									"click",
@@ -519,33 +524,6 @@
 								initMap();
 								
 							}); */
-
-							var searchForm = $("#searchForm");
-							$("#searchForm button")
-									.on(
-											"click",
-											function(e) {
-												if (!searchForm.find(
-														"option:selected")
-														.val()) {
-													alert("검색종류를 선택하세요");
-													return false;
-												}
-												if (!searchForm
-														.find(
-																"input[name='keyword']")
-														.val()) {
-													alert("키워드를 입력하세요");
-													return false;
-												}
-												searchForm
-														.find(
-																"input[name='pageNum']")
-														.val("1");
-												e.preventDefault();
-
-												searchForm.submit();
-											});
 						});
 	</script>
 	<%@include file="../includes/footer.jsp"%>

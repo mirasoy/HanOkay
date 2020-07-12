@@ -30,7 +30,9 @@
                             
 
 
+
                                 <form action="/acm/result" method="get" class="search-form section-pad-2" onsubmit="return checkValidation()" >
+
                                     <div class="form-row search-form-row">                                
                                         <div class="form-group form-group-pad form-group-1">
                                             <label for="inputCity">Choose Your Destination</label>
@@ -38,27 +40,10 @@
                                             <input type="hidden" value="CW" name="type">
                                         </div>
                                         <div class="form-group form-group-1">  
-                                            <!-- Start : form-group-1-->                                  
-                                            <div class="form-group form-group-2 form-right">
-                                                <label for="inputRoom">How many rooms?</label>
-                                                <select name="room" class="form-control select" id="inputRoom">
-                                                    <option value="1" selected>1 Room</option>
-                                                    <option value="2">2 Rooms</option>
-                                                    <option value="3">3 Rooms</option>
-                                                    <option value="4">4 Rooms</option>
-                                                    <option value="5">5 Rooms</option>
-                                                    <option value="6">6 Rooms</option>
-                                                    <option value="7">7 Rooms</option>
-                                                    <option value="8">8 Rooms</option>
-                                                    <option value="9">9 Rooms</option>
-                                                    <option value="10">10 Rooms</option>
-                                                </select>                                        
-                                            </div>
-                                            <!-- End : form-group-1-->
 
                                             <!-- Start : form-group-2--> 
                                             <div class="form-group form-group-3">                                       
-                                                <label for="inputAdult">Adult</label>     
+                                                <label for="inputAdult">Guests</label>     
                                                 <select name="person" class="form-control select" id="inputAdult">
                                                     <option value="1" selected>1</option>
                                                     <option value="2">2</option>
@@ -68,8 +53,6 @@
                                                     <option value="6">6</option>
                                                     <option value="7">7</option>
                                                     <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
                                                 </select>                                        
                                             </div>
                                             <!-- End : form-group-2-->
@@ -102,7 +85,7 @@
                                         </div>
                                         <div class="form-group form-group-1">
                                             <label for="btnSubmit">&nbsp;</label>
-                                            <button type="submit" class="submit-btn btn btn-primary btn btn-search text-uppercase" id="btnSubmit">Check Availability</button>
+                                            <button type="submit" class="submit-btn btn btn-primary btn btn-search text-uppercase" id="submitBtn">Check Availability</button>
                                         </div>
                                     </div>           
 								</div>
@@ -321,7 +304,6 @@
 		});
 
 		function checkValidation() {
-			alert("!");
 	         if(document.getElementById("in").value == document.getElementById("out").value){
 	            alert("1박 이상 선택해주세요!");
 	            return false;
