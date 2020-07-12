@@ -50,12 +50,14 @@
 		INSERT INTO TACM(acm_Num, acm_Name, acm_City,
 		acm_Distr, acm_Detailaddr,
 		rep_Phone, acm_fax, acm_email,
-		biz_regnum,checkin_time, checkout_time,acm_regdate,acm_updatedate)
+		biz_regnum,checkin_time, checkout_time,acm_regdate,acm_updatedate,latitude,longitude)
 		VALUES(concat('A',seq_tacm.nextval),#{acmName},#{acmCity},
 		#{acmDistr}, #{acmDetailaddr},#{repPhone},
-		#{acmFax},#{acmEmail},#{bizRegnum},#{checkoutTime},#{checkinTime},sysdate,sysdate)
+		#{acmFax},#{acmEmail},#{bizRegnum},#{checkoutTime},#{checkinTime},sysdate,sysdate,#{latitude},#{longitude})
+		
 	</insert>
 
+	<!-- 위도경도 추가 -->
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="acmNum" order="BEFORE"
 			resultType="String">
