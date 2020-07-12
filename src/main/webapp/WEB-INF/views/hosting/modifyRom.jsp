@@ -21,7 +21,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                           <a>user님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
+                           <a></a> 
                         </li>
                         <li>
                             <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
@@ -81,7 +81,7 @@
 	        </div>
 	        <div class="form-group">
 	          <label>객실최대수용인원</label> <input class="form-control" name='romCapa' id='romCapa'
-	            value='<c:out value="${thisrom.romCapa }"/>'>
+	            value='<c:out value="${thisrom.romCapa }"/>' numberonly>
 	        </div>
 	        <div class="form-group">
 	          <label>침대 타입</label> <input class="form-control" name='bedType' id='bedType'
@@ -89,20 +89,21 @@
 	        </div>
 			<div class="form-group">
 	          <label>침대 갯수</label> <input class="form-control" name='bedCnt' id='bedCnt'
-	            value='<c:out value="${thisrom.bedCnt }"/>' >
+	            value='<c:out value="${thisrom.bedCnt }"/>' numberonly>
 	        </div>
 			<div class="form-group">
 	          <label>객실 크기</label> <input class="form-control" name='romSize' id='romSize'
-	            value='<c:out value="${thisrom.romSize }"/>' >
+	            value='<c:out value="${thisrom.romSize }"/>' numberonly>
 	        </div>
 	        <div class="form-group">
 	          <label>객실 1박요금</label> <input class="form-control" name='romPrice' id=romPrice'
-	            value='<c:out value="${thisrom.romPrice }"/>' >
+	            value='<c:out value="${thisrom.romPrice }"/>' numberonly>
 	        </div>
 	        <div class="form-group">
-	          <label>객실 사진</label> <input class="form-control" name='romPurl' id='romPurl'
-	            value='<c:out value="${thisrom.romPurl }"/>'>
+	          <label></label> <input class="form-control" name='romPurl'
+	            value='<c:out value="${thisrom.romPurl }"/>' readonly="readonly">
 	        </div>
+	        
 			<div class="form-group">
 	        <label>객실 위치</label> <input class="form-control" name='romLoca' id='romLoca'
 	            value='<c:out value="${thisrom.romLoca }"/>'>
@@ -123,7 +124,6 @@
 	
 				
 
-<%@include file="../includes/footer.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
@@ -139,15 +139,32 @@
 				alert("목록으로 돌아갑니다");
 				formObj.attr("action","/hosting/become-host2_6");	
 			} else if(operation==='modify'){
-				alert("객실 수정이 완료되었습니다");
-				formObj.attr("action","/hosting/modifyRom");//홈의 내용과 다같이 들어간다
+				var flag=true;
+				
+				$("input").each(function () {
+					val = $(this).val().trim();
+					if (val == '') {
+						alert('모든 항목을 입력해주십시오.');
+						$(this).focus();
+						flag = false;
+						return flag; // break
+					}
+				});
+				
+				if(flag){alert("객실 수정이 완료되었습니다");
+					formObj.attr("action","/hosting/modifyRom");//홈의 내용과 다같이 들어간다
+				
+				}else return;
 			}
 			
 			actionForm.submit();
 		});
 	});
 
-
+	//숫자만 입력가능하게만드는 부분
+	$("input:text[numberOnly]").on("keyup", function () {
+		$(this).val($(this).val().replace(/[^0-9]/g, ""));
+	});
 
 </script>
 
