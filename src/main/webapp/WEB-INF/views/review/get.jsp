@@ -66,9 +66,9 @@ String name = (String) session.getAttribute("userNum");
 
 
 						</table>
-						<button type="submit">리뷰수정/삭제</button>
+						<button class='btn' type="submit">리뷰수정/삭제</button>
+						<a href="/review/list"><button type="button" class='btn'>리스트로 돌아가기</button></a>
 					</form>
-					<a href="/review/list"><button type="submit">리스트로 돌아가기</button></a>
 				</div>
 			</div>
 		</div>
