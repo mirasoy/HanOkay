@@ -52,16 +52,28 @@ public class UserController {
 
 	// 회원가입 하기
 	@PostMapping("/register")
-	public ModelAndView register(UserVO user, Model model) {
+	public ModelAndView register(UserVO user, Model model, RedirectAttributes rttr) {
 		log.info("register user: " + user);
-		service.register(user);
-		//세션에 user라는 키로 user객체를 담아주기
-		model.addAttribute("user", user);
-		log.info("user가 세션에 담겼으면 조켔당"+ user);
 		ModelAndView mv= new ModelAndView();
 		
+		//중복된 이메일이 있는지 한번 더 db를 확인한다(refresh할 때 중복 저장되는 경우가 있어서 그걸 막아야함)
+		if (service.checkEmail(user.getEmail())) {
+		service.register(user);
+		//세션에 user를 저장한다
+		model.addAttribute("user", user);
+		log.info("user가 세션에 담겼으면 조켔당 "+ user);
 		mv.setViewName("register/register");
+		} 
+		
+		//중복된 이메일이 있는 경우 그냥 회원가입 폼으로 다시 보내버리자
+		else {
+			
+			//rttr.addFlashAttribute("msg1", "해당 이메일로 이미 가입된 정보가 있습니다!!");
+			mv.setViewName("register/signUp");
+		}
 		return mv;
+		
+		//세션에 user라는 키로 user객체를 담아주기
 	}
 
 	

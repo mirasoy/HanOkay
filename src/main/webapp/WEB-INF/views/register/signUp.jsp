@@ -23,9 +23,9 @@
          <div id="personalInfo">
          <tr>
             <td>비밀번호(*): 
-            <input type="" class="inputField" size="50" name="pwd" id="pwd" placeholder="영 대,소문자,숫자,특수기호가 포함된 8~20자" value="${pwd }" > <br> 
+            <input type="password" class="inputField" size="50" name="pwd" id="pwd" placeholder="영 대,소문자,숫자,특수기호가 포함된 8~20자" value="${pwd }" > <br> 
           	  비밀번호 확인(*):
-            <input type="" class="inputField" size="50" name="pwd2" id="repeatedPwd" placeholder="비밀번호를 한번 더 입력하세요" > <br> 
+            <input type="password" class="inputField" size="50" name="pwd2" id="repeatedPwd" placeholder="비밀번호를 한번 더 입력하세요" > <br> 
               
                <span style="color: black;" id="msg2"><c:out value="${msg2 }" /></span><br>
                <span style="color: black;" id="msg3"><c:out value="${msg3 }" /></span><br>
