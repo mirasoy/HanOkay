@@ -102,7 +102,7 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 			<input type="hidden" name="bookStatus" value="RS_STT_BK" maxlength="100"> 
 					
 		</br></br></br>	
-		[요금정보]</br>
+		[요금정보] (결제 관련 미구현)</br>
 		<table>
 			<tr><td>₩<c:out value="${rom.romPrice}" /> X <%=staydays%>박</td><td>&emsp;</td><td>₩ <%=bookPrice%></td></tr>
 			<tr><td>세금 및 봉사료</td><td> &emsp;</td><td>₩ <%=bookPrice / 10%></td></tr>
