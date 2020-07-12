@@ -44,14 +44,12 @@ public class AcmDatailController {
 			.addAttribute("opt", optService.getList(acmNum))
 			.addAttribute("rom", romService.getList(acmNum, person))
 			.addAttribute("srh", getDate(checkin, checkout));
-			System.out.println("값이쪄");
 		}else {
 			model.addAttribute("acm", acmService.get(acmNum))
 			.addAttribute("rev", revService.getAcmList(acmNum))
 			.addAttribute("opt", optService.getList(acmNum))
 			.addAttribute("rom", romService.getAll(acmNum))
 			.addAttribute("srh", getDate(checkin, checkout));
-			System.out.println("값업쪄");
 		}
 	}
 	

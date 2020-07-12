@@ -121,9 +121,17 @@ body {
 </script>
 
     </head>
+    <script type="text/javascript">
+		 window.history.forward();
+		 function noBack(){
+			 window.history.forward();
+		}
+		 
+	</script>
+	    
 
     <body>
-  
+ 		<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
         <!-- main-content -->
         <div class="main-content" id="top">    
         
