@@ -147,8 +147,8 @@
 				<span id="guide" style="color:#999;display:none"></span>
 
 			   <input type="text" id="repPhone" name="repPhone" placeholder="숙소 대표번호(-없이)" numberOnly><br>
-			   <input type="text" id="acmFax" name="acmFax" placeholder="숙소  팩스번호(-없이)" numberOnly><br><br>
 			   <input type="text" id="acmEmail" name="acmEmail" placeholder="숙소  이메일 주소"><br>
+			   <input type="text" id="acmFax" name="acmFax" placeholder="숙소  팩스번호(-없이)" numberOnly><br><br>
 
 			<!-- 위도경도 임시로 넣어줌 -->
 			<input type="hidden" id="latitude" name="latitude" value="36.7307216">
