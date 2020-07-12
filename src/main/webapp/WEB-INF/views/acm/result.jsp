@@ -227,7 +227,10 @@
 	function checkValidation() {
 		let cin = document.getElementById("in").value;
 		let cout = document.getElementById("out").value;
-         if((cin!="" && cout !="") && (cin == cout)){
+		cin= Number(cin.replace(/-/g,""));
+		cout= Number(cout.replace(/-/g,""));
+		
+         if((cin != 0 && cout != 0) && (cin >= cout)){
             alert("1박 이상 선택해주세요!");
             return false;
          }else{
