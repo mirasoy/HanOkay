@@ -38,11 +38,7 @@
 
 </style>
 
-<link href="../resources/css/select2.css" rel="stylesheet">
-<script src="../resources/js/select2.js"></script>
-    <script>
-        $(document).ready(function() { $("#e1").select2(); });
-    </script>
+    
 </head>
 
 <body>
@@ -197,6 +193,7 @@
 
 	
 	<script>
+    $(document).ready(function() { $("#e1").select2(); });
 	<!-- 달력 변경(수희) -->
 	var today = new Date();
 	$('#rangestart').calendar({
@@ -228,15 +225,16 @@
 	});
 	
 	function checkValidation() {
-        if(document.getElementById("in").value == document.getElementById("out").value){
-           alert("1박 이상 선택해주세요!");
-           return false;
-        }else{
+		let cin = document.getElementById("in").value;
+		let cout = document.getElementById("out").value;
+         if((cin!="" && cout !="") && (cin == cout)){
+            alert("1박 이상 선택해주세요!");
+            return false;
+         }else{
 			return true;
 		}
 	}
 	</script>            
-	<script src="resources/js/bootstrap-datepicker.js"></script>
 	<!-- 달력 변경. 끝 -->
 
 	<script>	
