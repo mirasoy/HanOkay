@@ -1,27 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ page import="com.ana.domain.UserVO"%>
-	<!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
+   <!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
 <% 
-	UserVO user= (UserVO)session.getAttribute("user"); 
-	String userLastname="";
-	String userFstname="";
-	String userPwd="";
-	String userNum="";
-	//userNum = "U1";
-	
-	//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
-	if(user != null){
-	userLastname= user.getLastname();
-	userFstname=user.getFstname();
-	userPwd= user.getPwd();
-	userNum= user.getUserNum();
-	
-	} 
+   UserVO user= (UserVO)session.getAttribute("user"); 
+   String userLastname="";
+   String userFstname="";
+   String userPwd="";
+   String userNum="";
+   //userNum = "U1";
+   
+   //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+   if(user != null){
+   userLastname= user.getLastname();
+   userFstname=user.getFstname();
+   userPwd= user.getPwd();
+   userNum= user.getUserNum();
+   
+   } 
 %>
 <!DOCTYPE html>
 
@@ -32,7 +32,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Ana - korea homstay</title>
            
-
+   
         <!-- load stylesheets -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  <!-- Google web font "Open Sans" -->
         <link rel="stylesheet" href="../resources/font-awesome-4.7.0/css/font-awesome.min.css">    <!-- Font Awesome -->
@@ -46,44 +46,68 @@
         <script src="../resources/js/jquery-1.11.3.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
         <script src="../resources/js/popper.min.js"></script>                    <!-- https://popper.js.org/ -->       
         <script src="../resources/js/bootstrap.min.js"></script>                 <!-- https://getbootstrap.com/ -->
-   		<script src="../resources/js/datepicker.min.js"></script>              	 <!-- https://github.com/qodesmith/datepicker -->
+         <script src="../resources/js/datepicker.min.js"></script>                  <!-- https://github.com/qodesmith/datepicker -->
         <script src="../resources/js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
         <script src="../resources/slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->
         <script src="../resources/js/jquery.scrollTo.min.js"></script>           <!-- https://github.com/flesler/jquery.scrollTo -->
-        <script src="../resources/js/index.js"></script>          				 <!-- 메인 js -->
-	  
+        <script src="../resources/js/index.js"></script>                       <!-- 메인 js -->
+     
 <style>
 body {
-	 background: #f8f9fa;
-	 margin-top: 120px;
-	
+    background: #f8f9fa;
+    margin-top: 120px;
+   
 }
 
 #wrapper {
-	width: 100%;
-	/* 전체 세로 길이를 넓게 구성 : 원페이지에서 스크롤 이동을 보고자함 */
-	height: 4000px;
+   width: 100%;
+   /* 전체 세로 길이를 넓게 구성 : 원페이지에서 스크롤 이동을 보고자함 */
+   height: 4000px;
 }
 
 /* 하단의 컨텐츠에 여백을 주고자함  */
 .row {
-	margin-right: 50px;
-	margin-left: 50px;
+   margin-right: 50px;
+   margin-left: 50px;
 }
 
 .content { /* 부모  */
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	padding: 0;
-	z-index: 1000;
-	transition: all 0.2s ease-in-out;
-	height: 119px;
-	background: white;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   padding: 0;
+   z-index: 1000;
+   transition: all 0.2s ease-in-out;
+   height: 119px;
+   background: white;
 }
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+   $(document).ready(function(){
+      //만약 user에 해당하는 세션이 없으면 
+        if(<%=user == null %>){
+           // $("#loginout").append("<a href='/user/login'>로그인</a>");
+           //알림 드랍 다운 내부 텍스트를 모두 지우고
+            $('#notification').empty();
+           //회원 가입하라고 메세지 주기
+           //드랍 다운 상자를 responsive로 변경하면 좋겠다
+            $('#notification').append("<li><a href='#'>ana의 회원이 되셔서 <br>더 많은 혜택을 누려보세요!</a></li>");
+            
+           //내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
+              $('#myMenuIcon').removeAttr("data-toggle");
+           $('#myMenuIcon').attr("href", "../user/login");
+      
+        }
+        else{
+            $("#loginout").append("<a href='/user/logout'>로그아웃</a>")
+              
+        };
+    });
+</script>
+
     </head>
 
     <body>
@@ -127,7 +151,7 @@ body {
                                     <!-- Start : mainNav2 - 알림-->
                                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
                                         data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-2x"></i></a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" id="notification">
                                             <li><a href="#">예약이 완료되었습니다</a></li>
                                             <li><a href="#">ana의 회원가입을 환영합니다!</a></li>
             
@@ -135,7 +159,7 @@ body {
                                     </li>                                    
 
                                     <!-- Start : mainNav3 - 마이페이지-->
-                                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+                                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="myMenuIcon" 
                                         data-toggle="dropdown" href="#"> <i class="fa fa-user fa-2x"></i></a>
                                         <ul class="dropdown-menu">
                                             <span class="header-menu">마이페이지</span>
