@@ -304,7 +304,6 @@
 		});
 
 		function checkValidation() {
-			alert("!");
 	         if(document.getElementById("in").value == document.getElementById("out").value){
 	            alert("1박 이상 선택해주세요!");
 	            return false;

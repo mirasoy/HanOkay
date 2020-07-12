@@ -49,7 +49,7 @@
 
 	<div class="row">
 		<div class="booking-form">
-			<form action="/acm/result" method='get'>
+			<form action="/acm/result" method='get' onsubmit="return checkValidation()">
 				<div class="row no-margin">
 				
 					<div class="col-md-7">
@@ -227,17 +227,14 @@
 		}
 	});
 	
-	let submitBtn = document.getElementById("submitBtn");
-	submitBtn.addEventListener("click", function(){
-		/* alert(this.getAttribute("data-romNum")) */
-		let checkin = document.getElementById("in").value;
-		let checkout = document.getElementById("out").value;
-		
-		if(document.getElementById("in").value == document.getElementById("out").value){
-			alert("1박 이상 선택해주세요!");
-			return false;
+	function checkValidation() {
+        if(document.getElementById("in").value == document.getElementById("out").value){
+           alert("1박 이상 선택해주세요!");
+           return false;
+        }else{
+			return true;
 		}
-	});
+	}
 	</script>            
 	<script src="resources/js/bootstrap-datepicker.js"></script>
 	<!-- 달력 변경. 끝 -->
@@ -487,18 +484,6 @@
 								$("#myModal").modal("show");
 							}
 
-							let submitBtn = document.getElementById("submitBtn");
-							submitBtn.addEventListener("click", function(){
-								/* alert(this.getAttribute("data-romNum")) */
-								let checkin = document.getElementById("in").value;
-								let checkout = document.getElementById("out").value;
-								
-								if(document.getElementById("in").value == document.getElementById("out").value){
-									alert("1박 이상 선택해주세요!");
-									return false;
-								}
-							});
-	
 							var actionForm = $("#actionForm");
 							$(".paginate_button a").on(
 									"click",
