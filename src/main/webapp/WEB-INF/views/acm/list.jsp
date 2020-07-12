@@ -84,6 +84,35 @@
 
                                         <div class="form-group form-right form-group-3">
                                             <label for="inputCheckIn">Check In Date</label>
+                                             <div class="ui calendar" id="rangestart">
+											<div class="ui input left icon">
+												<i class="calendar icon"></i> 
+												<input type="text" placeholder="Start" id="in" name="in" value="">
+											</div>
+                                        </div>
+                                        
+                                        <div class="form-group form-group-3">
+                                            <label for="inputCheckOut">Check Out Date</label>
+                                            <div class="ui calendar" id="rangeend">
+												<div class="ui input left icon">
+													<i class="calendar icon"></i> 
+													<input type="text" placeholder="End" id="out" name="out" value="">
+												</div>
+											</div>
+                                        </div>
+                                        <div class="form-group form-group-1">
+                                            <label for="btnSubmit">&nbsp;</label>
+                                            <button type="submit" class="submit-btn btn btn-primary btn btn-search text-uppercase" id="btnSubmit">Check Availability</button>
+                                        </div>
+                                    </div>           
+								</div>
+				
+				                   
+                                </form>  
+  <!--                                   <div class="form-row search-form-row">
+
+                                        <div class="form-group form-right form-group-3">
+                                            <label for="inputCheckIn">Check In Date</label>
                                             <input name="in" type="date" class="form-control" id="datePickerId" placeholder="Check In">
                                         </div>
                                         <div class="form-group form-group-3">
@@ -93,7 +122,7 @@
                                         <div class="form-group form-group-1">
                                             <label for="btnSubmit">&nbsp;</label>
                                             <button type="submit" class="submit-btn btn btn-primary btn btn-search text-uppercase" id="btnSubmit">Check Availability</button>
-                                        </div>
+                                        </div> -->
                                     </div>                              
                                 </form>  
                                 
@@ -259,7 +288,41 @@
             <!-- End : page-wrap -->
         </div> 
         <!-- End : main-content -->
-            
+		<script>
+		
+		<!-- 달력 변경(수희) -->
+		var today = new Date();
+		$('#rangestart').calendar({
+		  type: 'date',
+		  minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+		  endCalendar: $('#rangeend'),
+		  formatter: {
+			    date: function (date, settings) {
+			      if (!date) return '';
+			      var day = date.getDate();
+			      var month = date.getMonth() + 1;
+			      var year = date.getFullYear();
+			      return year + '-' + month + '-' + day;
+			    }
+			}
+		});
+		$('#rangeend').calendar({
+		  type: 'date',
+		  startCalendar: $('#rangestart'),
+		  formatter: {
+			    date: function (date, settings) {
+			      if (!date) return '';
+			      var day = date.getDate();
+			      var month = date.getMonth() + 1;
+			      var year = date.getFullYear();
+			      return year + '-' + month + '-' + day;
+			    }
+			}
+		});
+		</script>            
+		<script src="resources/js/bootstrap-datepicker.js"></script>
+		
+		<!-- 달력 변경. 끝 -->
     </body>
 
     <footer class="container-outer">
@@ -289,43 +352,6 @@
 		}
 	}
 	//참고 끝
-	
-	datePickerId.min = new Date().toISOString().split("T")[0];
-   
-   document.getElementById("datePickerId2").disabled = true;
-   $("#datePickerId").on("change paste keyup", function() {
-         console.log($(this).val()); 
-        var testDate= $(this).val();
-        var date_regex = /^\d{4}-\d{2}-\d{2}$/;
-        if((date_regex.test(testDate)))
-         document.getElementById("datePickerId2").disabled = false;
-        
-        var end_ymd= document.getElementById("datePickerId").value;
-        
-        var yyyy = end_ymd.substr(0,4);
-        var mm = end_ymd.substr(5,2);
-        var dd = end_ymd.substr(8,2);
-        var com_ymd = new Date(yyyy,mm-1,dd);
-        
-        com_ymd.setDate(com_ymd.getDate() + 1);
-        var yyyy= com_ymd.getFullYear();
-        var mm = com_ymd.getMonth()+1;
-        var dd = com_ymd.getDate();
-        
-        function dateToYYYYMMDD(date){
-              function pad(num) {
-                  num = num + '';
-                  return num.length < 2 ? '0' + num : num;
-              }
-              return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
-          }
-        
-        
-        var checkout = yyyy+"-"+mm+"-"+dd; 120-7-21 
-        
-        datePickerId2.min = dateToYYYYMMDD(com_ymd);
-   });
 		
 	</script>
-
 </html>
