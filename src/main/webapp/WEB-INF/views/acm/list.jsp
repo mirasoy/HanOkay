@@ -30,7 +30,9 @@
                             
 
 
-                                <form action="/acm/result" method="get" class="search-form section-pad-2" onsubmit="return checkValidation()">
+
+                                <form action="/acm/result" method="get" class="search-form section-pad-2" onsubmit="return checkValidation()" >
+
                                     <div class="form-row search-form-row">                                
                                         <div class="form-group form-group-pad form-group-1">
                                             <label for="inputCity">Choose Your Destination</label>
@@ -300,17 +302,17 @@
 			    }
 			}
 		});
-		 function checkValidation() {
-	         alert("!");
-	            if(document.getElementById("in").value == document.getElementById("out").value){
-	               alert("1박 이상 선택해주세요!");
-	               return false;
-	            }else{
-	            return true;
-	         }
-	      }
 
-	);
+		function checkValidation() {
+			alert("!");
+	         if(document.getElementById("in").value == document.getElementById("out").value){
+	            alert("1박 이상 선택해주세요!");
+	            return false;
+	         }else{
+				return true;
+			}
+		}
+
 		</script>            
 		<script src="resources/js/bootstrap-datepicker.js"></script>
 		

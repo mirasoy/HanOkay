@@ -105,8 +105,9 @@ String name = (String)session.getAttribute("loginUserNum");
 <script>
 	
 	var s = '<c:out value="${board.bookStatus}"/>';
-	alert(s);
+	
 	var s2 = s.trim();
+	
 	if(s2=='RS_STT_BK'){
 		$('input[name=status]').val("투숙예정"); 
 	}else if(s2=='RS_STT_BC'){
