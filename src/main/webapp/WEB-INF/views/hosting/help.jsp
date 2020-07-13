@@ -8,7 +8,7 @@
 	<div class="body">
 		<div align="center">
 			
-		도움말
+		도움말(미구현)
 		</div>
 	</div>
 

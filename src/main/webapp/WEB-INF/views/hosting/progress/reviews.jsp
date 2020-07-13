@@ -8,7 +8,7 @@
 	<div class="body">
 		<div align="center">
 			
-	성취도의 첫페이지
+	성취도의 첫페이지(미구현)
 		</div>
 	</div>
 

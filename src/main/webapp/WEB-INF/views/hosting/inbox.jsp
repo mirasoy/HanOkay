@@ -8,7 +8,7 @@
 	<div class="body">
 		<div align="center">
 			
-		메시지
+		메시지(미구현)
 		</div>
 	</div>
 
