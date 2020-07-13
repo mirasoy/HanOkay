@@ -33,6 +33,19 @@ import lombok.extern.log4j.Log4j;
 
 public class BookingController {
 	private BookingService service;
+	
+	
+	   //세션에서 유저이름 가져오는 메서드
+	   public String getUsername(HttpSession session) {
+	      UserVO user=(UserVO)session.getAttribute("user");
+	  String userFstname="";
+	      
+	      if(user!=null) {
+	         userFstname=user.getFstname();
+	      }
+	      
+	      return userFstname;
+	   }
 
 
 	
@@ -68,25 +81,69 @@ public class BookingController {
 	@GetMapping("/bookList")
 	public void list2(Model model2, HttpSession session) {
 		String loginUserNum = (String) session.getAttribute("loginUserNum");
+		UserVO user= (UserVO)session.getAttribute("user"); 
+		String userLastname="";
+		String userFstname="";
+		String userPwd="";
+		String userNum="";
+		
+		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if(user != null){
+		userLastname= user.getLastname();
+		userFstname=user.getFstname();
+		userPwd= user.getPwd();
+		userNum= user.getUserNum();
+		} 
 		log.info("bookList");
-		model2.addAttribute("bookList", service.getBookList("U1"));
+		model2.addAttribute("bookList", service.getBookList(userNum));
 	}
 	
 	
 	//예약 완료 목록
 	@GetMapping("/checkout")
 	public void list3(Model model3, HttpSession session) {
+		
 		String loginUserNum = (String) session.getAttribute("loginUserNum");
+		UserVO user= (UserVO)session.getAttribute("user"); 
+		String userLastname="";
+		String userFstname="";
+		String userPwd="";
+		String userNum="";
+		
+		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if(user != null){
+		userLastname= user.getLastname();
+		userFstname=user.getFstname();
+		userPwd= user.getPwd();
+		userNum= user.getUserNum();
+		} 
+		
+		
 		log.info("checkout 완료된 예약입니다.");
-		model3.addAttribute("checkout", service.getCheckoutList("U1"));
+		model3.addAttribute("checkout", service.getCheckoutList(userNum));
 	}
 	
 	//예약 취소 목록
 	@GetMapping("/cancelled")
 	public void list4(Model model4, HttpSession session) {
-		String loginUserNum = (String) session.getAttribute("loginUserNum");
+		String loginUserNum = (String) session.getAttribute("loginUserNum");		
+		
+		UserVO user= (UserVO)session.getAttribute("user"); 
+		String userLastname="";
+		String userFstname="";
+		String userPwd="";
+		String userNum="";
+		
+		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if(user != null){
+		userLastname= user.getLastname();
+		userFstname=user.getFstname();
+		userPwd= user.getPwd();
+		userNum= user.getUserNum();
+		} 
+		
 		log.info("cancelled 취소된 예약입니다.");
-		model4.addAttribute("cancelled", service.getCancelList("U1"));		
+		model4.addAttribute("cancelled", service.getCancelList(userNum));		
 	}
 	
 	

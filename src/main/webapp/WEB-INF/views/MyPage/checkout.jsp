@@ -53,7 +53,7 @@ String name = (String)session.getAttribute("loginUserNum");
 		</div>
 		
 		<div class="panel-heading">
-				    <%=name %>의 예약 완료 목록입니다.(체크아웃)
+				    <%=userFstname %>의 예약 완료 목록입니다.(체크아웃)
 			</div>
 			
 

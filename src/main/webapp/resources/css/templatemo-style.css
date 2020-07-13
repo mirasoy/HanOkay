@@ -283,9 +283,32 @@ label { font-weight: 700; }
 
 .form-group-1 { width: 100%; }
 .form-group-2 { width: 50%; }
-.form-group-3 { width: 50%; }
+.form-group-3 { width: 20%; }
 .form-control { border-radius: 0; }
 
+.uigroup{
+	    width: 390px;
+}
+
+.leftpadding{
+	padding-right: 10px;
+}
+
+.info-group{
+	float: left;
+    width: 20%;
+    padding-right: 20px;
+    height: 80px;
+
+ }
+ 
+ 
+ .form-row {
+
+    margin-right: 0px; 
+    margin-left: 0px;
+ 
+ }
 
 .form-right{padding-right:10px}
 
