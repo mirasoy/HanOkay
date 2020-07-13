@@ -43,7 +43,6 @@ public class UserController {
 
 		} else {
 			rttr.addFlashAttribute("msg1", "사용불가! 중복된 이메일이 있습니다");
-			//rttr.addFlashAttribute("assureEmailCheck", "fail");
 		}
 		
 		rttr.addFlashAttribute("email", email);
@@ -64,10 +63,8 @@ public class UserController {
 		log.info("user가 세션에 담겼으면 조켔당 "+ user);
 		mv.setViewName("register/register");
 		} 
-		
 		//중복된 이메일이 있는 경우 그냥 회원가입 폼으로 다시 보내버리자
 		else {
-			
 			//rttr.addFlashAttribute("msg1", "해당 이메일로 이미 가입된 정보가 있습니다!!");
 			mv.setViewName("register/signUp");
 		}
@@ -83,7 +80,6 @@ public class UserController {
 		log.info("입력된 email: "+ email);
 		emailService.sendAuthEmail(email);
 		ModelAndView mv = new ModelAndView();
-	
 				
 	}
 

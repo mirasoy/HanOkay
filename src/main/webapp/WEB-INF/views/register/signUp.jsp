@@ -109,37 +109,10 @@
       }
       validate_date();
    }
-
-   //이메일 형식 정규식 메서드
-/*    function checkEmail(str) {
-      let emailRegex=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/
-
-      if (emailRegex.test(str)) {
-         console.log("이메일 정규식 통과");
-         return true;
-      } else {
-         console.log("이메일 정규식  미통과");
-         return false;
-      }
-   }
-
-   //비밀번호 형식 정규식 메서드
-   function checkPassword(str){
-      //특수문자 / 문자 / 숫자 포함 형태의 8~20자리 이내의 암호 정규식
-      let passwordRegex=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
-      if(passwordRegex.test(str)){
-         console.log("비밀번호 정규식 통과");
-         return true;
-      } else {
-         console.log("비밀번호 정규식  미통과");
-         return false;
-      }
-   } */
    
    //빈값체크
    function isEmpty(target) {
-       if(target === null || target === undefined || target === '' || target==null || target =='' ) {
+       if(target === null || target==null || target === undefined || target === '' || target =='' ) {
            return true;
        }
 
@@ -159,6 +132,8 @@
 
        return true; */
        //var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      
+       //email이 reg expression 통과하면 true 반환할 것이고 아니면 false반환
        return regExp.test(email);
    }
 
@@ -252,8 +227,6 @@
             //먼저 정규식으로 이메일 형식 체크 
             //이메일 형식 통과 시 액션값을 주고
             if (checkEmail(email)) {
-            formObj.attr("action", "/register/checkEmail");
-               formObj.submit(); 
               
           /*   	   
                $.ajax({
@@ -269,6 +242,10 @@
             	 });
                 */
             	// window.alert("e: "+ email);
+            
+            formObj.attr("action", "/register/checkEmail");
+               formObj.submit(); 
+            
               }
             else {
             	$('span#msg1').text("올바르지 않은 이메일 형식입니다!");
