@@ -52,7 +52,7 @@ if (user != null) {
 <!-- 메인 CSS style -->
 
 <!-- load JS files -->
-<script src="../resources/js/jquery-1.11.3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- jQuery (https://jquery.com/download/) -->
 <script src="../resources/js/popper.min.js"></script>
 <!-- https://popper.js.org/ -->
@@ -68,13 +68,9 @@ if (user != null) {
 <!-- https://github.com/flesler/jquery.scrollTo -->
 
 <script src="../resources/js/index.js"></script>
-<!-- 메인 js -->
 
-<!-- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
 <!-- 달력 변경(수희) -->
-<!-- 밑의 css가 깨져서 주석처리 (지원) -->
-
 <link
 	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
 	rel="stylesheet" type="text/css" />
