@@ -1,10 +1,18 @@
 package com.ana.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -33,20 +41,38 @@ public class UserController {
 		return "/register/signUp";
 	}
 
-	// 이메일 중복 검사
-	@PostMapping("/checkEmail")
-	public String checkEmail(String email, RedirectAttributes rttr) {
+	//checkEmail을 get방법으로 하면 에러 페이지를 보여주자
+	@GetMapping("checkEmail")
+	public String checkEmail() {
+		return "error/error";
+	}
+	
+	// 이메일 중복 검사 (ajax로 값을 받아온다)
+	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+	@ResponseBody
+	public void checkEmail(String email,HttpServletRequest request, HttpServletResponse response)
+throws IOException{	
+		JSONObject jso= new JSONObject();
 		log.info("email check: " + email);
+		//한글 깨짐 방지
+		response.setContentType("text/plain;charset=UTF-8");
+		String msg="";
+		//service에게 email을 주고 db를 뒤져오게한다
 		if (service.checkEmail(email)) {
-			rttr.addFlashAttribute("msg1", "해당 이메일 사용가능");
-			rttr.addFlashAttribute("assureEmailCheck", "pass");
-
+			log.info("checkEmail에서 service 성공");
+			msg="해당 이메일을 사용하실 수 있습니다";
+			jso.put("msg", msg);
+			
+			//msg.setMessage("해당 이메일을 사용할 수 있습니다");
+			//msg1="해당 이메일을 사용할 수 있습니다";
+			
 		} else {
-			rttr.addFlashAttribute("msg1", "사용불가! 중복된 이메일이 있습니다");
+			log.info("checkEmail에서 service를 불렀더니 이미 db에 있는 이메일임!");
+			msg="이미 등록된 이메일입니다!";
+			jso.put("msg", msg);
 		}
-		
-		rttr.addFlashAttribute("email", email);
-		return "redirect:/register/signUp";
+		PrintWriter out = response.getWriter();
+		out.print(jso);
 	}
 
 	// 회원가입 하기
@@ -55,7 +81,7 @@ public class UserController {
 		log.info("register user: " + user);
 		ModelAndView mv= new ModelAndView();
 		
-		//중복된 이메일이 있는지 한번 더 db를 확인한다(refresh할 때 중복 저장되는 경우가 있어서 그걸 막아야함)
+		//중복된 이메일이 있는지 한번 더 db를 확인한다(refresh할 때 중복 저장되는 경우가 있어서 그걸 막으려고)
 		if (service.checkEmail(user.getEmail())) {
 		service.register(user);
 		//세션에 user를 저장한다

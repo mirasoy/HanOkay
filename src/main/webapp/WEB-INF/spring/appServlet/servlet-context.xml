@@ -15,6 +15,8 @@
    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
    <resources mapping="/resources/**" location="/resources/" />
 
+<!-- json객체로 반환하기 위해 -->
+<beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></beans:bean>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	
@@ -22,7 +24,6 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
 
 <!-- email 발송을 위한 자바빈 -->
    <beans:bean id="mailSender"   class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -46,4 +47,6 @@
 	<beans:bean id="multipartResolver"
 	class="org.springframework.web.multipart.support.StandardServletMultipartResolver"
 	></beans:bean>
+	
+
 </beans:beans>
