@@ -133,6 +133,7 @@
 			
 			if(operation==='list'){
 				alert("목록으로 돌아갑니다");
+				formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
 				formObj.attr("action","/hosting/become-host2_6");	
 			} else if(operation==='modify'){
 				alert("객실을 수정합니다");

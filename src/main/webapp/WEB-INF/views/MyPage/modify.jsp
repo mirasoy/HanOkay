@@ -56,37 +56,21 @@
 <script language="javascript">
 	function validate() {
 
-		//var pattern = /^[가-힣]{2,4}|[a-zA-Z]{2,10}$/;
+
 	
 		var re = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		// 이메일이 적합한지 검사할 정규식
-
-
-	
-		var Firstname = document.getElementById("Lastname") //이름
-		var Lastname = document.getElementById("Firstname") //성
-	
-		var nameJ = /^[가-힣]{2,6}$/;
-		
-		
+		// 이메일이 적합한지 검사할 정규식		
 		var email = document.getElementById("email");
+		
+	
 
 /* 	공백일 경우에  */	
 		
-	
-		
-
-		if (Lastname.value == "") {
-			alert("이름을 입력해 주세요");
-			Lastname.focus();
-			return false;
+		if(!$(':input:radio[name=smoking]:checked').val()) {   
+		   alert("흡연 여부를 선택해 주세요.");
+		   return false;
 		}
-		if (Firstname.value == "") {
-			alert("성을 입력해 주세요");
-			Firstname.focus();
-			return false;
-		}
-		
+			
 
 		if (email.value == "") {
 			alert("이메일을 입력해 주세요");
@@ -99,11 +83,8 @@
 		}
 		
 
-		if (nameJ.test(Firstname)) {
-			console.log("성을 통과");
-			return false;
-		} 
 
+	
 
 		alert("정보가 수정되었습니다.");
 	}
@@ -120,6 +101,13 @@
 		return false;
 	}
 
+	
+	
+	
+
+	
+	
+	
 	
 	
 	
@@ -146,62 +134,62 @@
 				<form onsubmit="return validate();" role="form"
 					action="/MyPage/modify" method="post">
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>#예약번호</label> <input class="form-control" name='bookNum'
 							value='<c:out value="${info.bookNum}"/>' readonly="readonly">
 					</div>
 
-					<div class="f9orm-group">
+					<div class="f9orm-group info-group">
 						<label>#회원번호</label> <input class="form-control" name='userNum'
 							value='<c:out value="${info.userNum}"/>' readonly="readonly">
 					</div>
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>방번호</label> <input class="form-control" name='romNum'
 							value='<c:out value="${info.romNum}"/>' readonly="readonly">
 					</div>
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>예약일자</label> <input class="form-control" name='bookDate'
 							value='<fmt:formatDate pattern="yyyy/MM/dd" value="${info.bookDate}" />'
 							readonly>
 					</div>
 
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>체크인날짜</label> <input class="form-control"
 							name='checkinDate'
 							value='<fmt:formatDate pattern="yyyy/MM/dd" value="${info.checkinDate}" />'
 							readonly>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>체크아웃날짜</label> <input class="form-control"
 							name='checkoutDate'
 							value='<fmt:formatDate pattern="yyyy/MM/dd" value="${info.checkoutDate}" />'
 							readonly>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>예약숙박일수</label> <input class="form-control" name='staydays'
 							value='<c:out value=" ${info.staydays}"/>' readonly="readonly">
 					</div>
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>예약인원수</label> <input class="form-control" name='guest'
-							value='<c:out value="${info.guest}"/>'>
+							value='<c:out value="${info.guest}"/>' readonly="readonly">
 					</div>
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>객실요금</label> <input class="form-control" name='bookPrice'
 							value='<c:out value="${info.bookPrice}"/>' readonly="readonly">
 					</div>
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>도착예정시간</label> <input class="form-control"
-							name='expectedArr' value='<c:out value="${info.expectedArr}"/>'>
+							name='expectedArr' value='<c:out value="${info.expectedArr}"/>' readonly="readonly">
 							
 							
 					</div>
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>흡연여부</label> <input type="radio" class="form-control smoking" name='smoking'
 							value="1"> 흡연O
 							<input type="radio" class="form-control smoking" name='smoking' value="0"> 흡연X
@@ -211,41 +199,41 @@
 					</div>
 
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>요구사항</label>
 						<textarea class="form-control" rows="3" name='request'><c:out
 								value="${info.request}" /></textarea>
 					</div>
 
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>실제도착시간</label> <input class="form-control" name='realArr'
 							value='<c:out value="${info.realArr}"/>' readonly="readonly">
 					</div>
 
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>방이름</label> <input class="form-control" name='romName'
 							value='<c:out value="${info.romName}"/>' readonly="readonly">
 					</div>
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>예약자 이름</label> <input id="Lastname" class="form-control"
 							name='bookerLastname'
-							value='<c:out value="${info.bookerLastname}"/>'>
+							value='<c:out value="${info.bookerLastname}"/>' readonly="readonly">
 					</div>
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>예약자 성</label> <input id="Firstname" class="form-control"
 							name='bookerFirstname'
-							value='<c:out value="${info.bookerFirstname}"/>'>
+							value='<c:out value="${info.bookerFirstname}"/>' readonly="readonly">
 					</div>
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>이메일</label> <input id="email" class="form-control"
 							name='bookerEmail' value='<c:out value="${info.bookerEmail}"/>'>
 					</div>
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>연락처</label> <input class="form-control" name='bookerPhone'
-							value='<c:out value="${info.bookerPhone}"/>'>
+							value='<c:out value="${info.bookerPhone}"/>' readonly="readonly">
 					</div>
-					<div class="form-group">
+					<div class="form-group info-group">
 						<label>예약상태</label> <input class="form-control" name='bookStatus'
 							value='<c:out value="${info.bookStatus}"/>' readonly="readonly">
 					</div>

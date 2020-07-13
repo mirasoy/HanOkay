@@ -93,7 +93,7 @@ String name = (String) session.getAttribute("loginUserNum");
 			</div>
 
 			<div class="panel-heading">
-				<%=name%>의 예약 중인 목록입니다. (숙박예정)
+				<%=userFstname %>의 예약 중인 목록입니다. (숙박예정)
 			</div>
 
 

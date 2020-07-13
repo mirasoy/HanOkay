@@ -114,6 +114,11 @@
 		
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
 		<form id="actionForm" action="/hosting/become-host" method="post">
+
+			<input type="hidden" id="sample4_roadAddress" name="FullroadAddr" size="40" placeholder="도로전체주소" readonly="readonly">
+			<input type="hidden" id="sample4_jibunAddress" name="FulljibunAddr" size="40" placeholder="도로지번주소" readonly="readonly">
+			<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"><br><br>
+
 			<div class="acm" id="acm"><br><h6>*항목은 필수입력값입니다</h6>	  
 				<h4>*1.게스트가 묵게 될 숙소의 유형을 골라주세요(중복허용)</h4>
 				<input type="checkbox" id="acmType_house" name="acmType" value="house"><label for="rentType1">집 천제</label> 
@@ -131,8 +136,6 @@
  				-->
 
 
-				<input type="hidden" id="sample4_roadAddress" name="FullroadAddr" size="40" placeholder="도로전체주소" readonly="readonly">
-				<input type="hidden" id="sample4_jibunAddress" name="FulljibunAddr" size="40" placeholder="도로지번주소" readonly="readonly">
 				<input type="hidden" id="sample4_postcode" placeholder="우편번호">
 				
 				
@@ -142,14 +145,15 @@
 				<input type="text" id="acmDetailaddr" name="acmDetailaddr" size="20" placeholder="숙소상세" readonly="readonly"><br>
 				
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"><br><br>
 
 			   <input type="text" id="repPhone" name="repPhone" placeholder="숙소 대표번호(-없이)" numberOnly><br>
-			   <input type="text" id="acmFax" name="acmFax" placeholder="숙소  팩스번호(-없이)" numberOnly><br><br>
 			   <input type="text" id="acmEmail" name="acmEmail" placeholder="숙소  이메일 주소"><br>
+			   <input type="text" id="acmFax" name="acmFax" placeholder="숙소  팩스번호(-없이)" numberOnly><br><br>
 
-
-
+			<!-- 위도경도 임시로 넣어줌 -->
+			<input type="hidden" id="latitude" name="latitude" value="36.7307216">
+			<input type="hidden" id="longitude" name="longitude" value="128.6216116">
+			
 
 			  
 			  <br><br>

@@ -35,6 +35,29 @@
 	display: inline-block;
 }
 
+.booking-container{
+	width: 100%;
+}
+
+.booking-form{
+	width: 100%;
+	padding: 50px;
+}
+
+
+.result-container{
+}
+
+.formLayout{
+	width: 25%;
+    float: left;
+
+}
+
+.width400{
+	width: 400px;
+}
+
 
 </style>
 
@@ -44,14 +67,13 @@
 <body>
 
 	<div class="row">
-		<div class="booking-form">
-			<form action="/acm/result" method='get' onsubmit="return checkValidation()">
-				<div class="row no-margin">
-				
-					<div class="col-md-7">
-						<div class="row no-margin">
-							<div class="col-md-4">
-								<div class="form-group">
+		<div class="booking-container">
+			<form class="booking-form" action="/acm/result" method='get' onsubmit="return checkValidation()">
+				<div class="result-container">				
+					<div class="">
+						<div class="no-margin">
+							<div class="formLayout">
+								<div class="form-group width400">
 									<span class="form-label">Location</span> 
 									<input type="hidden" value="CW" name="type">
 									<select class="form-control" name="keyword" id="e1" value='<c:out value="${pageMaker.cri.keyword}"/>' >
@@ -73,30 +95,30 @@
 								</div>
 							</div>
 							
-							<div class="col-md-4">
-								<div class="form-group">
+							<div class="formLayout">
+								<div class="form-group form-group-3">
 									<span class="form-label">Check In</span> 
 									<div class="ui calendar" id="rangestart">
-										<div class="ui input left icon">
+										<div class="ui input left icon width400">
 											<i class="calendar icon"></i> 
 											<input type="text" placeholder="Start" id="in" name="in" value="<c:out value="${pageMaker.cri.in}"/>">
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
-								<div class="form-group">
+							<div class="formLayout">
+								<div class="form-group form-group-3">
 									<span class="form-label">Check out</span> 
 									<div class="ui calendar" id="rangeend">
-										<div class="ui input left icon">
+										<div class="ui input left icon width400">
 											<i class="calendar icon"></i> 
 											<input type="text" placeholder="End" id="out" name="out" value="<c:out value="${pageMaker.cri.out}"/>">
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-2">
-								<div class="form-group">
+							<div class="formLayout">
+								<div class="form-group form-group-3 width400">
 									<span class="form-label">Guests</span>
 												<select class="form-control" id="person" name="person">
 													<option value="1">1</option>
@@ -114,10 +136,10 @@
 						
 						</div>
 					</div>
-					<div class="col-md-2">
-						<div class="form-btn">
+					<div class="">
+						<div class="form-btn form-group-1">
 
-							<button class="submit-btn" id="submitBtn" type="submit">Check
+							<button class="submit-btn btn btn-primary btn btn-search text-uppercase" id="submitBtn" type="submit">Check
 								availability</button>
 						</div>
 					</div>
@@ -227,7 +249,10 @@
 	function checkValidation() {
 		let cin = document.getElementById("in").value;
 		let cout = document.getElementById("out").value;
-         if((cin!="" && cout !="") && (cin == cout)){
+		cin= Number(cin.replace(/-/g,""));
+		cout= Number(cout.replace(/-/g,""));
+		
+         if((cin != 0 && cout != 0) && (cin >= cout)){
             alert("1박 이상 선택해주세요!");
             return false;
          }else{
