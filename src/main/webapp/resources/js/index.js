@@ -26,11 +26,11 @@
                 
 
                 // Update nav links on scroll
-                $('#top-bar').singlePageNav({
-                    currentClass:'active',
-                    offset: 60     
-                                    
-                });
+//                $('#top-bar').singlePageNav({
+//                    currentClass:'active',
+//                    offset: 60     
+//                                    
+//                });
 
                 
 

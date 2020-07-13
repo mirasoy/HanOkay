@@ -57,7 +57,7 @@ String name = (String)session.getAttribute("loginUserNum");
 		</div>
 		
 		<div class="panel-heading">
-				    <%=name %>의 예약 목록입니다.	
+				   <%=userFstname %>의 예약 목록입니다.	
 			</div>
 			
 
@@ -85,10 +85,11 @@ String name = (String)session.getAttribute("loginUserNum");
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.checkoutDate}" /></td>
 							
-							<td><c:out value="${board.bookStatus}" />
-							<input class="form-control" name='status' value='' readonly="readonly">
-							</td>		
-						
+							
+							
+							<td><c:out value="${board.bookStatus}" /></td>
+							
+      			
 					
 						</tr>																				
 					</c:forEach>
@@ -104,17 +105,20 @@ String name = (String)session.getAttribute("loginUserNum");
 
 <script>
 	
-	var s = '<c:out value="${board.bookStatus}"/>';
+
 	
-	var s2 = s.trim();
+/* 	var bookStatus = '<c:out value="${board.bookStatus} "/>';
+	var bookStatus2 = bookStatus.trim();
+	alert(bookStatus2);
+	alert("수정");
 	
-	if(s2=='RS_STT_BK'){
-		$('input[name=status]').val("투숙예정"); 
-	}else if(s2=='RS_STT_BC'){
-		$('input[name=status]').val("예약취소"); 
-	}else{
-		$('input[name=status]').val("투숙완료"); 
-	}
+	if(bookStatus2=='RS_STT_BK'){
+		$('input[name=bookStatus]').val("투숙예정"); 
+	}else if(bookStatus2=='RS_STT_BC'){
+		$('input[name=bookStatus]').val("예약취소"); 
+	}else if(bookStatus2=='RS_STT_AC'){
+		$('input[name=bookStatus]').val("투숙완료"); 
+	} */
 	
 </script>
 
