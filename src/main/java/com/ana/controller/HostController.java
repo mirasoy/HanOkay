@@ -233,13 +233,6 @@ public class HostController {
 			Model model
 		) {
 			
-//		System.out.println("====== 컨트롤러 작동 =======");
-//		System.out.println("****룸이름");
-//		System.out.println(romName);
-//		System.out.println(acmNum);
-//		System.out.println(romType);
-//		System.out.println(romCapa);
-//		System.out.println("=======romOptArr======:"+romOptArr.toString());
 		
 		RomVO rom = new RomVO();
 		rom.setAcmNum(acmNum);
@@ -251,10 +244,8 @@ public class HostController {
 		rom.setRomSize(romSize);
 		rom.setRomPrice(romPrice);
 		rom.setRomLoca(romLoca);
-		rom.setRomPurl("RoomPic");
+		rom.setRomPurl("https://i.ibb.co/tmwm17K/a2-1.jpg");//유효한 사진값 우선 넣어주자
 		rom.setRomType(romType);
-		
-//		System.out.println(rom.toString());
 		
 		service.register(rom,romOptArr);//여기서 롬넘발생
 		

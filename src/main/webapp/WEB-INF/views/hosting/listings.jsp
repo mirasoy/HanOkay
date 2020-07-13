@@ -25,13 +25,13 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				숙소 목록
+				숙소 목록(미구현!!)
 				<button id='regBtn' type="button" class="btn btn-xs pull-right" onclick='location.href="/hosting/become-host"'>새숙소 등록</button>
 			</div>
 
 			<!-- /.panel-heading -->
 			<div class="panel-body">
-				<table class="table table-striped table-bordered table-hover">
+				<!-- <table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>숙소이름</th>
@@ -60,7 +60,7 @@
 									value="${board.updateDate}" /></td>
 						</tr>
 					</c:forEach>
-				</table>
+				</table> -->
 		</div>
 		<!--  end panel-body -->
 	</div>

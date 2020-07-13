@@ -8,7 +8,7 @@
 	<div class="body">
 		<div align="center">
 			
-		예약
+		예약(미구현!)
 		</div>
 	</div>
 
