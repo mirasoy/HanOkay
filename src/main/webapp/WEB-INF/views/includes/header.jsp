@@ -30,7 +30,7 @@ if (user != null) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ana - korea homstay</title>
+<title>Ana - Make yourself at home in Korea</title>
 
 
 <!-- load stylesheets -->
