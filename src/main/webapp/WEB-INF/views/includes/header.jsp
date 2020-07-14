@@ -114,18 +114,22 @@ if (user != null) {
 </script>
 
 </head>
+
 <!-- 뒤로가기 방지 -->
 <!-- 
+
 <script type="text/javascript">
 	window.history.forward();
 	function noBack() {
 		window.history.forward();
 	}
 </script>
+
 <body onload="noBack();" onpageshow="if(event.persisted) noBack(); onunload="">"
  -->
 
 <body>
+
 	<!-- main-content -->
 	<div class="main-content" id="top">
 

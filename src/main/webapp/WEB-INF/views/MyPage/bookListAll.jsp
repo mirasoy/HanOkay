@@ -5,6 +5,7 @@
 
 <% session.setAttribute("loginUserNum", "U1"); 
 String name = (String)session.getAttribute("loginUserNum");
+int i=0;
 %>
 <%@include file="../includes/header.jsp"%>
 
@@ -83,6 +84,7 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkinDate}" /></td>
 									
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
+
 									value="${board.checkoutDate}" /></td>						
 														
 							<td id="<c:out value="${board.bookNum}" />"> </td>
@@ -91,7 +93,9 @@ String name = (String)session.getAttribute("loginUserNum");
 							<!-- 여기에 추가하기 -->
       			
 					
+
 </tr>																				
+
 					</c:forEach>
 				</table>
 			</div>
@@ -107,6 +111,7 @@ String name = (String)session.getAttribute("loginUserNum");
 
 
 <script>
+
 
 		 
 		<c:forEach items="${bookListAll}" var="board">
@@ -136,7 +141,7 @@ String name = (String)session.getAttribute("loginUserNum");
 			
 		
 		</c:forEach>
-	
+
 	
 
 </script>
