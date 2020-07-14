@@ -5,6 +5,7 @@
 
 <% session.setAttribute("loginUserNum", "U1"); 
 String name = (String)session.getAttribute("loginUserNum");
+int i=0;
 %>
 <%@include file="../includes/header.jsp"%>
 
@@ -86,11 +87,10 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkoutDate}" /></td>
 							
 							
+							<td><input class='form-control' id = 'bookStatus' name='bookStatus<%=i%>' value='<c:out value="${board.bookStatus}" />' readonly='readonly'></td>
 							
-							<td><c:out value="${board.bookStatus}" /></td>
-							
-      			
-					
+      						
+							<%i++; %>
 						</tr>																				
 					</c:forEach>
 				</table>
@@ -104,9 +104,22 @@ String name = (String)session.getAttribute("loginUserNum");
 
 
 <script>
-	
+//var bookStatus = new Array();
+//var i= 0;
+<%int j=0;%>
+<c:forEach items="${bookListAll}" var="board">
+bookStatus = document.getElementById("bookStatus").value;
 
-	
+
+if(bookStatus=='RS_STT_BK'){
+	$('input[name=bookStatus<%=j%>]').val("투숙예정"); 
+}else if(bookStatus=='RS_STT_BC'){
+	$('input[name=bookStatus<%=j%>]').val("예약취소"); 
+}else if(bookStatus=='RS_STT_AC'){
+	$('input[name=bookStatus<%=j%>]').val("투숙완료"); 
+}
+<%j++;%>
+</c:forEach>
 /* 	var bookStatus = '<c:out value="${board.bookStatus} "/>';
 	var bookStatus2 = bookStatus.trim();
 	alert(bookStatus2);

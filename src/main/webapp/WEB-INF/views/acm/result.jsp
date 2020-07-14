@@ -218,37 +218,67 @@
     $(document).ready(function() { $("#e1").select2(); });
 	<!-- 달력 변경(수희) -->
 	var today = new Date();
-	$('#rangestart').calendar({
-	  type: 'date',
-	  minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-	  endCalendar: $('#rangeend'),
-	  formatter: {
-		    date: function (date, settings) {
-		      if (!date) return '';
-		      var day = date.getDate();
-		      var month = date.getMonth() + 1;
-		      var year = date.getFullYear();
-		      return year + '-' + month + '-' + day;
-		    }
-		}
-	});
-	$('#rangeend').calendar({
-	  type: 'date',
-	  startCalendar: $('#rangestart'),
-	  formatter: {
-		    date: function (date, settings) {
-		      if (!date) return '';
-		      var day = date.getDate();
-		      var month = date.getMonth() + 1;
-		      var year = date.getFullYear();
-		      return year + '-' + month + '-' + day;
-		    }
-		}
-	});
+    $('#rangestart').calendar({
+      type: 'date',
+      minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+      maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+      endCalendar: $('#rangeend'),
+      formatter: {
+           date: function (date, settings) {
+             if (!date) return '';
+             var day = date.getDate();
+             var month = date.getMonth() + 1;
+             var year = date.getFullYear();
+             if( (Number(month)<10) && (Number(day)<10) ){
+					console.log(year + '-0' + month + '-0' + day)
+			    	  return year + '-0' + month + '-0' + day;
+			  }
+			  if(Number(month)<10){
+			    	  return year + '-0' + month + '-' + day;
+			  }
+			  if(Number(day)<10){
+			    	  return year + '-' + month + '-0' + day;
+			  }
+             return year + '-' + month + '-' + day;
+           }
+       }
+    });
+    $('#rangeend').calendar({
+      type: 'date',
+      maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()+1),
+      startCalendar: $('#rangestart'),
+      formatter: {
+           date: function (date, settings) {
+             if (!date) return '';
+             var day = date.getDate();
+             var month = date.getMonth() + 1;
+             var year = date.getFullYear();
+             if( (Number(month)<10) && (Number(day)<10) ){
+					console.log(year + '-0' + month + '-0' + day)
+			    	  return year + '-0' + month + '-0' + day;
+			  }
+			  if(Number(month)<10){
+			    	  return year + '-0' + month + '-' + day;
+			  }
+			  if(Number(day)<10){
+			    	  return year + '-' + month + '-0' + day;
+			  }
+             return year + '-' + month + '-' + day;
+           }
+       }
+    });
 	
 	function checkValidation() {
+		var date_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; 
+		
 		let cin = document.getElementById("in").value;
 		let cout = document.getElementById("out").value;
+		if(!date_pattern.test(cin)){
+			return false;
+		}
+		if(!date_pattern.test(cout)){
+			return false;
+		}
 		cin= Number(cin.replace(/-/g,""));
 		cout= Number(cout.replace(/-/g,""));
 		

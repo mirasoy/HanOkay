@@ -1,9 +1,11 @@
 package com.ana.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -30,13 +32,21 @@ public class AcmController {
 	
 	private AcmService service;
 	
+	
+	
 	@GetMapping({"/list","/result"})
 	public void list(Criteria cri, String acmNum, Model model) {
 		log.info("list: "+cri);
 		
 //		cri.setKeyword("대구광역시");
 //		cri.setPerson("8");
+		ValidateDate  validateDate = new  ValidateDate();
+		
+		try {
 		if(!(cri.getIn()==null||cri.getIn().equals("")) && !(cri.getOut()==null||cri.getOut().equals(""))) {
+			if(!validateDate.validationDate(cri.getIn())||!validateDate.validationDate(cri.getOut())) {
+				return;
+			}
 			int cin = Integer.parseInt(cri.getIn().replace("-", ""));
 			int cout = Integer.parseInt(cri.getOut().replace("-", ""));
 				if(cin>=cout) {
@@ -44,7 +54,7 @@ public class AcmController {
 				}
 		}
 		
-		try {
+		
 			Calendar cal = Calendar.getInstance();
 			SimpleDateFormat df = new SimpleDateFormat ("yyyy-MM-dd");
 			Date date =null;
@@ -81,9 +91,7 @@ public class AcmController {
 				cri.setOut(out);
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		 
 		
 		log.info("list: "+cri);
 			
@@ -95,6 +103,9 @@ public class AcmController {
 		log.info("total: " + total);
 		model.addAttribute("acmNum",acmNum);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		}catch (Exception e) {
+			 return;
+		}
 	}
 	
 	@PostMapping("/register")

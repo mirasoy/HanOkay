@@ -88,7 +88,7 @@
 
 							<div class="form-group form-group-1">
 								<div class="form-group">
-									<label for="inputCheckOut">Check Out Date</label>
+									<label for="inputCheckOut">Check In Date</label>
 									<div class="ui calendar" id="rangestart">
 										<div class="ui input left icon uigroup leftpadding">
 											<i class="calendar icon"></i> <input type="text"
@@ -103,7 +103,7 @@
 									<div class="ui calendar" id="rangeend">
 										<div class="ui input left icon uigroup">
 											<i class="calendar icon"></i> <input type="text"
-												placeholder="End" id="out" name="out" value="">
+											placeholder="End" id="out" name="out" value="">
 										</div>
 									</div>
 								</div>
@@ -323,36 +323,70 @@
 </div>
 <!-- End : main-content -->
 <script>
+//예전 jQuery라면 on이 아니라 bind나 live 
+$("#in").on("propertychange change keyup paste input", function() {
+    var currentVal = $(this).val();
+    if(currentVal == oldVal) {
+        return;
+    }
+ 
+    oldVal = currentVal;
+   	console.log(currentVal);
+});		
+
         $(document).ready(function() { $("#e1").select2(); });
 		<!-- 달력 변경(수희) -->
 		var today = new Date();
-		$('#rangestart').calendar({
-		  type: 'date',
-		  minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-		  endCalendar: $('#rangeend'),
-		  formatter: {
-			    date: function (date, settings) {
-			      if (!date) return '';
-			      var day = date.getDate();
-			      var month = date.getMonth() + 1;
-			      var year = date.getFullYear();
-			      return year + '-' + month + '-' + day;
-			    }
-			}
-		});
-		$('#rangeend').calendar({
-		  type: 'date',
-		  startCalendar: $('#rangestart'),
-		  formatter: {
-			    date: function (date, settings) {
-			      if (!date) return '';
-			      var day = date.getDate();
-			      var month = date.getMonth() + 1;
-			      var year = date.getFullYear();
-			      return year + '-' + month + '-' + day;
-			    }
-			}
-		});
+	      $('#rangestart').calendar({
+	        type: 'date',
+	        minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+	        maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+	        endCalendar: $('#rangeend'),
+	        formatter: {
+	             date: function (date, settings) {
+	               if (!date) return '';
+	               var day = date.getDate();
+	               var month = date.getMonth() + 1;
+	               var year = date.getFullYear();
+	               if( (Number(month)<10) && (Number(day)<10) ){
+						console.log(year + '-0' + month + '-0' + day)
+				    	  return year + '-0' + month + '-0' + day;
+				  }
+				  if(Number(month)<10){
+				    	  return year + '-0' + month + '-' + day;
+				  }
+				  if(Number(day)<10){
+				    	  return year + '-' + month + '-0' + day;
+				  }
+	               return year + '-' + month + '-' + day;
+	             }
+	         }
+	      });
+	      $('#rangeend').calendar({
+	        type: 'date',
+	        maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()+1),
+	        startCalendar: $('#rangestart'),
+	        formatter: {
+	             date: function (date, settings) {
+	               if (!date) return '';
+	               var day = date.getDate();
+	               var month = date.getMonth() + 1;
+	               var year = date.getFullYear();
+	               if( (Number(month)<10) && (Number(day)<10) ){
+						console.log(year + '-0' + month + '-0' + day)
+				    	  return year + '-0' + month + '-0' + day;
+				  }
+				  if(Number(month)<10){
+				    	  return year + '-0' + month + '-' + day;
+				  }
+				  if(Number(day)<10){
+				    	  return year + '-' + month + '-0' + day;
+				  }
+	               return year + '-' + month + '-' + day;
+	             }
+	         }
+	      });
+	      
 
 		function checkValidation() {
 			let cin = document.getElementById("in").value;

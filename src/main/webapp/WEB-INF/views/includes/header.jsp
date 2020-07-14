@@ -140,17 +140,20 @@ body {
 </script>
 
 </head>
+<!--  뒤로가기 금지
 <script type="text/javascript">
 	window.history.forward();
 	function noBack() {
 		window.history.forward();
 	}
 </script>
-
+-->
 
 <body>
+<!-- 뒤로가기 금지
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();"
 	onunload="">
+	-->
 	<!-- main-content -->
 	<div class="main-content" id="top">
 

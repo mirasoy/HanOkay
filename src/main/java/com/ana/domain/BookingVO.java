@@ -3,7 +3,7 @@ package com.ana.domain;
 
 import java.util.Date;
 
-import javax.validation.constraints.Email;
+//import javax.validation.constraints.Email;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
