@@ -171,7 +171,7 @@
 		var today = new Date();
 		
 		$("#out").datepicker({
-			minDate: 0,
+			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
 			dateFormat: 'yy-mm-dd'
 		});
