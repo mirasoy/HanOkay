@@ -146,9 +146,8 @@
 		</div>
 	</div>
 	<!-- end of row -->
-	
-	
-	
+
+
 	<div id="myTable">
 	<table class="table table-striped table-bordered table-hover">
 		<thead>

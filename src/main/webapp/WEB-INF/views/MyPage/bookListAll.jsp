@@ -29,11 +29,9 @@ int i=0;
 	.panel-heading{
 	    padding-left: 25px;
 	}
-	
-	
-	
-	
 </style>
+
+
 
 <div class="row">
 	<div class="col-lg-12">
@@ -52,7 +50,7 @@ int i=0;
 				<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
 				<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
 				<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>	
+				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>		
 
 						
 			</ul>
@@ -96,7 +94,8 @@ int i=0;
       			
 					
 
-						</tr>																				
+</tr>																				
+
 					</c:forEach>
 				</table>
 			</div>
@@ -106,6 +105,10 @@ int i=0;
 	</div>	
 </div>
 <!-- /.row -->
+
+
+<%@include file="../includes/footer.jsp"%>
+
 
 <script>
 
@@ -120,8 +123,7 @@ int i=0;
 			
 			if(bookStatus.trim()=='RS_STT_BK'){
 				
-				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");
-				
+				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");				
 				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
 				
 				
@@ -143,7 +145,3 @@ int i=0;
 	
 
 </script>
-
-
-
-	<%@include file="../includes/footer.jsp"%>

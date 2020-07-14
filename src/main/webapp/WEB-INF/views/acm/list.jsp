@@ -107,7 +107,7 @@
 								<div class="form-group form-group-1 ">
 									<label for="btnSubmit">&nbsp;</label>
 									<button type="submit"
-										class="submit-btn btn btn-primary btn btn-search text-uppercase"
+										class="submit-btn btn-primary btn btn-search text-uppercase"
 										id="submitBtn">Check Availability</button>
 								</div>
 							</div>
@@ -344,6 +344,10 @@
 			dateFormat: 'yy-mm-dd'
 		});
 		</script>
+
+<!-- 달력 변경. 끝 -->
+
+
 </body>
 
 <footer class="container-outer">
