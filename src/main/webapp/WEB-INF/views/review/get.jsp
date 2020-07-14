@@ -1,23 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	session.setAttribute("userNum", "U2");
-String name = (String) session.getAttribute("userNum");
-%>
-<!DOCTYPE html>
-<html lang="en">
+	pageEncoding="UTF-8"%> 
+
 <%@include file="../includes/header.jsp"%>
 
-<head>
-	<title>review List</title>
-
-</head>
-
-<body>
-
-	<div class="row">
+<div class="container">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -78,9 +64,9 @@ String name = (String) session.getAttribute("userNum");
 	<script>
 		$(document)
 			.ready(
-				//숫자를 별로 변경하기 
 				function () {
 
+				//숫자를 별로 변경하기 
 					let star = "";
 					for (let a = 0; a < <c:out value="${review.stisf }" />; a++) {
 						star = star + '★';

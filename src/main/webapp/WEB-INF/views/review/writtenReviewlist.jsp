@@ -1,43 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	session.setAttribute("userNum", "U1");
-String name = (String) session.getAttribute("userNum");
-%>
-<!DOCTYPE html>
-<html lang="en">
 <%@include file="../includes/header.jsp"%>
-<head>
 
-<style type="text/css">
-.bookbar {
-	width: 100%;
-	height: 40px;
-	list-style: none;
-	padding: 0;
-}
-
-.bookbar>li {
-	float: left;
-	width: 110px;
-	height: 30px;
-	margin: 0;
-	text-align: center;
-	padding-top: 15px;
-}
-.on{
-	font-weight: bold;
-}
-
-</style>
-</head>
-
-<body>
-
-
-<div class="row">
+<div class="container">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -53,6 +18,7 @@ String name = (String) session.getAttribute("userNum");
 					<table
 						class="table table-striped table-bordered table-hover bookList">
 						<thead>
+							<tr>
 								<th>숙소이름</th>
 								<th>리뷰 제목</th>
 								<th>예약번호</th>

@@ -6,21 +6,19 @@ import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
 
 public interface RevService {
-	
+	//등록하기
 	public void register(RevVO post);
-	
+	//리뷰가져오기
 	public RevVO get(String postNum);
-	
+	//예약번호로 리뷰가져오기
 	public RevVO getByBooknum(String bookNum);
-	
+	//리뷰수정하기
 	public boolean modify(RevVO post);
-	
+	//리뷰삭제하기
 	public boolean remove(String postNum);
-	
+	//완료된 나의 예약가져오기
 	public List<RevVO> getUserList(String loginUser);
-	
-//	public List<RevVO> getBookingList(String loginUser);
-	
+	//모든 리뷰 가져오기 (모든 유저)
 	public List<RevVO> getList();
 
 }

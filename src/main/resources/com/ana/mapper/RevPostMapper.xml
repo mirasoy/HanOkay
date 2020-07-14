@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-
+<!-- 나의 리스트 불러오기 -->
 <select id="getMyList" resultMap="RevVOResult">
  select * from 
         (SELECT
@@ -91,60 +91,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 </select>
 
-<!-- 사라진 메소드 - 2차 개발시 삭제예정  -->
-<!-- <select id="getBookingList" resultMap="RevVOResult">
-    select * from 
-        (SELECT
-                A.ACM_NAME,
-                B.BOOK_NUM,
-                B.checkin_Date,
-                B.cheCkout_Date,
-                b.user_num
-                
-            FROM 
-                TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
-            WHERE 
-                B.BOOK_NUM=S.BOOK_NUM
-            AND 
-                B.ROM_NUM=R.ROM_NUM 
-            AND 
-                R.ACM_NUM=A.ACM_NUM 
-            AND 
-                B.BOOK_STATUS='RS_STT_AC') al,
-                
-                (select 
-                A.PST_NUM,
-                A.BRD_CODE,
-                a.p_title,
-                a.p_regdate,
-                a.p_updatedate,
-                a.user_num,
-                b.rev_purl,
-                B.STISF,
-                b.acm_num,
-                b.book_num,
-                b.content
-                
-                FROM
-                    TREV_POST A
-                LEFT JOIN
-                    trev_detail B
-                ON 
-                    a.pst_num = b.pst_num)bk
-        
-        where al.book_num = bk.book_num(+)
-        and al.user_num=   #{loginUser}
-        
-          
-        ORDER BY
-         AL.checkin_Date
-        
-</select> -->
 
-
-
-
-
+<!-- 예약번호로 불러오기 -->
 <select id="readByBookNum" resultMap="RevVOResult">
 SELECT 
   AL.ACM_NAME,
@@ -202,7 +150,7 @@ FROM
         
 </select>
 
-
+<!-- 리뷰하나 pstNum으로 불러오기 -->
 <select id="read" resultMap="RevVOResult">
 SELECT 
   AL.ACM_NAME,
@@ -273,10 +221,13 @@ FROM
       
 </select>
 
+
+<!-- 리뷰삭제 -->
 <delete id="delete">
 	delete from TREV_POST where PST_NUM = #{pstNum}
 </delete>
 
+<!-- 리뷰수정 -->
 <update id="update">
 	
 UPDATE
@@ -284,13 +235,13 @@ UPDATE
 SET
     brd_code = #{brdCode},
     p_title =#{title},
-    user_num =#{userNum},
-    p_regdate = #{regDate}
+    user_num =#{userNum}
 WHERE
     PST_NUM = #{pstNum}
 		
 </update>
 
+<!-- 전체 숙박완료 리스트 (전사용자) 불러오기 -->
 <select id="getList" resultMap="RevVOResult" >
 
 SELECT
@@ -311,9 +262,9 @@ AND
     
 </select>
 
+
+<!-- 리뷰등록하기 -->
 <insert id="insert" >
-
-
 <selectKey keyProperty="pstNum" order="BEFORE" resultType="String">
 select SEQ_REV.nextval from dual
 </selectKey>
@@ -329,6 +280,7 @@ select SEQ_REV.nextval from dual
 
 </insert>
 
+<!-- 하나의 숙소에 속한 모든 리뷰 리스트불러오기 -->
 <select id="getAcmList" resultMap="RevPostVOResult" >
 	select 
 	A.PST_NUM,
