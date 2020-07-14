@@ -11,7 +11,7 @@ public class RevPostVO {
 	private String brdCode;
 	private String title;
 	private String userNum;
-	private String regDate;
+	private Date regDate;
 	private Date updateDate;
 	private RevDetailVO revDetail;
 	{revDetail = new RevDetailVO();}

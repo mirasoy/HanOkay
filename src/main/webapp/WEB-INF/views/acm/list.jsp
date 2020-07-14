@@ -341,7 +341,7 @@
 				nextMonth.setDate(nextMonth.getDate() + 90);
 			  $("#out").datepicker("option","maxDate", nextMonth);
 			},
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd' 
 		});
 		</script>
 
