@@ -12,8 +12,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>호텔 상세페이지</title>
+	<title>호텔 상세페이지</title>
 <style>
 #map {
 	width: 33%;
@@ -28,20 +27,16 @@
 <body>
 	<div>
 		<div>
-			</br>
-			</br>
-			</br>
-			</br>
-			</br> </br>
 			<div>
-				[객실 선택] 체크인
+				[객실 선택]</br> 
+				체크인</br>
 				<div class="ui calendar" id="rangestart">
 					<div class="ui input left icon">
 						<i class="calendar icon"></i> 
 						<input type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
 					</div>
 				</div>
-				체크아웃
+				체크아웃</br>
 				<div class="ui calendar" id="rangeend">
 					<div class="ui input left icon">
 						<i class="calendar icon"></i> 
@@ -174,35 +169,26 @@
 	
 		// 날짜 선택
 		var today = new Date();
-		$('#rangestart').calendar({
-		  type: 'date',
-		  minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-		  endCalendar: $('#rangeend'),
-		  formatter: {
-			    date: function (date, settings) {
-			      if (!date) return '';
-			      var day = date.getDate();
-			      var month = date.getMonth() + 1;
-			      var year = date.getFullYear();
-			      return year + '-' + month + '-' + day;
-			    }
-			}
+		
+		$("#out").datepicker({
+			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
+			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+			dateFormat: 'yy-mm-dd'
 		});
-		$('#rangeend').calendar({
-		  type: 'date',
-		  startCalendar: $('#rangestart'),
-		  formatter: {
-			    date: function (date, settings) {
-			      if (!date) return '';
-			      var day = date.getDate();
-			      var month = date.getMonth() + 1;
-			      var year = date.getFullYear();
-			      return year + '-' + month + '-' + day;
-			    }
-			}
+		$("#in").datepicker({
+			minDate: 0,
+			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
+			onSelect: function(selectedDate) {
+				var nextDay = new Date(selectedDate);
+				nextDay.setDate(nextDay.getDate() + 1);
+			  $("#out").datepicker("option","minDate", nextDay);
+				var nextMonth = new Date(selectedDate);
+				nextMonth.setDate(nextMonth.getDate() + 90);
+			  $("#out").datepicker("option","maxDate", nextMonth);
+			},
+			dateFormat: 'yy-mm-dd'
 		});
 		
-	
 		// 페이지 이동
 		let person = document.getElementById("person").value;
 		let reservBtns = document.getElementsByClassName("reservBtn");
@@ -233,7 +219,7 @@
 		}
 		
 		
-		//***************** 경원찡 만든 구글맵 api
+		//***************** 구글맵 api(경원)
 		var address = null;
 		
 		function initMap() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수

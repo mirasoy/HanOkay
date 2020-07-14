@@ -16,6 +16,7 @@
          <tr>
             <td>Email(*): <input type="text" size="40" name="email" id="email" class="inputField"
             placeholder="서비스 이용을 위한 이메일을 입력하세요" value="${email }" ><br> 
+            	
                <span style="color: black;" id="msg1"><c:out value="${msg1 }" /></span><br>
                <button data-oper='checkEmail' class="btn btn-default">이메일 중복체크</button>
             </td>
@@ -109,37 +110,10 @@
       }
       validate_date();
    }
-
-   //이메일 형식 정규식 메서드
-/*    function checkEmail(str) {
-      let emailRegex=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/
-
-      if (emailRegex.test(str)) {
-         console.log("이메일 정규식 통과");
-         return true;
-      } else {
-         console.log("이메일 정규식  미통과");
-         return false;
-      }
-   }
-
-   //비밀번호 형식 정규식 메서드
-   function checkPassword(str){
-      //특수문자 / 문자 / 숫자 포함 형태의 8~20자리 이내의 암호 정규식
-      let passwordRegex=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
-      if(passwordRegex.test(str)){
-         console.log("비밀번호 정규식 통과");
-         return true;
-      } else {
-         console.log("비밀번호 정규식  미통과");
-         return false;
-      }
-   } */
    
    //빈값체크
    function isEmpty(target) {
-       if(target === null || target === undefined || target === '' || target==null || target =='' ) {
+       if(target === null || target==null || target === undefined || target === '' || target =='' ) {
            return true;
        }
 
@@ -149,16 +123,8 @@
    // 이메일 유효성
    function checkEmail(str) {
       let email = str;
-      let regExp = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;   
-
-      /*  if (!(regExp.test(str))) {
-           document.getElementById("msg1").innerHTML="올바르지 않은 이메일 형식입니다!";
-           $('span#msg1').text("ss올바르지 않은 이메일 형식입니다!");
-           return false;
-       }
-
-       return true; */
-       //var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      let regExp = /^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/;
+//    /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
        return regExp.test(email);
    }
 
@@ -169,15 +135,24 @@
        let eng = username.search(/[a-z]/ig);
        let spe = username.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
+       //매개변수가 빈값인지 확인
        if(isEmpty(username)){
     	   document.getElementById("msg3").innerHTML="성/이름을 입력해주세요";
            return false;
        }
+       //매개변수 길이가 적절한지 확인
+       if(str.length<10){
+    	   document.getElementById("msg3").innerHTML="이름의 글자수는 10자 이하로 해주세요";
+    	   return false;
+       }
 
+       //매개변수에 공백이 있는지 확인
        if(username.search(/\s/) != -1){
     	   document.getElementById("msg3").innerHTML="공백 없이 입력해주세요";
          return false;
        }
+       
+       
 
      return true;
    }
@@ -245,17 +220,16 @@
          var repeatedPwd=  $("input[id='repeatedPwd']").val();
          var fstname=$("input[id='fstname']").val();
          var lastname=$("input[id='lastname']").val();
-         var assureEmailCheck= $("input[id='assureEmailCheck']").val();
-      
+         var assureEmailCheck= document.getElementById("msg1").innerHTML;
+      	
          //중복체크 버튼을 눌렀을 경우
           if (operation === 'checkEmail') {
             //먼저 정규식으로 이메일 형식 체크 
             //이메일 형식 통과 시 액션값을 주고
             if (checkEmail(email)) {
-            formObj.attr("action", "/register/checkEmail");
-               formObj.submit(); 
-              
-          /*   	   
+            	
+             var result;
+             
                $.ajax({
             	   type: 'POST',
             	   url: '/register/checkEmail',
@@ -263,13 +237,22 @@
             	   data: {
             		   'email': email
             	   },
+            	   //async: false,
             	   success: function(data){
             		   console.log(data);
+            		 //  alert(data.msg);
+            		   $('span#msg1').text(data.msg);
+            	   },
+            	   error: function(data){
+            		  window.location.href ="../error/error";
             	   }
             	 });
-                */
-            	// window.alert("e: "+ email);
+               return result;
+               
+               
               }
+            
+            //이메일 정규식 불통시
             else {
             	$('span#msg1').text("올바르지 않은 이메일 형식입니다!");
             }

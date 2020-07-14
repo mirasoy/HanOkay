@@ -1,6 +1,7 @@
 package com.ana.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,7 @@ public class LoginController {
 
 	@Autowired
 	UserService service;
-	
+		
 	// login 페이지 보여주기
 	@RequestMapping("/login")
 	public String showLoginPage() {
@@ -37,6 +38,12 @@ public class LoginController {
 		return "/user/findPwd";
 	}
 
+	
+	@GetMapping("/executeLogin")
+	public String executeLogin() {
+		return "error/error";
+	}
+	
 	// 로그인 기능하기
 	@PostMapping("/executeLogin")
 	public String executeLogin(String email, String pwd, HttpServletRequest request, RedirectAttributes rttr, Model model) {
@@ -68,9 +75,13 @@ public class LoginController {
 		//session을 모두 없애줘
 		status.setComplete();
 		ModelAndView mv= new ModelAndView();
+		
+		//이제 로그아웃했을 때 그 로그아웃을 불러온 jsp로 그대로 남아있게 만들어야해(7/13)
 		StringBuffer contextPath= request.getRequestURL();
 		log.info("ContextPath: "+contextPath);
-		//없애기가 성공 되었으면 로그를 찍어줘
+		
+		
+		//없애기가 성공 되었으면 성공했다는 로그를 찍어줘
 		if(status.isComplete() == true) {
 			log.info("Session removed successfully");
 		}
@@ -82,9 +93,8 @@ public class LoginController {
 	
 	//welcome 페이지 보여주는 기능
 	@RequestMapping("/welcome")
-	public String showWelcome() {
-		return "user/welcome";
+	public ModelAndView showWelcome(Model model, HttpSession session) {
+	ModelAndView mv= new ModelAndView();
+		return mv;
 	}
-
-	
 }

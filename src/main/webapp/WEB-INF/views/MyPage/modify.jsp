@@ -45,51 +45,44 @@
 	background-color: red;
 }
 
-.smoking{
+.smoking {
 	width: 15px;
 }
-
-
 </style>
 
 <!-- 자바스크립트 정규식 체크 -->
 <script language="javascript">
 	function validate() {
 
-
-	
-		var re = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		// 이메일이 적합한지 검사할 정규식		
 		var email = document.getElementById("email");
-		
-	
 
-/* 	공백일 경우에  */	
-		
-		if(!$(':input:radio[name=smoking]:checked').val()) {   
-		   alert("흡연 여부를 선택해 주세요.");
-		   return false;
+		/* 	공백일 경우에  */
+
+		if (!$(':input:radio[name=smoking]:checked').val()) {
+			alert("흡연 여부를 선택해 주세요.");
+			return false;
 		}
-			
 
 		if (email.value == "") {
 			alert("이메일을 입력해 주세요");
 			email.focus();
 			return false;
 		}
-		
+
 		if (!check(re, email, "적합하지 않은 이메일 형식입니다.")) {
 			return false;
 		}
-		
 
-
-	
-
+		/* 	if(request.value == ""){
+				alert("요구사항을 입력해 주세요");
+				request.focus();
+				return false;
+			}
+		 */
 		alert("정보가 수정되었습니다.");
 	}
-	
-	
 
 	function check(re, what, message) {
 		if (re.test(what.value)) {
@@ -101,17 +94,59 @@
 		return false;
 	}
 
-	
-	
-	
+	$(document).ready(
+			function() {
 
-	
-	
-	
-	
-	
-	
-	
+				//흡연 여부 체크
+
+				var s = "${info.smoking}";
+
+				if (s == '1') {
+
+					$(".smokingOn").prop('checked', true);
+
+				} else if (s == '0') {
+
+					$(".smokingOff").prop('checked', true);
+
+				}
+
+				//글자수 제한		
+
+				$('#input_text').keyup(
+						function() {
+							if ($(this).val().length > $(this)
+									.attr('maxlength')) {
+								alert('200자 제한길이 초과');
+								$(this).val(
+										$(this).val().substr(0,
+												$(this).attr('maxlength')));
+							}
+						});
+				
+				
+				
+				
+				//예약 상태 수정
+				
+				var bookStatus = '<c:out value="${info.bookStatus} "/>';
+				var bookStatus2 = bookStatus.trim();
+				/* alert(bookStatus2); */
+				
+				if(bookStatus2=='RS_STT_BK'){
+					$('input[name=bookStatus]').val("투숙예정"); 
+				}else if(bookStatus2=='RS_STT_BC'){
+					$('input[name=bookStatus]').val("예약취소"); 
+				}else if(bookStatus2=='RS_STT_AC'){
+					$('input[name=bookStatus]').val("투숙완료"); 
+				}
+				
+				
+				
+				
+				
+
+			});
 </script>
 
 
@@ -185,23 +220,22 @@
 
 					<div class="form-group info-group">
 						<label>도착예정시간</label> <input class="form-control"
-							name='expectedArr' value='<c:out value="${info.expectedArr}"/>' readonly="readonly">
-							
-							
+							name='expectedArr' value='<c:out value="${info.expectedArr}"/>'
+							readonly="readonly">
 					</div>
+
 					<div class="form-group info-group">
-						<label>흡연여부</label> <input type="radio" class="form-control smoking" name='smoking'
-							value="1"> 흡연O
-							<input type="radio" class="form-control smoking" name='smoking' value="0"> 흡연X
-							
-						
-							
+						<label>흡연여부</label> <input type="radio"
+							class="form-control smokingOn" name='smoking' value="1">
+						YSE, 흡연 <input type="radio" class="form-control smokingOff"
+							name='smoking' value="0"> NO, 금연
 					</div>
 
 
 					<div class="form-group info-group">
 						<label>요구사항</label>
-						<textarea class="form-control" rows="3" name='request'><c:out
+						<textarea class="form-control" rows="3" name='request'
+							maxlength="200" id="input_text"><c:out
 								value="${info.request}" /></textarea>
 					</div>
 
@@ -218,12 +252,14 @@
 					<div class="form-group info-group">
 						<label>예약자 이름</label> <input id="Lastname" class="form-control"
 							name='bookerLastname'
-							value='<c:out value="${info.bookerLastname}"/>' readonly="readonly">
+							value='<c:out value="${info.bookerLastname}"/>'
+							readonly="readonly">
 					</div>
 					<div class="form-group info-group">
 						<label>예약자 성</label> <input id="Firstname" class="form-control"
 							name='bookerFirstname'
-							value='<c:out value="${info.bookerFirstname}"/>' readonly="readonly">
+							value='<c:out value="${info.bookerFirstname}"/>'
+							readonly="readonly">
 					</div>
 					<div class="form-group info-group">
 						<label>이메일</label> <input id="email" class="form-control"
@@ -234,8 +270,7 @@
 							value='<c:out value="${info.bookerPhone}"/>' readonly="readonly">
 					</div>
 					<div class="form-group info-group">
-						<label>예약상태</label> <input class="form-control" name='bookStatus'
-							value='<c:out value="${info.bookStatus}"/>' readonly="readonly">
+						<label>예약상태</label>   <input class="form-control" name='bookStatus' value='' readonly="readonly">
 					</div>
 
 					<button type="submit" data-oper='modify' class="btn btn-default">정보수정</button>
