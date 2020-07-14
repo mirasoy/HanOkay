@@ -30,10 +30,10 @@ String name = (String) session.getAttribute("userNum");
 	text-align: center;
 	padding-top: 15px;
 }
-.on{
+/* .on{
 	font-weight: bold;
 }
-
+ */
 </style>
 </head>
 

@@ -57,7 +57,6 @@ public class BookingServiceImpl implements BookingService{
 
 	@Override
 	public List<BookCancelVO> getCancelList(String loginUserNum) {
-		// TODO Auto-generated method stub
 		log.info("취소중인 회원의 리스트......");
 		return mapper.getCancelList(loginUserNum);
 	}
