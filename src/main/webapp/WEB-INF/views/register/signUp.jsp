@@ -240,7 +240,6 @@
             	   //async: false,
             	   success: function(data){
             		   console.log(data);
-            		 //  alert(data.msg);
             		   $('span#msg1').text(data.msg);
             	   },
             	   error: function(data){
@@ -248,7 +247,6 @@
             	   }
             	 });
                return result;
-               
                
               }
             

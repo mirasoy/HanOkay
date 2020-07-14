@@ -151,7 +151,7 @@ public class BookingController {
 	
 	
 	//예약 조회 페이지와 이동	
-	@GetMapping({"/info", "/info2","modify"})
+	@GetMapping({"/info", "/info2", "/info3", "modify"})
 	public void get(@RequestParam("bookNum") String bookNum, Model model) {
 		log.info("/info or modify");
 		

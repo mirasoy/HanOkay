@@ -71,11 +71,8 @@ if (user != null) {
 
 
 <!-- 달력 변경(수희) -->
-<link
-	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
-	rel="stylesheet" type="text/css" />
-<script
-	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <link href="../resources/css/select2.css" rel="stylesheet">
 <script src="../resources/js/select2.js"></script>
@@ -140,17 +137,18 @@ body {
 </script>
 
 </head>
-<!-- <script type="text/javascript">
+<!-- 뒤로가기 방지 -->
+<!-- 
+<script type="text/javascript">
 	window.history.forward();
 	function noBack() {
 		window.history.forward();
 	}
-</script> -->
-
+</script>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack(); onunload="">"
+ -->
 
 <body>
-<!-- <body onload="noBack();" onpageshow="if(event.persisted) noBack();"
-	onunload=""> -->
 	<!-- main-content -->
 	<div class="main-content" id="top">
 

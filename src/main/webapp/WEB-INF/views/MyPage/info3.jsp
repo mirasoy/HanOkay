@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">투숙 완료 상세 페이지 (수정 불가능)</h1>
+    <h1 class="page-header">취소된 예약 상세 페이지 (수정 불가능)</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -115,7 +115,7 @@
         </div>
 
 
-<button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/checkout'">List</button>
+<button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/cancelled'">List</button>
 
 
       </div>
