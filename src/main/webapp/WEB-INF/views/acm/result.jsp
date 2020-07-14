@@ -57,8 +57,6 @@
 .width400{
 	width: 400px;
 }
-
-
 </style>
 
     
@@ -216,73 +214,6 @@
 	
 	<script>
     $(document).ready(function() { $("#e1").select2(); });
-/* 
-	<!-- 달력 변경(수희) -->
-	var today = new Date();
-    $('#rangestart').calendar({
-      type: 'date',
-      minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-      maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
-      endCalendar: $('#rangeend'),
-      formatter: {
-           date: function (date, settings) {
-             if (!date) return '';
-             var day = date.getDate();
-             var month = date.getMonth() + 1;
-             var year = date.getFullYear();
-             if( (Number(month)<10) && (Number(day)<10) ){
-					console.log(year + '-0' + month + '-0' + day)
-			    	  return year + '-0' + month + '-0' + day;
-			  }
-			  if(Number(month)<10){
-			    	  return year + '-0' + month + '-' + day;
-			  }
-			  if(Number(day)<10){
-			    	  return year + '-' + month + '-0' + day;
-			  }
-             return year + '-' + month + '-' + day;
-           }
-       }
-    });
-    $('#rangeend').calendar({
-      type: 'date',
-      maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()+1),
-      startCalendar: $('#rangestart'),
-      formatter: {
-           date: function (date, settings) {
-             if (!date) return '';
-             var day = date.getDate();
-             var month = date.getMonth() + 1;
-             var year = date.getFullYear();
-             if( (Number(month)<10) && (Number(day)<10) ){
-					console.log(year + '-0' + month + '-0' + day)
-			    	  return year + '-0' + month + '-0' + day;
-			  }
-			  if(Number(month)<10){
-			    	  return year + '-0' + month + '-' + day;
-			  }
-			  if(Number(day)<10){
-			    	  return year + '-' + month + '-0' + day;
-			  }
-             return year + '-' + month + '-' + day;
-           }
-       }
-    });
-	
-	function checkValidation() {
-		var date_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; 
-		
-		let cin = document.getElementById("in").value;
-		let cout = document.getElementById("out").value;
-		if(!date_pattern.test(cin)){
-			return false;
-		}
-		if(!date_pattern.test(cout)){
-			return false;
-		}
-		cin= Number(cin.replace(/-/g,""));
-		cout= Number(cout.replace(/-/g,""));
- */
     
  	/* 날짜 선택(수희) */
 		var today = new Date();
@@ -306,80 +237,26 @@
 			dateFormat: 'yy-mm-dd'
 		});
 
-		
-	<script>	
-	/* 
-	datePickerId.min = new Date().toISOString().split("T")[0];
-	
-	document.getElementById("datePickerId2").disabled = true;
-	$("#datePickerId").on("change", function() {
-	      console.log($(this).val()); 
-	     var testDate= $(this).val();
-	     var date_regex = /^\d{4}-\d{2}-\d{2}$/;
-	     if((date_regex.test(testDate)))
-	      document.getElementById("datePickerId2").disabled = false;
-	     
-	     var end_ymd= document.getElementById("datePickerId").value;
-	     
-	     var yyyy = end_ymd.substr(0,4);
-	     var mm = end_ymd.substr(5,2);
-	     var dd = end_ymd.substr(8,2);
-	     var com_ymd = new Date(yyyy,mm-1,dd);
-	     
-	     com_ymd.setDate(com_ymd.getDate() + 1);
-	     var yyyy= com_ymd.getFullYear();
-	     var mm = com_ymd.getMonth()+1;
-	     var dd = com_ymd.getDate();
-	     
-	     function dateToYYYYMMDD(date){
-	    	    function pad(num) {
-	    	        num = num + '';
-	    	        return num.length < 2 ? '0' + num : num;
-	    	    }
-	    	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
-	    	}
-	     
-	 	 datePickerId2.min = dateToYYYYMMDD(com_ymd);
-	}); 
-	*/
-	
-	
-
+		// 구글맵 api
 		var address = null;
-		
 
 		/*  function getAddr(){
 		
 		     $.ajax({
-		
 		           type:'post',
-		
 		           headers:{
-		
 		               "Content-Type":"application/json"
-		
 		           },
-		
 		           async : false, // ajax를 동기화(순서대로) 처리해야하는 경우 true로하거나 기술하지 않으면 비동기로 작동한다.
-		
 		           url:"/board/category/getAddr?userId=${boardDTO.userId}",
-		
 		           dataType:"text",
-		
 		           success : function(result){
-		
 		               if ( result != null ){
-		
 		                   console.log("넘어온 값 : " + result);
-		
 		                   address = result;  
-		
 		               }
-		
 		           }
-		
 		       });
-		
 		 }; */
 
 		function initMap() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수
@@ -403,9 +280,9 @@
 			var latitude = document.getElementById("latitude").value;
 			var longitude = document.getElementById("longitude").value;
 			
+			//숙소번호로 해당 위도,경도 값 가져옴
 			<c:forEach items="${list }" var="acm">
 			if("${acm.acmNum}"===acmNum){
-				
 				var latitude = ${acm.latitude};
 				var longitude = ${acm.longitude};
 			}
@@ -415,19 +292,14 @@
 			var lngVal = parseFloat(longitude);
 			console.log('initMap');
 			
-			
 			var mapLocation = {
-					
 				lat : latVal,
 				lng : lngVal
 			}; // 위도, 경도를 가지는 객체를 생성
 
 			/*     var map = new google.maps.Map(document.getElementById('map'), { // 위의 div id="map" 부분에 지도를 추가하는 부분
-			
 			      zoom: 18, // 확대 정도(ZOOM)
-			
 			      center: uluru // 지도에 표시해주는 중심이 우리가 만든 객체의 위치를 지정해주도록 함
-			
 			    });
 			
 			 */
@@ -435,19 +307,15 @@
 			var mapOptions = {
 
 				center : mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
-
 				zoom : 15, // 지도 zoom단계
-
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 
 			};
 
 			var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
-
 			mapOptions);
 
 			var size_x = 60; // 마커로 사용할 이미지의 가로 크기
-
 			var size_y = 60; // 마커로 사용할 이미지의 세로 크기
 
 			// 마커로 사용할 이미지 주소
@@ -456,11 +324,8 @@
 					'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
 
 					new google.maps.Size(size_x, size_y),
-
 					'',
-
 					'',
-
 					new google.maps.Size(size_x, size_y));
 
 			<c:forEach items="${list }" var="acm">
@@ -469,18 +334,11 @@
 			var marker;
 
 			marker = new google.maps.Marker({
-
 				position : latLng, // 마커가 위치할 위도와 경도(변수)
-
 				map : map,
-
 				icon : image, // 마커로 사용할 이미지(변수)
-
 				title : "${acm.acmName}" // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
-
 			});
-			
-			
 			</c:forEach>
 			var content = "${acm.acmName}" ; // 말풍선 안에 들어갈 내용
 
@@ -491,39 +349,23 @@
 			});
 
 			google.maps.event.addListener(marker, "click", function() {
-
 				infowindow.open(map, marker);
-
 			});
-			
 
 			/*
-			
 			 단순한 마커로 default로 표시할 때 쓰는 마커 세팅
-			
 			var marker = new google.maps.Marker({
-			
 			    position: uluru,
-			
 			    map: map
-			
 			  });
-			
-			  
-			
 			 */
 
 		}
 	</script>
-
 	<!--
- 
                     아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함
- 
                     key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.
- 
                  -->
-
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
 	</script>
@@ -534,23 +376,7 @@
 		$(document)
 				.ready(
 						function() {
-							var result = '<c:out value="${result}"/>';
-
-							checkModal(result);
-
 							history.replaceState({}, null, null);
-
-							function checkModal(result) {
-								if (result === '' || history.state) {
-									return;
-								}
-								if (parseInt(result) > 0) {
-									$(".modal-body").html(
-											"게시글 " + parseInt(result)
-													+ " 번이 등록되었습니다.");
-								}
-								$("#myModal").modal("show");
-							}
 
 							var actionForm = $("#actionForm");
 							$(".paginate_button a").on(
@@ -572,26 +398,6 @@
 												actionForm.attr("action","/acm/get");
 												actionForm.submit();
 											}); 
-
-// 							$(".move").on("click",function(e) {
-//                                 e.preventDefault();
-//                                 actionForm.append("<input type='hidden' name='acmNum' value='"
-//                                             + $(this).attr("href")
-//                                             + "'>");
-//                                 actionForm.append("<input type='hidden' name='in' value='2020-08-01'>");
-//                                 actionForm.append("<input type='hidden' name='out' value='2020-08-03'>");
-//                                 actionForm.append("<input type='hidden' name='person' value='2'>");
-//                                 actionForm.attr("action","/acm/get");
-//                                 actionForm.submit();
-//                              }); 
-// >>>>>>> develop
-						/* 	$(".move").on("click",function(e) {
-								e.preventDefault();
-								var acmnum= ${acm.acmNum};
-								console.log(acmnum);
-								initMap();
-								
-							}); */
 						});
 	</script>
 	<%@include file="../includes/footer.jsp"%>

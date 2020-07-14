@@ -30,9 +30,6 @@
 				<!-- Start : section-search : 검색창-->
 				<div class="row banner-row" id="section-search">
 
-
-
-
 					<form action="/acm/result" method="get"
 						class="search-form section-pad-2"
 						onsubmit="return checkValidation()">
@@ -323,79 +320,15 @@
 </div>
 <!-- End : main-content -->
 <script>
-//예전 jQuery라면 on이 아니라 bind나 live 
-$("#in").on("propertychange change keyup paste input", function() {
-    var currentVal = $(this).val();
-    if(currentVal == oldVal) {
-        return;
-    }
- 
-    oldVal = currentVal;
-   	console.log(currentVal);
-});		
-
         $(document).ready(function() { $("#e1").select2(); });
 		
      	/* 날짜 선택(수희) */
 		var today = new Date();
-     	
-/* 
-	      $('#rangestart').calendar({
-	        type: 'date',
-	        minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-	        maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
-	        endCalendar: $('#rangeend'),
-	        formatter: {
-	             date: function (date, settings) {
-	               if (!date) return '';
-	               var day = date.getDate();
-	               var month = date.getMonth() + 1;
-	               var year = date.getFullYear();
-	               if( (Number(month)<10) && (Number(day)<10) ){
-						console.log(year + '-0' + month + '-0' + day)
-				    	  return year + '-0' + month + '-0' + day;
-				  }
-				  if(Number(month)<10){
-				    	  return year + '-0' + month + '-' + day;
-				  }
-				  if(Number(day)<10){
-				    	  return year + '-' + month + '-0' + day;
-				  }
-	               return year + '-' + month + '-' + day;
-	             }
-	         }
-	      });
-	      $('#rangeend').calendar({
-	        type: 'date',
-	        maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()+1),
-	        startCalendar: $('#rangestart'),
-	        formatter: {
-	             date: function (date, settings) {
-	               if (!date) return '';
-	               var day = date.getDate();
-	               var month = date.getMonth() + 1;
-	               var year = date.getFullYear();
-	               if( (Number(month)<10) && (Number(day)<10) ){
-						console.log(year + '-0' + month + '-0' + day)
-				    	  return year + '-0' + month + '-0' + day;
-				  }
-				  if(Number(month)<10){
-				    	  return year + '-0' + month + '-' + day;
-				  }
-				  if(Number(day)<10){
-				    	  return year + '-' + month + '-0' + day;
-				  }
-	               return year + '-' + month + '-' + day;
-	             }
-	         }
-	      });
-	      
- */
 		
 		$("#out").datepicker({
 			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd',
 		});
 		$("#in").datepicker({
 			minDate: 0,
@@ -410,10 +343,7 @@ $("#in").on("propertychange change keyup paste input", function() {
 			},
 			dateFormat: 'yy-mm-dd'
 		});
-
-
 		</script>
-<!-- 달력 변경. 끝 -->
 </body>
 
 <footer class="container-outer">
@@ -433,7 +363,6 @@ $("#in").on("propertychange change keyup paste input", function() {
 
 	}
 	
-
 	function fillInAddress(){
 		var place = autocomplete.getPlace();
 		$('#lat').prop('value',place.geometry.location.lat());
