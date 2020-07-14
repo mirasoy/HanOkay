@@ -216,52 +216,30 @@
 	
 	<script>
     $(document).ready(function() { $("#e1").select2(); });
-	<!-- 달력 변경(수희) -->
-	var today = new Date();
-	$('#rangestart').calendar({
-	  type: 'date',
-	  minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-	  endCalendar: $('#rangeend'),
-	  formatter: {
-		    date: function (date, settings) {
-		      if (!date) return '';
-		      var day = date.getDate();
-		      var month = date.getMonth() + 1;
-		      var year = date.getFullYear();
-		      return year + '-' + month + '-' + day;
-		    }
-		}
-	});
-	$('#rangeend').calendar({
-	  type: 'date',
-	  startCalendar: $('#rangestart'),
-	  formatter: {
-		    date: function (date, settings) {
-		      if (!date) return '';
-		      var day = date.getDate();
-		      var month = date.getMonth() + 1;
-		      var year = date.getFullYear();
-		      return year + '-' + month + '-' + day;
-		    }
-		}
-	});
-	
-	function checkValidation() {
-		let cin = document.getElementById("in").value;
-		let cout = document.getElementById("out").value;
-		cin= Number(cin.replace(/-/g,""));
-		cout= Number(cout.replace(/-/g,""));
+    
+ 	/* 날짜 선택(수희) */
+		var today = new Date();
 		
-         if((cin != 0 && cout != 0) && (cin >= cout)){
-            alert("1박 이상 선택해주세요!");
-            return false;
-         }else{
-			return true;
-		}
-	}
-	</script>            
-	<!-- 달력 변경. 끝 -->
+		$("#out").datepicker({
+			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
+			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+			dateFormat: 'yy-mm-dd'
+		});
+		$("#in").datepicker({
+			minDate: 0,
+			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
+			onSelect: function(selectedDate) {
+				var nextDay = new Date(selectedDate);
+				nextDay.setDate(nextDay.getDate() + 1);
+			  $("#out").datepicker("option","minDate", nextDay);
+				var nextMonth = new Date(selectedDate);
+				nextMonth.setDate(nextMonth.getDate() + 90);
+			  $("#out").datepicker("option","maxDate", nextMonth);
+			},
+			dateFormat: 'yy-mm-dd'
+		});
 
+		
 	<script>	
 	/* 
 	datePickerId.min = new Date().toISOString().split("T")[0];

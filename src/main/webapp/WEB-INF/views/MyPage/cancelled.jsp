@@ -83,7 +83,7 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkoutDate}" /></td>
 							<td><c:out value="${board.bookPrice}" /></td>			
 							
-							<td><a href="/MyPage/info2?bookNum=${board.bookNum}">예약정보</a></td>
+							<td><a href="/MyPage/info3?bookNum=${board.bookNum}">예약정보</a></td>
 					
 						</tr>																				
 					</c:forEach>

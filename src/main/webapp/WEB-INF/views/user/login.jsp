@@ -31,28 +31,14 @@
 
 	<script>
 	function checkEmail(str) {
-		let emailRegex=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		let emailRegex=/^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/;
 		if (emailRegex.test(str)) {
 			console.log("이메일 정규식 통과");
 			return true;
-		} else {
-			console.log("이메일 정규식  미통과");
-			return false;
-		}
+		} 
+		return false;
 	}
 
-	//비밀번호 형식 정규식 메서드
-	/* function checkPassword(str){
-		//특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
-		let passwordRegex=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-		if(passwordRegex.test(str)){
-			console.log("비밀번호 정규식 통과");
-			return true;
-		} else {
-			console.log("비밀번호 정규식  미통과");
-			return false;
-		}
-	} */
 	$(document).ready(function() {
 		let formObj = $("form");
 		//페이지가 다시 그려졌을 때 두번 submit되는 것을 방지

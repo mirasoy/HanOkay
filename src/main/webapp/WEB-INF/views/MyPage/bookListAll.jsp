@@ -33,6 +33,7 @@ String name = (String)session.getAttribute("loginUserNum");
 	
 	
 </style>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">나의 예약</h1>
@@ -71,11 +72,12 @@ String name = (String)session.getAttribute("loginUserNum");
 							<th>체크인날짜</th>
 							<th>체크아웃날짜</th>																											
 							<th>상태</th>																
+																				
 						</tr>
 					</thead>
 
 					<c:forEach items="${bookListAll}" var="board">
-						<tr>
+						<tr id="test1">
 							<td><c:out value="${board.acmName}" /></td>																			
 							<td><c:out value="${board.bookNum}" /></td>																
 					
@@ -83,12 +85,12 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkinDate}" /></td>
 									
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.checkoutDate}" /></td>
+									value="${board.checkoutDate}" /></td>						
+														
+							<td id="<c:out value="${board.bookNum}" />"> </td>
 							
-							
-							
-							<td><c:out value="${board.bookStatus}" /></td>
-							
+							<%-- <td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td> --%>							
+							<!-- 여기에 추가하기 -->
       			
 					
 						</tr>																				
@@ -102,25 +104,42 @@ String name = (String)session.getAttribute("loginUserNum");
 </div>
 <!-- /.row -->
 
-
 <script>
+
+		 
+		<c:forEach items="${bookListAll}" var="board">
+		
+	 		var bookStatus = '<c:out value="${board.bookStatus} "/>'
+			
+	 		console.log(bookStatus);
+				 
+			
+			if(bookStatus.trim()=='RS_STT_BK'){
+				
+				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");
+				
+				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+				
+				
+			}else if(bookStatus.trim()=='RS_STT_BC'){
+				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='예약취소' readonly='readonly'>");
+				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info3?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+				
+			}else if(bookStatus.trim()=='RS_STT_AC'){
+				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙완료' readonly='readonly'>");
+				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+			}else if(bookStatus.trim()=='RS_STT_CI'){
+				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='체크아웃' readonly='readonly'>");
+				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+			}
+			
+		
+		</c:forEach>
+	
 	
 
-	
-/* 	var bookStatus = '<c:out value="${board.bookStatus} "/>';
-	var bookStatus2 = bookStatus.trim();
-	alert(bookStatus2);
-	alert("수정");
-	
-	if(bookStatus2=='RS_STT_BK'){
-		$('input[name=bookStatus]').val("투숙예정"); 
-	}else if(bookStatus2=='RS_STT_BC'){
-		$('input[name=bookStatus]').val("예약취소"); 
-	}else if(bookStatus2=='RS_STT_AC'){
-		$('input[name=bookStatus]').val("투숙완료"); 
-	} */
-	
 </script>
 
 
-<%@include file="../includes/footer.jsp"%>
+
+	<%@include file="../includes/footer.jsp"%>
