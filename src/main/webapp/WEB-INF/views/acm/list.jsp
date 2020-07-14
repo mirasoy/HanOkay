@@ -30,9 +30,6 @@
 				<!-- Start : section-search : 검색창-->
 				<div class="row banner-row" id="section-search">
 
-
-
-
 					<form action="/acm/result" method="get"
 						class="search-form section-pad-2"
 						onsubmit="return checkValidation()">
@@ -110,7 +107,7 @@
 								<div class="form-group form-group-1 ">
 									<label for="btnSubmit">&nbsp;</label>
 									<button type="submit"
-										class="submit-btn btn btn-primary btn btn-search text-uppercase"
+										class="submit-btn btn-primary btn btn-search text-uppercase"
 										id="submitBtn">Check Availability</button>
 								</div>
 							</div>
@@ -349,6 +346,10 @@
 
 		</script>
 <!-- 달력 변경. 끝 -->
+
+
+
+
 </body>
 
 <footer class="container-outer">

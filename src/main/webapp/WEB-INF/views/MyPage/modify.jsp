@@ -5,50 +5,6 @@
 <%@include file="../includes/header.jsp"%>
 
 
-<style>
-
-/* The popup form - hidden by default */
-.form-popup {
-	display: none;
-	position: fixed;
-	padding-top: 100px;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	border: 3px solid #f1f1f1;
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Add styles to the form container */
-.form-container {
-	max-width: 600px;
-	padding: 30px;
-	background-color: white;
-	margin: auto;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-	background-color: #4CAF50;
-	color: white;
-	padding: 16px 20px;
-	border: none;
-	cursor: pointer;
-	width: 100%;
-	margin-bottom: 10px;
-	opacity: 0.8;
-}
-
-.form-container .cancel {
-	background-color: red;
-}
-
-.smoking {
-	width: 15px;
-}
-</style>
 
 <!-- 자바스크립트 정규식 체크 -->
 <script language="javascript">
@@ -75,12 +31,6 @@
 			return false;
 		}
 
-		/* 	if(request.value == ""){
-				alert("요구사항을 입력해 주세요");
-				request.focus();
-				return false;
-			}
-		 */
 		alert("정보가 수정되었습니다.");
 	}
 
@@ -140,10 +90,6 @@
 				}else if(bookStatus2=='RS_STT_AC'){
 					$('input[name=bookStatus]').val("투숙완료"); 
 				}
-				
-				
-				
-				
 				
 
 			});
