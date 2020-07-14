@@ -61,8 +61,8 @@ throws IOException{
 		if (service.checkEmail(email)) {
 			log.info("checkEmail에서 service 성공");
 			msg="해당 이메일을 사용하실 수 있습니다";
-			jso.put("msg", msg);
-			
+			jso.put("msg", msg);		
+		
 			//msg.setMessage("해당 이메일을 사용할 수 있습니다");
 			//msg1="해당 이메일을 사용할 수 있습니다";
 			
@@ -99,14 +99,21 @@ throws IOException{
 		//세션에 user라는 키로 user객체를 담아주기
 	}
 
+	//emailAuth 페이지를 get방식으로 접근하면 에러페이지를 보여주자
+	//7.14 오늘은 개발을 위해서 그냥 emailAuth 페이지를 보여주게 해놓음
+	@GetMapping("/emailAuth")
+	public String cannotGetEmailAuth() {
+		return "register/emailAuth";
+	}
 	
-	//인증메일을 발송하는 기능(미구현)
-	@PostMapping("/EmailAuth")
-	public void sendAuthEmail(String email, RedirectAttributes rttr) {
-		log.info("입력된 email: "+ email);
-		emailService.sendAuthEmail(email);
-		ModelAndView mv = new ModelAndView();
-				
+	//인증메일을 발송하는 기능
+	//누르면 emailAuth.jsp로 이동하고
+	//쿠키가 생성되어 sign Up form에서 채워진 값들이 저장되서 emailAuth.jsp로 넘어간다
+	@PostMapping("/emailAuth")
+	public ModelAndView sendAuthEmail(String email) {
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("emailAuth");
+		return mv;
 	}
 
 }

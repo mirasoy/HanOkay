@@ -65,7 +65,7 @@
                <br>
                <p>(*)표시된 항목은 반드시 입력해주십시오</p>
                <button data-oper='register' class="btn btn-default">가입하기</button>
-               <!-- <button data-oper='sendEmailAuth' class="btn btn-default" id="sendEmailAuth">인증메일 발송</button> -->
+               <button data-oper='sendEmailAuth' class="btn btn-default" id="sendEmailAuth">인증메일 발송</button> 
             </td>
             
          </tr>
@@ -314,10 +314,14 @@
             formObj.submit(); 
          }
          
-         //sendEmailAuth메일 보내기(미완)
-        /*  if( operator === 'sendEmailAuth'){
-         } */
-         
+         //sendEmailAuth메일 보내기
+          if( operator === 'sendEmailAuth'){
+        	  //form의 내용을 쿠키에 저장
+        	  //controller로 전송
+        	  formObj.attr("action", "/register/register");
+              formObj.submit(); 
+         } 
+        
       });
       });
    </script>
