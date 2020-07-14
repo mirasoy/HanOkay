@@ -28,11 +28,9 @@ String name = (String)session.getAttribute("loginUserNum");
 	.panel-heading{
 	    padding-left: 25px;
 	}
-	
-	
-	
-	
 </style>
+
+
 
 <div class="row">
 	<div class="col-lg-12">
@@ -51,7 +49,7 @@ String name = (String)session.getAttribute("loginUserNum");
 				<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
 				<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
 				<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>	
+				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>		
 
 						
 			</ul>
@@ -93,7 +91,7 @@ String name = (String)session.getAttribute("loginUserNum");
 							<!-- 여기에 추가하기 -->
       			
 					
-						</tr>																				
+</tr>																				
 					</c:forEach>
 				</table>
 			</div>
@@ -103,6 +101,10 @@ String name = (String)session.getAttribute("loginUserNum");
 	</div>	
 </div>
 <!-- /.row -->
+
+
+<%@include file="../includes/footer.jsp"%>
+
 
 <script>
 
@@ -116,8 +118,7 @@ String name = (String)session.getAttribute("loginUserNum");
 			
 			if(bookStatus.trim()=='RS_STT_BK'){
 				
-				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");
-				
+				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");				
 				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
 				
 				
@@ -139,7 +140,3 @@ String name = (String)session.getAttribute("loginUserNum");
 	
 
 </script>
-
-
-
-	<%@include file="../includes/footer.jsp"%>
