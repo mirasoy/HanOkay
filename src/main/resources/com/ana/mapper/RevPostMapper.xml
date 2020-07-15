@@ -280,7 +280,7 @@ select SEQ_REV.nextval from dual
 
 </insert>
 
-<!-- 하나의 숙소에 속한 모든 리뷰 리스트불러오기 -->
+<!-- 숙소 상세페이지: 숙소별 리뷰 목록을 불러온다 -->
 <select id="getAcmList" resultMap="RevPostVOResult" >
 	select 
 	A.PST_NUM,
