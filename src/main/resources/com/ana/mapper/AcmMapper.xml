@@ -77,7 +77,8 @@ from
 	</select>
 
 	
-
+	<!-- 숙소 상세페이지: 숙소 정보와 사진을 불러온다 -->
+	<!-- 예약 확인 페이지: 객실정보 확인을 위해 숙소 정보를 불러온다-->
 	<select id="read" resultMap="AcmVOResult">
 		select * from tacm where acm_Num = #{acmNum}
 	</select>

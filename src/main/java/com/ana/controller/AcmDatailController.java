@@ -23,7 +23,8 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/acm/*")
 @AllArgsConstructor
 public class AcmDatailController {
-
+// 숙소 상세페이지
+	
 	private AcmService acmService;
 	private RevPostService revService;
 	private AcmOptionService optService;
@@ -38,21 +39,22 @@ public class AcmDatailController {
 			Model model) {
 		log.info("accommodation");
 		
-		if(!person.isEmpty()) {
-			model.addAttribute("acm", acmService.get(acmNum))
-			.addAttribute("rev", revService.getAcmList(acmNum))
-			.addAttribute("opt", optService.getList(acmNum))
-			.addAttribute("rom", romService.getList(acmNum, person))
-			.addAttribute("srh", getDate(checkin, checkout));
+		if(!person.isEmpty()) { // 검색 페이지에서 인원수를 선택한 경우
+			model.addAttribute("acm", acmService.get(acmNum)) // 숙소 정보 + 사진
+			.addAttribute("rev", revService.getAcmList(acmNum)) // 리뷰 목록
+			.addAttribute("opt", optService.getList(acmNum)) // 옵션 목록
+			.addAttribute("rom", romService.getList(acmNum, person)) // 방 목록
+			.addAttribute("srh", getDate(checkin, checkout)); 
 		}else {
 			model.addAttribute("acm", acmService.get(acmNum))
 			.addAttribute("rev", revService.getAcmList(acmNum))
-			.addAttribute("opt", optService.getList(acmNum))
-			.addAttribute("rom", romService.getAll(acmNum))
+			.addAttribute("opt", optService.getList(acmNum)) 
+			.addAttribute("rom", romService.getAll(acmNum)) // 방 전체 목록
 			.addAttribute("srh", getDate(checkin, checkout));
 		}
 	}
 	
+	// 경우의 수에 따른 체크인, 체크아웃 날짜 설정
 	public String[] getDate(String checkin, String checkout) {
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

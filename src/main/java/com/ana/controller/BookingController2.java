@@ -22,14 +22,14 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/booking/*")
 @AllArgsConstructor
 public class BookingController2 {
-	// 0705 추가: 예약페이지와 예약확인페이지
+// 예약 페이지 & 예약 확인페이지	
 	
 	private AcmService acmService;
 	private RomService romService;
 	private BookingService bookService;
 	
 	@GetMapping("/new")
-	public void getInfo(
+	public void getInfo( // 예약 페이지 : 예약과 관련된 숙소와 객실 정보 등을 불러온다
 			@RequestParam("romNum") String romNum,
 			@RequestParam("in") String checkin,
 			@RequestParam("out") String checkout,
@@ -43,7 +43,7 @@ public class BookingController2 {
 	}
 	
 	@PostMapping("/new")
-	public String booking(
+	public String booking( // 예약 페이지 : 예약 정보를 저장한다
 			BookingVO book, 
 			RedirectAttributes rttr) {
 		log.info("booking"+book);
@@ -55,7 +55,7 @@ public class BookingController2 {
 	}
 	
 	@GetMapping("/get")
-	public void get(
+	public void get( // 예약 확인 페이지 : 예약 정보를 불러온다
 			@RequestParam("bookNum") String bookNum,
 			Model model) {
 		log.info("get");
