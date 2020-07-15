@@ -1,51 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	session.setAttribute("userNum", "U1");
-String name = (String) session.getAttribute("userNum");
-%>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
 <%@include file="../includes/header.jsp"%>
-<head>
-<title>review List</title>
-
-<style type="text/css">
-.bookbar {
-	width: 100%;
-	height: 40px;
-	list-style: none;
-	padding: 0;
-}
-.bookbar>li {
-	float: left;
-	width: 110px;
-	height: 30px;
-	margin: 0;
-	text-align: center;
-	padding-top: 15px;
-}
-.on{
-	font-weight: bold;
-}
-
-</style>
-</head>
-
-<body>
 
 	
-<div class="row">
+<div class="container">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<ul class="bookbar">
-					<li class="item1 on"><a href="/review/list">전체목록</a></li>
+					<li class="item1 active"><a href="/review/list">전체목록</a></li>
 					<li class="item2"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
 					<li class="item3"><a href="/review/unwrittenReviewlist">미작성 리뷰</a></li>
 				</ul>

@@ -184,17 +184,5 @@ from
    </foreach>
    ))
 </select>
-	
-<select id="getTotalCount2" resultType="int">
-	
-		select count(*) from (select distinct a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.rom_capa
-        from trom r, tacm a
-        where r.acm_num = a.acm_num) e
-		where
-		<include refid="criteria"></include>
-		<![CDATA[
-		to_number(substr(acm_num,2))>0
-		]]>
-	</select>
 
 </mapper>

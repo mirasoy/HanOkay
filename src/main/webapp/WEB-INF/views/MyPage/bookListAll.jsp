@@ -5,6 +5,7 @@
 
 <% session.setAttribute("loginUserNum", "U1"); 
 String name = (String)session.getAttribute("loginUserNum");
+int i=0;
 %>
 <%@include file="../includes/header.jsp"%>
 
@@ -28,11 +29,9 @@ String name = (String)session.getAttribute("loginUserNum");
 	.panel-heading{
 	    padding-left: 25px;
 	}
-	
-	
-	
-	
 </style>
+
+
 
 <div class="row">
 	<div class="col-lg-12">
@@ -51,7 +50,7 @@ String name = (String)session.getAttribute("loginUserNum");
 				<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
 				<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
 				<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>	
+				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>		
 
 						
 			</ul>
@@ -85,6 +84,7 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkinDate}" /></td>
 									
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
+
 									value="${board.checkoutDate}" /></td>						
 														
 							<td id="<c:out value="${board.bookNum}" />"> </td>
@@ -93,7 +93,9 @@ String name = (String)session.getAttribute("loginUserNum");
 							<!-- 여기에 추가하기 -->
       			
 					
-						</tr>																				
+
+</tr>																				
+
 					</c:forEach>
 				</table>
 			</div>
@@ -104,7 +106,12 @@ String name = (String)session.getAttribute("loginUserNum");
 </div>
 <!-- /.row -->
 
+
+<%@include file="../includes/footer.jsp"%>
+
+
 <script>
+
 
 		 
 		<c:forEach items="${bookListAll}" var="board">
@@ -116,8 +123,7 @@ String name = (String)session.getAttribute("loginUserNum");
 			
 			if(bookStatus.trim()=='RS_STT_BK'){
 				
-				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");
-				
+				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");				
 				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
 				
 				
@@ -135,11 +141,7 @@ String name = (String)session.getAttribute("loginUserNum");
 			
 		
 		</c:forEach>
-	
+
 	
 
 </script>
-
-
-
-	<%@include file="../includes/footer.jsp"%>
