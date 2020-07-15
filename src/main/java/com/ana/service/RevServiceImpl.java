@@ -67,7 +67,7 @@ public class RevServiceImpl implements RevService {
 	}
 
 	
-	//리뷰수정하기
+	//리뷰삭제하기
 	@Override
 	public boolean remove(String postNum) {
 		log.info("remove......" + postNum);
