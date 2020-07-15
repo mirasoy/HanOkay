@@ -27,9 +27,12 @@ public interface AcmMapper {
 	
 	public int getTotalCount(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
 	
-	public List<String> getAcmNum(String person);
+	public List<String> getRomNum(@Param("in") String in,@Param("out") String out);
+	
+	public List<String> getAcmNum(@Param("person") String person, @Param("romNum") List<String> romNum);
 	
 	public List<AcmVO> getListPaging(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
+
 	
 	
 }

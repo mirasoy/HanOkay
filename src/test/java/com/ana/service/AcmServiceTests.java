@@ -84,8 +84,10 @@ public class AcmServiceTests {
 	@Test
 	public void testGetList() {
 		Criteria cri = new Criteria();
-		cri.setKeyword("대구");
-		cri.setPerson("8");
+//		cri.setKeyword("대구");
+		cri.setPerson("1");
+		cri.setIn("2019-04-20");
+		cri.setOut("2019-04-22");
 	
 		service.getList(cri).forEach(acm -> log.info(acm));;
 	}
