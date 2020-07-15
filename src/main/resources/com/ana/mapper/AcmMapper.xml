@@ -146,7 +146,7 @@ select distinct acm_num
 	from trom
 	where (rom_capa >= to_number(#{person})) and
 	]]>
-	ROM_NUM in
+	ROM_NUM not in
    <foreach collection='romNum' index='index' item='romNum' open='(' close=')' separator=','>
       #{romNum}
    </foreach>
