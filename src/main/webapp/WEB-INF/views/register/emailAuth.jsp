@@ -12,10 +12,13 @@
 		<input id="enterAuthNum">
 		<input type="button" id="checkAuthNum" value="인증코드 확인">
 		<br>
+		<span id="msg"><c:out value="${msg}" /></span>
 		<input type="button" id="register" value="버튼을 누르고 가입완료">
 	<script> 
 	$(document).ready(function() {
-	
+		$("#checkAuthNum").click(function(){
+			alert("dd");
+		})
 	});
 	</script>
 </body>
