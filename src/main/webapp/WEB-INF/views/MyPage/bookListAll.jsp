@@ -5,6 +5,7 @@
 
 <% session.setAttribute("loginUserNum", "U1"); 
 String name = (String)session.getAttribute("loginUserNum");
+int i=0;
 %>
 <%@include file="../includes/header.jsp"%>
 
@@ -61,6 +62,7 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkinDate}" /></td>
 									
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
+
 									value="${board.checkoutDate}" /></td>						
 														
 							<td id="<c:out value="${board.bookNum}" />"> </td>
@@ -69,7 +71,9 @@ String name = (String)session.getAttribute("loginUserNum");
 							<!-- 여기에 추가하기 -->
       			
 					
+
 </tr>																				
+
 					</c:forEach>
 				</table>
 			</div>
@@ -86,7 +90,9 @@ String name = (String)session.getAttribute("loginUserNum");
 
 <script>
 
+
 		// 예약상태를 확인 하기 위해, 값을 불러오는 반복문을 여기에 둔다.
+
 		<c:forEach items="${bookListAll}" var="board">
 		
 	 		var bookStatus = '<c:out value="${board.bookStatus} "/>'
@@ -117,7 +123,7 @@ String name = (String)session.getAttribute("loginUserNum");
 			
 		
 		</c:forEach>
-	
+
 	
 
 </script>

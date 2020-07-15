@@ -49,6 +49,7 @@ public class RevPostServiceImpl implements RevPostService{
 		return mapper.getList();
 	}
 
+	// 숙소 상세페이지: 숙소별 리뷰 목록 불러오기
 	@Override
 	public List<RevPostVO> getAcmList(String acmNum) {
 		log.info("getList...........");

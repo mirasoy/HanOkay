@@ -66,10 +66,12 @@ public class HostController {
 	//become-host단
 	
 	@GetMapping("/getRom")//숙소 상세보기
-	public String getRomGet(@RequestParam("romNum") String romNum, Model model) {
-		//System.out.println("롬넘이 넘어온다~~~"+romNum);
+	public String getRomGet(@RequestParam("romNum") String romNum, Model model, HttpSession session) {
+		System.out.println("겟롬//롬넘이 넘어온다~~~"+romNum);
 		
 		model.addAttribute("thisrom",service.get(romNum));//RomVO가 나온다
+		model.addAttribute("userFstname", getUsername(session));
+		
 		return "/hosting/getRom";
 	}
 	
@@ -86,8 +88,6 @@ public class HostController {
 		
 		model.addAttribute("list", romList);
 		model.addAttribute("size", romList.size());
-		
-		
 		
 		model.addAttribute("userFstname", getUsername(session));
 		
@@ -183,8 +183,6 @@ public class HostController {
 	public void becomeHostGet2_6(String acmNum,Model model,HttpSession session) {
 		System.out.println("겟2_6");
 		System.out.println(acmNum);
-
-
 		
 		model.addAttribute("userFstname", getUsername(session));
 		

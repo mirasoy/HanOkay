@@ -102,25 +102,19 @@
 			return false;	       
 	    }
 	    
+	    var acmDesc =document.getElementById("acmDesc");
+	    
+	    if(acmDesc.value.length>100){
+		       alert('숙소에 대한 설명이 너무 깁니다!(100자 내)');
+				return false;	       
+		}
+	    
 	    return true;
 	 }
 	
 	//안쓴다앗
 	function romRegit(){
-		/*var acmNum=$("#acmNum").val();
-		var acmDesc=$("#acmDesc").val();
-		
-		
-		
-		$.ajax({
-			url: 'updateAcmDesc',
-			type: "POST",
-			data: {acmNum: acmNum, acmDesc:acmDesc},
-			success: function (data) {
-				alert("객실이 추가되었습니다.");
-			}
-		});*/
-		
+	
 		alert("숙소 옵션이 추가되었습니다");
 		document.getElementById('actionForm').submit();
 	}

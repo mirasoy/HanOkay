@@ -25,6 +25,8 @@ public class AcmServiceImpl implements AcmService{
 		mapper.insertSelectKey(acm);
 	}
 
+	// 숙소 상세페이지: 숙소 정보와 사진을 불러온다
+	// 예약 확인 페이지: 객실정보 확인을 위해 숙소 정보를 불러온다
 	@Override
 	public AcmVO get(String acmNum) {
 		log.info("get......"+acmNum);

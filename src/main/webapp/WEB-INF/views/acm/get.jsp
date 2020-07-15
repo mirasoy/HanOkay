@@ -29,18 +29,20 @@
 		<div>
 			<div>
 				[객실 선택]</br> 
-				체크인</br>
-				<div class="ui calendar" id="rangestart">
-					<div class="ui input left icon">
-						<i class="calendar icon"></i> 
-						<input type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
+				<div  id="datepicker">
+					체크인</br>
+					<div class="ui calendar" id="rangestart">
+						<div class="ui input left icon">
+							<i class="calendar icon"></i> 
+							<input type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
+						</div>
 					</div>
-				</div>
-				체크아웃</br>
-				<div class="ui calendar" id="rangeend">
-					<div class="ui input left icon">
-						<i class="calendar icon"></i> 
-						<input type="text" placeholder="End" id="out" name="out" value="<%=request.getParameter("out")%>">
+					체크아웃</br>
+					<div class="ui calendar" id="rangeend">
+						<div class="ui input left icon">
+							<i class="calendar icon"></i> 
+							<input type="text" placeholder="End" id="out" name="out" value="<%=request.getParameter("out")%>">
+						</div>
 					</div>
 				</div>
 				
@@ -95,9 +97,16 @@
 				<c:forEach items="${rev }" var="rev">
 					<tr>
 						<td><c:out value="${rev.title}" /></td>
-						<td><c:out value="${rev.revDetail.stisf}" /></td>
+						<td>
+							<c:choose>
+								<c:when test="${rev.revDetail.stisf==1}">★</c:when>
+								<c:when test="${rev.revDetail.stisf==2}">★★</c:when>
+								<c:when test="${rev.revDetail.stisf==3}">★★★</c:when>
+								<c:when test="${rev.revDetail.stisf==4}">★★★★</c:when>
+								<c:when test="${rev.revDetail.stisf==5}">★★★★★</c:when>
+							</c:choose>
 						<td><c:out value="${rev.userNum}" /></td>
-						<td><c:out value="${rev.regDate}" /></td>
+						<td><fmt:formatDate value="${rev.regDate}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				</c:forEach>
 				
@@ -113,7 +122,65 @@
 			[편의시설]</br>
 			<table>
 				<c:forEach items="${opt }" var="opt">
-					<td><c:out value="${opt.acmOptcode}" />&emsp;</td>
+					<td>
+						<c:choose>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_SW'}">
+								수영장
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_PK'}">
+								주차장
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_PU'}">
+								공항 이동 교통편 서비스
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_GM'}">
+								체육관/피트니스
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_FD'}">
+								24시간 프런트 데스크
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_FA'}">
+								가족/아동 여행객 친화형 시설
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_NS'}">
+								금연
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_SP'}">
+								스파/사우나
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_RT'}">
+								레스토랑
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_SA'}">
+								흡연 구역
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_WP'}">
+								반려동물 동반 가능
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_AD'}">
+								장애인용 편의 시설/서비스
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_VC'}">
+								비즈니스 관련 편의 시설
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_GP'}">
+								골프장
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_WF'}">
+								인터넷
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_BF'}">
+								조식
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_LC'}">
+								중식
+							</c:when>
+							<c:when test="${opt.acmOptcode eq'AC_OPT_DN'}">
+								석식
+							</c:when>
+							<c:otherwise>기타</c:otherwise>
+						</c:choose>
+					</td>
 				</c:forEach>
 				
 				<c:if test="${empty opt}">
@@ -146,9 +213,9 @@
 						<td><c:out value="${rom.romType}" /></td>
 						<td><c:out value="${rom.bedType}" /> x <c:out
 								value="${rom.bedCnt}" />&emsp;</td>
-						<td><c:out value="${rom.romCapa}" />&emsp;</td>
-						<td><c:out value="${rom.romSize}" />&emsp;</td>
-						<td><c:out value="${rom.romPrice}" /></td>
+						<td><c:out value="${rom.romCapa}" />명&emsp;</td>
+						<td><c:out value="${rom.romSize}" />m²&emsp;</td>
+						<td>₩ <fmt:formatNumber value="${rom.romPrice}" type="number"/></td>
 						<td><button class="reservBtn"
 								value="&price=<c:out value="${rom.romPrice}"/>"
 								data-romNum="${rom.romNum}">예약하기</button></td>
@@ -169,15 +236,18 @@
 	
 		// 날짜 선택
 		var today = new Date();
-		
+
 		$("#out").datepicker({
 			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+			numberOfMonths: 2,
 			dateFormat: 'yy-mm-dd'
 		});
 		$("#in").datepicker({
 			minDate: 0,
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
+			numberOfMonths: 2,
+			dateFormat: 'yy-mm-dd',
 			onSelect: function(selectedDate) {
 				var nextDay = new Date(selectedDate);
 				nextDay.setDate(nextDay.getDate() + 1);
@@ -185,8 +255,8 @@
 				var nextMonth = new Date(selectedDate);
 				nextMonth.setDate(nextMonth.getDate() + 90);
 			  $("#out").datepicker("option","maxDate", nextMonth);
-			},
-			dateFormat: 'yy-mm-dd'
+			  $("#out").datepicker("open");
+			}
 		});
 		
 		// 페이지 이동

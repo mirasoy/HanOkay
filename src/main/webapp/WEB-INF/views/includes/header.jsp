@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -33,7 +32,7 @@ if (user != null) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ana - korea homstay</title>
+<title>Ana - Make yourself at home in Korea</title>
 
 
 <!-- load stylesheets -->
@@ -52,7 +51,7 @@ if (user != null) {
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
-
+<link rel="stylesheet" href="../resources/css/review.css">
 
 <!-- 메인 CSS style -->
 
@@ -114,18 +113,22 @@ if (user != null) {
 </script>
 
 </head>
+
 <!-- 뒤로가기 방지 -->
 <!-- 
+
 <script type="text/javascript">
 	window.history.forward();
 	function noBack() {
 		window.history.forward();
 	}
 </script>
+
 <body onload="noBack();" onpageshow="if(event.persisted) noBack(); onunload="">"
  -->
 
 <body>
+
 	<!-- main-content -->
 	<div class="main-content" id="top">
 

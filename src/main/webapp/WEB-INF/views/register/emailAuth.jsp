@@ -5,15 +5,20 @@
 <%@include file="../includes/header.jsp"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입 완료</title>
+<title>이메일 인증</title>
 </head>
 <body>
-
-		<h1>회원 가입 완료 되었습니다!</h1>
-	<h2>ana의 다양한 서비스를 알아보세요!</h2>
+		<h1>가입한 이메일로 인증코드가 발송되었습니다</h1>
+		<input id="enterAuthNum">
+		<input type="button" id="checkAuthNum" value="인증코드 확인">
+		<br>
+		<span id="msg"><c:out value="${msg}" /></span>
+		<input type="button" id="register" value="버튼을 누르고 가입완료">
 	<script> 
 	$(document).ready(function() {
-	
+		$("#checkAuthNum").click(function(){
+			alert("dd");
+		})
 	});
 	</script>
 </body>

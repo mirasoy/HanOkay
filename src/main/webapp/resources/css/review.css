@@ -1,0 +1,30 @@
+.bookbar {
+	width: 100%;
+	height: 40px;
+	list-style: none;
+	padding: 0;
+}
+
+.bookbar>li {
+	float: left;
+	width: 110px;
+	height: 30px;
+	margin: 0;
+	text-align: center;
+	padding-top: 15px;
+}
+.active{
+	font-weight: bold;
+}
+
+
+#star a {
+	font-size: 2em;
+	text-decoration: none;
+	color: gray;
+}
+
+#star a.on {
+	font-size: 2em;
+	color: red;
+}

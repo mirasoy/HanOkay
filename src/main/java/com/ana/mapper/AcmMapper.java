@@ -18,6 +18,7 @@ public interface AcmMapper {
 	
 	public void insertSelectKey(AcmVO acm);
 	
+	// 숙소 상세페이지: 숙소 정보 불러오기
 	public AcmVO read(String acmNum);
 	
 	public int delete(String acmNum);

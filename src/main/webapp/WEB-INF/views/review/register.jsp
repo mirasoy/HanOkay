@@ -1,34 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	session.setAttribute("userNum", "U2");
-String name = (String) session.getAttribute("userNum");
-%>
-<!DOCTYPE html>
-<html lang="en">
 <%@include file="../includes/header.jsp"%>
-
-<head>
-
-	<style>
-		#star a {
-		font-size :2em;
-			text-decoration: none;
-			color: gray;
-		}
-
-		#star a.on {
-		font-size :2em;
-			color: red;
-		}
-	</style>
-</head>
-
-<body>
-
-	<div class="row">
+<div class="container">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -86,23 +59,19 @@ String name = (String) session.getAttribute("userNum");
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function () {
+			//글자수제한 1
 			$('input[name=title]').on('keyup', function () {
-
 			if ($(this).val().length > 20) {
 				alert("글자수는 20자로 이내로 제한됩니다.");
 				$(this).val($(this).val().substring(0, 20));
-
 			}
 
 		});
-			
+			//글자수제한 2
 			$('textarea[name=content]').on('keyup', function () {
-
-
 			if ($(this).val().length > 500) {
 				alert("글자수는 500자로 이내로 제한됩니다.");
 				$(this).val($(this).val().substring(0, 500));
-
 			}
 
 		});

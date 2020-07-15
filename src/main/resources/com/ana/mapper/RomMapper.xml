@@ -18,10 +18,12 @@
 		<result column="ROM_TYPE" property="romType" />
 	</resultMap>
 
+	<!-- 숙소 상세페이지: 숙소별 객실 전체 목록을 불러온다 -->
 	<select id="getAll" resultMap="RomVOResult">
 		select * from TROM where ACM_NUM = #{acmNum}
 	</select>
 	
+	<!-- 숙소 상세페이지: 검색 키워드에 따라 일부 객실 목록을 불러온다 -->
 	<select id="getList" resultMap="RomVOResult">
 		select * from (select * from TROM where ACM_NUM = #{acmNum}) where ROM_CAPA >= #{person}
 	</select>
