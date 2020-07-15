@@ -1088,3 +1088,65 @@ footer p { color: white; }
 .smoking {
 	width: 15px;
 }
+
+
+
+/* booklist에서 사용한 css (지원) */
+
+
+.bookbar {
+	width: 100%;
+	height: 40px;
+	list-style: none;
+	padding: 0;
+}
+
+.bookbar>li {
+	float: left;
+	width: 110px;
+	height: 30px;
+	margin: 0;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.panel-heading {
+	padding-left: 25px;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%;
+}
+
+/* The Close Button */
+#close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+#close:hover, #close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
