@@ -24,89 +24,70 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/register/*")
+@RequestMapping("/account/*")
 @AllArgsConstructor
-@SessionAttributes("user")
+//@SessionAttributes("user")
 public class UserController {
-
-	@Autowired
-	private UserService service;
-
-	@Autowired
-	EmailService emailService;
-	
-	// 회원가입 페이지 보여주기
-	@RequestMapping("/signUp")
-	public String showPage() {
-		return "/register/signUp";
-	}
-
-	//checkEmail을 get방법으로 하면 에러 페이지를 보여주자
-	@GetMapping("checkEmail")
-	public String checkEmail() {
-		return "error/error";
-	}
-	
-	// 이메일 중복 검사 (ajax로 값을 받아온다)
-	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
-	@ResponseBody
-	public void checkEmail(String email,HttpServletRequest request, HttpServletResponse response)
-throws IOException{	
-		JSONObject jso= new JSONObject();
-		log.info("email check: " + email);
-		//한글 깨짐 방지
-		response.setContentType("text/plain;charset=UTF-8");
-		String msg="";
-		//service에게 email을 주고 db를 뒤져오게한다
-		if (service.checkEmail(email)) {
-			log.info("checkEmail에서 service 성공");
-			msg="해당 이메일을 사용하실 수 있습니다";
-			jso.put("msg", msg);
-			
-			//msg.setMessage("해당 이메일을 사용할 수 있습니다");
-			//msg1="해당 이메일을 사용할 수 있습니다";
-			
-		} else {
-			log.info("checkEmail에서 service를 불렀더니 이미 db에 있는 이메일임!");
-			msg="이미 등록된 이메일입니다!";
-			jso.put("msg", msg);
-		}
-		PrintWriter out = response.getWriter();
-		out.print(jso);
-	}
-
-	// 회원가입 하기
-	@PostMapping("/register")
-	public ModelAndView register(UserVO user, Model model, RedirectAttributes rttr) {
-		log.info("register user: " + user);
-		ModelAndView mv= new ModelAndView();
-		
-		//중복된 이메일이 있는지 한번 더 db를 확인한다(refresh할 때 중복 저장되는 경우가 있어서 그걸 막으려고)
-		if (service.checkEmail(user.getEmail())) {
-		service.register(user);
-		//세션에 user를 저장한다
-		model.addAttribute("user", user);
-		log.info("user가 세션에 담겼으면 조켔당 "+ user);
-		mv.setViewName("register/register");
-		} 
-		//중복된 이메일이 있는 경우 그냥 회원가입 폼으로 다시 보내버리자
-		else {
-			//rttr.addFlashAttribute("msg1", "해당 이메일로 이미 가입된 정보가 있습니다!!");
-			mv.setViewName("register/signUp");
-		}
-		return mv;
-		
-		//세션에 user라는 키로 user객체를 담아주기
-	}
-
-	
-	//인증메일을 발송하는 기능(미구현)
-	@PostMapping("/EmailAuth")
-	public void sendAuthEmail(String email, RedirectAttributes rttr) {
-		log.info("입력된 email: "+ email);
-		emailService.sendAuthEmail(email);
-		ModelAndView mv = new ModelAndView();
-				
-	}
+	/*
+	 * @Autowired private UserService service;
+	 * 
+	 * @Autowired private EmailService emailService;
+	 * 
+	 * // 회원가입 페이지 보여주기
+	 * 
+	 * @RequestMapping("/signUp") public String showPage() { return
+	 * "/register/signUp"; }
+	 * 
+	 * //checkEmail을 get방법으로 하면 에러 페이지를 보여주자
+	 * 
+	 * @GetMapping("checkEmail") public String checkEmail() { return "error/error";
+	 * }
+	 * 
+	 * // 이메일 중복 검사 (ajax로 값을 받아온다)
+	 * 
+	 * @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public void checkEmail(String email,HttpServletRequest request,
+	 * HttpServletResponse response) throws IOException{ JSONObject jso= new
+	 * JSONObject(); log.info("email check: " + email); //한글 깨짐 방지
+	 * response.setContentType("text/plain;charset=UTF-8"); String msg="";
+	 * //service에게 email을 주고 db를 뒤져오게한다 if (service.checkEmail(email)) {
+	 * log.info("checkEmail에서 service 성공"); msg="해당 이메일을 사용하실 수 있습니다";
+	 * jso.put("msg", msg);
+	 * 
+	 * //msg.setMessage("해당 이메일을 사용할 수 있습니다"); //msg1="해당 이메일을 사용할 수 있습니다";
+	 * 
+	 * } else { log.info("checkEmail에서 service를 불렀더니 이미 db에 있는 이메일임!");
+	 * msg="이미 등록된 이메일입니다!"; jso.put("msg", msg); } PrintWriter out =
+	 * response.getWriter(); out.print(jso); }
+	 * 
+	 * // 회원가입 하기
+	 * 
+	 * @PostMapping("/register") public ModelAndView register(UserVO user, Model
+	 * model, RedirectAttributes rttr) { log.info("register user: " + user);
+	 * ModelAndView mv= new ModelAndView();
+	 * 
+	 * //중복된 이메일이 있는지 한번 더 db를 확인한다(refresh할 때 중복 저장되는 경우가 있어서 그걸 막으려고) if
+	 * (service.checkEmail(user.getEmail())) { service.register(user); //세션에 user를
+	 * 저장한다 model.addAttribute("user", user); log.info("user가 세션에 담겼으면 조켔당 "+ user);
+	 * mv.setViewName("register/register"); } //중복된 이메일이 있는 경우 그냥 회원가입 폼으로 다시 보내버리자
+	 * else { //rttr.addFlashAttribute("msg1", "해당 이메일로 이미 가입된 정보가 있습니다!!");
+	 * mv.setViewName("register/signUp"); } return mv;
+	 * 
+	 * //세션에 user라는 키로 user객체를 담아주기 }
+	 * 
+	 * //emailAuth 페이지를 get방식으로 접근하면 에러페이지를 보여주자 //7.14 오늘은 개발을 위해서 그냥 emailAuth
+	 * 페이지를 보여주게 해놓음
+	 * 
+	 * @GetMapping("/emailAuth") public String cannotGetEmailAuth() { return
+	 * "register/emailAuth"; }
+	 * 
+	 * //인증메일을 발송하는 기능 //누르면 emailAuth.jsp로 이동하고 //쿠키가 생성되어 sign Up form에서 채워진 값들이
+	 * 저장되서 emailAuth.jsp로 넘어간다
+	 * 
+	 * @PostMapping("/emailAuth") public ModelAndView sendAuthEmail(String email) {
+	 * ModelAndView mv= new ModelAndView(); mv.setViewName("emailAuth"); return mv;
+	 * }
+	 */
 
 }
