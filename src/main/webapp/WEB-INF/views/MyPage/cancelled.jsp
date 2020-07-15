@@ -8,27 +8,7 @@ String name = (String)session.getAttribute("loginUserNum");
 %>
 <%@include file="../includes/header.jsp"%>
 
-<style>
-	.bookbar{
-		width: 100%;
-	    height: 40px;
-	    list-style: none;
-	    padding: 0; 
-	}
-	
-	.bookbar>li{
-		float: left;
-	    width: 110px;
-	    height: 30px;
-	    margin: 0;
-	    text-align: center;
-	    padding-top: 15px;
-	}
-	
-	.panel-heading{
-	    padding-left: 25px;
-	}
-</style>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">나의 예약</h1>

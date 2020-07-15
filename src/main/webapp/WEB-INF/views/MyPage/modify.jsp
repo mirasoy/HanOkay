@@ -247,12 +247,15 @@
 
 
 <script type="text/javascript">
+
+//모달창을 출력하고 버튼을 누르면 어떻게 행동할지 결정하기 위한 코드이다.
+
 	$(document).ready(function() {
 
 		var formObj = $("form");
 		var nav = document.getElementById("side-menu");
 
-		$('button').on("click", function(e) {
+		$('button').on("click", function(e) { //버튼을 클릭하면, 
 
 			e.preventDefault();
 			var operation = $(this).data("oper");
@@ -260,18 +263,18 @@
 			console.log(operation);
 			if (operation === 'remove') {
 
-				document.getElementById("myForm").style.display = "block";
+				document.getElementById("myForm").style.display = "block"; //모달창을 보이게끔 바꾼다.
 				nav.style.display = "none";
 				return false;
 
-			} else if (operation === 'bookList') {
+			} else if (operation === 'bookList') { //만약 리스트 버튼을 누른다면 리스트로 이동한다.
 				self.location = "/MyPage/bookList";
 				return;
-			} else if (operation === 'can') {
+			} else if (operation === 'can') { // 만약 모달창의 취소버튼을 누른다면, 모달창을 보이지 않게 한다.
 				console.log("예약을 취소하지 않습니다.")
 				document.getElementById("myForm").style.display = "none";
 				return false;
-			} else if (operation === 'goCancle') {
+			} else if (operation === 'goCancle') {	// 만약 모달창의 확인 버튼을 누른다면 예약을 취소하며, 페이지는 remove로 (취소행동)
 				console.log("예약을 취소합니다.")
 				formObj.attr("action", "/MyPage/remove");
 			}

@@ -9,28 +9,6 @@ int i=0;
 %>
 <%@include file="../includes/header.jsp"%>
 
-<style>
-	.bookbar{
-		width: 100%;
-	    height: 40px;
-	    list-style: none;
-	    padding: 0; 
-	}
-	
-	.bookbar>li{
-		float: left;
-	    width: 110px;
-	    height: 30px;
-	    margin: 0;
-	    text-align: center;
-	    padding-top: 15px;
-	}
-	
-	.panel-heading{
-	    padding-left: 25px;
-	}
-</style>
-
 
 
 <div class="row">
@@ -113,27 +91,31 @@ int i=0;
 <script>
 
 
-		 
+		// 예약상태를 확인 하기 위해, 값을 불러오는 반복문을 여기에 둔다.
+
 		<c:forEach items="${bookListAll}" var="board">
 		
 	 		var bookStatus = '<c:out value="${board.bookStatus} "/>'
 			
 	 		console.log(bookStatus);
 				 
-			
+		//만약에, 내 예약상태가 "RS_STT_BK" 이라면, "투숙예정"을 출력하게끔 + 페이지는 info로 이동한다.
 			if(bookStatus.trim()=='RS_STT_BK'){
 				
 				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");				
 				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
 				
-				
+		//만약에, 내 예약상태가 "RS_STT_BC" 이라면, "예약취소"을 출력하게끔 + 페이지는 info3로 이동한다.		
 			}else if(bookStatus.trim()=='RS_STT_BC'){
 				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='예약취소' readonly='readonly'>");
 				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info3?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
-				
+		
+		//만약에, 내 예약상태가 "RS_STT_AC" 이라면, "투숙완료"을 출력하게끔 + 페이지는 info2로 이동한다.		
 			}else if(bookStatus.trim()=='RS_STT_AC'){
 				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙완료' readonly='readonly'>");
 				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+		
+		//만약에, 내 예약상태가 "RS_STT_CI" 이라면, "체크아웃"을 출력하게끔 + 페이지는 info2로 이동한다.	
 			}else if(bookStatus.trim()=='RS_STT_CI'){
 				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='체크아웃' readonly='readonly'>");
 				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");

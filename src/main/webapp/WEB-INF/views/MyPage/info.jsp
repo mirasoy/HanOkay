@@ -128,20 +128,28 @@
 </div>
 <!-- /.row -->
 <script>
+
+
+//당신의 흡연상태를 수정합니다.
+
 	var s = '<c:out value="${info.smoking} "/>';
 	
-	var s2 = s.trim();
+	var s2 = s.trim(); //뛰어쓰기를 없앤다
+	
+//당신이 흡연을 원하면 값은 1을 가져온다. 그리고 흡연을 원한다는 메세지를 출력한다.	
+
 	if(s2=='1'){
 		$('input[name=smoking]').val("YES, 흡연을 원합니다.");
-	}else{
+	}else{ // 만약 금연을 원한다면 값은 0을 불러오고, 금연을 원한다는 메세지를 출력한다.
 		$('input[name=smoking]').val("NO, 금연을 원합니다.");
 	}
 	
-	
+//예약상태를 출력하는 코드이다.	
 	var bookStatus = '<c:out value="${info.bookStatus} "/>';
 	var bookStatus2 = bookStatus.trim();
 	/* alert(bookStatus2); */
-	
+
+// 당신의 투숙상태를 변경
 	if(bookStatus2=='RS_STT_BK'){
 		$('input[name=bookStatus]').val("투숙예정"); 
 	}else if(bookStatus2=='RS_STT_BC'){
