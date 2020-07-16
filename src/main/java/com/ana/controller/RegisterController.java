@@ -2,10 +2,8 @@ package com.ana.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.ana.domain.UserVO;
 import com.ana.service.EmailService;
 import com.ana.service.UserService;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -33,7 +29,6 @@ import lombok.extern.log4j.Log4j;
 @SessionAttributes("user")
 public class RegisterController {
 
-
 	@Autowired
 	private UserService service;
 
@@ -41,15 +36,15 @@ public class RegisterController {
 	private EmailService emailService;
 	
 	// 회원가입 페이지 보여주기
-	@RequestMapping("/signUp")
+	@GetMapping("/signUp")
 	public String showPage() {
 		return "/register/signUp";
 	}
 
 	//checkEmail을 get방법으로 하면 에러 페이지를 보여주자
-	@GetMapping("checkEmail")
-	public String checkEmail() {
-		return "error/error";
+	@GetMapping("/checkEmail")
+	public String getCheckEmail() {
+		return "/error/error";
 	}
 	
 	// 이메일 중복 검사 (ajax로 값을 받아온다)
@@ -86,7 +81,7 @@ throws IOException{
 		//중복된 이메일이 있는지 한번 더 db를 확인한다(refresh할 때 중복 저장되는 경우가 있어서 그걸 막으려고)
 		if (service.checkEmail(user.getEmail())) {
 		service.register(user);
-		//세션에 user를 저장한다
+		//세션에 user를 저장한다(회원가입 성공하면 바로 로그인이 되는거)
 		model.addAttribute("user", user);
 		log.info("user가 세션에 담겼으면 조켔당 "+ user);
 		mv.setViewName("register/register");
@@ -112,9 +107,23 @@ throws IOException{
 	//누르면 emailAuth.jsp로 이동하고
 	//쿠키가 생성되어 sign Up form에서 채워진 값들이 저장되서 emailAuth.jsp로 넘어간다
 	@PostMapping("/emailAuth")
-	public ModelAndView sendAuthEmail(String email) {
-		ModelAndView mv= new ModelAndView();
-		mv.setViewName("emailAuth");
-		return mv;
+	public void sendAuthEmail(UserVO user) {
+		//db에 회원의 이메일 정보가 있다면
+		log.info("email authentication: "+user);
+		if(service.checkEmail(user.getEmail())) {
+			//이메일을 보낸다(쿠키 저장한다)
+			if(emailService.sendAuthEmail(user.getEmail())) {
+				//성공적으로 보냈으면		
+				//이메일로 발송한 인증코드를 칠 수 있게 jsp에게 알려주고
+			}
+			else {
+				//성공적으로 못보냇으면
+				//실패했다고 알려준다(발송의 실패)
+			}
+		} else {
+			//db에 회원정보가 없으면
+			//회원정보가 없다고 알리고findPwd페이지로 다시 가게 한다
+		}
+		
 	}
 }
