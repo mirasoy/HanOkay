@@ -21,8 +21,10 @@
 			<tr>
 				<td>비밀번호: <input type="password" size="50" name="pwd" id="pwd"
 					value="${pwd }" placeholder="비밀번호를 입력해주세요" ><br>
+					<input type="checkbox" id="rememberEmail">Email 기억하기
 					<button data-oper='signIn' class="btn btn-default">로그인</button>
-					<button data-oper='findPwd' class="btn btn-default">비밀번호 찾기</button><br>
+					<input type="button" class="btn btn-default" onclick= "location.href='/account/myAccount/findPwd'" value="비밀번호 찾기">
+					<br>
 					<a href="../register/signUp" >회원가입하기</a>
 				</td>
 			</tr>
@@ -67,14 +69,6 @@
 					document.getElementById("msg").innerHTML="유효하지 않은 이메일형식입니다";
 					console.log("이멜 정규식 불통");
 				}
-			}
-			
-			//비번찾기를 누르면
-			//controller에서 service.findPwd()를 시킴
-			else if(operation ==='findPwd'){
-				window.alert("죄송합니다. 아직 사용할 수 없는 서비스입니다!");
-				/* formObj.attr("action", "/user/findPwd");
-				formObj.submit(); */
 			}
 			
 		});
