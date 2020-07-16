@@ -161,7 +161,7 @@ body {
 				<div class="row">
 					<nav class="navbar navbar-expand-lg">
 						<!-- Start : Main Logo : ana의 로고 삽입-->
-						<a class="navbar-brand mr-auto" href="#top"
+						<a class="navbar-brand mr-auto #top" 
 							onclick="location.href='/acm/list'" style="cursor: pointer"><img
 							src="../resources/img/logo.png" alt="Site logo">ANA</a>
 						<!-- End : Main Logo -->
