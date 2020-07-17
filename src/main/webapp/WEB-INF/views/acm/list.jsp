@@ -30,9 +30,6 @@
 				<!-- Start : section-search : 검색창-->
 				<div class="row banner-row" id="section-search">
 
-
-
-
 					<form action="/acm/result" method="get"
 						class="search-form section-pad-2"
 						onsubmit="return checkValidation()">
@@ -88,7 +85,7 @@
 
 							<div class="form-group form-group-1">
 								<div class="form-group">
-									<label for="inputCheckOut">Check Out Date</label>
+									<label for="inputCheckOut">Check In Date</label>
 									<div class="ui calendar" id="rangestart">
 										<div class="ui input left icon uigroup leftpadding">
 											<i class="calendar icon"></i> <input type="text"
@@ -103,14 +100,14 @@
 									<div class="ui calendar" id="rangeend">
 										<div class="ui input left icon uigroup">
 											<i class="calendar icon"></i> <input type="text"
-												placeholder="End" id="out" name="out" value="">
+											placeholder="End" id="out" name="out" value="">
 										</div>
 									</div>
 								</div>
 								<div class="form-group form-group-1 ">
 									<label for="btnSubmit">&nbsp;</label>
 									<button type="submit"
-										class="submit-btn btn btn-primary btn btn-search text-uppercase"
+										class="submit-btn btn-primary btn btn-search text-uppercase"
 										id="submitBtn">Check Availability</button>
 								</div>
 							</div>
@@ -331,7 +328,7 @@
 		$("#out").datepicker({
 			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd',
 		});
 		$("#in").datepicker({
 			minDate: 0,
@@ -344,11 +341,13 @@
 				nextMonth.setDate(nextMonth.getDate() + 90);
 			  $("#out").datepicker("option","maxDate", nextMonth);
 			},
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd' 
 		});
-
 		</script>
+
 <!-- 달력 변경. 끝 -->
+
+
 </body>
 
 <footer class="container-outer">
@@ -368,7 +367,6 @@
 
 	}
 	
-
 	function fillInAddress(){
 		var place = autocomplete.getPlace();
 		$('#lat').prop('value',place.geometry.location.lat());

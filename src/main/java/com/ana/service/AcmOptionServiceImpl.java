@@ -17,6 +17,7 @@ public class AcmOptionServiceImpl implements AcmOptionService{
 	
 	private AcmOptionMapper mapper;
 
+	// 숙소 상세페이지: 숙소별 옵션 목록 불러오기
 	@Override
 	public List<AcmOptionVO> getList(String acmNum) {
 		log.info("getList...........");

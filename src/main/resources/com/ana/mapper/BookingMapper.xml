@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.ana.mapper.BookingMapper">
 
-
 	<resultMap id="BookingVOResult"
 		type="com.ana.domain.BookingVO">
 		<result column="book_num" property="bookNum" />
@@ -105,12 +104,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-
+<!-- 예약 확인 페이지: 예약 정보를 불러온다 -->
 	<select id="read" resultMap="BookingVOResult">
 		select * from tbooking where
 		book_Num = #{bookNum}
-
-
 	</select>
 
 
@@ -198,7 +195,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		to_number(substr(B.BOOK_NUM,2))
 	</select>
 
-
+<!-- 예약 페이지: 예약 정보를 저장한다 -->
 	<insert id="insert" parameterType="hashmap">
 		<selectKey keyProperty="bookNum" order="BEFORE"
 			resultType="String">

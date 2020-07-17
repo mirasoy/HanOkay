@@ -53,7 +53,7 @@ public class BookingController {
 	
 	
 	//모든 목록
-	@GetMapping("/bookListAll")
+	@GetMapping("/bookListAll") //모든 목록에 대한 조회는 get방식으로 처리를 하므로 이걸 사용했다.
 	public void list(Model model, HttpSession session) {
 		
 		String loginUserNum = (String) session.getAttribute("loginUserNum");
@@ -100,8 +100,8 @@ public class BookingController {
 	
 	
 	//예약 완료 목록
-	@GetMapping("/checkout")
-	public void list3(Model model3, HttpSession session) {
+	@GetMapping("/checkout") //이건 체크아웃으로 이동해야해
+	public void list3(Model model3, HttpSession session) { //세션에 담긴 값을 가져와야겠지
 		
 		String loginUserNum = (String) session.getAttribute("loginUserNum");
 		UserVO user= (UserVO)session.getAttribute("user"); 
@@ -111,7 +111,7 @@ public class BookingController {
 		String userNum="";
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
-		if(user != null){
+		if(user != null){ //내가 user가 맞다면 정보를 가져와야겠다.
 		userLastname= user.getLastname();
 		userFstname=user.getFstname();
 		userPwd= user.getPwd();
@@ -120,7 +120,7 @@ public class BookingController {
 		
 		
 		log.info("checkout 완료된 예약입니다.");
-		model3.addAttribute("checkout", service.getCheckoutList(userNum));
+		model3.addAttribute("checkout", service.getCheckoutList(userNum)); //이 정보를 여기다가 담는다.
 	}
 	
 	//예약 취소 목록
@@ -174,8 +174,7 @@ public class BookingController {
 		
 		if(service.modify(info)) {
 			rttr.addFlashAttribute("result", "success");
-		}
-		
+		}		
 		return "redirect:/MyPage/bookList";
 	}
 

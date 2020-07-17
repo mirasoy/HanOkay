@@ -118,23 +118,43 @@ public class AcmMapperTests {
 		list.forEach(acm -> log.info(acm));
 	}
 	
-	@Test
+	
+	//@Test
+	public void testGetRomNum() {
+		Criteria cri = new Criteria();
+		cri.setIn("2019-04-20");
+		cri.setOut("2019-04-22");
+		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
+	
+		romNumList.forEach(acm -> log.info(acm));
+	}
+	//@Test
 	public void testGetAcmNum() {
 		Criteria cri = new Criteria();
-		cri.setKeyword("대구");
-		cri.setPerson("8");
-		List<String> acmNumList = mapper.getAcmNum(cri.getPerson());
+		cri.setIn("2019-04-20");
+		cri.setOut("2019-04-22");
+		cri.setPerson("2");
+		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
+		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
 		acmNumList.forEach(acm -> log.info(acm));
-		List<AcmVO> list = new ArrayList<>();
-	
-		list = mapper.getListPaging(cri, acmNumList);
-		
-		list.forEach(acm -> log.info(acm));
 	}
 	
-
-	/*acmname      |acmcity |acmdistr |acmdetailaddr |repphone    |
-	bizregnum  |checkintime |checkouttime |acmregdate            |
-	acmupdatedate         |phone2     |acmfax      |acmemail     |acmdesc*/
+	//@Test
+		public void testGetListPaging() {
+			Criteria cri = new Criteria();
+			cri.setKeyword("대구");
+			cri.setPerson("8");
+			cri.setIn("2019-04-20");
+			cri.setOut("2019-04-22");
+			List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
+			List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
+			acmNumList.forEach(acm -> log.info(acm));
+			List<AcmVO> list = new ArrayList<>();
+		
+			list = mapper.getListPaging(cri, acmNumList);
+			
+			list.forEach(acm -> log.info(acm));
+		}
+	
 
 }

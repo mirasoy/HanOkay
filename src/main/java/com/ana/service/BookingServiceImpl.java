@@ -31,7 +31,7 @@ public class BookingServiceImpl implements BookingService{
 		return mapper.getList();
 	}
 
-	
+	// 예약 확인 페이지: 예약 정보를 불러온다
 	@Override
 	public BookingVO get(String bookNum) {
 		log.info("get......"+ bookNum);
@@ -57,7 +57,6 @@ public class BookingServiceImpl implements BookingService{
 
 	@Override
 	public List<BookCancelVO> getCancelList(String loginUserNum) {
-		// TODO Auto-generated method stub
 		log.info("취소중인 회원의 리스트......");
 		return mapper.getCancelList(loginUserNum);
 	}
@@ -87,6 +86,7 @@ public class BookingServiceImpl implements BookingService{
 	}
 
 
+	// 예약 페이지 : 예약 정보를 저장한다 & 비정상적인 접근을 막기 위한 유효성 검사 진행
 	@Override
 	public int register(BookingVO book) {
 		

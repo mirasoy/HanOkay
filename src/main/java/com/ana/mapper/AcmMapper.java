@@ -18,6 +18,7 @@ public interface AcmMapper {
 	
 	public void insertSelectKey(AcmVO acm);
 	
+	// 숙소 상세페이지: 숙소 정보 불러오기
 	public AcmVO read(String acmNum);
 	
 	public int delete(String acmNum);
@@ -26,9 +27,12 @@ public interface AcmMapper {
 	
 	public int getTotalCount(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
 	
-	public List<String> getAcmNum(String person);
+	public List<String> getRomNum(@Param("in") String in,@Param("out") String out);
+	
+	public List<String> getAcmNum(@Param("person") String person, @Param("romNum") List<String> romNum);
 	
 	public List<AcmVO> getListPaging(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
+
 	
 	
 }

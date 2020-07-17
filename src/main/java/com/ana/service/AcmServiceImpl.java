@@ -25,6 +25,8 @@ public class AcmServiceImpl implements AcmService{
 		mapper.insertSelectKey(acm);
 	}
 
+	// 숙소 상세페이지: 숙소 정보와 사진을 불러온다
+	// 예약 확인 페이지: 객실정보 확인을 위해 숙소 정보를 불러온다
 	@Override
 	public AcmVO get(String acmNum) {
 		log.info("get......"+acmNum);
@@ -52,16 +54,16 @@ public class AcmServiceImpl implements AcmService{
 	@Override
 	public List<AcmVO> getList(Criteria cri) {
 		log.info("get List with criteria: " + cri);
-		//List<String> per = mapper.getAcmNum(cri.getPerson());
-		List<String> acmNumList = mapper.getAcmNum(cri.getPerson());
-		//return mapper.getListWithPaging(cri);
+		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
+		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
 		return mapper.getListPaging(cri, acmNumList);
 	}
 
 	@Override
 	public int getTotal(Criteria cri) {
 		log.info("get total count");
-		List<String> acmNumList = mapper.getAcmNum(cri.getPerson());
+		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
+		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
 		return mapper.getTotalCount(cri, acmNumList);
 	}
 

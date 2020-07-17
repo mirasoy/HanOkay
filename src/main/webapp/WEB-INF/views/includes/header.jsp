@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -23,7 +22,10 @@ if (user != null) {
 
 }
 %>
-<!DOCTYPE html>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 <html lang="en">
@@ -49,6 +51,8 @@ if (user != null) {
 <link rel="stylesheet" type="text/css"
 	href="../resources/slick/slick-theme.css" />
 <link rel="stylesheet" href="../resources/css/templatemo-style.css">
+<link rel="stylesheet" href="../resources/css/review.css">
+
 <!-- 메인 CSS style -->
 
 <!-- load JS files -->
@@ -76,36 +80,8 @@ if (user != null) {
 
 <link href="../resources/css/select2.css" rel="stylesheet">
 <script src="../resources/js/select2.js"></script>
-<style>
-body {
-	background: #f8f9fa;
-	margin-top: 120px;
-}
 
-#wrapper {
-	width: 100%;
-	/* 전체 세로 길이를 넓게 구성 : 원페이지에서 스크롤 이동을 보고자함 */
-	height: 4000px;
-}
 
-/* 하단의 컨텐츠에 여백을 주고자함  */
-.row {
-	margin-right: 50px;
-	margin-left: 50px;
-}
-
-.content { /* 부모  */
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	padding: 0;
-	z-index: 1000;
-	transition: all 0.2s ease-in-out;
-	height: 119px;
-	background: white;
-}
-</style>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -137,18 +113,22 @@ body {
 </script>
 
 </head>
+
 <!-- 뒤로가기 방지 -->
 <!-- 
+
 <script type="text/javascript">
 	window.history.forward();
 	function noBack() {
 		window.history.forward();
 	}
 </script>
+
 <body onload="noBack();" onpageshow="if(event.persisted) noBack(); onunload="">"
  -->
 
 <body>
+
 	<!-- main-content -->
 	<div class="main-content" id="top">
 

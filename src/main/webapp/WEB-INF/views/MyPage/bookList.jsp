@@ -9,66 +9,7 @@ String name = (String) session.getAttribute("loginUserNum");
 %>
 <%@include file="../includes/header.jsp"%>
 
-<style>
 
-
-.bookbar {
-	width: 100%;
-	height: 40px;
-	list-style: none;
-	padding: 0;
-}
-
-.bookbar>li {
-	float: left;
-	width: 110px;
-	height: 30px;
-	margin: 0;
-	text-align: center;
-	padding-top: 15px;
-}
-
-.panel-heading {
-	padding-left: 25px;
-}
-
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	padding-top: 100px; /* Location of the box */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-	background-color: #fefefe;
-	margin: auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%;
-}
-
-/* The Close Button */
-#close {
-	color: #aaaaaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-#close:hover, #close:focus {
-	color: #000;
-	text-decoration: none;
-	cursor: pointer;
-}
-</style>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">나의 예약</h1>
@@ -108,7 +49,7 @@ String name = (String) session.getAttribute("loginUserNum");
 							<th>체크아웃날짜</th>
 							<th>객실요금</th>
 							<th>버튼1</th>
-							<th>버튼2</th>
+							<th>버튼2</th>ㅠ ㅜㅍ
 							<th>버튼3</th>
 						</tr>
 					</thead>
@@ -173,21 +114,21 @@ String name = (String) session.getAttribute("loginUserNum");
 
 
 	<script>
-		// Get the modal
+		// 모달창 가져오기
 		var modal = document.getElementById("myModal");
 		var modal2 = document.getElementById("myModal2");
 
-		// Get the button that opens the modal
+		// 버튼을 누르면 모달창이 열려야하니까, 변수로 선언
 		var btn = document.getElementById("myBtn");
 		var btn2 = document.getElementById("myMap");
 
 		var nav = document.getElementById("side-menu");
 
-		// Get the <span> element that closes the modal
+		// span태그에 close의 이름을 주자
 		var span = document.getElementsByClassName("close")[0];
 		var span2 = document.getElementsByClassName("close2")[0];
 
-		// When the user clicks the button, open the modal 
+		// 사용자가 버튼을 클릭하면 모달을 연다
 		btn.onclick = function() {
 			modal.style.display = "block";
 			nav.style.display = "none";
@@ -200,7 +141,7 @@ String name = (String) session.getAttribute("loginUserNum");
 
 		}
 
-		// When the user clicks on <span> (x), close the modal
+		// 사용자가 <span> (x)를 클릭하면 모달(모달)을 닫는다.
 		span.onclick = function() {
 			modal.style.display = "none";
 
@@ -210,12 +151,7 @@ String name = (String) session.getAttribute("loginUserNum");
 			modal2.style.display = "none";
 		}
 
-		
 	
-		
-		
-		
-		
 	</script>
 
 

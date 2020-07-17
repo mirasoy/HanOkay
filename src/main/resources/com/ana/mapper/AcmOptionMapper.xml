@@ -9,6 +9,7 @@
 		<result column="ACM_OPTCODE" property="acmOptcode" />
 	</resultMap>
 
+	<!-- 숙소 상세페이지: 숙소별 편의시설 목록을 불러온다 -->
 	<select id="getList" resultMap="AcmOptionVOResult">
 		select * from TACM_OPTION where ACM_NUM = #{acmNum}
 	</select>

@@ -12,9 +12,7 @@ public interface BookingService {
 
 	public BookingVO get(String bookNum);
 
-	public boolean modify(BookingVO info);
-
-	// public boolean remove(String book_Num);
+	public boolean modify(BookingVO info); //수정 
 
 	public List<BookingVO> getList();
 
@@ -26,9 +24,7 @@ public interface BookingService {
 
 	public List<BookCancelVO> getCancelList(String loginUserNum); // 취소중인 상태
 
-//	public boolean insert(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
-
-	public boolean reserveCancel(@Param("bookNum") String bookNum, @Param("bookStatus") String bookStatus);
+	public boolean reserveCancel(@Param("bookNum") String bookNum, @Param("bookStatus") String bookStatus); //취소시, insert와 update
 
 	public int register(BookingVO book);
 
