@@ -7,11 +7,11 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>잘못된 접근</title>
+<title>한오케이-네트워크 오류</title>
 </head>
 <body>
-	<h1>에러! 잘못된 접근입니다 </h1>
-	<button id="sendMain" onclick="window.location.href='../acm/list'">홈으로</button>
+	<h1>에러! 500 네트워크 오류가 발생했습니다 </h1>
+	<button id="sendMain" onclick="window.location.href='${request.contextPath}/acm/list'">홈으로</button>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
 	
 	</script>
