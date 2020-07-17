@@ -40,54 +40,57 @@ if (user != null) {
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
 <link rel="stylesheet"
-	href="../resources/font-awesome-4.7.0/css/font-awesome.min.css">
+	href="${request.contextPath}/resources/font-awesome-4.7.0/css/font-awesome.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${request.contextPath}/resources/css/bootstrap.min.css">
 <!-- Bootstrap style -->
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/datepicker.css" />
+	href="${request.contextPath}/resources/css/datepicker.css" />
 <link rel="stylesheet" type="text/css"
-	href="../resources/slick/slick.css" />
+	href="${request.contextPath}/resources/slick/slick.css" />
 <link rel="stylesheet" type="text/css"
-	href="../resources/slick/slick-theme.css" />
-<link rel="stylesheet" href="../resources/css/templatemo-style.css">
-<link rel="stylesheet" href="../resources/css/review.css">
+	href="${request.contextPath}/resources/slick/slick-theme.css" />
+<link rel="stylesheet" href="${request.contextPath}/resources/css/templatemo-style.css">
+<link rel="stylesheet" href="${request.contextPath}/resources/css/review.css">
 
 <!-- 메인 CSS style -->
 
 <!-- load JS files -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- jQuery (https://jquery.com/download/) -->
-<script src="../resources/js/popper.min.js"></script>
+<script src="${request.contextPath}/resources/js/popper.min.js"></script>
 <!-- https://popper.js.org/ -->
-<script src="../resources/js/bootstrap.min.js"></script>
+<script src="${request.contextPath}/resources/js/bootstrap.min.js"></script>
 <!-- https://getbootstrap.com/ -->
-<script src="../resources/js/datepicker.min.js"></script>
+<script src="${request.contextPath}/resources/js/datepicker.min.js"></script>
 <!-- https://github.com/qodesmith/datepicker -->
-<script src="../resources/js/jquery.singlePageNav.min.js"></script>
+<script src="${request.contextPath}/resources/js/jquery.singlePageNav.min.js"></script>
 <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
-<script src="../resources/slick/slick.min.js"></script>
+<script src="${request.contextPath}/resources/slick/slick.min.js"></script>
 <!-- http://kenwheeler.github.io/slick/ -->
-<script src="../resources/js/jquery.scrollTo.min.js"></script>
+<script src="${request.contextPath}/resources/js/jquery.scrollTo.min.js"></script>
 <!-- https://github.com/flesler/jquery.scrollTo -->
 
-<script src="../resources/js/index.js"></script>
+<script src="${request.contextPath}/resources/js/index.js"></script>
 
 
 <!-- 달력 변경(수희) -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<link href="../resources/css/select2.css" rel="stylesheet">
-<script src="../resources/js/select2.js"></script>
+<script src="${request.contextPath}/resources/js/select2.js"></script>
+<link href="${request.contextPath}/resources/css/select2.css" rel="stylesheet">
 
 
 <script type="text/javascript">
 	$(document)
 			.ready(
+					
+
 					function() {
 						//만약 user에 해당하는 세션이 없으면 
-						if (
+						
+					if (
 <%=user == null%>
 	) {
 							// $("#loginout").append("<a href='/user/login'>로그인</a>");
@@ -101,7 +104,7 @@ if (user != null) {
 
 							//내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
 							$('#myMenuIcon').removeAttr("data-toggle");
-							$('#myMenuIcon').attr("href", "../user/login");
+							$('#myMenuIcon').attr("href", "/user/login");
 
 						} else {
 							$("#loginout").append(
@@ -109,6 +112,7 @@ if (user != null) {
 
 						}
 						;
+						
 					});
 </script>
 
@@ -142,8 +146,8 @@ if (user != null) {
 					<nav class="navbar navbar-expand-lg">
 						<!-- Start : Main Logo : ana의 로고 삽입-->
 						<a class="navbar-brand mr-auto #top" 
-							onclick="location.href='/acm/list'" style="cursor: pointer"><img
-							src="../resources/img/logo.png" alt="Site logo">ANA</a>
+							onclick="location.href='${request.contextPath}/acm/list'" style="cursor: pointer"><img
+							src="${request.contextPath}/resources/img/logo.png" alt="Site logo">ANA</a>
 						<!-- End : Main Logo -->
 
 						<!-- Start : hidden button-->
