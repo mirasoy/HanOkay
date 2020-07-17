@@ -13,8 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ana -korea homestay</title>
-
+    <title>Hanokay- Make yourself at home in Korea</title>
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
