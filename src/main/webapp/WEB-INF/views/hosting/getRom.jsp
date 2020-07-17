@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
 	.room{
 		float:left;
@@ -14,7 +12,7 @@
 	}
 </style>
 
-<%@include file="../includes/Hostheader.jsp"%>
+<%@include file="../includes/hostheader.jsp"%>
 <!-- nav-sidebar -->
 <nav>
 <div class="navbar-default sidebar" role="navigation">

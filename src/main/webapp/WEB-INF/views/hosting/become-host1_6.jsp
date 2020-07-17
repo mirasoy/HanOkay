@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
-<%@include file="../includes/Hostheader.jsp"%>
+<%@include file="../includes/hostheader.jsp"%>
 <!-- nav-sidebar -->
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
