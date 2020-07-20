@@ -97,11 +97,11 @@ p:last-child { margin-bottom: 0; }
 .top-bar.active .navbar-brand { font-size: 1.4rem; }
 
 .top-bar .navbar-brand img {
-    width: 60px;
+    width: 140px;
     height: auto;
 }
 
-.top-bar.active .navbar-brand img { width: 40px; }
+.top-bar.active .navbar-brand img { width: 60px; }
 
 .top-bar a { color: 61dafb; }
 
