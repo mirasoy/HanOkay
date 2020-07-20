@@ -51,6 +51,7 @@ public class AcmMapperTests {
 		acm.setAcmDetailaddr("수정된 숙소 상세주소");
 		acm.setRepPhone("8212341234");
 		acm.setBizRegnum("56785678");
+
 		acm.setCheckinTime("pm12");
 		acm.setCheckoutTime("pm06");
 		

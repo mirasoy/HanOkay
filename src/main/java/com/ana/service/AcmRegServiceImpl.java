@@ -6,14 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ana.domain.AcmOptionVO;
 import com.ana.domain.AcmVO;
-import com.ana.domain.RomOptVO;
 import com.ana.domain.RomVO;
-import com.ana.mapper.AcmOptionMapper;
 import com.ana.mapper.AcmRegMapper;
-import com.ana.mapper.RomOptMapper;
 import com.ana.mapper.RomRegMapper;
+import com.ana.mapper.UserMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -26,51 +23,50 @@ public class AcmRegServiceImpl implements AcmRegService{
 	@Setter(onMethod_= {@Autowired})
 	private AcmRegMapper amapper;
 	@Setter(onMethod_= {@Autowired})
-	private AcmOptionMapper omapper;
+	private UserMapper umapper;
 	
 	
 
-	@Transactional
 	@Override
-	public void register(AcmVO acm) {
+	public void register(AcmVO vo) {
+//		vo.setAcmActi("PENDING");
+//		vo.setAcmStatus("PENDING");
+		vo.setAcmPurl("C:\\upload\\acm\\");
+		vo.setAcmPname("amc_p_1.jpg");
+		vo.setAcmDesc("-");
+//		vo.setAcmOptcode(0);
+		System.out.println("서비스단의 "+vo.toString());
 		
-		amapper.insertSelectKey(acm);//acmNum 반환값으로 안가지고나와도 완성되어있다!
+		amapper.insertSelectKey(vo);//acmNum 반환값으로 안가지고나와도 완성되어있다!
 		
-//		AcmOptionVO vo = new AcmOptionVO();//타입을 지정하는가?
 	}
 
 
 	@Transactional
 	@Override
-	public boolean update(String acmNum, List<String> acmOptcode,String acmDesc) {
+	public boolean update1_6(String acmNum, List<String> acmOptcode,String acmDesc) {
 		System.out.println("서비스단 acmNum:"+acmNum);
 		
-		AcmOptionVO vo = new AcmOptionVO();
-		vo.setAcmNum(acmNum);
+		AcmVO vo = new AcmVO();
+		vo.setAcmNum(acmNum.trim());
+		int sumOpt=0;
 		for(int i=0;i<acmOptcode.size();i++) {
 			System.out.println(acmOptcode.get(i));
-			vo.setAcmOptcode(acmOptcode.get(i));
-			omapper.insert(vo); //순차적으로 옵션디비에 저장
+			sumOpt+=Integer.parseInt(acmOptcode.get(i));
 		}
 		
-		System.out.println("한옥acmNum:"+acmNum);
-		System.out.println("한옥에 대한 설명:"+acmDesc);
-		System.out.println(acmNum);
-		acmNum=acmNum.trim();
-		System.out.println("트림한 acmNum:"+acmNum);
-//		AcmVO acm = new AcmVO();
-//		acm.setAcmNum(acmNum);
-//		acm.setAcmDesc(acmDesc);
-//		System.out.println("acm리스트"+acm.toString());
+		System.out.println("다 더한 값:"+sumOpt);
+		vo.setAcmOptcode(sumOpt);
+		vo.setAcmDesc(acmDesc);
 		
-		//int rs=amapper.updateDesc(acm);//작동안함1200
-		int rs=amapper.updateDesc(acmNum, acmDesc);
+		return amapper.update1_6(vo)==1;
+	}
+
+
+	@Override
+	public boolean chkaddr(String acmDetailaddr) {
 		
-		
-		
-		System.out.println("결과:"+rs);
-		
-		return rs==1;
+		return amapper.chkaddr(acmDetailaddr)==0;
 	}
 
 

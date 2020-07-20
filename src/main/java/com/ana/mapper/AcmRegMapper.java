@@ -12,16 +12,17 @@ public interface AcmRegMapper {
 	
 	public void insert(AcmVO acm);//숙소등록
 	
-	public void insertSelectKey(AcmVO acm);//숙소등록
+	public void insertSelectKey(AcmVO vo);//숙소등록**
 	
 	public AcmVO read(String acmNum);
 	
 	public int delete(String acmNum);
 	
-	public int update(AcmVO acm);
 	
-	//public int updateDesc(AcmVO acm);//
-	public int updateDesc(@Param("acmNum") String acmNum, @Param("acmDesc") String acmDesc);
+	public int update1_6(AcmVO vo);//opt와 desc update
+	
+	
+	public int chkaddr(String acmDetailaddr);//중복검사
 
 
 }

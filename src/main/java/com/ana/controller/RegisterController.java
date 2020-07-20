@@ -79,7 +79,7 @@ throws IOException{
 		ModelAndView mv= new ModelAndView();
 		
 		//중복된 이메일이 있는지 한번 더 db를 확인한다(refresh할 때 중복 저장되는 경우가 있어서 그걸 막으려고)
-		if (service.checkEmail(user.getEmail())) {
+		if (service.checkEmail(user.getUserEmail())) {
 		service.register(user);
 		//세션에 user를 저장한다(회원가입 성공하면 바로 로그인이 되는거)
 		model.addAttribute("user", user);
@@ -110,9 +110,9 @@ throws IOException{
 	public void sendAuthEmail(UserVO user) {
 		//db에 회원의 이메일 정보가 있다면
 		log.info("email authentication: "+user);
-		if(service.checkEmail(user.getEmail())) {
+		if(service.checkEmail(user.getUserEmail())) {
 			//이메일을 보낸다(쿠키 저장한다)
-			if(emailService.sendAuthEmail(user.getEmail())) {
+			if(emailService.sendAuthEmail(user.getUserEmail())) {
 				//성공적으로 보냈으면		
 				//이메일로 발송한 인증코드를 칠 수 있게 jsp에게 알려주고
 			}

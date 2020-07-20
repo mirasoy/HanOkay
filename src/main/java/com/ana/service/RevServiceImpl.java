@@ -45,8 +45,8 @@ public class RevServiceImpl implements RevService {
 	@Override
 	public boolean modify(RevVO post) {
 
-		RevPostVO revPost = new RevPostVO();
-		RevDetailVO detailPost = new RevDetailVO();
+		RevVO revPost = new RevVO();
+		
 
 		//매퍼마다 넣기위해서 RevVO > post/detail로 변경하기
 		revPost.setPstNum(post.getPstNum());
@@ -54,16 +54,15 @@ public class RevServiceImpl implements RevService {
 		revPost.setBrdCode(post.getBrdCode());
 		revPost.setTitle(post.getTitle());
 
-		detailPost.setAcmNum(post.getAcmNum());
-		detailPost.setBookNum(post.getBookNum());
-		detailPost.setContent(post.getContent());
-		detailPost.setPstNum(post.getPstNum());
-		detailPost.setRevPurl(post.getRevPurl());
-		detailPost.setStisf(post.getStisf());
+		revPost.setAcmNum(post.getAcmNum());
+		revPost.setBookNum(post.getBookNum());
+		revPost.setContent(post.getContent());
+		revPost.setPstNum(post.getPstNum());
+		revPost.setStisf(post.getStisf());
 
 		log.info("modify......" + post);
 		//각각 업데이트 메퍼돌리기
-		return mapper.update(revPost) == 1 && mapper2.update(detailPost) == 1;
+		return mapper.update(revPost) == 1;
 	}
 
 	
@@ -105,7 +104,7 @@ public class RevServiceImpl implements RevService {
 	@Override
 	public List<RevVO> getUserList(String loginUser) {
 		
-		List<RevVO> list = mapper.getMyList(loginUser);
+		List<RevVO> list = mapper.getUserBookingACList(loginUser);
 
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat fm2 = new SimpleDateFormat("yyyy-MM-dd");

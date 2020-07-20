@@ -12,9 +12,10 @@ public interface AcmRegService {//호스트 등록단에서
 
 //	public AcmVO get(String romNum);
 //
-	public boolean update(String acmNum,List<String> acmOptcode,String acmDesc);
+	public boolean update1_6(String acmNum, List<String> acmOptcode,String acmDesc);
 //
 //	public boolean remove(String acmNum);
 
-
+	public boolean chkaddr(String acmDetailaddr);
+	
 }

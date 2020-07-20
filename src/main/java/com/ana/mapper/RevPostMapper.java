@@ -11,7 +11,7 @@ public interface RevPostMapper {
 	// 숙소 상세페이지: 숙소에 해당하는 리뷰 목록 불러오기
 	public List<RevVO> getList();
 	
-	public List<RevVO> getMyList(String loginUser);
+	public List<RevVO> getUserBookingACList(String loginUser);
 	//자신의 모든 예약목록=(숙박완료된) 받아오기
 		
 	public void insert(RevVO RevVO);
@@ -26,7 +26,7 @@ public interface RevPostMapper {
 	public int delete(String pstNum);
 	//리뷰 삭제하기
 	
-	public int update(RevPostVO repost);
+	public int update(RevVO repost);
 	//리뷰수정하기 
 
 	public List<RevPostVO> getAcmList(String acmNum);

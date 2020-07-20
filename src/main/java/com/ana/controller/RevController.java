@@ -67,10 +67,12 @@ public class RevController {
 			userNum = user.getUserNum();
 			log.info("list Size>>>>>>" + service.getUserList(userNum).size());
 			log.info(userNum + "의 리스트 list");
-			model.addAttribute("list", service.getUserList(userNum));
+			model.addAttribute("list", service.getUserList("U1"));
 			return "/review/list";
 		} else {
-			return "redirect:/acm/list";
+			model.addAttribute("list", service.getUserList("U1"));
+			return "/review/list";
+			//return "redirect:/acm/list";
 		}
 
 	}
@@ -133,9 +135,7 @@ public class RevController {
 		// 뉴 리뷰라면
 		if (registrationStatus) {
 			RevVO rev = service.getByBooknum(reDetail.getBookNum());
-			// 임시설정
-			rev.setRevPurl("사진임시");
-			// 임시설정
+			
 			rev.setTitle(revP.getTitle());
 			rev.setContent(reDetail.getContent());
 			rev.setStisf(reDetail.getStisf());
@@ -175,9 +175,7 @@ public class RevController {
 		log.info("modify::::::::::" + review.getPstNum() + ":::::::::::::::::::::::::::::" + review);
 		RevVO rv = service.get(review.getPstNum());
 		log.info("modify::::>>>::::::::" + rv);
-		// 임시설정
-		rv.setRevPurl("_");
-		// 임시설정
+	
 		rv.setTitle(review.getTitle());
 		rv.setContent(review.getContent());
 		rv.setStisf(review.getStisf());

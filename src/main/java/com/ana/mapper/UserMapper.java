@@ -25,13 +25,13 @@ public interface UserMapper {
 	public int updateUser(UserVO user);
 
 	// email로 중복되는 값이 있는 지 확인하는 메서드
-	public int checkEmail(String email);
+	public int checkEmail(String userEmail);
 
 	// 해당 회원이 있는지 확인하는 메서드
-	public int isValidUser(@Param("email") String email, @Param("pwd") String pwd);
+	public int isValidUser(@Param("userEmail") String userEmail, @Param("userPwd") String userPwd);
 	
 	//해당 회원의 userNum을 반환
-	public UserVO getUserById(String email);
+	public UserVO getUserById(String UserEmail);
 
 	// 로그인 정보 일치하는 지 확인하는 메서드
 	public boolean checkLogin(UserVO user);

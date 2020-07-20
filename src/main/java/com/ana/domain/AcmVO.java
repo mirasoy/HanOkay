@@ -36,4 +36,5 @@ public class AcmVO {
 	private Integer acmOptcode;
 	
 	private RomVO rom;
+
 }
