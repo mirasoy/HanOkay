@@ -53,13 +53,12 @@
 		INSERT INTO TACM(acm_Num, acm_Name, acm_City,acm_Distr, acm_Detailaddr, rep_Phone, 
 		acm_regdate, acm_updatedate, acm_type,
 		biz_regnum,checkin_time, checkout_time,sub_phone,
-		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude, acm_desc, acm_acti, acm_status,acm_optcode)
+		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude)
 		
 		VALUES (concat('A',seq_tacm.nextval),#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
 		sysdate,sysdate,#{acmType},
 		#{bizRegnum},#{checkoutTime},#{checkinTime},#{subPhone},
-		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude},#{acmDesc},#{acmActi},#{acmStatus},#{acmOptcode})
-		
+		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude})
 	</insert>
 
 	<!-- 위도경도 추가 -->
@@ -72,14 +71,15 @@
 		INSERT INTO TACM(acm_Num, acm_Name, acm_City,acm_Distr, acm_Detailaddr, rep_Phone, 
 		acm_regdate, acm_updatedate, acm_type,
 		biz_regnum,checkin_time, checkout_time,sub_phone,
-		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude, acm_desc, acm_acti, acm_status,acm_optcode)
+		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude)
 		
-		VALUES (#{acmNum},#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
+		VALUES (concat('A',seq_tacm.nextval),#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
 		sysdate,sysdate,#{acmType},
-		#{bizRegnum},#{checkinTime},#{checkoutTime},#{subPhone},
-		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude},#{acmDesc},#{acmActi},#{acmStatus},#{acmOptcode})
-		
+		#{bizRegnum},#{checkoutTime},#{checkinTime},#{subPhone},
+		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude})
 	</insert>
+	
+	
 	<!-- 주소 중복체크 -->
 	<select id="chkaddr" resultType="int">
 	select count(*) from tacm

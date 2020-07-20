@@ -307,14 +307,14 @@ function sample6_execDaumPostcode() {
 	    
 		var repPhone=document.getElementById("repPhone");
 		if (repPhone.value.trim()=='') {
-			alert("대표 전화번호를 입력해주세요(10자리이내)");
+			alert("대표 전화번호를 입력해주세요(16자리이내)");
 			repPhone.focus();
 			return false;		
 		}
 		
-		if (repPhone.value.length > 11) {
-			alert("대표 전화번호는 10자리 이내입니다");
-			repPhone.value=repPhone.value.substring(0, 10);
+		if (repPhone.value.length > 17) {
+			alert("대표 전화번호는 16자리 이내입니다");
+			repPhone.value=repPhone.value.substring(0, 17);
 			repPhone.focus();
 			return false;		
 		}
@@ -364,11 +364,24 @@ function sample6_execDaumPostcode() {
 			}
 		}
 		
+		if (subPhone.value.length > 17) {
+			alert("보조연락처는 16자리 이내입니다");
+			subPhone.value=subPhone.value.substring(0, 17);
+			subPhone.focus();
+			return false;		
+		}
+		
 		var acmFax=document.getElementById("acmFax");
 		if (acmFax.value.trim()=='') {
 			acmFax.value="-";
 		}
 		
+		if (acmFax.value.length > 17) {
+			alert("팩스번호는 16자리 이내입니다");
+			acmFax.value=acmFax.value.substring(0, 17);
+			acmFax.focus();
+			return false;		
+		}
 		
 	    return true;
 	 }
