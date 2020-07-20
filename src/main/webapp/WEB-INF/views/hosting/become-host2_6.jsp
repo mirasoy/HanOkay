@@ -113,7 +113,7 @@
 	function openPop(){
 		// window.name = "부모창 이름"; 
 		
-		var _width='650';
+		var _width='850';
 		var _height='400';
 		
 		var _left=Math.ceil((window.screen.width-_width)/2);

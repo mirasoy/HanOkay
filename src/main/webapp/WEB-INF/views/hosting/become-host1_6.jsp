@@ -1,11 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
 <%@include file="../includes/hostheader.jsp"%>
 <!-- nav-sidebar -->
+ <style>
+        input[type=checkbox] {
+            display:none;
+            margin:10px;
+        }
+    
+        input[type=checkbox] + label {
+            display:inline-block;
+            margin:2px;
+            padding: 4px 10px;
+            background-color: #e7e7e7;
+            border-color: #ddd;
+            border-radius: 10px;
+        }
+        /*
+         Change background color for label next to checked radio button
+         to make it look like highlighted button
+        */
+        input[type=checkbox]:checked + label {
+           background-image: none;
+            background-color:cornflowerblue;
+            color: white;
+        }
+        
+  </style>
+
+
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -45,28 +70,26 @@
 			  <h6>한개 이상의 옵션을 선택하셔야합니다</h6>	
 			  
 			  <h4>5-1.시설 옵션</h4> <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->
-			  	<input type="checkbox" id="SW" name="acmOptcode" value="SW"><label for="SW">수영장</label>
-			   <input type="checkbox" id="PK" name="acmOptcode" value="PK"><label for="PK">주차장</label>
-			   <input type="checkbox" id="PU" name="acmOptcode" value="PU"><label for="PU">공항 등 교통편 서비스</label>
-			   <input type="checkbox" id="GM" name="acmOptcode" value="GM"><label for="GM">체육관/피트니스</label>
-			   <input type="checkbox" id="FD" name="acmOptcode" value="FD"><label for="FD">24시간 프런트 데스크</label>
-			   <input type="checkbox" id="FA" name="acmOptcode" value="FA"><label for="FA">가족/아동 여행객 친화형 시설</label>
-			   <input type="checkbox" id="NS" name="acmOptcode" value="NS"><label for="NS">금연</label>
-			   <input type="checkbox" id="SP" name="acmOptcode" value="SP"><label for="SP">스파/사우나</label><br>
-			   <input type="checkbox" id="RT" name="acmOptcode" value="RT"><label for="RT"> 레스토랑</label>
-			   <input type="checkbox" id="SA" name="acmOptcode" value="SA"><label for="SA"> 흡연구역</label>
-			   <input type="checkbox" id="WP" name="acmOptcode" value="WP"><label for="WP">반려동물 동반 가능</label>
-			   <input type="checkbox" id="AD" name="acmOptcode" value="AD"><label for="AD">장애인용 편의시설/서비스</label>
-			   <input type="checkbox" id="VC" name="acmOptcode" value="VC"><label for="VC">비즈니스 관련 편의 시설</label>
-			   <input type="checkbox" id="GP" name="acmOptcode" value="GP"><label for="GP">골프장</label>
-			   <input type="checkbox" id="WF" name="acmOptcode" value="WF"><label for="WF">인터넷</label>
+			  	<input type="checkbox" id="SW" name="acmOptcode" value="1"><label for="SW">수영장</label>
+			   <input type="checkbox" id="PK" name="acmOptcode" value="2"><label for="PK">주차장</label>
+			   <input type="checkbox" id="PU" name="acmOptcode" value="4"><label for="PU">공항 등 교통편 서비스</label>
+			   <input type="checkbox" id="GM" name="acmOptcode" value="8"><label for="GM">체육관/피트니스</label>
+			   <input type="checkbox" id="FD" name="acmOptcode" value="16"><label for="FD">24시간 프런트 데스크</label>
+			   <input type="checkbox" id="FA" name="acmOptcode" value="32"><label for="FA">가족/아동 여행객 친화형 시설</label>
+			   <input type="checkbox" id="NS" name="acmOptcode" value="64"><label for="NS">금연</label>
+			   <input type="checkbox" id="SP" name="acmOptcode" value="128"><label for="SP">스파/사우나</label><br>
+			   <input type="checkbox" id="RT" name="acmOptcode" value="256"><label for="RT"> 레스토랑</label>
+			   <input type="checkbox" id="SA" name="acmOptcode" value="512"><label for="SA"> 흡연구역</label>
+			   <input type="checkbox" id="WP" name="acmOptcode" value="1024"><label for="WP">반려동물 동반 가능</label>
+			   <input type="checkbox" id="AD" name="acmOptcode" value="2048"><label for="AD">장애인용 편의시설/서비스</label>
+			   <input type="checkbox" id="VC" name="acmOptcode" value="4096"><label for="VC">비즈니스 관련 편의 시설</label>
+			   <input type="checkbox" id="WF" name="acmOptcode" value="8192"><label for="WF">인터넷</label>
 			   
-				<br><br>
+			   <br><br>
 							  
-			  <h4>5-2.식사 옵션</h4>
-			   <input type="checkbox" id="BF" name="acmOptcode" value="BF"><label for="BF">조식</label>
-			   <input type="checkbox" id="LC" name="acmOptcode" value="LC"><label for="LC">중식</label>
-			   <input type="checkbox" id="DN" name="acmOptcode" value="DN"><label for="DN">석식</label>
+			   <h4>5-2.식사 옵션</h4>
+			   <input type="checkbox" id="BF" name="acmOptcode" value="16384"><label for="BF">조식</label>
+			   <input type="checkbox" id="DN" name="acmOptcode" value="32768"><label for="DN">석식</label>
 			   
 			 </div>
 			   
@@ -104,8 +127,8 @@
 	    
 	    var acmDesc =document.getElementById("acmDesc");
 	    
-	    if(acmDesc.value.length>100){
-		       alert('숙소에 대한 설명이 너무 깁니다!(100자 내)');
+	    if(acmDesc.value.length>400){
+		       alert('숙소에 대한 설명이 너무 깁니다!(400자 내)');
 				return false;	       
 		}
 	    

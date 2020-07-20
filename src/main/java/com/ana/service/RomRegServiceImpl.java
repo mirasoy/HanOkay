@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ana.domain.RomOptVO;
 import com.ana.domain.RomVO;
-import com.ana.mapper.RomOptMapper;
 import com.ana.mapper.RomRegMapper;
 
 import lombok.AllArgsConstructor;
@@ -21,8 +19,6 @@ import lombok.extern.log4j.Log4j;
 public class RomRegServiceImpl implements RomRegService{
 	@Setter(onMethod_= {@Autowired})
 	private RomRegMapper mapper;
-	@Setter(onMethod_= {@Autowired})
-	private RomOptMapper omapper;
 	
 	
 	@Override//뿌려주기
@@ -41,14 +37,10 @@ public class RomRegServiceImpl implements RomRegService{
 //		System.out.println("reg:"+rom.toString());
 		mapper.insertSelectKey(rom);//객실추가
 	
-		RomOptVO vo = new RomOptVO();
-		vo.setRomNum(rom.getRomNum());
 //		System.out.println(rom.getRomNum()+"을 가져오자");
 		
 		for(int i=0;i<romOptArr.size();i++) {//그 객실에 대한 
 			System.out.println("romOptMapper에 들어간다***"+i+"번째: "+romOptArr.get(i));
-			vo.setRomOptcode(romOptArr.get(i));
-			omapper.insert(vo);
 		}
 		
 		
@@ -65,7 +57,6 @@ public class RomRegServiceImpl implements RomRegService{
 
 	@Override
 	public boolean remove(String romNum) {//객실 지우기
-		omapper.delete(romNum);
 		return mapper.remove(romNum)==1;
 	}
 
