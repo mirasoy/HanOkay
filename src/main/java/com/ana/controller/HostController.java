@@ -247,20 +247,13 @@ public class HostController {
 	
 	
 	@PostMapping("/become-host2_6pop")//객실추가할때
-	public String becomeHostPost2_6pop(@RequestParam(value="romOptArr") List<String> romOptcode,
-			@RequestParam(value="acmNum") String acmNum,//숙소번호, +객실번호 생성해야함
-			@RequestParam(value="romType") String romType,//객실타입
-			@RequestParam(value="romName") String romName,//객실이름
-			@RequestParam(value="romCapa") int romCapa,//객실최대수용인원
-			@RequestParam(value="bedType") String bedType,//침대유형
-			@RequestParam(value="bedCnt") int bedCnt,//침대갯수
-			@RequestParam(value="romSize") int romSize,//객실사이즈
-			@RequestParam(value="romPrice") int romPrice,//객실단가
-			Model model
+	public String becomeHostPost2_6pop(
+			String acmNum, RomVO vo,Model model
 		) {
 
-		System.out.println("pop열림Post!");		
-		System.out.println(romOptcode);
+		System.out.println("===pop열림Post!===");		
+		System.out.println(vo.getRomOptcode());
+		System.out.println(acmNum);
 		
 //		RomVO rom = new RomVO();
 //		rom.setAcmNum(acmNum);

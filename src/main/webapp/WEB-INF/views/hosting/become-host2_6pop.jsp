@@ -82,7 +82,7 @@
    <input type="hidden" id="ACM_NUM" name="ACM_NUM" value="" readonly="readonly">
    <!-- 숙소 방 추가 모달로 띄우기-->
    <form action="/hosting/become-host2_6" method="get">
-      <h4>6-2.개별객실 추가하기</h4>
+      <h4>6-2.개별객실(베드룸) 추가하기</h4>
 
      <!-- <div id="image_container" style="width:200px;height:200px;"></div>
       <input type="file" id="ROM_PURL" name="ROM_PURL" placeholder="객실 사진" onchange="setThumbnail(event);"> --> 
@@ -165,8 +165,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
+	var chkArr = []; //배열 초기화
+	var romOptcode=0;
 
- 	var chkArr = []; //배열 초기화
 
 	function readyForreg() {
 		
@@ -187,6 +188,7 @@
 		$("input[name=romOptcode]:checked").each(function (i) {//체크박스값들을 모조리 배열에 담는다
 			//console.log('checkbox값:'+$(this).val());
 			chkArr.push($(this).val());
+			romOptcode=romOptcode+($(this).val());
 		});
 
 		if(chkArr.length==0){
@@ -195,12 +197,14 @@
 			flag = false;
 			
 		}
-		if($("#ROM_CAPA").val() > 100){
-			alert('100명 이하의 숫자만 등록 가능합니다.');
+
+		
+		if($("#ROM_CAPA").val() > 25){
+			alert('25명 이하의 숫자만 등록 가능합니다.');
 			flag = false;
 		};//객실최대인원수
-		if($("#ROM_SIZE").val()> 1000){
-			alert('1000이하의 숫자만 등록 가능합니다.');
+		if($("#ROM_SIZE").val()> 500){
+			alert('500이하의 숫자만 등록 가능합니다.');
 			flag = false;
 		};//객실크기
 		
@@ -209,6 +213,7 @@
 		return flag;
 	}
 
+	
 	function romRegit() {
 		
 
@@ -220,20 +225,18 @@
 		var bedCnt = $("#BED_CNT").val();//침대갯수
 		var romSize = $("#ROM_SIZE").val();//객실크기
 		var romPrice = $("#ROM_PRICE").val();//객실가격
-
 		
 
 		//name/value 형태로 담는다
 		var allData = {
 			"acmNum": acmNum, "romType": romType, "romName": romName,
 			"romCapa": romCapa, "bedType": bedType, "bedCnt": bedCnt, "romSize": romSize,
-			"romPrice": romPrice, "romOptArr": chkArr
+			"romPrice": romPrice, "romOptcode": romOptcode
 		}
 
 		$.ajax({
 			url: 'become-host2_6pop',
 			type: "POST",
-			dataType: 'json',
 			data: allData,
 			success: function (data) {
 				alert("객실이 추가되었습니다.");
