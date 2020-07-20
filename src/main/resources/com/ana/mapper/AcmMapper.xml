@@ -10,25 +10,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="acm_City" property="acmCity" />
 		<result column="acm_Distr" property="acmDistr" />
 		<result column="acm_Detailaddr" property="acmDetailaddr" />
+		
 		<result column="rep_Phone" property="repPhone" />
 		<result column="biz_Regnum" property="bizRegnum" />
 		<result column="checkin_Time" property="checkinTime" />
 		<result column="checkout_Time" property="checkoutTime" />
 		<result column="acm_Regdate" property="acmRegdate" />
+		
 		<result column="acm_Updatedate" property="acmUpdatedate" />
-		<result column="acm_Phone2" property="acmPhone2" />
+		<result column="SUB_PHONE" property="subPhone" />
 		<result column="acm_Fax" property="acmFax" />
 		<result column="acm_Email" property="acmEmail" />
 		<result column="acm_Desc" property="acmDesc" />
+		
 		<result column="acm_Purl" property="acmPurl" />
-		<result column="acm_Purl1" property="acmPurl1" />
-		<result column="acm_Purl2" property="acmPurl2" />
-		<result column="acm_Purl3" property="acmPurl3" />
-		<result column="acm_Purl4" property="acmPurl4" />
-		<result column="acm_Purl5" property="acmPurl5" />
-		<result column="acm_Purl6" property="acmPurl6" />
+		<result column="ACM_PNAME" property="acmPname" />
 		<result column="latitude" property="latitude" />
 		<result column="longitude" property="longitude" />
+		<result column="ACM_TYPE" property="acmType" />
+		
+		<result column="ACM_ACTI" property="acmActi" />
+		<result column="ACM_STATUS" property="acmStatus" />
+		<result column="ACM_OPTCODE" property="acmOptcode" />
 	</resultMap>
 
 	<sql id="criteria">
@@ -157,11 +160,11 @@ select distinct acm_num
 <select id="getListPaging" resultMap="AcmVOResult">
 <![CDATA[
 select 
-    acm_purl, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
+    acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
 from 
 (
    select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
-      rownum rn, acm_purl, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
+      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
    from
       tacm
    where (acm_city like '%'||#{cri.keyword}||'%' and
@@ -185,7 +188,7 @@ select
 from 
 (
    select
-      rownum rn, acm_purl, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
+      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
    from
       tacm
    where (acm_city like '%'||#{cri.keyword}||'%' and

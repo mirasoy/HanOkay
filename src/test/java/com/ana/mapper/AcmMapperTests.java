@@ -1,9 +1,6 @@
 package com.ana.mapper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -52,6 +49,9 @@ public class AcmMapperTests {
 		acm.setAcmCity("수정된 숙소도시");
 		acm.setAcmDistr("수정된 숙소 동");
 		acm.setAcmDetailaddr("수정된 숙소 상세주소");
+		acm.setRepPhone("8212341234");
+		acm.setBizRegnum("56785678");
+
 		acm.setCheckinTime("pm12");
 		acm.setCheckoutTime("pm06");
 		
@@ -68,6 +68,8 @@ public class AcmMapperTests {
 		acm.setAcmCity("새로운 숙소 시");
 		acm.setAcmDistr("새로운 숙소 동");
 		acm.setAcmDetailaddr("새로운 숙소 상세주소");
+		acm.setRepPhone("8212341234");
+		acm.setBizRegnum("56785678");
 		acm.setCheckinTime("AM11");
 		acm.setCheckoutTime("PM04");
 		
@@ -84,6 +86,8 @@ public class AcmMapperTests {
 		acm.setAcmCity("새로운 숙소 시selectkey");
 		acm.setAcmDistr("새로운 숙소 동");
 		acm.setAcmDetailaddr("새로운 숙소 상세주소");
+		acm.setRepPhone("8212341234");
+		acm.setBizRegnum("56785678");
 		acm.setCheckinTime("AM11");
 		acm.setCheckoutTime("PM04");
 		
@@ -133,11 +137,11 @@ public class AcmMapperTests {
 		acmNumList.forEach(acm -> log.info(acm));
 	}
 	
-	//@Test
+	@Test
 		public void testGetListPaging() {
 			Criteria cri = new Criteria();
-			cri.setKeyword("대구");
-			cri.setPerson("8");
+			cri.setKeyword("서울");
+			cri.setPerson("1");
 			cri.setIn("2019-04-20");
 			cri.setOut("2019-04-22");
 			List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
