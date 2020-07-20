@@ -34,7 +34,7 @@ public class RevPostServiceImpl implements RevPostService{
 	@Override
 	public boolean modify(RevPostVO post) {
 		log.info("modify......" + post);
-		return mapper.update(post)==1;
+		return false;
 	}
 
 	@Override

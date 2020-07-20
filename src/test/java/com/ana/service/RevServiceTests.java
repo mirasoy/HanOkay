@@ -25,22 +25,21 @@ public class RevServiceTests {
 	@Setter(onMethod_= {@Autowired})
 	private RevService service;
 	
-//	@Test
+	@Test
 	public void testExist() {
 		log.info(service);
 		assertNotNull(service);
 	}
 	
-//	@Test
+	@Test
 	public void testRegister() {
 		RevVO post = new RevVO();
 		post.setBrdCode("rev");
 		post.setTitle("서비스제목");
-		post.setUserNum("서비스작성자");
+		post.setUserNum("U9");
 		post.setAcmNum("A1");
 		post.setBookNum("B12");
 		post.setContent("so hot");
-		post.setRevPurl("/asd.jsp");
 		post.setStisf(3);
 		
 		service.register(post);
@@ -48,12 +47,12 @@ public class RevServiceTests {
 		log.info("생성된 리뷰의 번호: " + post.getPstNum());
 	}
 	
-	//@Test
+@Test
 	public void testGetList() {
 		service.getList().forEach(post->log.info(post));
 	}
 	
-	//@Test
+	@Test
 	public void testGet() {
 		log.info(service.get("8"));
 	}
@@ -64,7 +63,7 @@ public class RevServiceTests {
 		log.info("REMOVE RESULT: " + service.remove("78"));
 	}
 	
-//	@Test
+	@Test
 	public void testUpdate() {
 		RevVO post = service.get("34");
 		
@@ -76,12 +75,12 @@ public class RevServiceTests {
 		log.info("MODIFY RESULT: "+service.modify(post));
 	}
 	
-	//@Test
+	@Test
 	public void testReadByBookNum() {
 		log.info("MODIFY RESULT: "+service.getByBooknum("B15"));
 	}
 	
-	//@Test
+	@Test
 	public void testGetMyList() {
 		service.getUserList("U1").forEach(post->log.info(post));
 	}
