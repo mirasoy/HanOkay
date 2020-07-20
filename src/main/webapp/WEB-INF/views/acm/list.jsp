@@ -307,37 +307,31 @@
 </div>
 <!-- End : main-content -->
 <script>
-	$(document).ready(function() {
-		$("#e1").select2();
-	});
 
-	/* 날짜 선택(수희) */
-	var today = new Date();
-
-	$("#out").datepicker(
-			{
-				minDate : new Date(today.getFullYear(), today.getMonth(), today
-						.getDate() + 1),
-				maxDate : new Date(today.getFullYear() + 1, today.getMonth(),
-						today.getDate()),
-				dateFormat : 'yy-mm-dd',
-			});
-	$("#in").datepicker(
-			{
-				minDate : 0,
-				maxDate : new Date(today.getFullYear() + 1, today.getMonth(),
-						today.getDate() - 1),
-				onSelect : function(selectedDate) {
-					var nextDay = new Date(selectedDate);
-					nextDay.setDate(nextDay.getDate() + 1);
-					$("#out").datepicker("option", "minDate", nextDay);
-					var nextMonth = new Date(selectedDate);
-					nextMonth.setDate(nextMonth.getDate() + 90);
-					$("#out").datepicker("option", "maxDate", nextMonth);
-				},
-				dateFormat : 'yy-mm-dd'
-			});
-</script>
+        $(document).ready(function() { $("#e1").select2(); });
+		
+     	/* 날짜 선택(수희) */
+		var today = new Date();
+		
+		$("#out").datepicker({
+			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
+			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+			dateFormat: 'yy-mm-dd',
+		});
+		$("#in").datepicker({
+			minDate: 0,
+			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
+			onSelect: function(selectedDate) {
+				var nextDay = new Date(selectedDate);
+				nextDay.setDate(nextDay.getDate() + 1);
+			  $("#out").datepicker("option","minDate", nextDay);
+				var nextMonth = new Date(selectedDate);
+				nextMonth.setDate(nextMonth.getDate() + 90);
+			  $("#out").datepicker("option","maxDate", nextMonth);
+			},
+			dateFormat: 'yy-mm-dd' 
+		});
+		</script>
 
 <!-- 달력 변경. 끝 -->
 

@@ -32,14 +32,11 @@ public class AcmRegServiceImpl implements AcmRegService{
 
 	@Transactional
 	@Override
-	public int register(AcmVO acm) {
+	public void register(AcmVO acm) {
 		
 		amapper.insertSelectKey(acm);//acmNum 반환값으로 안가지고나와도 완성되어있다!
 		
 //		AcmOptionVO vo = new AcmOptionVO();//타입을 지정하는가?
-	
-		
-		return 1;//우선은 무조껀 성공이라 하자 070903
 	}
 
 

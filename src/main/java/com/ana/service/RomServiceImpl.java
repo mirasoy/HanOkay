@@ -17,12 +17,14 @@ public class RomServiceImpl implements RomService{
 	
 	private RomMapper mapper;
 
+	// 숙소 상세페이지: 검색 옵션에 맞는 객실 목록 불러오기
 	@Override
 	public List<RomVO> getList(String acmNum, String person) {
 		log.info("getList...........");
 		return mapper.getList(acmNum, person);
 	}
 	
+	// 숙소 상세페이지: 숙소별 객실 목록 불러오기
 	@Override
 	public List<RomVO> getAll(String acmNum) {
 		log.info("getList...........");
@@ -35,6 +37,7 @@ public class RomServiceImpl implements RomService{
 		return mapper.insert(rom);
 	}
 
+	// 예약 확인 페이지: 객실정보를 불러온다
 	@Override
 	public RomVO get(String romNum) {
 		log.info("get......"+romNum);

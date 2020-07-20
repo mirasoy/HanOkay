@@ -1,86 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
-<%@include file="../includes/Hostheader.jsp"%>
+<%@include file="../includes/hostheader.jsp"%>
 <!-- nav-sidebar -->
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function sample4_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	<script>
+	    function sample6_execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 참고 항목 변수
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-                
-                
-                //내가추가(지번주소를 자른다)
-                var full=document.getElementById("sample4_jibunAddress");
-                var parts=full.value.split(' ');
-                
-                var acmCity=document.getElementById("acmCity");
-                acmCity.value=parts[0]; //앞도시부분을 담는다
-                
-                var acmDistr=document.getElementById("acmDistr");
-                acmDistr.value=parts[1];
-                                
-                var extra=full.value.substring(parts[0].length+parts[1].length+2);
-                
-                var acmDetailaddr=document.getElementById("acmDetailaddr");
-                acmDetailaddr.value=extra;
-                
-                
-                if(roadAddr !== ''){
-                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-                } else {
-                    document.getElementById("sample4_extraAddress").value = '';
-                }
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("sample6_extraAddress").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                }
 
-                var guideTextBox = document.getElementById("guide");
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                
+	              //내가추가(지번주소를 자른다)
+	            	var full=document.getElementById("sample6_address");
+	            	var parts=full.value.split(' ');
+	            	
+	            	var acmCity=document.getElementById("acmCity");
+	            	acmCity.value=parts[0]; //앞도시부분을 담는다
+	            	
+	            	var acmDistr=document.getElementById("acmDistr");
+	            	acmDistr.value=parts[1];
+	            	                
+	            	var extra=full.value.substring(parts[0].length+parts[1].length+2);
+	            	
+	            	var acmDetailaddr=document.getElementById("acmDetailaddr");
+	            	acmDetailaddr.value=extra;
+	                
+	                
+	                
+	                
+	            }
+	        }).open();
+	    }
+	</script>
 
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
-                    guideTextBox.innerHTML = '';
-                    guideTextBox.style.display = 'none';
-                }
-            }
-        }).open();
-    }
-</script>
 
 
 <div class="navbar-default sidebar" role="navigation">
@@ -115,9 +108,6 @@
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
 		<form id="actionForm" action="/hosting/become-host" method="post">
 
-			<input type="hidden" id="sample4_roadAddress" name="FullroadAddr" size="40" placeholder="도로전체주소" readonly="readonly">
-			<input type="hidden" id="sample4_jibunAddress" name="FulljibunAddr" size="40" placeholder="도로지번주소" readonly="readonly">
-			<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"><br><br>
 
 			<div class="acm" id="acm"><br><h6>*항목은 필수입력값입니다</h6>	  
 				<h4>*1.게스트가 묵게 될 숙소의 유형을 골라주세요(중복허용)</h4>
@@ -135,11 +125,13 @@
 			   <input type="text" id="acmDetailaddr" name="acmDetailaddr" placeholder="숙소 상세주소"><br><br>
  				-->
 
+				<input type="hidden" id="sample6_postcode" placeholder="우편번호">
+				<input type="hidden" id="sample6_address" placeholder="주소"><br>
+				<input type="hidden" id="sample6_detailAddress" value="sth" placeholder="상세주소">
+				<input type="hidden" id="sample6_extraAddress" value="sth" placeholder="참고항목">
 
-				<input type="hidden" id="sample4_postcode" placeholder="우편번호">
 				
-				
-				<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기" readonly="readonly"><br>
+				<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
 				<input type="text" id="acmCity" name="acmCity" size="10" placeholder="숙소시도" readonly="readonly">
 				<input type="text" id="acmDistr" name="acmDistr" size="20" placeholder="숙소구군" readonly="readonly"><br>
 				<input type="text" id="acmDetailaddr" name="acmDetailaddr" size="20" placeholder="숙소상세" readonly="readonly"><br>
@@ -200,64 +192,6 @@
 <%@include file="../includes/footer.jsp"%>
 <script type="text/javascript">
 
-
-	//바로반응하는것들
-	$(document).ready(function () {
-		
-		$('input[name=acmName]').focusout(function () {
-	
-			if ($(this).val().length > 10) {
-				alert("숙소이름은 10자로 이내로 정해주세요~");
-				$(this).val($(this).val().substring(0, 10));
-		
-			}
-	
-		});//한타스 완성
-		
-		$('input[name=repPhone]').focusout(function () {
-			
-			if ($(this).val().length > 12) {
-				alert("전화번호가 너무깁니다!");
-				$(this).val($(this).val().substring(0, 12));
-		
-			}
-	
-		});//한타스 완성
-	
-		$('input[name=acmFax]').focusout(function () {
-			
-			if ($(this).val().length > 12) {
-				alert("팩스번호가 너무 깁니다!");
-				$(this).val($(this).val().substring(0, 12));
-		
-			}
-	
-		});//한타스 완성
-
-		var email=document.getElementById("acmEmail");
-		//좀더 생각해보고 만들겠음
-		$('input[name=acmEmail]').focusout(function () {
-			
-			if(!CheckEmail(email.value)) {
-				alert("이메일 형식에 어긋납니다");
-				email.value="";
-		
-			}
-	
-		});//한타스 완성*/
-	
-		var bizRegnum=document.getElementById("bizRegnum");
-		$('input[name=bizRegnum]').focusout(function(){
-			if(bizRegnum.value.length!=10){
-				alert("사업자등록코드의 형식에 벗어납니다(10글자)");
-				bizRegnum.value="";
-			}
-		})
-	
-		
-	}); //바로 반응하는것들
-
-	
 	//이메일 정규식
 	function CheckEmail(str){                                                 
 		// 이메일이 적합한지 검사할 정규식    
@@ -272,32 +206,88 @@
 	}  
 
 	function readyForreg() {
-	    
-	    var acmmNotNull = $(".acm input");
-	    var flag = true;
-	     chkArr = [];
-	    $(".acm input").each(function () {
-	       val = $(this).val().trim();
-	       if (val == '') {
-	          alert('입력하지 않은 필수항목이 있습니다');
-	          flag = false;
-	          return flag; // break
-	       }
-	    });
-	
-	    
+		chkArr = [];
+		
 	    $("input[name=acmType]:checked").each(function (i) {//체크박스값들을 모조리 배열에 담는다
 	       //console.log('checkbox값:'+$(this).val());
 	       chkArr.push($(this).val());
 	    });
-	
+
 	    if(chkArr.length==0){
 	       alert('하나 이상의 숙소유형을 골라주셔야합니다');
 	       $(this).focus();
-	       flag = false;
+	       return false;
 	    }
+
+	    var acmName=document.getElementById("acmName");
+		if (acmName.value.length > 10 || acmName.value.trim()=='') {
+			alert("숙소이름은 10자로 이내로 정해주세요~");
+			acmName.value=acmName.value.substring(0, 10);
+			acmName.focus();
+			return false;		
+		}
+	
+		var acmDetailaddr=document.getElementById("acmDetailaddr");
+		if (acmDetailaddr.value.trim()=='') {
+			alert("주소찾기버튼을 눌러 주소를 입력해주세요 ");
+			acmDetailaddr.focus();
+			return false;		
+		}
 	    
-	    return flag;
+		var repPhone=document.getElementById("repPhone");
+		if (repPhone.value.trim()=='') {
+			alert("전화번호를 입력해주세요(10자리이내)");
+			repPhone.focus();
+			return false;		
+		}
+		
+		if (repPhone.value.length > 11) {
+			alert("전화번호는 10자리 이내입니다");
+			repPhone.value=repPhone.value.substring(0, 10);
+			repPhone.focus();
+			return false;		
+		}
+		
+		var acmEmail=document.getElementById("acmEmail");
+		if (acmEmail.value.trim()=='') {
+			alert("이메일을 입력해주세요");
+			acmEmail.focus();
+			return false;		
+		}
+		if(!CheckEmail(acmEmail.value)) {
+			alert("이메일 형식에 어긋납니다");
+			acmEmail.focus();
+			return false;
+		}
+		
+		var acmFax=document.getElementById("acmFax");
+		if (acmFax.value.trim()=='') {
+			alert("팩스번호를 입력해주세요(10자리이내)");
+			acmFax.focus();
+			return false;		
+		}
+		if (acmFax.value.length > 11 ) {
+			alert("팩스번호는 10자리이내로 입력하셔야합니다");
+			acmFax.value=acmFax.value.substring(0, 10);
+			acmFax.focus();
+			return false;		
+		}
+		
+		var bizRegnum=document.getElementById("bizRegnum");
+		if (bizRegnum.value.trim()=='') {
+			alert("사업자등록번호를 입력해주세요(10자리)");
+			bizRegnum.focus();
+			return false;		
+		}
+		if (bizRegnum.value.length!=10) {
+			alert("사업자등록번호형식 10자리로 입력하셔야합니다");
+			bizRegnum.value=bizRegnum.value.substring(0, 10);
+			bizRegnum.focus();
+			return false;		
+		}
+		
+	
+	    return true;
 	 }
 
 

@@ -52,7 +52,6 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		*필수 입력사항</br>
 	 	<form name="form" method="post" onsubmit="return checkValidation()">
 		<input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</br>
-	
 		이름*<input type="text" id="userInfo1" name='bookerFirstname' value='<%=user.getFstname() %>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"> 
 		성*<input type="text" id="userInfo2"  name='bookerLastname' value='<%=user.getLastname()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
 		<label id="nameMsg" >&nbsp</label></br>
@@ -98,26 +97,25 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		</select></br> 
 		흡연여부: 금연객실<input type="radio" name="smoking" value="0" checked="checked">
 			흡연객실<input type="radio" name="smoking" value="1"></br> 
-		특별 요청사항: <input type="text" size="100" id="request" name="request" value=""></br> 
-			<input type="hidden" name="bookStatus" value="RS_STT_BK" maxlength="100"> 
+		특별 요청사항: <input type="text" size="100" id="request" name="request" value="" maxlength="100"></br> 
+			<input type="hidden" name="bookStatus" value="RS_STT_BK" > 
 					
 		</br></br></br>	
 		[요금정보] (결제 관련 미구현)</br>
 		<table>
-			<tr><td>₩<c:out value="${rom.romPrice}" /> X <%=staydays%>박</td><td>&emsp;</td><td>₩ <%=bookPrice%></td></tr>
-			<tr><td>세금 및 봉사료</td><td> &emsp;</td><td>₩ <%=bookPrice / 10%></td></tr>
+			<tr><td>₩ <fmt:formatNumber value="${rom.romPrice}" type="number"/> X <%=staydays%>박</td><td>&emsp;</td><td>₩ <fmt:formatNumber value="<%=bookPrice%>" type="number"/></td></tr>
+			<tr><td>세금 및 봉사료</td><td> &emsp;</td><td>₩ <fmt:formatNumber value="<%=bookPrice/10%>" type="number"/></td></tr>
 			<tr><td>총 할인 금액</td><td> &emsp;</td><td>₩ 0</td></tr>
 			<tr><td>회원 등급 할인</td><td> &emsp;</td><td>₩ 0</td></tr>
 			<tr><td>보유쿠폰 할인</td><td> &emsp;</td><td>₩ 0</td></tr>
 			<tr><td>적립금 사용</td><td> &emsp;</td><td>₩ 0</td></tr>
 			<tr><td></td><td> &emsp;</td><td></td></tr>
-			<tr><td>합계</td><td> &emsp;</td><td>₩ <%=bookPrice + (bookPrice / 10) %></td></tr>
-			<tr><td>(1박 평균)</td><td> &emsp;</td><td>₩ <%= (bookPrice + (bookPrice / 10)) / staydays %></td></tr>
+			<tr><td>합계</td><td> &emsp;</td><td>₩ <fmt:formatNumber value="<%=(bookPrice + (bookPrice / 10)) %>" type="number"/></td></tr>
+			<!-- <tr><td>(1박 평균)</td><td> &emsp;</td><td>₩ </td></tr> -->
 		</table>
 		</br></br></br>
 		<button data-oper='booking'>예약하기</button>
 	</form>
-	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 		
 		window.onload = function() {
@@ -136,14 +134,15 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		const lastname = document.getElementById("userInfo2");
 		const email = document.getElementById("userInfo3");
 		const phone = document.getElementById("userInfo4");
-		const request = document.getElementById("request");
 		
 		function firstnameValid() {
 			if (!firstname.value) {
 				firstname.placeholder = "이름을 입력하지 않았습니다.";
+				firstname.focus();
 				return false;
 			} else if ((!regFirstnameKo.test(firstname.value)&&(!regFirstnameEn.test(firstname.value))) ) {
 				document.getElementById("nameMsg").innerText = "이름은 1~60자의 영문 또는 1~20자의 한글만 사용 가능합니다.";
+				firstname.focus();
 				return false;
 			}else{
 				document.getElementById("nameMsg").innerHTML = '&nbsp';
@@ -154,9 +153,11 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		function lastnameValid() {
 			if (!lastname.value) {
 				lastname.placeholder = "성을 입력하지 않았습니다.";
+				lastname.focus();
 				return false; 
 			} else if ((!regLastnameKo.test(lastname.value)&&(!regLastnameEn.test(lastname.value))) ) {
 				document.getElementById("nameMsg").innerText = "성은 1~40자의 영문 또는 1~13자의 한글만 사용 가능합니다.";
+				lastname.focus();
 				return false; 
 			}else{
 				document.getElementById("nameMsg").innerHTML = '&nbsp';
@@ -167,9 +168,11 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		function emailValid() {
 			if (!email.value) {
 				email.placeholder = "이메일을 입력하지 않았습니다.";
+				email.focus();
 				return false;
 			} else if (!regEmail.test(email.value) ) {
 				document.getElementById("emailMsg").innerText = "올바른 이메일 형식이 아닙니다.";
+				email.focus();
 				return false;
 			}else{
 				document.getElementById("emailMsg").innerHTML = '&nbsp';
@@ -180,6 +183,7 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		function phoneValid() {
 			if (!regPhone.test(phone.value) ) {
 				document.getElementById("phoneMsg").innerText = "연락처는 1~15자의 숫자만 가능합니다.";
+				phone.focus();
 				return false;
 			}else{
 				document.getElementById("phoneMsg").innerHTML = '&nbsp';
@@ -187,15 +191,10 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 			}
 		}
 		
-		function checkValidation() {
-			
-			// css 반영 후 제거 부분(단순 나열형식 때문에 페이지가 너무 길어져서 띄우는 알림창..)
-			if(!(firstnameValid()&&lastnameValid()&&emailValid()&&phoneValid())){
-				alert("예약 정보 입력창의 메세지를 확인하세요(임시 알림창)");
-			}
-			
+		function checkValidation(element) {
 			return firstnameValid()&&lastnameValid()&&emailValid()&&phoneValid();
 		}
+		
 		
 		// 체크박스를 눌렀을 때 실행되는 메서드
 		function setInfo() {

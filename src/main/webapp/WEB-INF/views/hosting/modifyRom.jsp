@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
 	.room{
 		float:left;
@@ -14,7 +12,7 @@
 	}
 </style>
 
-<%@include file="../includes/Hostheader.jsp"%>
+<%@include file="../includes/hostheader.jsp"%>
 <!-- nav-sidebar -->
 <nav>
 <div class="navbar-default sidebar" role="navigation">
@@ -61,7 +59,7 @@
       <div class="panel-heading">객실 수정하기</div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-		<form id="actionForm" method="post">
+		<form id="actionForm">
 			<div class="form-group">
 	          <label>소속숙소번호</label> <input class="form-control" name='acmNum' id='acmNum'
 	            value='<c:out value="${thisrom.acmNum }"/>' readonly="readonly">
@@ -112,7 +110,7 @@
 	
 	
 			<button data-oper='modify' class="btn btn-default">수정완료</button>
-			<button data-oper='list' class="btn btn-info">뒤로가기</button>
+			<button data-oper='getRom' class="btn btn-info">수정취소</button>
 				
 		</form>
 		</div>
@@ -127,6 +125,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
+		var acmNum = $("#acmNum").val();
 		
 		$('button').on("click", function(e){
 			e.preventDefault();
@@ -135,9 +134,12 @@
 			var operation=$(this).data("oper");
 			console.log(operation);
 			
-			if(operation==='list'){
-				alert("목록으로 돌아갑니다");
-				formObj.attr("action","/hosting/become-host2_6");	
+			//취소 버튼을 누르면 getRom으로 
+			if(operation==='getRom'){
+				alert("수정이 취소되었습니다");
+				//formObj안에 romNum값이 있으니~
+				formObj.attr("action","/hosting/getRom");	
+				
 			} else if(operation==='modify'){
 				var flag=true;
 				
@@ -152,6 +154,7 @@
 				});
 				
 				if(flag){alert("객실 수정이 완료되었습니다");
+					formObj.attr("method","post");
 					formObj.attr("action","/hosting/modifyRom");//홈의 내용과 다같이 들어간다
 				
 				}else return;

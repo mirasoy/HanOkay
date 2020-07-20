@@ -59,6 +59,16 @@
 		<servlet-name>appServlet</servlet-name>
 	</filter-mapping>
 
-	
+<!-- 404 에러 처리 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/404error.jsp</location>
+	</error-page>
+
+<!-- 500 에러 처리 -->
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500error.jsp</location>
+	</error-page>
 
 </web-app>

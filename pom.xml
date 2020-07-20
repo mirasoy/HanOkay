@@ -118,6 +118,12 @@
          <artifactId>jstl</artifactId>
          <version>1.2</version>
       </dependency>
+      
+      <dependency>
+    <groupId>javax.el</groupId>
+    <artifactId>javax.el-api</artifactId>
+    <version>3.0.0</version>
+	</dependency>
 
       <!-- Test -->
       <dependency>
@@ -127,16 +133,21 @@
          <scope>test</scope>
       </dependency>
 
+	<!-- test 라이브러리 -->
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-test</artifactId>
          <version>${org.springframework-version}</version>
       </dependency>
+      
+      <!-- 스프링 jdbc 라이브러리 -->
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-jdbc</artifactId>
          <version>${org.springframework-version}</version>
       </dependency>
+      
+      <!-- transaction 라이브러리 -->
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-tx</artifactId>
@@ -196,7 +207,12 @@
          <artifactId>jackson-dataformat-xml</artifactId>
          <version>2.9.6</version>
       </dependency>
-
+	<dependency>
+         <groupId>com.fasterxml.jackson.core</groupId>
+         <artifactId>jackson-databind</artifactId>
+         <version>2.9.8</version>
+    </dependency>
+		
       <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
       <dependency>
          <groupId>com.google.code.gson</groupId>

@@ -43,6 +43,9 @@
 
 	</div>
 	<button id='uploadBtn'>Upload</button>
+   
+      
+
 
 
 
@@ -64,7 +67,7 @@
 					return false;
 				}
 				if (!(regex.test(fileName))) {
-					alert("그림파일만가능합니다.")
+					alert("그림파일만 가능합니다.")
 					return false;
 				}
 				return true;
@@ -79,14 +82,27 @@
 				$(uplodResultArr).each(function (i, obj) {
 
 					if (!obj.image) {
-						str += "<li><img src='../resources/img/attach.png'>" + obj.fileName + "</li>"
+						//이거는 이미지 외 파일도 받을때
+						//str += "<li><img src='../resources/img/logo.png'>" + obj.fileName + "</li>"
+						alert("그림파일만 가능합니다.")
+						return false;
 					} else {
-						str += "<li>" + obj.fileName + "</li>";
+						var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_"+obj.uuid+"_"+obj.fileName);
+						var originPath =  obj.uploadPath + "/"+obj.uuid+"_"+obj.fileName;
+                  originPath = originPath.replace(new RegExp(/\\/g),"/");
+
+                  str += "<li><a href=\"javascript:showImage()\'"+originPath+"\')\">"+
+                        "<img src = '/review/display?fileName="+fileCallPath+"'></a>"+
+                        "<span daea-file=\'"+fileCallPath+"\' date=type='image'>x </span>"+"</li>";
 					}
 				});
 				uploadResult.append(str);
 			}
-
+	
+			
+			//파일 삭제관련
+			
+			
 
 			//파일 업로드
 			var cloneObj = $(".uploadDiv").clone();
@@ -128,8 +144,9 @@
 				});
 
 
-			})
-
+			});
+			
+		
 
 
 

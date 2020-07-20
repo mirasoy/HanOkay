@@ -38,7 +38,7 @@
          <tr>
          <!-- 동적으로 생월 생일 생년 옵션 뿌려주기 -->
             <td><p>생년월일(*)</p>
-            <select class="inputField" name="selectBirthMonth" id="selectBirthMonth" onchange="call()" >
+            <select class="select" name="selectBirthMonth" id="selectBirthMonth" onchange="call()" >
                   <option value="">--생월--</option>
                   <option value="1">Jan</option>
                   <option value="2">Feb</option>
@@ -53,10 +53,10 @@
                   <option value="11">Nov</option>
                   <option value="12">Dec</option>
             </select> 
-            <select class="inputField" name="selectBirthday" id="selectBirthday" >
+            <select class="select" name="selectBirthday" id="selectBirthday" >
                   <option value="">--생일--</option>
             </select> 
-            <select class="inputField" name="selectBirthYear" id="selectBirthYear" >
+            <select class="select" name="selectBirthYear" id="selectBirthYear" >
                   <option value="">--생년--</option>
             </select>
             <br>
@@ -65,7 +65,7 @@
                <br>
                <p>(*)표시된 항목은 반드시 입력해주십시오</p>
                <button data-oper='register' class="btn btn-default">가입하기</button>
-               <!-- <button data-oper='sendEmailAuth' class="btn btn-default" id="sendEmailAuth">인증메일 발송</button> -->
+               <button data-oper='sendEmailAuth' class="btn btn-default" id="sendEmailAuth">인증메일 발송</button> 
             </td>
             
          </tr>
@@ -113,7 +113,7 @@
    
    //빈값체크
    function isEmpty(target) {
-       if(target === null || target==null || target === undefined || target === '' || target =='' ) {
+       if( target === "undefined" ||target === null || target==null || target === '' || target =='' ) {
            return true;
        }
 
@@ -240,7 +240,6 @@
             	   //async: false,
             	   success: function(data){
             		   console.log(data);
-            		 //  alert(data.msg);
             		   $('span#msg1').text(data.msg);
             	   },
             	   error: function(data){
@@ -248,7 +247,6 @@
             	   }
             	 });
                return result;
-               
                
               }
             
@@ -270,15 +268,15 @@
             //이메일과 비밀번호 유효성 확인
             if(checkEmail(email) && checkPwd(pwd, repeatedPwd)) {
             
-            let bmonth=document.getElementById("selectBirthMonth").value;
-            let byear=document.getElementById("selectBirthYear").value;
-            let bday=document.getElementById("selectBirthday").value;
+            var bmonth=document.getElementById("selectBirthMonth").value;
+            var byear=document.getElementById("selectBirthYear").value;
+            var bday=document.getElementById("selectBirthday").value;
             
             console.log("bmonth: "+bmonth);
             console.log("byear: "+ byear);
             console.log("bday: "+ bday);
             
-            console.log($('#checkbox').is(':checked')); 
+            console.log("checkbox: checked? "+$('#checkbox').is(':checked')); 
             
             //select 의 옵션들을 date형식으로 바꿔주기 (userVO를 만들기 위함)
             let b= new Date(byear, bmonth-1, bday);
@@ -287,14 +285,16 @@
             console.log("formatted birthday: "+ formatted_date);
             
             $("input[id='birthday']").val(formatted_date);
-            
-            
             }
-            //생년 생월 생일을 선택하였는지 확인
-          	 if($("input[id='birthday']").val() =='1899/11/30'){
-        	   window.alert("생년월일을 제대로 선택해주세요!");
-        	   return;
-         	  }
+            //생년 생월 생일을 선택하였는지 확인(SELECTED 되었는지 확인- 수정필요)
+            function validateBirthday(){
+            	
+            var select= document.getElementById("select");
+            var selectedVal= select.options[select.selectedIndex].value;
+            if(selectedVal == "")
+          	console.log("selectedVal: "+ selectedVal);
+        	   window.alert("생년월일을 제대로 선택해주세요!");      	
+            }          
             
             //성과 이름 빈 값이 아닌지 확인
             if(isEmpty(fstname) || isEmpty(lastname)){
@@ -308,18 +308,24 @@
             	return;
             }
             
-            if(assureEmailCheck !=='pass'){
+            /*  if(assureEmailCheck !=='pass'){
             	window.alert("중복검사는 반드시 통과하여야합니다");
             	return;
-            }
-            formObj.attr("action", "/register/register");
-            formObj.submit(); 
+            }  */
+            /* formObj.attr("action", "/register/register");
+            formObj.submit();  */
          }
          
-         //sendEmailAuth메일 보내기(미완)
-        /*  if( operator === 'sendEmailAuth'){
-         } */
-         
+         //sendEmailAuth메일 보내기
+          if( operator === 'sendEmailAuth'){
+        	  //form의 내용(UserVO를 만들기 위한 변수값들) 을 쿠키에 저장
+        	  //controller로 전송
+        	  formObj.attr("action", "/register/emailAuth");
+              formObj.submit(); 
+              
+              
+         } 
+        
       });
       });
    </script>
