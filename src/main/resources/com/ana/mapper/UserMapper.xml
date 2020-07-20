@@ -12,6 +12,7 @@
 		<result property="userFstName" column="U_FSTNAME"/>
 		<result property="userPhone" column="U_PHONE"/>
 		<result property="userBirthday" column="U_BIRTHDAY"/>
+		<result property="userRegisterDate" column="U_REGDATE" />
 		<result property="userRegisterMethod" column="U_REGMETHOD"/>
 		<result property="userPriv" column="U_PRIV"/>
 		<result property="userProfilePicUrl" column="U_PURL" />

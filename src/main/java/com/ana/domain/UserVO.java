@@ -14,6 +14,7 @@ public class UserVO {
 	private String userLastName;
 	private String userPhone;
 	private Date userBirthday;
+	private Date userRegisterDate;
 	private String userRegisterMethod;
 	private String userPriv;
 	private String userProfilePicUrl;
