@@ -8,27 +8,20 @@ import lombok.Data;
 public class UserVO {
 
 	private String userNum;
-	private String email;
-	private String pwd;
-	private String fstname;
-	private String lastname;
+	private String userEmail;
+	private String userPwd;
+	private String userFstName;
+	private String userLastName;
 	private String userPhone;
-	private Date birthday;
+	private Date userBirthday;
+	private String userRegisterMethod;
 	private String userPriv;
-	private String regMethod;
-	
-	public UserVO() {}
-	
-	public UserVO(String userNum, String email, String pwd, String lastname, String fstname, String userPhone,
-			Date birthday, String userPriv, String regMethod) {
-		this.userNum = userNum;
-		this.email = email;
-		this.pwd = pwd;
-		this.fstname = fstname;
-		this.lastname = lastname;
-		this.userPhone = userPhone;
-		this.birthday = birthday;
-		this.userPriv = userPriv;
-		this.regMethod = regMethod;
-	}
+	private String userProfilePicUrl;
+	private String userProfilePicName;
+	private String userIntroduction;
+	private String userLanguage;
+	private String userStatusCode;
+	private String bizRegisterNumber;
+	private String bizRegisterPicUrl;
+	private String userAuthCode;
 }

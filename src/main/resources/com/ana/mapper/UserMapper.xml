@@ -6,32 +6,40 @@
 
 	<resultMap id="UserVO" type="com.ana.domain.UserVO">
 		<result property="userNum" column="USER_NUM"/>
-		<result property="email" column="EMAIL"/>
-		<result property="pwd" column="PWD"/>
-		<result property="fstname" column="U_FSTNAME"/>
-		<result property="lastname" column="U_LASTNAME"/>
+		<result property="userEmail" column="U_PWD"/>
+		<result property="userPwd" column="U_EMAIL"/>
+		<result property="userLastName" column="U_LASTNAME"/>
+		<result property="userFstName" column="U_FSTNAME"/>
 		<result property="userPhone" column="U_PHONE"/>
-		<result property="birthday" column="U_BIRTHDAY"/>
+		<result property="userBirthday" column="U_BIRTHDAY"/>
+		<result property="userRegisterMethod" column="U_REGMETHOD"/>
 		<result property="userPriv" column="U_PRIV"/>
-		<result property="regMethod" column="REG_METHOD"/>
+		<result property="userProfilePicUrl" column="U_PURL" />
+		<result property="userProfilePicName" column="U_PICNAME" />
+		<result property="userIntroduction" column="U_INTRO" />
+		<result property="userLanguage" column="U_LANG" />
+		<result property="userStatusCode" column="U_STAT_CODE" />
+		<result property="bizRegisterNumber" column="BIZ_REGNUM" />
+		<result property="bizRegisterPicUrl" column="BIZ_REGPURL" />
+		<result property="userAuthCode" column="U_AUTH_CODE" />
 	</resultMap>
 
 <!-- id와 pwd가 일치하는 user의 모든 정보를 읽어오는 쿼리 -->
 <select id="getUserById" resultMap="UserVO">
-select * from tuser where email=#{email}
+select * from tuser where u_email=#{userEmail}
 </select>
 
 
 <!-- DB에 존재하는 id와 pwd인지 확인하는 쿼리 -->
 <select id="isValidUser" resultType="int">
 select count(*) from tuser
-where EMAIL=#{email} and PWD= #{pwd}
+where u_email=#{userEmail} and u_pwd=#{userPwd}
 </select>
 
 <!-- 이메일 중복 검사 쿼리 -->
 <select id="checkEmail" resultType="int">
 select count(*) from tuser
-where EMAIL= #{email}
+where u_email=#{userEmail}
 </select>
 
 <!-- 유저 정보 읽어오는 쿼리 -->
@@ -46,17 +54,17 @@ select * from tuser
 
 <!-- 유저 테이블에 한 행 삽입하는 쿼리 -->
 <insert id="insertUser">
-insert into tuser(USER_NUM, EMAIL, PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY)
-values(concat('U',SEQ_USER.nextval),#{email}, #{pwd}, #{lastname}, #{fstname}, #{birthday})
+insert into tuser(USER_NUM, U_EMAIL, U_PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY)
+values(concat('U',SEQ_TUSER.nextval),#{userEmail}, #{userPwd}, #{userLastName}, #{userFstName}, #{userBirthday})
 </insert>
 
 
 <insert id="insertSelectKey">
 <selectKey resultType="String" order="BEFORE" keyProperty="userNum">
-select concat('U',seq_user.nextval) from dual 
+select concat('U',SEQ_TUSER.nextval) from dual 
 </selectKey>
-insert into tuser(USER_NUM, EMAIL, PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY) 
-values(#{userNum}, #{email}, #{pwd}, #{lastname}, #{fstname}, #{birthday}) 
+insert into tuser(USER_NUM, U_EMAIL, U_PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY) 
+values(#{userNum}, #{userEmail}, #{userPwd}, #{userLastName}, #{userFstName}, #{userBirthday}) 
 </insert>
 
 <!-- 유저 테이블에 해당 유저 번호가진 행 삭제하는 쿼리 -->
@@ -68,7 +76,7 @@ delete from tuser where USER_NUM = #{userNum}
 <update id="updateUser">
 update tuser
 set
-EMAIL=#{email}, PWD=#{pwd}, U_LASTNAME=#{lastname}, U_FSTNAME=#{fstname}, U_BIRTHDAY=#{birthday}
+U_EMAIL=#{userEmail}, U_PWD=#{userPwd}, U_LASTNAME=#{userLastName}, U_FSTNAME=#{userFstName}, U_BIRTHDAY=#{userBirthday}
 where USER_NUM=#{userNum}
 </update>
 
