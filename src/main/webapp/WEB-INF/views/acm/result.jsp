@@ -151,7 +151,7 @@
 		<c:forEach items="${list }" var="acm">
 		  
 			<tr class='move' href='<c:out value="${acm.acmNum}"/>' onclick="location.href='<c:out value="${acm.acmNum}"/>'" style="cursor:pointer;"> 
-				<td><img alt="" src="<c:out value="${acm.acmPurl}"/>" width="100"></td>
+				<td><img alt="" src="<c:out value="${acm.acmPurl}"/>s\<c:out value="${acm.acmPname}"/>" width="100"></td>
 				<td><c:out value="${acm.acmName}" /></td>
 				<td><c:out value="${acm.acmCity }" /> <c:out value="${acm.acmDistr }" /> <c:out value="${acm.acmDetailaddr }" /></td>
 				<td><c:out value="${acm.acmDesc }" /></td>
