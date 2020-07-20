@@ -41,8 +41,6 @@ public class AcmServiceTests {
 		acm.setAcmCity("새로운 숙소 시");
 		acm.setAcmDistr("새로운 숙소 동");
 		acm.setAcmDetailaddr("새로운 숙소 상세주소");
-		acm.setRepPhone(8212341234L);
-		acm.setBizRegnum(56785678L);
 		acm.setCheckinTime("AM11");
 		acm.setCheckoutTime("PM04");
 		

@@ -7,7 +7,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>한오케이-잘못된 접근</title>
+<title>Han:ok-잘못된 접근</title>
 </head>
 <body>
 	<h1>에러! 404 잘못된 URL입니다 </h1>
