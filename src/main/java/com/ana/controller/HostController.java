@@ -57,7 +57,7 @@ public class HostController {
 		String userFstname="";
 		
 		if(user!=null) {
-			userFstname=user.getFstname();
+			userFstname=user.getUserFstName();
 		}
 		
 		return userFstname;
