@@ -7,17 +7,17 @@
 <!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
 <%
 	UserVO user = (UserVO) session.getAttribute("user");
-String userLastname = "";
-String userFstname = "";
+String userLastName = "";
+String userFstName = "";
 String userPwd = "";
 String userNum = "";
 //userNum = "U1";
 
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
-	userLastname = user.getLastname();
-	userFstname = user.getFstname();
-	userPwd = user.getPwd();
+	userLastName = user.getUserLastName();
+	userFstName = user.getUserFstName();
+	userPwd = user.getUserPwd();
 	userNum = user.getUserNum();
 
 }
