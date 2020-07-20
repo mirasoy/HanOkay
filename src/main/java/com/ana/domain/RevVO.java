@@ -13,7 +13,6 @@ public class RevVO {
 	private String userNum;
 	private Date regDate;
 	private Date updateDate;
-	private String revPurl;
 	private Integer stisf;
 	private String acmNum;
 	private String bookNum;
@@ -22,5 +21,7 @@ public class RevVO {
 	private String acmName;
 	private String checkInDay;
 	private String checkOutDay;
-	
+	private String pusl;
+	private String pname;
+	private Date pregdate;
 }

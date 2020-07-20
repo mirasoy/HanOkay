@@ -1,308 +1,286 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ana.mapper.RevPostMapper">
 
-<resultMap id="RevDetailVOResult" type="com.ana.domain.RevDetailVO">
+	<resultMap id="RevDetailVOResult" type="com.ana.domain.RevDetailVO">
 		<result column="PST_NUM" property="pstNum" />
 		<result column="REV_PURL" property="revPurl" />
 		<result column="STISF" property="stisf" />
-		<result column="ACM_NUM" property="acmNum" />	
-		<result column="BOOK_NUM" property="bookNum" />	
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="BOOK_NUM" property="bookNum" />
 		<result column="CONTENT" property="content" />
-</resultMap>
+	</resultMap>
 
-<resultMap id="RevPostVOResult" type="com.ana.domain.RevPostVO">
+	<resultMap id="RevPostVOResult" type="com.ana.domain.RevPostVO">
 		<result column="PST_NUM" property="pstNum" />
 		<result column="BRD_CODE" property="brdCode" />
 		<result column="P_TITLE" property="title" />
-		<result column="USER_NUM" property="userNum" />	
-		<result column="P_REGDATE" property="regDate" />	
+		<result column="USER_NUM" property="userNum" />
+		<result column="P_REGDATE" property="regDate" />
 		<result column="P_UPDATEDATE" property="updateDate" />
-		<collection property="revDetail" resultMap="RevDetailVOResult"/>
-		
-</resultMap>
+		<collection property="revDetail" resultMap="RevDetailVOResult" />
+	</resultMap>
 
 
-<resultMap id="RevVOResult" type="com.ana.domain.RevVO">
+	<resultMap id="RevVOResult" type="com.ana.domain.RevVO">
 		<result column="PST_NUM" property="pstNum" />
 		<result column="BRD_CODE" property="brdCode" />
 		<result column="P_TITLE" property="title" />
-		<result column="USER_NUM" property="userNum" />	
-		<result column="P_REGDATE" property="regDate" />	
+		<result column="USER_NUM" property="userNum" />
+		<result column="P_REGDATE" property="regDate" />
 		<result column="P_UPDATEDATE" property="updateDate" />
-		<result column="REV_PURL" property="revPurl" />
 		<result column="STISF" property="stisf" />
-		<result column="ACM_NUM" property="acmNum" />	
-		<result column="BOOK_NUM" property="bookNum" />	
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="BOOK_NUM" property="bookNum" />
 		<result column="CONTENT" property="content" />
 		<result column="ACM_NAME" property="acmName" />
 		<result column="CHECKIN_DATE" property="checkInDay" />
 		<result column="CHECKOUT_DATE" property="checkOutDay" />
-</resultMap>
+		<result column="PST_PURL" property="pusl" />
+		<result column="PST_PNAME" property="pname" />
+		<result column="PST_PREGDATE" property="pregdate" />
+	</resultMap>
 
 
 
-<!-- 나의 리스트 불러오기 -->
-<select id="getMyList" resultMap="RevVOResult">
- select * from 
-        (SELECT
-                A.ACM_NAME,
-                B.BOOK_NUM,
-                B.checkin_Date,
-                B.cheCkout_Date,
-                b.user_num,
-                a.acm_num
-                
-            FROM 
-                TBOOKING B, TACM A, TROM R
-            WHERE 
-                B.ROM_NUM=R.ROM_NUM 
-            AND 
-                R.ACM_NUM=A.ACM_NUM 
-            AND 
-                B.BOOK_STATUS='RS_STT_AC') al,
-                
-                (select 
-                A.PST_NUM,
-                A.BRD_CODE,
-                a.p_title,
-                a.p_regdate,
-                a.p_updatedate,
-                a.user_num,
-                b.rev_purl,
-                B.STISF,
-                b.book_num,
-                b.content
-                
-                FROM
-                    TREV_POST A
-                LEFT JOIN
-                    trev_detail B
-                ON 
-                    a.pst_num = b.pst_num) bk
-        
-        where al.book_num = bk.book_num(+)
-        and al.user_num = #{loginUser}
-     
-        ORDER BY
-         al.checkin_Date
 
-</select>
+	<!-- 리뷰삭제 0 -->
+	<delete id="delete">
+		delete from TREVIEW where PST_NUM = #{pstNum}
+	</delete>
+
+	<!-- 리뷰수정0 -->
+	<update id="update">
+
+		UPDATE
+		TREVIEW
+		SET
+		p_title =#{title},
+		CONTENT
+		=#{content},
+		STISF=#{stisf}
+		WHERE
+		PST_NUM = #{pstNum}
+
+	</update>
 
 
-<!-- 예약번호로 불러오기 -->
-<select id="readByBookNum" resultMap="RevVOResult">
-SELECT 
-  AL.ACM_NAME,
-    AL.BOOK_NUM,
-       AL.checkin_Date,
-        AL.cheCkout_Date,
-        AL.pst_num,
-        al.user_nuM,
-        AL.acm_num
-FROM
-    (SElECT
-    
-        J.ACM_NAME,
-        J.BOOK_NUM,
-        J.checkin_Date,
-        J.cheCkout_Date,
-        J.USER_NUM,
-        j.acm_num,
-        t.pst_num
-        
-        FROM
-        (
-            SELECT
-                A.ACM_NAME,
-                B.BOOK_NUM,
-                B.checkin_Date,
-                B.cheCkout_Date,
-                a.acm_num,
-                b.user_num
-                
-            FROM 
-                TBOOKING B, TACM A, TROM R
-            WHERE 
-                B.ROM_NUM=R.ROM_NUM 
-            AND 
-                R.ACM_NUM=A.ACM_NUM 
-            AND 
-                B.BOOK_STATUS='RS_STT_AC'
-        )J,
-        trev_detail T
-        
-        WHERE
-        j.book_num= t.book_num(+)
-        ) AL,
-        TREV_POST PST
-        
-        
-        WHERE
-        al.pst_num = pst.pst_num(+)
-        AND
-        al.book_num =  #{bookNum}
-          
-        ORDER BY
-         AL.checkin_Date
-        
-</select>
 
-<!-- 리뷰하나 pstNum으로 불러오기 -->
-<select id="read" resultMap="RevVOResult">
-SELECT 
-  AL.ACM_NAME,
-    AL.BOOK_NUM,
-       AL.checkin_Date,
-        AL.cheCkout_Date,
-        AL.pst_num,
-        al.user_nuM,
-        AL.acm_num,
-        al.content,
-        al.stisf,
-        pst.p_title,
-        pst.brd_code,
-        pst.user_num,
-        pst.p_regdate,
-        pst.p_updatedate
-        
-        
-FROM
-    (SElECT
-    
-        J.ACM_NAME,
-        J.BOOK_NUM,
-        J.checkin_Date,
-        J.cheCkout_Date,
-        J.USER_NUM,
-        j.acm_num,
-        t.pst_num,
-        t.content,
-        t.stisf
-        
-        
-        
-        FROM
-        (
-            SELECT
-                A.ACM_NAME,
-                B.BOOK_NUM,
-                B.checkin_Date,
-                B.cheCkout_Date,
-                a.acm_num,
-                b.user_num
-                
-            FROM 
-                TBOOKING B,TACM A, TROM R
-            WHERE 
-             
-                B.ROM_NUM=R.ROM_NUM 
-            AND 
-                R.ACM_NUM=A.ACM_NUM 
-                
-        )J,
-        trev_detail T
-        
-        WHERE
-        j.book_num= t.book_num(+)
-        ) AL,
-        TREV_POST PST
-        
-        
-        WHERE
-        al.pst_num = pst.pst_num(+)
-        AND
-        pst.pst_num = #{pstNum}
-
-        ORDER BY
-        AL.checkin_Date
-      
-</select>
+	<!-- 리뷰등록하기 0 -->
+	<insert id="insert">
+		<selectKey keyProperty="pstNum" order="BEFORE"
+			resultType="String">
+			select concat('RV',SEQ_REV.nextval) from dual
+		</selectKey>
+		INSERT INTO
+		TREVIEW(PST_NUM,BRD_CODE,P_TITLE,USER_NUM,STISF,ACM_NUM,BOOK_NUM,CONTENT)
+		VALUES(
+		#{pstNum},'REV',#{title},#{userNum},#{stisf},#{acmNum},#{bookNum},#{content}
+		)
 
 
-<!-- 리뷰삭제 -->
-<delete id="delete">
-	delete from TREV_POST where PST_NUM = #{pstNum}
-</delete>
 
-<!-- 리뷰수정 -->
-<update id="update">
-	
-UPDATE
-    TREV_POST
-SET
-    brd_code = #{brdCode},
-    p_title =#{title},
-    user_num =#{userNum}
-WHERE
-    PST_NUM = #{pstNum}
-		
-</update>
-
-<!-- 전체 숙박완료 리스트 (전사용자) 불러오기 -->
-<select id="getList" resultMap="RevVOResult" >
-
-SELECT
-    A.ACM_NAME,
-    B.BOOK_NUM,
-    B.checkin_Date,
-    B.cheCkout_Date
-FROM 
-	TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
-WHERE 
-	B.BOOK_NUM=S.BOOK_NUM 
-AND 
-	B.ROM_NUM=R.ROM_NUM 
-AND 
-	R.ACM_NUM=A.ACM_NUM 
-AND 
-	S.BOOK_STATUS='RS_STT_AC'
-    
-</select>
+	</insert>
 
 
-<!-- 리뷰등록하기 -->
-<insert id="insert" >
-<selectKey keyProperty="pstNum" order="BEFORE" resultType="String">
-select SEQ_REV.nextval from dual
-</selectKey>
+	<!-- 예약번호로 불러오기 0 -->
+	<select id="readByBookNum" resultMap="RevVOResult">
+		SELECT
+		PST.PST_NUM ,
+		PST.BRD_CODE ,
+		PST.P_TITLE ,
+		PST.USER_NUM ,
+		PST.P_REGDATE ,
+		PST.P_UPDATEDATE ,
+		PST.STISF ,
+		PST.CONTENT ,
+		J.ACM_NUM ,
+		J.BOOK_NUM ,
+		J.ACM_NAME ,
+		J.CHECKIN_DATE ,
+		J.CHECKOUT_DATE
 
-    INSERT ALL
-    INTO TREV_POST(PST_NUM, BRD_CODE, P_TITLE, USER_NUM)
-    VALUES(#{pstNum},'RV',#{title},#{userNum})  
-    INTO TREV_DETAIL(pst_num,  REV_PURL , STISF , ACM_NUM ,BOOK_NUM, CONTENT  )
-    VALUES(#{pstNum},#{revPurl},#{stisf},#{acmNum},#{bookNum},#{content}) 
-    SELECT * 
-    FROM DUAL
+		FROM
+		(
+		SELECT
+		A.ACM_NUM ,
+		B.BOOK_NUM ,
+		A.ACM_NAME ,
+		B.CHECKIN_DATE ,
+		B.CHECKOUT_DATE
+		FROM
+		TBOOKING B,
+		TACM A, TROM R
+		WHERE
+		B.ROM_NUM=R.ROM_NUM
+		AND
+		R.ACM_NUM=A.ACM_NUM
+		AND
+		B.BOOK_STATUS='RS_STT_AC'
+		)J,
+
+		TREVIEW PST
+
+		WHERE
+		J.BOOK_NUM =
+		pst.BOOK_NUM(+)
+		AND
+		J.book_num = #{bookNum}
+
+		ORDER BY
+		J.checkin_Date
+
+	</select>
 
 
-</insert>
+	<!-- 나의 리스트 불러오기0 -->
+	<select id="getUserBookingACList" resultMap="RevVOResult">
+		SELECT
+		PST.PST_NUM ,
+		PST.BRD_CODE ,
+		PST.P_TITLE ,
+		PST.USER_NUM ,
+		PST.P_REGDATE ,
+		PST.P_UPDATEDATE ,
+		PST.STISF ,
+		PST.CONTENT ,
+		J.ACM_NUM ,
+		J.BOOK_NUM ,
+		J.ACM_NAME ,
+		J.CHECKIN_DATE ,
+		J.CHECKOUT_DATE
 
-<!-- 숙소 상세페이지: 숙소별 리뷰 목록을 불러온다 -->
-<select id="getAcmList" resultMap="RevPostVOResult" >
-	select 
-	A.PST_NUM,
-	A.BRD_CODE,
-	a.p_title,
-	a.p_regdate,
-	a.p_updatedate,
-	a.user_num,
-	b.rev_purl,
-	B.STISF,
-	b.acm_num,
-	b.book_num,
-	b.content
-	
-	FROM
-	    TREV_POST A
-	LEFT JOIN
-	    trev_detail B
-	ON 
-	    a.pst_num = b.pst_num
-    
-    WHERE b.acm_num = #{acmNum}
-</select>
+		FROM
+		(
+		SELECT
+		A.ACM_NUM ,
+		B.BOOK_NUM ,
+		A.ACM_NAME ,
+		B.CHECKIN_DATE ,
+		B.CHECKOUT_DATE
+		FROM
+		TBOOKING B,
+		TACM A, TROM R
+		WHERE
+		B.ROM_NUM=R.ROM_NUM
+		AND
+		R.ACM_NUM=A.ACM_NUM
+		AND
+		B.BOOK_STATUS='RS_STT_AC'
+		)J,
 
+		TREVIEW PST
+
+		WHERE
+		J.BOOK_NUM =
+		pst.BOOK_NUM(+)
+		AND
+		PST.user_num = #{loginUser}
+
+		ORDER BY
+		J.checkin_Date
+
+	</select>
+
+	<!-- 리뷰하나 pstNum으로 불러오기0 -->
+	<select id="read" resultMap="RevVOResult">
+		SELECT
+		PST.PST_NUM ,
+		PST.BRD_CODE ,
+		PST.P_TITLE ,
+		PST.USER_NUM ,
+		PST.P_REGDATE ,
+		PST.P_UPDATEDATE ,
+		PST.STISF
+		,
+		PST.CONTENT ,
+		J.ACM_NUM ,
+		J.BOOK_NUM ,
+		J.ACM_NAME ,
+		J.CHECKIN_DATE ,
+		J.CHECKOUT_DATE
+
+		FROM
+		(
+		SELECT
+		A.ACM_NUM ,
+		B.BOOK_NUM ,
+		A.ACM_NAME ,
+		B.CHECKIN_DATE ,
+		B.CHECKOUT_DATE
+		FROM
+		TBOOKING B, TACM A, TROM R
+		WHERE
+		B.ROM_NUM=R.ROM_NUM
+		AND
+		R.ACM_NUM=A.ACM_NUM
+		AND
+		B.BOOK_STATUS='RS_STT_AC'
+		)J,
+
+		TREVIEW PST
+
+		WHERE
+		J.BOOK_NUM = pst.BOOK_NUM(+)
+		AND
+		pst.pst_num =
+		#{pstNum}
+
+		ORDER BY
+		J.checkin_Date
+
+	</select>
+
+
+
+
+
+
+	<!-- 전체 숙박완료 리스트 (전사용자) 불러오기 -->
+	<select id="getList" resultMap="RevVOResult">
+		SELECT
+		A.ACM_NUM ,
+		B.BOOK_NUM ,
+		A.ACM_NAME ,
+		B.CHECKIN_DATE ,
+		B.CHECKOUT_DATE
+		FROM
+		TBOOKING B, TACM A,
+		TROM R
+		WHERE
+		B.ROM_NUM=R.ROM_NUM
+		AND
+		R.ACM_NUM=A.ACM_NUM
+		AND
+		B.BOOK_STATUS='RS_STT_AC'
+
+	</select>
+
+
+
+	<!-- 숙소 상세페이지: 숙소별 리뷰 목록을 불러온다 -->
+	<select id="getAcmList" resultMap="RevPostVOResult">
+		select
+		A.PST_NUM,
+		A.BRD_CODE,
+		a.p_title,
+		a.p_regdate,
+		a.p_updatedate,
+		a.user_num,
+		b.rev_purl,
+		B.STISF,
+		b.acm_num,
+		b.book_num,
+		b.content
+
+		FROM
+		TREV_POST A
+		LEFT JOIN
+		trev_detail B
+		ON
+		a.pst_num = b.pst_num
+
+		WHERE b.acm_num = #{acmNum}
+	</select>
 </mapper>
