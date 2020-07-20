@@ -31,36 +31,44 @@ public class BookingMapperTests {
 
 	@Test
 	public void testInsert() {								
-		mapper.changeStatus("B1", "예약완료");		
+		mapper.changeStatus("B3", "예약완료");		
 	}
 	
+	// 취소버튼 클릭시 변경됨 ('RS_STT_BC')
+	@Test
+	public void testDelete() {
+		log.info("DELETE COUNT: " + mapper.delete("B1"));
+	}
 
 
-	//1. 모든 예약 목록을 가져오기 위한 리스트 테스트
+	//현재 예약의 모든 목록을 가져옴
+	@Test
+    public void testGetList() {
+		mapper.getList().forEach(board -> log.info(board));
+	}
+	
+	
+	
+	//1. 지정한 유저 (U1)의 모든 예약 목록을 가져오기 위한 리스트 테스트
 	@Test
 	public void getBookListAll() {
 		mapper.getBookListAll("U1").forEach(board->log.info(board));
 	}
 
-	//@Test
-	public void testDelete() {
-		log.info("DELETE COUNT: " + mapper.delete("B13"));
-	}
 	
 	
-	//@Test
+	@Test
 	public void testUpdate() {
 		BookingVO board = new BookingVO();
 	
-		board.setBookNum("B8");
-		board.setUserNum("A1");
+		board.setBookNum("B3");
+		board.setUserNum("U1");
 		board.setRomNum("수정된 방번호");
 		board.setStaydays(1);
 		board.setGuest(22);
 		board.setBookPrice(123);
 		board.setExpectedArr("수정된 예정시간");
-		board.setRequest("수정된 요청사항");
-		board.setRealArr("수정된 도착시간");
+		board.setRequest("수정된 요청사항");		
 		
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/mm/dd");
 		try {
@@ -78,16 +86,16 @@ public class BookingMapperTests {
 	}
 	
 	//2. 예약중인 목록을 가져오기 위한 리스트 테스트	
-	//@Test
+	@Test
 	public void getBookList() {
-		mapper.getBookList("A1").forEach(board->log.info(board));
+		mapper.getBookList("U1").forEach(board->log.info(board));
 	}
 	
 	
 	//3. 취소한 내역으로 상태변화를 업데이트 하는 코드
-	//@Test
+	@Test
 	public void testCancel() {
-		mapper.getCancelList("A1").forEach(board2->log.info(board2));
+		mapper.getCancelList("U1").forEach(board2->log.info(board2));
 	}
 	
 	
@@ -98,13 +106,6 @@ public class BookingMapperTests {
 	}
 	
 	
-	
-	
-	// 취소한 내역으로 상태변화를 업데이트 하는 코드	
-	//@Test
-	public void testDelete2() {
-		log.info("DELETE COUNT: " + mapper.delete("B13"));
-	}
 	
 	
 //	@Test
@@ -143,11 +144,7 @@ public class BookingMapperTests {
 	
 	
 	
-	
-	@Test
-    public void testGetList() {
-		mapper.getList().forEach(board -> log.info(board));
-	}
+
 	
 //	@Test
 //	public void testRead() {
@@ -178,7 +175,6 @@ public class BookingMapperTests {
 		book.setExpectedArr("PM02");
 		book.setSmoking("1");
 		book.setRequest("뷰 좋은 방 주세요");
-		book.setRomName("테스트");
 		book.setBookerLastname("테스트");
 		book.setBookerFirstname("테스트");
 		book.setBookerEmail("test@ana.com");

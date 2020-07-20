@@ -25,8 +25,6 @@ public class BookingVO {
 	private String expectedArr;
 	private String smoking;
 	private String request;
-	private String realArr;
-	private String romName;
 	private String bookerLastname;
 	private String bookerFirstname;
 	private String bookerEmail;

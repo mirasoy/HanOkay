@@ -147,7 +147,7 @@ if (user != null) {
 						<!-- Start : Main Logo : ana의 로고 삽입-->
 						<a class="navbar-brand mr-auto #top" 
 							onclick="location.href='${request.contextPath}/acm/list'" style="cursor: pointer"><img
-							src="${request.contextPath}/resources/img/logo.png" alt="Site logo">ANA</a>
+							src="${request.contextPath}/resources/img/logo.png" alt="Site logo"></a>
 						<!-- End : Main Logo -->
 
 						<!-- Start : hidden button-->
