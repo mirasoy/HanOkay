@@ -33,19 +33,19 @@ public class UserServiceTests {
 	public void testRegister() {
 		UserVO user = new UserVO();
 
-		user.setEmail("jiha@naver.com");
-		user.setPwd("Bimil123@");
+		user.setUserEmail("jiha@naver.com");
+		user.setUserPwd("Bimil123@");
 
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setBirthday(beforeFormat.parse("2010/11/11"));
+			user.setUserBirthday(beforeFormat.parse("2010/11/11"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		user.setLastname("Jiha");
-		user.setFstname("Kim");
+		user.setUserLastName("Jiha");
+		user.setUserFstName("Kim");
 		user.setUserPriv("GU");
-		user.setRegMethod("m");
+		user.setUserRegisterMethod("m");
 		user.setUserPhone("");
 		service.register(user);
 		log.info("생성된 회원번호: " + user.getUserNum());
