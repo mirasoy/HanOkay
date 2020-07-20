@@ -7,7 +7,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>한오케이-네트워크 오류</title>
+<title>Han:ok-네트워크 오류</title>
 </head>
 <body>
 	<h1>에러! 500 네트워크 오류가 발생했습니다 </h1>

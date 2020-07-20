@@ -52,8 +52,6 @@ public class AcmMapperTests {
 		acm.setAcmCity("수정된 숙소도시");
 		acm.setAcmDistr("수정된 숙소 동");
 		acm.setAcmDetailaddr("수정된 숙소 상세주소");
-		acm.setRepPhone(8200000000L);
-		acm.setBizRegnum(11000000L);
 		acm.setCheckinTime("pm12");
 		acm.setCheckoutTime("pm06");
 		
@@ -70,8 +68,6 @@ public class AcmMapperTests {
 		acm.setAcmCity("새로운 숙소 시");
 		acm.setAcmDistr("새로운 숙소 동");
 		acm.setAcmDetailaddr("새로운 숙소 상세주소");
-		acm.setRepPhone(8212341234L);
-		acm.setBizRegnum(56785678L);
 		acm.setCheckinTime("AM11");
 		acm.setCheckoutTime("PM04");
 		
@@ -88,8 +84,6 @@ public class AcmMapperTests {
 		acm.setAcmCity("새로운 숙소 시selectkey");
 		acm.setAcmDistr("새로운 숙소 동");
 		acm.setAcmDetailaddr("새로운 숙소 상세주소");
-		acm.setRepPhone(8212341234L);
-		acm.setBizRegnum(56785678L);
 		acm.setCheckinTime("AM11");
 		acm.setCheckoutTime("PM04");
 		

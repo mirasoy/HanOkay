@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
-import com.ana.domain.RomOptVO;
 import com.ana.domain.RomVO;
 
 import lombok.Setter;
