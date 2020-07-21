@@ -33,7 +33,7 @@ String name = (String)session.getAttribute("loginUserNum");
 		</div>
 		
 		<div class="panel-heading">
-				  <%=userFstname %>의 예약취소 목록입니다.	
+				  <%=userFstName %>의 예약취소 목록입니다.	
 			</div>
 			
 
