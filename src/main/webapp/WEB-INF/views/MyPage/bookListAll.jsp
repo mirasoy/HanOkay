@@ -35,7 +35,7 @@ int i=0;
 		</div>
 		
 		<div class="panel-heading">
-				   <%=userFstname %>의 예약 목록입니다.	
+				   <%=userFstName %>의 예약 목록입니다.	
 			</div>
 			
 

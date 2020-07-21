@@ -7,6 +7,7 @@
 	session.setAttribute("loginUserNum", "U1");
 String name = (String) session.getAttribute("loginUserNum");
 %>
+
 <%@include file="../includes/header.jsp"%>
 
 
@@ -34,7 +35,7 @@ String name = (String) session.getAttribute("loginUserNum");
 			</div>
 
 			<div class="panel-heading">
-				<%=userFstname %>의 예약 중인 목록입니다. (숙박예정)
+				<%=userFstName %>의 예약 중인 목록입니다. (숙박예정)
 			</div>
 
 
