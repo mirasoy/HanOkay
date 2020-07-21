@@ -19,8 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="expected_Arr" property="expectedArr" />
 		<result column="smoking" property="smoking" />
 		<result column="request" property="request" />
-		<result column="real_Arr" property="realArr" />
-		<result column="rom_Name" property="romName" />
 		<result column="booker_Lastname" property="bookerLastname" />
 		<result column="booker_firstname" property="bookerFirstname" />
 		<result column="booker_email" property="bookerEmail" />
@@ -33,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="book_num" property="bookNum" />
 		<result column="book_Status" property="bookStatus" />
 		<result column="updatedate" property="updatedate" />
+		<result column="editer" property="editer" />		
 	</resultMap>
 
 	<!-- 예약중인 리스트 -->
@@ -72,9 +71,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<update id="update">
-
-
-
 		update tbooking
 		set
 		user_num = #{userNum},
@@ -88,9 +84,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		expected_Arr=#{expectedArr},
 		smoking=#{smoking},
 		request=#{request},
-		real_Arr=#{realArr},
-
-		rom_Name=#{romName},
 		booker_lastname=#{bookerLastname},
 		booker_firstname=#{bookerFirstname},
 		booker_email=#{bookerEmail},
@@ -206,8 +199,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
 		CHECKOUT_DATE,
 		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING,
-		REQUEST,
-		ROM_NAME, BOOKER_LASTNAME, BOOKER_FIRSTNAME, BOOKER_EMAIL,
+		REQUEST, BOOKER_LASTNAME, BOOKER_FIRSTNAME, BOOKER_EMAIL,
 		BOOKER_PHONE, BOOK_STATUS)
 
 		values (

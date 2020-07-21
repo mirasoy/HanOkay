@@ -2,9 +2,6 @@ package com.ana.service;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
-import com.ana.mapper.AcmMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -41,8 +37,8 @@ public class AcmServiceTests {
 		acm.setAcmCity("새로운 숙소 시");
 		acm.setAcmDistr("새로운 숙소 동");
 		acm.setAcmDetailaddr("새로운 숙소 상세주소");
-		acm.setRepPhone(8212341234L);
-		acm.setBizRegnum(56785678L);
+		acm.setRepPhone("8212341234");
+		acm.setBizRegnum("56785678");
 		acm.setCheckinTime("AM11");
 		acm.setCheckoutTime("PM04");
 		

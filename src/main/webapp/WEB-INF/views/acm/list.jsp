@@ -37,24 +37,11 @@
 						<div class="form-row search-form-row">
 							<div class="form-group form-group-pad form-group-1">
 								<label for="inputCity">Location</label> <input type="hidden"
-									value="CW" name="type"> <select class="form-control"
-									name="keyword" id="e1"
-									value='<c:out value="${pageMaker.cri.keyword}"/>'>
-									<option value="서울">서울특별시</option>
-									<option value="경기">경기도</option>
-									<option value="충북">충청북도</option>
-									<option value="충남">충청남도</option>
-									<option value="경북">경상북도</option>
-									<option value="경남">경상남도</option>
-									<option value="대구">대구광역시</option>
-									<option value="대전">대전광역시</option>
-									<option value="부산">부산광역시</option>
-									<option value="인천">인천광역시</option>
-									<option value="강원">강원도</option>
-									<option value="전북">전라북도</option>
-									<option value="전남">전라남도</option>
-									<option value="제주">제주특별자치도</option>
-								</select>
+									value="CW" name="type"> 
+									
+									<input class="form-control" id="pac-input" type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'
+            placeholder="Enter a location">
+								
 							</div>
 							<div class="form-group form-group-1">
 
@@ -100,7 +87,7 @@
 									<div class="ui calendar" id="rangeend">
 										<div class="ui input left icon uigroup">
 											<i class="calendar icon"></i> <input type="text"
-											placeholder="End" id="out" name="out" value="">
+												placeholder="End" id="out" name="out" value="">
 										</div>
 									</div>
 								</div>
@@ -320,6 +307,7 @@
 </div>
 <!-- End : main-content -->
 <script>
+
         $(document).ready(function() { $("#e1").select2(); });
 		
      	/* 날짜 선택(수희) */
@@ -356,28 +344,36 @@
 	</p>
 </footer>
 
-
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&libraries=places&callback=initAutocomplete"
+	async defer></script>
 <script type="text/javascript">
 	//참고
-	function initAutocomplete(){
-	autocomplete = new google.maps.places.Autocomplete(
-			/** @type{!HTMLInputElement} */(document.getElementById('autocomplete')),
-			{types: ['geocode'],componentRestrictions: {country: 'kr'}});
-	autocomplete.addListener('place_changed', fillInAddress);
-
-	}
 	
-	function fillInAddress(){
-		var place = autocomplete.getPlace();
-		$('#lat').prop('value',place.geometry.location.lat());
-		$('#lng').prop('value',place.geometry.location.lng());
-		console.log(place.formatted_address);
-		console.log('?');
-		if(document.getElementById('country')!=null){
-			fill_addr();
+		function initAutocomplete() {
+			autocomplete = new google.maps.places.Autocomplete(
+			/** @type{!HTMLInputElement} */
+			(document.getElementById('pac-input')), {
+				types : [ 'geocode' ],
+				componentRestrictions : {
+					country : 'kr'
+				}
+			});
+			autocomplete.addListener('place_changed', fillInAddress);
+
 		}
-	}
+
+		function fillInAddress() {
+			var place = autocomplete.getPlace();
+			$('#lat').prop('value', place.geometry.location.lat());
+			$('#lng').prop('value', place.geometry.location.lng());
+			console.log(place.formatted_address);
+			console.log('?');
+			if (document.getElementById('country') != null) {
+				fill_addr();
+			}
+		}
+	
 	//참고 끝
-		
-	</script>
+</script>
 </html>

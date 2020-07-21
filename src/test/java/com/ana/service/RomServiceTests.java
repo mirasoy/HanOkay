@@ -47,7 +47,6 @@ public class RomServiceTests {
 		rom.setRomSize(1);
 		rom.setRomPrice(99999);
 		rom.setRomPurl("test");
-		rom.setRomLoca("test");
 		service.register(rom);
 		log.info("생성된 숙소의 번호: " + rom.getRomNum());
 	}
@@ -76,7 +75,6 @@ public class RomServiceTests {
 		rom.setRomSize(1);
 		rom.setRomPrice(99999);
 		rom.setRomPurl("test");
-		rom.setRomLoca("test");
 		log.info("MODIFY RESULT: " + service.modify(rom));
 	}
 

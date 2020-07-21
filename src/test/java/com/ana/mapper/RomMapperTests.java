@@ -33,7 +33,6 @@ public class RomMapperTests {
 		rom.setRomSize(99);
 		rom.setRomPrice(9999);
 		rom.setRomPurl("테스트 사진 URL");
-		rom.setRomLoca("테스트 객실 위치");
 
 		mapper.insert(rom);
 
@@ -59,7 +58,6 @@ public class RomMapperTests {
 		rom.setRomSize(99);
 		rom.setRomPrice(9999);
 		rom.setRomPurl("수정테스트");
-		rom.setRomLoca("수정테스트");
 
 		int count = mapper.update(rom);
 

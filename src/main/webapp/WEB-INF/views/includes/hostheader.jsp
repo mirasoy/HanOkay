@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hanokay- Make yourself at home in Korea</title>
+    <title>Han:ok- Make yourself at home in Korea</title>
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -35,6 +35,11 @@
 		html,body{
 			font-family:"타이포_쌍문동";
 		}
+		
+		#logo{
+			width:50px;
+			height:20px;
+		}
 	</style>
 </head>
 
@@ -54,7 +59,7 @@
                 
                 
 				<!-- 로고자리 -->
-                <a class="navbar-brand" href="/hosting/hostindex">Ana</a>
+                <a class="navbar-brand" href="/hosting/hostindex">Han:Ok</a>
             </div>
             <!-- /.navbar-header -->
 

@@ -42,7 +42,6 @@ public class RomRegServiceTests {
 		rom.setRomSize(2);
 		rom.setRomPrice(900);
 		rom.setRomPurl("서비스단 URL내용");
-		rom.setRomLoca("2층집");
 		
 		
 		List<String> romOptArr= new ArrayList();

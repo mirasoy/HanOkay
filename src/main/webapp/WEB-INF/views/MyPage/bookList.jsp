@@ -49,7 +49,7 @@ String name = (String) session.getAttribute("loginUserNum");
 							<th>체크아웃날짜</th>
 							<th>객실요금</th>
 							<th>버튼1</th>
-							<th>버튼2</th>ㅠ ㅜㅍ
+							<th>버튼2</th>
 							<th>버튼3</th>
 						</tr>
 					</thead>

@@ -7,17 +7,17 @@
 <!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
 <%
 	UserVO user = (UserVO) session.getAttribute("user");
-String userLastname = "";
-String userFstname = "";
+String userLastName = "";
+String userFstName = "";
 String userPwd = "";
 String userNum = "";
 //userNum = "U1";
 
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
-	userLastname = user.getLastname();
-	userFstname = user.getFstname();
-	userPwd = user.getPwd();
+	userLastName = user.getUserLastName();
+	userFstName = user.getUserFstName();
+	userPwd = user.getUserPwd();
 	userNum = user.getUserNum();
 
 }
@@ -32,7 +32,7 @@ if (user != null) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ana - Make yourself at home in Korea</title>
+<title>HanOkay - Make yourself at HanOk in Korea</title>
 
 
 <!-- load stylesheets -->
@@ -147,7 +147,7 @@ if (user != null) {
 						<!-- Start : Main Logo : ana의 로고 삽입-->
 						<a class="navbar-brand mr-auto #top" 
 							onclick="location.href='${request.contextPath}/acm/list'" style="cursor: pointer"><img
-							src="${request.contextPath}/resources/img/logo.png" alt="Site logo">ANA</a>
+							src="${request.contextPath}/resources/img/logo.png" alt="Site logo"></a>
 						<!-- End : Main Logo -->
 
 						<!-- Start : hidden button-->

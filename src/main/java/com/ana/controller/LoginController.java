@@ -58,7 +58,7 @@ public class LoginController {
 			// 해당 이메일을 가진 유저 객체 가져오기
 			UserVO user = service.getUserById(email);
 			// 보안을 위해 비밀번호는 empty String으로 임의 변경
-			user.setPwd("");
+			user.setUserPwd("");
 			// 일치하면 모델에 세션에 유저 객체 담기
 			model.addAttribute("user", user);
 			log.info("***로그인한 user 정보: " + user);

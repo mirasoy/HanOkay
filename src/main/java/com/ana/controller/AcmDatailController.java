@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ana.service.AcmOptionService;
 import com.ana.service.AcmService;
 import com.ana.service.RevPostService;
 import com.ana.service.RomService;
@@ -27,7 +26,6 @@ public class AcmDatailController {
 	
 	private AcmService acmService;
 	private RevPostService revService;
-	private AcmOptionService optService;
 	private RomService romService;
 	
 	
@@ -42,13 +40,11 @@ public class AcmDatailController {
 		if(!person.isEmpty()) { // 검색 페이지에서 인원수를 선택한 경우
 			model.addAttribute("acm", acmService.get(acmNum)) // 숙소 정보 + 사진
 			.addAttribute("rev", revService.getAcmList(acmNum)) // 리뷰 목록
-			.addAttribute("opt", optService.getList(acmNum)) // 옵션 목록
 			.addAttribute("rom", romService.getList(acmNum, person)) // 방 목록
 			.addAttribute("srh", getDate(checkin, checkout)); 
 		}else {
 			model.addAttribute("acm", acmService.get(acmNum))
 			.addAttribute("rev", revService.getAcmList(acmNum))
-			.addAttribute("opt", optService.getList(acmNum)) 
 			.addAttribute("rom", romService.getAll(acmNum)) // 방 전체 목록
 			.addAttribute("srh", getDate(checkin, checkout));
 		}

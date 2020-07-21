@@ -11,24 +11,27 @@
 		<result column="acm_Distr" property="acmDistr" />
 		<result column="acm_Detailaddr" property="acmDetailaddr" />
 		<result column="rep_Phone" property="repPhone" />
+		<result column="acm_Regdate" property="acmRegdate" />
+		<result column="acm_Updatedate" property="acmUpdatedate" />
+		<result column="acm_Type" property="acmType" />
+		
 		<result column="biz_Regnum" property="bizRegnum" />
 		<result column="checkin_Time" property="checkinTime" />
 		<result column="checkout_Time" property="checkoutTime" />
-		<result column="acm_Regdate" property="acmRegdate" />
-		<result column="acm_Updatedate" property="acmUpdatedate" />
-		<result column="acm_Phone2" property="acmPhone2" />
+		<result column="sub_Phone" property="subPhone" />
 		<result column="acm_Fax" property="acmFax" />
 		<result column="acm_Email" property="acmEmail" />
-		<result column="acm_Desc" property="acmDesc" />
 		<result column="acm_Purl" property="acmPurl" />
-		<result column="acm_Purl1" property="acmPurl1" />
-		<result column="acm_Purl2" property="acmPurl2" />
-		<result column="acm_Purl3" property="acmPurl3" />
-		<result column="acm_Purl4" property="acmPurl4" />
-		<result column="acm_Purl5" property="acmPurl5" />
-		<result column="acm_Purl6" property="acmPurl6" />
+		<result column="acm_Pname" property="acmPname" />
+		
 		<result column="latitude" property="latitude" />
 		<result column="longitude" property="longitude" />
+		<result column="acm_Desc" property="acmDesc" />
+		<result column="acm_Acti" property="acmActi" />
+		<result column="acm_status" property="acmStatus" />
+		<result column="acm_Optcode" property="acmOptcode" />
+		
+		
 	</resultMap>
 
 	<!-- 호스트단에서 숙소등록 -->
@@ -47,14 +50,15 @@
 	
 	<!-- 숙소추가하기 -->
 	<insert id="insert">
-		INSERT INTO TACM(acm_Num, acm_Name, acm_City,
-		acm_Distr, acm_Detailaddr,
-		rep_Phone, acm_fax, acm_email,
-		biz_regnum,checkin_time, checkout_time,acm_regdate,acm_updatedate,latitude,longitude)
-		VALUES(concat('A',seq_tacm.nextval),#{acmName},#{acmCity},
-		#{acmDistr}, #{acmDetailaddr},#{repPhone},
-		#{acmFax},#{acmEmail},#{bizRegnum},#{checkoutTime},#{checkinTime},sysdate,sysdate,#{latitude},#{longitude})
+		INSERT INTO TACM(acm_Num, acm_Name, acm_City,acm_Distr, acm_Detailaddr, rep_Phone, 
+		acm_regdate, acm_updatedate, acm_type,
+		biz_regnum,checkin_time, checkout_time,sub_phone,
+		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude)
 		
+		VALUES (concat('A',seq_tacm.nextval),#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
+		sysdate,sysdate,#{acmType},
+		#{bizRegnum},#{checkoutTime},#{checkinTime},#{subPhone},
+		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude})
 	</insert>
 
 	<!-- 위도경도 추가 -->
@@ -64,25 +68,34 @@
 			select concat('A',seq_tacm.nextval) from dual
 		</selectKey>
 
-		INSERT INTO TACM(acm_Num, acm_Name, acm_City,
-		acm_Distr, acm_Detailaddr,
-		rep_Phone, acm_fax, acm_email,
-		biz_regnum,checkin_time, checkout_time,acm_regdate,acm_updatedate,latitude,longitude)
-		VALUES(#{acmNum},#{acmName},#{acmCity},
-		#{acmDistr}, #{acmDetailaddr},#{repPhone},
-		#{acmFax},#{acmEmail},#{bizRegnum},#{checkoutTime},#{checkinTime},sysdate,sysdate,#{latitude},#{longitude})
+		INSERT INTO TACM(acm_Num, acm_Name, acm_City,acm_Distr, acm_Detailaddr, rep_Phone, 
+		acm_regdate, acm_updatedate, acm_type,
+		biz_regnum,checkin_time, checkout_time,sub_phone,
+		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude)
+		
+		VALUES (concat('A',seq_tacm.nextval),#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
+		sysdate,sysdate,#{acmType},
+		#{bizRegnum},#{checkoutTime},#{checkinTime},#{subPhone},
+		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude})
 	</insert>
-
-
+	
+	
+	<!-- 주소 중복체크 -->
+	<select id="chkaddr" resultType="int">
+	select count(*) from tacm
+	where acm_Detailaddr = #{acmDetailaddr}
+	</select>
+	
+	
 	<!-- 객실 삭제 -->
 	<delete id="remove">
 		delete from trom where rom_Num = #{romNum}
 	</delete>
 
-	<!-- 객실 수정 -->
-	<update id="updateDesc">
+	<!-- 숙소1_6 정보(opt, desc) 수정 -->
+	<update id="update1_6">
 		update tacm
-		set acm_desc=#{acmDesc}
+		set acm_optcode=#{acmOptcode}, acm_desc=#{acmDesc}
 		where acm_Num = #{acmNum} 
 	</update>
 
