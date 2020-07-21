@@ -42,17 +42,17 @@ public class BookingController2 {
 		.addAttribute("rom", romService.get(romNum));
 	}
 	
-	@PostMapping("/new")
-	public String booking( // 예약 페이지 : 예약 정보를 저장한다
-			BookingVO book, 
-			RedirectAttributes rttr) {
-		log.info("booking"+book);
-
-		bookService.register(book);
-		rttr.addFlashAttribute("book", book.getBookNum());
-		
-		return "redirect:/booking/get?bookNum="+book.getBookNum();
-	}
+//	@PostMapping("/new")
+//	public String booking( // 예약 페이지 : 예약 정보를 저장한다
+//			BookingVO book, 
+//			RedirectAttributes rttr) {
+//		log.info("booking"+book);
+//
+//		bookService.register(book);
+//		rttr.addFlashAttribute("book", book.getBookNum());
+//		
+//		return "redirect:/booking/get?bookNum="+book.getBookNum();
+//	}
 	
 	@GetMapping("/get")
 	public void get( // 예약 확인 페이지 : 예약 정보를 불러온다
