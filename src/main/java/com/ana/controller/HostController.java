@@ -67,7 +67,7 @@ public class HostController {
 		String userFstname="";
 		
 		if(user!=null) {
-			userFstname=user.getUserFstName();
+			//userFstname=user.getFstname();
 		}
 		
 		return userFstname;
@@ -255,17 +255,7 @@ public class HostController {
 		System.out.println(vo.getRomOptcode());
 		System.out.println(acmNum);
 		
-//		RomVO rom = new RomVO();
-//		rom.setAcmNum(acmNum);
-//
-//		rom.setRomName(romName);
-//		rom.setRomCapa(romCapa);
-//		rom.setBedType(bedType);
-//		rom.setBedCnt(bedCnt);
-//		rom.setRomSize(romSize);
-//		rom.setRomPrice(romPrice);
-//		rom.setRomType(romType);
-//		
+		rservice.register(vo);
 		
 		
 		System.out.println(acmNum);
@@ -316,56 +306,6 @@ public class HostController {
 
 	}
 		
-	
-	
-	///////////////////////아마도 안쓸듯 ////////////////
-	
-	@PostMapping("/become-host3_6")
-	public String becomeHostPost3_6() {
-		return "/hosting/become-host3_6";
-	}
-	
-	@PostMapping("/become-host4_6")
-	public String becomeHostPost4_6() {
-		return "/hosting/become-host4_6";
-	}
-	
-	@PostMapping("/become-host5_6")
-	public String becomeHostPost5_6() {
-		return "/hosting/become-host5_6";
-	}
-	
-	@PostMapping("/become-host6_6")
-	public String becomeHostPost6_6() {
-		return "/hosting/become-host6_6";
-	}
-
-	@GetMapping("/become-host3_6")
-	public void becomeHostGet3_6() {
-
-	}
-	
-	@GetMapping("/become-host4_6")
-	public void becomeHostGet4_6() {
-
-	}
-	
-	@GetMapping("/become-host5_6")
-	public void becomeHostGet5_6() {
-
-	}
-	
-	@GetMapping("/become-host6_6")
-	public void becomeHostGet6_6() {
-
-	}
-	
-	
-	///////////////////////////////////////////////////////////
-	
-	
-
-	//Request
 	
 	
 	

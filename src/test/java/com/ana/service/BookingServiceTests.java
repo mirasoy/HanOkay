@@ -133,7 +133,6 @@ public class BookingServiceTests {
 		book.setExpectedArr("PM02");
 		book.setSmoking("1");
 		book.setRequest("뷰 좋은 방 주세요");
-		book.setRomName("테스트");
 		book.setBookerLastname("테스트");
 		book.setBookerFirstname("테스트");
 		book.setBookerEmail("test@ana.com");
