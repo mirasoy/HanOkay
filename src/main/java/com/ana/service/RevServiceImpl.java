@@ -132,4 +132,11 @@ public class RevServiceImpl implements RevService {
 		return mapper.readByBookNum(bookNum);
 	}
 
+
+	@Override
+	public List<RevPostVO> getPhoto(String pstNum) {
+		
+		return mapper.getPhoto(pstNum);
+	}
+
 }

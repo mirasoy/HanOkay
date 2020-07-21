@@ -8,6 +8,8 @@ import com.ana.domain.RevVO;
 public interface RevService {
 	//등록하기
 	public void register(RevVO post);
+	//사진 등록하기
+	//public void registerPhoto(RevVO post);
 	//리뷰가져오기
 	public RevVO get(String postNum);
 	//예약번호로 리뷰가져오기
@@ -20,5 +22,7 @@ public interface RevService {
 	public List<RevVO> getUserList(String loginUser);
 	//모든 리뷰 가져오기 (모든 유저)
 	public List<RevVO> getList();
+	
+	public List<RevPostVO> getPhoto(String pstNum);
 
 }

@@ -21,7 +21,7 @@ public class RevVO {
 	private String acmName;
 	private String checkInDay;
 	private String checkOutDay;
-	private String pusl;
+	private String purl;
 	private String pname;
 	private Date pregdate;
 }
