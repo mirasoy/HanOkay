@@ -31,25 +31,7 @@ public class RomRegServiceTests {
 
 	@Test
 	public void testRegister() {
-		RomVO rom = new RomVO();
-		rom.setAcmNum("A02");
-		rom.setRomNum("A02R01");
-		rom.setRomType("single");
-		rom.setRomName("서비스단 첫");
-		rom.setRomCapa(4);
-		rom.setBedType("king");
-		rom.setBedCnt(2);
-		rom.setRomSize(2);
-		rom.setRomPrice(900);
-		rom.setRomPurl("서비스단 URL내용");
-		
-		
-		List<String> romOptArr= new ArrayList();
-		romOptArr.add("WE");
-		romOptArr.add("DT");
-		
-		service.register(rom, romOptArr);
-		log.info("생성된 숙소의 번호: " + rom.getRomNum());
+
 	}
 
 

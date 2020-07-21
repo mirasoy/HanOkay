@@ -52,10 +52,10 @@ int bookPrice = (int) (Integer.parseInt(price) * staydays);
 		*필수 입력사항</br>
 	 	<form name="form" method="post" onsubmit="return checkValidation()">
 		<input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</br>
-		이름*<input type="text" id="userInfo1" name='bookerFirstname' value='<%=user.getFstname() %>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"> 
-		성*<input type="text" id="userInfo2"  name='bookerLastname' value='<%=user.getLastname()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
+		이름*<input type="text" id="userInfo1" name='bookerFirstname' value='<%=user.getUserFstName() %>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"> 
+		성*<input type="text" id="userInfo2"  name='bookerLastname' value='<%=user.getUserLastName()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
 		<label id="nameMsg" >&nbsp</label></br>
-		이메일*<input type="text" id="userInfo3"  name='bookerEmail' value='<%=user.getEmail()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br> 
+		이메일*<input type="text" id="userInfo3"  name='bookerEmail' value='<%=user.getUserEmail()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br> 
 		<label id="emailMsg" >&nbsp</label></br>
 		전화번호<input type="text" id="userInfo4" name='bookerPhone' value='<%=user.getUserPhone()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
 		<label id="phoneMsg" >&nbsp</label></br>

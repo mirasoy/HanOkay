@@ -35,18 +35,6 @@ public class BookingController {
 	private BookingService service;
 	
 	
-	   //세션에서 유저이름 가져오는 메서드
-	   public String getUsername(HttpSession session) {
-	      UserVO user=(UserVO)session.getAttribute("user");
-	  String userFstname="";
-	      
-	      if(user!=null) {
-	         userFstname=user.getFstname();
-	      }
-	      
-	      return userFstname;
-	   }
-
 
 	
 	
@@ -56,22 +44,19 @@ public class BookingController {
 	@GetMapping("/bookListAll") //모든 목록에 대한 조회는 get방식으로 처리를 하므로 이걸 사용했다.
 	public void list(Model model, HttpSession session) {
 		
-		String loginUserNum = (String) session.getAttribute("loginUserNum");
-		
-		UserVO user= (UserVO)session.getAttribute("user"); 
-		String userLastname="";
-		String userFstname="";
-		String userPwd="";
-		String userNum="";
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userLastName = "";
+		String userFstName = "";
+		String userPwd = "";
+		String userNum = "";
 		//userNum = "U1";
-
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
-		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
-		userNum= user.getUserNum();
-		} 
+		if (user != null) {
+			userLastName = user.getUserLastName();
+			userFstName = user.getUserFstName();
+			userPwd = user.getUserPwd();
+			userNum = user.getUserNum();
+		}
 		
 		log.info("bookListAll");
 		model.addAttribute("bookListAll", service.getBookListAll(userNum));
@@ -80,20 +65,19 @@ public class BookingController {
 	//예약 예정 목록
 	@GetMapping("/bookList")
 	public void list2(Model model2, HttpSession session) {
-		String loginUserNum = (String) session.getAttribute("loginUserNum");
-		UserVO user= (UserVO)session.getAttribute("user"); 
-		String userLastname="";
-		String userFstname="";
-		String userPwd="";
-		String userNum="";
-		
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userLastName = "";
+		String userFstName = "";
+		String userPwd = "";
+		String userNum = "";
+		//userNum = "U1";
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
-		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
-		userNum= user.getUserNum();
-		} 
+		if (user != null) {
+			userLastName = user.getUserLastName();
+			userFstName = user.getUserFstName();
+			userPwd = user.getUserPwd();
+			userNum = user.getUserNum();
+		}
 		log.info("bookList");
 		model2.addAttribute("bookList", service.getBookList(userNum));
 	}
@@ -103,20 +87,19 @@ public class BookingController {
 	@GetMapping("/checkout") //이건 체크아웃으로 이동해야해
 	public void list3(Model model3, HttpSession session) { //세션에 담긴 값을 가져와야겠지
 		
-		String loginUserNum = (String) session.getAttribute("loginUserNum");
-		UserVO user= (UserVO)session.getAttribute("user"); 
-		String userLastname="";
-		String userFstname="";
-		String userPwd="";
-		String userNum="";
-		
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userLastName = "";
+		String userFstName = "";
+		String userPwd = "";
+		String userNum = "";
+		//userNum = "U1";
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
-		if(user != null){ //내가 user가 맞다면 정보를 가져와야겠다.
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
-		userNum= user.getUserNum();
-		} 
+		if (user != null) {
+			userLastName = user.getUserLastName();
+			userFstName = user.getUserFstName();
+			userPwd = user.getUserPwd();
+			userNum = user.getUserNum();
+		}
 		
 		
 		log.info("checkout 완료된 예약입니다.");
@@ -126,21 +109,19 @@ public class BookingController {
 	//예약 취소 목록
 	@GetMapping("/cancelled")
 	public void list4(Model model4, HttpSession session) {
-		String loginUserNum = (String) session.getAttribute("loginUserNum");		
-		
-		UserVO user= (UserVO)session.getAttribute("user"); 
-		String userLastname="";
-		String userFstname="";
-		String userPwd="";
-		String userNum="";
-		
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userLastName = "";
+		String userFstName = "";
+		String userPwd = "";
+		String userNum = "";
+		//userNum = "U1";
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
-		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
-		userNum= user.getUserNum();
-		} 
+		if (user != null) {
+			userLastName = user.getUserLastName();
+			userFstName = user.getUserFstName();
+			userPwd = user.getUserPwd();
+			userNum = user.getUserNum();
+		}
 		
 		log.info("cancelled 취소된 예약입니다.");
 		model4.addAttribute("cancelled", service.getCancelList(userNum));		

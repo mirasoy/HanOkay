@@ -7,20 +7,18 @@
 <!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
 <%
 	UserVO user = (UserVO) session.getAttribute("user");
-String userLastname = "";
-String userFstname = "";
-String userPwd = "";
-String userNum = "";
-//userNum = "U1";
-
-//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
-if (user != null) {
-	userLastname = user.getLastname();
-	userFstname = user.getFstname();
-	userPwd = user.getPwd();
-	userNum = user.getUserNum();
-
-}
+	String userLastName = "";
+	String userFstName = "";
+	String userPwd = "";
+	String userNum = "";
+	//userNum = "U1";
+	//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+	if (user != null) {
+		userLastName = user.getUserLastName();
+		userFstName = user.getUserFstName();
+		userPwd = user.getUserPwd();
+		userNum = user.getUserNum();
+	}
 %>
 
 
@@ -86,13 +84,12 @@ if (user != null) {
 	$(document)
 			.ready(
 					
-
 					function() {
 						//만약 user에 해당하는 세션이 없으면 
 						
 					if (
-<%=user == null%>
-	) {
+						<%=user == null%>
+						) {
 							// $("#loginout").append("<a href='/user/login'>로그인</a>");
 							//알림 드랍 다운 내부 텍스트를 모두 지우고
 							$('#notification').empty();
@@ -101,15 +98,12 @@ if (user != null) {
 							$('#notification')
 									.append(
 											"<li><a href='#'>ana의 회원이 되셔서 <br>더 많은 혜택을 누려보세요!</a></li>");
-
 							//내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
 							$('#myMenuIcon').removeAttr("data-toggle");
 							$('#myMenuIcon').attr("href", "/user/login");
-
 						} else {
 							$("#loginout").append(
 									"<a href='/user/logout'>로그아웃</a>")
-
 						}
 						;
 						

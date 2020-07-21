@@ -3,10 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<% session.setAttribute("loginUserNum", "U1"); 
-String name = (String)session.getAttribute("loginUserNum");
-int i=0;
-%>
+
 <%@include file="../includes/header.jsp"%>
 
 
@@ -35,7 +32,7 @@ int i=0;
 		</div>
 		
 		<div class="panel-heading">
-				   <%=userFstname %>의 예약 목록입니다.	
+				   <%=userFstName %>의 예약 목록입니다.	
 			</div>
 			
 

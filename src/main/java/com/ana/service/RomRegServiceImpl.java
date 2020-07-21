@@ -32,19 +32,10 @@ public class RomRegServiceImpl implements RomRegService{
 	
 	@Transactional
 	@Override
-	public int register(RomVO rom, List<String> romOptArr) {
-		
-//		System.out.println("reg:"+rom.toString());
-		mapper.insertSelectKey(rom);//객실추가
-	
-//		System.out.println(rom.getRomNum()+"을 가져오자");
-		
-		for(int i=0;i<romOptArr.size();i++) {//그 객실에 대한 
-			System.out.println("romOptMapper에 들어간다***"+i+"번째: "+romOptArr.get(i));
-		}
-		
-		
-		return 1;//우선은 무조껀 성공이라 하자 07071233
+	public int register(RomVO rom) {
+		System.out.println("서비스에서:"+rom.toString());
+
+		return mapper.insertSelectKey(rom);//객실추가 
 	}
 
 
