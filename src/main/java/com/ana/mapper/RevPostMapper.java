@@ -14,7 +14,7 @@ public interface RevPostMapper {
 	public List<RevVO> getUserBookingACList(String loginUser);
 	//자신의 모든 예약목록=(숙박완료된) 받아오기
 		
-	public void insert(RevVO RevVO);
+	public void insert(RevVO revVO);
 	//리뷰입력하기
 	
 	public RevVO read(String pstNum);
@@ -30,6 +30,9 @@ public interface RevPostMapper {
 	//리뷰수정하기 
 
 	public List<RevPostVO> getAcmList(String acmNum);
+
+	public List<RevPostVO> getPhoto(String pstNum);
 	
+	public void insertPhoto(RevVO revVO);
 
 }
