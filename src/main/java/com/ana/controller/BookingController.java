@@ -28,9 +28,6 @@ import lombok.extern.log4j.Log4j;
 
 
 
-
-
-
 public class BookingController {
 	private BookingService service;
 	
