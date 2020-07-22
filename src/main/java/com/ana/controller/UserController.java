@@ -51,7 +51,8 @@ public class UserController {
 			emailService.sendAuthEmail(email);
 			msg = "해당 이메일을 사용하실 수 있습니다";
 			jso.put("msg", msg);
-		}  else {
+		}  
+		else {
 			log.info("checkEmail에서 service를 불렀더니 이미 db에 있는 이메일임!");
 			msg = "이미 등록된 이메일입니다!";
 			jso.put("msg", msg);
