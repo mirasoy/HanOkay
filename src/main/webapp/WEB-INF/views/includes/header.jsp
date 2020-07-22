@@ -53,6 +53,7 @@ if (user != null) {
 <link rel="stylesheet" href="${request.contextPath}/resources/css/templatemo-style.css">
 <link rel="stylesheet" href="${request.contextPath}/resources/css/review.css">
 
+
 <!-- 메인 CSS style -->
 
 <!-- load JS files -->
@@ -73,6 +74,8 @@ if (user != null) {
 
 <script src="${request.contextPath}/resources/js/index.js"></script>
 
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 <!-- 달력 변경(수희) -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

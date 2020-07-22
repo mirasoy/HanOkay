@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.AcmDetailMapper">
+	
+	<resultMap id="AcmDetailVOResult" type="com.ana.domain.AcmDetailVO">
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="ACM_NAME" property="acmName" />
+		<result column="ACM_CITY" property="acmCity" />
+		<result column="ACM_DISTR" property="acmDistr" />
+		<result column="ACM_DETAILADDR" property="acmDetailaddr" />
+		<result column="REP_PHONE" property="repPhone" />
+		<result column="ACM_ACTI" property="acmActi" />
+		<result column="CHECKIN_TIME" property="checkinTime" />
+		<result column="CHECKOUT_TIME" property="checkoutTime" />
+		<result column="SUB_PHONE" property="subPhone" />
+		<result column="ACM_FAX" property="acmFax" />
+		<result column="ACM_EMAIL" property="acmEmail" />
+		<result column="LATITUDE" property="latitude" />
+		<result column="LONGITUDE" property="longitude" />
+		<result column="ACM_DESC" property="acmDesc" />
+		<result column="ACM_OPTCODE" property="acmOptcode" />
+	</resultMap>
+		
+	<resultMap id="AcmDetailPicVOResult" type="com.ana.domain.AcmDetailPicVO">	
+		<result column="ACM_PURL" property="picAcmpurl" />
+		<result column="ACM_PNAME" property="picAcmpname" />
+		<result column="ACM_PDESC" property="picAcmpdesc" />
+	</resultMap>
+	
+	<resultMap id="AcmDetailRomVOResult" type="com.ana.domain.AcmDetailRomVO">
+		<result column="ROM_NUM" property="romNum" />
+		<result column="ROM_NAME" property="romName" />
+		<result column="ROM_CAPA" property="romCapa" />
+		<result column="BED_TYPE" property="bedType" />
+		<result column="BED_CNT" property="bedCnt" />
+		<result column="ROM_SIZE" property="romSize" />
+		<result column="ROM_PRICE" property="romPrice" />
+		<result column="ROM_PURL" property="romPurl" />
+		<result column="ROM_PNAME" property="romPname" />
+		<result column="ROM_TYPE" property="romType" />
+		<result column="ROM_ACTI" property="romActi" />
+		<result column="ROM_OPTCODE" property="romOptcode" />
+	</resultMap>
+	
+	<resultMap id="AcmDetailRevVOResult" type="com.ana.domain.AcmDetailRevVO">
+		<result column="P_TITLE" property="revPtitle" />
+		<result column="USER_NUM" property="revUsernum" />
+		<result column="P_REGDATE" property="revPregdate" />
+		<result column="P_UPDATEDATE" property="revPupdatedate" />
+		<result column="STISF" property="revStisf" />
+		<result column="CONTENT" property="revContent" />
+		<result column="PST_ACTI" property="revPstacti" />
+	</resultMap>
+
+	<!-- 숙소정보(숙소번호 기준) -->
+	<select id="getAcm" resultMap="AcmDetailVOResult">
+		SELECT
+		    ACM_NUM, ACM_NAME, ACM_CITY, ACM_DISTR, ACM_DETAILADDR, REP_PHONE, ACM_ACTI, CHECKIN_TIME, CHECKOUT_TIME
+		    , SUB_PHONE, ACM_FAX, ACM_EMAIL, LATITUDE, LONGITUDE, ACM_DESC, ACM_OPTCODE
+		FROM TACM 
+		WHERE ACM_NUM = #{acmNum}
+	</select>	
+	
+	<!-- 숙소사진 리스트(숙소번호 기준) -->
+	<select id="getPicList" resultMap="AcmDetailPicVOResult">
+		SELECT 
+			ACM_PURL, ACM_PNAME, ACM_PDESC
+		FROM TACM_PIC
+		WHERE ACM_NUM = #{acmNum}
+	</select>	
+	
+	<!-- 객실정보 리스트(숙소번호 기준 + 활성화된 상태) -->
+	<select id="getRomAll" resultMap="AcmDetailRomVOResult">
+		SELECT 
+			ROM_NUM, ROM_NAME, ROM_CAPA, BED_TYPE, BED_CNT, ROM_SIZE, ROM_PRICE, ROM_PURL, ROM_PNAME, ROM_TYPE, ROM_ACTI, ROM_OPTCODE
+		FROM TROM
+		WHERE ACM_NUM = #{acmNum} AND ROM_ACTI = 'ACTIVE'
+	</select>	
+	
+	<!-- 객실정보 리스트(숙소번호 기준 + 활성화된 상태 + 인원수) -->
+	<select id="getRomList" resultMap="AcmDetailRomVOResult">
+		SELECT 
+			ROM_NUM, ROM_NAME, ROM_CAPA, BED_TYPE, BED_CNT, ROM_SIZE, ROM_PRICE, ROM_PURL, ROM_PNAME, ROM_TYPE, ROM_ACTI, ROM_OPTCODE
+		FROM TROM
+		WHERE ACM_NUM = #{acmNum} AND ROM_ACTI = 'ACTIVE' AND ROM_CAPA >= #{person}
+	</select>	
+	
+	<!-- 숙소리뷰 리스트(숙소번호 기준 + 활성화된 상태) -->
+	<select id="getRevList" resultMap="AcmDetailRevVOResult">
+		SELECT 
+		    P_TITLE, USER_NUM, P_REGDATE, P_UPDATEDATE, STISF, CONTENT, PST_ACTI
+		FROM TREVIEW
+		WHERE ACM_NUM = #{acmNum} AND PST_ACTI = 'T'
+	</select>	
+		
+	<!-- 숙소 평균 별점(숙소번호 기준 + 활성화된 상태) -->
+	<select id="getStisf" resultType="double">
+		SELECT 
+		   NVL(TRUNC(AVG(STISF), 1), 0) AS STISF
+		FROM TREVIEW
+		WHERE ACM_NUM = #{acmNum} AND PST_ACTI = 'T'
+	</select>	
+
+</mapper>
