@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/MyPage/*")
+@RequestMapping("/mypage/*")
 @AllArgsConstructor
 
 
@@ -174,7 +174,7 @@ public class BookingController {
 		if(service.modify(info)) {
 			rttr.addFlashAttribute("result", "success");
 		}		
-		return "redirect:/MyPage/bookList";
+		return "redirect:/mypage/bookList";
 	}
 
 //예약 취소  ( 취소시, 상태를 변화시키고, 로그에 저장한다 )
@@ -184,7 +184,7 @@ public class BookingController {
 		if(service.reserveCancel(bookNum,"RS_STT_BC")) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/MyPage/bookList";
+		return "redirect:/mypage/bookList";
 	}
 	
 

@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">취소된 예약 상세 페이지 (수정 불가능)</h1>
+    <h1 class="page-header">투숙 완료 상세 페이지 (수정 불가능)</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -85,7 +85,6 @@
         
         
       
-      
         <div class="form-group info-group">
           <label>예약자 이름</label> <input class="form-control" name='bookerLastname'
             value='<c:out value="${info.bookerLastname} "/>' readonly="readonly">
@@ -108,7 +107,7 @@
         </div>
 
 
-<button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/cancelled'">List</button>
+<button data-oper='bookList' class="btn btn-info" onclick="location.href='/mypage/checkout'">List</button>
 
 
       </div>
@@ -141,6 +140,9 @@
 	}else if(bookStatus2=='RS_STT_AC'){
 		$('input[name=bookStatus]').val("투숙완료"); 
 	}
+	
+	
+	
 </script>
 
 
