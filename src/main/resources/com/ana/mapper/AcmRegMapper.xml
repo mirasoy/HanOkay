@@ -60,7 +60,7 @@
 		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude)
 		
 		VALUES (#{acmNum},#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
-		#{acmType},	#{bizRegnum},#{checkoutTime},#{checkinTime},#{subPhone},
+		#{acmType},	#{bizRegnum},#{checkinTime},#{checkoutTime},#{subPhone},
 		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude})
 	</insert>
 	
@@ -71,15 +71,21 @@
 	where acm_Detailaddr = #{acmDetailaddr}
 	</select>
 	
+	
+	<!-- 숙소 개별적으로 가져오기 -->
+	<select id="getAcm" resultType="String">
+		select acm_Name from TACM where ACM_NUM = #{acmNum}
+	</select> 
 	 
-	<!-- 객실 삭제 -->
+	 
+	<!-- 슥소 삭제 -->
 	<delete id="remove">
 		delete from tacm where acm_Num = #{acmNum}
 	</delete>
 
 	<!-- 숙소1_6 정보(opt, desc) 수정 -->
 	<update id="update1_6">
-		update tacm
+		update tacm 
 		set acm_optcode=#{acmOptcode}, acm_desc=#{acmDesc}
 		where acm_Num = #{acmNum} 
 	</update>

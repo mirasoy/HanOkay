@@ -10,7 +10,7 @@ public interface AcmRegService {//호스트 등록단에서
 
 	public void newAcmReg(AcmVO vo, String userNum); //객실등록할때
 
-//	public AcmVO get(String romNum);
+	public String getAcm(String acmNum);
 //
 	public boolean update1_6(String acmNum, List<String> acmOptcode,String acmDesc);
 //

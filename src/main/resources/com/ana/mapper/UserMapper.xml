@@ -109,12 +109,26 @@
 
 
 
+	<!-- **************** 어드민 단의 영역 ************** -->
+	<select id="getPendingHost" resultMap="UserVO">
+		select * from tuser where u_stat_code=#{userStatusCode}
+	</select>
 
+	<select id="getUser" resultMap="UserVO">
+		select * from tuser where USER_NUM = #{userNum}
+	</select>
 
-
-
-
-
+	<update id="moditoHost">
+		update tuser set
+		U_PRIV =#{userPriv}, U_STAT_CODE=#{userStatusCode}
+		where USER_NUM =#{userNum}
+	</update>
+	
+	<update id="moditoGuest">
+		update tuser set
+		U_PRIV =#{userPriv}, U_STAT_CODE=#{userStatusCode},BIZ_REGNUM =#{bizRegisterNumber}
+		where USER_NUM =#{userNum}
+	</update>
 
 
 </mapper>

@@ -44,8 +44,8 @@ public class RomRegServiceImpl implements RomRegService{
 
 
 	@Override
-	public RomVO get(String romNum) {
-		RomVO vo = mapper.read(romNum); 
+	public RomVO getRom(String romNum) {
+		RomVO vo = mapper.getRom(romNum); 
 		return vo;
 	}
 

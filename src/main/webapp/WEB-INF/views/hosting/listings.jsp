@@ -100,6 +100,17 @@
 	});
 
 
+	$(document).ready(function(){
+		$(".move").on("click", function(e){
+			var actionForm = $("#actionForm");
+			
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
+			actionForm.attr("action","/hosting/become-host2_6");
+			actionForm.submit();
+		});
+	});
+	
 
 </script>
 
