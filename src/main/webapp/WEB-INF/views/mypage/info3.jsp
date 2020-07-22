@@ -28,7 +28,7 @@
             value='<c:out value="${info.bookNum}"/>' readonly="readonly">
         </div>
 
-        <div class="form-group info-group">
+        <div class="form-group info-group sr-only">
           <label>#회원번호</label> <input class="form-control" name='userNum'
             value='<c:out value="${info.userNum}"/>' readonly="readonly">
         </div>
@@ -54,7 +54,7 @@
              <input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkoutDate}" />' readonly> 
         </div>                   
       
-        <div class="form-group info-group">
+        <div class="form-group info-group sr-only">
           <label>예약숙박일수</label> <input class="form-control" name='staydays'
             value='<c:out value=" ${info.staydays}"/>' readonly="readonly">
         </div>
@@ -75,17 +75,7 @@
           <label>흡연여부</label> <input class="form-control" name='smoking'
             value='' readonly="readonly">
         </div> 
- 
-        
-       <div class="form-group info-group">
-          <label>요구사항</label>
-          <textarea class="form-control" rows="3" name='request'
-            readonly="readonly"><c:out value="${info.request}" /></textarea>
-        </div>      
-        
-        
-      
-      
+
         <div class="form-group info-group">
           <label>예약자 이름</label> <input class="form-control" name='bookerLastname'
             value='<c:out value="${info.bookerLastname} "/>' readonly="readonly">
@@ -102,6 +92,14 @@
           <label>연락처</label> <input class="form-control" name='bookerPhone'
             value='<c:out value="${info.bookerPhone} "/>' readonly="readonly">
         </div>
+        
+        <div class="form-group info-group">
+          <label>요구사항</label>
+          <textarea class="form-control" rows="3" name='request'
+            readonly="readonly"><c:out value="${info.request}" /></textarea>
+        </div>      
+        
+        
         <div class="form-group info-group">
           <label>예약상태</label> <input class="form-control" name='bookStatus'
             value='<c:out value="${info.bookStatus} "/>' readonly="readonly">

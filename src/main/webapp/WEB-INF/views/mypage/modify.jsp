@@ -199,7 +199,7 @@
 							value='<c:out value="${info.bookNum}"/>' readonly="readonly">
 					</div>
 
-					<div class="f9orm-group info-group">
+					<div class="f9orm-group info-group sr-only">
 						<label>#회원번호</label> <input class="form-control" name='userNum'
 							value='<c:out value="${info.userNum}"/>' readonly="readonly">
 					</div>
@@ -230,13 +230,27 @@
 							readonly>
 					</div>
 
-					<div class="form-group info-group">
+					<div class="form-group info-group sr-only">
 						<label>예약숙박일수</label> <input class="form-control" name='staydays'
 							value='<c:out value=" ${info.staydays}"/>' readonly="readonly">
 					</div>
 					<div class="form-group info-group">
-						<label>예약인원수</label> <input class="form-control" name='guest'
-							value='<c:out value="${info.guest}"/>' readonly="readonly">
+						 
+							
+							
+						<label>예약인원수</label>
+						<select class="form-control" name='guest'>
+						    <option '<c:out value="${info.guest}"/>'>인원선택</option>
+						    <option value="1">1</option>
+						    <option value="2">2</option>
+						    <option value="4">4</option>
+						    <option value="5">5</option>
+						    <option value="6">6</option>
+						    <option value="7">7</option>
+						</select>
+							
+							
+							
 					</div>
 					<div class="form-group info-group">
 						<label>객실요금</label> <input class="form-control" name='bookPrice'
@@ -256,13 +270,6 @@
 							name='smoking' value="0"> NO, 금연
 					</div>
 
-
-					<div class="form-group info-group">
-						<label>요구사항</label>
-						<textarea class="form-control" rows="3" name='request'
-							maxlength="200" id="input_text"><c:out
-								value="${info.request}" /></textarea>
-					</div>
 
 
 					
@@ -284,6 +291,19 @@
 						<label>연락처</label> <input class="form-control" name='bookerPhone'
 							value='<c:out value="${info.bookerPhone}"/>' >
 					</div>
+					
+					
+					<div class="form-group info-group">
+						<label>요구사항</label>
+						<textarea class="form-control" rows="3" name='request'
+							maxlength="200" id="input_text"><c:out
+								value="${info.request}" /></textarea>
+					</div>
+					
+					
+					
+					
+					
 					<div class="form-group info-group">
 						<label>예약상태</label>   <input class="form-control" name='bookStatus' value='' readonly="readonly">
 					</div>

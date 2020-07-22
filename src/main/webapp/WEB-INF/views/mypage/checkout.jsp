@@ -65,7 +65,7 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkoutDate}" /></td>
 							<td><c:out value="${board.bookPrice}" /></td>			
 							
-							<td><a href="/mypage/info2?bookNum=${board.bookNum}">예약관리하기</a></td>
+							<td><a href="/mypage/info2?bookNum=${board.bookNum}">정보보기</a></td>
 					
 						</tr>																				
 					</c:forEach>
