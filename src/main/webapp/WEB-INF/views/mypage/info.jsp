@@ -28,7 +28,7 @@
             value='<c:out value="${info.bookNum}"/>' readonly="readonly">
         </div>
 
-        <div class="form-group info-group">
+        <div class="form-group info-group sr-only">
           <label>#회원번호</label> <input class="form-control" name='userNum'
             value='<c:out value="${info.userNum}"/>' readonly="readonly">
         </div>
@@ -54,7 +54,7 @@
              <input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkoutDate}" />' readonly> 
         </div>                   
       
-        <div class="form-group info-group">
+        <div class="form-group info-group sr-only">
           <label>예약숙박일수</label> <input class="form-control" name='staydays'
             value='<c:out value=" ${info.staydays}"/>' readonly="readonly">
         </div>
@@ -75,13 +75,7 @@
           <label>흡연여부</label> 
           <input class="form-control" name='smoking' value='' readonly="readonly">
         </div> 
- 
-        
-       <div class="form-group info-group">
-          <label>요구사항</label>
-          <textarea class="form-control" rows="3" name='request'
-            readonly="readonly"><c:out value="${info.request}" /></textarea>
-        </div>      
+       
         
         
         <div class="form-group info-group">
@@ -100,14 +94,23 @@
           <label>연락처</label> <input class="form-control" name='bookerPhone'
             value='<c:out value="${info.bookerPhone} "/>' readonly="readonly">
         </div>
+        
+        <div class="form-group info-group">
+          <label>요구사항</label>
+          <textarea class="form-control" rows="3" name='request'
+            readonly="readonly"><c:out value="${info.request}" /></textarea>
+        </div>      
+        
+        
+        
         <div class="form-group info-group">
           <label>예약상태</label>           
           <input class="form-control" name='bookStatus' value='' readonly="readonly">
         </div>
 
 
-<button data-oper='modify' class="btn btn-default" onclick="location.href='/MyPage/modify?bookNum=<c:out value="${info.bookNum}"/>'">Modify</button>
-<button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/bookList'">List</button>
+<button data-oper='modify' class="btn btn-default" onclick="location.href='/mypage/modify?bookNum=<c:out value="${info.bookNum}"/>'">Modify</button>
+<button data-oper='bookList' class="btn btn-info" onclick="location.href='/mypage/bookList'">List</button>
 
 
       </div>
@@ -150,6 +153,10 @@
 	}
 	
 	
+	var bookerPhone = document.getElementsByName("bookerPhone")[0].value;
+	if(bookerPhone==" "){
+		$('input[name=bookerPhone]').val("번호없음"); 
+	}
 	
 	
 </script>

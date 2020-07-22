@@ -23,19 +23,17 @@ String name = (String)session.getAttribute("loginUserNum");
 		
 		<div>
 			<ul class="bookbar">
-				<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
-				<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
-				<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>	
+				<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
+				<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
+				<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
+				<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>		
 
 						
 			</ul>
 		</div>
 		
 		<div class="panel-heading">
-
-				    <%=userFstName %>의 예약 완료 목록입니다.(체크아웃, 투숙완료)
-
+				  <%=userFstName %>의 예약취소 목록입니다.	
 			</div>
 			
 
@@ -53,7 +51,7 @@ String name = (String)session.getAttribute("loginUserNum");
 						</tr>
 					</thead>
 
-					<c:forEach items="${checkout}" var="board">
+					<c:forEach items="${cancelled}" var="board">
 						<tr>
 							<td><c:out value="${board.acmName}" /></td>																			
 							<td><c:out value="${board.bookNum}" /></td>																
@@ -65,7 +63,7 @@ String name = (String)session.getAttribute("loginUserNum");
 									value="${board.checkoutDate}" /></td>
 							<td><c:out value="${board.bookPrice}" /></td>			
 							
-							<td><a href="/MyPage/info2?bookNum=${board.bookNum}">예약정보</a></td>
+							<td><a href="/mypage/info3?bookNum=${board.bookNum}">정보보기</a></td>
 					
 						</tr>																				
 					</c:forEach>

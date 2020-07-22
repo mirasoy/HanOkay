@@ -25,10 +25,10 @@ int i=0;
 		
 		<div>
 			<ul class="bookbar">
-				<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
-				<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
-				<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>		
+				<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
+				<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
+				<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
+				<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>		
 
 						
 			</ul>
@@ -67,7 +67,7 @@ int i=0;
 														
 							<td id="<c:out value="${board.bookNum}" />"> </td>
 							
-							<%-- <td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td> --%>							
+							<%-- <td><a href="/mypage/info?bookNum=${board.bookNum}">예약정보</a></td> --%>							
 							<!-- 여기에 추가하기 -->
       			
 					
@@ -103,22 +103,22 @@ int i=0;
 			if(bookStatus.trim()=='RS_STT_BK'){
 				
 				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");				
-				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/mypage/info?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
 				
 		//만약에, 내 예약상태가 "RS_STT_BC" 이라면, "예약취소"을 출력하게끔 + 페이지는 info3로 이동한다.		
 			}else if(bookStatus.trim()=='RS_STT_BC'){
 				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='예약취소' readonly='readonly'>");
-				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info3?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/mypage/info3?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
 		
 		//만약에, 내 예약상태가 "RS_STT_AC" 이라면, "투숙완료"을 출력하게끔 + 페이지는 info2로 이동한다.		
 			}else if(bookStatus.trim()=='RS_STT_AC'){
 				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='투숙완료' readonly='readonly'>");
-				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/mypage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
 		
 		//만약에, 내 예약상태가 "RS_STT_CI" 이라면, "체크아웃"을 출력하게끔 + 페이지는 info2로 이동한다.	
 			}else if(bookStatus.trim()=='RS_STT_CI'){
 				$('#<c:out value="${board.bookNum}" />').append("<input class='form-control' name='bookStatus' value='체크아웃' readonly='readonly'>");
-				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/MyPage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
+				$('#<c:out value="${board.bookNum}" />').append("<td><a href='/mypage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기<a></td>");
 			}
 			
 		

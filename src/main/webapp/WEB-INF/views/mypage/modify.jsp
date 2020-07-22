@@ -9,10 +9,37 @@
 <!-- 자바스크립트 정규식 체크 -->
 <script language="javascript">
 	function validate() {
-
-		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		
+/*  
+		  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+		  ★★★★★★★★★★★★★★★★★★★★★★★★★★1. 변수 선언 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+		  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		  
+	 */	
+		
+		
 		// 이메일이 적합한지 검사할 정규식		
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		var email = document.getElementById("email");
+		
+		// 이름이 적합한지 검사할 정규식
+		var hName =  /^[가-힣]{1,4}|[a-zA-Z]{2,10}$/;
+		var Lastname= document.getElementById("Lastname").value;
+		var Lastname2 = Lastname.trim();
+		var Lastname3= document.getElementById("Lastname");				
+		var Firstname = document.getElementById("Firstname").value;
+		var Firstname2 = Firstname.trim();
+		var Firstname3 = document.getElementById("Firstname");
+		
+		
+
+		
+/*  
+		  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+		  ★★★★★★★★★★★★★★★★★★★★★★★★★★2. 스크립트  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+		  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		  
+ */		
+		
+				
 
 		/* 	공백일 경우에  */
 
@@ -26,12 +53,62 @@
 			email.focus();
 			return false;
 		}
+				
+		
+		if(Lastname2.value == ""){
+			alert("성을 입력해 주세요");			
+			Lastname3.focus();
+			return false;
+		}
+									
+		
+		if(Firstname2.value == ""){
+			alert("이름을 입력해 주세요");
+			Firstname3.focus();
+			return false;
+		}
+		
+
+		
+		/* 	이름 유효성 검사  */
+		
+		
+		if(!hName.test(Lastname2)){
+			   alert("성을 정확히 입력해주세요. \n ※ 한글은 2 ~ 4글자, 영문은 (2 ~ 10글자)");
+			   Lastname3.focus();
+			   return false;
+			}
+					
+		if(!hName.test(Firstname2)){
+			alert("이름을 정확히 입력해주세요. \n ※ 한글은 2 ~ 4글자, 영문은 (2 ~ 10글자)");
+			Firstname3.focus();
+		    return false;
+		}
+		
+		/* 이메일 유효성 검사 */
+		
 
 		if (!check(re, email, "적합하지 않은 이메일 형식입니다.")) {
 			return false;
 		}
+		
 
 		alert("정보가 수정되었습니다.");
+
+		
+		
+		/* 정보가 넘어갈 때, value를 바꾸어야 DB에 올바르게 들어감 */
+		
+		
+		var bookStatus = document.getElementsByName("bookStatus")[0].value;
+		var bookStatus2 = bookStatus.trim();		
+		
+		if(bookStatus2=='투숙예정'){
+			$('input[name=bookStatus]').val("RS_STT_BK"); 
+		}
+			
+
+
 	}
 
 	function check(re, what, message) {
@@ -71,11 +148,12 @@
 								$(this).val(
 										$(this).val().substr(0,
 												$(this).attr('maxlength')));
-							}
-						});
+					}
+				});
 				
 				
-				
+		
+		
 			
 	 			//예약 상태 수정
 				
@@ -114,14 +192,14 @@
 			<div class="panel-body">
 
 				<form onsubmit="return validate();" role="form"
-					action="/MyPage/modify" method="post">
+					action="/mypage/modify" method="post">
 
 					<div class="form-group info-group">
 						<label>#예약번호</label> <input class="form-control" name='bookNum'
 							value='<c:out value="${info.bookNum}"/>' readonly="readonly">
 					</div>
 
-					<div class="f9orm-group info-group">
+					<div class="f9orm-group info-group sr-only">
 						<label>#회원번호</label> <input class="form-control" name='userNum'
 							value='<c:out value="${info.userNum}"/>' readonly="readonly">
 					</div>
@@ -152,13 +230,27 @@
 							readonly>
 					</div>
 
-					<div class="form-group info-group">
+					<div class="form-group info-group sr-only">
 						<label>예약숙박일수</label> <input class="form-control" name='staydays'
 							value='<c:out value=" ${info.staydays}"/>' readonly="readonly">
 					</div>
 					<div class="form-group info-group">
-						<label>예약인원수</label> <input class="form-control" name='guest'
-							value='<c:out value="${info.guest}"/>' readonly="readonly">
+						 
+							
+							
+						<label>예약인원수</label>
+						<select class="form-control" name='guest'>
+						    <option '<c:out value="${info.guest}"/>'>인원선택</option>
+						    <option value="1">1</option>
+						    <option value="2">2</option>
+						    <option value="4">4</option>
+						    <option value="5">5</option>
+						    <option value="6">6</option>
+						    <option value="7">7</option>
+						</select>
+							
+							
+							
 					</div>
 					<div class="form-group info-group">
 						<label>객실요금</label> <input class="form-control" name='bookPrice'
@@ -179,26 +271,17 @@
 					</div>
 
 
-					<div class="form-group info-group">
-						<label>요구사항</label>
-						<textarea class="form-control" rows="3" name='request'
-							maxlength="200" id="input_text"><c:out
-								value="${info.request}" /></textarea>
-					</div>
-
 
 					
 					<div class="form-group info-group">
-						<label>예약자 이름</label> <input id="Lastname" class="form-control"
+						<label>예약자 성</label> <input id="Lastname" class="form-control"
 							name='bookerLastname'
-							value='<c:out value="${info.bookerLastname}"/>'
-							readonly="readonly">
+							value='<c:out value="${info.bookerLastname}"/>'>
 					</div>
 					<div class="form-group info-group">
-						<label>예약자 성</label> <input id="Firstname" class="form-control"
+						<label>예약자 이름</label> <input id="Firstname" class="form-control"
 							name='bookerFirstname'
-							value='<c:out value="${info.bookerFirstname}"/>'
-							readonly="readonly">
+							value='<c:out value="${info.bookerFirstname}"/>'>
 					</div>
 					<div class="form-group info-group">
 						<label>이메일</label> <input id="email" class="form-control"
@@ -206,8 +289,21 @@
 					</div>
 					<div class="form-group info-group">
 						<label>연락처</label> <input class="form-control" name='bookerPhone'
-							value='<c:out value="${info.bookerPhone}"/>' readonly="readonly">
+							value='<c:out value="${info.bookerPhone}"/>' >
 					</div>
+					
+					
+					<div class="form-group info-group">
+						<label>요구사항</label>
+						<textarea class="form-control" rows="3" name='request'
+							maxlength="200" id="input_text"><c:out
+								value="${info.request}" /></textarea>
+					</div>
+					
+					
+					
+					
+					
 					<div class="form-group info-group">
 						<label>예약상태</label>   <input class="form-control" name='bookStatus' value='' readonly="readonly">
 					</div>
@@ -261,7 +357,7 @@
 				return false;
 
 			} else if (operation === 'bookList') { //만약 리스트 버튼을 누른다면 리스트로 이동한다.
-				self.location = "/MyPage/bookList";
+				self.location = "/mypage/bookList";
 				return;
 			} else if (operation === 'can') { // 만약 모달창의 취소버튼을 누른다면, 모달창을 보이지 않게 한다.
 				console.log("예약을 취소하지 않습니다.")
@@ -269,23 +365,15 @@
 				return false;
 			} else if (operation === 'goCancle') {	// 만약 모달창의 확인 버튼을 누른다면 예약을 취소하며, 페이지는 remove로 (취소행동)
 				console.log("예약을 취소합니다.")
-				formObj.attr("action", "/MyPage/remove");
+				formObj.attr("action", "/mypage/remove");
 			}
 			
 			
-	
-			var bookStatus = document.getElementsByName("bookStatus")[0].value;
-			var bookStatus2 = bookStatus.trim();		
-			
-			if(bookStatus2=='투숙예정'){
-				$('input[name=bookStatus]').val("RS_STT_BK"); 
-			}
-				
-	
-
 			formObj.submit();
+			
+			
 		});
-
+		
 	});
 </script>
 
