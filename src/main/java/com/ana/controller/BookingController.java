@@ -28,9 +28,6 @@ import lombok.extern.log4j.Log4j;
 
 
 
-
-
-
 public class BookingController {
 	private BookingService service;
 	
@@ -41,8 +38,10 @@ public class BookingController {
 	  String userFstname="";
 	      
 	      if(user!=null) {
-	         userFstname=user.getFstname();
+	         userFstname=user.getUserFstName();
 	      }
+	      
+
 	      
 	      return userFstname;
 	   }
@@ -67,9 +66,9 @@ public class BookingController {
 
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
 		
@@ -89,11 +88,13 @@ public class BookingController {
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
+
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
+
 		log.info("bookList");
 		model2.addAttribute("bookList", service.getBookList(userNum));
 	}
@@ -111,12 +112,14 @@ public class BookingController {
 		String userNum="";
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+
 		if(user != null){ //내가 user가 맞다면 정보를 가져와야겠다.
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
+
 		
 		
 		log.info("checkout 완료된 예약입니다.");
@@ -136,12 +139,13 @@ public class BookingController {
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
+
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
-		
+
 		log.info("cancelled 취소된 예약입니다.");
 		model4.addAttribute("cancelled", service.getCancelList(userNum));		
 	}

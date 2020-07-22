@@ -38,9 +38,9 @@
 
 
 			<div class="acm" id="acm"><br><h6>*항목은 필수입력값입니다</h6>	  
-				<h4>*1.게스트가 묵게 될 숙소의 유형을 골라주세요</h4>
+				<h4>*1.게스트가 예약할 수 있는 숙소의 유형을 선택해주세요 </h4>
 				<input type="radio" id="acmType_house" name="acmTypes" value="H"><label for="rentType1">집 천제</label> 
-				<input type="radio" id="acmType_priv" name="acmTypes" value="P"><label for="rentType2">객실별 대여</label>
+				<input type="radio" id="acmType_priv" name="acmTypes" value="P"><label for="rentType2">객실별 예약</label>
 			
 		<form id="actionForm" action="/hosting/become-host" method="post">
 			<br>	
@@ -189,7 +189,7 @@ function sample6_execDaumPostcode() {
         	acmDetailaddr.value=extra;
             
     		var chkacmDetailaddr=document.getElementById("acmDetailaddr").value;
-    	
+    		
     		
     	     $.ajax({
           	   type: 'POST',
@@ -204,13 +204,15 @@ function sample6_execDaumPostcode() {
           		   $('span#msg').text(data.msg);
           		
           		   var chkaddr=document.getElementById("chkaddr");
-	     	    	if(chkaddr==null)//없으면 추가시켜주고
+	     	    
+          		   if(chkaddr==null)//없으면 추가시켜주고
 	     	    	formObj.append("<input type='hidden' id='chkaddr' name='chkaddr' value='"+data.msg+"'>");
 	     	    	else chkaddr.value=data.msg;//이미 있으면 바꿔치기
           	   },
           	   error: function(data){
           		  window.location.href ="../error/error";
           	   }
+          	   
           	 });
     	     
     	     
@@ -359,9 +361,7 @@ function sample6_execDaumPostcode() {
 			if(confirm("보조 연락처를 작성하셔야 숙소운영에 도움이 됩니다.계속 진행하시겠습니까?")==false){
 				subPhone.focus();
 				return false;	
-			} else{
-				subPhone.value="-";
-			}
+			} 
 		}
 		
 		if (subPhone.value.length > 17) {
@@ -372,9 +372,6 @@ function sample6_execDaumPostcode() {
 		}
 		
 		var acmFax=document.getElementById("acmFax");
-		if (acmFax.value.trim()=='') {
-			acmFax.value="-";
-		}
 		
 		if (acmFax.value.length > 17) {
 			alert("팩스번호는 16자리 이내입니다");

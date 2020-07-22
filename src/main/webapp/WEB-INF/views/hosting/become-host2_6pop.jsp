@@ -218,13 +218,13 @@
 		
 
 		var acmNum = $("#ACM_NUM").val();//숙소번호
-		var romType = $("#ROM_TYPE").val();//룸타입
 		var romName = $("#ROM_NAME").val();//객실이름
 		var romCapa = $("#ROM_CAPA").val();//객실최대인원수
 		var bedType = $("#BED_TYPE").val();//침대유형
 		var bedCnt = $("#BED_CNT").val();//침대갯수
 		var romSize = $("#ROM_SIZE").val();//객실크기
 		var romPrice = $("#ROM_PRICE").val();//객실가격
+		var romType = $("#ROM_TYPE").val();//룸타입
 		
 
 		//name/value 형태로 담는다

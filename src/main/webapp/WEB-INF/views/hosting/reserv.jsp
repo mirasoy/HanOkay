@@ -4,8 +4,7 @@
 <%@include file="../includes/hostheader.jsp"%>
 	<div class="body">
 		<div align="center">
-			
-		예약(미구현!)
+		 <h4><c:out value="${userFstname}"/> 호스트님의 예약 모아보기</h4>
 		</div>
 	</div>
 

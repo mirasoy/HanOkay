@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ana.mapper.UserHisMapper">
+
+	<resultMap id="UserHisVO" type="com.ana.domain.UserHisVO">
+		<result property="serialNum" column="SERIAL_NUM"/>
+		<result property="userNum" column="USER_NUM"/>
+		<result property="infoCode" column="INFO_CODE"/>
+		<result property="infoUpdatedate" column="INFO_UPDATEDATE"/>
+		<result property="changer" column="CHANGER"/>
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- *************** 림쨩영역  **************  -->		
+	
+	<insert id="becomeHost">
+		<selectKey resultType="String" order="BEFORE" keyProperty="serialNum">
+		select concat('H',SEQ_TUSER_INFO_HISTORY.nextval) from dual 
+		</selectKey>
+		insert into tuser_info_history(SERIAL_NUM, USER_NUM, INFO_CODE, CHANGER) 
+		values(#{serialNum}, #{userNum}, #{infoCode}, #{changer}) 
+	</insert>	
+	
+	
+	
+	
+
+</mapper>

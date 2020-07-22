@@ -37,7 +37,7 @@
 		<result column="ACM_NAME" property="acmName" />
 		<result column="CHECKIN_DATE" property="checkInDay" />
 		<result column="CHECKOUT_DATE" property="checkOutDay" />
-		<result column="PST_PURL" property="pusl" />
+		<result column="PST_PURL" property="purl" />
 		<result column="PST_PNAME" property="pname" />
 		<result column="PST_PREGDATE" property="pregdate" />
 	</resultMap>
@@ -81,6 +81,13 @@
 
 
 
+	</insert>
+	
+	
+	<insert id="insertPhoto">
+		INSERT INTO TREVIEW_PIC (PST_NUM,PST_PURL,PST_PNAME) VALUES(
+		#{pstNum},#{purl},#{pname}
+		)
 	</insert>
 
 
@@ -136,11 +143,12 @@
 
 	<!-- 나의 리스트 불러오기0 -->
 	<select id="getUserBookingACList" resultMap="RevVOResult">
+
 		SELECT
 		PST.PST_NUM ,
 		PST.BRD_CODE ,
 		PST.P_TITLE ,
-		PST.USER_NUM ,
+		J.USER_NUM ,
 		PST.P_REGDATE ,
 		PST.P_UPDATEDATE ,
 		PST.STISF ,
@@ -158,7 +166,8 @@
 		B.BOOK_NUM ,
 		A.ACM_NAME ,
 		B.CHECKIN_DATE ,
-		B.CHECKOUT_DATE
+		B.CHECKOUT_DATE,
+        B.USER_NUM
 		FROM
 		TBOOKING B,
 		TACM A, TROM R
@@ -176,7 +185,7 @@
 		J.BOOK_NUM =
 		pst.BOOK_NUM(+)
 		AND
-		PST.user_num = #{loginUser}
+		J.user_num ='U1'
 
 		ORDER BY
 		J.checkin_Date
@@ -233,7 +242,11 @@
 	</select>
 
 
+	<!-- 리뷰사진불러오기 -->
+	<select id="getPhoto" resultMap="RevVOResult">
+	SELECT * FROM TREVIEW_PIC WHERE pst_num = #{pstNum}
 
+	</select>
 
 
 

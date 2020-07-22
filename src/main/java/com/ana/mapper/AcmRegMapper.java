@@ -8,11 +8,9 @@ import com.ana.domain.AcmVO;
 
 public interface AcmRegMapper {
 	
-	public List<AcmVO> getList();
+	public List<AcmVO> getListHosts(String bizRegnum);
 	
-	public void insert(AcmVO acm);//숙소등록
-	
-	public void insertSelectKey(AcmVO vo);//숙소등록**
+	public void newAcmReg(AcmVO vo);//숙소등록**
 	
 	public AcmVO read(String acmNum);
 	

@@ -14,8 +14,16 @@
 		<result column="ROM_SIZE" property="romSize" />
 		<result column="ROM_PRICE" property="romPrice" />
 		<result column="ROM_PURL" property="romPurl" />
-		<result column="ROM_LOCA" property="romLoca" />
+		<result column="ROM_PNAME" property="romPname" />
+		
 		<result column="ROM_TYPE" property="romType" />
+		<result column="ROM_ACTI" property="romActi" />
+
+		<result column="ROM_STATUS" property="romStatus" />
+		<result column="ROM_OPTCODE" property="romOptcode" />
+		<result column="ROM_REGDATE" property="romRegdate" />
+		<result column="ROM_UPDATEDATE" property="romUpdatedate" />
+
 	</resultMap>
 
 	<!-- 호스트단 -->
@@ -33,31 +41,18 @@
 	
 	
 	<!-- 객실추가하기 -->
-	<insert id="insert">
-	<selectKey keyProperty="romNum" order="BEFORE"
-			resultType="String">
-			select concat('R',seq_trom.nextval) from dual
-		</selectKey>
-		insert into TROM(ROM_NUM,ROM_TYPE,ACM_NUM,ROM_NAME,
-		ROM_CAPA,BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_LOCA)
-		values (concat('R',seq_tacm.nextval), #{romType},
-		#{acmNum}, #{romName}, #{romCapa},
-		#{bedType}, #{bedCnt}, #{romSize},
-		#{romPrice}, #{romPurl}, #{romLoca})
-	</insert>
-
-	<insert id="insertSelectKey">
+	<insert id="registerRom">
 		<selectKey keyProperty="romNum" order="BEFORE"
 			resultType="String">
 			select concat('R',seq_tacm.nextval) from dual
 		</selectKey>
 
-		insert into TROM(ROM_NUM,ROM_TYPE,ACM_NUM,ROM_NAME,
-		ROM_CAPA,BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_LOCA)
-		values (#{romNum}, #{romType},
-		#{acmNum}, #{romName}, #{romCapa},
-		#{bedType}, #{bedCnt}, #{romSize},
-		#{romPrice}, #{romPurl}, #{romLoca})
+		insert into TROM(ACM_NUM, ROM_NUM, ROM_NAME, ROM_CAPA, 
+		BED_TYPE,BED_CNT, ROM_SIZE, ROM_PRICE,	ROM_PURL, ROM_PNAME,ROM_TYPE,
+		ROM_OPTCODE)
+		values (#{acmNum},#{romNum},#{romName},#{romCapa},
+		#{bedType}, #{bedCnt}, #{romSize}, #{romPrice}, #{romPurl},#{romPname}, #{romType},
+		#{romOptcode})
 	</insert>
 	
 	

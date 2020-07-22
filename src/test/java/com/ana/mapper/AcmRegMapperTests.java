@@ -46,7 +46,7 @@ public class AcmRegMapperTests {
 		acm.setAcmFax("020000");
 		
 		
-		mapper.insertSelectKey(acm);
+		mapper.newAcmReg(acm);
 		
 		log.info(acm);
 	}

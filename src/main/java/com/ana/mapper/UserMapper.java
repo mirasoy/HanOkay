@@ -35,4 +35,20 @@ public interface UserMapper {
 
 	// 로그인 정보 일치하는 지 확인하는 메서드
 	public boolean checkLogin(UserVO user);
+	
+	
+	
+	/////////////////////////////////림쨩의 영역/////////////////////////////////
+	
+	//숙소등록을 처음 시작할때 사업자번호등록
+	public int becomeHost(UserVO u);
+	
+	public UserVO isHost(String userNum);
+	
+	
+	
+	
+	
+	
+	
 }

@@ -13,7 +13,7 @@ import com.ana.domain.RomVO;
 
 public interface BookingMapper {
 	
-	public List<BookingVO> getList(); //모든 상태 리스트	(??) - 역할 고민중	
+	public List<BookingVO> getList(); // 1. 모든 상태 리스트	
 	
 	public List<BookVO> getBookListAll(String loginUserNum); //모든 상태 리스트
 	
@@ -31,5 +31,5 @@ public interface BookingMapper {
 	
 	public int changeStatus(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
 	
-	public int insert(BookingVO booking);
+	/* public int insert(BookingVO booking); */
 }
