@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
 	//이메일 중복 검사하는 메서드 구현
 	@Override
 	public boolean checkEmail(String email) {
-		log.info("idCheck........");
+		log.info("Email Duplication Check........");
 		return mapper.checkEmail(email)==0;
 	}
 

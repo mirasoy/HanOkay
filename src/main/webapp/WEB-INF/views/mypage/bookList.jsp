@@ -25,10 +25,10 @@ String name = (String) session.getAttribute("loginUserNum");
 
 			<div>
 				<ul class="bookbar">
-					<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
-					<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
-					<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
-					<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>
+					<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
+					<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
+					<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
+					<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>
 
 
 				</ul>
@@ -67,7 +67,7 @@ String name = (String) session.getAttribute("loginUserNum");
 									value="${board.checkoutDate}" /></td>
 							<td><c:out value="${board.bookPrice}" /></td>
 
-							<td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td>
+							<td><a href="/mypage/info?bookNum=${board.bookNum}">예약관리하기</a></td>
 							<td><button id="myBtn">예약 확정서 받기</button></td>
 							<td><button id="myMap">
 									숙소 위치 확인</a></td>

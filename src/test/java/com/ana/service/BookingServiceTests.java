@@ -165,6 +165,7 @@ public class BookingServiceTests {
 		book.setBookerPhone("010");
 		book.setBookStatus("RS_STT_BK");
 		//service.register(book);
+
 		log.info("생성된 예약 번호: " + book.getBookNum());
 	}
 

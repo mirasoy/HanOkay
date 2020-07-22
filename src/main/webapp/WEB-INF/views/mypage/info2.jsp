@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">취소된 예약 상세 페이지 (수정 불가능)</h1>
+    <h1 class="page-header">투숙 완료 상세 페이지 (수정 불가능)</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -28,7 +28,7 @@
             value='<c:out value="${info.bookNum}"/>' readonly="readonly">
         </div>
 
-        <div class="form-group info-group">
+        <div class="form-group info-group sr-only">
           <label>#회원번호</label> <input class="form-control" name='userNum'
             value='<c:out value="${info.userNum}"/>' readonly="readonly">
         </div>
@@ -54,7 +54,7 @@
              <input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkoutDate}" />' readonly> 
         </div>                   
       
-        <div class="form-group info-group">
+        <div class="form-group info-group sr-only">
           <label>예약숙박일수</label> <input class="form-control" name='staydays'
             value='<c:out value=" ${info.staydays}"/>' readonly="readonly">
         </div>
@@ -77,13 +77,6 @@
         </div> 
  
         
-       <div class="form-group info-group">
-          <label>요구사항</label>
-          <textarea class="form-control" rows="3" name='request'
-            readonly="readonly"><c:out value="${info.request}" /></textarea>
-        </div>      
-        
-        
       
       
         <div class="form-group info-group">
@@ -102,13 +95,21 @@
           <label>연락처</label> <input class="form-control" name='bookerPhone'
             value='<c:out value="${info.bookerPhone} "/>' readonly="readonly">
         </div>
+        
+        <div class="form-group info-group">
+          <label>요구사항</label>
+          <textarea class="form-control" rows="3" name='request'
+            readonly="readonly"><c:out value="${info.request}" /></textarea>
+        </div>      
+        
+        
         <div class="form-group info-group">
           <label>예약상태</label> <input class="form-control" name='bookStatus'
             value='<c:out value="${info.bookStatus} "/>' readonly="readonly">
         </div>
 
 
-<button data-oper='bookList' class="btn btn-info" onclick="location.href='/MyPage/cancelled'">List</button>
+<button data-oper='bookList' class="btn btn-info" onclick="location.href='/mypage/checkout'">List</button>
 
 
       </div>
@@ -141,6 +142,9 @@
 	}else if(bookStatus2=='RS_STT_AC'){
 		$('input[name=bookStatus]').val("투숙완료"); 
 	}
+	
+	
+	
 </script>
 
 
