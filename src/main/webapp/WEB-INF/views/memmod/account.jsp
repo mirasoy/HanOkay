@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/hostheader.jsp"%>
-	<div class="body">
+<div class="body">
 		<div align="center">
-		 <h4><c:out value="${userFstname}"/> 호스트님의 예약 모아보기</h4>
+			<h4><c:out value="${userFstname}"/> 님의 계정</h4>
 		</div>
 	</div>
-
-
 <%@include file="../includes/footer.jsp"%>

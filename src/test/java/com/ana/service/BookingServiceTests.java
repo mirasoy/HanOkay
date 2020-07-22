@@ -121,6 +121,7 @@ public class BookingServiceTests {
 //		log.info("생성된 예약 번호: " + book.getBookNum());
 //	}
 
+
 //	@Test
 //	public void testExist() {
 //		log.info(service);
@@ -166,5 +167,6 @@ public class BookingServiceTests {
 		service.register(book);
 		log.info("생성된 예약 번호: " + book.getBookNum());
 	}
+
 
 }

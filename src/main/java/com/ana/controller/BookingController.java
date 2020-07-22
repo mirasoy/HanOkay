@@ -88,11 +88,13 @@ public class BookingController {
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
+
 		userLastname= user.getUserLastName();
 		userFstname=user.getUserFstName();
 		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
+
 		log.info("bookList");
 		model2.addAttribute("bookList", service.getBookList(userNum));
 	}
@@ -110,12 +112,14 @@ public class BookingController {
 		String userNum="";
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+
 		if(user != null){ //내가 user가 맞다면 정보를 가져와야겠다.
 		userLastname= user.getUserLastName();
 		userFstname=user.getUserFstName();
 		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
+
 		
 		
 		log.info("checkout 완료된 예약입니다.");
@@ -135,12 +139,13 @@ public class BookingController {
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
+
 		userLastname= user.getUserLastName();
 		userFstname=user.getUserFstName();
 		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
-		
+
 		log.info("cancelled 취소된 예약입니다.");
 		model4.addAttribute("cancelled", service.getCancelList(userNum));		
 	}
