@@ -102,11 +102,22 @@ public void testGetMyList() {
 	}
 	
 	
-	@Test
+//	@Test
     public void testGetList() {
 		mapper.getList().forEach(post -> log.info(post));
 	}
 	
+	@Test
+    public void insertPhoto() {
+    	
+		RevVO vo = new RevVO();
+		vo.setPstNum("RV44");
+		vo.setPname("e0d2fa25-c60c-4980-a3d9-3cd185db8616_2.gif");
+		vo.setPurl("c:/upload/review/2020/07/20/");
+		
+		mapper.insertPhoto(vo);
+    }
+    
 
 
 

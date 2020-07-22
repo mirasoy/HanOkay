@@ -84,15 +84,7 @@
         </div>      
         
         
-        <div class="form-group info-group">
-          <label>실제도착시간</label> <input class="form-control" name='realArr'
-            value='<c:out value="${info.realArr} "/>' readonly="readonly">
-        </div> 
-        
-        <div class="form-group info-group">
-          <label>방이름</label> <input class="form-control" name='romName'
-            value='<c:out value="${info.romName} "/>' readonly="readonly">
-        </div>
+      
         <div class="form-group info-group">
           <label>예약자 이름</label> <input class="form-control" name='bookerLastname'
             value='<c:out value="${info.bookerLastname} "/>' readonly="readonly">
@@ -134,6 +126,23 @@
 	}else{
 		$('input[name=smoking]').val("NO, 금연을 원합니다.");
 	}
+	
+	//예약상태를 출력하는 코드이다.	
+	var bookStatus = '<c:out value="${info.bookStatus} "/>';
+	var bookStatus2 = bookStatus.trim();
+	/* alert(bookStatus2); */
+
+// 당신의 투숙상태를 변경
+	if(bookStatus2=='RS_STT_BK'){
+		$('input[name=bookStatus]').val("투숙예정"); 
+	}else if(bookStatus2=='RS_STT_BC'){
+		$('input[name=bookStatus]').val("예약취소"); 
+	}else if(bookStatus2=='RS_STT_AC'){
+		$('input[name=bookStatus]').val("투숙완료"); 
+	}
+	
+	
+	
 </script>
 
 

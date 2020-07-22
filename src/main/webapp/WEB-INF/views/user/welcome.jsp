@@ -12,7 +12,9 @@
 		<table border="1" width="500px">
 			<tr>
 				<td>
-				<label>	<%=userLastName %><%=userFstName  %>님 환영합니다. </label>
+
+				<label>	<%=userLastName %><%=userFstName %>님 환영합니다. </label>
+
 				<p>오늘은 우리나라의  어느 곳을 여행하고 싶으신가요?</p>
 				<br>
 				<a href="../acm/list">숙소 검색 홈으로 </a>

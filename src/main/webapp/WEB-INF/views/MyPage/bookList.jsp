@@ -7,6 +7,7 @@
 	session.setAttribute("loginUserNum", "U1");
 String name = (String) session.getAttribute("loginUserNum");
 %>
+
 <%@include file="../includes/header.jsp"%>
 
 

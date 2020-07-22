@@ -86,21 +86,21 @@ public class BookingServiceImpl implements BookingService{
 	}
 
 
-	// 예약 페이지 : 예약 정보를 저장한다 & 비정상적인 접근을 막기 위한 유효성 검사 진행
-	@Override
-	public int register(BookingVO book) {
-		
-		if(!(book.getBookerFirstname().length() <= 50 && 
-				book.getBookerLastname().length() <= 50 && 
-				book.getBookerEmail().length() <= 100 && 
-				book.getBookerEmail().contains("@"))
-		){
-			System.out.println("올바르지 않은 접근으로 입력 시도!!!");
-			log.info("올바르지 않은 접근으로 입력 시도!!! register......" + book);
-			return 0;
-		}
-		log.info("register......" + book);
-		return mapper.insert(book);
-	}
+//	// 예약 페이지 : 예약 정보를 저장한다 & 비정상적인 접근을 막기 위한 유효성 검사 진행
+//	@Override
+//	public int register(BookingVO book) {
+//		
+//		if(!(book.getBookerFirstname().length() <= 50 && 
+//				book.getBookerLastname().length() <= 50 && 
+//				book.getBookerEmail().length() <= 100 && 
+//				book.getBookerEmail().contains("@"))
+//		){
+//			System.out.println("올바르지 않은 접근으로 입력 시도!!!");
+//			log.info("올바르지 않은 접근으로 입력 시도!!! register......" + book);
+//			return 0;
+//		}
+//		log.info("register......" + book);
+//		return mapper.insert(book);
+//	}
 
 }
