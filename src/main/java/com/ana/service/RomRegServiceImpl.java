@@ -32,9 +32,14 @@ public class RomRegServiceImpl implements RomRegService{
 	
 	@Transactional
 	@Override
-	public int register(RomVO rom) {
+	public int register(RomVO rom) {//등록이를 하자
+		rom.setRomPurl("C:\\upload\\room\\");
+		rom.setRomPname("room_p_50.jpg");
 		
-		return mapper.insertSelectKey(rom);//객실추가
+		System.out.println("romReg:"+rom.toString());
+		
+		
+		return mapper.registerRom(rom);//객실추가
 	}
 
 

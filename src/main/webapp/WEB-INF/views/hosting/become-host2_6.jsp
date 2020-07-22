@@ -44,7 +44,7 @@
 	<br>			
   <form action="become-host-complete" method="post">
   <!-- 숙소 방 추가 모달로 띄우기-->
-  <h4>6.개별객실 추가하기</h4><input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
+  <h4>7.개별객실 추가하기</h4><input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
   <h3 align="left">총 <c:out value="${size}"/>개의 방</h3>
 			
 			  
@@ -113,7 +113,7 @@
 	function openPop(){
 		// window.name = "부모창 이름"; 
 		
-		var _width='850';
+		var _width='800';
 		var _height='400';
 		
 		var _left=Math.ceil((window.screen.width-_width)/2);
