@@ -121,4 +121,50 @@ public class BookingServiceTests {
 //		log.info("생성된 예약 번호: " + book.getBookNum());
 //	}
 
+//	@Test
+//	public void testExist() {
+//		log.info(service);
+//		assertNotNull(service);
+//	}
+//	
+//	@Test
+//	public void testGetList() {
+//		service.getList().forEach(board-> log.info(board));
+//	}
+//	
+//	
+//	@Test
+//	public void testGet() {
+//		log.info(service.get("B1"));
+//	}
+	
+	
+	//@Test
+	public void testRegister() {
+		BookingVO book = new BookingVO();
+		book.setUserNum("U999");
+		book.setRomNum("R999");
+		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
+		try {
+			book.setCheckinDate(beforeFormat.parse("2020/8/1"));
+			book.setCheckoutDate(beforeFormat.parse("2020/8/3"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		book.setStaydays(2);
+		book.setGuest(2);
+		book.setBookPrice(1004);
+		book.setExpectedArr("PM02");
+		book.setSmoking("1");
+		book.setRequest("뷰 좋은 방 주세요");
+		//book.setRomName("테스트");
+		book.setBookerLastname("테스트");
+		book.setBookerFirstname("테스트");
+		book.setBookerEmail("test@ana.com");
+		book.setBookerPhone("010");
+		book.setBookStatus("RS_STT_BK");
+		service.register(book);
+		log.info("생성된 예약 번호: " + book.getBookNum());
+	}
+
 }

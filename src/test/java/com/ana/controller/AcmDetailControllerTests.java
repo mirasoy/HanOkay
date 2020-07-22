@@ -32,8 +32,8 @@ public class AcmDetailControllerTests {
 	}
 
 	@Test
-	public void testList() throws Exception {
-		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/accommodation").param("acmNum", "A2")).andReturn()
-				.getModelAndView().getModelMap());
+	public void test() throws Exception {
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/acm/detail").param("acmNum", "A1").param("in", "2020-01-01")
+				.param("out", "2020-01-02").param("person", "1")).andReturn().getModelAndView().getModelMap());
 	}
 }
