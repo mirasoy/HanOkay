@@ -54,7 +54,7 @@ public class AdminServiceImpl implements AdminService{
 		vo.setUserNum(userNum);
 		vo.setUserPriv("GUEST");
 		vo.setUserStatusCode("ACTIVE");
-		vo.setBizRegisterNumber("DENY");
+		vo.setBizRegisterNumber("");
 		
 		return umapper.moditoGuest(vo)==1;
 	}
