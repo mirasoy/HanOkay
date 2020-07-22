@@ -2,6 +2,9 @@ package com.ana.service;
 
 import java.util.List;
 import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.ana.domain.UserVO;
 
 public interface UserService {

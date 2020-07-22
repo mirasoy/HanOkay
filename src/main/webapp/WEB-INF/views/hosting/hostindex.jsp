@@ -4,7 +4,7 @@
 <%@include file="../includes/hostheader.jsp"%>
 	<div class="body">
 		<div align="center">
-			알림판(미구현)
+			 <h4><c:out value="${userFstname}"/> 호스트님의 알림판</h4>
 			(호스트 관리페이지의 메인페이지. 헤더에 있는 정보들이 축약되서 보여짐)
 		</div>
 	</div>

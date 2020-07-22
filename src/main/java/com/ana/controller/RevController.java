@@ -155,7 +155,10 @@ public class RevController {
 	public void get(@RequestParam("pstNum") String pstNum, Model model) {
 
 		log.info("/get" + service.get(pstNum));
+		log.info("/get" + service.getPhoto(pstNum));
+		
 		model.addAttribute("review", service.get(pstNum));
+		model.addAttribute("reviewP", service.getPhoto(pstNum));
 
 	}
 
@@ -223,6 +226,7 @@ public class RevController {
 		String uploadFolder = "c:/upload";
 
 		for (MultipartFile multipartFile : uploadFile) {
+			
 			log.info("--------------------------");
 			log.info("name >>" + multipartFile.getOriginalFilename());
 			log.info("size >>" + multipartFile.getSize());
@@ -296,14 +300,13 @@ public class RevController {
 
 		return new ResponseEntity<List<AttachFileDTO>>(list, HttpStatus.OK);
 	}
-
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName) {
 
 		log.info("fileName: " + fileName);
 
-		File file = new File("c:/upload/" + fileName);
+		File file = new File(fileName);
 
 		log.info("file :" + file);
 
@@ -317,7 +320,7 @@ public class RevController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		return result;
 	}
 

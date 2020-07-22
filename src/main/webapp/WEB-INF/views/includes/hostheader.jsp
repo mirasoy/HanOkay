@@ -2,6 +2,27 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="com.ana.domain.UserVO"%>
+<!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
+<%
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userLastName = "";
+		String userFstName = "";
+		String userPwd = "";
+		String userNum = "";
+		//userNum = "U1";
+		
+		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if (user != null) {
+			userLastName = user.getUserLastName();
+			userFstName = user.getUserFstName();
+			userPwd = user.getUserPwd();
+			userNum = user.getUserNum();
+
+		}
+%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" >
 <html>
 <head>
@@ -94,14 +115,14 @@
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
-                            <a href="#">
+                            <a href="/memmode/profile">
                                 <div>
                                     	프로필
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/memmode/account">
                                 <div>
                                     	계정
                                 </div>

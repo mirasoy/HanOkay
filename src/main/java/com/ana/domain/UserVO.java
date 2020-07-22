@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class UserVO {
 
-	private String userNum;
+	private String userNum;//
 	private String userEmail;
 	private String userPwd;
 	private String userFstName;
@@ -21,8 +21,8 @@ public class UserVO {
 	private String userProfilePicName;
 	private String userIntroduction;
 	private String userLanguage;
-	private String userStatusCode;
-	private String bizRegisterNumber;
+	private String userStatusCode;//
+	private String bizRegisterNumber;//
 	private String bizRegisterPicUrl;
 	private String userAuthCode;
 }
