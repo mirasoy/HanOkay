@@ -76,12 +76,12 @@
 				
 				
 				
-				
-				//예약 상태 수정
+			
+	 			//예약 상태 수정
 				
 				var bookStatus = '<c:out value="${info.bookStatus} "/>';
 				var bookStatus2 = bookStatus.trim();
-				/* alert(bookStatus2); */
+				
 				
 				if(bookStatus2=='RS_STT_BK'){
 					$('input[name=bookStatus]').val("투숙예정"); 
@@ -89,8 +89,9 @@
 					$('input[name=bookStatus]').val("예약취소"); 
 				}else if(bookStatus2=='RS_STT_AC'){
 					$('input[name=bookStatus]').val("투숙완료"); 
-				}
-				
+				}  
+		
+				 
 
 			});
 </script>
@@ -186,15 +187,7 @@
 					</div>
 
 
-					<div class="form-group info-group">
-						<label>실제도착시간</label> <input class="form-control" name='realArr'
-							value='<c:out value="${info.realArr}"/>' readonly="readonly">
-					</div>
-
-					<div class="form-group info-group">
-						<label>방이름</label> <input class="form-control" name='romName'
-							value='<c:out value="${info.romName}"/>' readonly="readonly">
-					</div>
+					
 					<div class="form-group info-group">
 						<label>예약자 이름</label> <input id="Lastname" class="form-control"
 							name='bookerLastname'
@@ -278,6 +271,17 @@
 				console.log("예약을 취소합니다.")
 				formObj.attr("action", "/MyPage/remove");
 			}
+			
+			
+	
+			var bookStatus = document.getElementsByName("bookStatus")[0].value;
+			var bookStatus2 = bookStatus.trim();		
+			
+			if(bookStatus2=='투숙예정'){
+				$('input[name=bookStatus]').val("RS_STT_BK"); 
+			}
+				
+	
 
 			formObj.submit();
 		});

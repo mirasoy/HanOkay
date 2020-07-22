@@ -85,15 +85,6 @@
         
         
         <div class="form-group info-group">
-          <label>실제도착시간</label> <input class="form-control" name='realArr'
-            value='<c:out value="${info.realArr} "/>' readonly="readonly">
-        </div> 
-        
-        <div class="form-group info-group">
-          <label>방이름</label> <input class="form-control" name='romName'
-            value='<c:out value="${info.romName} "/>' readonly="readonly">
-        </div>
-        <div class="form-group info-group">
           <label>예약자 이름</label> <input class="form-control" name='bookerLastname'
             value='<c:out value="${info.bookerLastname} "/>' readonly="readonly">
         </div>
