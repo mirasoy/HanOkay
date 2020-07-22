@@ -32,17 +32,17 @@ public class AcmRegServiceImpl implements AcmRegService{
 	
 
 	@Override
-	public void newAcmReg(AcmVO vo,String userNum) {//회원당 1.숙소추가가 되면서 2.회원히스토리정보가 추가  3.회원상태코드와 회원권한 변경
+	public void newAcmReg(AcmVO vo,String userNum) {//회원당 1.숙소추가가 되면서 2.회원상태코드와 회원권한 변경 3.회원히스토리정보가 추가  
 		//우선 임의로 넣어줍니다
 		vo.setAcmPurl("C:\\upload\\acm\\");
 		vo.setAcmPname("amc_p_1.jpg");
 		System.out.println("서비스단의 "+vo.toString());
-		
-		amapper.newAcmReg(vo);//acmNum 반환값으로 안가지고나와도 완성되어있다! 1.
+		System.out.println(vo.getLatitude()+","+vo.getLongitude());
+		amapper.newAcmReg(vo);//acmNum 반환값으로 안가지고나와도 완성되어있다! 
 		
 		UserVO u = new UserVO();
 		u.setUserNum(userNum);
-		u.setBizRegisterNumber(vo.getBizRegnum());
+		u.setBizRegisterNumber(vo.getBizRegnum());//사업자 등록을 추가해준다
 		u.setUserStatusCode("HO_PENDING"); //priv는 계속 guest다
 
 		umapper.becomeHost(u);//이미 HO_ACTIVE면 바꾸지말고-- 21일 이후에 수정하자
@@ -99,6 +99,12 @@ public class AcmRegServiceImpl implements AcmRegService{
 		
 		//호스트이면 사업자등록증에 있는것들을 다 가꾸와
 		return amapper.getListHosts(bizRegnum);
+	}
+
+
+	@Override
+	public String getAcm(String acmNum) {
+		return amapper.getAcm(acmNum);
 	}
 
 

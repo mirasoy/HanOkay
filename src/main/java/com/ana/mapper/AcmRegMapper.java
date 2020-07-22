@@ -12,7 +12,7 @@ public interface AcmRegMapper {
 	
 	public void newAcmReg(AcmVO vo);//숙소등록**
 	
-	public AcmVO read(String acmNum);
+	public String getAcm(String acmNum);//숙소정보 가져오기
 	
 	public int delete(String acmNum);
 	

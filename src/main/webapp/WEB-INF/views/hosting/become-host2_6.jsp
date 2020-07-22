@@ -44,8 +44,9 @@
 	<br>			
   <form action="become-host-complete" method="post">
   <!-- 숙소 방 추가 모달로 띄우기-->
-  <h4>7.개별객실 추가하기</h4><input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
-  <h3 align="left">총 <c:out value="${size}"/>개의 방</h3>
+  <h4>7.숙소 <c:out value="${acmName}"/>에 객실 추가하기</h4>
+  <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
+  <h3 align="left">총 <c:out value="${size}"/>개의 객실</h3>
 			
 			  
 		

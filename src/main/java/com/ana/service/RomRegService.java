@@ -10,7 +10,7 @@ public interface RomRegService {//호스트 등록단에서
 
 	public int register(RomVO rom); //객실등록할때
 
-	public RomVO get(String romNum);
+	public RomVO getRom(String romNum);
 
 	public boolean modify(RomVO rom);
 

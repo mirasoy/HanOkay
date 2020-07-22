@@ -97,12 +97,28 @@
             value='<c:out value="${thisrom.romPrice }"/>' readonly="readonly">
         </div>
         <div class="form-group">
-          <label></label> <input class="form-control" name='romPurl'
+          <label>객실 사진</label> <input class="form-control" name='romPurl'
             value='<c:out value="${thisrom.romPurl }"/>' readonly="readonly">
         </div>
 		<div class="form-group">
-          <label>객실 위치</label> <input class="form-control" name='romLoca'
-            value='<c:out value="${thisrom.romLoca }"/>' readonly="readonly">
+          <label>객실 활성화</label> <input class="form-control" name='romActi'
+            value='<c:out value="${thisrom.romActi }"/>' readonly="readonly">
+        </div>
+		<div class="form-group">
+          <label>객실 상태</label> <input class="form-control" name='romStatus'
+            value='<c:out value="${thisrom.romStatus }"/>' readonly="readonly">
+        </div>
+		<div class="form-group">
+          <label>객실 옵션정보</label> <input class="form-control" name='romOptcode'
+            value='<c:out value="${thisrom.romOptcode }"/>' readonly="readonly">
+        </div>
+		<div class="form-group">
+          <label>객실 등록일</label> <input class="form-control" name='romRegdate'
+            value='<c:out value="${thisrom.romRegdate }"/>' readonly="readonly">
+        </div>
+        <div class="form-group">
+          <label>객실 최근 수정일</label> <input class="form-control" name='romUpdatedate'
+            value='<c:out value="${thisrom.romUpdatedate }"/>' readonly="readonly">
         </div>
 
 

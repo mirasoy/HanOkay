@@ -61,12 +61,12 @@ public class HostController {
 	///////////////////////
 	@GetMapping("/hostindex")
 	public void indexGet(Model model,HttpSession session) {
-		//model.addAttribute("userFstname", getUser(session).getUserFstName());
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
 	@GetMapping("/reserv")
 	public void reservGet(Model model,HttpSession session) {
-		//model.addAttribute("userFstname", getUser(session).getUserFstName());
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
 	@PostMapping("/listings")
@@ -117,7 +117,7 @@ public class HostController {
 	public String getRomGet(@RequestParam("romNum") String romNum, Model model, HttpSession session) {
 		System.out.println("겟롬//롬넘이 넘어온다~~~"+romNum);
 		
-		model.addAttribute("thisrom",rservice.get(romNum));//RomVO가 나온다
+		model.addAttribute("thisrom",rservice.getRom(romNum));//RomVO가 나온다
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
 		return "/hosting/getRom";
@@ -125,7 +125,7 @@ public class HostController {
 	
 	@GetMapping("/modifyRom")//내용 전체를 받아서 (Post)숙소 수정하기
 	public String modifyRomGet(@RequestParam("romNum") String romNum, Model model) {
-		model.addAttribute("thisrom",rservice.get(romNum));
+		model.addAttribute("thisrom",rservice.getRom(romNum));
 		return "/hosting/modifyRom";
 	}
 	
@@ -225,8 +225,8 @@ public class HostController {
 	@PostMapping("/become-host1_6")//입력한 상세 숙소정보를 db에 넣자
 	public String becomeHostPost1_6(@RequestParam(value="acmOptcode") List<String> acmOptcode,
 		String acmNum,String acmDesc,Model model,HttpSession session){
-	
-		model.addAttribute("acmNum", acmNum.trim());//여기가 안되는가
+		
+		model.addAttribute("acmNum", acmNum);//여기가 안되는가
 		
 		
 		aservice.update1_6(acmNum,acmOptcode,acmDesc);//한꺼번에 넣어준다***s
@@ -248,7 +248,12 @@ public class HostController {
 	@GetMapping("/become-host2_6")//뿌려주기
 	public void becomeHostGet2_6(String acmNum,Model model,HttpSession session) {
 		System.out.println("겟2_6");
+		acmNum = acmNum.trim();
 		System.out.println(acmNum);
+
+		String acmName=aservice.getAcm(acmNum);
+		
+		model.addAttribute("acmName", acmName);//이름담고
 		
 
 		model.addAttribute("userFstname", getUser(session).getUserFstName());

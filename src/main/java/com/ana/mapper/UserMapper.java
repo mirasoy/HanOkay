@@ -45,9 +45,15 @@ public interface UserMapper {
 	
 	public UserVO isHost(String userNum);
 	
+	//////////////////////////////어드민단 //////////////////////////////////////
 	
+	public List<UserVO> getPendingHost(String userStatusCode);
 	
+	public UserVO getUser(String userNum);
 	
+	public int moditoHost(UserVO vo);
+	
+	public int moditoGuest(UserVO vo);
 	
 	
 	
