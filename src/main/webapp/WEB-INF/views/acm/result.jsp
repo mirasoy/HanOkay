@@ -553,7 +553,7 @@
 												actionForm.append("<input type='hidden' name='acmNum' value='"
 																+ $(this).attr("href")
 																+ "'>");
-												actionForm.attr("action","/acm/get");
+												actionForm.attr("action","/acm/detail");
 												actionForm.submit();
 											}); 
 						});
