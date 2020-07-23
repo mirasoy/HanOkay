@@ -94,12 +94,13 @@
 		</div>
 			
 			
-		<button type="submit" onclick="">다음으로</button>
 		</form>	
 			
 		<!-- 빈 폼 -->
-		<form id="actionForm">
+		<form id="actionForm" action="/hosting/become-host-complete">
+			<input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
 		</form>
+		<button type="submit">다음으로</button>
 				
 			
 		</div>

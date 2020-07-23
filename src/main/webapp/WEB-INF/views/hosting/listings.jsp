@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/hostheader.jsp"%>
-
-<div id="page-wrapper" style="padding-bottom:50px;">
+	<div>
 	<br>			
   <!-- 숙소 방 추가 모달로 띄우기-->
   <h4><c:out value="${userFstname}"/> 호스트님의 숙소 관리</h4><input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
@@ -55,9 +54,8 @@
 		<!-- 빈 폼 -->
 		<form id="actionForm">
 		</form>
-				
+		</div>		
 			
-		</div>
 
 				
 
@@ -74,11 +72,10 @@
 			console.log(operation);
 			
 			if(operation==='newAcm'){
-				alert("목록으로 돌아갑니다");
-				formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
-				formObj.attr("action","/hosting/become-host2_6");	
+				alert("새 숙소를 등록합니다");
+				formObj.attr("action","/hosting/become-host");	
 			}
-			//actionForm.submit();
+			actionForm.submit();
 		});
 	});
 

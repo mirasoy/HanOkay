@@ -10,6 +10,7 @@
 		String userFstName = "";
 		String userPwd = "";
 		String userNum = "";
+		String userStatusCode ="";//이걸로 새 숙소등록하기가 보이던지 사업자등록증이 보이던지 결정할거임
 		//userNum = "U1";
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
@@ -18,7 +19,7 @@
 			userFstName = user.getUserFstName();
 			userPwd = user.getUserPwd();
 			userNum = user.getUserNum();
-
+			userStatusCode=user.getUserStatusCode();
 		}
 %>
 
@@ -56,6 +57,7 @@
 		html,body{
 			font-family:"타이포_쌍문동";
 		}
+		
 		
 		#logo{
 			width:50px;
@@ -107,11 +109,11 @@
 			<!-- 오른쪽 nav -->
             <ul class="nav navbar-top-links navbar-right">
            		<li class="nav-menu">
-					<button onclick="location.href='/hosting/become-host'">숙소 등록하기</button>
+           			<div><a href='/hosting/become-host'>숙소 등록하기</a></div>
 				</li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        	프로필 <i class="fa fa-caret-down"></i>
+                        	<c:out value="${userFstname}"/>님 환영합니다!<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
@@ -135,13 +137,6 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	가이드북
-                                </div>
-                            </a>
-                        </li>
                         <li class="divider"></li>
                         <li>
                             <a href="#">
@@ -154,14 +149,6 @@
                             <a href="#">
                                 <div>
                                     	호스트 지원
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	새로운 숙소 추가
                                 </div>
                             </a>
                         </li>
@@ -188,5 +175,25 @@
         </nav>
 
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+   $(document).ready(function() {
+	                 
+               
+   
+   
+   
+   });
+</script>
+
+
+
+
+
+
+
+
+
+
+
 

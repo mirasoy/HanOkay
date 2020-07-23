@@ -3,8 +3,9 @@
 
 
 <%@include file="../includes/hostheader.jsp"%>
-<!-- nav-sidebar -->
 
+
+<div class="startwrite">
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <!-- 사업자 등록도 받을것 -->
@@ -38,13 +39,13 @@
 
 
 			<div class="acm" id="acm"><br><h6>*항목은 필수입력값입니다</h6>	  
-				<h4>*1.게스트가 묵게 될 숙소의 유형을 골라주세요</h4>
+				<h4>게스트가 묵게 될 숙소의 유형을 골라주세요!</h4>
 				<input type="radio" id="acmType_house" name="acmTypes" value="H"><label for="rentType1">집 천제</label> 
 				<input type="radio" id="acmType_priv" name="acmTypes" value="P"><label for="rentType2">객실별 대여</label>
 			
 		<form id="actionForm" action="/hosting/become-host" method="post">
 			<br>	
-			  <h4>*2.숙소 이름과 정보</h4>
+			  <h4>숙소 이름과 정보를 입력합니다</h4>
 			   <input type="text" id="acmName" name="acmName" placeholder="숙소의 이름"><br><br>
 			   <!-- 구글 API추가해야함 /우선 다음 API 사용하겠음-->
 			   
@@ -84,7 +85,7 @@
 				
 			 
 				  <br><br>
-				  <h4>*3.Ana에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4>
+				  <h4>한:오케이에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4>
 				  <input type="text" id="bizRegnum" name="bizRegnum" placeholder="사업자등록번호" numberOnly><br><br>
 				  <!-- 우선 숨겨두겠음 -->
 				  <!-- <input type="hidden" id="bizRegpurl" name="bizRegpurl" placeholder="사업자등록증"><br>
