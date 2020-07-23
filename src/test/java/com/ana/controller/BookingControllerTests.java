@@ -53,7 +53,7 @@ public class BookingControllerTests {
 	public void TestgetBookListAll() throws Exception{
 		log.info(
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookListAll"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/mypage/bookListAll"))
 		.andReturn()
 		.getModelAndView()
 		.getModelMap());
@@ -65,7 +65,7 @@ public class BookingControllerTests {
 	public void testCheckout() throws Exception{
 		log.info(
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/checkout"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/mypage/checkout"))
 		.andReturn()
 		.getModelAndView()
 		.getModelMap());
@@ -80,7 +80,7 @@ public class BookingControllerTests {
 	public void testCancelList() throws Exception{
 		log.info(
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/cancelled"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/mypage/cancelled"))
 		.andReturn()
 		.getModelAndView()
 		.getModelMap());
@@ -95,7 +95,7 @@ public class BookingControllerTests {
 	
 	@Test
 	public void testRemove()throws Exception{
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/MyPage/remove")
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/mypage/remove")
 				.param("bookNum", "B1")
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
@@ -107,7 +107,7 @@ public class BookingControllerTests {
 	public void testList() throws Exception{
 		
 		log.info(
-		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookList"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/mypage/bookList"))
 		.andReturn()
 		.getModelAndView()
 		.getModelMap());
@@ -121,7 +121,7 @@ public class BookingControllerTests {
 	public void testGet() throws Exception {
 
 		log.info(mockMvc.perform(MockMvcRequestBuilders
-				.get("/MyPage/info")
+				.get("/mypage/info")
 				.param("bookNum", "B1"))
 				.andReturn()
 				.getModelAndView().getModelMap());
@@ -136,7 +136,7 @@ public class BookingControllerTests {
 				
 		
 		String resultPage = mockMvc
-				.perform(MockMvcRequestBuilders.post("/MyPage/modify")
+				.perform(MockMvcRequestBuilders.post("/mypage/modify")
 						.param("bookNum", "B2")
 						.param("userNum", "수정된 회원번호")
 						.param("romNum", "수정된 방번호")						
