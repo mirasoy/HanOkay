@@ -100,12 +100,12 @@ public class UserServiceTests {
 	
 	@Test 
 	public void testGiveAuth() {
-		AssertFalse(service.giveAuth("se", "1234"));
+		AssertFalse(service.matchAuthCode("se", "1234"));
 	}
 	
 	@Test
 	public void testGiveAuth2() {
-		assertTrue(service.giveAuth("twestmerland5@yahoo.co.jp","56231"));
+		assertTrue(service.grantActive("twestmerland5@yahoo.co.jp"));
 	}
 }
 

@@ -31,13 +31,15 @@ if (user != null) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ana - Make yourself at home in Korea</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Expires" content=0>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Hanokay 한오케이 -Make yourself At home in Korea!</title>
 
 
 <!-- load stylesheets -->
-<link rel="stylesheet"
-   href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
 <link rel="stylesheet"
    href="${request.contextPath}/resources/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -45,13 +47,13 @@ if (user != null) {
 <link rel="stylesheet" href="${request.contextPath}/resources/css/bootstrap.min.css">
 <!-- Bootstrap style -->
 <link rel="stylesheet" type="text/css"
-   href="${request.contextPath}/resources/css/datepicker.css" />
+   href="${request.contextPath}/resources/css/datepicker.css" >
 <link rel="stylesheet" type="text/css"
-   href="${request.contextPath}/resources/slick/slick.css" />
+   href="${request.contextPath}/resources/slick/slick.css">
 <link rel="stylesheet" type="text/css"
-   href="${request.contextPath}/resources/slick/slick-theme.css" />
-<link rel="stylesheet" href="${request.contextPath}/resources/css/templatemo-style.css">
-<link rel="stylesheet" href="${request.contextPath}/resources/css/review.css">
+   href="${request.contextPath}/resources/slick/slick-theme.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/review.css">
 
 <!-- 메인 CSS style -->
 
@@ -76,22 +78,19 @@ if (user != null) {
 
 <!-- 달력 변경(수희) -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="${request.contextPath}/resources/js/select2.js"></script>
-<link href="${request.contextPath}/resources/css/select2.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/select2.css" >
 
 
 <script type="text/javascript">
    $(document)
          .ready(
-               
                function() {
                   //만약 user에 해당하는 세션이 없으면 
-                  var biz;
-               if (
-<%=user == null%>
-   ) {
+                  var biz='0000000000';
+               if (<%=user == null%>){
                      // $("#loginout").append("<a href='/user/login'>로그인</a>");
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
                      $('#notification').empty();
@@ -104,22 +103,20 @@ if (user != null) {
                      $('#myMenuIcon').removeAttr("data-toggle");
                      $('#myMenuIcon').attr("href", "/user/login");
                      
-                  } else {
+                  } 
+               else {
                      biz ='<%=bizRegisterNumber%>';
-                     if(biz== "0000000000"){
-                        $('#mode').append("<a onclick='location.href='/admin/adminindex''   style='cursor: pointer'>관리자 모드</a>");
-                        
-                     }else{
-                        $('#mode').append("<a onclick='location.href='/hosting/hostindex''   style='cursor: pointer'>호스트 모드</a>");
-                           
-
+                     if(biz== '0000000000'){
+                        $('#mode').append('<a href="/admin/adminindex"> 관리자 모드</a>');
                      }
-                     $("#loginout").append(
-                           "<a href='/user/logout'>로그아웃</a>")
+                     else{
+                        $('#mode').append('<a href="/hosting/hostindex"> 호스트 모드</a>');
+                     }
+                     
+                     $('#loginout').append(
+                           '<a href="/user/logout">로그아웃</a>');
                            
-                  }
-                  ;
-                  
+                  };    
                });
 </script>
 

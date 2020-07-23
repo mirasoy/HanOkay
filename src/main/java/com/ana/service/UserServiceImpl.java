@@ -90,12 +90,25 @@ public class UserServiceImpl implements UserService{
 	public UserVO getUserById(String email) {
 		return mapper.getUserById(email);
 	}
-
-	//인증번호가 일치하는 user의 상태코드를 변경하고 업데이트 된 행의 수를 가져오는 메서드
+	
+	//인증코드를 확인하는 메서드
 	@Override
-	public boolean giveAuth(@Param("userAuthNum")String authNum, @Param("userEmail")String email) {
-		return mapper.giveAuth(authNum, email)==1;
+	public boolean matchAuthCode(@Param("userAuthCode") String authCode, @Param("userEmail") String email) {
+		return mapper.matchAuthCode(authCode, email) ==1;
 	}
+
+	//user의 상태코드를 active 변경하고 업데이트 된 행의 수를 가져오는 메서드
+	 @Override 
+	 public boolean grantActive(String email) {
+		 return mapper.grantActive(email)==1; 
+	 }
+
+	 //user의 인증코드를 업데이트 하게하는 메서드
+	@Override
+	public boolean updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode")String authCode) {
+		return mapper.updateAuthCode(email ,authCode)==1;
+	}
+	
 
  
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ana.domain.UserVO;
 
@@ -39,6 +40,15 @@ public interface UserService {
 	//email과 pw 일치하는 userNum가져오는 메서드
 	public UserVO getUserById(String email);
 	
-	//이메일과 인증번호를 확인하고 회원상태를 active해주는 메서드
-	public boolean giveAuth(String authNum, String email);
+	//인증코드를 확인하는 메서드
+	public boolean matchAuthCode(String authCode, String email);
+	
+	//회원상태를 active해주는 메서드
+	@Transactional
+	public boolean grantActive(String email);
+	
+	//해당 이메일을 가진 회원의 authCode를 업데이트 시키는 메서드
+	@Transactional
+	public boolean updateAuthCode(String email, String authCode);
+	
 }

@@ -116,7 +116,7 @@ public class UserMapperTests {
 	
 	@Test
 	public void testGiveAuth() {
-		int count=mapper.giveAuth("serin9811@naver.com", "0000");
+		int count=mapper.matchAuthCode("serin9811@naver.com", "0000");
 		log.info("*****GIVE AUTH COUNT: "+ count+ "*****");
 	}
 
