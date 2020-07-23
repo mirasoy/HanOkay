@@ -42,6 +42,7 @@
 	grid-row: 3;
 	grid-column: 1;
 	padding: 20px;
+    font-size: 2vh;
 }
 
 .container-review{
@@ -155,7 +156,6 @@ details{
 
 .rom-title{
 	font-size: 3vh;
-	
 }
 
 .rom{
@@ -365,6 +365,96 @@ details{
 	display: inline-block;
 }
 
+
+#cb label {
+  display: inline-block;
+  color: black;
+  cursor: pointer;
+  position: relative;
+}
+#cb label span {
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  transform-origin: center;
+  border: 2px solid black;
+  vertical-align: -6px;
+  margin-right: 10px;
+  transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
+}
+#cb label span:before {
+  content: "";
+  width: 0px;
+  height: 2px;
+  border-radius: 2px;
+  background: black;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 13px;
+  left: 9px;
+  transition: width 50ms ease 50ms;
+  transform-origin: 0% 0%;
+}
+#cb label span:after {
+  content: "";
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: black;
+  position: absolute;
+  transform: rotate(305deg);
+  top: 16px;
+  left: 10px;
+  transition: width 50ms ease;
+  transform-origin: 0% 0%;
+}
+#cb label:hover span:before {
+  width: 5px;
+  transition: width 100ms ease;
+}
+#cb label:hover span:after {
+  width: 10px;
+  transition: width 150ms ease 100ms;
+}
+
+#cb input[type=checkbox] {
+  display: none;
+}
+#cb input[type=checkbox]:checked + #cb label span {
+  background-color: black;
+  transform: scale(1.25);
+}
+#cb input[type=checkbox]:checked + #cb label span:after {
+  width: 10px;
+  background: #1790b5;
+  transition: width 150ms ease 100ms;
+}
+#cb input[type=checkbox]:checked + #cb label span:before {
+  width: 5px;
+  background: #1790b5;
+  transition: width 150ms ease 100ms;
+}
+#cb input[type=checkbox]:checked + #cb label:hover span {
+  background-color: black;
+  transform: scale(1.25);
+}
+#cb input[type=checkbox]:checked + #cb label:hover span:after {
+  width: 10px;
+  background: #1790b5;
+  transition: width 150ms ease 100ms;
+}
+#cb input[type=checkbox]:checked + #cb label:hover span:before {
+  width: 5px;
+  background: #1790b5;
+  transition: width 150ms ease 100ms;
+}
+
+.copy{
+	color: black;
+}
+
 </style>
 
 <div class = "page-wrapper">
@@ -420,6 +510,9 @@ details{
 			<span id="stisf">&nbsp;</span>
 			<span id="stisf-num">(<c:out value="${star}" />)</span>
 			</br><span class="address"><i class="fas fa-map-marker-alt"></i>&nbsp;<c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" />&nbsp;&nbsp;<a target="_blank" href="https://www.google.co.kr/maps/place/<c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" />">지도보기</a></span>
+			&emsp;<i class="fa fa-ellipsis-v" aria-hidden="true"></i>&emsp;<span class="phone">전화하기: <a href="tel:${acm.repPhone}"><c:out value="${acm.repPhone}"/></a></span>
+			&emsp;<i class="fa fa-ellipsis-v" aria-hidden="true"></i>&emsp;<span class="email">메일보내기: <a href="mailto:${acm.acmEmail}"><c:out value="${acm.acmEmail}"/></a>&nbsp;&nbsp;<span class="copy">주소복사</span><i class="fa fa-clipboard" aria-hidden="true"></i>
+			<input type="hidden" id="email" value="${acm.acmEmail}">
 			</br><span class="desc" ><i class="fa fa-quote-left" aria-hidden="true"></i><c:out value="${acm.acmDesc}" /><i class="fa fa-quote-right" aria-hidden="true"></i></span>
 		</div>
 		
@@ -451,7 +544,7 @@ details{
 									<span><c:out value="${rev.revPtitle}" />&nbsp;
 										<c:choose>
 										    <c:when test="${rev.revStisf >= 3.0}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></c:when>
-										    <c:otherwise><i class="fa fa-thumbs-down" aria-hidden="true"></i></c:otherwise>
+										    <c:otherwise><i class="fa fa-thumbs-down" id="test" aria-hidden="true"></i></c:otherwise>
 										</c:choose>
 									</span>
 								</summary>
@@ -475,34 +568,42 @@ details{
 		
 		<!-- 객실리스트 -->
 		<div class = "container-roomlist booking-form" name="roomlist">
-			<label class="sub-title">ROOMS</label></br>
+			<label class="sub-title">ROOM</label></br>
 				<table>
 					<c:forEach items="${rom}" var="rom">
 						<tr>
-							<span class="rom">
-								<td colspan="4"><span class="rom-title"><c:out value="${rom.romName}" /></span></td>
-								<td><span class="rom-pic"><img alt='객실사진' src='/display?fileName=<c:out value="${rom.romPurl}" /><c:out value="${rom.romPname}" />' /></span>
-								</td>
-								
-								<td class="table-rom-td"><span class="rom-type"><c:out value="${rom.romType}" /></span>&nbsp;
-								<span class="rom-size"><c:out value="${rom.romSize}" />(m²)</span>
-								</br><i class="fa fa-user" aria-hidden="true"></i>&emsp;<span class="rom-capa"><c:out value="${rom.romCapa}" />명</span>
-								</br><span class="rom-bed"><i class="fa fa-bed" aria-hidden="true"></i>&emsp;<c:out value="${rom.bedType}" />&nbsp;
-									<c:choose>
-										<c:when test="${rom.bedType eq '온돌'}"> </c:when>
-										<c:otherwise>
-											<c:out value="${rom.bedCnt}" />개
-										</c:otherwise>
-									</c:choose>
-									</span>
-								</td>
-								
-								<td class="table-rom-td"><span class="rom-opt"><c:out value="${rom.romOptcode}" /></span>
-								</td>
-								
-								<td class="table-rom-td"><span class="rom-price">₩&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/></span>
-								</td>
-							</span>
+							<td colspan ="5"><span class="rom-title"><c:out value="${rom.romName}" /></span></td>
+						</tr>
+						<tr>
+							<td><span class="rom-pic"><img alt='객실사진' src='/display?fileName=<c:out value="${rom.romPurl}" /><c:out value="${rom.romPname}" />' /></span>
+							</td>
+							
+							<td class="table-rom-td"><span class="rom-type"><c:out value="${rom.romType}" /></span>&nbsp;
+							<span class="rom-size"><c:out value="${rom.romSize}" />(m²)</span>
+							</br><i class="fa fa-user" aria-hidden="true"></i>&emsp;<span class="rom-capa"><c:out value="${rom.romCapa}" />명</span>
+							</br><span class="rom-bed"><i class="fa fa-bed" aria-hidden="true"></i>&emsp;<c:out value="${rom.bedType}" />&nbsp;
+								<c:choose>
+									<c:when test="${rom.bedType eq '온돌'}"> </c:when>
+									<c:otherwise>
+										<c:out value="${rom.bedCnt}" />개
+									</c:otherwise>
+								</c:choose>
+								</span>
+							</td>
+							
+							<td class="table-rom-td"><span class="rom-opt"><c:out value="${rom.romOptcode}" /></span>
+							</td>
+							
+							<td class="table-rom-td"><span class="rom-price"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/></span>
+							</td>
+							
+							<td class="table-rom-td">
+								<span id="cb">
+							        <input type="checkbox" id="check" name="check" value="" />
+							        <label for="check">
+							        <span><!-- 필요한 공간 --></span>예약하기
+								</span>
+							</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -595,7 +696,17 @@ details{
 				}
 			}
 		}
-			
+		
+		// 메일 복사하기
+		document.querySelector(".copy").addEventListener("click", function(){
+			var temp = document.createElement('textarea'); 
+			temp.value = document.getElementById("email").value; 
+			document.body.appendChild(temp);
+			temp.select();//select()는 textarea, input 같은 form요소에서만 사용 가능
+			document.execCommand("copy");
+			document.body.removeChild(temp);
+			alert("메일이 복사되었습니다!");
+		});
 		
 		// 숙소 만족도
 		function getStar() {
