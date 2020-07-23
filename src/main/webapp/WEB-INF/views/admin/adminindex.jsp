@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/adminheader.jsp"%>
 
 
 <div id="page-wrapper" style="padding-bottom:50px;">
