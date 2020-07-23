@@ -9,7 +9,8 @@ import com.ana.domain.UserVO;
 public interface UserHisMapper {
 	
 	/////////////////////////////////세린쨩의 영역/////////////////////////////////
-	
+	//회원의 상태코드가 변경될 때 (guest,pending -> guest,active)
+	public void leaveHistory(UserHisVO hisVO);
 	
 	
 	

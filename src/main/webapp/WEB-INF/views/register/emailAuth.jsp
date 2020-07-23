@@ -5,21 +5,23 @@
 <%@include file="../includes/header.jsp"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>이메일 인증</title>
+<title>HanOkay- 회원가입 이메일 인증</title>
 </head>
 <body>
-		<h1>가입한 이메일로 인증코드가 발송되었습니다</h1>
-		<input id="enterAuthNum">
-		<input type="button" id="checkAuthNum" value="인증코드 확인">
+		<h2>가입한 이메일로 인증코드가 발송되었습니다</h2>
+		
+		<form method="post" action="/register/submitAuth">
+		<input id="enterAuthNum" name="authNum" value="${authNum}">
 		<br>
 		<span id="msg"><c:out value="${msg}" /></span>
-		<input type="button" id="register" value="버튼을 누르고 가입완료">
+		<button type="submit" id="register">인증번호 확인하고 가입하기</button>
+		<button type="button" id="sendAgain">인증번호 재발송</button>
+		
+		<input type="hidden" name="email">
+		</form>
+		
 	<script> 
-	$(document).ready(function() {
-		$("#checkAuthNum").click(function(){
-			alert("dd");
-		})
-	});
+	
 	</script>
 </body>
 <%@include file="../includes/footer.jsp"%>

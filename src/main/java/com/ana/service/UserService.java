@@ -25,7 +25,7 @@ public interface UserService {
 	public List<UserVO> getList();
 	
 	//email로 중복체크하기 메서드
-	public boolean checkEmail(String email);
+	public boolean canRegister(String email);
 	
 	//로그인 하는 메서드
 	public void checkLogin(UserVO user, HttpSession session);
@@ -39,4 +39,6 @@ public interface UserService {
 	//email과 pw 일치하는 userNum가져오는 메서드
 	public UserVO getUserById(String email);
 	
+	//이메일과 인증번호를 확인하고 회원상태를 active해주는 메서드
+	public boolean giveAuth(String authNum, String email);
 }

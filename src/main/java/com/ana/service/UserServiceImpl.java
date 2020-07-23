@@ -2,6 +2,8 @@ package com.ana.service;
 
 import java.util.List;
 import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import com.ana.domain.UserVO;
 import com.ana.mapper.UserMapper;
@@ -51,9 +53,9 @@ public class UserServiceImpl implements UserService{
 	
 	//이메일 중복 검사하는 메서드 구현
 	@Override
-	public boolean checkEmail(String email) {
+	public boolean canRegister(String email) {
 		log.info("Email Duplication Check........");
-		return mapper.checkEmail(email)==0;
+		return mapper.canRegister(email) == 0;
 	}
 
 	//로그아웃하는 메서드 구현
@@ -87,6 +89,12 @@ public class UserServiceImpl implements UserService{
 	@Override 
 	public UserVO getUserById(String email) {
 		return mapper.getUserById(email);
+	}
+
+	//인증번호가 일치하는 user의 상태코드를 변경하고 업데이트 된 행의 수를 가져오는 메서드
+	@Override
+	public boolean giveAuth(@Param("userAuthNum")String authNum, @Param("userEmail")String email) {
+		return mapper.giveAuth(authNum, email)==1;
 	}
 
  
