@@ -138,7 +138,7 @@
 		//사진업로드 관련 부분
 
 		// 파일유효성체크
-		let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif|bmp)$")
+		let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)$")
 		let maxSize = 5242880;
 		function checkExtension(fileName, fileSize) {
 			if (fileSize > maxSize) {
