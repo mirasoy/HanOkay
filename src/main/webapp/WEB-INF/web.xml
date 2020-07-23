@@ -45,6 +45,22 @@
       <url-pattern>/</url-pattern>
    </servlet-mapping>
    
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        		<url-pattern>*.js</url-pattern>
+			    <url-pattern>*.css</url-pattern>
+			    <url-pattern>*.jpg</url-pattern>
+			    <url-pattern>*.gif</url-pattern>
+			    <url-pattern>*.png</url-pattern>
+			    <url-pattern>*.woff</url-pattern>
+			    <url-pattern>*.woff2</url-pattern>
+			    <url-pattern>*.ttf</url-pattern>
+			    <url-pattern>*.map</url-pattern>
+			    <url-pattern>*.eot</url-pattern>
+			    <url-pattern>*.svg</url-pattern>
+			    <url-pattern>*.ico</url-pattern>
+    </servlet-mapping>
+   
    <!-- 한국어필터 -->
    <filter>
       <filter-name>encoding</filter-name>

@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -25,13 +26,13 @@ if (user != null) {
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Expires" content=0>
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -42,9 +43,9 @@ if (user != null) {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
 <link rel="stylesheet"
-   href="${request.contextPath}/resources/font-awesome-4.7.0/css/font-awesome.min.css">
+   href="/resources/font-awesome-4.7.0/css/font-awesome.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="${request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <!-- Bootstrap style -->
 <link rel="stylesheet" type="text/css"
    href="${request.contextPath}/resources/css/datepicker.css" >
