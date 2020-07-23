@@ -24,6 +24,11 @@
 		<result property="bizRegisterPicUrl" column="BIZ_REGPURL" />
 		<result property="userAuthCode" column="U_AUTH_CODE" />
 	</resultMap>
+		
+	<update id="giveAuth">
+	update tuser set u_stat_code ='ACTIVE'
+	where u_email=#{userEmail} and u_auth_code=#{userAuthCode}
+	</update>
 
 	<!-- id와 pwd가 일치하는 user의 모든 정보를 읽어오는 쿼리 -->
 	<select id="getUserById" resultMap="UserVO">
@@ -38,7 +43,7 @@
 	</select>
 	
 	<!-- 이메일 중복 검사 쿼리 -->
-	<select id="checkEmail" resultType="int">
+	<select id="canRegister" resultType="int">
 	select count(*) from tuser
 	where u_email=#{userEmail}
 	</select>
@@ -64,8 +69,8 @@
 	<selectKey resultType="String" order="BEFORE" keyProperty="userNum">
 	select concat('U',SEQ_TUSER.nextval) from dual 
 	</selectKey>
-	insert into tuser(USER_NUM, U_EMAIL, U_PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY) 
-	values(#{userNum}, #{userEmail}, #{userPwd}, #{userLastName}, #{userFstName}, #{userBirthday}) 
+	insert into tuser(USER_NUM, U_EMAIL, U_PWD, U_LASTNAME, U_FSTNAME, U_BIRTHDAY, U_AUTH_CODE) 
+	values(#{userNum}, #{userEmail}, #{userPwd}, #{userLastName}, #{userFstName}, #{userBirthday}, #{userAuthCode}) 
 	</insert>
 	
 	<!-- 유저 테이블에 해당 유저 번호가진 행 삭제하는 쿼리 -->
