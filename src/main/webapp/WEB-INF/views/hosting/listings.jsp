@@ -15,9 +15,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading" style="padding-bottom:25px;">
 				
-				<button type="button" class="btn btn-xs pull-right" onclick="location.href='/hosting/become-host'">새 숙소 등록</button>
+				<button type="button" class="btn btn-xs pull-right" data-oper='newAcm'>새 숙소 등록</button>
 			</div>
-
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<table class="table table-striped table-bordered table-hover">
@@ -63,10 +62,6 @@
 				
 
 <script type="text/javascript">
-	function goNew(){
-		alert("호");
-		location.href = "/hosting/become-host";
-	}
 
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
@@ -78,24 +73,12 @@
 			var operation=$(this).data("oper");
 			console.log(operation);
 			
-			if(operation==='list'){
+			if(operation==='newAcm'){
 				alert("목록으로 돌아갑니다");
 				formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
 				formObj.attr("action","/hosting/become-host2_6");	
-			} else if(operation==='modify'){
-				alert("객실을 수정합니다");
-				formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-				formObj.attr("action","/hosting/modifyRom");
-			} else if(operation==='remove'){
-				if(confirm("정말 삭제하시겠습니까??")==true){
-					formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
-					formObj.attr("action","/hosting/removeRom");
-				} else {
-					return false;
-				}
 			}
-			actionForm.submit();
+			//actionForm.submit();
 		});
 	});
 

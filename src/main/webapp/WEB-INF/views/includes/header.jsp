@@ -107,10 +107,10 @@ if (user != null) {
                   } else {
                      biz ='<%=bizRegisterNumber%>';
                      if(biz== "0000000000"){
-                        $('#mode').append("<a onclick='location.href='/admin/adminindex''   style='cursor: pointer'>관리자 모드</a>");
+                        $('#mode').append("<a href='/admin/adminindex'   style='cursor: pointer'>관리자 모드</a>");
                         
                      }else{
-                        $('#mode').append("<a onclick='location.href='/hosting/hostindex''   style='cursor: pointer'>호스트 모드</a>");
+                        $('#mode').append("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
                            
 
                      }
