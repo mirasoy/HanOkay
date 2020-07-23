@@ -88,18 +88,15 @@ public class UserMapperTests {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-//		user.setUserPriv("GU");
-//		user.setRegMethod("g");
-
 
 		int count = mapper.updateUser(user);
 		log.info("*******UPDATE COUNT: " + count);
 	}
 
 	// 이메일로 중복확인 하는 인터페이스 테스트
-	@Test
+//	@Test
 	public void testIdCheck() {
-		int count = mapper.checkEmail("mira@naver.com");
+		int count = mapper.canRegister("mira123@naver.com");
 		log.info("*******DUPLICATED ID COUNT: " + count);
 	}
 
@@ -115,6 +112,12 @@ public class UserMapperTests {
 	public void testGetUserById() {
 		UserVO user = mapper.getUserById("mira@naver.com");
 		log.info("@@@@@@@@@UserNum: "+user);
+	}
+	
+	@Test
+	public void testGiveAuth() {
+		int count=mapper.matchAuthCode("serin9811@naver.com", "0000");
+		log.info("*****GIVE AUTH COUNT: "+ count+ "*****");
 	}
 
 }

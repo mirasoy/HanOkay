@@ -37,6 +37,7 @@ public class LoginController {
 	@GetMapping("/welcome")
 	public ModelAndView showWelcome(Model model, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user/welcome");
 		return mv;
 	}
 

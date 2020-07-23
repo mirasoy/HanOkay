@@ -32,6 +32,6 @@ public class EmailServiceTests {
 	
 	@Test
 	public void testSendEmail2() {
-		service.sendAuthEmail("serin9811@naver.com"); //이메일 주소만으로 미리 지정해준 내용을 보낼 수 있는 메서드
+		service.sendAuthEmail("serin9811@naver.com", "123412"); //이메일 주소만으로 미리 지정해준 내용을 보낼 수 있는 메서드
 	}
 }

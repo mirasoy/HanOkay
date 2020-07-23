@@ -88,14 +88,24 @@ public class UserServiceTests {
 		log.info("GET USER BY EMAIL: "+ service.getUserById("mira@naver.com"));
 	}
 	
-	@Test
+//	@Test
 	public void testEmailCheck() {
-		AssertFalse(service.checkEmail("serin@naver.com"));
+		AssertFalse(service.canRegister("serin@naver.com"));
 	}
 
 	private void AssertFalse(boolean checkEmail) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Test 
+	public void testGiveAuth() {
+		AssertFalse(service.matchAuthCode("se", "1234"));
+	}
+	
+	@Test
+	public void testGiveAuth2() {
+		assertTrue(service.grantActive("twestmerland5@yahoo.co.jp"));
 	}
 }
 

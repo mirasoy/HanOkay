@@ -25,7 +25,7 @@ public interface UserMapper {
 	public int updateUser(UserVO user);
 
 	// email로 중복되는 값이 있는 지 확인하는 메서드
-	public int checkEmail(@Param("userEmail")String email);
+	public int canRegister(@Param("userEmail")String email);
 
 	// 해당 회원이 있는지 확인하는 메서드
 	public int isValidUser(@Param("userEmail") String email, @Param("userPwd") String pwd);
@@ -36,6 +36,14 @@ public interface UserMapper {
 	// 로그인 정보 일치하는 지 확인하는 메서드
 	public boolean checkLogin(UserVO user);
 	
+	//입력된 인증코드와 보내진 db의 인증코드가 일치하는 사람이 1명이 맞는지 확인하는 메서드
+	public int matchAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authNum);
+	
+	//user의 상태코드를 'ACTIVE'로 수정하는 메서드
+	public int grantActive(String email);
+	
+	//user의 인증코드를 업데이트 하는 메서드
+	public int updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authNum);
 	
 	
 	/////////////////////////////////림쨩의 영역/////////////////////////////////
