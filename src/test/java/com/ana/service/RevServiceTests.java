@@ -42,7 +42,7 @@ public class RevServiceTests {
 		post.setContent("so hot");
 		post.setStisf(3);
 		
-		service.register(post);
+	//	service.register(post);
 		
 		log.info("생성된 리뷰의 번호: " + post.getPstNum());
 	}
