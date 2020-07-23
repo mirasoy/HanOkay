@@ -8,7 +8,6 @@
 %>
 <style>
 
-
 .page-wrapper{
 	display: grid;
 }
@@ -20,7 +19,7 @@
 .page-sidebar{
 	width: 28.5%;
 	position: fixed;
-	top: 25%;
+    top: 13.5%;
  	right: 0;
 }
 
@@ -32,6 +31,7 @@
 }
 
 .container-navigation{
+	font-size: 20px;
 	width: 100%;
 	display: grid;
 	grid-row: 2;
@@ -41,26 +41,56 @@
 .container-info{
 	grid-row: 3;
 	grid-column: 1;
+	padding: 20px;
 }
 
-.container-payment {
-
+.container-review{
+	padding: 20px;
 }
 
+.container-roomlist{
+	padding: 20px;
+}
+
+.container-location{
+	padding: 20px;
+}
+
+.container-option{
+	padding: 20px;
+}
+
+.table-rom-td{
+	font-size: 2vh;
+}
 
 .detail-navigation-list{
 	list-style: none;
 	text-decoration: none;
 	align-content: center;
+    text-align: center;
+    background-color: #61dafb;
+	overflow: auto;
+	white-space: nowrap;
+	font-size: 2vh;
+    font-weight: bold;
 }
 
-.detail-navigation-list li{
-	display: inline;
-	padding: 10px;
+.detail-navigation-list a{
+	display: inline-block;
+	color: white;
+	text-align: center;
+	padding: 14px;
+	text-decoration: none;
+}
+
+.detail-navigation-list a:hover{
+	background-color: #61dafb;
+	color: white;
 }
 
 .address{
-	font-size: 15px;
+	font-size: 20px;
 }
 
 .desc{
@@ -74,40 +104,66 @@
 	vertical-align: super;
 }
 
-#rangestart{
-	width: 90%;
-	grid-row: 1;
-	grid-column: 1;
-}
-
-#rangeend{
-	width: 90%;
-	grid-row: 1;
-	grid-column: 2;
-}
-
-#person{
-	width: 90%;
-	grid-row: 1;
-	grid-column: 3;
-}
-
 details{
 	width: 500px;
+	font-size: 2vh;
 }
 
-img {
+.pic{
+	height: 500px;
+	background-color: black;
+}
+
+.rom-pic{
+    width: 300px;
+	height: 200px;
+    background-color: black;
+}
+
+.pic img {
 	width: 100%;
+}
+
+.rom-pic img{
+	height: 200px;
+}
+
+
+#pic1{
+	width: 60%;
+	height: 500px;
+    background-color: black;
+}
+
+#pic2 #pic3 #pic4 #pic5 #pic6 #pic7{
+	width: 20%;
+	height: 165px;
+    background-color: black;
+}
+
+.title{
+	font-size: 3.5rem;
+	font-style: bold;
+	font-weight: bold;
+    text-shadow: 4px 3px 0 #D3D3D3, 9px 8px 0 rgba(0, 0, 0, 0);
 }
 
 .sub-title{
 	font-size: 20px;
+	color: #61dafb;
 }
 
 .rom-title{
-	font-size: 10px;
+	font-size: 3vh;
+	
 }
-/* 검색부분 */
+
+.rom{
+}
+
+.page-wrapper table{
+	width: 100%;
+}
 .section {
 	position: relative;
 	height: 100vh;
@@ -126,15 +182,14 @@ img {
 	font-family: 'Lato', sans-serif;
 	background-size: cover;
 	background-position: center;
-	color: #191a1e;
+	color: #61dafb;
 }
 
 .booking-form {
 	position: relative;
 	background: #fff;
 	width: 95%;
-	margin: 2%;
-	padding: 20px 20px 20px;
+	margin: 1%;
 	border-radius: 4px;
 	-webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
 	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
@@ -142,7 +197,8 @@ img {
 
 .booking-form .booking-group {
 	position: relative;
-	width: 30%
+    width: 33%;
+    padding: 15px 15px 15px;
 }
 
 .form-control {
@@ -190,8 +246,8 @@ img {
 
 .booking-form select.form-control+.select-arrow {
 	position: absolute;
-	right: 6px;
-	bottom: 6px;
+    right: 25px;
+    bottom: 20px;
 	width: 32px;
 	line-height: 32px;
 	height: 32px;
@@ -210,14 +266,14 @@ img {
 
 .booking-form .form-label {
 	position: absolute;
-	top: 6px;
-	left: 20px;
+	top: 25px;
+	left: 35px;
 	font-weight: 700;
 	text-transform: uppercase;
 	line-height: 24px;
 	height: 24px;
 	font-size: 12px;
-	color: #98c9ee;
+	color: #61dafb;
 }
 
 .booking-form .form-checkbox input {
@@ -302,82 +358,102 @@ img {
 	color: #191a1e;
 }
 
+#map {
+	width: 100%;
+	height: 450px;
+	background-color: grey;
+	display: inline-block;
+}
+
 </style>
 
 <div class = "page-wrapper">
 	<div class = "page-contnets" style="width: calc(75% - 1.875rem);">
 	
 		<!-- 검색 조건 -->
-		<div class = "container-search booking-form"" id="datepicker">
+		<div class = "container-search booking-form" id="datepicker">
 				<form>
 					<div class="booking-search-row"> 
-						<div class="booking-group">
-							<span class="form-label">Checkin</span>
-							<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
-						</div>
-						<div class="booking-group">
-							<span class="form-label">Checkout</span>
-							<input class="form-control" type="text" placeholder="End" id="out" name="out" value="<%=request.getParameter("out")%>">
-						</div>
-						<div class="booking-group"  >
-							<span class="form-label">Person</span>
-								<select name="person" class="form-control select" id="rangeperson" style="height: 65px">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-								</select>
-							<span class="select-arrow"></span>
+						<div class="row">
+							<div class="booking-group" >
+								<span class="form-label">Checkin</span>
+								<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
+							</div>
+							<div class="booking-group">
+								<span class="form-label">Checkout</span>
+								<input class="form-control" type="text" placeholder="End" id="out" name="out" value="<%=request.getParameter("out")%>">
+							</div>
+							<div class="booking-group"  >
+								<span class="form-label">Person</span>
+									<select name="person" class="form-control select" id="person" style="height: 65px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+									</select>
+								<span class="select-arrow"></span>
+							</div>
 						</div>
 					</div>
 				</form>
 		</div>
 
 		<!-- 네비게이션 -->
-		<div class = "container-navigation booking-form"">
-			<ul class = "detail-navigation-list">
-				<li><a href="#detail-info">숙소정보</a></li>
-				<li><a href="#detail-room">객실정보</a></li>
-				<li><a href="#detail-map">숙소위치</a></li>
-				<li><a href="#detail-room">숙소리뷰</a></li>
-			</ul>
+		<div class = "detail-navigation-list container-navigation booking-form">
+			<div class = "detail-navigation-list">
+				<a href="#info">INFO</a>
+				<a href="#picture">PICTURE</a>
+				<a href="#review">REVIEW</a>
+				<a href="#option">OPTION</a>
+				<a href="#roomList">ROOM</a>
+				<a href="#location">LOCATION</a>
+			</div>
 		</div>
 		
 		<!-- 숙소정보-->
-		<div class = "container-info booking-form"" name="detail-info">
-			<h2><c:out value="${acm.acmName}" /><span id="stisf"></span></h2>
-			<span class="address"><i class="fas fa-map-marker-alt"></i>&nbsp;<c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" /></span></br>	
-			<span class="desc"><i class="fa fa-quote-left" aria-hidden="true"></i><c:out value="${acm.acmDesc}" /><i class="fa fa-quote-right" aria-hidden="true"></i></span>
+		<div class = "container-info booking-form" name="info">
+			<span class="title"><c:out value="${acm.acmName}" /></span>
+			<span id="stisf">&nbsp;</span>
+			<span id="stisf-num">(<c:out value="${star}" />)</span>
+			</br><span class="address"><i class="fas fa-map-marker-alt"></i>&nbsp;<c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" />&nbsp;&nbsp;<a target="_blank" href="https://www.google.co.kr/maps/place/<c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" />">지도보기</a></span>
+			</br><span class="desc" ><i class="fa fa-quote-left" aria-hidden="true"></i><c:out value="${acm.acmDesc}" /><i class="fa fa-quote-right" aria-hidden="true"></i></span>
 		</div>
 		
 		<!-- 숙소사진 -->
-		<div class = "container-picture booking-form"">
+		<div class = "container-picture booking-form" name="picture">
 				<table class="pic" style="border-color: red">
 					<tr >
-						<td id="pic1" rowspan="2" ></td>				
+						<td id="pic1" rowspan="3" ></td>				
 						<td id="pic2"></td><td id="pic3"></td>				
 					</tr>
 					<tr>
 						<td id="pic4"></td><td id="pic5"></td>	
 					</tr>
+					<tr>
+						<td id="pic6"></td><td id="pic7"></td>	
+					</tr>
 				</table>
 		</div>
 		
 		<!-- 숙소리뷰 -->
-		<div class = "container-review booking-form"">
-			<label class="sub-title">숙소리뷰</label>
+		<div class = "container-review booking-form" name="review">
+			<label class="sub-title">REVIEW</label>
 			<table>
 				<c:forEach items="${rev}" var="rev" begin="0" end="4">
 					<tr style="width:100%;">
 						<td>
 							<details>						
 								<summary>
-									<c:out value="${rev.revPtitle}" />
-									<label id="stisf" star="${rev.revStisf}"></label>
+									<span><c:out value="${rev.revPtitle}" />&nbsp;
+										<c:choose>
+										    <c:when test="${rev.revStisf >= 3.0}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></c:when>
+										    <c:otherwise><i class="fa fa-thumbs-down" aria-hidden="true"></i></c:otherwise>
+										</c:choose>
+									</span>
 								</summary>
 		  						<p><c:out value="${rev.revContent}" /></p>
 		  					</details>
@@ -392,27 +468,54 @@ img {
 		</div>		
 		
 		<!-- 편의시설 -->
-		<div class = "container-option booking-form"">
-			<label class="sub-title">편의시설</label>
-		</div>		
-		
-		<!-- 숙소위치 -->
-		<div class = "container-map booking-form"">
-			<label class="sub-title">숙소위치</label>
+		<div class = "container-option booking-form" name="option">
+			<label class="sub-title">OPTION</label>
+			<div id=acmOpt>&nbsp;</div>
 		</div>		
 		
 		<!-- 객실리스트 -->
-		<div class = "container-roomlist booking-form"">
-			<label class="sub-title">객실위치</label></br>
-			<c:forEach items="${rom}" var="rom">
-			<label class="rom-title"><c:out value="${rom.romName}" /></label>
+		<div class = "container-roomlist booking-form" name="roomlist">
+			<label class="sub-title">ROOMS</label></br>
 				<table>
-					<tr><td>${rom.romName}</td></tr>
-					<tr><td>${rom.romNum}</td></tr>
+					<c:forEach items="${rom}" var="rom">
+						<tr>
+							<span class="rom">
+								<td colspan="4"><span class="rom-title"><c:out value="${rom.romName}" /></span></td>
+								<td><span class="rom-pic"><img alt='객실사진' src='/display?fileName=<c:out value="${rom.romPurl}" /><c:out value="${rom.romPname}" />' /></span>
+								</td>
+								
+								<td class="table-rom-td"><span class="rom-type"><c:out value="${rom.romType}" /></span>&nbsp;
+								<span class="rom-size"><c:out value="${rom.romSize}" />(m²)</span>
+								</br><i class="fa fa-user" aria-hidden="true"></i>&emsp;<span class="rom-capa"><c:out value="${rom.romCapa}" />명</span>
+								</br><span class="rom-bed"><i class="fa fa-bed" aria-hidden="true"></i>&emsp;<c:out value="${rom.bedType}" />&nbsp;
+									<c:choose>
+										<c:when test="${rom.bedType eq '온돌'}"> </c:when>
+										<c:otherwise>
+											<c:out value="${rom.bedCnt}" />개
+										</c:otherwise>
+									</c:choose>
+									</span>
+								</td>
+								
+								<td class="table-rom-td"><span class="rom-opt"><c:out value="${rom.romOptcode}" /></span>
+								</td>
+								
+								<td class="table-rom-td"><span class="rom-price">₩&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/></span>
+								</td>
+							</span>
+						</tr>
+					</c:forEach>
 				</table>
-			</c:forEach>			
+			<c:if test="${empty rom}">
+				예약 가능한 객실이 없습니다<i class="fa fa-meh-o" aria-hidden="true"></i></br>
+			</c:if>		
 		</div>		
 		
+		<!-- 숙소위치 -->
+		<div class = "container-location booking-form" name="location">
+			<label class="sub-title">LOCATION</label>
+			<div id="map"></div>
+		</div>		
 		
 	</div> <!-- end of contents -->
 
@@ -421,7 +524,7 @@ img {
 	<!-- 결제정보 -->
 		<div class = "container-payment" id="payment">
 			<div class="booking-form">
-				결제정보</br>
+				<i class="fa fa-star" aria-hidden=""></i></br>
 				결제정보</br>
 				결제정보</br>
 				결제정보</br>
@@ -446,7 +549,86 @@ img {
 </div><!-- end of page -->
 
 	<script>
-	
+
+		window.onload = function() {
+			// 인원 선택
+			document.getElementById("person").value= <%=person%>; 
+			// 숙소 평균 별점
+			getStar(); 
+			// 숙소 사진
+			let i = 1;
+			<c:forEach items="${pic}" var="pic">
+				document.getElementById("pic"+ i).innerHTML = "<img alt='<c:out value="${pic.picAcmpdesc}" />' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }" />'>";
+				i++;
+			</c:forEach>
+			// 구글맵 
+			initMap(); 
+			// 숙소 옵션
+			getAcmOpt(); 
+		}
+		 
+		// 옵션 코드(10진수 옵션코드를 16자리 2진수로 변환한다)
+		let option = pad(dec2bin("${acm.acmOptcode}"));
+		function dec2bin(codeNum){
+			return (codeNum >>> 0).toString(2); 
+		}
+		function pad(code) {
+			return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
+		}
+		
+		// 숙소 옵션
+		function getAcmOpt() {
+			var iconArr = new Array(); 
+			var codeArr = new Array(); 
+			var nameArr = new Array(); 
+			let j = 0;
+			<c:forEach items="${acmCode}" var="acmCode">
+				iconArr[j] = '<c:out value="${acmCode.codeIcon}" />';
+				codeArr[j] = 'acm' + '<c:out value="${acmCode.codeFull}" />';
+				nameArr[j] = '<c:out value="${acmCode.codeCont}" />';
+				j++;
+			</c:forEach>
+			
+			for(let k=0; k<option.length; k++){
+				if(option.charAt(k) == 1){
+					document.getElementById("acmOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+				}
+			}
+		}
+			
+		
+		// 숙소 만족도
+		function getStar() {
+			let star = "${star}";
+			let stisf = document.getElementById("stisf");
+			let stisfNum = document.getElementById("stisf-num");
+			if(star == 5.0){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
+			}else if(star >= 4.5){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half" aria-hidden="true"></i>';
+			}else if(star >= 4.0){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
+			}else if(star >= 3.5){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half" aria-hidden="true"></i>';
+			}else if(star >= 3.0){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
+			}else if(star >= 2.5){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half" aria-hidden="true"></i>';
+			}else if(star >= 2.0){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
+			}else if(star >= 1.5){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half" aria-hidden="true"></i>';
+			}else if(star >= 1.0){
+				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i>';
+			}else if(star >= 0.5){
+				stisf.innerHTML = '<i class="fa fa-star-half" aria-hidden="true"></i>';
+			}else{
+			}
+			document.getElementById("stisf").style.color="#e3cf7a";
+			document.getElementById("stisf").style.fontSize="50px";
+		}
+		//
+		
 		// 날짜 선택
 		var today = new Date();
 
@@ -501,16 +683,6 @@ img {
 			});
 		}
 		
-		// 인원 선택
-		window.onload = function() {
-			document.getElementById("rangeperson").value= <%=person%>;
-			let i = 1;
-			<c:forEach items="${pic}" var="pic">
-				document.getElementById("pic"+ i).innerHTML = "<img alt='<c:out value="${pic.picAcmpdesc}" />' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }" />'>";
-				i++;
-			</c:forEach>
-		}
-		
 		
 		// 리뷰(하나만 선택되게)
 		for(let i=0; i<document.getElementsByTagName("details").length; i++ ){
@@ -522,11 +694,55 @@ img {
 			}
 		}
 		
-		// 숙소옵션
-		// 임의의 숫자에서 32768를 나눈다 - 1이면 해당 옵션o
-		// 나머지에서 16484를 나눈다 - 1이면 해당옵션 o
 		
+		// 구글맵 api
+		function initMap() { 
+			var acmNum = "<c:out value="${acm.acmNum}" />";
+			var mapLocation = {
+				lat : parseFloat("<c:out value="${acm.latitude}" />"),
+				lng : parseFloat("<c:out value="${acm.longitude}" />")
+			};
+			var mapOptions = {
+				center : mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
+				zoom : 16, 
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
+			mapOptions);
+			
+			var size_x = 50; // 마커로 사용할 이미지의 가로 크기
+			var size_y = 50; // 마커로 사용할 이미지의 세로 크기
+			// 마커로 사용할 이미지 주소
+			var image = new google.maps.MarkerImage(
+					'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
+					new google.maps.Size(size_x, size_y),
+					'',
+					'',
+					new google.maps.Size(size_x, size_y));
+			var latLng = {lat: parseFloat(${acm.latitude }), lng: parseFloat(${acm.longitude})};
+			var marker;
+			marker = new google.maps.Marker({
+				position : latLng, // 마커가 위치할 위도와 경도(변수)
+				map : map,
+				icon : image, // 마커로 사용할 이미지(변수)
+				title : "${acm.acmName}" // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+			});
+			
+			var content = "${acm.acmName}" ; // 말풍선 안에 들어갈 내용
+			
+			// 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+			var infowindow = new google.maps.InfoWindow({
+				content : content
+			});
+			google.maps.event.addListener(marker, "click", function() {
+				infowindow.open(map, marker);
+			});
+			
+		}
 				
+	</script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
 	</script>
 <%@include file="../includes/footer.jsp"%>
 </html>
