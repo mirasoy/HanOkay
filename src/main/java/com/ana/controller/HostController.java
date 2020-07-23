@@ -179,7 +179,7 @@ public class HostController {
 		model.addAttribute("acmNum", vo.getAcmNum().trim());
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
-		return "/hosting/become-host1_6";
+		return "redirect:/hosting/become-host1_6";
 	}
 	
 	@GetMapping("/chkaddr")
@@ -213,11 +213,10 @@ public class HostController {
 	}
 	
 	@GetMapping("/become-host1_6")
-	public void becomeHostGet1_6(Model model,HttpSession session) {
+	public void becomeHostGet1_6(String acmNum,Model model,HttpSession session) {
 		System.out.println("become-hos1_6창 열림~");
-		System.out.println("become-host페이지를 띄운다**");
 		
-
+		model.addAttribute("acmNum", acmNum.trim());
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
@@ -239,13 +238,13 @@ public class HostController {
 
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
-		return "/hosting/become-host2_6";
+		return "redirect:/hosting/become-host2_6";
 	}
 
 	
 	
 	
-	@GetMapping("/become-host2_6")//뿌려주기
+	@GetMapping("/become-host2_6")//뿌려주는 곳
 	public void becomeHostGet2_6(String acmNum,Model model,HttpSession session) {
 		System.out.println("겟2_6");
 		acmNum = acmNum.trim();
@@ -269,16 +268,19 @@ public class HostController {
 	@PostMapping("/become-host2_6")
 	public String becomeHostPost2_6(String acmNum,Model model,HttpSession session) {
 		System.out.println("2_6포스트");
-
+		System.out.println("보낼것이 아마 없을텐데");
+		
+		model.addAttribute("acmNum", acmNum);
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
-		return "/hosting/become-host2_6";
+		return "redirect:/hosting/become-host-complete";
 	}
 	
 
 	@GetMapping("/become-host-complete")
-	public void becomeHostGet_complete() {
-		
+	public void becomeHostGet_complete(String acmNum,Model model,HttpSession session) {
+		model.addAttribute("acmNum", acmNum);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
 	

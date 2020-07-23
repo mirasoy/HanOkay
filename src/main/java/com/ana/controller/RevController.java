@@ -192,6 +192,7 @@ public class RevController {
 		log.info("modify::::::::::" + review);
 		RevVO rv = service.get(review.getPstNum());
 		log.info("modify::::>>>::::::::" + rv);
+		log.info("modify::::>>>::::::::" + rv);
 
 		rv.setTitle(review.getTitle());
 		rv.setContent(review.getContent());
@@ -199,7 +200,7 @@ public class RevController {
 
 		
 		List<RevPicVO> revPicList =review.getPicList();
-		//pst넘버를 불러와서 기존에 있던 사진들을 모두삭제한다
+		//pst넘버를 불러와서 기존에 있던 사진들을 모두삭제한다 한다
 		service.removeAllPhoto(review.getPstNum());
 		
 		//지금 가지고있는 사진들만 추려서 사진입력을 시도하느 ㄴ서비스를 만들고 그 서비스단에 넣는다.

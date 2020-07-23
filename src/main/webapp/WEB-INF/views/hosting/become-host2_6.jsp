@@ -12,7 +12,7 @@
 	}
 </style>
 
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/becomehostheader.jsp"%>
 <!-- nav-sidebar -->
 <nav>
 <div class="navbar-default sidebar" role="navigation">

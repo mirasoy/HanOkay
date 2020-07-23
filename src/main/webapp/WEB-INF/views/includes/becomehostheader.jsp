@@ -89,24 +89,7 @@
             </div>
             <!-- /.navbar-header -->
 
-			<!-- 왼쪽 nav -->
-            <ul class="nav navbar-top-links navbar-left">
-				<li class="nav-menu">
-					<a href="/hosting/reserv">예약</a><!-- 예약관리 -->
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/listings">숙소</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/inbox">메시지</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/progress/reviews">성취도</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/help">도움말</a>
-				</li>
-			</ul>
+			
 			
 			
 			<!-- 오른쪽 nav -->

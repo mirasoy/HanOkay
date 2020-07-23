@@ -2,10 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/becomehostheader.jsp"%>
 
 
-<div class="startwrite">
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <!-- 사업자 등록도 받을것 -->
@@ -90,7 +89,7 @@
 				  <!-- 우선 숨겨두겠음 -->
 				  <!-- <input type="hidden" id="bizRegpurl" name="bizRegpurl" placeholder="사업자등록증"><br>
 				   -->
-				  <h4>*4.숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
+				  <h4>숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
 				  <label for="checkinTime">체크인시간</label>
 					<select name="checkinTime" id="checkinTime">
 					  <option value="PM12">점심12시이후</option>

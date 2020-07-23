@@ -11,8 +11,7 @@
 		font-size:8px;
 	}
 </style>
-
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/becomehostheader.jsp"%>
 
 <!-- nav-sidebar -->
 <div class="navbar-default sidebar" role="navigation">
