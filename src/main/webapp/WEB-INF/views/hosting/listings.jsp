@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/hostheader.jsp"%>
-	<div>
+
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>			
   <!-- 숙소 방 추가 모달로 띄우기-->
   <h4><c:out value="${userFstname}"/> 호스트님의 숙소 관리</h4><input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
@@ -54,8 +55,9 @@
 		<!-- 빈 폼 -->
 		<form id="actionForm">
 		</form>
-		</div>		
+				
 			
+		</div>
 
 				
 

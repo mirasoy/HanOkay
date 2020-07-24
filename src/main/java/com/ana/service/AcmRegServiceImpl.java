@@ -30,7 +30,7 @@ public class AcmRegServiceImpl implements AcmRegService{
 	@Setter(onMethod_= {@Autowired})
 	private UserHisMapper hmapper;
 	
-
+	@Transactional
 	@Override
 	public void newAcmReg(AcmVO vo,String userNum) {//회원당 1.숙소추가가 되면서 2.회원상태코드와 회원권한 변경 3.회원히스토리정보가 추가  
 		//우선 임의로 넣어줍니다
@@ -104,7 +104,23 @@ public class AcmRegServiceImpl implements AcmRegService{
 
 	@Override
 	public String getAcm(String acmNum) {
+		System.out.println("getAcm의:"+acmNum);
 		return amapper.getAcm(acmNum);
+	}
+
+
+	@Override
+	public AcmVO getnewAcm(String acmNum) {
+		if(acmNum==null)return null;
+		AcmVO vo=amapper.getnewAcm(acmNum);
+		return vo;
+	}
+
+
+	@Override
+	public AcmVO getpendingacm(String bizRegisterNumber) {
+		AcmVO vo=amapper.getnewAcm(bizRegisterNumber);
+		return vo;
 	}
 
 

@@ -2,10 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/becomehostheader.jsp"%>
 
 
-<div class="startwrite">
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <!-- 사업자 등록도 받을것 -->
@@ -18,13 +17,13 @@
                             <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+                            <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                            <a><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                            <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                     </ul>
                 </div>
@@ -90,7 +89,7 @@
 				  <!-- 우선 숨겨두겠음 -->
 				  <!-- <input type="hidden" id="bizRegpurl" name="bizRegpurl" placeholder="사업자등록증"><br>
 				   -->
-				  <h4>*4.숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
+				  <h4>숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
 				  <label for="checkinTime">체크인시간</label>
 					<select name="checkinTime" id="checkinTime">
 					  <option value="PM12">점심12시이후</option>

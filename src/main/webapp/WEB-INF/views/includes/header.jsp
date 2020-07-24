@@ -11,7 +11,10 @@ String userLastName = "";
 String userFstName = "";
 String userPwd = "";
 String userNum = "";
-String bizRegisterNumber = "";
+String userPriv ="";
+String userStatusCode="";
+
+
 //userNum = "U1";
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
@@ -19,7 +22,10 @@ if (user != null) {
    userFstName = user.getUserFstName();
    userPwd = user.getUserPwd();
    userNum = user.getUserNum();
-   bizRegisterNumber = user.getBizRegisterNumber();
+   userPriv=user.getUserPriv();
+   userStatusCode=user.getUserStatusCode();
+   
+   
 }
 %>
 
@@ -32,7 +38,7 @@ if (user != null) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ana - Make yourself at home in Korea</title>
+<title>Han:ok- Make yourself at home in Korea</title>
 
 
 <!-- load stylesheets -->
@@ -88,9 +94,10 @@ if (user != null) {
                
                function() {
                   //만약 user에 해당하는 세션이 없으면 
-                  var biz;
+                  var priv;
+                  var userStatusCode;
                if (
-<%=user == null%>
+<%=user == null%>//세션에 유저가 없으면
    ) {
                      // $("#loginout").append("<a href='/user/login'>로그인</a>");
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
@@ -105,15 +112,23 @@ if (user != null) {
                      $('#myMenuIcon').attr("href", "/user/login");
                      
                   } else {
-                     biz ='<%=bizRegisterNumber%>';
-                     if(biz== "0000000000"){
+                     priv ='<%=userPriv%>';
+                     userStatusCode='<%=userStatusCode%>';
+                     if(priv== "ADMIN"){
                         $('#mode').append("<a href='/admin/adminindex'   style='cursor: pointer'>관리자 모드</a>");
                         
-                     }else{
+                     }else if(priv=="HOST"){
                         $('#mode').append("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
-                           
-
+                     }else if(priv=="GUEST"){
+                    	 if(userStatusCode=="ACTIVE")
+                        $('#mode').append("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
+                    	 else $('#mode').append("<a style='cursor: pointer'>호스트 등록중</a>");
+                    	  
                      }
+                     
+                     
+                     
+                     
                      $("#loginout").append(
                            "<a href='/user/logout'>로그아웃</a>")
                            

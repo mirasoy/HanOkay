@@ -42,10 +42,6 @@
 		]]>
 	</select>
 	
-	<!-- 객실 하나하나의 정보 가져오기 -->
-	<select id="read" resultMap="AcmVOResult">
-		select * from TROM where ROM_NUM =#{romNum}
-	</select>
 	
 	
 	<!-- 위도경도 추가 -->
@@ -90,8 +86,15 @@
 		where acm_Num = #{acmNum} 
 	</update>
 
-
-
+	<!-- 방금 생성한 숙소 가져오기 -->
+	<select id="getnewAcm" resultMap="AcmVOResult">
+		select * from TACM where ACM_NUM =#{acmNum}
+	</select>
+	
+	<!-- pending된 숙소 확인 -->
+	<select id="getpendingacm" resultMap="AcmVOResult">
+		select * from TACM where biz_Regnum =#{bizRegisterNumber}
+	</select>
 
 
 

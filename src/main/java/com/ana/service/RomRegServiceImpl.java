@@ -30,7 +30,6 @@ public class RomRegServiceImpl implements RomRegService{
 	}
 	
 	
-	@Transactional
 	@Override
 	public int register(RomVO rom) {//등록이를 하자
 		rom.setRomPurl("C:\\upload\\room\\");
