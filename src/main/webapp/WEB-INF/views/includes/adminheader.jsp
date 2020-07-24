@@ -80,26 +80,26 @@
                 
                 
 				<!-- 로고자리 -->
-                <a class="navbar-brand" href="/hosting/hostindex">Han:Ok</a>
+                <a class="navbar-brand" href="/admin/adminindex">Han:Ok</a>
             </div>
             <!-- /.navbar-header -->
 
 			<!-- 왼쪽 nav -->
             <ul class="nav navbar-top-links navbar-left">
 				<li class="nav-menu">
-					<a href="/hosting/reserv">예약</a><!-- 예약관리 -->
+					<a href="/admin/adminindex">알림판</a><!-- 예약관리 -->
 				</li>
 				<li class="nav-menu">
-					<a href="/hosting/listings">숙소</a>
+					<a href="/admin/userStat">회원관리</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/hosting/inbox">메시지</a>
+					<a href="#">메시지</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/hosting/progress/reviews">성취도</a>
+					<a href="#">성취도</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/hosting/help">도움말</a>
+					<a href="#">도움말</a>
 				</li>
 			</ul>
 			
@@ -107,84 +107,8 @@
 			<!-- 오른쪽 nav -->
             <ul class="nav navbar-top-links navbar-right">
            		<li class="nav-menu">
-					<button onclick="location.href='/hosting/become-host'">숙소 등록하기</button>
-				</li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        	프로필 <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="/memmode/profile">
-                                <div>
-                                    	프로필
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/memmode/account">
-                                <div>
-                                    	계정
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	대금 수령 내역
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	가이드북
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	커뮤니티 센터
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	호스트 지원
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	새로운 숙소 추가
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/acm/list">
-                                <div>
-                                    	게스트 모드 전환
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    	로그아웃
-                                </div>
-                            </a>
-                        </li>
-                        
-                        
-                        
-                            
-                     </ul>
+					<a href='/acm/list'>메인으로</a>
+            </ul>
         </nav>
 
         

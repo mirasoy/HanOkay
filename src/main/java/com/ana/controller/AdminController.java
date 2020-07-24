@@ -49,6 +49,13 @@ public class AdminController {
 	@GetMapping("/adminindex")
 	public void indexGet(Model model,HttpSession session) {
 		System.out.println("adminindex get");
+		
+		
+		model.addAttribute("adminFstname", getUser(session).getUserFstName());
+	}
+	
+	@GetMapping("/userStat")
+	public void userStatGet(String userNum,Model model,HttpSession session) {
 		//HOST_PENDING인 회원들을 전부 가져온다
 		List<UserVO> list=aservice.getPendingHost();
 		
@@ -60,14 +67,15 @@ public class AdminController {
 			model.addAttribute("size", list.size());
 			
 		}
-		
+				
 		model.addAttribute("adminFstname", getUser(session).getUserFstName());
+		
 	}
 	
 	
 	
 	@GetMapping("/userStatProc")
-	public void userStatGet(String userNum,Model model,HttpSession session) {
+	public void userStatProcGet(String userNum,Model model,HttpSession session) {
 		System.out.println("userStatProc Get");
 		UserVO user=aservice.getUser(userNum);
 		
@@ -77,7 +85,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/userStatProc")
-	public String userStatPost(String userNum,Model model,HttpSession session) {
+	public String userStatProcPost(String userNum,Model model,HttpSession session) {
 		System.out.println("userStatProc Post");
 		
 		model.addAttribute("adminFstname", getUser(session).getUserFstName());
@@ -96,6 +104,9 @@ public class AdminController {
 		System.out.println("moditoHost Post");
 		aservice.moditoHost(userNum);
 		
+		
+		//알림 보내기 기능추가할것 나중에
+		
 		return "redirect:/admin/adminindex";
 	}
 	
@@ -112,6 +123,8 @@ public class AdminController {
 		
 		//guest, active, 사업자번호 리셋
 		aservice.moditoGuest(userNum);
+		
+		//알림 보내기 기능추가할것 나중에
 		
 		return "redirect:/admin/adminindex";
 	}

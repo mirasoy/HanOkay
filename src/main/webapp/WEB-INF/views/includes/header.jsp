@@ -12,7 +12,10 @@ String userLastName = "";
 String userFstName = "";
 String userPwd = "";
 String userNum = "";
-String bizRegisterNumber = "";
+String userPriv ="";
+String userStatusCode="";
+
+
 //userNum = "U1";
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
@@ -20,7 +23,10 @@ if (user != null) {
    userFstName = user.getUserFstName();
    userPwd = user.getUserPwd();
    userNum = user.getUserNum();
-   bizRegisterNumber = user.getBizRegisterNumber();
+   userPriv=user.getUserPriv();
+   userStatusCode=user.getUserStatusCode();
+   
+   
 }
 %>
 
@@ -33,10 +39,10 @@ if (user != null) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Expires" content=0>
+<meta http-equiv="Expires" content="0;">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Hanokay 한오케이 -Make yourself At home in Korea!</title>
+<title>HanOkay 한오케이 -Make yourself At home in Korea!</title>
 
 
 <!-- load stylesheets -->
@@ -90,8 +96,11 @@ if (user != null) {
          .ready(
                function() {
                   //만약 user에 해당하는 세션이 없으면 
-                  var biz='0000000000';
-               if (<%=user == null%>){
+
+                  var priv;
+                  var userStatusCode;
+                //세션에 유저가 없으면
+               if (<%=user == null%>) {
                      // $("#loginout").append("<a href='/user/login'>로그인</a>");
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
                      $('#notification').empty();
@@ -104,18 +113,25 @@ if (user != null) {
                      $('#myMenuIcon').removeAttr("data-toggle");
                      $('#myMenuIcon').attr("href", "/user/login");
                      
-                  } 
-               else {
-                     biz ='<%=bizRegisterNumber%>';
-                     if(biz== '0000000000'){
-                        $('#mode').append('<a href="/admin/adminindex"> 관리자 모드</a>');
+
+                  } else {
+                     priv ='<%=userPriv%>';
+                     userStatusCode='<%=userStatusCode%>';
+                     if(priv== "ADMIN"){
+                        $('#mode').append("<a href='/admin/adminindex'   style='cursor: pointer'>관리자 모드</a>");
+                        
+                     }else if(priv=="HOST"){
+                        $('#mode').append("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
+                     }else if(priv=="GUEST"){
+                    	 if(userStatusCode=="ACTIVE")
+                        $('#mode').append("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
+                    	 else $('#mode').append("<a style='cursor: pointer'>호스트 등록중</a>");
+                    	  
                      }
-                     else{
-                        $('#mode').append('<a href="/hosting/hostindex"> 호스트 모드</a>');
-                     }
-                     
-                     $('#loginout').append(
-                           '<a href="/user/logout">로그아웃</a>');
+
+      
+                     $("#loginout").append(
+                           "<a href='/user/logout'>로그아웃</a>")
                            
                   };    
                });
@@ -138,9 +154,7 @@ if (user != null) {
 
    <!-- main-content -->
    <div class="main-content" id="top">
-
       <div class="top-bar-bg"></div>
-
       <!-- Start : top-bar - 메인 네비게이션 바 : 동적 active 적용 -->
       <div class="top-bar" id="top-bar">
          <!-- Start : container-->

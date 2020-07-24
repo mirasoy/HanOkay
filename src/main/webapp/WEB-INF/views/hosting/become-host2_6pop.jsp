@@ -48,7 +48,7 @@
         
 	
 </style>
-
+<%@include file="../includes/becomehostheader.jsp"%>
 <script type="text/javascript">
 	
 	//acmNum넘겨받는부분

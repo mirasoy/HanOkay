@@ -39,6 +39,9 @@ public class EmailServiceImpl implements EmailService {
             msg.setSubject(dto.getSubject(), "utf-8");
             // 이메일 본문 (인코딩을 해야 한글이 깨지지 않음)
             msg.setText(dto.getMessage(), "utf-8");
+            
+          //setText에 booking에 정보를 담아서 준다.
+            //
  
 //            msg.setText(dto.getBookingVO().toString(), "utf-8");
  

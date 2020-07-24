@@ -1,6 +1,7 @@
 package com.ana.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -16,5 +17,5 @@ public class RevPostVO {
 	private RevDetailVO revDetail;
 	{revDetail = new RevDetailVO();}
 	
-	
+
 }

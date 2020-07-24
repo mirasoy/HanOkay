@@ -1,13 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+   
 <%@include file="../includes/header.jsp"%>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입</title>
-</head>
-<body>
 
    <h1>회원가입</h1>
 	<!--  action= "/register/emailAuth" -->
@@ -48,7 +41,6 @@
               <!--  <button data-oper='register' class="btn btn-default">가입하기</button> -->                        
              <button data-oper='sendEmail' class="btn btn-default" id="sendEmail">인증메일 발송</button> 
             </td>
-            
          </tr>
       </div>
       </table>

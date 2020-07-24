@@ -1,4 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" >
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -28,6 +27,7 @@
 %>
 
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -89,24 +89,7 @@
             </div>
             <!-- /.navbar-header -->
 
-			<!-- 왼쪽 nav -->
-            <ul class="nav navbar-top-links navbar-left">
-				<li class="nav-menu">
-					<a href="/hosting/reserv">예약</a><!-- 예약관리 -->
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/listings">숙소</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/inbox">메시지</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/progress/reviews">성취도</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/help">도움말</a>
-				</li>
-			</ul>
+			
 			
 			
 			<!-- 오른쪽 nav -->
