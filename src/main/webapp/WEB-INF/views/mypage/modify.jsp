@@ -240,7 +240,7 @@
 							
 						<label>예약인원수</label>
 						<select class="form-control" name='guest'>
-						    <option '<c:out value="${info.guest}"/>'>인원선택</option>
+						    <option '<c:out value="${info.guest}"/>' hidden>${info.guest}</option>
 						    <option value="1">1</option>
 						    <option value="2">2</option>
 						    <option value="4">4</option>

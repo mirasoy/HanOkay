@@ -274,6 +274,13 @@ public class HostController {
 	}
 	
 
+
+	@GetMapping("/become-host-complete")
+	public void becomeHostGet_complete(String acmNum,Model model,HttpSession session) {
+		model.addAttribute("acmNum", acmNum);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+
 	@GetMapping("/become-host2_6pop")
 	public void becomeHostGet2_6pop(String acmNum,Model model) {
 		System.out.println("pop열림!");

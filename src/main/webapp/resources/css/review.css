@@ -31,7 +31,9 @@
 
 .uploadResult {
 	width: 100%;
-	background-color: gray;
+	background-color: white;
+	margin-top: 10px;
+
 }
 
 .uploadResult ul {
@@ -46,6 +48,25 @@
 	padding: 10px;
 }
 
-.uploadResult ul li img {
-	width: 20px;
+.uploadResult ul li img{
+	width: 150px;
 }
+
+.MR-contain{
+	
+	background-color: gray;
+	margin-top: 10px;
+}
+
+.MR-heading{
+	background-color: #E6E6E6;
+	padding :10px;
+}
+.MR-body{
+	background-color: gray;
+	padding :10px;
+	   margin-bottom: 30px;
+	   border-radius : 15px;
+}
+
+

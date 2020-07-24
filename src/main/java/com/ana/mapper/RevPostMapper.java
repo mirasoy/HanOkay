@@ -2,7 +2,10 @@ package com.ana.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ana.domain.RevDetailVO;
+import com.ana.domain.RevPicVO;
 import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
 
@@ -31,8 +34,14 @@ public interface RevPostMapper {
 
 	public List<RevPostVO> getAcmList(String acmNum);
 
-	public List<RevPostVO> getPhoto(String pstNum);
+	//사진가져오기
+	public List<RevPicVO> getPhoto(String pstNum);
+	//사진등록하기
+	public void insertPhoto(RevPicVO revPicVO);
+	//사진삭제하기
+	public int deletePhoto(RevPicVO revPicVO);
+	//리뷰의 모든사진삭제
+	public int deleteAllPhoto(String pstNum);
 	
-	public void insertPhoto(RevVO revVO);
-
+	
 }
