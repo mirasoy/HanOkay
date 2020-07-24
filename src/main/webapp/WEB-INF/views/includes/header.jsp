@@ -212,13 +212,12 @@ if (user != null) {
                            <ul class="dropdown-menu">
                               <span class="header-menu">마이페이지</span>
                               <li><a href="#">계정</a></li>
-                              <li><a onclick="location.href='/MyPage/bookListAll'"
+                              <li><a onclick="location.href='/mypage/bookListAll'"
                                  style="cursor: pointer">나의 예약</a></li>
                               <li><a onclick="location.href='/review/list'"
                                  style="cursor: pointer">나의 리뷰</a></li>
                               <li><a href="#">내 관심 숙소</a></li>
-                              <li id='mode'>
-                        </li>
+                              <li id='mode'></li>
                               <li id="header-menu"><a
                                  onclick="location.href='/user/login'" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"
