@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService{
 	//email과 pw가 일치하는 user의 userNum을 반환하는 메서드
 	@Override 
 	public UserVO getUserById(String email) {
+		
 		return mapper.getUserById(email);
 	}
 
