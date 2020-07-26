@@ -114,6 +114,7 @@ throws IOException{
 	//emailAuth 페이지를 get방식으로 접근하면 에러페이지를 보여주자
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.GET)
 	public String cannotGetEmailAuth() {
+		log.info("emailAuth는 get방식으로 접근 불가!");
 		return "/error/404error";
 	}
 	
@@ -156,7 +157,8 @@ throws IOException{
 	
 	@GetMapping("/registerFail")
 	public String showRegisterFail() {
-		return "/register/registerFail";
+		log.info("register fail!!!!");
+		return "/error/500error";
 	}
 	
 	//emailAuth 페이지에서 인증코드를 입력하고 인증코드 확인 버튼 누르면 실행되는 메서드

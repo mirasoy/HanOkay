@@ -78,10 +78,7 @@ public class UserServiceTests {
 		log.info("MOODIFY RESULT: " + service.modify(user));
 	}
 	
-//	@Test
-	public void testIsValidUser() {
-		assertTrue(service.isValidUser("serin@naver.com", "Serin123!"));
-	}
+
 
 //	@Test
 	public void testGetUserById() {

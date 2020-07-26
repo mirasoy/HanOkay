@@ -6,8 +6,8 @@
 
 	<resultMap id="UserVO" type="com.ana.domain.UserVO">
 		<result property="userNum" column="USER_NUM"/>
-		<result property="userEmail" column="U_PWD"/>
-		<result property="userPwd" column="U_EMAIL"/>
+		<result property="userEmail" column="U_EMAIL"/>
+		<result property="userPwd" column="U_PWD"/>
 		<result property="userLastName" column="U_LASTNAME"/>
 		<result property="userFstName" column="U_FSTNAME"/>
 		<result property="userPhone" column="U_PHONE"/>
@@ -52,8 +52,8 @@
 	
 	
 	<!-- DB에 존재하는 id와 pwd인지 확인하는 쿼리 -->
-	<select id="isValidUser" resultType="int">
-	select count(*) from tuser
+	<select id="isValidUser" resultMap="UserVO">
+	select * from tuser
 	where u_email=#{userEmail} and u_pwd=#{userPwd}
 	</select>
 	

@@ -100,12 +100,7 @@ public class UserMapperTests {
 		log.info("*******DUPLICATED ID COUNT: " + count);
 	}
 
-	// 로그인 할 떄 회원 정보 일치하는지 확인하는 메서드
-//	@Test
-	public void testIsValidUser() {
-		int count = mapper.isValidUser("serin@naver.com", "Serin123!");
-		log.info("*****THIS ACCOUNT EXIST: " + count);
-	}
+
 	
 	//해당 유저의 유저번호를 반환하는 메서드 테스트
 //	@Test

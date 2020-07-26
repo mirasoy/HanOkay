@@ -1,6 +1,8 @@
 package com.ana.service;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -28,17 +30,17 @@ public interface UserService {
 	//email로 중복체크하기 메서드
 	public boolean canRegister(String email);
 	
-	//로그인 하는 메서드
-	public void checkLogin(UserVO user, HttpSession session);
-	
 	//로그아웃하는 메서드
 	public void logout(HttpSession session);
 
 	//유효한 회원인지 확인하는 메서드
-	public boolean isValidUser(String email, String pwd);
+	//public boolean isValidUser(String email, String pwd);
 	
 	//email과 pw 일치하는 userNum가져오는 메서드
 	public UserVO getUserById(String email);
+	
+	//로그인하는 메서드
+	public int executeLogin(@Param("email")String email, @Param("pwd")String pwd, @Param("user_check")String user_check, HttpServletResponse response, HttpSession session);
 	
 	//인증코드를 확인하는 메서드
 	public boolean matchAuthCode(String authCode, String email);

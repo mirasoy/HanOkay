@@ -1,10 +1,14 @@
 package com.ana.service;
 
 import java.util.List;
-import javax.servlet.http.HttpSession;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ana.domain.UserVO;
 import com.ana.mapper.UserMapper;
 import lombok.AllArgsConstructor;
@@ -67,23 +71,54 @@ public class UserServiceImpl implements UserService{
 	}
 
 	//로그인하는 메서드 구현
+	@Transactional
 	@Override
-	public void checkLogin(UserVO user, HttpSession session) {
-		//메퍼에서 아이디 비번 일치하는 지 확인
-		boolean result= mapper.checkLogin(user);
+	public int executeLogin(String email, String pwd, String user_check, HttpServletResponse response, HttpSession session) {
+		System.out.println("유저 서비스에서 이메일: "+ email);
+		System.out.println("유저 서비스에서 ㅂㅣ번: "+ pwd);
+		System.out.println("유저 서비스에서 아이디 기억: "+ user_check);
 		
+		UserVO user= mapper.isValidUser(email, pwd);
+		System.out.println("UserService에서 로그인 객체확인:  "+ user);
 		
-//		if(result) {
-//			
-//		}
+		int result=0;
+		//회원 정보 없을 때
+		if(user==null) {
+			System.out.println("service에서 반환되는 result 값: "+ result);
+
+			return result;
+		}
+		
+		//회원 정보가 있을 때
+		else if (user != null) {
+			Cookie cookie= new Cookie("user_check", email);
+			
+			if(user_check.equals("true")) {
+				response.addCookie(cookie);
+				System.out.println("쿠키에 아이디 저장한다~");
+				
+				System.out.println("service check: "+ cookie);
+			} else {
+				System.out.println("쿠키 아이디 저장 x !");
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
+				
+			}
+			
+			System.out.println("로그인 한다~");
+			user.setUserPwd("");
+				
+			session.setAttribute("user", user);
+			System.out.println("세션에 회원객체는~: "+ session.getAttribute("user"));
+			result=1;
+			
+		}
+		System.out.println("service에서 반환되는 result 값: "+ result);
+		return result;
 	}
 
 	//유효한 회원인지 확인하는 메서드
-	@Override
-	public boolean isValidUser(String email, String pwd) {
-		return mapper.isValidUser(email, pwd) != 0;
-		
-	}
+	
 
 	//email과 pw가 일치하는 user의 userNum을 반환하는 메서드
 	@Override 
@@ -107,8 +142,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode")String authCode) {
 		return mapper.updateAuthCode(email ,authCode)==1;
-	}
 	
-
- 
+	
+	}
 }
