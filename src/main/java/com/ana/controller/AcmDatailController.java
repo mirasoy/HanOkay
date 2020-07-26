@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.service.AcmDetailService;
 import com.ana.service.CodeService;
@@ -24,14 +25,13 @@ public class AcmDatailController { // 숙소 상세페이지
 	private AcmDetailService service;
 	private CodeService codeService;
 	
-	// 숙소 정보 얻기
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public void getDetailInfo(@RequestParam("acmNum") String acmNum, 
 			@RequestParam("in") String checkin,
 			@RequestParam("out") String checkout,
 			@RequestParam("person") String person,
 			Model model) {
-		log.info("■■■■■■■■■■■■▶ getDetailInfo");
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■ 상세페이지로 이동 중...");
 		
 		if(person.isEmpty()) person = "1"; // 인원수가 없는 경우
 		
@@ -39,7 +39,6 @@ public class AcmDatailController { // 숙소 상세페이지
 		.addAttribute("pic", service.getPicList(acmNum))
 		.addAttribute("rev", service.getRevList(acmNum))
 		.addAttribute("star", service.getStisf(acmNum))
-		.addAttribute(getDate(checkin, checkout))
 		.addAttribute("acmCode", codeService.getAcmCode())
 		.addAttribute("romCode", codeService.getRomCode());
 		
@@ -48,6 +47,10 @@ public class AcmDatailController { // 숙소 상세페이지
 		}else {
 			model.addAttribute("rom", service.getRomList(acmNum, person));
 		}
+		
+		String[] tmp = getDate(checkin , checkout);
+		model.addAttribute("in", tmp[0])
+		.addAttribute("out", tmp[1]);
 	}
 	
 	// 경우의 수에 따른 체크인, 체크아웃 날짜 설정하기
