@@ -3,8 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
-<% 
-	String person = (String)request.getParameter("person");
+<%
+	String checkin = request.getParameter("in");
+	String checkout = request.getParameter("out");
+	String person = request.getParameter("person");
 %>
 <style>
 
@@ -58,7 +60,7 @@
 	grid-row: 1/3;
 	grid-column: 2;
 	padding: 20px;
-	width: 70vh;
+    width: 100%;
 }
 
 .container-roomlist{
@@ -406,22 +408,6 @@ details{
     font-size: 1.8vh;
 }
 
-#rom button, button:hover, button:active {
-	background: #61dafb;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadada), to(#f3f3f3));
-	border-top: 1px solid #c5c5c5;
-	border-right: 1px solid #cecece;
-	border-bottom: 1px solid #d9d9d9;
-	border-left: 1px solid #cecece;
-	color: #8f8f8f;
-	box-shadow: none;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	cursor: not-allowed;
-	text-shadow: 0 -1px 1px #ebebeb;
-	-webkit-background-clip: padding-box;
-}
-
 .button_scrolltop {
     position: fixed;
     right: 20px;
@@ -450,15 +436,15 @@ details{
 						<div class="row">
 							<div class="booking-group" >
 								<span class="form-label">Checkin</span>
-								<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
+								<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="<%=checkin%>" onchange="search()">
 							</div>
 							<div class="booking-group">
 								<span class="form-label">Checkout</span>
-								<input class="form-control" type="text" placeholder="End" id="out" name="out" value="<%=request.getParameter("out")%>">
+								<input class="form-control" type="text" placeholder="End" id="out" name="out" value="<%=checkout%>" onchange="search()">
 							</div>
 							<div class="booking-group"  >
 								<span class="form-label">Person</span>
-									<select name="person" class="form-control select" id="person" style="height: 65px">
+									<select name="person" class="form-control select" id="person" style="height: 65px" onchange="search()">
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -581,12 +567,12 @@ details{
 							<td class="table-rom-td rom-opt"><c:out value="${rom.romOptcode}" />
 							</td>
 							
-							<td class="table-rom-td rom-price"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/>
+							<td class="table-rom-td rom-price"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/></br>(1박당 객실요금)
 							</td>
 							
 							<td class="table-rom-td rom-select">
 								<span id="select-rom">
-						        	<button onclick = 'selectRoom("${rom.romNum}")'>선택</button>
+									<button onclick='book("${rom.romNum}","${rom.romPrice}")'>예약</button>
 								</span>
 							</td>
 						</tr>
@@ -597,7 +583,16 @@ details{
 				예약 가능한 객실이 없습니다<i class="fa fa-meh-o" aria-hidden="true"></i></br>
 			</c:if>		
 		</div>		
-	
+		
+       	<form action="detail.jsp" id="form" method=post>
+      		<input type="hidden" name="in" id="form-in" value="<%=checkin%>">
+      		<input type="hidden" name="out" id="form-out" value="<%=checkout%>">
+      		<input type="hidden" name="person" id="form-person" value="<%=person%>">
+      		<input type="hidden" name="romNum" id="form-romNum" value="">
+      		<input type="hidden" name="romPrice"id="form-romPrice" value="">
+			<input type="submit" value="" id="form-submit">
+		</form>
+		
 	</div> <!-- end of contents -->
 	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
 
@@ -622,7 +617,7 @@ details{
 			getAcmOpt(); 
 		}
 		
-		// 객실 선택
+		/* // 객실 선택
 		function selectRoom(romNum) {
 			let room = document.getElementById(romNum);
 			let list = document.getElementsByClassName("rom-list");
@@ -634,7 +629,7 @@ details{
 			
 			room.style.border='10px solid #61dafb';
 			room.style.fontWeight='bold';
-		}
+		} */
 		 
 		// 옵션 코드(10진수 옵션코드를 16자리 2진수로 변환한다)
 		let option = pad(dec2bin("${acm.acmOptcode}"));
@@ -721,36 +716,6 @@ details{
 			}
 		});
 		
-		// 페이지 이동
-		let person = document.getElementById("person").value;
-		let reservBtns = document.getElementsByClassName("reservBtn");
-		
-		for(let i = 0; i<reservBtns.length; i++){
-			let reservBtn = reservBtns[i];
-			reservBtn.addEventListener("click", function(){
-				/* alert(this.getAttribute("data-romNum")) */
-				let checkin = document.getElementById("in").value;
-				let checkout = document.getElementById("out").value;
-				
-				if('<%=user%>'=="null" || '<%=user%>' == null){
-					alert("로그인이 필요합니다!");
-					return false;
-				}
-				
-				if(person == "null" || person == "") person = 1;
-				
-				if(document.getElementById("in").value == document.getElementById("out").value){
-					alert("1박 이상 선택해주세요!");
-					return false;
-				}else{
-					document.location = '../../booking/new?romNum='+this.getAttribute("data-romNum") 
-						+ this.value + "&in=" + checkin +"&out=" + checkout +"&person=" + person;
-					return true;
-				}
-			});
-		}
-		
-		
 		// 리뷰(하나만 선택되게)
 		for(let i=0; i<document.getElementsByTagName("details").length; i++ ){
 			document.getElementsByTagName("details")[i].onclick = function() {
@@ -760,7 +725,6 @@ details{
 				}
 			}
 		}
-		
 		
 		// 구글맵 api
 		var mapLocation = {
@@ -806,7 +770,37 @@ details{
 			});
 			
 		}
-				
+			
+		// 검색값 변경
+		function search() {
+			document.getElementById("form-in").value = document.getElementById("in").value;
+			document.getElementById("form-out").value = document.getElementById("out").value;
+			document.getElementById("form-person").value = document.getElementById("person").value;
+		}
+		
+		// 예약하기
+		function book(romNum, romPrice) {
+			// 객실 선택시 실행되어 해당 객실번호와 객실가격을 폼에 저장한다
+			document.getElementById("form-romNum").value = romNum;
+			document.getElementById("form-romPrice").value = romPrice;
+
+			// 로그인 확인, 인원 디폴트값, 1박 이상 선택 확인
+			if('<%=user%>'=="null" || '<%=user%>' == null){
+				alert("로그인이 필요합니다!");
+				return false;
+			}
+			
+			if(person == "null" || person == "") person = 1;
+			
+			if(document.getElementById("in").value == document.getElementById("out").value){
+				alert("1박 이상 선택해주세요!");
+				return false;
+			}
+			
+			// 폼의 submit을 실행하여 다음 페이지로 넘어간다
+			document.getElementById("form").submit();
+		}
+		
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">

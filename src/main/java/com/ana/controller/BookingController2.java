@@ -24,46 +24,16 @@ import lombok.extern.log4j.Log4j;
 public class BookingController2 {
 // 예약 페이지 & 예약 확인페이지	
 	
-	private AcmService acmService;
-	private RomService romService;
-	private BookingService bookService;
-	
 	@GetMapping("/new")
-	public void getInfo( // 예약 페이지 : 예약과 관련된 숙소와 객실 정보 등을 불러온다
-			@RequestParam("romNum") String romNum,
-			@RequestParam("in") String checkin,
-			@RequestParam("out") String checkout,
-			@RequestParam("person") String person,
-			@RequestParam("price") String price,
-			Model model) {
+	public void getInfo() { // 예약 페이지 : 예약과 관련된 숙소와 객실 정보 등을 불러온다
 		log.info("getInfo");
-		
-		model.addAttribute("acm", acmService.get(romService.get(romNum).getAcmNum()))
-		.addAttribute("rom", romService.get(romNum));
 	}
 	
 	@PostMapping("/new")
-	public String booking( // 예약 페이지 : 예약 정보를 저장한다
-			BookingVO book, 
-			RedirectAttributes rttr) {
-		log.info("booking"+book);
-
-		bookService.register(book);
-		rttr.addFlashAttribute("book", book.getBookNum());
+	public String booking() {
+		log.info("booking");
 		
-		return "redirect:/booking/get?bookNum="+book.getBookNum();
-	}
-	
-	@GetMapping("/get")
-	public void get( // 예약 확인 페이지 : 예약 정보를 불러온다
-			@RequestParam("bookNum") String bookNum,
-			Model model) {
-		log.info("get");
-		
-		bookService.get(bookNum);
-		
-		model.addAttribute("book", bookService.get(bookNum))
-		.addAttribute("acm", acmService.get(romService.get(bookService.get(bookNum).getRomNum()).getAcmNum()));
+		return "redirect:/booking/get?bookNum=";
 	}
 	
 }

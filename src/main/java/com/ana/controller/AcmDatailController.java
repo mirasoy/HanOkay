@@ -24,7 +24,11 @@ public class AcmDatailController { // 숙소 상세페이지
 	private AcmDetailService service;
 	private CodeService codeService;
 	
-	// 숙소 정보 얻기
+	@RequestMapping(value = "/detail", method = RequestMethod.POST)
+	public void get() {
+		
+	}
+	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public void getDetailInfo(@RequestParam("acmNum") String acmNum, 
 			@RequestParam("in") String checkin,
