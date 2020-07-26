@@ -8,43 +8,66 @@
 %>
 <style>
 
-
 .page-wrapper{
 	display: grid;
 }
 
 .page-contents{
-	width: calc(75% - 1.875rem);
-}
-
-.page-sidebar{
-	width: 28.5%;
-	position: fixed;
-	top: 25%;
- 	right: 0;
-}
-
-.container-search{
-	width: 100%;
-	display: grid;
-	grid-row: 1;
-	grid-column: 1;
+	width: calc(96% - 1.875rem);
 }
 
 .container-navigation{
+	font-size: 20px;
 	width: 100%;
 	display: grid;
-	grid-row: 2;
-	grid-column: 1/3;
+}
+
+.container-search{
+	display: grid;
+	grid-row: 1;
+	grid-column: 1/2;
+}
+
+.container-grid{
+	display: grid;
 }
 
 .container-info{
-	grid-row: 3;
-	grid-column: 1;
+	padding: 20px;
+    font-size: 2vh;
 }
 
-.container-payment {
+.container-picture{
+	padding: 20px;
+}
 
+.container-option{
+	grid-row: 1;
+	grid-column: 1;
+	padding: 20px;
+	font-size: 2vh;
+}
+
+.container-review{
+	grid-row: 2;
+	grid-column: 1;
+	padding: 20px;
+}
+
+.container-location{
+	grid-row: 1/3;
+	grid-column: 2;
+	padding: 20px;
+	width: 70vh;
+}
+
+.container-roomlist{
+	padding: 20px;
+}
+
+.container-roomlist table{
+	font-size: 2vh;
+	text-align: center;
 }
 
 
@@ -52,15 +75,29 @@
 	list-style: none;
 	text-decoration: none;
 	align-content: center;
+    text-align: center;
+    background-color: white;
+	overflow: auto;
+	white-space: nowrap;
+	font-size: 2vh;
+    font-weight: bold;
 }
 
-.detail-navigation-list li{
-	display: inline;
-	padding: 10px;
+.detail-navigation-list a{
+	display: inline-block;
+	color: #61dafb;
+	text-align: center;
+    padding: 1vh 5vh;
+	text-decoration: none;
+}
+
+.detail-navigation-list a:hover{
+	background-color: #61dafb;
+	color: white;
 }
 
 .address{
-	font-size: 15px;
+	font-size: 20px;
 }
 
 .desc{
@@ -74,40 +111,73 @@
 	vertical-align: super;
 }
 
-#rangestart{
-	width: 90%;
-	grid-row: 1;
-	grid-column: 1;
-}
-
-#rangeend{
-	width: 90%;
-	grid-row: 1;
-	grid-column: 2;
-}
-
-#person{
-	width: 90%;
-	grid-row: 1;
-	grid-column: 3;
-}
-
 details{
 	width: 500px;
+	font-size: 2vh;
 }
 
-img {
+.pic{
+	height: 500px;
+	background-color: black;
+}
+
+.rom-pic{
+    width: 300px;
+	height: 200px;
+    background-color: black;
+}
+
+.pic img {
 	width: 100%;
+}
+
+.rom-pic img{
+	height: 200px;
+}
+
+.rom-opt{
+	width: 30vh;
+}
+
+.rom-select{
+	width: 10vh;
+}
+
+.rom-list{
+	border: 10px solid white;
+}
+
+#pic1{
+	width: 60%;
+	height: 500px;
+    background-color: black;
+}
+
+#pic2 #pic3 #pic4 #pic5 #pic6 #pic7{
+	width: 20%;
+	height: 165px;
+    background-color: black;
+}
+
+.title{
+	font-size: 3.5rem;
+	font-style: bold;
+	font-weight: bold;
+    text-shadow: 4px 3px 0 #D3D3D3, 9px 8px 0 rgba(0, 0, 0, 0);
 }
 
 .sub-title{
 	font-size: 20px;
+	color: #61dafb;
 }
 
 .rom-title{
-	font-size: 10px;
+	font-size: 3vh;
 }
-/* 검색부분 */
+
+.page-wrapper table{
+	width: 100%;
+}
 .section {
 	position: relative;
 	height: 100vh;
@@ -126,15 +196,14 @@ img {
 	font-family: 'Lato', sans-serif;
 	background-size: cover;
 	background-position: center;
-	color: #191a1e;
+	color: #61dafb;
 }
 
 .booking-form {
-	position: relative;
+    font-size: 2vh;
+	width: 100%;
 	background: #fff;
-	width: 95%;
-	margin: 2%;
-	padding: 20px 20px 20px;
+	margin: 1%;
 	border-radius: 4px;
 	-webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
 	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
@@ -142,7 +211,8 @@ img {
 
 .booking-form .booking-group {
 	position: relative;
-	width: 30%
+    width: 33%;
+    padding: 15px 15px 15px;
 }
 
 .form-control {
@@ -190,8 +260,8 @@ img {
 
 .booking-form select.form-control+.select-arrow {
 	position: absolute;
-	right: 6px;
-	bottom: 6px;
+    right: 25px;
+    bottom: 20px;
 	width: 32px;
 	line-height: 32px;
 	height: 32px;
@@ -210,14 +280,14 @@ img {
 
 .booking-form .form-label {
 	position: absolute;
-	top: 6px;
-	left: 20px;
+	top: 25px;
+	left: 35px;
 	font-weight: 700;
 	text-transform: uppercase;
 	line-height: 24px;
 	height: 24px;
 	font-size: 12px;
-	color: #98c9ee;
+	color: #61dafb;
 }
 
 .booking-form .form-checkbox input {
@@ -302,87 +372,180 @@ img {
 	color: #191a1e;
 }
 
+#map {
+	width: 100%;
+	height: 450px;
+	background-color: grey;
+	display: inline-block;
+}
+
+.copy{
+	color: black;
+}
+
+#select-rom button:hover {
+	background: #61dafb;
+    border-right: 4px solid #56565654;
+    border-bottom: 7px solid #56565654;
+    box-shadow: inset 0 0 10px 0px #c7bebe69;
+}
+
+#select-rom button {
+    margin: 0.25em 0;
+    display: block;
+    outline: none;
+    background: #c7c7c7;
+    border: none;
+    padding: 1.1em;
+    width: 10vh;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-right: 4px solid #9c9c9c;
+    border-bottom: 7px solid #d0d0d0;
+    font-size: 1.8vh;
+}
+
+#rom button, button:hover, button:active {
+	background: #61dafb;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadada), to(#f3f3f3));
+	border-top: 1px solid #c5c5c5;
+	border-right: 1px solid #cecece;
+	border-bottom: 1px solid #d9d9d9;
+	border-left: 1px solid #cecece;
+	color: #8f8f8f;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	cursor: not-allowed;
+	text-shadow: 0 -1px 1px #ebebeb;
+	-webkit-background-clip: padding-box;
+}
+
+.button_scrolltop {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    font-size: 40px;
+    text-align: center;
+    color: #c6c6c6;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
 </style>
 
 <div class = "page-wrapper">
-	<div class = "page-contnets" style="width: calc(75% - 1.875rem);">
+	<div class = "page-contnets" style="width: calc(96% - 1.875rem);">
 	
 		<!-- 검색 조건 -->
-		<div class = "container-search booking-form"" id="datepicker">
+		<div class = "container-search booking-form" id="datepicker">
 				<form>
 					<div class="booking-search-row"> 
-						<div class="booking-group">
-							<span class="form-label">Checkin</span>
-							<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
-						</div>
-						<div class="booking-group">
-							<span class="form-label">Checkout</span>
-							<input class="form-control" type="text" placeholder="End" id="out" name="out" value="<%=request.getParameter("out")%>">
-						</div>
-						<div class="booking-group"  >
-							<span class="form-label">Person</span>
-								<select name="person" class="form-control select" id="rangeperson" style="height: 65px">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-								</select>
-							<span class="select-arrow"></span>
+						<div class="row">
+							<div class="booking-group" >
+								<span class="form-label">Checkin</span>
+								<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="<%=request.getParameter("in")%>">
+							</div>
+							<div class="booking-group">
+								<span class="form-label">Checkout</span>
+								<input class="form-control" type="text" placeholder="End" id="out" name="out" value="<%=request.getParameter("out")%>">
+							</div>
+							<div class="booking-group"  >
+								<span class="form-label">Person</span>
+									<select name="person" class="form-control select" id="person" style="height: 65px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+									</select>
+								<span class="select-arrow"></span>
+							</div>
 						</div>
 					</div>
 				</form>
 		</div>
 
 		<!-- 네비게이션 -->
-		<div class = "container-navigation booking-form"">
-			<ul class = "detail-navigation-list">
-				<li><a href="#detail-info">숙소정보</a></li>
-				<li><a href="#detail-room">객실정보</a></li>
-				<li><a href="#detail-map">숙소위치</a></li>
-				<li><a href="#detail-room">숙소리뷰</a></li>
-			</ul>
+		<div class = "detail-navigation-list container-navigation booking-form">
+			<div class = "detail-navigation-list">
+				<a href="#info">INFO</a>
+				<a href="#review">REVIEW</a>
+				<a href="#location">LOCATION</a>
+				<a href="#roomlist">ROOM</a>
+			</div>
 		</div>
-		
+
 		<!-- 숙소정보-->
-		<div class = "container-info booking-form"" name="detail-info">
-			<h2><c:out value="${acm.acmName}" /><span id="stisf"></span></h2>
-			<span class="address"><i class="fas fa-map-marker-alt"></i>&nbsp;<c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" /></span></br>	
-			<span class="desc"><i class="fa fa-quote-left" aria-hidden="true"></i><c:out value="${acm.acmDesc}" /><i class="fa fa-quote-right" aria-hidden="true"></i></span>
+		<div class = "container-info booking-form" id="info">
+			<span class="title"><c:out value="${acm.acmName}" /></span>
+			<span id="stisf">&nbsp;</span>
+			<span id="stisf-num">(<c:out value="${star}" />)</span>
+			</br><span class="address"><i class="fas fa-map-marker-alt"></i>&nbsp;<c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" />&nbsp;&nbsp;<a target="_blank" href="https://www.google.co.kr/maps/place/<c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" />">지도보기</a></span>
+			&emsp;<i class="fa fa-ellipsis-v" aria-hidden="true"></i>&emsp;<span class="phone">전화하기: <a href="tel:${acm.repPhone}"><c:out value="${acm.repPhone}"/></a></span>
+			&emsp;<i class="fa fa-ellipsis-v" aria-hidden="true"></i>&emsp;<span class="email">메일보내기: <a href="mailto:${acm.acmEmail}"><c:out value="${acm.acmEmail}"/></a>&nbsp;&nbsp;<span class="copy">주소복사</span><i class="fa fa-clipboard" aria-hidden="true"></i>
+			<input type="hidden" id="email" value="${acm.acmEmail}">
+			</br><span class="desc" ><i class="fa fa-quote-left" aria-hidden="true"></i><c:out value="${acm.acmDesc}" /><i class="fa fa-quote-right" aria-hidden="true"></i></span>
 		</div>
 		
 		<!-- 숙소사진 -->
-		<div class = "container-picture booking-form"">
+		<div class = "container-picture booking-form" id="picture">
 				<table class="pic" style="border-color: red">
 					<tr >
-						<td id="pic1" rowspan="2" ></td>				
+						<td id="pic1" rowspan="3" ></td>				
 						<td id="pic2"></td><td id="pic3"></td>				
 					</tr>
 					<tr>
 						<td id="pic4"></td><td id="pic5"></td>	
 					</tr>
+					<tr>
+						<td id="pic6"></td><td id="pic7"></td>	
+					</tr>
 				</table>
 		</div>
 		
+		<div class = "container-grid  booking-form">
+		<!-- 편의시설 -->
+		<div class = "container-option" id="option">
+			<label class="sub-title">OPTION</label>
+			<div id=acmOpt>&nbsp;</div>
+		</div>		
+
+		<!-- 숙소위치 -->
+		<div class = "container-location booking-for" id="location">
+			<label class="sub-title">LOCATION</label>
+			<div id="map"></div>
+		</div>	
+				
 		<!-- 숙소리뷰 -->
-		<div class = "container-review booking-form"">
-			<label class="sub-title">숙소리뷰</label>
+		<div class = "container-review" id="review">
+			<label class="sub-title">REVIEW</label>
 			<table>
 				<c:forEach items="${rev}" var="rev" begin="0" end="4">
 					<tr style="width:100%;">
 						<td>
 							<details>						
 								<summary>
-									<c:out value="${rev.revPtitle}" />
-									<label id="stisf" star="${rev.revStisf}"></label>
+									<span><c:out value="${rev.revPtitle}" />&nbsp;
+										<c:choose>
+										    <c:when test="${rev.revStisf >= 3.0}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></c:when>
+										    <c:otherwise><i class="fa fa-thumbs-down" id="test" aria-hidden="true"></i></c:otherwise>
+										</c:choose>
+									</span>
 								</summary>
 		  						<p><c:out value="${rev.revContent}" /></p>
 		  					</details>
 						</td>
-						<td style="vertical-align: top;"><fmt:formatDate value="${rev.revPregdate}" pattern="yyyy-MM"/><fmt:formatDate value="${rev.revPupdatedate}" pattern="(yyyy-MM)"/></td>
+						<td style="vertical-align: top;"><fmt:formatDate value="${rev.revPregdate}" pattern="yyyy-MM"/></td>
 					</tr>
 				</c:forEach>
 				<c:if test="${empty rev}">
@@ -390,63 +553,149 @@ img {
 				</c:if>
 			</table>
 		</div>		
-		
-		<!-- 편의시설 -->
-		<div class = "container-option booking-form"">
-			<label class="sub-title">편의시설</label>
-		</div>		
-		
-		<!-- 숙소위치 -->
-		<div class = "container-map booking-form"">
-			<label class="sub-title">숙소위치</label>
-		</div>		
+		</div>
 		
 		<!-- 객실리스트 -->
-		<div class = "container-roomlist booking-form"">
-			<label class="sub-title">객실위치</label></br>
-			<c:forEach items="${rom}" var="rom">
-			<label class="rom-title"><c:out value="${rom.romName}" /></label>
+		<div class = "container-roomlist booking-form" id="roomlist">
+			<label class="sub-title">ROOM</label></br>
 				<table>
-					<tr><td>${rom.romName}</td></tr>
-					<tr><td>${rom.romNum}</td></tr>
+					<c:forEach items="${rom}" var="rom">
+						<tr class= "rom-list" id="${rom.romNum}">
+							<td><span class="rom-title"><c:out value="${rom.romName}" /></span></td>
+							<td class="rom-pic"><img alt='객실사진' src='/display?fileName=<c:out value="${rom.romPurl}" /><c:out value="${rom.romPname}" />' />
+							</td>
+							
+							<td class="table-rom-td"><span class="rom-type"><c:out value="${rom.romType}" /></span>&nbsp;
+							<span class="rom-size"><c:out value="${rom.romSize}" />(m²)</span>
+							</br><i class="fa fa-user" aria-hidden="true"></i>&emsp;<span class="rom-capa"><c:out value="${rom.romCapa}" />명</span>
+							</br><span class="rom-bed"><i class="fa fa-bed" aria-hidden="true"></i>&emsp;<c:out value="${rom.bedType}" />&nbsp;
+								<c:choose>
+									<c:when test="${rom.bedType eq '온돌'}"> </c:when>
+									<c:otherwise>
+										<c:out value="${rom.bedCnt}" />개
+									</c:otherwise>
+								</c:choose>
+								</span>
+							</td>
+							
+							<td class="table-rom-td rom-opt"><c:out value="${rom.romOptcode}" />
+							</td>
+							
+							<td class="table-rom-td rom-price"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/>
+							</td>
+							
+							<td class="table-rom-td rom-select">
+								<span id="select-rom">
+						        	<button onclick = 'selectRoom("${rom.romNum}")'>선택</button>
+								</span>
+							</td>
+						</tr>
+						<tr><td></br></td></tr>
+					</c:forEach>
 				</table>
-			</c:forEach>			
+			<c:if test="${empty rom}">
+				예약 가능한 객실이 없습니다<i class="fa fa-meh-o" aria-hidden="true"></i></br>
+			</c:if>		
 		</div>		
-		
-		
+	
 	</div> <!-- end of contents -->
+	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
 
-
-	<div class = "page-sidebar ">
-	<!-- 결제정보 -->
-		<div class = "container-payment" id="payment">
-			<div class="booking-form">
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-			</div>
-		</div>
-	</div> <!-- end of navi -->
 </div><!-- end of page -->
 
 	<script>
-	
+
+		window.onload = function() {
+			// 인원 선택
+			document.getElementById("person").value= <%=person%>; 
+			// 숙소 평균 별점
+			getStar(); 
+			// 숙소 사진
+			let i = 1;
+			<c:forEach items="${pic}" var="pic">
+				document.getElementById("pic"+ i).innerHTML = "<img alt='<c:out value="${pic.picAcmpdesc}" />' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }" />'>";
+				i++;
+			</c:forEach>
+			// 구글맵 
+			initMap(); 
+			// 숙소 옵션
+			getAcmOpt(); 
+		}
+		
+		// 객실 선택
+		function selectRoom(romNum) {
+			let room = document.getElementById(romNum);
+			let list = document.getElementsByClassName("rom-list");
+			
+			for(let i = 0; i< list.length; i++){
+				list[i].style.border='10px solid white';
+				list[i].style.fontWeight='';
+			}
+			
+			room.style.border='10px solid #61dafb';
+			room.style.fontWeight='bold';
+		}
+		 
+		// 옵션 코드(10진수 옵션코드를 16자리 2진수로 변환한다)
+		let option = pad(dec2bin("${acm.acmOptcode}"));
+		function dec2bin(codeNum){
+			return (codeNum >>> 0).toString(2); 
+		}
+		function pad(code) {
+			return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
+		}
+		
+		// 숙소 옵션
+		function getAcmOpt() {
+			var iconArr = new Array(); 
+			var codeArr = new Array(); 
+			var nameArr = new Array(); 
+			let j = 0;
+			<c:forEach items="${acmCode}" var="acmCode">
+				iconArr[j] = '<c:out value="${acmCode.codeIcon}" />';
+				codeArr[j] = 'acm' + '<c:out value="${acmCode.codeFull}" />';
+				nameArr[j] = '<c:out value="${acmCode.codeCont}" />';
+				j++;
+			</c:forEach>
+			
+			for(let k=0; k<option.length; k++){
+				if(option.charAt(k) == 1){
+					document.getElementById("acmOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+				}
+			}
+		}
+		
+		// 메일 복사하기
+		document.querySelector(".copy").addEventListener("click", function(){
+			var temp = document.createElement('textarea'); 
+			temp.value = document.getElementById("email").value; 
+			document.body.appendChild(temp);
+			temp.select();//select()는 textarea, input 같은 form요소에서만 사용 가능
+			document.execCommand("copy");
+			document.body.removeChild(temp);
+			alert("메일이 복사되었습니다!");
+		});
+		
+		// 숙소 만족도
+		function getStar() {
+			let star = "${star}";
+			let stisf = document.getElementById("stisf");
+			let stisfNum = document.getElementById("stisf-num");
+			
+			for(let i = 0; i < Math.floor(star); i++){
+				stisf.innerHTML += '<i class="fa fa-star" aria-hidden="true"></i>';
+			}
+			
+			let half = star-Math.floor(star) < 0.5 ? 0 : 0.5; 
+			for(let i = 0; i < half; i++){
+				stisf.innerHTML += '<i class="fa fa-star-half" aria-hidden="true"></i>';
+			}
+			
+			document.getElementById("stisf").style.color="#e3cf7a";
+			document.getElementById("stisf").style.fontSize="50px";
+		}
+		//
+		
 		// 날짜 선택
 		var today = new Date();
 
@@ -501,16 +750,6 @@ img {
 			});
 		}
 		
-		// 인원 선택
-		window.onload = function() {
-			document.getElementById("rangeperson").value= <%=person%>;
-			let i = 1;
-			<c:forEach items="${pic}" var="pic">
-				document.getElementById("pic"+ i).innerHTML = "<img alt='<c:out value="${pic.picAcmpdesc}" />' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }" />'>";
-				i++;
-			</c:forEach>
-		}
-		
 		
 		// 리뷰(하나만 선택되게)
 		for(let i=0; i<document.getElementsByTagName("details").length; i++ ){
@@ -522,11 +761,55 @@ img {
 			}
 		}
 		
-		// 숙소옵션
-		// 임의의 숫자에서 32768를 나눈다 - 1이면 해당 옵션o
-		// 나머지에서 16484를 나눈다 - 1이면 해당옵션 o
 		
+		// 구글맵 api
+		var mapLocation = {
+			lat : parseFloat("<c:out value="${acm.latitude}" />"),
+			lng : parseFloat("<c:out value="${acm.longitude}" />")
+		};
+		function initMap() { 
+			var acmNum = "<c:out value="${acm.acmNum}" />";
+			var mapOptions = {
+				center : mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
+				zoom : 16, 
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
+			mapOptions);
+			
+			var size_x = 50; // 마커로 사용할 이미지의 가로 크기
+			var size_y = 50; // 마커로 사용할 이미지의 세로 크기
+			
+			// 마커로 사용할 이미지 주소
+			var image = new google.maps.MarkerImage(
+					'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
+					new google.maps.Size(size_x, size_y),
+					'',
+					'',
+					new google.maps.Size(size_x, size_y));
+			var marker;
+			marker = new google.maps.Marker({
+				position : mapLocation, // 마커가 위치할 위도와 경도(변수)
+				map : map,
+				icon : image, // 마커로 사용할 이미지(변수)
+				title : "${acm.acmName}" // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+			});
+			
+			var content = "${acm.acmName}" ; // 말풍선 안에 들어갈 내용
+			
+			// 마커를 클릭했을 때의 이벤트
+			var infowindow = new google.maps.InfoWindow({
+				content : content
+			});
+			google.maps.event.addListener(marker, "click", function() {
+				infowindow.open(map, marker);
+			});
+			
+		}
 				
+	</script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
 	</script>
 <%@include file="../includes/footer.jsp"%>
 </html>
