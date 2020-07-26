@@ -91,15 +91,17 @@ public class UserServiceImpl implements UserService{
 		
 		//회원 정보가 있을 때
 		else if (user != null) {
-			Cookie cookie= new Cookie("user_check", email);
+			Cookie cookie= new Cookie("user_check", null);
 			
 			if(user_check.equals("true")) {
+				cookie.setValue(email);
 				response.addCookie(cookie);
 				System.out.println("쿠키에 아이디 저장한다~");
-				
-				System.out.println("service check: "+ cookie);
-			} else {
+				System.out.println("service check에서 cookie: "+ cookie);
+			} 
+			else {
 				System.out.println("쿠키 아이디 저장 x !");
+				cookie.setValue("");
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 				
@@ -107,7 +109,6 @@ public class UserServiceImpl implements UserService{
 			
 			System.out.println("로그인 한다~");
 			user.setUserPwd("");
-				
 			session.setAttribute("user", user);
 			System.out.println("세션에 회원객체는~: "+ session.getAttribute("user"));
 			result=1;

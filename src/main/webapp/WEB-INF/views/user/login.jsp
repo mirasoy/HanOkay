@@ -2,6 +2,11 @@
 
 <%@include file="../includes/header.jsp"%>
 
+<!-- Cookie가 비어있지 않을 때 checked 속성을 줌 -->
+	<c:if test="${not empty cookie.user_check}">
+		<c:set value="checked" var="checked"/>
+	</c:if>
+	
 	<form name="loginForm" method="post">
 		<table border="1" width="500px">
 			<tr>
@@ -9,6 +14,7 @@
 				<span style="color: red;" id="msg"><c:out value="${msg}" /></span>
 				<td>Email: <input type="text" size="40" name="email" id="email"
 					value="${cookie.user_check.value }" placeholder="서비스 이용을 위해 이메일을 입력해주세요" >
+					
 					<input type="checkbox" id="rememberEmail" ${checked }>Email 기억하기
 				</td>
 			</tr>
@@ -83,11 +89,6 @@
 			return result;		
 		});
 		
-		//비밀번호 찾기 버튼을 누르면
-		$("#findPwdButton").on("click", function(e){
-			e.preventDefault();
-			window.alert("자 이제 너의 비밀번호를 찾아주지");
-		});
 		
 	});
 	</script>
