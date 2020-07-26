@@ -17,13 +17,13 @@
                             <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+                            <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                            <a><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                            <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                     </ul>
                 </div>

@@ -45,11 +45,12 @@ if (user != null) {
 <title>HanOkay 한오케이 -Make yourself At home in Korea!</title>
 
 
+
 <!-- load stylesheets -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
-<link rel="stylesheet"
-   href="/resources/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <!-- Bootstrap style -->
@@ -209,13 +210,12 @@ if (user != null) {
                            <ul class="dropdown-menu">
                               <span class="header-menu">마이페이지</span>
                               <li><a href="#">계정</a></li>
-                              <li><a onclick="location.href='/MyPage/bookListAll'"
+                              <li><a onclick="location.href='/mypage/bookListAll'"
                                  style="cursor: pointer">나의 예약</a></li>
                               <li><a onclick="location.href='/review/list'"
                                  style="cursor: pointer">나의 리뷰</a></li>
                               <li><a href="#">내 관심 숙소</a></li>
-                              <li id='mode'>
-                        </li>
+                              <li id='mode'></li>
                               <li id="header-menu"><a
                                  onclick="location.href='/user/login'" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"

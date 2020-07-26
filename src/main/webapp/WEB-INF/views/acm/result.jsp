@@ -295,8 +295,8 @@
 				new google.maps.Size(size_x, size_y));
         
         <c:forEach items="${list }" var="acm">
-		var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
-		
+        
+        var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
 		var marker;
 
 		marker = new google.maps.Marker({
@@ -553,7 +553,7 @@
 												actionForm.append("<input type='hidden' name='acmNum' value='"
 																+ $(this).attr("href")
 																+ "'>");
-												actionForm.attr("action","/acm/get");
+												actionForm.attr("action","/acm/detail");
 												actionForm.submit();
 											}); 
 						});

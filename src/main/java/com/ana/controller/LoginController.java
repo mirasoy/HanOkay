@@ -69,6 +69,7 @@ public class LoginController {
 		jso.put("msg", result);
 		PrintWriter out = response.getWriter();
 		out.print(jso);
+
 	}
 
 	// 로그아웃을 하는 기능(=세션에서 user를 제거하는 기능)

@@ -14,6 +14,10 @@ public interface AcmRegMapper {
 	
 	public String getAcm(String acmNum);//숙소정보 가져오기
 	
+	public AcmVO getnewAcm(String acmNum);//숙소정보 가져오기
+	
+	public AcmVO getpendingacm(String bizRegisterNumber);
+	
 	public int delete(String acmNum);
 	
 	

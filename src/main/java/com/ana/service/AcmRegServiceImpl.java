@@ -104,7 +104,23 @@ public class AcmRegServiceImpl implements AcmRegService{
 
 	@Override
 	public String getAcm(String acmNum) {
+		System.out.println("getAcm의:"+acmNum);
 		return amapper.getAcm(acmNum);
+	}
+
+
+	@Override
+	public AcmVO getnewAcm(String acmNum) {
+		if(acmNum==null)return null;
+		AcmVO vo=amapper.getnewAcm(acmNum);
+		return vo;
+	}
+
+
+	@Override
+	public AcmVO getpendingacm(String bizRegisterNumber) {
+		AcmVO vo=amapper.getnewAcm(bizRegisterNumber);
+		return vo;
 	}
 
 

@@ -97,7 +97,9 @@
            		
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        	<c:out value="${userFstname}"/>님 환영합니다!<i class="fa fa-caret-down"></i>
+
+                        	<div id="who"><c:out value="${userFstname}"/>님 환영합니다!<i class="fa fa-caret-down"></i></div>
+
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
@@ -142,16 +144,20 @@
                      </ul>
         </nav>
 
+</div>
+
         
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
    $(document).ready(function() {
-	  var priv ='<%=userPriv%>';
-      var userStatusCode='<%=userStatusCode%>';        
-               
-   
-   
-   
+
+		var pathname= window.location.pathname;
+		
+	   	if(pathname=="/hosting/become-host2_6pop"){
+	   		$("#who").css("display","none"); 
+	   		//$("#who").append("<button type='button' onclick='if(readyForreg()){romRegit()}'>객실 등록</button>");
+	   	}
+
    });
 </script>
 
