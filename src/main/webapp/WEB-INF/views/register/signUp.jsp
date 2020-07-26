@@ -1,21 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+   
 <%@include file="../includes/header.jsp"%>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입</title>
-</head>
-<body>
 
    <h1>회원가입</h1>
-
-   <form name="form" method="post">
+	<!--  action= "/register/emailAuth" -->
+   <form method="post" id="form">
       <table border="1" width="500px">
          <tr>
-            <td>Email(*): <input type="text" size="40" name="userEmail" id="email" class="inputField"
-            placeholder="서비스 이용을 위한 이메일을 입력하세요" value="${email }" ><br> 
+            <td>Email(*):
+            <input type="text" size="40" name="userEmail" id="userEmail" class="inputField"
+            placeholder="서비스 이용을 위한 이메일을 입력하세요" value="${userEmail }" ><br> 
             	
                <span style="color: black;" id="msg1"><c:out value="${msg1 }" /></span><br>
                <button data-oper='checkEmail' class="btn btn-default">이메일 중복체크</button>
@@ -30,8 +24,8 @@
               
                <span style="color: black;" id="msg2"><c:out value="${msg2 }" /></span><br>
                <span style="color: black;" id="msg3"><c:out value="${msg3 }" /></span><br>
-                성(*): <input type="text" size=10 id="lastname" name="userLastName" value="${lastname }" ><br>
-               이름(*): <input type="text" size=20 id="fstname" name="userFstName" value="${fstname }" >
+                성(*): <input type="text" size=10 id="lastName" name="userLastName" value="${lastName }" ><br>
+               이름(*): <input type="text" size=20 id="fstName" name="userFstName" value="${fstName }" >
             </td>
          </tr>
    
@@ -44,20 +38,21 @@
                <a href="/policies/terms" target="_blank">이용약관보기</a>
                <br>
                <p>(*)표시된 항목은 반드시 입력해주십시오</p>
-              <!--  <button data-oper='register' class="btn btn-default">가입하기</button> -->
-              
-              
-               <button data-oper='sendEmail' class="btn btn-default" id="sendEmail">인증메일 발송</button> 
+              <!--  <button data-oper='register' class="btn btn-default">가입하기</button> -->                        
+             <button data-oper='sendEmail' class="btn btn-default" id="sendEmail">인증메일 발송</button> 
             </td>
-            
          </tr>
       </div>
       </table>
+      <!-- userVO에 생년월일부분 -->
       <input id="birthday" name="userBirthday" >
+      
       <input id="assureEmailResult" name="assureEmailResult" value="${assureEmailResult}">
       <input id="assureEmail" name="assureEmail" value="${assureEmail}">
    </form>
-  
+  	<a href="../user/login">로그인으로 돌아가기</a>
+  	
+  	
    <script>
    
    //빈값체크
@@ -67,12 +62,14 @@
        }
        return false;
    }
+   
    // 이메일 유효성
    function checkEmail() {
-      var email = document.getElementById("email");
+      var email = document.getElementById("userEmail").value;
       var regExp = /^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/;
        return regExp.test(email);
    }
+   
    // 유저명 유효성
    function checkUsername(str){
        let username = str;
@@ -96,7 +93,6 @@
     	   document.getElementById("msg3").innerHTML="공백 없이 입력해주세요";
          return false;
        }
-       
        
      return true;
    }
@@ -130,9 +126,9 @@
        return true;
    }
    
-   //중복확인을 했는지 확인하는 메서드
-   function assureEmailCheck(str1, str2, str3){
-	   if((str1 == "pass") && (str2 === str3)){
+   //이메일 중복확인을 했는지 확인하는 메서드
+   function assureEmailCheck(assuredMsg, assuredEmail , inputEmail){
+	   if((assuredMsg == "pass") && (assuredEmail === inputEmail)){
 		   return true;
 	   }
 	   return false;
@@ -141,7 +137,7 @@
    
    //html이 그려지면 실행되는 메서드
    $(document).ready(function() {
-      
+
       
       //페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
       if ( window.history.replaceState) {
@@ -153,8 +149,8 @@
 			 $('#date').datepicker({
 						dateFormat : 'yy-MM-dd' //Input Display Format 변경
 						,onSelect : function(date) { //날짜가 선택되면
-							alert(date);
-							document.getElementById("birthday").value = date;
+							
+							document.getElementById("birthday").value =new Date(date);
 						}
 						,showOtherMonths : true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
 						,showMonthAfterYear : true //년도 먼저 나오고, 뒤에 월 표시
@@ -178,18 +174,18 @@
 					});
       });
 
-      let formObj = $("form");
+      let formObj = $('form');
       //버튼을 눌렀을 때 발생하는 일들
       $('button').on("click", function(e) {
       let operation= $(this).data("oper");
     	   
        e.preventDefault();
-      //   let operation = $(this).data("oper");
-         var email= $("input[id='email']").val();
+      
+         var email= $("input[id='userEmail']").val();
          var pwd= $("input[id='pwd']").val();
          var repeatedPwd=  $("input[id='repeatedPwd']").val();
-         var fstname=$("input[id='fstname']").val();
-         var lastname=$("input[id='lastname']").val();
+         var fstName=$("input[id='fstName']").val();
+         var lastName=$("input[id='lastName']").val();
          
          var assureEmail= document.getElementById("assureEmail").value;
          var assureEmailCheckResult= document.getElementById("assureEmailResult").value;
@@ -197,8 +193,7 @@
          //중복체크 버튼을 눌렀을 경우
           if (operation === 'checkEmail') {
             //먼저 정규식으로 이메일 형식 체크 
-            //이메일 형식 통과 시 액션값을 주고
-            if (checkEmail(email)) {
+            if (checkEmail()) {
             	
              var result;
              
@@ -217,7 +212,7 @@
             		   $('#assureEmail').val(data.assuredEmail);
             	   },
             	   error: function(data){
-            		  window.location.href ="../error/error";
+            		  window.location.href ="../error/404error";
             	   }
             	 });
                return result;
@@ -229,27 +224,25 @@
             	$('span#msg1').text("올바르지 않은 이메일 형식입니다!");
             }
          }
-         //가입하기 버튼을 눌렀을 경우 
+         
+         
+         //인증메일 발송 버튼을 눌렀을 경우 
           if (operation === 'sendEmail') {
             
             //빈항목이 있는지 확인
         	console.log("email: "+ email);
         	console.log("pwd: "+ pwd);
-        	console.log("fstname: "+ fstname);
-        	console.log("lastname: "+ lastname);
+        	console.log("fst Name: "+ fstName);
+        	console.log("last Name: "+ lastName);
             
             //이메일과 비밀번호 유효성 확인
-            if(checkEmail(email) && checkPwd(pwd, repeatedPwd)) {
-            
-          
-            
-            console.log($('#checkbox').is(':checked')); 
-            
-            
+            if(!(checkEmail(email) && checkPwd(pwd, repeatedPwd))) {
+          	 	return;        
             }
            
+            
             //성과 이름 빈 값이 아닌지 확인
-            if(isEmpty(fstname) || isEmpty(lastname)){
+            if(isEmpty(fstName) || isEmpty(lastName)){
                 window.alert("성과 이름을 반드시 입력해주세요!");
                 return;
              }
@@ -264,13 +257,10 @@
             	window.alert("중복검사는 반드시 통과하여야합니다");
             	return;
             }
-          //	 formObj.attr("action", "/register/sendEmail");
-          // 	 formObj.submit(); 
-         }
-         
-         //sendEmailAuth메일 보내기
-        
-        
+            
+          	 formObj.attr("action", "/register/emailAuth");
+           	 formObj.submit();
+         }    
       });
       });
  </script>

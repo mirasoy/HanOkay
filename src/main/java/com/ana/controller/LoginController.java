@@ -1,13 +1,21 @@
 package com.ana.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,6 +45,7 @@ public class LoginController {
 	@GetMapping("/welcome")
 	public ModelAndView showWelcome(Model model, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user/welcome");
 		return mv;
 	}
 
@@ -47,28 +56,20 @@ public class LoginController {
 	}
 
 	// 로그인 기능하기
-	@PostMapping("/executeLogin")
-	public String executeLogin(String email, String pwd, HttpServletRequest request, RedirectAttributes rttr,
-			Model model) {
+	@RequestMapping(value = "/executeLogin", method = RequestMethod.POST)
+	@ResponseBody
+	public void executeLogin(String email, String pwd, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr,
+			Model model) throws IOException {
+		JSONObject jso= new JSONObject();
 		log.info("login email: " + email);
 		log.info("login pwd: " + pwd);
-		// ModelAndView mv = new ModelAndView();
-		// 이메일과 비번이 일치하는 지 확인하기
-		if (service.isValidUser(email, pwd)) {
-			// 해당 이메일을 가진 유저 객체 가져오기
-			UserVO user = service.getUserById(email);
-			log.info("***로그인한 user---------- 정보: " + user);
-			// 보안을 위해 비밀번호는 empty String으로 임의 변경
-			user.setUserPwd("");
-			// 일치하면 모델에 세션에 유저 객체 담기
-			model.addAttribute("user", user);
-			log.info("***로그인한 user 정보: " + user);
-			// 로그인 성공했을 때 나타나는 뷰 이름
-			return "/user/welcome";
-		}
-		// 로그인에 실패했을 때 나타나는 뷰 이름
-		rttr.addFlashAttribute("msg", "로그인 정보가 일치하지 않습니다!");
-		return "redirect:/user/login";
+		String user_check= request.getParameter("remember_email");
+		log.info("remember_email: "+ user_check);
+		int result= service.executeLogin(email, pwd, user_check, response, session);
+		jso.put("msg", result);
+		PrintWriter out = response.getWriter();
+		out.print(jso);
+
 	}
 
 	// 로그아웃을 하는 기능(=세션에서 user를 제거하는 기능)

@@ -6,10 +6,10 @@
 <!-- %@include file="../includes/header.jsp"% -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ana 서비스 약관</title>
+<title>HanOkay 한오케이 서비스 약관</title>
 </head>
 <body>
-	<h1>ana 서비스 약관</h1>
+	<h1>HanOkay 한오케이서비스 약관</h1>
 
 	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
