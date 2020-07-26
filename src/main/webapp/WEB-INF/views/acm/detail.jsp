@@ -3,15 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
-<%
-	String checkin = request.getParameter("in");
-	String checkout = request.getParameter("out");
-	String person = request.getParameter("person");
-%>
+<% String person = request.getParameter("person"); %>
 <style>
 
 .page-wrapper{
 	display: grid;
+    padding: 10px;
 }
 
 .page-contents{
@@ -48,6 +45,7 @@
 	grid-column: 1;
 	padding: 20px;
 	font-size: 2vh;
+    width: 950px;
 }
 
 .container-review{
@@ -60,7 +58,7 @@
 	grid-row: 1/3;
 	grid-column: 2;
 	padding: 20px;
-    width: 100%;
+    width: 800px;
 }
 
 .container-roomlist{
@@ -72,6 +70,9 @@
 	text-align: center;
 }
 
+.container-roomlist table td{
+    width: 20vh;
+}
 
 .detail-navigation-list{
 	list-style: none;
@@ -146,7 +147,8 @@ details{
 }
 
 .rom-list{
-	border: 10px solid white;
+	border: 20px solid whitesmoke;
+	background: whitesmoke;
 }
 
 #pic1{
@@ -174,7 +176,8 @@ details{
 }
 
 .rom-title{
-	font-size: 3vh;
+    font-size: 11vh;
+    font-family: 'East Sea Dokdo', cursive;
 }
 
 .page-wrapper table{
@@ -201,7 +204,7 @@ details{
 	color: #61dafb;
 }
 
-.booking-form {
+.box {
     font-size: 2vh;
 	width: 100%;
 	background: #fff;
@@ -211,7 +214,7 @@ details{
 	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
 }
 
-.booking-form .booking-group {
+.box .booking-group {
 	position: relative;
     width: 33%;
     padding: 15px 15px 15px;
@@ -234,33 +237,33 @@ details{
 	transition: 0.2s all;
 }
 
-.booking-form .form-control::-webkit-input-placeholder {
+.box .form-control::-webkit-input-placeholder {
 	color: #dfe5e9;
 }
 
-.booking-form .form-control:-ms-input-placeholder {
+.box .form-control:-ms-input-placeholder {
 	color: #dfe5e9;
 }
 
-.booking-form .form-control::placeholder {
+.box .form-control::placeholder {
 	color: #dfe5e9;
 }
 
-.booking-form .form-control:focus {
+.box .form-control:focus {
 	background: #f9fafb;
 }
 
-.booking-form input[type="date"].form-control:invalid {
+.box input[type="date"].form-control:invalid {
 	color: #dfe5e9;
 }
 
-.booking-form select.form-control {
+.box select.form-control {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 }
 
-.booking-form select.form-control+.select-arrow {
+.box select.form-control+.select-arrow {
 	position: absolute;
     right: 25px;
     bottom: 20px;
@@ -273,14 +276,14 @@ details{
 	font-size: 14px;
 }
 
-.booking-form select.form-control+.select-arrow:after {
+.box select.form-control+.select-arrow:after {
 	content: '\279C';
 	display: block;
 	-webkit-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
 
-.booking-form .form-label {
+.box .form-label {
 	position: absolute;
 	top: 25px;
 	left: 35px;
@@ -292,13 +295,13 @@ details{
 	color: #61dafb;
 }
 
-.booking-form .form-checkbox input {
+.box .form-checkbox input {
 	position: absolute !important;
 	margin-left: -9999px !important;
 	visibility: hidden !important;
 }
 
-.booking-form .form-checkbox label {
+.box .form-checkbox label {
 	position: relative;
 	padding-top: 4px;
 	padding-left: 30px;
@@ -306,11 +309,11 @@ details{
 	color: #191a1e;
 }
 
-.booking-form .form-checkbox label+label {
+.box .form-checkbox label+label {
 	margin-left: 15px;
 }
 
-.booking-form .form-checkbox input+span {
+.box .form-checkbox input+span {
 	position: absolute;
 	left: 2px;
 	top: 4px;
@@ -321,7 +324,7 @@ details{
 	border-radius: 50%;
 }
 
-.booking-form .form-checkbox input+span:after {
+.box .form-checkbox input+span:after {
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -336,17 +339,17 @@ details{
 	transition: 0.2s all;
 }
 
-.booking-form .form-checkbox input:not(:checked)+span:after {
+.box .form-checkbox input:not(:checked)+span:after {
 	opacity: 0;
 }
 
-.booking-form .form-checkbox input:checked+span:after {
+.box .form-checkbox input:checked+span:after {
 	opacity: 1;
 	width: 10px;
 	height: 10px;
 }
 
-.booking-form .submit-btn {
+.box .submit-btn {
 	color: #fff;
 	background-color: #4fa3e3;
 	font-weight: 400;
@@ -425,22 +428,21 @@ details{
 }
 
 </style>
-
 <div class = "page-wrapper">
 	<div class = "page-contnets" style="width: calc(96% - 1.875rem);">
 	
 		<!-- 검색 조건 -->
-		<div class = "container-search booking-form" id="datepicker">
+		<div class = "container-search box" id="datepicker">
 				<form>
 					<div class="booking-search-row"> 
 						<div class="row">
 							<div class="booking-group" >
 								<span class="form-label">Checkin</span>
-								<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="<%=checkin%>" onchange="search()">
+								<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="${in}" onchange="search()">
 							</div>
 							<div class="booking-group">
 								<span class="form-label">Checkout</span>
-								<input class="form-control" type="text" placeholder="End" id="out" name="out" value="<%=checkout%>" onchange="search()">
+								<input class="form-control" type="text" placeholder="End" id="out" name="out" value="${out}" onchange="search()">
 							</div>
 							<div class="booking-group"  >
 								<span class="form-label">Person</span>
@@ -462,7 +464,7 @@ details{
 		</div>
 
 		<!-- 네비게이션 -->
-		<div class = "detail-navigation-list container-navigation booking-form">
+		<div class = "detail-navigation-list container-navigation box">
 			<div class = "detail-navigation-list">
 				<a href="#info">INFO</a>
 				<a href="#review">REVIEW</a>
@@ -472,7 +474,7 @@ details{
 		</div>
 
 		<!-- 숙소정보-->
-		<div class = "container-info booking-form" id="info">
+		<div class = "container-info box" id="info">
 			<span class="title"><c:out value="${acm.acmName}" /></span>
 			<span id="stisf">&nbsp;</span>
 			<span id="stisf-num">(<c:out value="${star}" />)</span>
@@ -484,7 +486,7 @@ details{
 		</div>
 		
 		<!-- 숙소사진 -->
-		<div class = "container-picture booking-form" id="picture">
+		<div class = "container-picture box" id="picture">
 				<table class="pic" style="border-color: red">
 					<tr >
 						<td id="pic1" rowspan="3" ></td>				
@@ -499,7 +501,7 @@ details{
 				</table>
 		</div>
 		
-		<div class = "container-grid  booking-form">
+		<div class = "container-grid  box">
 		<!-- 편의시설 -->
 		<div class = "container-option" id="option">
 			<label class="sub-title">OPTION</label>
@@ -542,7 +544,7 @@ details{
 		</div>
 		
 		<!-- 객실리스트 -->
-		<div class = "container-roomlist booking-form" id="roomlist">
+		<div class = "container-roomlist box" id="roomlist">
 			<label class="sub-title">ROOM</label></br>
 				<table>
 					<c:forEach items="${rom}" var="rom">
@@ -584,13 +586,13 @@ details{
 			</c:if>		
 		</div>		
 		
-       	<form action="detail.jsp" id="form" method=post>
-      		<input type="hidden" name="in" id="form-in" value="<%=checkin%>">
-      		<input type="hidden" name="out" id="form-out" value="<%=checkout%>">
+       	<form action="../booking/new" id="form" method=post>
+      		<input type="hidden" name="in" id="form-in" value="${in}">
+      		<input type="hidden" name="out" id="form-out" value="${out}">
       		<input type="hidden" name="person" id="form-person" value="<%=person%>">
       		<input type="hidden" name="romNum" id="form-romNum" value="">
       		<input type="hidden" name="romPrice"id="form-romPrice" value="">
-			<input type="submit" value="" id="form-submit">
+			<input type="submit" value="" id="form-submit" style="opacity: 0">
 		</form>
 		
 	</div> <!-- end of contents -->
@@ -784,11 +786,11 @@ details{
 			document.getElementById("form-romNum").value = romNum;
 			document.getElementById("form-romPrice").value = romPrice;
 
-			// 로그인 확인, 인원 디폴트값, 1박 이상 선택 확인
+ 			// 로그인 확인, 인원 디폴트값, 1박 이상 선택 확인
 			if('<%=user%>'=="null" || '<%=user%>' == null){
 				alert("로그인이 필요합니다!");
 				return false;
-			}
+			} 
 			
 			if(person == "null" || person == "") person = 1;
 			

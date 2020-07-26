@@ -11,6 +11,7 @@ public class RomVO {
 	private String romNum;
 	private String romName;
 
+	private String romType;
 	private Integer romCapa;
 	private String bedType;
 	private Integer bedCnt;
@@ -19,7 +20,6 @@ public class RomVO {
 	private String romPurl;
 	private String romPname;
 	
-	private String romType;
 	private String romActi;
 	private String romStatus;
 	private String romOptcode;

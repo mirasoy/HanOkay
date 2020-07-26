@@ -6,8 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ana.domain.RevDetailVO;
+import com.ana.domain.RevPicVO;
 import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
 import com.ana.mapper.RevDetailMapper;
@@ -23,13 +25,23 @@ public class RevServiceImpl implements RevService {
 
 	private RevPostMapper mapper;
 	private RevDetailMapper mapper2;
-
+	
 	
 	//등록하기
+	@Transactional
 	@Override
 	public void register(RevVO post) {
-		log.info("register......" + post);
+	
+		List<RevPicVO> picList = post.getPicList();
 		mapper.insert(post);
+		
+		if(picList!=null && picList.size()!=0) {
+			String pstNum = post.getPstNum();
+			for(RevPicVO pic: picList) {
+				pic.setPstNum(pstNum);
+				mapper.insertPhoto(pic);
+			}
+		}
 	}
 	
 	
@@ -130,6 +142,29 @@ public class RevServiceImpl implements RevService {
 	@Override
 	public RevVO getByBooknum(String bookNum) {
 		return mapper.readByBookNum(bookNum);
+	}
+
+
+	@Override
+	public List<RevPicVO> getPhoto(String pstNum) {
+		
+		return mapper.getPhoto(pstNum);
+	}
+
+
+	@Override
+	public boolean removeAllPhoto(String pstNum) {
+		return mapper.deleteAllPhoto(pstNum)>0;
+	}
+
+
+	@Override
+	public void registerPicture(List<RevPicVO> picList) {
+		if(picList!=null && picList.size()!=0) {
+			for(RevPicVO pic: picList) {
+				mapper.insertPhoto(pic);
+			}
+		}
 	}
 
 }

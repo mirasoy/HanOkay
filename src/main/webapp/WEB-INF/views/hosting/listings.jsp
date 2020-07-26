@@ -3,69 +3,100 @@
 
 <%@include file="../includes/hostheader.jsp"%>
 
-
-
-	
-<div class="row">
-	<div class="col-lg-12" style="padding-left:50px; padding-right: 50px;">
-		<h1 class="page-header">숙소 <span>n개</span></h1><!-- 갯수받아와서 넣어주기 -->
-            <div class="input-group custom-search-form" style="width:500px;padding-bottom:20px;">
-                <input type="text" class="form-control" size="30" placeholder="숙소 이름, 위치 등으로 검색">
-                <span class="input-group-btn">
-                 <button class="btn btn-default" type="button">
-                     <i class="fa fa-search"></i>
-                 </button>
-           		</span>
-            </div>
-
-
-	
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
+	<br>			
+  <!-- 숙소 방 추가 모달로 띄우기-->
+  <h4><c:out value="${userFstname}"/> 호스트님의 숙소 관리</h4><input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
+  <h3 align="left">총 <c:out value="${size}"/>개의 숙소</h3>
+			
+			  
+		
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				숙소 목록(미구현!!)
-				<button id='regBtn' type="button" class="btn btn-xs pull-right" onclick='location.href="/hosting/become-host"'>새숙소 등록</button>
+			<div class="panel-heading" style="padding-bottom:25px;">
+				
+				<button type="button" class="btn btn-xs pull-right" data-oper='newAcm'>새 숙소 등록</button>
 			</div>
-
 			<!-- /.panel-heading -->
 			<div class="panel-body">
-				<!-- <table class="table table-striped table-bordered table-hover">
+				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>숙소이름</th>
-							<th>등록여부</th>
-							<th>방 갯수</th>
-							<th>침대 갯수</th>
-							<th>욕실 갯수</th>
-							<th>위치</th>
-							<th>최종 수정일</th>
+							<th>숙소 사진</th>
+							<th>숙소 이름</th>
+							<th>숙소 유형</th>
+							<th>숙소 위치</th>
 						</tr>
 					</thead>
 
-					<c:forEach items="${list}" var="board">
+					<c:forEach items="${list}" var="acm">
 						<tr>
-							<td><c:out value="${board.bno}" /></td>
-							<%-- <td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td> --%>
-
-							<td><a class='move' href='<c:out value="${board.bno}"/>'>
-									<c:out value="${board.title}" />
-							</a></td>
-
-							<td><c:out value="${board.writer}" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.regdate}" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.updateDate}" /></td>
+							<td><c:out value="${acm.acmPurl}" /></td>
+							<td>
+								<a class='move' href='<c:out value="${acm.acmNum}"/>'>
+									<c:out value="${acm.acmName}" />
+								</a>
+							</td>
+							<td><c:out value="${acm.acmType}" /></td>
+							<td><c:out value="${acm.acmDetailaddr}" /></td>
 						</tr>
 					</c:forEach>
-				</table> -->
+				</table>
+				
+				
+				  <br>
+				</div>
+				<!--  end panel-body -->
+			</div>
+			<!-- end panel -->
 		</div>
-		<!--  end panel-body -->
-	</div>
-	<!-- end panel -->
-</div>
-</div>
-<!-- /.row -->
+			
+			
+		<!-- 빈 폼 -->
+		<form id="actionForm">
+		</form>
+				
+			
+		</div>
+
+				
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		var formObj = $("#actionForm");
+		
+		$('button').on("click", function(e){
+			e.preventDefault();
+			
+			
+			var operation=$(this).data("oper");
+			console.log(operation);
+			
+			if(operation==='newAcm'){
+				alert("새 숙소를 등록합니다");
+				formObj.attr("action","/hosting/become-host");	
+			}
+			actionForm.submit();
+		});
+	});
+
+
+	$(document).ready(function(){
+		$(".move").on("click", function(e){
+			var actionForm = $("#actionForm");
+			
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
+			actionForm.attr("action","/hosting/become-host2_6");
+			actionForm.submit();
+		});
+	});
+	
+
+</script>
+
+
 
 
 

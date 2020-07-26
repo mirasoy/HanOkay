@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@include file="../includes/hostheader.jsp"%>
-<!-- nav-sidebar -->
+<%@include file="../includes/becomehostheader.jsp"%>
+
 
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -17,13 +17,13 @@
                             <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+                            <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                            <a><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                            <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                     </ul>
                 </div>
@@ -38,13 +38,13 @@
 
 
 			<div class="acm" id="acm"><br><h6>*항목은 필수입력값입니다</h6>	  
-				<h4>*1.게스트가 묵게 될 숙소의 유형을 골라주세요</h4>
+				<h4>게스트가 묵게 될 숙소의 유형을 골라주세요!</h4>
 				<input type="radio" id="acmType_house" name="acmTypes" value="H"><label for="rentType1">집 천제</label> 
 				<input type="radio" id="acmType_priv" name="acmTypes" value="P"><label for="rentType2">객실별 대여</label>
 			
 		<form id="actionForm" action="/hosting/become-host" method="post">
 			<br>	
-			  <h4>*2.숙소 이름과 정보</h4>
+			  <h4>숙소 이름과 정보를 입력합니다</h4>
 			   <input type="text" id="acmName" name="acmName" placeholder="숙소의 이름"><br><br>
 			   <!-- 구글 API추가해야함 /우선 다음 API 사용하겠음-->
 			   
@@ -61,7 +61,7 @@
 				
 				<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기">&nbsp;&nbsp;
 				<!-- 주소 중복체크으!!!! -->
-				<span style="color: black;" id="msg"><c:out value="${msg }" /></span>
+				<span style="color: black;" id="msg"><c:out value="${msg}" /></span>
 				<br>				
 				
 				
@@ -84,12 +84,12 @@
 				
 			 
 				  <br><br>
-				  <h4>*3.Ana에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4>
+				  <h4>한:오케이에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4>
 				  <input type="text" id="bizRegnum" name="bizRegnum" placeholder="사업자등록번호" numberOnly><br><br>
 				  <!-- 우선 숨겨두겠음 -->
 				  <!-- <input type="hidden" id="bizRegpurl" name="bizRegpurl" placeholder="사업자등록증"><br>
 				   -->
-				  <h4>*4.숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
+				  <h4>숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
 				  <label for="checkinTime">체크인시간</label>
 					<select name="checkinTime" id="checkinTime">
 					  <option value="PM12">점심12시이후</option>
@@ -124,19 +124,19 @@
 		</div>
 
 <%@include file="../includes/footer.jsp"%>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00edf13596a79c29680f481ec4a2fc03&libraries=services"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><script type="text/javascript">
+<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00edf13596a79c29680f481ec4a2fc03&libraries=services"></script> -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script type="text/javascript">
 var full='';
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
             // 각 주소의 노출 규칙에 따라 주소를 조합한다.
             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
             var addr = ''; // 주소 변수
             var extraAddr = ''; // 참고항목 변수
-
             //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
             if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                 addr = data.roadAddress;
@@ -145,7 +145,6 @@ function sample6_execDaumPostcode() {
                 addr = data.jibunAddress;
 				
             }
-
             // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
             if(data.userSelectedType === 'R'){
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -167,7 +166,6 @@ function sample6_execDaumPostcode() {
             } else {
                 document.getElementById("sample6_extraAddress").value = '';
             }
-
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample6_postcode').value = data.zonecode;
             document.getElementById("sample6_address").value = addr;
@@ -204,9 +202,15 @@ function sample6_execDaumPostcode() {
           		   $('span#msg').text(data.msg);
           		
           		   var chkaddr=document.getElementById("chkaddr");
-	     	    	if(chkaddr==null)//없으면 추가시켜주고
-	     	    	formObj.append("<input type='hidden' id='chkaddr' name='chkaddr' value='"+data.msg+"'>");
-	     	    	else chkaddr.value=data.msg;//이미 있으면 바꿔치기
+	     	    	if(chkaddr==null){//없으면 추가시켜주고
+		     	    	formObj.append("<input type='hidden' id='chkaddr' name='chkaddr' value='"+data.msg+"'>");
+		     	    	
+		     	    	
+		     	    	//임시
+		     	    	formObj.append("<input type='hidden' id='latitude' name='latitude' value='"+35.8133295+"'>");
+		     	    	formObj.append("<input type='hidden' id='longitude' name='longitude' value='"+129.1894108+"'>");
+	     	    	}
+	     	    		else chkaddr.value=data.msg;//이미 있으면 바꿔치기
           	   },
           	   error: function(data){
           		  window.location.href ="../error/error";
@@ -215,22 +219,20 @@ function sample6_execDaumPostcode() {
     	     
     	     
     	   //주소-좌표 변환 객체를 생성
-    	   var geocoder = new daum.maps.services.Geocoder();
+    	  /* var geocoder = new kakao.maps.services.Geocoder();
     	   geocoder.addressSearch(addr, function(results, status) {
                // 정상적으로 검색이 완료됐으면
-               if (status === daum.maps.services.Status.OK) {
-
+               if (status === kakao.maps.services.Status.OK) {
                    var result = results[0]; //첫번째 결과의 값을 활용
-
                    // 해당 주소에 대한 좌표를 받아서
-                   var coords = new daum.maps.LatLng(result.y, result.x);
+                   var coords = new kakao.maps.LatLng(result.y, result.x);
                   
                   var latitude=document.getElementById("latitude");
                   var longitude=document.getElementById("longitude");
                   
 	     	    	if(latitude==null && longitude==null){//없으면 추가시켜주고
-		     	    	formObj.append("<input type='hidden' id='latitude' name='latitude' value='"+result.y+"'>");
-		     	    	formObj.append("<input type='hidden' id='longitude' name='longitude' value='"+result.x+"'>");
+		     	    	formObj.append("<input type='text' id='latitude' name='latitude' value='"+result.y+"'>");
+		     	    	formObj.append("<input type='text' id='longitude' name='longitude' value='"+result.x+"'>");
 	     	    	} else {
 	     	    		latitude.value=result.y;//이미 있으면 바꿔치기
 	     	    		longitude.value=result.x;
@@ -238,14 +240,11 @@ function sample6_execDaumPostcode() {
                   
                }
            });  
-    	     
+    	  */   
     	     
         }
     }).open();
 }
-
-
-
 	//html이 그려지면 실행되는 메서드
 	$(document).ready(function() {
 		//페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
@@ -259,7 +258,6 @@ function sample6_execDaumPostcode() {
 	function CheckEmail(str){                                                 
 		// 이메일이 적합한지 검사할 정규식    
 		var re =/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; 
-
 		if(!re.test(str)) {                            
 	          return false;         
 	     }                            
@@ -267,7 +265,6 @@ function sample6_execDaumPostcode() {
 	          return true;         
 	     }                            
 	}  
-
 	var formObj = $("#actionForm");
 	//유효성 검사
 	function readyForreg() {
@@ -278,7 +275,6 @@ function sample6_execDaumPostcode() {
 	    	chkArr.push($(this).val())  
 	   		 acmTypevalue=acmTypevalue.concat($(this).val());
 	    });
-
 	    if(chkArr.length==0){
 	       alert('하나 이상의 숙소유형을 골라주셔야합니다');
 	       $(this).focus();
@@ -289,7 +285,6 @@ function sample6_execDaumPostcode() {
 	    	formObj.append("<input type='hidden' id='acmType' name='acmType' value="+acmTypevalue+">");
 	    	else acmType.value=acmTypevalue;//이미 있으면 바꿔치기
 	    }
-
 	    var acmName=document.getElementById("acmName");
 		if (acmName.value.length > 10 || acmName.value.trim()=='') {
 			alert("숙소이름은 10자로 이내로 정해주세요~");
@@ -351,7 +346,6 @@ function sample6_execDaumPostcode() {
 			alert("같은 주소지에 숙소가 이미 등록되어있습니다! 주소를 확인해주세요");
 			return false;		
 		}
-
 		
 		//null허용값들 실험
 		var subPhone=document.getElementById("subPhone");
@@ -397,7 +391,5 @@ function sample6_execDaumPostcode() {
 	$("input:text[numberOnly]").on("keyup", function () {
 		$(this).val($(this).val().replace(/[^0-9]/g, ""));
 	});
-
 	   
 </script>
-

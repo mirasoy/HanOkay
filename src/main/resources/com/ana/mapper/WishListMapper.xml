@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ana.mapper.WishListMapper">
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★1. ResultMap 을 이용한 mybatis ★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	 ResultMap은 DB 필드값과 DTO객체의 프라퍼티(변수)명이 다를 때 사용한다.	  
+-->
+
+
+
+<resultMap id="WishListVOResult" type="com.ana.domain.WishListVO">
+		<result column="WISH_NUM" property="wishNum" />
+		<result column="USER_NUM" property="userNum" />
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="LIST_TITLE" property="listTitle" />	
+		<result column="LIST_CONTENT" property="listContent" />	
+		
+</resultMap>
+
+
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★2. 리스트 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+
+<!-- 문자열 비교연산자나 부등호를 처리할 때 "<![CDATA[" 를 사용 -->
+
+<select id="getList" resultMap="WishListVOResult">
+<![CDATA[
+	select * from TWISH_LIST 
+]]>
+</select>
+
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★2. create 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+<insert id="insert">
+	insert into TWISH_LIST (WISH_NUM, USER_NUM, ACM_NUM, LIST_TITLE, LIST_CONTENT)
+	values(concat('W',seq_tacm.nextval),#{userNum}, #{acmNum}, #{listTitle}, #{listContent})
+
+</insert>
+
+<insert id="insertSelectKey">
+<selectKey keyProperty="wishNum" order="BEFORE" resultType="String">
+</selectKey>
+
+	insert into TWISH_LIST (WISH_NUM, USER_NUM, ACM_NUM, LIST_TITLE, LIST_CONTENT)
+	values(concat('W',seq_tacm.nextval),#{userNum}, #{acmNum}, #{listTitle}, #{listContent})
+
+</insert>
+
+
+
+</mapper>

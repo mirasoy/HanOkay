@@ -45,10 +45,14 @@
         background-color:cornflowerblue;
         color: white;
     }
-        
+     
+    button{
+    	width:100px;
+    	height:30px;
+    }    
 	
 </style>
-
+<%@include file="../includes/becomehostheader.jsp"%>
 <script type="text/javascript">
 	
 	//acmNum넘겨받는부분
@@ -78,11 +82,16 @@
 	
 </script>
 <body>
-<div id="page-wrapper" style="padding-bottom:50px;">
+<%@include file="../includes/becomehostheader.jsp"%>
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
    <input type="hidden" id="ACM_NUM" name="ACM_NUM" value="" readonly="readonly">
    <!-- 숙소 방 추가 모달로 띄우기-->
    <form action="/hosting/become-host2_6" method="get">
-      <h4>6-2.개별객실(베드룸) 추가하기</h4>
+<br>
+	<div align="right">	
+      <button type="button" onclick="if(readyForreg()){romRegit()}">객실 등록</button>
+     </div> 
+      <h4>개별객실(베드룸) 추가하기</h4>
 
      <!-- <div id="image_container" style="width:200px;height:200px;"></div>
       <input type="file" id="ROM_PURL" name="ROM_PURL" placeholder="객실 사진" onchange="setThumbnail(event);"> --> 
@@ -134,8 +143,8 @@
 
       </div>
       <!-- 여기에 appendChild하고 싶닷 -->
-
-      <h4>2-2.객실 옵션</h4>
+		<br><br>
+      <h4>객실 옵션</h4>
 
       <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->
       <input type="checkbox" name="romOptcode" id="RM_OPT_ES" value="1"><label for="RM_OPT_ES">필수품목(수건,화장지, 이불, 씻는도구)</label>
@@ -154,10 +163,6 @@
       <input type="checkbox" name="romOptcode" id="RM_OPT_BC" value="8192"><label for="RM_OPT_BC">발코니/테라스</label>
       <input type="checkbox" name="romOptcode" id="RM_OPT_SM" value="16384"><label for="RM_OPT_SM">흡연</label>
       <input type="checkbox" name="romOptcode" id="RM_OPT_KC" value="32768"><label for="RM_OPT_KC">개별주방</label>
-
-
-      <br>
-      <button type="button" onclick="if(readyForreg()){romRegit()}">등록하기</button>
    </form>
 
 </div>
@@ -218,13 +223,13 @@
 		
 
 		var acmNum = $("#ACM_NUM").val();//숙소번호
-		var romType = $("#ROM_TYPE").val();//룸타입
 		var romName = $("#ROM_NAME").val();//객실이름
 		var romCapa = $("#ROM_CAPA").val();//객실최대인원수
 		var bedType = $("#BED_TYPE").val();//침대유형
 		var bedCnt = $("#BED_CNT").val();//침대갯수
 		var romSize = $("#ROM_SIZE").val();//객실크기
 		var romPrice = $("#ROM_PRICE").val();//객실가격
+		var romType = $("#ROM_TYPE").val();//룸타입
 		
 
 		//name/value 형태로 담는다
