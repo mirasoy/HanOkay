@@ -3,7 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ana.mapper.RevPostMapper">
 
-	<resultMap id="RevDetailVOResult" type="com.ana.domain.RevDetailVO">
+	<resultMap id="RevDetailVOResult"
+		type="com.ana.domain.RevDetailVO">
 		<result column="PST_NUM" property="pstNum" />
 		<result column="REV_PURL" property="revPurl" />
 		<result column="STISF" property="stisf" />
@@ -12,14 +13,16 @@
 		<result column="CONTENT" property="content" />
 	</resultMap>
 
-	<resultMap id="RevPostVOResult" type="com.ana.domain.RevPostVO">
+	<resultMap id="RevPostVOResult"
+		type="com.ana.domain.RevPostVO">
 		<result column="PST_NUM" property="pstNum" />
 		<result column="BRD_CODE" property="brdCode" />
 		<result column="P_TITLE" property="title" />
 		<result column="USER_NUM" property="userNum" />
 		<result column="P_REGDATE" property="regDate" />
 		<result column="P_UPDATEDATE" property="updateDate" />
-		<collection property="revDetail" resultMap="RevDetailVOResult" />
+		<collection property="revDetail"
+			resultMap="RevDetailVOResult" />
 	</resultMap>
 
 
@@ -37,13 +40,18 @@
 		<result column="ACM_NAME" property="acmName" />
 		<result column="CHECKIN_DATE" property="checkInDay" />
 		<result column="CHECKOUT_DATE" property="checkOutDay" />
-		<result column="PST_PURL" property="pusl" />
+		<result column="PST_PURL" property="purl" />
 		<result column="PST_PNAME" property="pname" />
 		<result column="PST_PREGDATE" property="pregdate" />
 	</resultMap>
 
 
-
+	<resultMap id="RevPicVo" type="com.ana.domain.RevPicVO">
+		<result column="PST_NUM" property="pstNum" />
+		<result column="PST_PURL" property="purl" />
+		<result column="PST_PNAME" property="pname" />
+		<result column="PST_PREGDATE" property="pregdate" />
+	</resultMap>
 
 	<!-- 리뷰삭제 0 -->
 	<delete id="delete">
@@ -82,6 +90,8 @@
 
 
 	</insert>
+
+
 
 
 	<!-- 예약번호로 불러오기 0 -->
@@ -136,11 +146,12 @@
 
 	<!-- 나의 리스트 불러오기0 -->
 	<select id="getUserBookingACList" resultMap="RevVOResult">
+
 		SELECT
 		PST.PST_NUM ,
 		PST.BRD_CODE ,
 		PST.P_TITLE ,
-		PST.USER_NUM ,
+		J.USER_NUM ,
 		PST.P_REGDATE ,
 		PST.P_UPDATEDATE ,
 		PST.STISF ,
@@ -158,7 +169,8 @@
 		B.BOOK_NUM ,
 		A.ACM_NAME ,
 		B.CHECKIN_DATE ,
-		B.CHECKOUT_DATE
+		B.CHECKOUT_DATE,
+		B.USER_NUM
 		FROM
 		TBOOKING B,
 		TACM A, TROM R
@@ -176,7 +188,7 @@
 		J.BOOK_NUM =
 		pst.BOOK_NUM(+)
 		AND
-		PST.user_num = #{loginUser}
+		J.user_num ='U1'
 
 		ORDER BY
 		J.checkin_Date
@@ -233,6 +245,25 @@
 	</select>
 
 
+	<!-- 리뷰사진불러오기 -->
+	<select id="getPhoto" resultMap="RevPicVo">
+		SELECT * FROM TREVIEW_PIC WHERE pst_num = #{pstNum}
+	</select>
+	<!-- 리뷰사진넣기 -->
+	<insert id="insertPhoto">
+		INSERT INTO TREVIEW_PIC (PST_NUM,PST_PURL,PST_PNAME) VALUES(
+		#{pstNum},#{purl},#{pname}
+		)
+	</insert>
+	<!-- 리뷰사진삭제 0 -->
+	<delete id="deletePhoto">
+		delete from TREVIEW_PIC where PST_NUM = #{pstNum} and
+		PST_PNAME =#{pname}
+	</delete>
+	<!-- 리뷰의 모든사진삭제 0 -->
+	<delete id="deleteAllPhoto">
+		delete from TREVIEW_PIC where PST_NUM = #{pstNum} 
+	</delete>
 
 
 
@@ -283,4 +314,7 @@
 
 		WHERE b.acm_num = #{acmNum}
 	</select>
+
+
+
 </mapper>

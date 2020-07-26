@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
 	//이메일 중복 검사하는 메서드 구현
 	@Override
 	public boolean checkEmail(String email) {
-		log.info("idCheck........");
+		log.info("Email Duplication Check........");
 		return mapper.checkEmail(email)==0;
 	}
 
@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService{
 	//email과 pw가 일치하는 user의 userNum을 반환하는 메서드
 	@Override 
 	public UserVO getUserById(String email) {
+		
 		return mapper.getUserById(email);
 	}
 

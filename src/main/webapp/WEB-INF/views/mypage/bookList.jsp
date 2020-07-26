@@ -7,6 +7,7 @@
 	session.setAttribute("loginUserNum", "U1");
 String name = (String) session.getAttribute("loginUserNum");
 %>
+
 <%@include file="../includes/header.jsp"%>
 
 
@@ -24,17 +25,17 @@ String name = (String) session.getAttribute("loginUserNum");
 
 			<div>
 				<ul class="bookbar">
-					<li class="item1"><a href="/MyPage/bookListAll">전체목록</a></li>
-					<li class="item2"><a href="/MyPage/bookList">투숙예정</a></li>
-					<li class="item3"><a href="/MyPage/checkout">투숙완료</a></li>
-					<li class="item4"><a href="/MyPage/cancelled">취소된 예약</a></li>
+					<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
+					<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
+					<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
+					<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>
 
 
 				</ul>
 			</div>
 
 			<div class="panel-heading">
-				<%=userFstname %>의 예약 중인 목록입니다. (숙박예정)
+				<%=userFstName %>의 예약 중인 목록입니다. (숙박예정)
 			</div>
 
 
@@ -56,7 +57,7 @@ String name = (String) session.getAttribute("loginUserNum");
 
 					<c:forEach items="${bookList}" var="board">
 						<tr>
-							<td><c:out value="${board.acmName}" /></td>
+							<td name='acmNum' id='acmNum'><c:out value="${board.acmName}" /></td>
 							<td><c:out value="${board.bookNum}" /></td>
 
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -66,10 +67,9 @@ String name = (String) session.getAttribute("loginUserNum");
 									value="${board.checkoutDate}" /></td>
 							<td><c:out value="${board.bookPrice}" /></td>
 
-							<td><a href="/MyPage/info?bookNum=${board.bookNum}">예약정보</a></td>
-							<td><button id="myBtn">예약 확정서 받기</button></td>
-							<td><button id="myMap">
-									숙소 위치 확인</a></td>
+							<td><a href="/mypage/info?bookNum=${board.bookNum}">예약관리하기</a></td>
+							<td><button data-oper='myBtn' id="myBtn" class="myBtn">예약 확정서 받기</button></td>
+							<td><button id="myMap">숙소 위치 확인</button></td>
 
 						</tr>
 					</c:forEach>
@@ -80,11 +80,35 @@ String name = (String) session.getAttribute("loginUserNum");
 				<div id="myModal" class="modal">
 					<!-- Modal content -->
 					<div class="modal-content">
+					
+					
 						<span id="close" class="close">&times;</span>
-						<h1>메일 보내기</h1>
-						<h1>미구현 (2차 개발 예정 사항입니다.)</h1>
-						<div id="map"></div>
-						<!-- 지도가 붙을 위치 -->
+						<h1>메일 보내기</h1>						
+						<form id="actionForm" method="post" action="${path}/email/send.do">
+							<!-- post방식으로 자료를 컨트롤러로 보냄 -->
+					
+							<label>발신자 이름 : </label>
+							<input name="senderName"><br> 
+							<label class="sr-only">보낸 사람 이메일 : </label>
+							<input class="sr-only" name="senderMail" value="tmpProjAna@gmail.com"><br> 
+							<label>받는 사람 이메일 : </label>
+							<input name="receiveMail"><br> 
+							
+							<label>[HanOkay 한:옥케이] 예약정보 안내 드립니다. </label>
+							<input class="sr-only" value="[HanOkay 한:옥케이] 예약정보 안내 드립니다." name="subject"><br>
+						<c:forEach items="${bookList}" var="board">
+							<input id="acmName" value='<c:out value="${board.acmName}"/>'>
+							</c:forEach> 
+					
+							<label class="sr-only">내용 : </label>
+							<textarea id="txt" rows="5" cols="80" name="message"></textarea><br> 
+		
+							
+							<input type="submit" value="전송">
+						</form>
+						<span style="color: red;">${message}</span>
+					
+						
 					</div>
 				
 				</div>
@@ -114,30 +138,78 @@ String name = (String) session.getAttribute("loginUserNum");
 
 
 	<script>
+	
+	
+
+	//클릭 된것의 value를 가져온다.
+		
+		
+	
 		// 모달창 가져오기
 		var modal = document.getElementById("myModal");
 		var modal2 = document.getElementById("myModal2");
 
 		// 버튼을 누르면 모달창이 열려야하니까, 변수로 선언
-		var btn = document.getElementById("myBtn");
+		var btn = document.getElementsByClassName("myBtn");
 		var btn2 = document.getElementById("myMap");
 
-		var nav = document.getElementById("side-menu");
 
 		// span태그에 close의 이름을 주자
 		var span = document.getElementsByClassName("close")[0];
 		var span2 = document.getElementsByClassName("close2")[0];
+		
+		
+		
+		var txt = document.getElementById("txt");
+		
+		var acmName = document.getElementById("acmName").value;
+		
+		console.log(acmName);
+		
+	/* 	txt.innerHTML = acmName;  */
+		
+		
+		//모달 창 가져오기
+		
+		
+		var formObj = $("#actionForm");
+		
+		for(
+				var i=0 ; i<btn.length ; i++
+				){
+			btn[i].onclick = function(e){
+				console.log(e);
+				modal.style.display = "block";
+				
+				var operation=$(this).data("oper");
+				console.log(operation);
+			
+			};	
+		}
+		
+		
+		${board.acmName}
+		
+		
+		
+		
+/* 		
 
 		// 사용자가 버튼을 클릭하면 모달을 연다
 		btn.onclick = function() {
 			modal.style.display = "block";
-			nav.style.display = "none";
+			
+			console.log("여기는 가능");
+			
+		
+			
+			
 
-		}
+		} */
 
 		btn2.onclick = function() {
 			modal2.style.display = "block";
-			nav.style.display = "none";
+			
 
 		}
 

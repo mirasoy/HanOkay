@@ -48,7 +48,7 @@ public class RegisterController {
 	}
 	
 	// 이메일 중복 검사 (ajax로 값을 받아온다)
-	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+	@RequestMapping(value="/checkEmail", method=RequestMethod.POST)
 	@ResponseBody
 	public void checkEmail(String email,HttpServletRequest request, HttpServletResponse response)
 throws IOException{	
@@ -57,16 +57,22 @@ throws IOException{
 		//한글 깨짐 방지
 		response.setContentType("text/plain;charset=UTF-8");
 		String msg="";
+		String assureMsg="";
 		//service에게 email을 주고 db를 뒤져오게한다
 		if (service.checkEmail(email)) {
 			log.info("checkEmail에서 service 성공");
 			msg="해당 이메일을 사용하실 수 있습니다";
-			jso.put("msg", msg);		
+			assureMsg="pass";
+			jso.put("msg", msg);
+			jso.put("assureMsg", assureMsg);
+			jso.put("assuredEmail", email);
 		} 
 		else {
 			log.info("checkEmail에서 service를 불렀더니 이미 db에 있는 이메일임!");
 			msg="이미 등록된 이메일입니다!";
+			assureMsg="fail";
 			jso.put("msg", msg);
+			jso.put("assureMsg", assureMsg);
 		}
 		PrintWriter out = response.getWriter();
 		out.print(jso);
@@ -100,30 +106,30 @@ throws IOException{
 	//7.14 오늘은 개발을 위해서 그냥 emailAuth 페이지를 보여주게 해놓음
 	@GetMapping("/emailAuth")
 	public String cannotGetEmailAuth() {
-		return "register/emailAuth";
+		return "error/error";
 	}
 	
 	//인증메일을 발송하는 기능
 	//누르면 emailAuth.jsp로 이동하고
 	//쿠키가 생성되어 sign Up form에서 채워진 값들이 저장되서 emailAuth.jsp로 넘어간다
-	@PostMapping("/emailAuth")
+	@PostMapping("/sendEmail")
 	public void sendAuthEmail(UserVO user) {
 		//db에 회원의 이메일 정보가 있다면
 		log.info("email authentication: "+user);
-		if(service.checkEmail(user.getUserEmail())) {
-			//이메일을 보낸다(쿠키 저장한다)
-			if(emailService.sendAuthEmail(user.getUserEmail())) {
+		//if(service.checkEmail(user.getUserEmail())) {
+			//이메일을 보낸다
+			//if(emailService.sendAuthEmail(user.getUserEmail())) {
 				//성공적으로 보냈으면		
 				//이메일로 발송한 인증코드를 칠 수 있게 jsp에게 알려주고
-			}
-			else {
+			//}
+		//	else {
 				//성공적으로 못보냇으면
 				//실패했다고 알려준다(발송의 실패)
-			}
-		} else {
+		//	}
+	//	} else {
 			//db에 회원정보가 없으면
 			//회원정보가 없다고 알리고findPwd페이지로 다시 가게 한다
-		}
+		//}
 		
 	}
 }

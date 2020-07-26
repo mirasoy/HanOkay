@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.domain.AttachFileDTO;
 import com.ana.domain.RevDetailVO;
+import com.ana.domain.RevPicVO;
 import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
 import com.ana.domain.UserVO;
@@ -67,12 +69,10 @@ public class RevController {
 			userNum = user.getUserNum();
 			log.info("list Size>>>>>>" + service.getUserList(userNum).size());
 			log.info(userNum + "의 리스트 list");
-			model.addAttribute("list", service.getUserList("U1"));
+			model.addAttribute("list", service.getUserList(userNum));
 			return "/review/list";
 		} else {
-			model.addAttribute("list", service.getUserList("U1"));
-			return "/review/list";
-			//return "redirect:/acm/list";
+			return "redirect:/acm/list";
 		}
 
 	}
@@ -126,28 +126,41 @@ public class RevController {
 
 	// 리뷰등록하기
 	@PostMapping("/register")
-	public String register(RevPostVO revP, RevDetailVO reDetail, RedirectAttributes rttr) {
+	public String register(RevVO revP, RedirectAttributes rttr, HttpSession session) {
 
-		boolean registrationStatus = service.getByBooknum(reDetail.getBookNum()).getPstNum() == null;
+		boolean registrationStatus = service.getByBooknum(revP.getBookNum()).getPstNum() == null;
 		log.info("먼저 등록되엇던 리뷰인지 확인>>" + registrationStatus);
+		init(session);
 
-		// 먼저 등록되엇던 리뷰인지 확인하기
-		// 뉴 리뷰라면
-		if (registrationStatus) {
-			RevVO rev = service.getByBooknum(reDetail.getBookNum());
+		// user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if (user != null) {
+			userNum = user.getUserNum();
 			
-			rev.setTitle(revP.getTitle());
-			rev.setContent(reDetail.getContent());
-			rev.setStisf(reDetail.getStisf());
-			log.info("다음리뷰를 등록합니다>>>>>> " + rev);
-			service.register(rev);
+			// 먼저 등록되엇던 리뷰인지 확인하기
+			// 뉴 리뷰라면
+			if (registrationStatus) {
 
-			return "redirect:/review/writtenReviewlist";
-		} else {
-			// 중복이라면 돌려보내기
-			rttr.addFlashAttribute("msg", "이미 리뷰가 등록된 예약입니다.");
-			return "redirect:/review/writtenReviewlist";
+				log.info("가져온자료>>>>> " + revP);
+
+				RevVO rev = service.getByBooknum(revP.getBookNum());
+				rev.setUserNum(userNum);
+				rev.setStisf(revP.getStisf());
+				rev.setContent(revP.getContent());
+				rev.setTitle(revP.getTitle());
+				rev.setPicList(revP.getPicList());
+				log.info("입력하는 자료>> " + rev);
+				service.register(rev);
+
+				return "redirect:/review/writtenReviewlist";
+			} else {
+				// 중복이라면 돌려보내기
+				rttr.addFlashAttribute("msg", "이미 리뷰가 등록된 예약입니다.");
+				return "redirect:/review/writtenReviewlist";
+			}
+			
 		}
+		rttr.addFlashAttribute("msg", "로그인후 이용해주세요.");
+		return "redirect:/review/writtenReviewlist";
 	}
 
 	// 리뷰하나 열어서 보기
@@ -155,7 +168,10 @@ public class RevController {
 	public void get(@RequestParam("pstNum") String pstNum, Model model) {
 
 		log.info("/get" + service.get(pstNum));
+		log.info("/get" + service.getPhoto(pstNum));
+
 		model.addAttribute("review", service.get(pstNum));
+		model.addAttribute("reviewP", service.getPhoto(pstNum));
 
 	}
 
@@ -167,19 +183,29 @@ public class RevController {
 		log.info("/modi THAT >> " + service.get(pstNum));
 
 		model.addAttribute("review", service.get(pstNum));
+		model.addAttribute("reviewP", service.getPhoto(pstNum));
 	}
 
 	// 리뷰 수정하기
 	@PostMapping("/modify")
 	public String modify(RevVO review, RedirectAttributes rttr) {
-		log.info("modify::::::::::" + review.getPstNum() + ":::::::::::::::::::::::::::::" + review);
+		log.info("modify::::::::::" + review);
 		RevVO rv = service.get(review.getPstNum());
 		log.info("modify::::>>>::::::::" + rv);
-	
+		log.info("modify::::>>>::::::::" + rv);
+
 		rv.setTitle(review.getTitle());
 		rv.setContent(review.getContent());
 		rv.setStisf(review.getStisf());
 
+		
+		List<RevPicVO> revPicList =review.getPicList();
+		//pst넘버를 불러와서 기존에 있던 사진들을 모두삭제한다 한다
+		service.removeAllPhoto(review.getPstNum());
+		
+		//지금 가지고있는 사진들만 추려서 사진입력을 시도하느 ㄴ서비스를 만들고 그 서비스단에 넣는다.
+		service.registerPicture(revPicList);
+		
 		if (service.modify(rv)) {
 			rttr.addFlashAttribute("result", "success");
 		}
@@ -191,21 +217,11 @@ public class RevController {
 	public String remove(RevVO review, RedirectAttributes rttr) {
 		log.info("delete" + review.getPstNum());
 		service.remove(review.getPstNum());
+		service.removeAllPhoto(review.getPstNum());
+		
 		return "redirect:/review/list";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 이미지 업로드 테스트 단
 	@GetMapping("/uploadForm")
 	public void uploadForm() {
@@ -223,6 +239,7 @@ public class RevController {
 		String uploadFolder = "c:/upload";
 
 		for (MultipartFile multipartFile : uploadFile) {
+
 			log.info("--------------------------");
 			log.info("name >>" + multipartFile.getOriginalFilename());
 			log.info("size >>" + multipartFile.getSize());
@@ -243,11 +260,11 @@ public class RevController {
 
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile, Model model) {
+	public ResponseEntity<List<RevPicVO>> uploadAjaxPost(MultipartFile[] uploadFile, String bookNum, Model model) {
 
-		List<AttachFileDTO> list = new ArrayList<>();
-		String uploadFolder = "c:/upload";
-
+		List<RevPicVO> picList = new ArrayList<>();
+		log.info("bookNum File : " + bookNum);
+		String uploadFolder = "c:/upload/";
 		String uploadFolderPath = getFolder();
 		// 파일만들기
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
@@ -258,16 +275,14 @@ public class RevController {
 
 		for (MultipartFile multipartFile : uploadFile) {
 
-			AttachFileDTO attachDTO = new AttachFileDTO();
-
+			// AttachFileDTO attachDTO = new AttachFileDTO();
+			RevPicVO pic = new RevPicVO();
 			String uploadFilename = multipartFile.getOriginalFilename();
 
 			// IE has fiel path
 			uploadFilename = uploadFilename.substring(uploadFilename.lastIndexOf("/") + 1);
-			attachDTO.setFileName(uploadFilename);
 
 			UUID uuid = UUID.randomUUID();
-
 			uploadFilename = uuid.toString() + "_" + uploadFilename;
 
 			try {
@@ -275,18 +290,19 @@ public class RevController {
 				File saveFile = new File(uploadPath, uploadFilename);
 				multipartFile.transferTo(saveFile);
 
-				attachDTO.setUuid(uuid.toString());
-				attachDTO.setUploadPath(uploadFolderPath);
+				pic.setPname(uploadFilename);
+				pic.setPurl(uploadFolder + uploadFolderPath+"/");
+				log.info("uploadFilename : " + uploadFilename);
+				log.info("uploadFolder+uploadFolderPath : " + uploadFolder + uploadFolderPath);
 
 				// check image file type
 				if (CheckImageType(saveFile)) {
-					attachDTO.setImage(true);
+					pic.setImage(true);
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFilename));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
 				}
-
-				list.add(attachDTO);
+				picList.add(pic);
 
 			} catch (Exception e) {
 				log.error(e.getMessage());
@@ -294,7 +310,7 @@ public class RevController {
 
 		} // for문 종료
 
-		return new ResponseEntity<List<AttachFileDTO>>(list, HttpStatus.OK);
+		return new ResponseEntity<List<RevPicVO>>(picList, HttpStatus.OK);
 	}
 
 	@GetMapping("/display")
@@ -303,7 +319,7 @@ public class RevController {
 
 		log.info("fileName: " + fileName);
 
-		File file = new File("c:/upload/" + fileName);
+		File file = new File(fileName);
 
 		log.info("file :" + file);
 
@@ -321,31 +337,53 @@ public class RevController {
 		return result;
 	}
 
-	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	
+	@PostMapping("/deleteFile")
 	@ResponseBody
-	public ResponseEntity<Resource> downloadFile(String fileName) {
-		log.info("DownLoad File : " + fileName);
-
-		Resource resource = new FileSystemResource("c:/upload/" + fileName);
-
-		log.info("resource" + resource);
+	public ResponseEntity<String> deleteFile(String fileName, String type){
+		log.info("delete file >"+ fileName);
 		
-		String resourceName = resource.getFilename();
-		
-		HttpHeaders headers = new HttpHeaders();
+		File file;
 		
 		try {
-			headers.add("Content-Disposition", "attachment; filename="+new String(resourceName.getBytes("UTF-8"),"ISO-8859-1"));
+			file = new File(URLDecoder.decode(fileName,"UTF-8"));
+			file.delete();
+			
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-
-		return new ResponseEntity<Resource>(resource,headers,HttpStatus.OK);
+		return new ResponseEntity<String>("삭제되었습니다",HttpStatus.OK);
 	}
-
 	
+	
+	
+//	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+//	@ResponseBody
+//	public ResponseEntity<Resource> downloadFile(String fileName) {
+//		log.info("DownLoad File : " + fileName);
+//	
+//
+//		Resource resource = new FileSystemResource("c:/upload/" + fileName);
+//
+//		log.info("resource" + resource);
+//		
+//		String resourceName = resource.getFilename();
+//		
+//		HttpHeaders headers = new HttpHeaders();
+//		
+//		try {
+//			headers.add("Content-Disposition", "attachment; filename="+new String(resourceName.getBytes("UTF-8"),"ISO-8859-1"));
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//
+//		return new ResponseEntity<Resource>(resource,headers,HttpStatus.OK);
+//	}
+
 	private boolean CheckImageType(File file) {
 		try {
 			String contentType = Files.probeContentType(file.toPath());
@@ -362,7 +400,7 @@ public class RevController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String str = sdf.format(date);
-		return str.replace("-", File.separator);
+		return str.replace("-","/");
 	}
 
 }

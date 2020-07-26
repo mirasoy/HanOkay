@@ -46,12 +46,13 @@
 										<c:out value="${review.content }" />
 									</td>
 								</tr>
+								
 
 							</thead>
 							<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
-
-
 						</table>
+						<div id='revPicture' style='margin-bottom: 40px'>
+						</div>
 						<button class='btn' type="submit">리뷰수정/삭제</button>
 						<a href="/review/list"><button type="button" class='btn'>리스트로 돌아가기</button></a>
 					</form>
@@ -73,6 +74,16 @@
 					}
 					document.getElementById('star').innerHTML = star;
 
+					//리뷰사진뿌리기
+					
+					<c:forEach items="${reviewP }" var="picture">
+
+					$("#revPicture").append
+					("<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${picture.purl }" /><c:out value="${picture.pname }" />'>");
+		
+					</c:forEach>
+				
+					
 				});
 	</script>
 
