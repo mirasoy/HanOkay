@@ -13,64 +13,70 @@
 }
 
 .page-contents{
-	width: calc(75% - 1.875rem);
-}
-
-.page-sidebar{
-	width: 28.5%;
-	position: fixed;
-    top: 13.5%;
- 	right: 0;
-}
-
-.container-search{
-	width: 100%;
-	display: grid;
-	grid-row: 1;
-	grid-column: 1;
+	width: calc(96% - 1.875rem);
 }
 
 .container-navigation{
 	font-size: 20px;
 	width: 100%;
 	display: grid;
-	grid-row: 2;
-	grid-column: 1/3;
+}
+
+.container-search{
+	display: grid;
+	grid-row: 1;
+	grid-column: 1/2;
+}
+
+.container-grid{
+	display: grid;
 }
 
 .container-info{
-	grid-row: 3;
-	grid-column: 1;
 	padding: 20px;
     font-size: 2vh;
 }
 
-.container-review{
+.container-picture{
 	padding: 20px;
+}
+
+.container-option{
+	grid-row: 1;
+	grid-column: 1;
+	padding: 20px;
+	font-size: 2vh;
+}
+
+.container-review{
+	grid-row: 2;
+	grid-column: 1;
+	padding: 20px;
+}
+
+.container-location{
+	grid-row: 1/3;
+	grid-column: 2;
+	padding: 20px;
+	width: 70vh;
 }
 
 .container-roomlist{
 	padding: 20px;
 }
 
-.container-location{
-	padding: 20px;
-}
-
-.container-option{
-	padding: 20px;
-}
-
-.table-rom-td{
+.container-roomlist table{
 	font-size: 2vh;
+	text-align: center;
 }
+
 
 .detail-navigation-list{
 	list-style: none;
 	text-decoration: none;
 	align-content: center;
     text-align: center;
-    background-color: #61dafb;
+    background-color: white;
 	overflow: auto;
 	white-space: nowrap;
 	font-size: 2vh;
@@ -79,9 +85,9 @@
 
 .detail-navigation-list a{
 	display: inline-block;
-	color: white;
+	color: #61dafb;
 	text-align: center;
-	padding: 14px;
+    padding: 1vh 5vh;
 	text-decoration: none;
 }
 
@@ -129,6 +135,17 @@ details{
 	height: 200px;
 }
 
+.rom-opt{
+	width: 30vh;
+}
+
+.rom-select{
+	width: 10vh;
+}
+
+.rom-list{
+	border: 10px solid white;
+}
 
 #pic1{
 	width: 60%;
@@ -158,9 +175,6 @@ details{
 	font-size: 3vh;
 }
 
-.rom{
-}
-
 .page-wrapper table{
 	width: 100%;
 }
@@ -186,9 +200,9 @@ details{
 }
 
 .booking-form {
-	position: relative;
+    font-size: 2vh;
+	width: 100%;
 	background: #fff;
-	width: 95%;
 	margin: 1%;
 	border-radius: 4px;
 	-webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
@@ -365,100 +379,69 @@ details{
 	display: inline-block;
 }
 
-
-#cb label {
-  display: inline-block;
-  color: black;
-  cursor: pointer;
-  position: relative;
-}
-#cb label span {
-  display: inline-block;
-  position: relative;
-  background-color: transparent;
-  width: 25px;
-  height: 25px;
-  transform-origin: center;
-  border: 2px solid black;
-  vertical-align: -6px;
-  margin-right: 10px;
-  transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
-}
-#cb label span:before {
-  content: "";
-  width: 0px;
-  height: 2px;
-  border-radius: 2px;
-  background: black;
-  position: absolute;
-  transform: rotate(45deg);
-  top: 13px;
-  left: 9px;
-  transition: width 50ms ease 50ms;
-  transform-origin: 0% 0%;
-}
-#cb label span:after {
-  content: "";
-  width: 0;
-  height: 2px;
-  border-radius: 2px;
-  background: black;
-  position: absolute;
-  transform: rotate(305deg);
-  top: 16px;
-  left: 10px;
-  transition: width 50ms ease;
-  transform-origin: 0% 0%;
-}
-#cb label:hover span:before {
-  width: 5px;
-  transition: width 100ms ease;
-}
-#cb label:hover span:after {
-  width: 10px;
-  transition: width 150ms ease 100ms;
-}
-
-#cb input[type=checkbox] {
-  display: none;
-}
-#cb input[type=checkbox]:checked + #cb label span {
-  background-color: black;
-  transform: scale(1.25);
-}
-#cb input[type=checkbox]:checked + #cb label span:after {
-  width: 10px;
-  background: #1790b5;
-  transition: width 150ms ease 100ms;
-}
-#cb input[type=checkbox]:checked + #cb label span:before {
-  width: 5px;
-  background: #1790b5;
-  transition: width 150ms ease 100ms;
-}
-#cb input[type=checkbox]:checked + #cb label:hover span {
-  background-color: black;
-  transform: scale(1.25);
-}
-#cb input[type=checkbox]:checked + #cb label:hover span:after {
-  width: 10px;
-  background: #1790b5;
-  transition: width 150ms ease 100ms;
-}
-#cb input[type=checkbox]:checked + #cb label:hover span:before {
-  width: 5px;
-  background: #1790b5;
-  transition: width 150ms ease 100ms;
-}
-
 .copy{
 	color: black;
+}
+
+#select-rom button:hover {
+	background: #61dafb;
+    border-right: 4px solid #56565654;
+    border-bottom: 7px solid #56565654;
+    box-shadow: inset 0 0 10px 0px #c7bebe69;
+}
+
+#select-rom button {
+    margin: 0.25em 0;
+    display: block;
+    outline: none;
+    background: #c7c7c7;
+    border: none;
+    padding: 1.1em;
+    width: 10vh;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-right: 4px solid #9c9c9c;
+    border-bottom: 7px solid #d0d0d0;
+    font-size: 1.8vh;
+}
+
+#rom button, button:hover, button:active {
+	background: #61dafb;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dadada), to(#f3f3f3));
+	border-top: 1px solid #c5c5c5;
+	border-right: 1px solid #cecece;
+	border-bottom: 1px solid #d9d9d9;
+	border-left: 1px solid #cecece;
+	color: #8f8f8f;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	cursor: not-allowed;
+	text-shadow: 0 -1px 1px #ebebeb;
+	-webkit-background-clip: padding-box;
+}
+
+.button_scrolltop {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    font-size: 40px;
+    text-align: center;
+    color: #c6c6c6;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
 }
 
 </style>
 
 <div class = "page-wrapper">
-	<div class = "page-contnets" style="width: calc(75% - 1.875rem);">
+	<div class = "page-contnets" style="width: calc(96% - 1.875rem);">
 	
 		<!-- 검색 조건 -->
 		<div class = "container-search booking-form" id="datepicker">
@@ -496,16 +479,14 @@ details{
 		<div class = "detail-navigation-list container-navigation booking-form">
 			<div class = "detail-navigation-list">
 				<a href="#info">INFO</a>
-				<a href="#picture">PICTURE</a>
 				<a href="#review">REVIEW</a>
-				<a href="#option">OPTION</a>
-				<a href="#roomList">ROOM</a>
 				<a href="#location">LOCATION</a>
+				<a href="#roomlist">ROOM</a>
 			</div>
 		</div>
-		
+
 		<!-- 숙소정보-->
-		<div class = "container-info booking-form" name="info">
+		<div class = "container-info booking-form" id="info">
 			<span class="title"><c:out value="${acm.acmName}" /></span>
 			<span id="stisf">&nbsp;</span>
 			<span id="stisf-num">(<c:out value="${star}" />)</span>
@@ -517,7 +498,7 @@ details{
 		</div>
 		
 		<!-- 숙소사진 -->
-		<div class = "container-picture booking-form" name="picture">
+		<div class = "container-picture booking-form" id="picture">
 				<table class="pic" style="border-color: red">
 					<tr >
 						<td id="pic1" rowspan="3" ></td>				
@@ -532,8 +513,21 @@ details{
 				</table>
 		</div>
 		
+		<div class = "container-grid  booking-form">
+		<!-- 편의시설 -->
+		<div class = "container-option" id="option">
+			<label class="sub-title">OPTION</label>
+			<div id=acmOpt>&nbsp;</div>
+		</div>		
+
+		<!-- 숙소위치 -->
+		<div class = "container-location booking-for" id="location">
+			<label class="sub-title">LOCATION</label>
+			<div id="map"></div>
+		</div>	
+				
 		<!-- 숙소리뷰 -->
-		<div class = "container-review booking-form" name="review">
+		<div class = "container-review" id="review">
 			<label class="sub-title">REVIEW</label>
 			<table>
 				<c:forEach items="${rev}" var="rev" begin="0" end="4">
@@ -551,7 +545,7 @@ details{
 		  						<p><c:out value="${rev.revContent}" /></p>
 		  					</details>
 						</td>
-						<td style="vertical-align: top;"><fmt:formatDate value="${rev.revPregdate}" pattern="yyyy-MM"/><fmt:formatDate value="${rev.revPupdatedate}" pattern="(yyyy-MM)"/></td>
+						<td style="vertical-align: top;"><fmt:formatDate value="${rev.revPregdate}" pattern="yyyy-MM"/></td>
 					</tr>
 				</c:forEach>
 				<c:if test="${empty rev}">
@@ -559,23 +553,16 @@ details{
 				</c:if>
 			</table>
 		</div>		
-		
-		<!-- 편의시설 -->
-		<div class = "container-option booking-form" name="option">
-			<label class="sub-title">OPTION</label>
-			<div id=acmOpt>&nbsp;</div>
-		</div>		
+		</div>
 		
 		<!-- 객실리스트 -->
-		<div class = "container-roomlist booking-form" name="roomlist">
+		<div class = "container-roomlist booking-form" id="roomlist">
 			<label class="sub-title">ROOM</label></br>
 				<table>
 					<c:forEach items="${rom}" var="rom">
-						<tr>
-							<td colspan ="5"><span class="rom-title"><c:out value="${rom.romName}" /></span></td>
-						</tr>
-						<tr>
-							<td><span class="rom-pic"><img alt='객실사진' src='/display?fileName=<c:out value="${rom.romPurl}" /><c:out value="${rom.romPname}" />' /></span>
+						<tr class= "rom-list" id="${rom.romNum}">
+							<td><span class="rom-title"><c:out value="${rom.romName}" /></span></td>
+							<td class="rom-pic"><img alt='객실사진' src='/display?fileName=<c:out value="${rom.romPurl}" /><c:out value="${rom.romPname}" />' />
 							</td>
 							
 							<td class="table-rom-td"><span class="rom-type"><c:out value="${rom.romType}" /></span>&nbsp;
@@ -591,62 +578,29 @@ details{
 								</span>
 							</td>
 							
-							<td class="table-rom-td"><span class="rom-opt"><c:out value="${rom.romOptcode}" /></span>
+							<td class="table-rom-td rom-opt"><c:out value="${rom.romOptcode}" />
 							</td>
 							
-							<td class="table-rom-td"><span class="rom-price"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/></span>
+							<td class="table-rom-td rom-price"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/>
 							</td>
 							
-							<td class="table-rom-td">
-								<span id="cb">
-							        <input type="checkbox" id="check" name="check" value="" />
-							        <label for="check">
-							        <span><!-- 필요한 공간 --></span>예약하기
+							<td class="table-rom-td rom-select">
+								<span id="select-rom">
+						        	<button onclick = 'selectRoom("${rom.romNum}")'>선택</button>
 								</span>
 							</td>
 						</tr>
+						<tr><td></br></td></tr>
 					</c:forEach>
 				</table>
 			<c:if test="${empty rom}">
 				예약 가능한 객실이 없습니다<i class="fa fa-meh-o" aria-hidden="true"></i></br>
 			</c:if>		
 		</div>		
-		
-		<!-- 숙소위치 -->
-		<div class = "container-location booking-form" name="location">
-			<label class="sub-title">LOCATION</label>
-			<div id="map"></div>
-		</div>		
-		
+	
 	</div> <!-- end of contents -->
+	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
 
-
-	<div class = "page-sidebar ">
-	<!-- 결제정보 -->
-		<div class = "container-payment" id="payment">
-			<div class="booking-form">
-				<i class="fa fa-star" aria-hidden=""></i></br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-				결제정보</br>
-			</div>
-		</div>
-	</div> <!-- end of navi -->
 </div><!-- end of page -->
 
 	<script>
@@ -666,6 +620,20 @@ details{
 			initMap(); 
 			// 숙소 옵션
 			getAcmOpt(); 
+		}
+		
+		// 객실 선택
+		function selectRoom(romNum) {
+			let room = document.getElementById(romNum);
+			let list = document.getElementsByClassName("rom-list");
+			
+			for(let i = 0; i< list.length; i++){
+				list[i].style.border='10px solid white';
+				list[i].style.fontWeight='';
+			}
+			
+			room.style.border='10px solid #61dafb';
+			room.style.fontWeight='bold';
 		}
 		 
 		// 옵션 코드(10진수 옵션코드를 16자리 2진수로 변환한다)
@@ -713,28 +681,16 @@ details{
 			let star = "${star}";
 			let stisf = document.getElementById("stisf");
 			let stisfNum = document.getElementById("stisf-num");
-			if(star == 5.0){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
-			}else if(star >= 4.5){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half" aria-hidden="true"></i>';
-			}else if(star >= 4.0){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
-			}else if(star >= 3.5){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half" aria-hidden="true"></i>';
-			}else if(star >= 3.0){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
-			}else if(star >= 2.5){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half" aria-hidden="true"></i>';
-			}else if(star >= 2.0){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
-			}else if(star >= 1.5){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half" aria-hidden="true"></i>';
-			}else if(star >= 1.0){
-				stisf.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i>';
-			}else if(star >= 0.5){
-				stisf.innerHTML = '<i class="fa fa-star-half" aria-hidden="true"></i>';
-			}else{
+			
+			for(let i = 0; i < Math.floor(star); i++){
+				stisf.innerHTML += '<i class="fa fa-star" aria-hidden="true"></i>';
 			}
+			
+			let half = star-Math.floor(star) < 0.5 ? 0 : 0.5; 
+			for(let i = 0; i < half; i++){
+				stisf.innerHTML += '<i class="fa fa-star-half" aria-hidden="true"></i>';
+			}
+			
 			document.getElementById("stisf").style.color="#e3cf7a";
 			document.getElementById("stisf").style.fontSize="50px";
 		}
@@ -807,12 +763,12 @@ details{
 		
 		
 		// 구글맵 api
+		var mapLocation = {
+			lat : parseFloat("<c:out value="${acm.latitude}" />"),
+			lng : parseFloat("<c:out value="${acm.longitude}" />")
+		};
 		function initMap() { 
 			var acmNum = "<c:out value="${acm.acmNum}" />";
-			var mapLocation = {
-				lat : parseFloat("<c:out value="${acm.latitude}" />"),
-				lng : parseFloat("<c:out value="${acm.longitude}" />")
-			};
 			var mapOptions = {
 				center : mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
 				zoom : 16, 
@@ -823,6 +779,7 @@ details{
 			
 			var size_x = 50; // 마커로 사용할 이미지의 가로 크기
 			var size_y = 50; // 마커로 사용할 이미지의 세로 크기
+			
 			// 마커로 사용할 이미지 주소
 			var image = new google.maps.MarkerImage(
 					'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
@@ -830,10 +787,9 @@ details{
 					'',
 					'',
 					new google.maps.Size(size_x, size_y));
-			var latLng = {lat: parseFloat(${acm.latitude }), lng: parseFloat(${acm.longitude})};
 			var marker;
 			marker = new google.maps.Marker({
-				position : latLng, // 마커가 위치할 위도와 경도(변수)
+				position : mapLocation, // 마커가 위치할 위도와 경도(변수)
 				map : map,
 				icon : image, // 마커로 사용할 이미지(변수)
 				title : "${acm.acmName}" // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
@@ -841,7 +797,7 @@ details{
 			
 			var content = "${acm.acmName}" ; // 말풍선 안에 들어갈 내용
 			
-			// 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+			// 마커를 클릭했을 때의 이벤트
 			var infowindow = new google.maps.InfoWindow({
 				content : content
 			});
