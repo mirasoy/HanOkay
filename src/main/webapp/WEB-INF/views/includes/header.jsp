@@ -103,9 +103,12 @@ if (user != null) {
                   var priv;
                   var userStatusCode;
                 //세션에 유저가 없으면
-               if (<%=userFstName.equals("") %>) {
-                     // $("#loginout").append("<a href='/user/login'>로그인</a>");
+                $('#myMenuIcon').on("click", function(){
+                	
+               if (<%=user == null %>) {
+                    
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
+                     $('#myMenuIcon').removeAttr("data-toggle");
                      $('#notification').empty();
                      //회원 가입하라고 메세지 주기
                      //드랍 다운 상자를 responsive로 변경하면 좋겠다
@@ -113,7 +116,6 @@ if (user != null) {
                            .append(
                                  "<li><a href='#'>ana의 회원이 되셔서 <br>더 많은 혜택을 누려보세요!</a></li>");
                      //내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
-                     $('#myMenuIcon').removeAttr("data-toggle");
                      $('#myMenuIcon').attr("href", "/user/login");
                      
 
@@ -137,6 +139,7 @@ if (user != null) {
                            "<a href='/user/logout'>로그아웃</a>")
                            
                   };    
+                });
                });
 </script>
 
