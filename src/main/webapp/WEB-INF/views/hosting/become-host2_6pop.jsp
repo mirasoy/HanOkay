@@ -87,7 +87,7 @@
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
    <input type="hidden" id="ACM_NUM" name="ACM_NUM" value="" readonly="readonly">
    <!-- 숙소 방 추가 모달로 띄우기-->
-   <form action="/hosting/become-host2_6" method="get">
+   <form action="/hosting/become-host2_6" method="get" id='roomForm'>
 <br>
 		<div class="pull-right">
 		  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">객실 등록</button><!-- ajax처리안함 -->
@@ -169,7 +169,7 @@
     
     
  	<div class="uploadDiv" style="display:inline-block; background-color:orange;">
-          <input type="file" name="uploadFile" multiple="multiple">
+          <input type="file" name="uploadFile">
        <div class="uploadResult">
           <ul>
 
@@ -223,6 +223,10 @@
 			flag = false;
 		};//객실크기
 		
+		if($(".uploadResult ul >li").length < 1){
+			alert('사진을 등록해주세요.');
+			flag = false;
+		}//사진유무
 		
 		
 		return flag;
@@ -255,6 +259,8 @@
 
 	function romRegit() {
 		
+		regiPhoto();
+				
 		var acmNum = $("#ACM_NUM").val();//숙소번호
 		var romName = $("#ROM_NAME").val();//객실이름
 		var romCapa = $("#ROM_CAPA").val();//객실최대인원수
@@ -263,12 +269,14 @@
 		var romSize = $("#ROM_SIZE").val();//객실크기
 		var romPrice = $("#ROM_PRICE").val();//객실가격
 		var romType = $("#ROM_TYPE").val();//룸타입
+		var romPname =$("input[name='romPname']").val();//사진이름
+		var romPurl = $("input[name='romPurl']").val();//사진이름
 		
 		//name/value 형태로 담는다
 		var allData = {
 			"acmNum": acmNum, "romType": romType, "romName": romName,
 			"romCapa": romCapa, "bedType": bedType, "bedCnt": bedCnt, "romSize": romSize,
-			"romPrice": romPrice, "romOptcode": romOptcode
+			"romPrice": romPrice, "romOptcode": romOptcode, "romPurl":romPurl, "romPname":romPname
 		}
 		$.ajax({
 			url: 'become-host2_6pop',
@@ -281,9 +289,153 @@
 			}
 		});
 	}
+	
+	
+	
+	
 	//숫자만 입력가능하게만드는 부분
 	$("input:text[numberOnly]").on("keyup", function () {
 		$(this).val($(this).val().replace(/[^0-9]/g, ""));
 	});
+	
+	
+	
+	
+	
+
+	//사진업로드 관련 부분
+
+	
+	
+	
+	//사진 배열로 정리해서 보내는 함수
+	function regiPhoto() {
+		let formObj = $("#roomForm");
+		var str2 = "";
+
+		$(".uploadResult ul li").each(function (i, obj) {
+
+			var jobj = $(obj);
+			console.dir(jobj);
+
+			str2 += "<input type = 'hidden' name = 'romPname' value='" + jobj.data("filename") + "'>";
+			str2 += "<input type = 'hidden' name = 'romPurl' value='" + jobj.data("path") + "'>";
+		});
+	
+		alert(str2);
+		formObj.append(str2);
+	
+
+	}
+	
+	
+	
+	
+	
+	// 파일유효성체크
+	let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)$")
+	let maxSize = 5242880;
+	function checkExtension(fileName, fileSize) {
+		if (fileSize > maxSize) {
+			alert("파일사이즈초과");
+			return false;
+		}
+		if (!(regex.test(fileName))) {
+			alert("그림파일만 가능합니다.")
+			return false;
+		}
+		return true;
+	}
+
+
+	//파일 미리보기 관련()
+	var uploadResult = $(".uploadResult ul");
+	function showUploadedFile(uplodResultArr) {
+		var str = "";
+		$(uplodResultArr).each(function (i, obj) {
+			if (!obj.image) {
+				//이거는 이미지 외 파일도 받을때
+				//str += "<li><img src='../resources/img/logo.png'>" + obj.fileName + "</li>"
+				alert("그림파일만 가능합니다.")
+				return false;
+			} else {
+
+				var fileCallPath = encodeURIComponent(obj.purl + "/" + obj.pname);
+				var originPath = obj.purl + "/" + obj.pname;
+
+				originPath = originPath.replace(new RegExp(/\\/g), "/");
+
+				str += "<li data-path='" + obj.purl + "'";
+				str += "data-filename='" + obj.pname + "'";
+				str += "data-type='" + obj.image + "'><div>";
+				str += "<img src = '/display?fileName=" + fileCallPath + "'>";
+				str += "<button type='button' data-file=\'" + fileCallPath + "\' "
+				str += "data-type = 'image' class ='btn'><i class='fa fa-times'></i></button><br>"
+				str += "</div></li>";
+			}
+		});
+		uploadResult.append(str);
+	}
+
+	//파일 삭제관련
+	$(".uploadResult").on("click", "button", function (e) {
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		var targetLi = $(this).closest("li");
+
+		$.ajax({
+			url: '/deleteFile',
+			data: { fileName: targetFile, type: type },
+			dataType: 'text',
+			type: 'POST',
+			success: function (result) {
+				alert("삭제되었습니다.");
+				targetLi.remove();
+			}
+		});
+	})
+
+	//파일 업로드
+	var cloneObj = $(".uploadDiv").clone();
+
+	$("input[type='file']").change(function (e) {
+		var formData = new FormData;
+		
+		var inputFile = $("input[name='uploadFile']");
+		var files = inputFile[0].files;
+
+		console.log(files);
+
+		// 총 갯수 구하기
+		var total = $(".uploadResult ul >li").length+files.length
+		if(total>1){
+			alert("1장의 사진만 등록이 가능합니다.")
+			return false;
+		}
+		
+		for (let i = 0; i < files.length; i++) {
+			if (!checkExtension(files[i].name, files[i].size)) {
+				return false;
+			}
+
+			formData.append("uploadFile", files[i]);
+		}
+
+		$.ajax({
+			url: '/review/uploadAjaxAction',
+			processData: false,
+			contentType: false,
+			data: formData,
+			type: 'POST',
+			dataType: 'json',
+			success: function (result) {
+				console.log(result);
+				showUploadedFile(result);
+			}
+		});
+	});
+	
+	
+	
 </script>
 </html></html>

@@ -1,6 +1,7 @@
 package com.ana.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -36,5 +37,7 @@ public class AcmVO {
 	private Integer acmOptcode;
 	
 	private RomVO rom;
+	
+	private List<PicVO> picList;
 
 }

@@ -32,6 +32,15 @@
 		<result column="acm_Optcode" property="acmOptcode" />
 		
 	</resultMap>
+	
+	
+	<resultMap id="AcmPivVo" type="com.ana.domain.PicVO">
+		<result column="ACM_NUM" property="num" />
+		<result column="ACM_PURL" property="purl" />
+		<result column="ACM_PNAME" property="ptitle" />
+		<result column="ACM_PDESC" property="picDesc" />
+	
+	</resultMap>
 
 
 
@@ -150,6 +159,12 @@
 		 where U.BIZ_REGNUM= A.BIZ_REGNUM and A.ACM_ACTI=#{acmActi} order by A.ACM_REGDATE
 	</select>
 
+
+	<!-- 사진입력 -->
+	<insert id="insertPhoto">
+	INSERT INTO TACM_PIC(ACM_NUM, ACM_PURL, ACM_PNAME, ACM_PDESC) VALUES
+	(#{num},#{purl},#{ptitle},#{picDesc})
+	</insert>
 
 
 </mapper>
