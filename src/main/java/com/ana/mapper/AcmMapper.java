@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
+import com.ana.domain.PicVO;
 
 public interface AcmMapper {
 	

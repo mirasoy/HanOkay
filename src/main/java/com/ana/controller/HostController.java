@@ -212,10 +212,13 @@ public class HostController {
 		model.addAttribute("acmNum", vo.getAcmNum().trim());
 		
 
+		
+		
 		System.out.println(getUser(session).getUserStatusCode());//
 		
 		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
 		System.out.println(user);
+		System.out.println();
 		
 		session.setAttribute("user", user);
 		

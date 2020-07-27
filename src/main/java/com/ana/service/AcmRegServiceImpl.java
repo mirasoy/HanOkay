@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.PicVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserHisVO;
 import com.ana.domain.UserVO;
@@ -33,9 +34,7 @@ public class AcmRegServiceImpl implements AcmRegService{
 	@Transactional
 	@Override
 	public void newAcmReg(AcmVO vo,String userNum) {//회원당 1.숙소추가가 되면서 2.회원상태코드와 회원권한 변경 3.회원히스토리정보가 추가  
-		//우선 임의로 넣어줍니다
-		vo.setAcmPurl("C:\\upload\\acm\\");
-		vo.setAcmPname("amc_p_1.jpg");
+		
 		System.out.println("서비스단의 "+vo.toString());
 		System.out.println(vo.getLatitude()+","+vo.getLongitude());
 		amapper.newAcmReg(vo);//acmNum 반환값으로 안가지고나와도 완성되어있다! 
@@ -54,7 +53,16 @@ public class AcmRegServiceImpl implements AcmRegService{
 		hmapper.becomeHost(h);//1536
 		
 		
-		
+		//사진 존재시 사진 넣는 부분
+		if(vo.getPicList()!=null) {
+			for(PicVO picVO : vo.getPicList())
+			{	picVO.setNum(vo.getAcmNum());
+				if(picVO.getPicDesc()==null) {
+					picVO.setPicDesc(vo.getAcmName()+"의 사진");
+				}
+				amapper.insertPhoto(picVO);
+			}
+		}
 		
 	}
 
