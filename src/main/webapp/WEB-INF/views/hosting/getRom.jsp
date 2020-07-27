@@ -10,35 +10,38 @@
 	.exp{
 		font-size:8px;
 	}
+	.container-option{
+		padding: 20px;
+	}
 </style>
 
 <%@include file="../includes/hostheader.jsp"%>
 <!-- nav-sidebar -->
 <nav>
 <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                   		<li>
-                           <a></a> 
-                        </li>
-                        <li>
-                            <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+       		<li>
+               <a></a> 
+            </li>
+            <li>
+                <a><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
+            </li>
+            <li>
+                <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+            </li>
+            <li>
+                <a class="active"><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+            </li>
+            <li>
+                <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
             <!-- /.navbar-static-side -->
-        </nav>
+</nav>
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;">
 	<br>			
@@ -46,7 +49,7 @@
   		  
 	<div class="row">
   <div class="col-lg-12">
-    <h4><c:out value="${thisrom.romName }"/>의  정보</h4>
+    <h4>'<c:out value="${thisrom.romName }"/>'의  정보</h4>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -55,19 +58,14 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
-
-      <div class="panel-heading">객실 상세보기</div>
+	<input type="hidden" name='acmNum' id='acmNum' value='<c:out value="${thisrom.acmNum }"/>' readonly="readonly">
+	<input type="hidden" name='romNum' id='romNum' value='<c:out value="${thisrom.romNum }"/>' readonly="readonly">
+   
+      <div class="panel-heading">객실 상세보기
+      <label class="pull-right"><c:out value="${thisrom.acmNum }"/><c:out value="${thisrom.romNum }"/></label>
+      </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-		<div class="form-group">
-          <label>소속숙소번호</label> <input class="form-control" name='acmNum' id='acmNum'
-            value='<c:out value="${thisrom.acmNum }"/>' readonly="readonly">
-        </div>	
-        <div class="form-group">
-          <label>객실번호</label> <input class="form-control" name='romNum' id='romNum'
-            value='<c:out value="${thisrom.romNum }"/>' readonly="readonly">
-        </div>
-
         <div class="form-group">
           <label>객실이름</label> <input class="form-control" name='romName'
             value='<c:out value="${thisrom.romName }"/>' readonly="readonly">
@@ -100,14 +98,11 @@
           <label>객실 사진</label> <input class="form-control" name='romPurl'
             value='<c:out value="${thisrom.romPurl }"/>' readonly="readonly">
         </div>
-		<div class="form-group">
-          <label>객실 활성화</label> <input class="form-control" name='romActi'
-            value='<c:out value="${thisrom.romActi }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>객실 상태</label> <input class="form-control" name='romStatus'
-            value='<c:out value="${thisrom.romStatus }"/>' readonly="readonly">
-        </div>
+		<!-- 편의시설 -->
+		<div class = "container-option booking-form" name="romOptcode">
+			<label>객실 옵션정보(여기 icon 뿌리자)</label>
+			<div id=romOpt>&nbsp;</div>
+		</div>	
 		<div class="form-group">
           <label>객실 옵션정보</label> <input class="form-control" name='romOptcode'
             value='<c:out value="${thisrom.romOptcode }"/>' readonly="readonly">
@@ -121,20 +116,55 @@
             value='<c:out value="${thisrom.romUpdatedate }"/>' readonly="readonly">
         </div>
 
-
-		<button data-oper='modify' class="btn btn-default">수정하기</button>
-		<button data-oper='remove' class="btn btn-danger">삭제하기</button>
-		<button data-oper='list' class="btn btn-info" >뒤로가기</button>
-			
+		<div class="pull-right">
+			<button data-oper='modify' class="btn btn-default">수정하기</button>
+			<button data-oper='remove' class="btn btn-danger">삭제하기</button>
+			<button data-oper='list' class="btn btn-info" >뒤로가기</button>
+		</div>	
 	</div>
+</div></div></div></div>
 
-
-		<!-- 빈 폼 -->
-		<form id="actionForm">
-		</form>
+<!-- 빈 폼 -->
+<form id="actionForm">
+</form>
 				
 
 <script type="text/javascript">
+	//Option출력
+	window.onload=function(){
+		//getRomOpt();
+	}
+	
+	let option = pad(dec2bin("${thisrom.romOptcode }"));
+	function dec2bin(codeNum){
+		return (codeNum >>> 0).toString(2); 
+	}
+	function pad(code) {
+		return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
+	}
+	
+	// 숙소 옵션
+	/*function getAcmOpt() {
+		var iconArr = new Array(); 
+		var codeArr = new Array(); 
+		var nameArr = new Array(); 
+		let j = 0;
+		<c:forEach items="${acmCode}" var="acmCode">
+			iconArr[j] = '<c:out value="${acmCode.codeIcon}" />';
+			codeArr[j] = 'acm' + '<c:out value="${acmCode.codeFull}" />';
+			nameArr[j] = '<c:out value="${acmCode.codeCont}" />';
+			j++;
+		</c:forEach>
+		
+		for(let k=0; k<option.length; k++){
+			if(option.charAt(k) == 1){
+				document.getElementById("romOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+			}
+		}
+	}*/
+	
+
+
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
 		

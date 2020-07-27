@@ -3,8 +3,7 @@
 
 
 <%@include file="../includes/becomehostheader.jsp"%>
-
-
+                  
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <!-- 사업자 등록도 받을것 -->
@@ -26,6 +25,7 @@
                             <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                     </ul>
+                    
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
@@ -33,11 +33,13 @@
         </nav> 
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;">
-		
+		<br>
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
+			<div class="pull-right">
+			  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">다음으로</button><!-- ajax처리안함 -->
+			  </div>
 
-
-			<div class="acm" id="acm"><br><h6>*항목은 필수입력값입니다</h6>	  
+			<div class="acm" id="acm">
 				<h4>게스트가 묵게 될 숙소의 유형을 골라주세요!</h4>
 				<input type="radio" id="acmType_house" name="acmTypes" value="H"><label for="rentType1">집 천제</label> 
 				<input type="radio" id="acmType_priv" name="acmTypes" value="P"><label for="rentType2">객실별 대여</label>
@@ -45,7 +47,7 @@
 		<form id="actionForm" action="/hosting/become-host" method="post">
 			<br>	
 			  <h4>숙소 이름과 정보를 입력합니다</h4>
-			   <input type="text" id="acmName" name="acmName" placeholder="숙소의 이름"><br><br>
+			   <input class="form-control"  style="width:200px;display:inline-block;" id="acmName" name="acmName" placeholder="숙소의 이름"><br><br>
 			   <!-- 구글 API추가해야함 /우선 다음 API 사용하겠음-->
 			   
 			   <!-- <input type="text" id="acmCity" name="acmCity" placeholder="숙소 시도"><br>
@@ -59,23 +61,22 @@
 				<input type="hidden" id="sample6_extraAddress" value="sth" placeholder="참고항목">
 
 				
-				<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기">&nbsp;&nbsp;
+				<div class="form-group">
+				<input class="form-control" type="button" class="form-control" style="width:100px;inline-block;" onclick="sample6_execDaumPostcode()" value="주소 찾기">
 				<!-- 주소 중복체크으!!!! -->
-				<span style="color: black;" id="msg"><c:out value="${msg}" /></span>
-				<br>				
+				<span style="color: black;" id="msg"><c:out value="${msg}" /></span><br>
 				
-				
-				<input type="text" id="acmCity" name="acmCity" size="10" placeholder="숙소시도" readonly="readonly">
-				<input type="text" id="acmDistr" name="acmDistr" size="20" placeholder="숙소구군" readonly="readonly"><br>
-				<input type="text" id="acmDetailaddr" name="acmDetailaddr" size="20" placeholder="숙소상세"  onchange="jungbok()" readonly="readonly"><br>
-				
+				<input class="form-control"  style="width:130px;display:inline-block;" id="acmCity" name="acmCity" size="10" placeholder="숙소시도" readonly="readonly">
+				<input class="form-control"  style="width:130px;display:inline-block;" id="acmDistr" name="acmDistr" size="20" placeholder="숙소구군" readonly="readonly"><br>
+				<input class="form-control"  style="width:265px;display:inline-block;" id="acmDetailaddr" name="acmDetailaddr" size="20" placeholder="숙소상세"  onchange="jungbok()" readonly="readonly"><br>
+				</div>
 				<span id="guide" style="color:#999;display:none"></span>
 
-			   <input type="text" id="repPhone" name="repPhone" placeholder="숙소 대표번호(-없이)" numberOnly><br>
-			   <input type="text" id="subPhone" name="subPhone" value="" placeholder="보조연락처 및 개인번호" numberOnly><br><br>
+			   <input class="form-control"  style="width:200px;display:inline-block;" id="repPhone" name="repPhone" placeholder="숙소 대표번호(-없이)" numberOnly><br>
+			   <input class="form-control"  style="width:200px;display:inline-block;" id="subPhone" name="subPhone" value="" placeholder="보조연락처 및 개인번호" numberOnly><br><br>
 			   
-			   <input type="text" id="acmEmail" name="acmEmail" placeholder="숙소  이메일 주소"><br>
-			   <input type="text" id="acmFax" name="acmFax" value="" placeholder="숙소  팩스번호(필수아님)" numberOnly><br><br>
+			   <input class="form-control"  style="width:200px;display:inline-block;"" id="acmEmail" name="acmEmail" placeholder="숙소  이메일 주소"><br>
+			   <input class="form-control"  style="width:200px;display:inline-block;" id="acmFax" name="acmFax" value="" placeholder="숙소  팩스번호(필수아님)" numberOnly><br><br>
 
 				<!-- 위도경도 임시로 넣어줌 ********* 위도경도 바꾸는 api 넣어야함
 				<input type="hidden" id="latitude" name="latitude" value="36.7307216">
@@ -85,13 +86,13 @@
 			 
 				  <br><br>
 				  <h4>한:오케이에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4>
-				  <input type="text" id="bizRegnum" name="bizRegnum" placeholder="사업자등록번호" numberOnly><br><br>
+				  <input class="form-control"  style="width:200px;display:inline-block;" id="bizRegnum" name="bizRegnum" placeholder="사업자등록번호" numberOnly><br><br>
 				  <!-- 우선 숨겨두겠음 -->
 				  <!-- <input type="hidden" id="bizRegpurl" name="bizRegpurl" placeholder="사업자등록증"><br>
 				   -->
 				  <h4>숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
 				  <label for="checkinTime">체크인시간</label>
-					<select name="checkinTime" id="checkinTime">
+					<select class="form-control"  style="width:150px;display:inline-block;" name="checkinTime" id="checkinTime">
 					  <option value="PM12">점심12시이후</option>
 					  <option value="PM01">1시이후</option>
 					  <option value="PM02">2시이후</option>
@@ -106,7 +107,7 @@
 					  <option value="anytime">상관없음</option>
 					</select>
 				  <label for="checkouTime">체크아웃시간</label>
-					<select name="checkoutTime" id="checkoutTime">
+					<select class="form-control"  style="width:150px;display:inline-block;" name="checkoutTime" id="checkoutTime">
 					  <option value="PM09">오전9시이전</option>
 					  <option value="PM10">오전10시이전</option>
 					  <option value="PM11">오전11시이전</option>
@@ -119,7 +120,7 @@
 					</select>
 				 </div> 
 			  <br><br>
-			  <button type="button" onclick="if(readyForreg()){romRegit()}">다음으로</button><!-- ajax처리안함 -->
+			  
 			</form>
 		</div>
 

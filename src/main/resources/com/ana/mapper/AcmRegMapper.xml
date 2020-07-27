@@ -36,9 +36,9 @@
 
 	<!-- 호스트단에서 숙소등록 -->
 	<!-- 한회원이 운영하는 숙소 다 가져오기 -->
-	<select id="getListHosts" resultMap="AcmVOResult">
+	<select id="getListAcms" resultMap="AcmVOResult">
 		<![CDATA[
-		select * from TACM where biz_Regnum=#{bizRegnum}
+			select * from TACM where biz_Regnum=#{bizRegnum} and acm_acti=#{acmActi}
 		]]>
 	</select>
 	

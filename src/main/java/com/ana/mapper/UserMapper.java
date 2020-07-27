@@ -53,6 +53,9 @@ public interface UserMapper {
 	
 	public UserVO isHost(String userNum);
 	
+	//세션새거
+	public UserVO letsNewSession(String userNum);
+	
 	//////////////////////////////어드민단 //////////////////////////////////////
 	
 	public List<UserVO> getPendingHost(String userStatusCode);

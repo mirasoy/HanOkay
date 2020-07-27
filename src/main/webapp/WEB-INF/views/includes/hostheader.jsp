@@ -90,7 +90,7 @@
             <!-- /.navbar-header -->
 
 			<!-- 왼쪽 nav -->
-            <ul class="nav navbar-top-links navbar-left">
+            <ul class="nav navbar-top-links navbar-left" id="hostonly">
 				<li class="nav-menu">
 					<a href="/hosting/reserv">예약</a><!-- 예약관리 -->
 				</li>
@@ -163,10 +163,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
    $(document).ready(function() {
+	  var user='<%=user%>';
+	   if(user==null){
+		   alert("회원만 접근할 수 있습니다");
+		   location.href="/acm/list";
+	   }
 	  var priv ='<%=userPriv%>';
       var userStatusCode='<%=userStatusCode%>';        
                
-   
+      if(userStatusCode=="ACTIVE"){
+    	  alert("숙소등록을 한 회원만 접근할 수 있습니다");
+    	  location.href="/acm/list";
+
+      } else if(userStatusCode=="HO_PENDING"){
+   		$("#hostonly").css("display","none"); 
+	  }
    
    
    });

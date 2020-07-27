@@ -128,6 +128,7 @@ public class UserServiceImpl implements UserService{
 		return mapper.getUserById(email);
 	}
 	
+  
 	//인증코드를 확인하는 메서드
 	@Override
 	public boolean matchAuthCode(@Param("userAuthCode") String authCode, @Param("userEmail") String email) {
@@ -140,6 +141,7 @@ public class UserServiceImpl implements UserService{
 		 return mapper.grantActive(email)==1; 
 	 }
 
+
 	 //user의 인증코드를 업데이트 하게하는 메서드
 	@Override
 	public boolean updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode")String authCode) {
@@ -147,4 +149,14 @@ public class UserServiceImpl implements UserService{
 	
 	
 	}
+  
+  	//////////////////////////////////////////////////////////////
+
+	@Override
+	public UserVO letsNewSession(String userNum) {
+		
+		return mapper.letsNewSession(userNum);
+	}
+  
+  
 }

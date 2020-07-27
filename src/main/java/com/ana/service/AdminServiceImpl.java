@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ana.domain.AcmVO;
 import com.ana.domain.UserVO;
 import com.ana.mapper.UserMapper;
 
@@ -38,11 +39,15 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public boolean moditoHost(String userNum) {
-		
+		//회원 호스트 업그레이드
 		UserVO vo = new UserVO();
 		vo.setUserNum(userNum);
 		vo.setUserPriv("HOST");
 		vo.setUserStatusCode("HO_ACTIVE");
+		
+		//숙소 상태도 pending-> active/open 으로 update
+		//AcmVO acm = new AcmVO();
+		
 		
 		return umapper.moditoHost(vo)==1;
 	}

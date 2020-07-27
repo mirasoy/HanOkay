@@ -128,7 +128,7 @@ if (user != null) {
                      }else if(priv=="GUEST"){
                     	 if(userStatusCode=="ACTIVE")
                         $('#mode').append("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
-                    	 else $('#mode').append("<a style='cursor: pointer'>호스트 등록중</a>");
+                    	 else $('#mode').append("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");
                     	  
                      }
 

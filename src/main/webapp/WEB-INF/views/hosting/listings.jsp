@@ -1,20 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/hostheader.jsp"%>
 
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>			
   <!-- 숙소 방 추가 모달로 띄우기-->
-  <h4><c:out value="${userFstname}"/> 호스트님의 숙소 관리</h4><input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
-  <h3 align="left">총 <c:out value="${size}"/>개의 숙소</h3>
-			
-			  
+  <h3 align="left">총 <c:out value="${size}"/>개의 숙소</h3><br>
 		
-	<div class="col-lg-12">
+		
+		<!-- 영업중인 숙소 -->
+			
+		<div class="col-lg-12" id="activeacm">
 		<div class="panel panel-default">
-			<div class="panel-heading" style="padding-bottom:25px;">
-				
+			<div class="panel-heading">
+				<span id="acmlist">영업중인 숙소</span>
 				<button type="button" class="btn btn-xs pull-right" data-oper='newAcm'>새 숙소 등록</button>
 			</div>
 			<!-- /.panel-heading -->
@@ -29,16 +28,101 @@
 						</tr>
 					</thead>
 
-					<c:forEach items="${list}" var="acm">
+					<c:forEach items="${activelist}" var="activeacm">
 						<tr>
-							<td><c:out value="${acm.acmPurl}" /></td>
+							<td><c:out value="${activeacm.acmPurl}" /></td>
 							<td>
-								<a class='move' href='<c:out value="${acm.acmNum}"/>'>
-									<c:out value="${acm.acmName}" />
+								<a class='move' href='<c:out value="${activeacm.acmNum}"/>'>
+									<c:out value="${activeacm.acmName}" />
 								</a>
 							</td>
-							<td><c:out value="${acm.acmType}" /></td>
-							<td><c:out value="${acm.acmDetailaddr}" /></td>
+							<td id="<c:out value='${activeacm.acmType}'/>"></td>
+							<td><c:out value="${activeacm.acmDetailaddr}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+				
+				
+				  <br>
+				</div>
+				<!--  end panel-body -->
+			</div>
+			<!-- end panel -->
+		</div>
+		
+		
+		<!-- 대기중인 숙소 -->
+		
+		<div class="col-lg-12" id="pendingacm">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div id="acmlist">대기중인 숙소</div>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>숙소 사진</th>
+							<th>숙소 이름</th>
+							<th>숙소 유형</th>
+							<th>숙소 위치</th>
+						</tr>
+					</thead>
+
+					<c:forEach items="${pendinglist}" var="pendingacm">
+						<tr>
+							<td><c:out value="${pendingacm.acmPurl}" /></td>
+							<td>
+								<a class='move' href='<c:out value="${pendingacm.acmNum}"/>'>
+									<c:out value="${pendingacm.acmName}" />
+								</a>
+							</td>
+							<td id="<c:out value='${pendingacm.acmType}'/>"></td>
+							<td><c:out value="${pendingacm.acmDetailaddr}" /></td>
+							
+						</tr>
+					</c:forEach>
+				</table>
+				
+				
+				  <br>
+				</div>
+				<!--  end panel-body -->
+			</div>
+			<!-- end panel -->
+		</div>
+		
+		
+		<!-- 비활성화된 숙소 -->
+		
+		<div class="col-lg-12" id="inactiveacm">
+		<div class="panel panel-default hostonly">
+			<div class="panel-heading">
+				<div id="acmlist">비활성화 된 숙소</div>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>숙소 사진</th>
+							<th>숙소 이름</th>
+							<th>숙소 유형</th>
+							<th>숙소 위치</th>
+						</tr>
+					</thead>
+
+					<c:forEach items="${inactivelist}" var="inactiveacm">
+						<tr>
+							<td><c:out value="${inactiveacm.acmPurl}" /></td>
+							<td>
+								<a class='move' href='<c:out value="${inactivelist.acmNum}"/>'>
+									<c:out value="${inactiveacm.acmName}" />
+								</a>
+							</td>
+							<td id="<c:out value='${inactiveacm.acmType}'/>"></td>
+							<td><c:out value="${inactiveacm.acmDetailaddr}" /></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -62,7 +146,45 @@
 				
 
 <script type="text/javascript">
-
+$(document).ready(function(){
+		
+	<c:forEach items="${pendinglist}" var="pendingacm">
+	var pendingacmType='<c:out value="${pendingacm.acmType}" />';
+	console.log(pendingacmType);
+	if(pendingacmType.trim()=="P"){//객실별
+		$('#<c:out value="${pendingacm.acmType}"/>').append("객실별");
+	}
+		
+	else if(pendingacmType.trim()=="H"){//집천체
+		$('#<c:out value="${pendingacm.acmType}"/>').append("집천체");
+	}	
+	</c:forEach>
+	<c:forEach items="${activelist}" var="activeacm">
+	var activeacmType='<c:out value="${activeacm.acmType}" />';
+	console.log(activeacmType);
+	if(activeacmType.trim()=="P"){//객실별
+		$('#<c:out value="${activeacm.acmType}"/>').append("객실별");
+	}
+		
+	else if(activeacmType.trim()=="H"){//집천체
+		$('#<c:out value="${activeacm.acmType}"/>').append("집천체");
+	}	
+	</c:forEach>
+		
+	<c:forEach items="${inactivelist}" var="inactiveacm">
+	var inactiveacmType='<c:out value="${inactiveacm.acmType}" />';
+	console.log(inactiveacmType);
+	if(inactiveacmType.trim()=="P"){//객실별
+		$('#<c:out value="${inactiveacm.acmType}"/>').append("객실별");
+	}
+		
+	else if(inactiveacmType.trim()=="H"){//집천체
+		$('#<c:out value="${inactiveacm.acmType}"/>').append("집천체");
+	}	
+	
+	</c:forEach>
+	
+	});
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
 		
@@ -94,6 +216,16 @@
 	});
 	
 
+	 $(document).ready(function() {
+		  var priv ='<%=userPriv%>';
+	      var userStatusCode='<%=userStatusCode%>';
+	      //alert(userStatusCode);
+	      if(userStatusCode=="HO_PENDING"){
+	   		$("#activeacm").css("display","none"); 
+	   		$("#inactiveacm").css("display","none"); 
+		  }
+	   
+	   });
 </script>
 
 

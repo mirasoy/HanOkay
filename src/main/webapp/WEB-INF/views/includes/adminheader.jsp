@@ -108,6 +108,12 @@
             <ul class="nav navbar-top-links navbar-right">
            		<li class="nav-menu">
 					<a href='/acm/list'>메인으로</a>
+				</li>
+				<li class="nav-menu">
+					<a href='/hosting/listings'>호스트 모드 보기</a>
+				</li>
+				
+					
             </ul>
         </nav>
 

@@ -39,6 +39,9 @@ public interface UserService {
 	//email과 pw 일치하는 userNum가져오는 메서드
 	public UserVO getUserById(String email);
 	
+
+	
+	
 	//로그인하는 메서드
 	public int executeLogin(@Param("email")String email, @Param("pwd")String pwd, @Param("user_check")String user_check, HttpServletResponse response, HttpSession session);
 	
@@ -52,5 +55,11 @@ public interface UserService {
 	//해당 이메일을 가진 회원의 authCode를 업데이트 시키는 메서드
 	@Transactional
 	public boolean updateAuthCode(String email, String authCode);
+
 	
+	////////////////////////림쨩 ////////////////
+	
+	//세션리뉴얼
+	public UserVO letsNewSession(String userNum);
+
 }
