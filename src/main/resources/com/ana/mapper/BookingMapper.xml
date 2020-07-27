@@ -65,6 +65,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 
+
+	<!-- 예약을 위한 숙소와 객실의 정보 -->
+	<resultMap id="AcmRomVOResult" type="com.ana.domain.AcmRomVO">
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="ACM_NAME" property="acmName" />
+		<result column="ACM_CITY" property="acmCity" />
+		<result column="ACM_DISTR" property="acmDistr" />
+		<result column="ACM_DETAILADDR" property="acmDetailaddr" />
+		<result column="REP_PHONE" property="repPhone" />
+		<result column="ACM_ACTI" property="acmActi" />
+		<result column="CHECKIN_TIME" property="checkinTime" />
+		<result column="CHECKOUT_TIME" property="checkoutTime" />
+		<result column="SUB_PHONE" property="subPhone" />
+		<result column="ACM_FAX" property="acmFax" />
+		<result column="ACM_EMAIL" property="acmEmail" />
+		<result column="ACM_PURL" property="acmPurl" />
+		<result column="ACM_PNAME" property="acmPname" />
+		<result column="LATITUDE" property="latitude" />
+		<result column="LONGITUDE" property="longitude" />
+		<result column="ACM_DESC" property="acmDesc" />
+		<result column="ACM_OPTCODE" property="acmOptcode" />
+
+		<result column="ROM_NUM" property="romNum" />
+		<result column="ROM_NAME" property="romName" />
+		<result column="ROM_CAPA" property="romCapa" />
+		<result column="BED_TYPE" property="bedType" />
+		<result column="BED_CNT" property="bedCnt" />
+		<result column="ROM_SIZE" property="romSize" />
+		<result column="ROM_PRICE" property="romPrice" />
+		<result column="ROM_PURL" property="romPurl" />
+		<result column="ROM_PNAME" property="romPname" />
+		<result column="ROM_TYPE" property="romType" />
+		<result column="ROM_ACTI" property="romActi" />
+		<result column="ROM_OPTCODE" property="romOptcode" />
+	</resultMap>
+
 <!-- 
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★2. 회원의 상태 리스트 ★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -165,50 +201,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <!-- 
-
-	<insert id="insert" parameterType="hashmap">
-		<selectKey keyProperty="bookNum" order="BEFORE"
-			resultType="String">
-			select concat('B',seq_tbook.nextval) from dual
-		</selectKey>
-
-		insert all
-		into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
-		CHECKOUT_DATE,
-		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING,
-		REQUEST, BOOKER_LASTNAME, BOOKER_FIRSTNAME, BOOKER_EMAIL,
-		BOOKER_PHONE, BOOK_STATUS)
-
-		values (
-		#{bookNum},
-		#{userNum},
-		#{romNum},
-		#{checkinDate},
-		#{checkoutDate},
-		#{staydays},
-		#{guest},
-		#{bookPrice},
-		#{expectedArr},
-		#{smoking},
-		#{request},
-		(select ROM_NAME from TROM where
-		ROM_NUM= #{romNum}),
-		#{bookerLastname},
-		#{bookerFirstname},
-		#{bookerEmail},
-		#{bookerPhone, jdbcType=VARCHAR},
-		#{bookStatus})
-		into
-		tbook_status(book_num, book_status, updatedate)
-		values (#{bookNum}, #{bookStatus} ,sysdate)
-		select * from dual
-
-	</insert> -->
-
-
-
-
-<!-- 
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★5. update ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
@@ -251,4 +243,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+
+<!-- 예약과 관련된 숙소와 객실에 대한 정보를 가져온다 (예약페이지, 예약완료페이지) -->
+	<select id="getInfo" resultMap="AcmRomVOResult">
+		SELECT 
+        	A.ACM_NUM, A.ACM_NAME, A.ACM_CITY, A.ACM_DISTR, A.ACM_DETAILADDR, A.REP_PHONE, A.ACM_ACTI, A.CHECKIN_TIME, A.CHECKOUT_TIME, A.SUB_PHONE, A.ACM_FAX, A.ACM_EMAIL, A.ACM_PURL, A.ACM_PNAME, A.LATITUDE, A.LONGITUDE, A.ACM_DESC, A.ACM_OPTCODE, 
+        	R.ROM_NUM, R.ROM_NAME, R.ROM_CAPA, R.BED_TYPE, R.BED_CNT, R.ROM_SIZE, R.ROM_PRICE, R.ROM_PURL, R.ROM_PNAME, R.ROM_TYPE, R.ROM_OPTCODE
+		FROM TACM  A, TROM R
+		WHERE R.ROM_NUM = #{romNum} AND A.ACM_NUM =  R.ACM_NUM
+	</select>
+
+<!-- 
+
+	<insert id="insert" parameterType="hashmap">
+		<selectKey keyProperty="bookNum" order="BEFORE"
+			resultType="String">
+			select concat('B',seq_tbook.nextval) from dual
+		</selectKey>
+
+		insert all
+		into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
+		CHECKOUT_DATE,
+		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING,
+		REQUEST, BOOKER_LASTNAME, BOOKER_FIRSTNAME, BOOKER_EMAIL,
+		BOOKER_PHONE, BOOK_STATUS)
+
+		values (
+		#{bookNum},
+		#{userNum},
+		#{romNum},
+		#{checkinDate},
+		#{checkoutDate},
+		#{staydays},
+		#{guest},
+		#{bookPrice},
+		#{expectedArr},
+		#{smoking},
+		#{request},
+		(select ROM_NAME from TROM where
+		ROM_NUM= #{romNum}),
+		#{bookerLastname},
+		#{bookerFirstname},
+		#{bookerEmail},
+		#{bookerPhone, jdbcType=VARCHAR},
+		#{bookStatus})
+		into
+		tbook_status(book_num, book_status, updatedate)
+		values (#{bookNum}, #{bookStatus} ,sysdate)
+		select * from dual
+
+	</insert> -->
+
 </mapper>
+

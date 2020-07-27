@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ana.domain.AcmRomVO;
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookCancelVO;
 import com.ana.domain.BookStatusVO;
@@ -83,6 +84,17 @@ public class BookingServiceImpl implements BookingService{
 	public boolean reserveCancel(String bookNum, String bookStatus) {
 	
 		return mapper.delete(bookNum) ==1 && mapper.changeStatus(bookNum, bookStatus)==1;
+	}
+
+	
+	
+	
+	
+	
+	// 객실번호로 객실정보와 대응하는 숙소정보를 불러온다
+	@Override
+	public AcmRomVO getInfo(String romNum) {
+		return mapper.getInfo(romNum);
 	}
 
 

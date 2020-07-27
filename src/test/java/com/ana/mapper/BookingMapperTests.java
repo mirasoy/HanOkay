@@ -139,6 +139,18 @@ public class BookingMapperTests {
 	public void testInsert() {								
 		mapper.changeStatus("B3", "예약완료");		
 	}
+
+	
+
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	// 객실번호 R210에 해당하는 객실정보와 대응하는 숙소정보를 불러온다.
+	@Test
+	public void testGetInfo() {
+		log.info(mapper.getInfo("R210"));
+	}
 	
 //	@Test
 //	public void testInsert2() {

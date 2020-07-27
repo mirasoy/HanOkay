@@ -3,13 +3,11 @@ package com.ana.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
+import com.ana.domain.AcmRomVO;
 import com.ana.domain.BookCancelVO;
-import com.ana.domain.BookStatusVO;
 import com.ana.domain.BookVO;
 import com.ana.domain.BookingVO;
-import com.ana.domain.RomVO;
 
 public interface BookingMapper {
 	
@@ -31,5 +29,12 @@ public interface BookingMapper {
 	
 	public int changeStatus(@Param("bookNum")String bookNum, @Param("bookStatus")String bookStatus);
 	
-	/* public int insert(BookingVO booking); */
+	
+	
+	
+	
+	public int insert(BookingVO booking); // 예약페이지에서 예약 진행
+	
+	public AcmRomVO getInfo(String romNum); // 예약페이지와 예약완료페이지에서 예약을 위한 숙소 및 객실 정보 출력
+	
 }
