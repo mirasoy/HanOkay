@@ -111,6 +111,9 @@
 			
 			<!-- 오른쪽 nav -->
             <ul class="nav navbar-top-links navbar-right">
+                <li class="nav-menu">
+					<a id="adminonly" href='/admin/adminindex'>관리자 모드 보기</a>
+				</li>
            		
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -171,6 +174,7 @@
 	  var priv ='<%=userPriv%>';
       var userStatusCode='<%=userStatusCode%>';        
                
+      if(priv!="ADMIN")$("#adminonly").css("display","none"); 
       if(userStatusCode=="ACTIVE"){
     	  alert("숙소등록을 한 회원만 접근할 수 있습니다");
     	  location.href="/acm/list";
