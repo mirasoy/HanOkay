@@ -76,7 +76,7 @@
 			
 			if(operation==='pendingAcm'){
 				alert("pendingAcm");
-				formObj.attr("action","/hosting/pendingAcm");	
+				formObj.attr("action","/hosting/listings");	
 			} else if(operation==='home'){
 				alert("돌아갑니다");
 				formObj.attr("action","/acm/list");

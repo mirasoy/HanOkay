@@ -82,32 +82,37 @@
 	
 </script>
 <body>
-<%@include file="../includes/becomehostheader.jsp"%>
+
+
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
    <input type="hidden" id="ACM_NUM" name="ACM_NUM" value="" readonly="readonly">
    <!-- 숙소 방 추가 모달로 띄우기-->
    <form action="/hosting/become-host2_6" method="get">
 <br>
-	<div align="right">	
-      <button type="button" onclick="if(readyForreg()){romRegit()}">객실 등록</button>
-     </div> 
+		<div class="pull-right">
+		  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">객실 등록</button><!-- ajax처리안함 -->
+		</div>
+		
+		
       <h4>개별객실(베드룸) 추가하기</h4>
 
      <!-- <div id="image_container" style="width:200px;height:200px;"></div>
       <input type="file" id="ROM_PURL" name="ROM_PURL" placeholder="객실 사진" onchange="setThumbnail(event);"> --> 
 
-      <div class="room" id="room">
+    <div class="room" id="room" style="width:500px;">
+      <div class="form-group">
+           <input class="form-control" id="ROM_NAME" name="ROM_NAME" placeholder="객실 이름" style="width:300px;"> 
+      </div>
+      
       	<label for="ROM_TYPE">객실 타입</label>
-         <select name="ROM_TYPE" id="ROM_TYPE">
+         <select class="form-control" name="ROM_TYPE" id="ROM_TYPE" style="width:100px;display:inline-block;">
             <option value="싱글룸">싱글</option>
             <option value="더블룸">더블</option>
             <option value="프리미엄">프리미엄</option>
             <option value="도미토리">도미토리</option>
-         </select><br>
-        
-         <input type="text" id="ROM_NAME" name="ROM_NAME" placeholder="객실 이름"><br>
-		<label for="ROM_CAPA">객실 최대 인원수</label>
-          <select name="ROM_CAPA" id="ROM_CAPA">
+         </select>
+         <label for="ROM_CAPA">객실 최대 인원수</label>
+          <select class="form-control" style="width:100px;display:inline-block;" name="ROM_CAPA" id="ROM_CAPA">
             <option value="1">1명</option>
             <option value="2">2명</option>
             <option value="3">3명</option>
@@ -118,28 +123,25 @@
             <option value="8">8명</option>
             <option value="9">9명</option>
             <option value="10">10명</option>
-         </select><br>
-         <label for="BED_TYPE">침대유형</label>
-          <select name="BED_TYPE" id="BED_TYPE">
+         </select>
+        
+		<br>
+     <label for="BED_TYPE">침대 유형</label>
+          <select class="form-control" style="width:120px;display:inline-block;" name="BED_TYPE" id="BED_TYPE" onchange="categChange(this)">
             <option value="온돌">온돌(이불)</option>
             <option value="싱글">싱글</option>
             <option value="퀸">퀸</option>
             <option value="킹">킹</option>
             <option value="2층침대">2층침대</option>
             
-         </select><br>
-         <label for="BED_CNT">침대갯수</label>
-          <select name="BED_CNT" id="BED_CNT">
+         </select>
+         <label for="BED_CNT">침대 갯수</label>
+          <select class="form-control" style="width:120px;display:inline-block;" name="BED_CNT" id="BED_CNT">
             <option value="0">온돌(이불)</option>
-            <option value="1">1개</option>
-            <option value="2">2개</option>
-            <option value="3">3개</option>
-            <option value="4">4개</option>
-            <option value="5">5개</option>
          </select><br>
          
-         <input type="text" id="ROM_SIZE" name="ROM_SIZE" placeholder="객실크기 m2" numberOnly><br>
-         <input type="text" id="ROM_PRICE" name="ROM_PRICE" placeholder="객실가격" numberOnly><br>
+         <label for="ROM_SIZE">객실 크기 </label>&nbsp;<input class="form-control" style="width:150px;display:inline-block;" id="ROM_SIZE" name="ROM_SIZE" placeholder="m2" numberOnly>
+        <label for="ROM_PRICE">객실 가격 </label>&nbsp;<input class="form-control" style="width:150px;display:inline-block;" id="ROM_PRICE" name="ROM_PRICE" placeholder="원" numberOnly><br>
 
       </div>
       <!-- 여기에 appendChild하고 싶닷 -->
@@ -172,8 +174,6 @@
 	
 	var chkArr = []; //배열 초기화
 	var romOptcode=0;
-
-
 	function readyForreg() {
 		
 		var roomNotNull = $(".room input");
@@ -188,21 +188,18 @@
 				return false; // break
 			}
 		});
-
 		
 		$("input[name=romOptcode]:checked").each(function (i) {//체크박스값들을 모조리 배열에 담는다
 			//console.log('checkbox값:'+$(this).val());
 			chkArr.push($(this).val());
-			romOptcode=romOptcode+($(this).val());
+			romOptcode=parseInt(romOptcode)+parseInt($(this).val());
 		});
-
 		if(chkArr.length==0){
 			alert('하나 이상의 옵션을 선택해주세요.');
 			$(this).focus();
 			flag = false;
 			
 		}
-
 		
 		if($("#ROM_CAPA").val() > 25){
 			alert('25명 이하의 숫자만 등록 가능합니다.');
@@ -218,10 +215,33 @@
 		return flag;
 	}
 
-	
+	function categChange(e){
+	      var bed_ondol=["이불"];
+	      var bed_single=["1","2","3"];
+	      var bed_queen=["1","2","3"];
+	      var bed_king=["1","2","3"];
+	      var bed_2f=["1","2","3","4","5"];
+	      var target=document.getElementById("BED_CNT");
+	      
+	      if(e.value=="온돌")var cnt=bed_ondol;
+	      else if(e.value=="싱글")var cnt=bed_single;
+	      else if(e.value=="퀸")var cnt=bed_queen;
+	      else if(e.value=="킹")var cnt=bed_king;
+	      else if(e.value=="2층침대")var cnt=bed_2f;
+	      
+	      target.options.length = 0;
+
+	      for (x in cnt) {
+	         var opt = document.createElement("option");
+	         opt.value = cnt[x];
+	         opt.innerHTML = cnt[x];
+	         target.appendChild(opt);
+	      }   
+	   }
+	   
+
 	function romRegit() {
 		
-
 		var acmNum = $("#ACM_NUM").val();//숙소번호
 		var romName = $("#ROM_NAME").val();//객실이름
 		var romCapa = $("#ROM_CAPA").val();//객실최대인원수
@@ -231,14 +251,12 @@
 		var romPrice = $("#ROM_PRICE").val();//객실가격
 		var romType = $("#ROM_TYPE").val();//룸타입
 		
-
 		//name/value 형태로 담는다
 		var allData = {
 			"acmNum": acmNum, "romType": romType, "romName": romName,
 			"romCapa": romCapa, "bedType": bedType, "bedCnt": bedCnt, "romSize": romSize,
 			"romPrice": romPrice, "romOptcode": romOptcode
 		}
-
 		$.ajax({
 			url: 'become-host2_6pop',
 			type: "POST",
@@ -247,16 +265,12 @@
 				alert("객실이 추가되었습니다.");
 				self.close();
 				opener.document.location.href="/hosting/become-host2_6?acmNum="+acmNum;
-
 			}
 		});
-
 	}
-
 	//숫자만 입력가능하게만드는 부분
 	$("input:text[numberOnly]").on("keyup", function () {
 		$(this).val($(this).val().replace(/[^0-9]/g, ""));
 	});
-
 </script>
-</html>
+</html></html>

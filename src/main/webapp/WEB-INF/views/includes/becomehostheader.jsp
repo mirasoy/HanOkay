@@ -62,9 +62,11 @@
 		}
 		
 		
-		#logo{
-			width:50px;
-			height:20px;
+		img{
+		position:absolute;
+			left:20px;
+			width:200px;
+			height:160px;
 		}
 	</style>
 </head>
@@ -86,6 +88,9 @@
                 
 				<!-- 로고자리 -->
                 <a class="navbar-brand" href="/hosting/hostindex">Han:Ok</a>
+               
+                    <!--  <img src="${request.contextPath}/resources/img/hostlogo.png" alt="Site logo">
+                  --> 
             </div>
             <!-- /.navbar-header -->
 

@@ -88,6 +88,15 @@ public class UserServiceImpl implements UserService{
 	public UserVO getUserById(String email) {
 		return mapper.getUserById(email);
 	}
+	
+	
+	//////////////////////////////////////////////////////////////
+
+	@Override
+	public UserVO letsNewSession(String userNum) {
+		
+		return mapper.letsNewSession(userNum);
+	}
 
  
 }

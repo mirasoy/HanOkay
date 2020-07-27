@@ -95,10 +95,10 @@ public class AcmRegServiceImpl implements AcmRegService{
 
 
 	@Override
-	public List<AcmVO> getListHosts(String bizRegnum) {
+	public List<AcmVO> getListAcms(String bizRegnum,String acmActi) {
 		
 		//호스트이면 사업자등록증에 있는것들을 다 가꾸와
-		return amapper.getListHosts(bizRegnum);
+		return amapper.getListAcms(bizRegnum,acmActi);
 	}
 
 
@@ -119,7 +119,13 @@ public class AcmRegServiceImpl implements AcmRegService{
 
 	@Override
 	public AcmVO getpendingacm(String bizRegisterNumber) {
-		AcmVO vo=amapper.getnewAcm(bizRegisterNumber);
+		System.out.println("서비스단:"+bizRegisterNumber);
+		
+		AcmVO vo=amapper.getpendingacm(bizRegisterNumber);
+
+		if(vo==null)return null;
+		System.out.println(vo.toString());
+		
 		return vo;
 	}
 

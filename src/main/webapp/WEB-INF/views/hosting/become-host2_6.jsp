@@ -41,10 +41,13 @@
         </nav>
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;">
-	<br>			
+	<br>	
+	<div class="pull-right">
+		<button data-oper='next' class="form-control"style="width:150px;">객실 추가 완료</button>
+	 </div>
   <form action="become-host-complete" method="post">
   <!-- 숙소 방 추가 모달로 띄우기-->
-  <h4>숙소 <c:out value="${acmName}"/>에 객실 추가하기</h4>
+  <h4>숙소 '<c:out value="${acmName}"/>'에 객실 추가하기</h4>
   <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
   <h3 align="left">총 <span><c:out value='${size}'/></span>개의 객실</h3>
 			
@@ -99,10 +102,7 @@
 		<!-- 빈 폼 -->
 		<form id="actionForm">
 		</form>
-		<button data-oper='next' class="btn btn-default">객실 추가 완료</button>
-				
-			
-		</div>
+</div>
 
 
 <%@include file="../includes/footer.jsp"%>
@@ -131,10 +131,17 @@
 			console.log(operation);
 			
 			if(operation==='next'){
-				alert("객실등록이 완료되었습니다");
-				formObj.append("<input type='text' name='acmNum' value='"+$('#acmNum').val()+"'>");
-				formObj.attr("action","/hosting/become-host-complete");	
-				actionForm.submit();
+				var size=document.querySelector('span');
+				
+				if(size.innerText=="0"){
+					alert("한개이상의 객실이 등록되어야합니다");
+					return;
+				}else{
+					alert("객실등록이 완료되었습니다");
+					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
+					formObj.attr("action","/hosting/become-host-complete");	
+					actionForm.submit();
+				}
 			}else if(operation=='openpop'){
 				var openWin;//자식창
 				

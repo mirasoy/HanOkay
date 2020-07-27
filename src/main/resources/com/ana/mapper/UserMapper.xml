@@ -105,6 +105,9 @@
 		BIZ_REGNUM =#{bizRegisterNumber}, U_STAT_CODE=#{userStatusCode}
 		where USER_NUM =#{userNum}
 	</update>
+	<select id="letsNewSession" resultMap="UserVO">
+		select * from tuser where USER_NUM =#{userNum}
+	</select>
 	
 
 
