@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.CodeMapper">
+	
+	<resultMap id="CodeVOResult" type="com.ana.domain.CodeVO">
+		<result column="CODE_CONT" property="codeCont" />	
+		<result column="CODE_FULL" property="codeFull" />	
+		<result column="CODE_ICON" property="codeIcon" />
+	</resultMap>
+
+	<!-- 숙소 옵션 코드  -->
+	<select id="getAcmCode" resultMap="CodeVOResult">
+		SELECT
+		   CODE_CONT, CODE_FULL, CODE_ICON
+		FROM TCODE 
+		WHERE CODE_TYPE = 'AC_OPT' AND CODE_ACTI = 'ACTI'
+	</select>	
+	
+	<!-- 객실 옵션 코드  -->
+	<select id="getRomCode" resultMap="CodeVOResult">
+		SELECT
+		   CODE_CONT, CODE_FULL, CODE_ICON
+		FROM TCODE 
+		WHERE CODE_TYPE = 'RM_OPT' AND CODE_ACTI = 'ACTI'
+	</select>	
+
+</mapper>

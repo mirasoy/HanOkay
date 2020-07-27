@@ -1,24 +1,17 @@
 package com.ana.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.service.AcmDetailService;
+import com.ana.service.CodeService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -30,32 +23,37 @@ import lombok.extern.log4j.Log4j;
 public class AcmDatailController { // 숙소 상세페이지
 	
 	private AcmDetailService service;
+	private CodeService codeService;
 	
-	// 숙소 정보 얻기
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public void getDetailInfo(@RequestParam("acmNum") String acmNum, 
 			@RequestParam("in") String checkin,
 			@RequestParam("out") String checkout,
 			@RequestParam("person") String person,
 			Model model) {
-		log.info("■■■■■■■■■■■■▶ getDetailInfo");
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■ 상세페이지로 이동 중...");
 		
 		if(person.isEmpty()) person = "1"; // 인원수가 없는 경우
 		
 		model.addAttribute("acm", service.getAcm(acmNum))
 		.addAttribute("pic", service.getPicList(acmNum))
 		.addAttribute("rev", service.getRevList(acmNum))
-		.addAttribute("avg", service.getStisf(acmNum))
-		.addAttribute(getDate(checkin, checkout));
+		.addAttribute("star", service.getStisf(acmNum))
+		.addAttribute("acmCode", codeService.getAcmCode())
+		.addAttribute("romCode", codeService.getRomCode());
 		
 		if(service.getRomList(acmNum, person).isEmpty()) {
 			model.addAttribute("rom", service.getRomAll(acmNum));
 		}else {
 			model.addAttribute("rom", service.getRomList(acmNum, person));
 		}
+		
+		String[] tmp = getDate(checkin , checkout);
+		model.addAttribute("in", tmp[0])
+		.addAttribute("out", tmp[1]);
 	}
 	
-	// 경우의 수에 따른 체크인, 체크아웃 날짜 설정
+	// 경우의 수에 따른 체크인, 체크아웃 날짜 설정하기
 	public String[] getDate(String checkin, String checkout) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
@@ -93,6 +91,7 @@ public class AcmDatailController { // 숙소 상세페이지
 		
 	}
 	
+	// 날짜 패턴 맞추기
 	public Calendar set(String date) {
 		Calendar cal = Calendar.getInstance();
 		cal.clear();
@@ -101,6 +100,7 @@ public class AcmDatailController { // 숙소 상세페이지
 		return cal;
 	}
 	
+	// 날짜 기본값 설정하기
 	public String[] setDefault(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal1 = Calendar.getInstance();

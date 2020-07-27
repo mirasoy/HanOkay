@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -31,33 +32,37 @@ if (user != null) {
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Han:ok- Make yourself at home in Korea</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Expires" content="0;">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>HanOkay 한오케이 -Make yourself At home in Korea!</title>
+
 
 
 <!-- load stylesheets -->
-<link rel="stylesheet"
-   href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 <!-- Google web font "Open Sans" -->
-<link rel="stylesheet"
-   href="${request.contextPath}/resources/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Google web font "동해독도(로고)" -->
+<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="${request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <!-- Bootstrap style -->
 <link rel="stylesheet" type="text/css"
-   href="${request.contextPath}/resources/css/datepicker.css" />
+   href="${request.contextPath}/resources/css/datepicker.css" >
 <link rel="stylesheet" type="text/css"
-   href="${request.contextPath}/resources/slick/slick.css" />
+   href="${request.contextPath}/resources/slick/slick.css">
 <link rel="stylesheet" type="text/css"
-   href="${request.contextPath}/resources/slick/slick-theme.css" />
-<link rel="stylesheet" href="${request.contextPath}/resources/css/templatemo-style.css">
-<link rel="stylesheet" href="${request.contextPath}/resources/css/review.css">
+   href="${request.contextPath}/resources/slick/slick-theme.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/review.css">
 
 <!-- 메인 CSS style -->
 
@@ -79,26 +84,26 @@ if (user != null) {
 
 <script src="${request.contextPath}/resources/js/index.js"></script>
 
-
-<!-- 달력 변경(수희) -->
+<!-- iMask -->
+<script src="https://unpkg.com/imask"></script>
+<!-- 달력 변경 -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="${request.contextPath}/resources/js/select2.js"></script>
-<link href="${request.contextPath}/resources/css/select2.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/select2.css" >
 
 
 <script type="text/javascript">
    $(document)
          .ready(
-               
                function() {
                   //만약 user에 해당하는 세션이 없으면 
+
                   var priv;
                   var userStatusCode;
-               if (
-<%=user == null%>//세션에 유저가 없으면
-   ) {
+                //세션에 유저가 없으면
+               if (<%=user == null%>) {
                      // $("#loginout").append("<a href='/user/login'>로그인</a>");
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
                      $('#notification').empty();
@@ -111,6 +116,7 @@ if (user != null) {
                      $('#myMenuIcon').removeAttr("data-toggle");
                      $('#myMenuIcon').attr("href", "/user/login");
                      
+
                   } else {
                      priv ='<%=userPriv%>';
                      userStatusCode='<%=userStatusCode%>';
@@ -125,16 +131,12 @@ if (user != null) {
                     	 else $('#mode').append("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");
                     	  
                      }
-                     
-                     
-                     
-                     
+
+      
                      $("#loginout").append(
                            "<a href='/user/logout'>로그아웃</a>")
                            
-                  }
-                  ;
-                  
+                  };    
                });
 </script>
 
@@ -155,9 +157,7 @@ if (user != null) {
 
    <!-- main-content -->
    <div class="main-content" id="top">
-
       <div class="top-bar-bg"></div>
-
       <!-- Start : top-bar - 메인 네비게이션 바 : 동적 active 적용 -->
       <div class="top-bar" id="top-bar">
          <!-- Start : container-->
@@ -212,13 +212,12 @@ if (user != null) {
                            <ul class="dropdown-menu">
                               <span class="header-menu">마이페이지</span>
                               <li><a href="#">계정</a></li>
-                              <li><a onclick="location.href='/MyPage/bookListAll'"
+                              <li><a onclick="location.href='/mypage/bookListAll'"
                                  style="cursor: pointer">나의 예약</a></li>
                               <li><a onclick="location.href='/review/list'"
                                  style="cursor: pointer">나의 리뷰</a></li>
                               <li><a href="#">내 관심 숙소</a></li>
-                              <li id='mode'>
-                        </li>
+                              <li id='mode'></li>
                               <li id="header-menu"><a
                                  onclick="location.href='/user/login'" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"

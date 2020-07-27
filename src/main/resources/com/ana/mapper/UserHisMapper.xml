@@ -12,7 +12,15 @@
 		<result property="changer" column="CHANGER"/>
 	</resultMap>
 	
-	
+	<!-- 상태코드변경(회원정보유형코드  512) 기록을 남기는 쿼리 -->
+	<insert id="insertStatCodeChangeHistory">
+	<selectKey resultType="String" order="BEFORE" keyProperty="serialNum">
+		select concat('H',SEQ_TUSER_INFO_HISTORY.nextval) from dual 
+		</selectKey>
+		insert into tuser_info_history(SERIAL_NUM, USER_NUM, INFO_CODE, CHANGER) 
+		values
+		(#{serialNum}, #{userNum}, #{infoCode}, #{changer}) 
+	</insert>
 	
 	
 	

@@ -88,33 +88,31 @@ public class UserMapperTests {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-//		user.setUserPriv("GU");
-//		user.setRegMethod("g");
-
 
 		int count = mapper.updateUser(user);
 		log.info("*******UPDATE COUNT: " + count);
 	}
 
 	// 이메일로 중복확인 하는 인터페이스 테스트
-	@Test
+//	@Test
 	public void testIdCheck() {
-		int count = mapper.checkEmail("mira@naver.com");
+		int count = mapper.canRegister("mira123@naver.com");
 		log.info("*******DUPLICATED ID COUNT: " + count);
 	}
 
-	// 로그인 할 떄 회원 정보 일치하는지 확인하는 메서드
-//	@Test
-	public void testIsValidUser() {
-		int count = mapper.isValidUser("serin@naver.com", "Serin123!");
-		log.info("*****THIS ACCOUNT EXIST: " + count);
-	}
+
 	
 	//해당 유저의 유저번호를 반환하는 메서드 테스트
 //	@Test
 	public void testGetUserById() {
 		UserVO user = mapper.getUserById("mira@naver.com");
 		log.info("@@@@@@@@@UserNum: "+user);
+	}
+	
+	@Test
+	public void testGiveAuth() {
+		int count=mapper.matchAuthCode("serin9811@naver.com", "0000");
+		log.info("*****GIVE AUTH COUNT: "+ count+ "*****");
 	}
 
 }

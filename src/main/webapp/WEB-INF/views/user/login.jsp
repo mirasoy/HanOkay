@@ -1,29 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<%@include file="../includes/header.jsp"%>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>로그인</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@include file="../includes/header.jsp"%>
+
+<!-- Cookie가 비어있지 않을 때 checked 속성을 줌 -->
+	<c:if test="${not empty cookie.user_check}">
+		<c:set value="checked" var="checked"/>
+	</c:if>
+	
 	<form name="loginForm" method="post">
 		<table border="1" width="500px">
 			<tr>
-				<label style="color: red;" id="msg"><c:out value="${msg}" /></label>
-				<br>
+			
+				<span style="color: red;" id="msg"><c:out value="${msg}" /></span>
 				<td>Email: <input type="text" size="40" name="email" id="email"
-					value="${email }" placeholder="서비스 이용을 위해 이메일을 입력해주세요" ><br>
+					value="${cookie.user_check.value }" placeholder="서비스 이용을 위해 이메일을 입력해주세요" >
+					
+					<input type="checkbox" id="rememberEmail" ${checked }>Email 기억하기
 				</td>
 			</tr>
 			<tr>
-				<td>비밀번호: <input type="password" size="50" name="pwd" id="pwd"
-					value="${pwd }" placeholder="비밀번호를 입력해주세요" ><br>
-					<input type="checkbox" id="rememberEmail">Email 기억하기
-					<button data-oper='signIn' class="btn btn-default">로그인</button>
-					<input type="button" class="btn btn-default" onclick= "location.href='/account/myAccount/findPwd'" value="비밀번호 찾기">
+				<p>
+				<td>비밀번호: <input type="password" size="50" name="pwd" id="pwd" value="${pwd }" placeholder="비밀번호를 입력해주세요" ><br>
+				</p>
+					<button id="loginButton" type="button" class="btn btn-default">로그인</button>
+					<button id="findPwdBtton" type="button" class="btn btn-default" onclick= "location.href='/account/myAccount/findPwd'">비밀번호 찾기</button>
 					<br>
 					<a href="../register/signUp" >회원가입하기</a>
 				</td>
@@ -48,32 +48,49 @@
 		if ( window.history.replaceState ) {
 	        window.history.replaceState( null, null, window.location.href );
 	    }
-		//버튼에 따라 컨트롤러에서 다른 서비스를 부르게함
-		$('button').on("click", function(e) {
-			e.preventDefault();
 
-			let operation = $(this).data("oper");
+
+		//로그인 버튼을 누르면
+		$('#loginButton').click(function(){
 			
-			let email= $("input[id='email']").val();
-			//로그인 버튼을 눌렀을 때
-			if(operation ==='signIn'){
-				// js로 이메일 정규식이 일치하는지 확인
-				if (checkEmail(email)) {
-					//controller에서 service.login()을 시킴
-					formObj.attr("action", "/user/executeLogin");
-					formObj.submit();
-				}
-				else {
-				//정규식 테스트 통과 못하면 페이지 이동 없고 메세지 던져주기
-					console.log("email: "+email);
-					document.getElementById("msg").innerHTML="유효하지 않은 이메일형식입니다";
-					console.log("이멜 정규식 불통");
-				}
-			}
 			
+			let email= document.getElementById('email').value;
+			let pwd= $("input[id='pwd']").val();
+			let remember_email= $('#rememberEmail').is(':checked');
+		
+			
+			var result;
+			$.ajax({
+						type:'POST',
+						url: '${pageContext.request.contextPath}/user/executeLogin',
+						dataType: 'json',
+						data: {
+							'email': email,
+							'pwd' : pwd,
+							'remember_email': remember_email
+						},
+						success: function(data){
+							
+							if (data.msg==0){ //로그인 실패
+								
+								$('#msg').text('로그인 정보가 불일치합니다. 다시 시도해주세요');
+							}
+							
+							else if(data.msg==1){ //로그인 성공 시
+								
+								window.location.href='${pageContext.request.contextPath}/user/welcome';
+							} 
+						
+						},
+						/* error: function(error){
+							location.href='/register/registerFail';
+						} */
+				});	
+			return result;		
 		});
+		
+		
 	});
 	</script>
-</body>
+
 <%@include file="../includes/footer.jsp"%>
-</html>
