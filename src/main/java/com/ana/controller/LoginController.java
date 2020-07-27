@@ -64,7 +64,9 @@ public class LoginController {
 		log.info("login email: " + email);
 		log.info("login pwd: " + pwd);
 		String user_check= request.getParameter("remember_email");
-		log.info("remember_email: "+ user_check);
+		log.info("remember_email checked: "+ user_check);
+		
+		//로그인을 실행하는 서비스 메서드 호출
 		int result= service.executeLogin(email, pwd, user_check, response, session);
 		jso.put("msg", result);
 		PrintWriter out = response.getWriter();
