@@ -30,7 +30,10 @@
 
 					<c:forEach items="${activelist}" var="activeacm">
 						<tr>
-							<td><c:out value="${activeacm.acmPurl}" /></td>
+							<td style="width: 350px;">
+							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${activeacm.acmPurl}" /><c:out value="${activeacm.acmPname }" />'>
+
+							</td>
 							<td>
 								<a class='move' href='<c:out value="${activeacm.acmNum}"/>'>
 									<c:out value="${activeacm.acmName}" />
@@ -72,7 +75,9 @@
 
 					<c:forEach items="${pendinglist}" var="pendingacm">
 						<tr>
-							<td><c:out value="${pendingacm.acmPurl}" /></td>
+							<td style="width: 350px;">
+							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${pendingacm.acmPurl}" /><c:out value="${pendingacm.acmPname }" />'>
+							</td>
 							<td>
 								<a class='move' href='<c:out value="${pendingacm.acmNum}"/>'>
 									<c:out value="${pendingacm.acmName}" />
@@ -115,7 +120,9 @@
 
 					<c:forEach items="${inactivelist}" var="inactiveacm">
 						<tr>
-							<td><c:out value="${inactiveacm.acmPurl}" /></td>
+							<td style="width: 350px;">
+							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${inactiveacm.acmPurl}" /><c:out value="${inactiveacm.acmPname }" />'>
+							</td>
 							<td>
 								<a class='move' href='<c:out value="${inactivelist.acmNum}"/>'>
 									<c:out value="${inactiveacm.acmName}" />
