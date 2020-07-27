@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.UserAcmVO;
 import com.ana.domain.UserVO;
 import com.ana.mapper.AcmRegMapper;
+import com.ana.mapper.RomRegMapper;
 import com.ana.mapper.UserMapper;
 
 import lombok.AllArgsConstructor;
@@ -22,12 +24,10 @@ public class AdminServiceImpl implements AdminService{
 	@Setter(onMethod_= {@Autowired})
 	private AcmRegMapper amapper;
 
-	@Override
-	public List<UserVO> getPendingHost() {
-		String userStatusCode ="HO_PENDING";
-		
-		return umapper.getPendingHost(userStatusCode);
-	}
+	@Setter(onMethod_= {@Autowired})
+	private RomRegMapper rmapper;
+
+
 
 	@Override
 	public List<UserVO> getAll(String acmNum) {
@@ -68,10 +68,23 @@ public class AdminServiceImpl implements AdminService{
 		return umapper.moditoGuest(vo)==1;
 	}
 
-	@Override
-	public List<AcmVO> getadminListAcms(String acmActi) {
+	@Override//pending, active, inactive 숙소들을 가져온다
+	public List<UserAcmVO> getadminListAcms(String acmActi) {
+		List<UserAcmVO> acms=amapper.getadminListAcms(acmActi);
+		int romsize;
 		
-		return amapper.getadminListAcms(acmActi);
+		for(int i=0;i<acms.size();i++) {
+			romsize=rmapper.getRomsize(acms.get(i).getAcmNum());//select count(*) from trom	where acm_num=#{acmNum}
+			acms.get(i).setRomSize(romsize);
+		}
+		
+		return acms; 
+	}
+
+	@Override//active, ho_pending, ho_active의 회원list를 가져온다
+	public List<UserVO> getadminListUsers(String userStatusCode) {
+		
+		return umapper.getadminListUsers(userStatusCode);
 	}
 	
 
