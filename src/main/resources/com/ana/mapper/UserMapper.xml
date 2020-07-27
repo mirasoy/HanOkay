@@ -133,7 +133,7 @@
 
 
 	<!-- **************** 어드민 단의 영역 ************** -->
-	<select id="getPendingHost" resultMap="UserVO">
+	<select id="getadminListUsers" resultMap="UserVO">
 		select * from tuser where u_stat_code=#{userStatusCode}
 	</select>
 

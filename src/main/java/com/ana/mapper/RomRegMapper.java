@@ -13,4 +13,6 @@ public interface RomRegMapper {//호스트단에서 객실관련처리
 	public RomVO getRom(String romNum);
 	public int modify(RomVO rom);
 	public int remove(String romNum);
+	
+	public int getRomsize(String acmNum);
 }
