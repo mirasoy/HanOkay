@@ -1,5 +1,7 @@
 package com.ana.mapper;
 
+import static org.junit.Assert.assertTrue;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.junit.Test;
@@ -109,10 +111,27 @@ public class UserMapperTests {
 		log.info("@@@@@@@@@UserNum: "+user);
 	}
 	
-	@Test
+//	@Test
 	public void testGiveAuth() {
 		int count=mapper.matchAuthCode("serin9811@naver.com", "0000");
 		log.info("*****GIVE AUTH COUNT: "+ count+ "*****");
 	}
-
+	
+	@Test
+	public void giveGrant() {
+		int count= mapper.grantActive("kw@naver.com", "13506");
+		log.info("******GRANT ACTIVE"+ count);
+	}
+	
+//	@Test
+	public void testIsValid() {
+		UserVO user= mapper.isValidUser("serin@naver.com", "Serin123!");
+		log.info(user);
+	}
+	
+	@Test
+	public void testMatchAuthCode() {
+		int num= mapper.matchAuthCode("srawet6f@mapquest.com", "76097");
+		assertTrue(num==1);
+	}
 }

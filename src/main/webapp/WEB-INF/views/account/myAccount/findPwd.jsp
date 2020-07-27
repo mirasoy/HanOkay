@@ -14,7 +14,8 @@
 				<button  type="button" id="sendEmail">발송하기</button>
 				</td>
 			</tr>
-		</table>		
+		</table>	
+		<input id="msg2" value="${msg2 }">	
 	</form>
 	
 	<script>

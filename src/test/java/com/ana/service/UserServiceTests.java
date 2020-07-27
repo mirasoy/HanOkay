@@ -90,19 +90,17 @@ public class UserServiceTests {
 		AssertFalse(service.canRegister("serin@naver.com"));
 	}
 
+	
+	@Test 
+	public void testMatchAuth() {
+		assertTrue(service.matchAuthCode("admin@hanokay.com", "00000"));
+		
+	}
+	
 	private void AssertFalse(boolean checkEmail) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	@Test 
-	public void testGiveAuth() {
-		AssertFalse(service.matchAuthCode("se", "1234"));
-	}
-	
-	@Test
-	public void testGiveAuth2() {
-		assertTrue(service.grantActive("twestmerland5@yahoo.co.jp"));
-	}
 }
 
