@@ -15,7 +15,7 @@
 				<td>Email: <input type="text" size="40" name="email" id="email"
 					value="${cookie.user_check.value }" placeholder="서비스 이용을 위해 이메일을 입력해주세요" >
 					
-					<input type="checkbox" id="rememberEmail" ${checked }>Email 기억하기
+					<input type="checkbox" id="rememberEmail" ${checked } >Email 기억하기
 				</td>
 			</tr>
 			<tr>

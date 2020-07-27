@@ -135,7 +135,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href='/user/logout'>
                                 <div>
                                     	로그아웃
                                 </div>
