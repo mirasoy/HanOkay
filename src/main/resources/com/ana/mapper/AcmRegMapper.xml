@@ -98,4 +98,11 @@
 
 
 
+	<!-- admin단 -->
+	<select id="getadminListAcms" resultMap="AcmVOResult">
+		select * from TACM where ACM_ACTI =#{acmActi}
+	</select>
+
+
+
 </mapper>

@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ana.domain.AcmVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AdminService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-
-
-
 
 
 
@@ -128,4 +126,43 @@ public class AdminController {
 		
 		return "redirect:/admin/adminindex";
 	}
+	
+	@PostMapping("/adminlistings")
+	public String adminlistingsPost() {
+		return "/admin/adminlistings";
+	}
+	
+
+	
+	@GetMapping("/adminlistings")
+	public void adminlistingsGet(Model model,HttpSession session) {
+		System.out.println("=== 어드민단 숙소보기 페이지!===");
+		
+		String acmActi;
+		int size=0;
+
+			
+			
+		acmActi="PENDING";
+		List<AcmVO> pendinglist= aservice.getadminListAcms(acmActi);
+		model.addAttribute("pendinglist", pendinglist);
+		size+=pendinglist.size();
+		
+		acmActi="ACTIVE";
+		List<AcmVO> activelist= aservice.getadminListAcms(acmActi);
+		model.addAttribute("activelist", activelist);
+		size+=activelist.size();
+		
+		acmActi="INACTIVE";
+		List<AcmVO> inactivelist= aservice.getadminListAcms(acmActi);
+		model.addAttribute("inactivelist", inactivelist);
+		size+=inactivelist.size();
+			
+		
+		
+		System.out.println("전체리스트갯수:"+size);
+		model.addAttribute("size", size);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+	
 }

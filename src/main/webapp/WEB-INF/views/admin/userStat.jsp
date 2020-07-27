@@ -4,10 +4,10 @@
 <%@include file="../includes/adminheader.jsp"%>
 
 
-<div id="page-wrapper" style="padding-bottom:50px;">
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>			
   <!-- 숙소 방 추가 모달로 띄우기-->
-  <h4><c:out value="${adminFstname}"/> 관리자님의 알림판</h4><input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
+<input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
   <h3 align="left">총 <c:out value="${size}"/>개의 회원 호스트요청</h3>
 			
 			  
