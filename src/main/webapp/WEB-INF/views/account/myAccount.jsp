@@ -2,7 +2,7 @@
 
 <%@include file="../includes/header.jsp"%>
 
-	<h1>계정</h1>
+	<h1>계정2다</h1>
 	<script>
 	$(document).ready(function(){
 		

@@ -71,7 +71,7 @@ public class EmailServiceImpl implements EmailService {
             // 이메일 제목 (인코딩을 해야 한글이 깨지지 않음)
             msg.setSubject("HanOkay 한오케이 서비스 회원가입 인증코드", "utf-8");
             // 이메일 본문 (인코딩을 해야 한글이 깨지지 않음)
-            msg.setText("안녕하세요 HanOkay 한오케이 서비스팀입니다. \n 저희 회원이 되기위한 인증 코드는 '"+ authCode + "' 입니다. \n 인증 코드를 입력한 후, '인증코드 확인'버튼을 누르세요."
+            msg.setText("안녕하세요 HanOkay 한오케이 서비스팀입니다. \n 저희 회원이 되기위한 인증 코드는 \n"+ authCode + "\n입니다. \n 인증 코드를 입력한 후, '인증코드 확인'버튼을 누르세요."
            ,"utf-8");
             // 이메일 보내기
             mailSender.send(msg);

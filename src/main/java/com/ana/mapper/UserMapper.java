@@ -37,13 +37,13 @@ public interface UserMapper {
 	public boolean checkLogin(UserVO user);
 	
 	//입력된 인증코드와 보내진 db의 인증코드가 일치하는 사람이 1명이 맞는지 확인하는 메서드
-	public int matchAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authNum);
+	public int matchAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
 	
 	//user의 상태코드를 'ACTIVE'로 수정하는 메서드
-	public int grantActive(String email);
+	public int grantActive(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
 	
 	//user의 인증코드를 업데이트 하는 메서드
-	public int updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authNum);
+	public int updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
 	
 	
 	/////////////////////////////////림쨩의 영역/////////////////////////////////
