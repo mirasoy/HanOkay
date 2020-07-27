@@ -27,4 +27,7 @@ public interface AcmRegMapper {
 	public int chkaddr(String acmDetailaddr);//중복검사
 
 
+	
+	////////////어드민단////////////
+	public List<AcmVO> getadminListAcms(String acmActi);
 }

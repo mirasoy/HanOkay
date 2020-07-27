@@ -60,6 +60,9 @@
 				<input type="hidden" id="sample6_detailAddress" value="sth" placeholder="상세주소">
 				<input type="hidden" id="sample6_extraAddress" value="sth" placeholder="참고항목">
 
+
+
+				<div id="notphoto" style="display:inline-block; background-color:pink;">
 				
 				<div class="form-group">
 				<input class="form-control" type="button" class="form-control" style="width:100px;inline-block;" onclick="sample6_execDaumPostcode()" value="주소 찾기">
@@ -119,7 +122,16 @@
 					  <option value="PM05">5시이전</option>
 					</select>
 				 </div> 
-			  <br><br>
+			  <div class="uploadDiv" style="display:inline-block; background-color:orange;">
+                    <input type="file" name="uploadFile" multiple="multiple">
+                 <div class="uploadResult">
+                    <ul>
+
+                    </ul>
+           		 </div>
+			  
+			  </div>
+			  
 			  
 			</form>
 		</div>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.UserVO;
+import com.ana.mapper.AcmRegMapper;
 import com.ana.mapper.UserMapper;
 
 import lombok.AllArgsConstructor;
@@ -17,6 +18,9 @@ import lombok.Setter;
 public class AdminServiceImpl implements AdminService{
 	@Setter(onMethod_= {@Autowired})
 	private UserMapper umapper;
+	
+	@Setter(onMethod_= {@Autowired})
+	private AcmRegMapper amapper;
 
 	@Override
 	public List<UserVO> getPendingHost() {
@@ -62,6 +66,12 @@ public class AdminServiceImpl implements AdminService{
 		vo.setBizRegisterNumber("");
 		
 		return umapper.moditoGuest(vo)==1;
+	}
+
+	@Override
+	public List<AcmVO> getadminListAcms(String acmActi) {
+		
+		return amapper.getadminListAcms(acmActi);
 	}
 	
 

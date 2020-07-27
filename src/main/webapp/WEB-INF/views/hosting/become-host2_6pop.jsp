@@ -99,7 +99,7 @@
      <!-- <div id="image_container" style="width:200px;height:200px;"></div>
       <input type="file" id="ROM_PURL" name="ROM_PURL" placeholder="객실 사진" onchange="setThumbnail(event);"> --> 
 
-    <div class="room" id="room" style="width:500px;">
+    <div class="room" id="room" style="width:500px; display:inline-block; background-color:pink;">
       <div class="form-group">
            <input class="form-control" id="ROM_NAME" name="ROM_NAME" placeholder="객실 이름" style="width:300px;"> 
       </div>
@@ -143,7 +143,7 @@
          <label for="ROM_SIZE">객실 크기 </label>&nbsp;<input class="form-control" style="width:150px;display:inline-block;" id="ROM_SIZE" name="ROM_SIZE" placeholder="m2" numberOnly>
         <label for="ROM_PRICE">객실 가격 </label>&nbsp;<input class="form-control" style="width:150px;display:inline-block;" id="ROM_PRICE" name="ROM_PRICE" placeholder="원" numberOnly><br>
 
-      </div>
+   
       <!-- 여기에 appendChild하고 싶닷 -->
 		<br><br>
       <h4>객실 옵션</h4>
@@ -165,6 +165,19 @@
       <input type="checkbox" name="romOptcode" id="RM_OPT_BC" value="8192"><label for="RM_OPT_BC">발코니/테라스</label>
       <input type="checkbox" name="romOptcode" id="RM_OPT_SM" value="16384"><label for="RM_OPT_SM">흡연</label>
       <input type="checkbox" name="romOptcode" id="RM_OPT_KC" value="32768"><label for="RM_OPT_KC">개별주방</label>
+    </div>
+    
+    
+ 	<div class="uploadDiv" style="display:inline-block; background-color:orange;">
+          <input type="file" name="uploadFile" multiple="multiple">
+       <div class="uploadResult">
+          <ul>
+
+          </ul>
+ 		 </div>
+
+	</div>
+ 
    </form>
 
 </div>
