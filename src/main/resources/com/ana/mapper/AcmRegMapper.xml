@@ -33,6 +33,15 @@
 		
 		
 	</resultMap>
+	
+	
+	<resultMap id="AcmPivVo" type="com.ana.domain.PicVO">
+		<result column="ACM_NUM" property="num" />
+		<result column="ACM_PURL" property="purl" />
+		<result column="ACM_PNAME" property="ptitle" />
+		<result column="ACM_PDESC" property="picDesc" />
+	
+	</resultMap>
 
 	<!-- 호스트단에서 숙소등록 -->
 	<!-- 한회원이 운영하는 숙소 다 가져오기 -->
@@ -103,6 +112,12 @@
 		select * from TACM where ACM_ACTI =#{acmActi}
 	</select>
 
+
+	<!-- 사진입력 -->
+	<insert id="insertPhoto">
+	INSERT INTO TACM_PIC(ACM_NUM, ACM_PURL, ACM_PNAME, ACM_PDESC) VALUES
+	(#{num},#{purl},#{ptitle},#{picDesc})
+	</insert>
 
 
 </mapper>
