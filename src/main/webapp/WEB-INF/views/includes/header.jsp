@@ -14,7 +14,7 @@ String userPwd = "";
 String userNum = "";
 String userPriv ="";
 String userStatusCode="";
-
+ 
 
 //userNum = "U1";
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
@@ -103,7 +103,7 @@ if (user != null) {
                   var priv;
                   var userStatusCode;
                 //세션에 유저가 없으면
-               if (<%=user == null%>) {
+               if (<%=userFstName.equals("") %>) {
                      // $("#loginout").append("<a href='/user/login'>로그인</a>");
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
                      $('#notification').empty();
@@ -211,7 +211,7 @@ if (user != null) {
                               class="fa fa-user fa-2x"></i></a>
                            <ul class="dropdown-menu">
                               <span class="header-menu">마이페이지</span>
-                              <li><a href="#">계정</a></li>
+                              <li><a onclick="location.href='/account/myAccount'" style="cursor: pointer">계정</a></li>
                               <li><a onclick="location.href='/mypage/bookListAll'"
                                  style="cursor: pointer">나의 예약</a></li>
                               <li><a onclick="location.href='/review/list'"
