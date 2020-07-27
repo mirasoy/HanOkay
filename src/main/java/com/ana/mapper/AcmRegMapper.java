@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.PicVO;
+import com.ana.domain.UserAcmVO;
 
 public interface AcmRegMapper {
 	
@@ -31,5 +32,5 @@ public interface AcmRegMapper {
 
 	
 	////////////어드민단////////////
-	public List<AcmVO> getadminListAcms(String acmActi);
+	public List<UserAcmVO> getadminListAcms(String acmActi);
 }

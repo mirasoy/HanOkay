@@ -77,9 +77,11 @@
 		
 	</update>
 
-
-
-
+	<!-- 어드민단 -->
+	<select id="getRomsize" resultType="int">
+	select count(*) from trom
+	where acm_num=#{acmNum}
+	</select>
 
 
 </mapper>
