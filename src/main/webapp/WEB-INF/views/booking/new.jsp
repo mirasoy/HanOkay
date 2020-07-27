@@ -168,11 +168,11 @@
 	background: whitesmoke;
 }
 
+/* 카드결제 */
 .payment-card{
 	display: flex;
 }
 
-/* 카드결제 */
 .payment-title {
     width: 100%;
     text-align: center;
@@ -214,12 +214,12 @@
     color: #707070;
 }
 
-label {
+.payment-card label {
     padding-bottom: 5px;
     font-size: 13px;
 }
 
-input {
+.payment-card input {
     margin-top: 3px;
     padding: 15px;
     font-size: 16px;
@@ -228,7 +228,7 @@ input {
     border: 1px solid #dcdcdc;
 }
 
-.ccicon {
+.payment-card .ccicon {
     height: 38px;
     position: absolute;
     right: 6px;
@@ -237,14 +237,14 @@ input {
 }
 
 /* CREDIT CARD IMAGE STYLING */
-.preload * {
+.payment-card .preload * {
     -webkit-transition: none !important;
     -moz-transition: none !important;
     -ms-transition: none !important;
     -o-transition: none !important;
 }
 
-.container {
+.payment-card .container {
     width: 100%;
     max-width: 400px;
     max-height: 251px;
@@ -472,7 +472,7 @@ input {
 }
 
 /* FLIP ANIMATION */
-.container {
+.payment-card .container {
     perspective: 1000px;
 }
 
@@ -509,93 +509,127 @@ input {
     transform: rotateY(180deg);
 }
 
+.container-info .acm-pic{
+	background: black;
+}
+
+.container-info .acm-pic img{
+	width: 25vh;
+}
+
+.container-info{
+	font-size: 2vh;
+}
+
+
+.container-info .acm-title{
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.container-booker input[type="text"], input[type="email"], input[type="tel"]{
+	background-color:#eee; 
+	opacity: 0.5;
+}
+
+.page-contnets .label-required:after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
+}
+
+.page-contnets .td-title{
+    font-size: 2vh;
+    font-weight: bold;
+	text-align: center;
+    padding: 3vh;
+}
+
+.page-contents td{
+	width: 50px;
+	
+}
+
 </style>
 
 <div class = "page-wrapper">
 	<div class = "page-contnets" style="width: calc(75% - 1.875rem);">
 		<div class = "container-info box" >
 			<table>
-				<tr><td rowspan="4">사진</td>
-					<td>비트캠프 호텔</td></tr>
-				<tr><td>**</td></tr>
-				<tr><td>(2.2/5.0) 별로에요</td></tr>
-				<tr><td>서울시 종로구 어쩌구로</td></tr>
+				<tr><td class="acm-pic" rowspan="4">
+						<img alt='숙소사진' src='/display?fileName=<c:out value="${info.acmPurl}" /><c:out value="${info.acmPname}" />' />
+					</td>
+					<td>&nbsp;</td><td class="acm-title"><c:out value="${info.acmName}" /></td></tr>
+				<tr><td></td><td><span id="stisf">&nbsp;</span>
+					<span id="stisf-num">(<c:out value="${star}" /> / 5.0)</span>
+					</td></tr>
+				<tr><td></td><td><c:out value="${info.acmCity} "/> <c:out value="${info.acmDistr} "/> <c:out value="${info.acmDetailaddr} "/></td></tr>
 			</table>
 		</div>
 		
+ 	<form name="form" method="post" onsubmit="return checkValidation()">
 		<div class = "container-booker box" >
-			*필수 입력사항</br>
-		 	<form name="form" method="post" onsubmit="return checkValidation()">
-			<input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</br>
-			이름*<input type="text" id="userInfo1" name='bookerFirstname' value='<%=user.getUserFstName()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"> 
-			성*<input type="text" id="userInfo2"  name='bookerLastname' value='<%=user.getUserLastName()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
-			<label id="nameMsg" >&nbsp</label></br>
-			이메일*<input type="text" id="userInfo3"  name='bookerEmail' value='<%=user.getUserEmail()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br> 
-			<label id="emailMsg" >&nbsp</label></br>
-			전화번호<input type="text" id="userInfo4" name='bookerPhone' value='<%=user.getUserPhone()%>' readonly="readonly" style="background-color:#eee; opacity: 0.5;"></br>
-			<label id="phoneMsg" >&nbsp</label></br>
+			<table>
+				<tr><td rowspan="6" class="td-title">예약</br>정보</td><td colspan="3"><input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</td><td><input type="hidden" class="label-required">표시는 필수 입력사항입니다.</td></tr>
+				<tr><td><label class="table-lb label-required">First Name</label></td><td><input id="userInfo1" name="firstName" required type="text" value='<%=user.getUserFstName()%>' readonly="readonly"/></td>
+					<td><label class="table-lb label-required">Last Name</label></td><td><input id="userInfo2" name="lastName" required type="text" value='<%=user.getUserLastName()%>' readonly="readonly"/></td>
+					<td><label id="nameMsg" >&nbsp</label></td></tr>
+				<tr><td><label class="table-lb label-required">Email</label></td><td colspan="3"><input id="userInfo3" name="email" required type="email" value='<%=user.getUserEmail()%>' readonly="readonly"/></td>
+					<td><label id="emailMsg" >&nbsp</label><tr><td>
+				<tr><td><label class="table-lb ">Phone</label></td><td colspan="3"><input id="userInfo4" name="phone" type="tel" value='<%=user.getUserPhone()%>' readonly="readonly" /></td>
+					<td><label id="phoneMsg" >&nbsp</label><tr><td>
+			</table>
 			
-			<input type="hidden" name='userNum' value='<%=user.getUserNum() %>'> 
-			<input type="hidden" name='checkinDate' value=''> 
-			<input type="hidden" name='checkoutDate' value=''> 
-			<input type="hidden" name='staydays' value=''> 
-			<input type="hidden" name='guest' value=''> 
-			<input type="hidden" name='bookPrice' value=''> 
 		</div>
-		
+ 		
 		<div class = "container-request box" >
-			도착 예정시간: <select name="expectedArr">
-						<option value="">-----</option>
-						<option value="PM02">PM02</option>
-						<option value="PM03">PM03</option>
-						<option value="PM04">PM04</option>
-						<option value="PM05">PM05</option>
-						<option value="PM06">PM06</option>
-						<option value="PM07">PM07</option>
-						<option value="PM08">PM08</option>
-						<option value="PM09">PM09</option>
-						<option value="PM10">PM10</option>
-						<option value="PM11">PM11</option>
-						<option value="PM12">PM12</option>
-						<option value="AM01">AM01</option>
-						<option value="AM02">AM02</option>
-						<option value="AM03">AM03</option>
-						<option value="AM04">AM04</option>
-						<option value="AM05">AM05</option>
-						<option value="AM06">AM06</option>
-						<option value="AM07">AM07</option>
-						<option value="AM08">AM08</option>
-						<option value="AM09">AM09</option>
-						<option value="AM10">AM10</option>
-						<option value="AM11">AM11</option>
-						<option value="AM12">AM12</option>
-					</select></br> 
-					흡연여부: 금연객실<input type="radio" name="smoking" value="0" checked="checked">
-						흡연객실<input type="radio" name="smoking" value="1"></br> 
-					특별 요청사항: <input type="text" size="100" id="request" name="request" value="" maxlength="100"></br> 
-						<input type="hidden" name="bookStatus" value="RS_STT_BK" > 
+			<table>
+				 <tr><td rowspan="3" class="td-title">추가</br>요청</td><td><label class="lb">도착 예정시간</label></td>
+				 	<td><select name="expectedArr">
+							<option value="">-----</option>
+							<option value="PM02">PM02</option>
+							<option value="PM03">PM03</option>
+							<option value="PM04">PM04</option>
+							<option value="PM05">PM05</option>
+							<option value="PM06">PM06</option>
+							<option value="PM07">PM07</option>
+							<option value="PM08">PM08</option>
+							<option value="PM09">PM09</option>
+							<option value="PM10">PM10</option>
+							<option value="PM11">PM11</option>
+							<option value="PM12">PM12</option>
+							<option value="AM01">AM01</option>
+							<option value="AM02">AM02</option>
+							<option value="AM03">AM03</option>
+							<option value="AM04">AM04</option>
+							<option value="AM05">AM05</option>
+							<option value="AM06">AM06</option>
+							<option value="AM07">AM07</option>
+							<option value="AM08">AM08</option>
+							<option value="AM09">AM09</option>
+							<option value="AM10">AM10</option>
+							<option value="AM11">AM11</option>
+							<option value="AM12">AM12</option>
+						</select></td></tr>
+					<tr><td><label class="lb">흡연여부</label></td><td>금연객실<input type="radio" name="smoking" value="0" checked="checked">흡연객실<input type="radio" name="smoking" value="1"></td></tr>
+					<tr><td><label class="lb">메세지</label></td><td><input type="text" size="100" id="request" name="request" value="" maxlength="100"></td></tr>
+					<tr><td><input type="hidden" name="bookStatus" value="RS_STT_BK" ></td><td></td></tr>
+			</table>
+						 
 		</div>
-			<%=checkin %> 
-			<%=checkout %>
-			<%=person %>
-			<%=romNum %>
-			<%=romPrice %>
-			${days }
 	</div> <!-- end of contents -->
 	
 	<div class = "page-sidebar">
 		<div class = "container-payment box" >
 			<span><%=checkin %> ~ <%=checkout %> (${days}박)</span></br>
-			<span>'방이름'('방타입')</span></br>
-			<span>'평균 별점'(이용후기 '리뷰건수'건 기준)</span></br>
+			<span>${info.romName}(${info.romType})</span></br>
 			<span>객실 1개, 인원 <%=person %>명</span></br>
-			<span>최대 인원: '객실 인원수'명</span></br>
+			<span>(최대 인원: ${info.romCapa}명)</span></br>
 			<table>
-				<tr><td>요금(<i class="fa fa-krw" aria-hidden="true"></i>)</td><td><i class="fa fa-krw" aria-hidden="true"></i></td></tr>
-				<tr><td>합계</td><td><i class="fa fa-krw" aria-hidden="true"></i></td></tr>
-				<tr><td>추가(세금 10%)</td><td><i class="fa fa-krw" aria-hidden="true"></i></td></tr>
-				<tr><td></td><td></td></tr>
-				<tr><td>합계</td><td><i class="fa fa-krw" aria-hidden="true"></i></td></tr>
+				<tr><td>객실 요금(${days}박 x <%=romPrice%>)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="price"></label></td></tr>
+				<tr><td>세금 10%</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="tax"></label></td></tr>
+				<tr><td id="total-td">합계</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="total"></label></td></tr>
+				<tr><td>(1박당 금액)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="perDay"></label></td></tr>
 			</table>
 			<a id="modalBtn">결제하기</a>
 		</div>
@@ -741,7 +775,7 @@ input {
 			    <input type="radio" name="item" id="item-two" hidden />
 			    <label for="item-two">간편 결제</label>
 			    <div class="acc-contents">
-			      <p>I'm a web developer by day, and a web developer by night. I live a very exciting life.</p>
+			      <p><div id="paypal-button-container"></div></p>
 			    </div>
 			  </div>
 			  
@@ -762,6 +796,44 @@ input {
 	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
 
 </div><!-- end of page -->
+	<script>
+		window.onload = function() {
+			// 숙소 평균 별점
+			getStar(); 
+			getPrice();
+		}
+	
+		function getStar() {
+			let star = "${star}";
+			let stisf = document.getElementById("stisf");
+			
+			for(let i = 0; i < Math.floor(star); i++){
+				stisf.innerHTML += '<i class="fa fa-star" aria-hidden="true"></i>';
+			}
+			
+			let half = star-Math.floor(star) < 0.5 ? 0 : 0.5; 
+			for(let i = 0; i < half; i++){
+				stisf.innerHTML += '<i class="fa fa-star-half" aria-hidden="true"></i>';
+			}
+			
+			document.getElementById("stisf").style.color="#e3cf7a";
+			document.getElementById("stisf").style.fontSize="18px";
+		}
+		
+		function getPrice() {
+			const romPrice = "<%=romPrice%>";
+			const days = "${days}";
+			let price = romPrice * days;
+			let tax = price / 10;
+			let total = price + tax;
+			let perDay = total / days;
+			document.getElementById("price").innerHTML = price;
+			document.getElementById("tax").innerHTML = tax; 
+			document.getElementById("total").innerHTML = total;
+			document.getElementById("perDay").innerHTML = perDay;
+		}
+	</script>
+
 
 	<script>
 		let modal = document.getElementById("paymentModal");
@@ -776,8 +848,34 @@ input {
 		}
 
 	</script>
-	
+
+	 <!-- Include the PayPal JavaScript SDK -->
+	<script src="https://www.paypal.com/sdk/js?client-id=sb&components=buttons,funding-eligibility"></script>
+
 	<script>
+	  paypal.Buttons({
+	    createOrder: function(data, actions) {
+	      // This function sets up the details of the transaction, including the amount and line item details.
+	      return actions.order.create({
+	        purchase_units: [{
+	          amount: {
+	            value: '0.01'
+	          }
+	        }]
+	      });
+	    },
+	    onApprove: function(data, actions) {
+	      // This function captures the funds from the transaction.
+	      return actions.order.capture().then(function(details) {
+	        // This function shows a transaction success message to your buyer.
+	        alert('Transaction completed by ' + details.payer.name.given_name);
+	      });
+	    }
+	  }).render('#paypal-button-container');
+	  //This function displays Smart Payment Buttons on your web page.
+	</script>
+	
+<!-- 	<script>
 	window.onload = function () {
 
 		const name = document.getElementById('name');
@@ -1054,6 +1152,6 @@ input {
 		    document.querySelector('.creditcard').classList.add('flipped');
 		});
 		};
-	</script>
+	</script> -->
 <%@include file="../includes/footer.jsp"%>
 </html>
