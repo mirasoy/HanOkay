@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ana.service.AcmDetailService;
+import com.ana.service.BookingService;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -15,15 +18,21 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/booking/*")
 @AllArgsConstructor
-public class BookingController2 {
+public class BookingRegisterController {
+	
+	private BookingService service;
+	private AcmDetailService star;
 	
 	@PostMapping("/new")
 	public void getInfo(
 			@RequestParam("in") String checkin,
 			@RequestParam("out") String checkout,
+			@RequestParam("romNum") String romNum,
 			Model model) {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■ 예약페이지로 이동 중...");
-		model.addAttribute("days", getDiff(checkin, checkout));
+		model.addAttribute("days", getDiff(checkin, checkout))
+		.addAttribute("star", star.getStisf(service.getInfo(romNum).getAcmNum())) // 숙소별 별점
+		.addAttribute("info", service.getInfo(romNum)); // 객실과 숙소 정보
 	}
 	
 	public long getDiff(String in, String out) {

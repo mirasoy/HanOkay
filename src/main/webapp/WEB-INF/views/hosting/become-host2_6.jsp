@@ -74,8 +74,10 @@
 					</thead>
 
 					<c:forEach items="${list}" var="room">
-						<tr>
-							<td><c:out value="${room.romPurl}" /></td>
+						<tr style = "height: 220px;">
+							<td style="width: 350px;">
+							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px; ' id='rPicture' src='/review/display?fileName=<c:out value="${room.romPurl}" /><c:out value="${room.romPname }" />'>
+							</td>
 							<td>
 								<a class='move' href='<c:out value="${room.romNum}"/>'>
 									<c:out value="${room.romName}" />

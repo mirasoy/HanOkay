@@ -16,6 +16,6 @@ public class AcmDetailRomVO {
 	Integer	romPrice;
 	String	romType;
 	String	romActi;
-	String	romOptcode;
+	Integer	romOptcode;
 	
 }

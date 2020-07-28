@@ -673,7 +673,7 @@ details{
 			alert("메일이 복사되었습니다!");
 		});
 		
-		// 숙소 만족도
+		// 숙소 만족도(별점)
 		function getStar() {
 			let star = "${star}";
 			let stisf = document.getElementById("stisf");
@@ -691,7 +691,6 @@ details{
 			document.getElementById("stisf").style.color="#e3cf7a";
 			document.getElementById("stisf").style.fontSize="50px";
 		}
-		//
 		
 		// 날짜 선택
 		var today = new Date();
