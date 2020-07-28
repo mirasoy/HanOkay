@@ -95,7 +95,7 @@ public class HostController {
 			model.addAttribute("pendinglist", pendinglist);
 			size+=pendinglist.size();
 			
-		} else if(userPriv.equals("Host")){
+		} else if(userPriv.equals("HOST")){
 			//호스트면
 			System.out.println(2);
 			acmActi="PENDING";

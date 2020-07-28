@@ -526,8 +526,8 @@ function sample6_execDaumPostcode() {
 
 		// 총 갯수 구하기
 		var total = $(".uploadResult ul >li").length+files.length
-		if(total>5){
-			alert("5장의 사진만 등록이 가능합니다.")
+		if(total>7){
+			alert("7장의 사진만 등록이 가능합니다.")
 			return false;
 		}
 		
