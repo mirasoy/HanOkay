@@ -2,7 +2,6 @@ package com.ana.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
@@ -26,10 +25,6 @@ public class UserController {
 	@Autowired
 	private UserService service;
 
-	@Autowired
-	private EmailService emailService;
-   
-	
 	@GetMapping
 	public String showMyAccountPage() {
 		return "/account/myAccount";
@@ -41,13 +36,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/account/myAccount/accountRecovery", method=RequestMethod.POST)
-	public void sendEmailToFindPwd() {
+	public void sendEmailToFindPwd(String email) {
+		log.info("email in UserController: "+ email);
+		
+		
 		
 	}
-	
-	
-	
-	
-	
-
 }

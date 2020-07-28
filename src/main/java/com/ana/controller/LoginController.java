@@ -45,14 +45,14 @@ public class LoginController {
 	@GetMapping("/welcome")
 	public ModelAndView showWelcome(Model model, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/welcome");
+		mv.setViewName("/user/welcome");
 		return mv;
 	}
 
 	// excuteLogin을 get으로 mapping시 에러페이지를 보여주게
 	@GetMapping("/executeLogin")
 	public String executeLogin() {
-		return "error/error";
+		return "/error/error";
 	}
 
 	// 로그인 기능하기

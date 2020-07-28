@@ -14,6 +14,6 @@ public class ErrorController {
 
 	@GetMapping("/error")
 	public String showErrorPage() {
-		return "error/404error";
+		return "/error/404error";
 	}
 }

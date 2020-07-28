@@ -2,7 +2,8 @@
 
 <%@include file="../includes/header.jsp"%>
 
-	<h1>계정2다</h1>
+	<h3>나의 계정</h3>
+	
 	<script>
 	$(document).ready(function(){
 		
