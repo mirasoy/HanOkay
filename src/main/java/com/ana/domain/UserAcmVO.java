@@ -48,4 +48,5 @@ public class UserAcmVO {
 	private Integer acmOptcode;
 	
 	private int romSize;
+	//private CodeVO acmCode;//2진수 코드찍기용
 }

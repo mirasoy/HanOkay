@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public boolean moditoHost(String userNum) {
+	public boolean moditoHost(String userNum, String bizRegnum) {
 		//회원 호스트 업그레이드
 		UserVO vo = new UserVO();
 		vo.setUserNum(userNum);
@@ -52,8 +52,12 @@ public class AdminServiceImpl implements AdminService{
 		//숙소 상태도 pending-> active/open 으로 update
 		//AcmVO acm = new AcmVO();
 		
+		AcmVO acm= new AcmVO();
+		acm.setAcmStatus("OPEN");
+		acm.setAcmActi("ACTIVE");
+		acm.setBizRegnum(bizRegnum);
 		
-		return umapper.moditoHost(vo)==1;
+		return umapper.moditoHost(vo)*amapper.moditoAcmActive(acm)==1;
 	}
 
 	@Override
@@ -85,6 +89,12 @@ public class AdminServiceImpl implements AdminService{
 	public List<UserVO> getadminListUsers(String userStatusCode) {
 		
 		return umapper.getadminListUsers(userStatusCode);
+	}
+
+	@Override
+	public UserAcmVO getpendingUserAcms(String bizRegnum) {
+		// TODO Auto-generated method stub
+		return amapper.getpendingUserAcms(bizRegnum);
 	}
 	
 

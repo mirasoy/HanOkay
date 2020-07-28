@@ -59,8 +59,8 @@
 	<style>
 		html,body{
 			font-family:"타이포_쌍문동";
+			background-color:white;
 		}
-		
 		
 		#logo{
 			width:50px;
@@ -74,16 +74,8 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button> -->
-                
-                
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:70px;margin-bottom:0;background-color:white;">
+            <div class="navbar-header" style="margin-bottom:15px;">     
 				<!-- 로고자리 -->
                 <a class="navbar-brand" href="/hosting/hostindex">Han:Ok</a>
             </div>
@@ -161,7 +153,7 @@
                         </li>
                      </ul>
         </nav>
-
+</div>
         
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
