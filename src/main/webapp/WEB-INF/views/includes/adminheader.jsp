@@ -67,7 +67,7 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:70px;margin-bottom:0;background-color:white;">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:50px;margin-bottom:0;background-color:white;">
             <div class="navbar-header" style="margin-bottom:15px;">
                 
 				<!-- 로고자리 -->

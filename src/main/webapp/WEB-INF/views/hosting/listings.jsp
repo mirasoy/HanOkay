@@ -219,7 +219,7 @@ $(document).ready(function(){
 			
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
-			actionForm.attr("action","/hosting/become-host2_6");
+			actionForm.attr("action","/hosting/regAcm");
 			actionForm.submit();
 		});
 	});
