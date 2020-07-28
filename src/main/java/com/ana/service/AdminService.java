@@ -17,9 +17,12 @@ public interface AdminService {
 	//회원관리
 	public List<UserVO> getadminListUsers(String userStat);
 	
+	//회원숙소 가져오기
+	public UserAcmVO getpendingUserAcms(String bizRegnum);
+	
 	public UserVO getUser(String userNum);
 
-	public boolean moditoHost(String userNum);
+	public boolean moditoHost(String userNum,String bizRegnum);
 
 	public boolean moditoGuest(String userNum);
 

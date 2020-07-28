@@ -4,22 +4,48 @@
 <%@include file="../includes/adminheader.jsp"%>
 
   <!-- 숙소 방 추가 모달로 띄우기-->
-<div id="page-wrapper" style="padding-bottom:50px;">
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
  
- <br> <h4>일반 회원리스트</h4><input type="hidden" id="userNum" name="userNum" value=" <c:out value='${userNum}'/>">
 	<br>			
   <!-- 수정, 삭제 가능하게  -->
-  		  
+ <!-- 중앙정렬 -->
+<div style="margin-left:15%;margin-right:15%;">		
 <div class="row">
-	  <div class="col-lg-12">
-	    <h4>'<c:out value="${user.userFstName }"/>' 회원님의  요청</h4>
-	  </div>
+	  
 	  <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-3">
+    <div class="panel panel-default">
+
+      <div class="panel-heading"><c:out value="${user.userFstName }"/> 회원님의 정보</div>
+      <!-- /.panel-heading -->
+	      <div class="panel-body">
+			<div class="form-group">
+	          <label>회원번호</label> <input class="form-control" name='userNum' id='userNum'
+	            value='<c:out value="${user.userNum }"/>' readonly="readonly">
+	        </div>	
+	        <div class="form-group">
+	          <label>회원이름</label> <input class="form-control" name='userFstName' id='userFstName'
+	            value='<c:out value="${user.userFstName }"/>' readonly="readonly">
+	        </div>
+	        <div class="form-group">
+	          <label>회원 권한</label> <input class="form-control" name='userPiv'
+	            value='<c:out value="${user.userPriv }"/>' readonly="readonly">
+	        </div>
+	
+	        <div class="form-group">
+	          <label>회원 상태</label> <input class="form-control" name='userStatusCode'
+	            value='<c:out value="${user.userStatusCode }"/>' readonly="readonly">
+	        </div>
+			
+		</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-8">
     <div class="panel panel-default">
 
       <div class="panel-heading"><c:out value="${user.userFstName }"/> 회원님의 정보</div>
@@ -51,8 +77,10 @@
 		</div>
 		</div>
 	</div>
+	
+	
 </div>
-
+</div>
 		<!-- 빈 폼 -->
 		<form id="actionForm">
 		</form>

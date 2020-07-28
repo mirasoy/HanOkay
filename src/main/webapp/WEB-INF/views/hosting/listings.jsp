@@ -3,7 +3,9 @@
 <%@include file="../includes/hostheader.jsp"%>
 
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
-	<br>			
+	<br>		
+		<!-- 중앙정렬 -->
+	<div style="margin-left:15%;margin-right:15%;">		
   <!-- 숙소 방 추가 모달로 띄우기-->
   <h3 align="left">총 <c:out value="${size}"/>개의 숙소</h3><br>
 		
@@ -141,7 +143,7 @@
 			</div>
 			<!-- end panel -->
 		</div>
-			
+		</div>	
 			
 		<!-- 빈 폼 -->
 		<form id="actionForm">

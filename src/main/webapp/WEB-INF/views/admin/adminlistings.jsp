@@ -4,64 +4,10 @@
 
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>			
+<!-- 중앙정렬 -->
+<div style="margin-left:15%;margin-right:15%;">		
   <!-- 숙소 방 추가 모달로 띄우기-->
   <h3 align="left">총 <c:out value="${size}"/>개의 숙소</h3><br>
-		
-		
-		<!-- 영업중인 숙소 -->
-			
-		<div class="col-lg-12" id="activeacm">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span id="acmlist">영업중인 숙소</span>
-				<!-- button type="button" class="btn btn-xs pull-right" data-oper='newAcm'>새 숙소 등록</button-->
-			</div>
-			<!-- /.panel-heading -->
-			<div class="panel-body">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>숙소 호스트 </th>
-							<th>사업자번호 </th>
-							<th>숙소 번호</th>
-							<th>숙소 이름</th>
-							<th>숙소 유형</th>
-							<th>숙소 대표번호 </th>
-							<th>숙소 위치</th>
-							<th>숙소 옵션 </th>
-							<th>숙소 객실수</th>
-						</tr>
-					</thead>
-
-					<c:forEach items="${activelist}" var="activeacm">
-						<tr>
-							<td><c:out value="${activeacm.userNum}" /></td>
-							<td><c:out value="${activeacm.bizRegnum}" /></td>
-							<td><c:out value="${activeacm.acmNum}" /></td>
-							<td>
-								<a class='move' href='<c:out value="${activeacm.bizRegnum}"/>'>
-									<c:out value="${activeacm.acmName}" />
-								</a>
-							</td>
-							<td id="<c:out value='${activeacm.acmType}'/>"></td>
-							<td><c:out value="${activeacm.repPhone}" /></td>
-							
-							<td><c:out value="${activeacm.acmCity}" />&nbsp;<c:out value="${activeacm.acmDistr}" />&nbsp;<c:out value="${activeacm.acmDetailaddr}" /></td>
-							<td><c:out value="${activeacm.acmOptcode}" /></td>
-							<td><c:out value="${activeacm.romSize}" /></td>
-						
-						</tr>
-					</c:forEach>
-				</table>
-				
-				
-				  <br>
-				</div>
-				<!--  end panel-body -->
-			</div>
-			<!-- end panel -->
-		</div>
-		
 		
 		<!-- 대기중인 숙소 -->
 		
@@ -75,33 +21,31 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>숙소 호스트 </th>
-							<th>사업자번호 </th>
+							<th>호스트 </th>
 							<th>숙소 번호</th>
 							<th>숙소 이름</th>
 							<th>숙소 유형</th>
-							<th>숙소 대표번호 </th>
+							<th>대표 번호 </th>
 							<th>숙소 위치</th>
 							<th>숙소 옵션 </th>
-							<th>숙소 객실수</th>
+							<th>객실수</th>
 						</tr>
 					</thead>
 
 					<c:forEach items="${pendinglist}" var="pendingacm">
 						<tr>
 							<td><c:out value="${pendingacm.userNum}" /></td>
-							<td><c:out value="${pendingacm.bizRegnum}" /></td>
 							<td><c:out value="${pendingacm.acmNum}" /></td>
 							<td>
 								<a class='move' href='<c:out value="${pendingacm.bizRegnum}"/>'>
 									<c:out value="${pendingacm.acmName}" />
 								</a>
 							</td>
-							<td id="<c:out value='${pendingacm.acmType}'/>"></td>
+							<td><div id="pendingacmType${pendingacm.acmNum}">&nbsp;</div></td>
 							<td><c:out value="${pendingacm.repPhone}" /></td>
 							
 							<td><c:out value="${pendingacm.acmCity}" />&nbsp;<c:out value="${pendingacm.acmDistr}" />&nbsp;<c:out value="${pendingacm.acmDetailaddr}" /></td>
-							<td><c:out value="${pendingacm.acmOptcode}" /></td>
+							<td><div id="pendingacmOpt${pendingacm.acmNum}">&nbsp;</div></td>
 							<td><c:out value="${pendingacm.romSize}" /></td>
 						
 						</tr>
@@ -117,6 +61,61 @@
 		</div>
 		
 		
+		<!-- 영업중인 숙소 -->
+			
+		<div class="col-lg-12" id="activeacm">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span id="acmlist">영업중인 숙소</span>
+				<!-- button type="button" class="btn btn-xs pull-right" data-oper='newAcm'>새 숙소 등록</button-->
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>호스트 </th>
+							<th>숙소 번호</th>
+							<th>숙소 이름</th>
+							<th>숙소 유형</th>
+							<th>대표 번호 </th>
+							<th>숙소 위치</th>
+							<th>숙소 옵션 </th>
+							<th>객실수</th>
+						</tr>
+					</thead>
+
+					<c:forEach items="${activelist}" var="activeacm">
+						<tr>
+							<td><c:out value="${activeacm.userNum}" /></td>
+							<td><c:out value="${activeacm.acmNum}" /></td>
+							<td>
+								<a class='move' href='<c:out value="${activeacm.bizRegnum}"/>'>
+									<c:out value="${activeacm.acmName}" />
+								</a>
+							</td>
+							<td><div id="activeacmType${activeacm.acmNum}">&nbsp;</div></td>
+							<td><c:out value="${activeacm.repPhone}" /></td>
+							
+							<td><c:out value="${activeacm.acmCity}" />&nbsp;<c:out value="${activeacm.acmDistr}" />&nbsp;<c:out value="${activeacm.acmDetailaddr}" /></td>
+							<td><div id="activeacmOpt${activeacm.acmNum}">&nbsp;</div></td>
+							<td><c:out value="${activeacm.romSize}" /></td>
+						
+						</tr>
+					</c:forEach>
+				</table>
+				
+				
+				  <br>
+				</div>
+				<!--  end panel-body -->
+			</div>
+			<!-- end panel -->
+		</div>
+		
+		
+		
+		
 		<!-- 비활성화된 숙소 -->
 		
 		<div class="col-lg-12" id="inactiveacm">
@@ -129,22 +128,20 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>숙소 호스트 </th>
-							<th>사업자번호 </th>
+							<th>호스트 </th>
 							<th>숙소 번호</th>
 							<th>숙소 이름</th>
 							<th>숙소 유형</th>
-							<th>숙소 대표번호 </th>
+							<th>대표 번호 </th>
 							<th>숙소 위치</th>
 							<th>숙소 옵션 </th>
-							<th>숙소 객실수</th>
+							<th>객실수</th>
 						</tr>
 					</thead>
 
 					<c:forEach items="${inactivelist}" var="inactiveacm">
 						<tr>
 							<td><c:out value="${inactiveacm.userNum}" /></td>
-							<td><c:out value="${inactiveacm.bizRegnum}" /></td>
 							<td><c:out value="${inactiveacm.acmNum}" /></td>
 							<td>
 								<a class='move' href='<c:out value="${inactiveacm.bizRegnum}"/>'>
@@ -155,7 +152,7 @@
 							<td><c:out value="${inactiveacm.repPhone}" /></td>
 							
 							<td><c:out value="${inactiveacm.acmCity}" />&nbsp;<c:out value="${inactiveacm.acmDistr}" />&nbsp;<c:out value="${inactiveacm.acmDetailaddr}" /></td>
-							<td><c:out value="${inactiveacm.acmOptcode}" /></td>
+							<td><div id="inactiveacmOpt${inactiveacm.acmNum}">&nbsp;</div></td>
 							<td><c:out value="${inactiveacm.romSize}" /></td>
 						
 						</tr>
@@ -170,13 +167,13 @@
 			<!-- end panel -->
 		</div>
 			
-			
+		</div>	
 		<!-- 빈 폼 -->
 		<form id="actionForm">
 		</form>
 				
 			
-		</div>
+</div>
 
 				
 
@@ -188,11 +185,11 @@ $(document).ready(function(){
 		console.log(pendingacmType);
 		
 		if(pendingacmType.trim()=="P"){//객실별
-			$('#<c:out value="${pendingacm.acmType}"/>').append("객실별");
+			document.getElementById("pendingacmType${pendingacm.acmNum}").innerHTML="객실별";
 		}
 			
 		else if(pendingacmType.trim()=="H"){//집천체
-			$('#<c:out value="${pendingacm.acmType}"/>').append("집천체");
+			document.getElementById("pendingacmType${pendingacm.acmNum}").innerHTML="집전체";
 		}	
 	
 	</c:forEach>
@@ -204,12 +201,12 @@ $(document).ready(function(){
 		console.log(activeacmType);
 		
 		if(activeacmType.trim()=="P"){//객실별
-			$('#<c:out value="${activeacm.acmType}"/>').append("객실별");
+			document.getElementById("activeacmType${activeacm.acmNum}").innerHTML="객실별";
 		}
 			
 		else if(activeacmType.trim()=="H"){//집천체
-			$('#<c:out value="${activeacm.acmType}"/>').append("집천체");
-		}	
+			document.getElementById("activeacmType${activeacm.acmNum}").innerHTML="집전체";
+		}
 	
 	</c:forEach>
 		
@@ -219,18 +216,97 @@ $(document).ready(function(){
 		var inactiveacmType='<c:out value="${inactiveacm.acmType}" />';
 		console.log(inactiveacmType);
 		if(inactiveacmType.trim()=="P"){//객실별
-			$('#<c:out value="${inactiveacm.acmType}"/>').append("객실별");
+			document.getElementById("inactiveacmType${inactiveacm.acmNum}").innerHTML="객실별";
 		}
 			
 		else if(inactiveacmType.trim()=="H"){//집천체
-			$('#<c:out value="${inactiveacm.acmType}"/>').append("집천체");
-		}	
+			document.getElementById("inactiveacmType${inactiveacm.acmNum}").innerHTML="집전체";
+		}		
 		
 	</c:forEach>
 	
+	getAcmOpt();
+	
+	});	
+	
+	//숙소옵션뿌리기
+	function dec2bin(codeNum){
+		return (codeNum >>> 0).toString(2); 
+	}
+	function pad(code) {
+		return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
+	}
 	
 	
-	});
+	
+	function getAcmOpt() {
+		var iconArr = new Array(); 
+		var codeArr = new Array(); 
+		var nameArr = new Array(); 
+		let option;
+		let j = 0;
+
+		<c:forEach items="${acmCode}" var="acmCode">
+		
+			iconArr[j] = '<c:out value="${acmCode.codeIcon}" />';
+			codeArr[j] = 'acm' + '<c:out value="${acmCode.codeFull}" />';
+			nameArr[j] = '<c:out value="${acmCode.codeCont}" />';
+			j++;
+
+		</c:forEach>
+		
+		
+		<c:forEach items="${pendinglist}" var="pendingacm">
+				
+			option= pad(dec2bin("${pendingacm.acmOptcode}"));//10진수 옵션코드를 16자리 2진수로 변환한다(110101010..like this)
+			
+		
+			for(let k=0; k<option.length; k++){
+				if(option.charAt(k) == 1){
+					//document.getElementById("pendingacmOpt${pendingacm.acmNum}").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+					document.getElementById("pendingacmOpt${pendingacm.acmNum}").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i></span>'+'&nbsp;';
+					
+				}
+			}
+
+		</c:forEach>
+
+		<c:forEach items="${activelist}" var="activeacm">
+		
+		option= pad(dec2bin("${activeacm.acmOptcode}"));//10진수 옵션코드를 16자리 2진수로 변환한다(110101010..like this)
+		
+	
+		for(let k=0; k<option.length; k++){
+			if(option.charAt(k) == 1){
+				//document.getElementById("activeacmOpt${activeacm.acmNum}").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+				document.getElementById("activeacmOpt${activeacm.acmNum}").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i></span>'+'&nbsp;';
+				
+			}
+		}
+
+		</c:forEach>
+		
+		<c:forEach items="${inactivelist}" var="inactiveacm">
+		
+		option= pad(dec2bin("${inactiveacm.acmOptcode}"));//10진수 옵션코드를 16자리 2진수로 변환한다(110101010..like this)
+		
+	
+		for(let k=0; k<option.length; k++){
+			if(option.charAt(k) == 1){
+				//document.getElementById("inactiveacmOpt${inactiveacm.acmNum}").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+				document.getElementById("inactiveacmOpt${inactiveacm.acmNum}").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i></span>'+'&nbsp;';
+				
+			}
+		}
+
+		</c:forEach>
+			
+		
+	}
+	
+	
+	
+
 
 	//해당 숙소 상세보기(권한 수정 페이지로)
 	$(document).ready(function(){

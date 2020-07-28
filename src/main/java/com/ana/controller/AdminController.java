@@ -17,6 +17,7 @@ import com.ana.domain.RomVO;
 import com.ana.domain.UserAcmVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AdminService;
+import com.ana.service.CodeService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -31,7 +32,8 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService aservice;//호스트 사업등록증관련
-	
+	@Autowired
+	private CodeService codeService;
 	
 	//세션에서 유저이름 가져오는 메서드
 	public UserVO getUser(HttpSession session) {
@@ -62,17 +64,19 @@ public class AdminController {
 
 		String userStat;
 		int size=0;
-			
+		int hopensize=0;	
 			
 		userStat="ACTIVE";
 		List<UserVO> activelist= aservice.getadminListUsers(userStat);
 		model.addAttribute("activelist", activelist);
 		size+=activelist.size();
 		
-		userStat="Ho_PENDING";
+		userStat="HO_PENDING";
 		List<UserVO> hopendinglist= aservice.getadminListUsers(userStat);
+		System.out.println(hopendinglist);
 		model.addAttribute("hopendinglist", hopendinglist);
 		size+=hopendinglist.size();
+		hopensize+=hopendinglist.size();
 		
 		userStat="HO_ACTIVE";
 		List<UserVO> hoactivelist= aservice.getadminListUsers(userStat);
@@ -83,15 +87,36 @@ public class AdminController {
 		
 		System.out.println("전체리스트갯수:"+size);
 		model.addAttribute("size", size);
+		model.addAttribute("hopensize", hopensize);
+		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	
 	}
 	
 	
 	
-	@GetMapping("/userStatPendingProc")
-	public void userStatPendingProcGet(String userNum,Model model,HttpSession session) {
-		System.out.println("userStatPendingProc Get");
+	@GetMapping("/userStatPending")
+	public void userStatPendingGet(String bizRegisterNumber,Model model,HttpSession session) {
+		System.out.println("userStatPending Get");
+		System.out.println(bizRegisterNumber);
+		
+		UserAcmVO pendinghostacm= aservice.getpendingUserAcms(bizRegisterNumber);
+		System.out.println(pendinghostacm);
+		model.addAttribute("pendinghostacm", pendinghostacm);
+		
+	}
+	
+	@PostMapping("/userStatPending")
+	public String userStatPendingPost(String userNum,Model model,HttpSession session) {
+		System.out.println("userStatPending Post");
+		
+		model.addAttribute("adminFstname", getUser(session).getUserFstName());
+		return "/admin/userStatPending";
+	}
+	
+	@GetMapping("/userStathost")
+	public void userStathostGet(String userNum,Model model,HttpSession session) {
+		System.out.println("userStathost Get");
 		UserVO user=aservice.getUser(userNum);//유저 정보 뿌린다
 		
 		model.addAttribute("user", user);
@@ -99,17 +124,17 @@ public class AdminController {
 		
 	}
 	
-	@PostMapping("/userStatPendingProc")
-	public String userStatPendingProcPost(String userNum,Model model,HttpSession session) {
-		System.out.println("userStatPendingProc Post");
+	//@PostMapping("/userStathost")
+	public String userStathostPost(String userNum,Model model,HttpSession session) {
+		System.out.println("userStathost Post");
 		
 		model.addAttribute("adminFstname", getUser(session).getUserFstName());
-		return "/admin/userStatPendingProc";
+		return "/admin/userStathost";
 	}
 	
-	@GetMapping("/userStathostProc")
-	public void userStathostProcGet(String userNum,Model model,HttpSession session) {
-		System.out.println("userStathostProc Get");
+	@GetMapping("/userStatguest")
+	public void userStatguestGet(String userNum,Model model,HttpSession session) {
+		System.out.println("userStatguest Get");
 		UserVO user=aservice.getUser(userNum);//유저 정보 뿌린다
 		
 		model.addAttribute("user", user);
@@ -117,30 +142,12 @@ public class AdminController {
 		
 	}
 	
-	//@PostMapping("/userStathostProc")
-	public String userStathostProcPost(String userNum,Model model,HttpSession session) {
-		System.out.println("userStathostProc Post");
-		
-		model.addAttribute("adminFstname", getUser(session).getUserFstName());
-		return "/admin/userStathostProc";
-	}
-	
-	@GetMapping("/userStatguestProc")
-	public void userStatguestProcGet(String userNum,Model model,HttpSession session) {
-		System.out.println("userStatguestProctProc Get");
-		UserVO user=aservice.getUser(userNum);//유저 정보 뿌린다
-		
-		model.addAttribute("user", user);
-		model.addAttribute("adminFstname", getUser(session).getUserFstName());
-		
-	}
-	
-	//@PostMapping("/userStatguestProc")
+	//@PostMapping("/userStatguest")
 	public String userStatguestProcPost(String userNum,Model model,HttpSession session) {
-		System.out.println("userStatguestProc Post");
+		System.out.println("userStatguest Post");
 		
 		model.addAttribute("adminFstname", getUser(session).getUserFstName());
-		return "/admin/userStatguestProc";
+		return "/admin/userStatguest";
 	}
 	
 	@GetMapping("/moditoHost")//페이지 자체는 없음
@@ -151,9 +158,9 @@ public class AdminController {
 	
 	
 	@PostMapping("/moditoHost")
-	public String moditoHostPost(String userNum,Model model,HttpSession session) {
+	public String moditoHostPost(String userNum,String bizRegnum,Model model,HttpSession session) {
 		System.out.println("moditoHost Post");
-		aservice.moditoHost(userNum);
+		aservice.moditoHost(userNum,bizRegnum);
 		
 		
 		//알림 보내기 기능추가할것 나중에
@@ -215,14 +222,23 @@ public class AdminController {
 		
 		System.out.println("전체리스트갯수:"+size);
 		model.addAttribute("size", size);
+		
+		
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
+		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
-	@GetMapping("/adminviewAcm")//페이지 자체는 없음
+	@GetMapping("/adminviewAcm")
 	public void adminviewAcmGet(String bizRegnum,Model model,HttpSession session) {
 		System.out.println("adminviewAcm Get");
-		//UserAcmVO pendinglist= aservice.getadminListAcms(acmActi);
-		//AcmVO vo = aservice.getadminAcm(acmNum);
+		System.out.println(bizRegnum);
+		
+		UserAcmVO getuseracm= aservice.getpendingUserAcms(bizRegnum);
+		System.out.println(getuseracm);
+		model.addAttribute("getuseracm", getuseracm);
+		
 	}
 	
 	@PostMapping("/adminviewAcm")

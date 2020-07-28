@@ -33,7 +33,7 @@
 
     <title>Han:ok- Make yourself at home in Korea</title>
     <!-- Bootstrap Core CSS -->
-    <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -48,10 +48,11 @@
     <link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/resources/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
 	<style>
 		html,body{
 			font-family:"타이포_쌍문동";
+			background-color:white;
 		}
 		
 		#logo{
@@ -66,15 +67,8 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button> -->
-                
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:70px;margin-bottom:0;background-color:white;">
+            <div class="navbar-header" style="margin-bottom:15px;">
                 
 				<!-- 로고자리 -->
                 <a class="navbar-brand" href="/admin/adminindex">Han:Ok</a>
@@ -116,6 +110,7 @@
 					
             </ul>
         </nav>
+        </div>
 
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
