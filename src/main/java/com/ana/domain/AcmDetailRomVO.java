@@ -5,17 +5,17 @@ import lombok.Data;
 @Data
 public class AcmDetailRomVO {
 	
-	String	romNum;
-	String	romName;
-	Integer	romCapa;
-	String	bedType;
-	Integer	bedCnt;
-	Integer	romSize;
-	String	romPurl;
-	String	romPname;
-	Integer	romPrice;
-	String	romType;
-	String	romActi;
-	Integer	romOptcode;
+	private	String	romNum;
+	private	String	romName;
+	private	Integer	romCapa;
+	private	String	bedType;
+	private	Integer	bedCnt;
+	private	Integer	romSize;
+	private	String	romPurl;
+	private	String	romPname;
+	private	Integer	romPrice;
+	private	String	romType;
+	private	String	romActi;
+	private	Integer	romOptcode;
 	
 }

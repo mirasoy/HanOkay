@@ -81,10 +81,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 객실정보 리스트(숙소번호 기준 + 활성화된 상태 + 인원수) -->
 	<select id="getRomList" resultMap="AcmDetailRomVOResult">
+	<![CDATA[
 		SELECT 
 			ROM_NUM, ROM_NAME, ROM_CAPA, BED_TYPE, BED_CNT, ROM_SIZE, ROM_PRICE, ROM_PURL, ROM_PNAME, ROM_TYPE, ROM_ACTI, ROM_OPTCODE
 		FROM TROM
 		WHERE ACM_NUM = #{acmNum} AND ROM_ACTI = 'ACTIVE' AND ROM_CAPA >= #{person}
+	]]>
 	</select>	
 	
 	<!-- 숙소리뷰 리스트(숙소번호 기준 + 활성화된 상태) -->
