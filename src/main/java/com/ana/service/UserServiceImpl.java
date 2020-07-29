@@ -188,6 +188,8 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
+	
+	
 	//인증번호 생성 메서드
 	 public static String numberGen(int len, int dupCd ) {
 	        

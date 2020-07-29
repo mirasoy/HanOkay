@@ -139,7 +139,7 @@ throws IOException{
 			return mv;
 		} else {
 			model.addAttribute("msg2", "already");
-			mv.setViewName("/account/muAccount/findPwd");
+			mv.setViewName("/account/myAccount/findPwd");
 			return mv;
 		}
 	}
