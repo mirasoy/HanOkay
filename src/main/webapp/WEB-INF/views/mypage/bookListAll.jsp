@@ -36,7 +36,7 @@ int i = 0;
 		max-width: 1140px;
 	}
 	.container-1 {
-		max-width: 1160px;
+		max-width: 1140px;
 		margin: 0 auto;
 	}
 }
@@ -134,8 +134,8 @@ int i = 0;
 .user-pic{
     float: left;
     width: 60px;
-    
-    border-radius: 12px;
+    border-radius: 50px;
+/*     border-radius: 12px; */
     margin-right: 15px;
     overflow: hidden;
 }
