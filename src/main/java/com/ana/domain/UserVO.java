@@ -1,13 +1,15 @@
 package com.ana.domain;
 
 import java.util.Date;
-
-import lombok.Data;
-
-@Data
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+@Setter
+@Getter
+@ToString
 public class UserVO {
 
-	private String userNum;
+	private String userNum;//
 	private String userEmail;
 	private String userPwd;
 	private String userFstName;
@@ -21,8 +23,8 @@ public class UserVO {
 	private String userProfilePicName;
 	private String userIntroduction;
 	private String userLanguage;
-	private String userStatusCode;
-	private String bizRegisterNumber;
+	private String userStatusCode;//
+	private String bizRegisterNumber;//
 	private String bizRegisterPicUrl;
 	private String userAuthCode;
 }

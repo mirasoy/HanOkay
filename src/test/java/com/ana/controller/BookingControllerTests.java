@@ -2,6 +2,7 @@ package com.ana.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +54,7 @@ public class BookingControllerTests {
 	public void TestgetBookListAll() throws Exception{
 		log.info(
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookListAll"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/mypage/bookListAll"))
 		.andReturn()
 		.getModelAndView()
 		.getModelMap());
@@ -65,7 +66,7 @@ public class BookingControllerTests {
 	public void testCheckout() throws Exception{
 		log.info(
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/checkout"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/mypage/checkout"))
 		.andReturn()
 		.getModelAndView()
 		.getModelMap());
@@ -80,7 +81,7 @@ public class BookingControllerTests {
 	public void testCancelList() throws Exception{
 		log.info(
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/cancelled"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/mypage/cancelled"))
 		.andReturn()
 		.getModelAndView()
 		.getModelMap());
@@ -95,7 +96,7 @@ public class BookingControllerTests {
 	
 	@Test
 	public void testRemove()throws Exception{
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/MyPage/remove")
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/mypage/remove")
 				.param("bookNum", "B1")
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
@@ -107,7 +108,7 @@ public class BookingControllerTests {
 	public void testList() throws Exception{
 		
 		log.info(
-		mockMvc.perform(MockMvcRequestBuilders.get("/MyPage/bookList"))
+		mockMvc.perform(MockMvcRequestBuilders.get("/mypage/bookList"))
 		.andReturn()
 		.getModelAndView()
 		.getModelMap());
@@ -121,7 +122,7 @@ public class BookingControllerTests {
 	public void testGet() throws Exception {
 
 		log.info(mockMvc.perform(MockMvcRequestBuilders
-				.get("/MyPage/info")
+				.get("/mypage/info")
 				.param("bookNum", "B1"))
 				.andReturn()
 				.getModelAndView().getModelMap());
@@ -136,7 +137,7 @@ public class BookingControllerTests {
 				
 		
 		String resultPage = mockMvc
-				.perform(MockMvcRequestBuilders.post("/MyPage/modify")
+				.perform(MockMvcRequestBuilders.post("/mypage/modify")
 						.param("bookNum", "B2")
 						.param("userNum", "수정된 회원번호")
 						.param("romNum", "수정된 방번호")						
@@ -162,5 +163,41 @@ public class BookingControllerTests {
 
 	}
 	
+	
+	@Test
+	public void test() throws Exception {
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/booking/new")
+				.param("bookNum", "B9999")
+				.param("userNum", "U9999")
+				.param("romNum", "R9999")
+				.param("bookDate", "2020-01-01")
+				.param("checkinDate", "2020-01-01")
+				.param("checkoutDate", "2020-01-02")
+				.param("staydays", "1")
+				.param("guest", "1")
+				.param("bookPrice", "1004")
+				.param("expectedArr", "1")
+				.param("smoking", "1")
+				.param("request", "1")
+				.param("bookerLastname", "TEST")
+				.param("bookerFirstname", "TEST")
+				.param("bookerEmail", "TEST@NAVER.COM")
+				.param("bookerPhone", "112")
+				.param("bookStatus", "1")
+		
+				.param("payNum", "P1")
+				.param("payMethod", "1")
+				.param("payTime", "2020-01-01")
+				.param("acmNum", "A9999")
+				.param("price", "1004")
+				.param("vat", "1004")
+				.param("subtotal", "1004")
+				.param("coupon", "1004")
+				.param("mileage", "1004")
+				.param("discount", "1004")
+				.param("total", "1004")
+				.param("payStatus", "1")
+				).andReturn().getModelAndView().getModelMap());
+	}
 
 }

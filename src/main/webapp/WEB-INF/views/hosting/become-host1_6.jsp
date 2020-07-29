@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/becomehostheader.jsp"%>
 <!-- nav-sidebar -->
  <style>
         input[type=checkbox] {
@@ -28,6 +28,10 @@
             color: white;
         }
         
+        #this{
+        	background-color:cornflowerblue
+        	 color: white;
+        }
   </style>
 
 
@@ -38,16 +42,16 @@
                            <a><c:out value="${userFstname}"/>님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
+                            <a ><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+                            <a class="active"><i class="fa fa-male fa-fw"></i> 상세 정보</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                            <a><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                            <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
                         </li>
                     </ul>
                 </div>

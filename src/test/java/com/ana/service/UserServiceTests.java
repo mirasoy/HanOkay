@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import javax.validation.constraints.AssertFalse;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,7 @@ public class UserServiceTests {
 		assertNotNull(service);
 	}
 
-	@Test
+//	@Test
 	public void testRegister() {
 		UserVO user = new UserVO();
 
@@ -44,15 +47,13 @@ public class UserServiceTests {
 		}
 		user.setUserLastName("Jiha");
 		user.setUserFstName("Kim");
-		user.setUserPriv("GU");
-		user.setUserRegisterMethod("m");
 		user.setUserPhone("");
 		service.register(user);
 		log.info("생성된 회원번호: " + user.getUserNum());
 
 	}
 
-	@Test
+//	@Test
 	public void testGet() {
 		if (service.get("U1") == null) {
 			log.info("********없는 회원입니다!***********");
@@ -61,13 +62,13 @@ public class UserServiceTests {
 		}
 	}
 
-	@Test
+//	@Test
 	public void testDelete() {
-		log.info("REMOVE RESULT: " + service.remove("U1"));
+		log.info("REMOVE RESULT: " + service.remove("U190"));
 
 	}
 
-	@Test
+//	@Test
 	public void testUpdate() {
 
 		UserVO user = service.get("U10");
@@ -76,16 +77,32 @@ public class UserServiceTests {
 		}
 		log.info("MOODIFY RESULT: " + service.modify(user));
 	}
-
 	
-	@Test
-	public void testIsValidUser() {
-		assertTrue(service.isValidUser("serin9811@naver.com", "Serin9811@"));
-	}
 
-	@Test
+
+//	@Test
 	public void testGetUserById() {
 		log.info("GET USER BY EMAIL: "+ service.getUserById("mira@naver.com"));
+	}
+	
+//	@Test
+	public void testEmailCheck() {
+		AssertFalse(service.canRegister("serin@naver.com"));
+	}
+
+	private void AssertFalse(boolean checkEmail) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Test 
+	public void testGiveAuth() {
+		AssertFalse(service.matchAuthCode("se", "1234"));
+	}
+	
+	@Test
+	public void testGiveAuth2() {
+		assertTrue(service.grantActive("twestmerland5@yahoo.co.jp"));
 	}
 }
 

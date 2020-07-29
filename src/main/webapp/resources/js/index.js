@@ -8,8 +8,11 @@
                 $(window).on("scroll", function() {
                     if($(window).scrollTop() > 100) {
                         $(".top-bar").addClass("active");
+                        $(".sidebar").addClass("side-active-top");
+                        
                     } else {                    
                         $(".top-bar").removeClass("active");
+                        $(".sidebar").removeClass("side-active-top");
                     }
                 });
 

@@ -30,34 +30,21 @@ public class UserController {
 
 	@Autowired
 	private EmailService emailService;
-
+   
+	//account/myAccount/findPwd 를 보여주는 메서드
 	@GetMapping("/account/myAccount/findPwd")
 	public String showFindPasswordPage() {
 		return "/account/myAccount/findPwd";
 	}
+	
 
-	// 이메일 보내기
-	@RequestMapping(value = "/account/myAccount/accountRecovery", method = RequestMethod.POST)
-	@ResponseBody
-	public void sendEmail(String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		JSONObject jso = new JSONObject();
-		log.info("send email: " + email);
-		// 한글 깨짐 방지
-		response.setContentType("text/plain;charset=UTF-8");
-		String msg = "";
-		// service에게 email을 주고 db를 뒤져오게한다
-		if (service.checkEmail(email)) {
-			log.info("checkEmail에서 service 성공" );
-			emailService.sendAuthEmail(email);
-			msg = "해당 이메일을 사용하실 수 있습니다";
-			jso.put("msg", msg);
-		}  else {
-			log.info("checkEmail에서 service를 불렀더니 이미 db에 있는 이메일임!");
-			msg = "이미 등록된 이메일입니다!";
-			jso.put("msg", msg);
-		}
-		PrintWriter out = response.getWriter();
-		out.print(jso);
+		
+	//user/welcome 페이지를 보여주는 메서드
+	@GetMapping
+	public String showWelcome() {
+		return "/user/welcome";
 	}
+	
+	
 
 }

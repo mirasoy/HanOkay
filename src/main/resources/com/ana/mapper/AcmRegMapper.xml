@@ -36,46 +36,27 @@
 
 	<!-- 호스트단에서 숙소등록 -->
 	<!-- 한회원이 운영하는 숙소 다 가져오기 -->
-	<select id="getList" resultMap="AcmVOResult">
+	<select id="getListHosts" resultMap="AcmVOResult">
 		<![CDATA[
-		select * from TROM where ACM_NUM=#{acmNum}
+		select * from TACM where biz_Regnum=#{bizRegnum}
 		]]>
 	</select>
 	
-	<!-- 객실 하나하나의 정보 가져오기 -->
-	<select id="read" resultMap="AcmVOResult">
-		select * from TROM where ROM_NUM =#{romNum}
-	</select>
 	
 	
-	<!-- 숙소추가하기 -->
-	<insert id="insert">
-		INSERT INTO TACM(acm_Num, acm_Name, acm_City,acm_Distr, acm_Detailaddr, rep_Phone, 
-		acm_regdate, acm_updatedate, acm_type,
-		biz_regnum,checkin_time, checkout_time,sub_phone,
-		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude)
-		
-		VALUES (concat('A',seq_tacm.nextval),#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
-		sysdate,sysdate,#{acmType},
-		#{bizRegnum},#{checkoutTime},#{checkinTime},#{subPhone},
-		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude})
-	</insert>
-
 	<!-- 위도경도 추가 -->
-	<insert id="insertSelectKey">
+	<insert id="newAcmReg">
 		<selectKey keyProperty="acmNum" order="BEFORE"
 			resultType="String">
 			select concat('A',seq_tacm.nextval) from dual
 		</selectKey>
 
 		INSERT INTO TACM(acm_Num, acm_Name, acm_City,acm_Distr, acm_Detailaddr, rep_Phone, 
-		acm_regdate, acm_updatedate, acm_type,
-		biz_regnum,checkin_time, checkout_time,sub_phone,
+		acm_type,biz_regnum,checkin_time, checkout_time,sub_phone,
 		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude)
 		
-		VALUES (concat('A',seq_tacm.nextval),#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
-		sysdate,sysdate,#{acmType},
-		#{bizRegnum},#{checkoutTime},#{checkinTime},#{subPhone},
+		VALUES (#{acmNum},#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
+		#{acmType},	#{bizRegnum},#{checkinTime},#{checkoutTime},#{subPhone},
 		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude})
 	</insert>
 	
@@ -87,20 +68,33 @@
 	</select>
 	
 	
-	<!-- 객실 삭제 -->
+	<!-- 숙소 개별적으로 가져오기 -->
+	<select id="getAcm" resultType="String">
+		select acm_Name from TACM where ACM_NUM = #{acmNum}
+	</select> 
+	 
+	 
+	<!-- 슥소 삭제 -->
 	<delete id="remove">
-		delete from trom where rom_Num = #{romNum}
+		delete from tacm where acm_Num = #{acmNum}
 	</delete>
 
 	<!-- 숙소1_6 정보(opt, desc) 수정 -->
 	<update id="update1_6">
-		update tacm
+		update tacm 
 		set acm_optcode=#{acmOptcode}, acm_desc=#{acmDesc}
 		where acm_Num = #{acmNum} 
 	</update>
 
-
-
+	<!-- 방금 생성한 숙소 가져오기 -->
+	<select id="getnewAcm" resultMap="AcmVOResult">
+		select * from TACM where ACM_NUM =#{acmNum}
+	</select>
+	
+	<!-- pending된 숙소 확인 -->
+	<select id="getpendingacm" resultMap="AcmVOResult">
+		select * from TACM where biz_Regnum =#{bizRegisterNumber}
+	</select>
 
 
 

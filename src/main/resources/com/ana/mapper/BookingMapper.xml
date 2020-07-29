@@ -5,6 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.ana.mapper.BookingMapper">
 
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★1. ResultMap 을 이용한 mybatis ★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	 ResultMap은 DB 필드값과 DTO객체의 프라퍼티(변수)명이 다를 때 사용한다.	  
+-->
+
+
 	<resultMap id="BookingVOResult"
 		type="com.ana.domain.BookingVO">
 		<result column="book_num" property="bookNum" />
@@ -55,11 +63,201 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="checkout_Date" property="checkoutDate" />
 		<result column="book_Price" property="bookPrice" />
 	</resultMap>
+
+
+
+	<!-- 예약을 위한 숙소와 객실의 정보 -->
+	<resultMap id="AcmRomVOResult" type="com.ana.domain.AcmRomVO">
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="ACM_NAME" property="acmName" />
+		<result column="ACM_CITY" property="acmCity" />
+		<result column="ACM_DISTR" property="acmDistr" />
+		<result column="ACM_DETAILADDR" property="acmDetailaddr" />
+		<result column="REP_PHONE" property="repPhone" />
+		<result column="ACM_ACTI" property="acmActi" />
+		<result column="CHECKIN_TIME" property="checkinTime" />
+		<result column="CHECKOUT_TIME" property="checkoutTime" />
+		<result column="SUB_PHONE" property="subPhone" />
+		<result column="ACM_FAX" property="acmFax" />
+		<result column="ACM_EMAIL" property="acmEmail" />
+		<result column="ACM_PURL" property="acmPurl" />
+		<result column="ACM_PNAME" property="acmPname" />
+		<result column="LATITUDE" property="latitude" />
+		<result column="LONGITUDE" property="longitude" />
+		<result column="ACM_DESC" property="acmDesc" />
+		<result column="ACM_OPTCODE" property="acmOptcode" />
+
+		<result column="ROM_NUM" property="romNum" />
+		<result column="ROM_NAME" property="romName" />
+		<result column="ROM_CAPA" property="romCapa" />
+		<result column="BED_TYPE" property="bedType" />
+		<result column="BED_CNT" property="bedCnt" />
+		<result column="ROM_SIZE" property="romSize" />
+		<result column="ROM_PRICE" property="romPrice" />
+		<result column="ROM_PURL" property="romPurl" />
+		<result column="ROM_PNAME" property="romPname" />
+		<result column="ROM_TYPE" property="romType" />
+		<result column="ROM_ACTI" property="romActi" />
+		<result column="ROM_OPTCODE" property="romOptcode" />
+	</resultMap>
+	
+	<!-- 예약확인을 위한 예약, 결제, 숙소, 객실의 정보 -->
+	<resultMap id="BookingInfoVOResult" type="com.ana.domain.BookingInfoVO">
+		<result column=	"BOOK_NUM"	property=	"bookNum"	/>
+		<result column=	"USER_NUM"	property=	"userNum"	/>
+		<result column=	"BOOK_DATE"	property=	"bookDate"	/>
+		<result column=	"CHECKIN_DATE"	property=	"checkinDate"	/>
+		<result column=	"CHECKOUT_DATE"	property=	"checkoutDate"	/>
+		<result column=	"STAYDAYS"	property=	"staydays"	/>
+		<result column=	"GUEST"	property=	"guest"	/>
+		<result column=	"EXPECTED_ARR"	property=	"expectedArr"	/>
+		<result column=	"SMOKING"	property=	"smoking"	/>
+		<result column=	"REQUEST"	property=	"request"	/>
+		<result column=	"BOOKER_FIRSTNAME"	property=	"bookerLastname"	/>
+		<result column=	"BOOKER_LASTNAME"	property=	"bookerFirstname"	/>
+		
+		<result column=	"PAY_NUM"	property=	"payNum"	/>
+		<result column=	"PAY_METHOD"	property=	"payMethod"	/>
+		<result column=	"PAY_TIME"	property=	"payTime"	/>
+		<result column=	"PRICE"	property=	"price"	/>
+		<result column=	"VAT"	property=	"vat"	/>
+		<result column=	"SUBTOTAL"	property=	"subtotal"	/>
+		<result column=	"COUPON"	property=	"coupon"	/>
+		<result column=	"MILEAGE"	property=	"mileage"	/>
+		<result column=	"DISCOUNT"	property=	"discount"	/>
+		<result column=	"TOTAL"	property=	"total"	/>
+		<result column=	"PAY_STATUS"	property=	"payStatus"	/>
+		
+		<result column=	"ROM_NAME"	property=	"romName"	/>
+		<result column=	"ROM_CAPA"	property=	"romCapa"	/>
+		<result column=	"BED_TYPE"	property=	"bedType"	/>
+		<result column=	"BED_CNT"	property=	"bedCnt"	/>
+		<result column=	"ROM_PURL"	property=	"romPurl"	/>
+		<result column=	"ROM_PNAME"	property=	"romPname"	/>
+		<result column=	"ROM_TYPE"	property=	"romType"	/>
+		
+		<result column=	"ACM_NUM"	property=	"acmNum"	/>
+		<result column=	"ACM_NAME"	property=	"acmName"	/>
+		<result column=	"ACM_CITY"	property=	"acmCity"	/>
+		<result column=	"ACM_DISTR"	property=	"acmDistr"	/>
+		<result column=	"ACM_DETAILADDR"	property=	"acmDetailaddr"	/>
+		<result column=	"REP_PHONE"	property=	"repPhone"	/>
+		<result column=	"BIZ_REGNUM"	property=	"bizRegnum"	/>
+		<result column=	"CHECKIN_TIME"	property=	"checkinTime"	/>
+		<result column=	"CHECKOUT_TIME"	property=	"checkoutTime"	/>
+		<result column=	"ACM_EMAIL"	property=	"acmEmail"	/>
+		<result column=	"ACM_PURL"	property=	"acmPurl"	/>
+		<result column=	"ACM_PNAME"	property=	"acmPname"	/>
+		<result column=	"LATITUDE"	property=	"latitude"	/>
+		<result column=	"LONGITUDE"	property=	"longitude"	/>
+	</resultMap>
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★2. 회원의 상태 리스트 ★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+
+	<!-- 1. 예약 모든 리스트 -->
+	<select id="getBookListAll" resultMap="BookVOResult">	
+	<![CDATA[
+	SELECT distinct
+    A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Status
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 
+	]]>
+	</select>
+
+
+	<!-- 2. 예약예정 리스트 -->
+	<select id="getBookList" resultMap="BookVOResult">	
+	<![CDATA[
+	SELECT distinct
+    A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BK' AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 
+	]]>
+	</select>
+
+
+	<!-- 3. 예약취소 리스트 -->
+	<select id="getCancelList" resultMap="BookCancelVOResult">
+	SELECT distinct
+    A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BC' AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 
+	</select>
+
+	<!-- 4. 예약완료 리스트 -->
+	<select id="getCheckoutList" resultMap="BookVOResult">
+		SELECT distinct
+    A.ACM_NAME,
+    B.BOOK_NUM,
+    B.checkin_Date,
+    B.cheCkout_Date,
+    B.book_Price
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_AC' AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2)) 
+	</select>
+
+
+	<!-- 5. 예약번호의 리스트를 불러온다 -->
+	<select id="read" resultMap="BookingVOResult">
+		select * from tbooking where
+		book_Num = #{bookNum}
+	</select>
+
+
+	<!-- 6. U1의 예약 정보를 불러온다 -->
+	<select id="getList" resultMap="BookingVOResult">	
+	<![CDATA[
+	select * from tbooking where user_num='U1'	
+	]]>
+	</select>
+
+
+
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★3. insert ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+
+
 	<!-- 상태에 추가하는 메서드 -->
 	<insert id="changeStatus">
-		insert into TBOOK_STATUS(book_Num, book_Status)
-		VALUES(#{bookNum},'RS_STT_BC')
+		insert into TBOOK_STATUS(book_Num, book_Status, updatedate)
+		VALUES(#{bookNum},'RS_STT_BC', sysdate)
 	</insert>
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★5. update ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+	
+
 
 	<!-- 취소버튼 클릭시 변경됨 -->
 	<update id="delete">
@@ -97,134 +295,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-<!-- 예약 확인 페이지: 예약 정보를 불러온다 -->
-	<select id="read" resultMap="BookingVOResult">
-		select * from tbooking where
-		book_Num = #{bookNum}
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+
+<!-- 예약과 관련된 숙소와 객실에 대한 정보를 가져온다 (예약페이지, 예약완료페이지) -->
+	<select id="getAcmInfo" resultMap="AcmRomVOResult">
+		SELECT 
+        	A.ACM_NUM, A.ACM_NAME, A.ACM_CITY, A.ACM_DISTR, A.ACM_DETAILADDR, A.REP_PHONE, A.ACM_ACTI, A.CHECKIN_TIME, A.CHECKOUT_TIME, A.SUB_PHONE, A.ACM_FAX, A.ACM_EMAIL, A.ACM_PURL, A.ACM_PNAME, A.LATITUDE, A.LONGITUDE, A.ACM_DESC, A.ACM_OPTCODE, 
+        	R.ROM_NUM, R.ROM_NAME, R.ROM_CAPA, R.BED_TYPE, R.BED_CNT, R.ROM_SIZE, R.ROM_PRICE, R.ROM_PURL, R.ROM_PNAME, R.ROM_TYPE, R.ROM_OPTCODE
+		FROM TACM  A, TROM R
+		WHERE R.ROM_NUM = #{romNum} AND A.ACM_NUM =  R.ACM_NUM
 	</select>
-
-
-
-	<select id="getList" resultMap="BookingVOResult">
-	
-	<![CDATA[
-	select * from tbooking where user_num='U1'
-	
-	]]>
-
-
-	</select>
-
-	<!-- 회원 A1의 예약중인 리스트 -->
-
-	<!-- 1. 예약 모든 리스트 -->
-	<select id="getBookListAll" resultMap="BookVOResult">	
-	<![CDATA[
-	SELECT distinct
-    A.ACM_NAME,
-    B.BOOK_NUM,
-    B.checkin_Date,
-    B.cheCkout_Date,
-    B.book_Status
-	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
-	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.user_num=#{loginUserNum}
-	order by to_number(substr(B.BOOK_NUM,2)) 
-	]]>
-	</select>
-
-
-
-
-
-	<!-- 2. 예약예정 리스트 -->
-	<select id="getBookList" resultMap="BookVOResult">	
-	<![CDATA[
-	SELECT distinct
-    A.ACM_NAME,
-    B.BOOK_NUM,
-    B.checkin_Date,
-    B.cheCkout_Date,
-    B.book_Price
-	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
-	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BK' AND B.user_num=#{loginUserNum}
-	order by to_number(substr(B.BOOK_NUM,2)) 
-	]]>
-	</select>
-
-
-	<!-- 3. 예약취소 리스트 -->
-	<select id="getCancelList" resultMap="BookVOResult">
-		SELECT distinct
-		A.ACM_NAME,
-		B.BOOK_NUM,
-		B.checkin_Date,
-		B.cheCkout_Date,
-		B.book_Price
-		FROM TBOOKING B,
-		TBOOK_STATUS S, TACM A, TROM R
-		WHERE B.BOOK_NUM=S.BOOK_NUM AND
-		B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM
-		AND
-		B.BOOK_STATUS='RS_STT_BC' AND B.user_num=#{loginUserNum}
-		order by
-		to_number(substr(B.BOOK_NUM,2))
-	</select>
-
-	<!-- 4. 예약완료 리스트 -->
-	<select id="getCheckoutList" resultMap="BookVOResult">
-		SELECT distinct
-		A.ACM_NAME,
-		B.BOOK_NUM,
-		B.checkin_Date,
-		B.cheCkout_Date,
-		B.book_Price
-		FROM TBOOKING B,
-		TBOOK_STATUS S, TACM A, TROM R
-		WHERE B.BOOK_NUM=S.BOOK_NUM AND
-		B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM
-		AND
-		B.BOOK_STATUS='RS_STT_AC' AND B.user_num=#{loginUserNum}
-		order by
-		to_number(substr(B.BOOK_NUM,2))
-	</select>
-
-<!-- 예약 페이지: 예약 정보를 저장한다 -->
-	<insert id="insert" parameterType="hashmap">
-		<selectKey keyProperty="bookNum" order="BEFORE"
-			resultType="String">
-			select concat('B',seq_tbook.nextval) from dual
+<!-- 예약을 하면, 예약테이블에 정보를 저장한다 (예약페이지) -->
+	<insert id="insertBooking" parameterType="hashmap">
+		<selectKey keyProperty="bookNum" order="BEFORE" resultType="String">
+			SELECT CONCAT('B',SEQ_TBOOK.NEXTVAL) FROM DUAL
 		</selectKey>
-
-		insert all
-		into TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE,
-		CHECKOUT_DATE,
-		STAYDAYS, GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING,
-		REQUEST, BOOKER_LASTNAME, BOOKER_FIRSTNAME, BOOKER_EMAIL,
-		BOOKER_PHONE, BOOK_STATUS)
-
-		values (
-		#{bookNum},
-		#{userNum},
-		#{romNum},
-		#{checkinDate},
-		#{checkoutDate},
-		#{staydays},
-		#{guest},
-		#{bookPrice},
-		#{expectedArr},
-		#{smoking},
-		#{request},
-		(select ROM_NAME from TROM where
-		ROM_NUM= #{romNum}),
-		#{bookerLastname},
-		#{bookerFirstname},
-		#{bookerEmail},
-		#{bookerPhone, jdbcType=VARCHAR},
-		#{bookStatus})
-		into
-		tbook_status(book_num, book_status)
-		values (#{bookNum}, #{bookStatus})
-		select * from dual
-
-	</insert>
+		INSERT ALL
+		INTO TBOOKING(BOOK_NUM, USER_NUM, ROM_NUM, CHECKIN_DATE, CHECKOUT_DATE, STAYDAYS, 
+			GUEST, BOOK_PRICE, EXPECTED_ARR, SMOKING, REQUEST, 
+			BOOKER_LASTNAME, BOOKER_FIRSTNAME, BOOKER_EMAIL, BOOKER_PHONE, BOOK_STATUS)
+		VALUES (
+			#{bookNum}, #{userNum}, #{romNum}, #{checkinDate}, #{checkoutDate}, #{staydays},
+			#{guest}, #{bookPrice}, #{expectedArr}, #{smoking}, #{request},
+			#{bookerLastname}, #{bookerFirstname}, #{bookerEmail}, #{bookerPhone}, #{bookStatus})
+		INTO TBOOK_STATUS (BOOK_NUM, BOOK_STATUS, EDITER) 
+		VALUES (#{bookNum}, #{bookStatus}, #{userNum})
+		SELECT * FROM DUAL
+	</insert> 
+<!-- 예약을 하면, 결제테이블에 정보를 저장한다 (예약페이지) -->
+	<insert id="insertPayment" parameterType="hashmap">
+		<selectKey keyProperty="payNum" order="BEFORE" resultType="String">
+			SELECT CONCAT('P',SEQ_PAY.NEXTVAL) FROM DUAL
+		</selectKey>
+		INSERT ALL
+		INTO TPAYMENT(PAY_NUM, BOOK_NUM, PAY_METHOD, ACM_NUM, ROM_NUM,
+			PRICE, STAYDAYS, VAT, SUBTOTAL, COUPON, MILEAGE, DISCOUNT, TOTAL, PAY_STATUS)
+		VALUES (#{payNum}, #{bookNum}, #{payMethod}, #{acmNum}, #{romNum}
+			, #{price}, #{staydays}, #{vat}, #{subtotal}, #{coupon}, #{mileage}, #{discount}, #{total}, #{payStatus})
+		 
+		INTO TPAY_STATUS (PAY_NUM, PAY_STATUS, EDITER)
+		VALUES (#{payNum}, #{payStatus}, #{userNum})
+		SELECT * FROM DUAL
+	</insert> 
+<!-- 예약이 완료되면, 예약&결제&숙소&객실 4개 테이블에서 정보를 불러온다 (예약완료페이지) -->
+	<select id="getBooking" resultMap="BookingInfoVOResult">
+		SELECT 
+		    B.BOOK_NUM, B.USER_NUM, B.BOOK_DATE, B.CHECKIN_DATE, B.CHECKOUT_DATE, B.STAYDAYS, B.GUEST, B.EXPECTED_ARR, B.SMOKING, B.REQUEST, B.BOOKER_FIRSTNAME, B.BOOKER_LASTNAME,
+		    P.PAY_NUM, P.PAY_METHOD, P.PAY_TIME, P.PRICE, P.VAT, P.SUBTOTAL, P.COUPON, P.MILEAGE, P.DISCOUNT, P.TOTAL, P.PAY_STATUS,
+		    R.ROM_NAME, R.ROM_CAPA, R.BED_TYPE, R.BED_CNT, R.ROM_PURL, R.ROM_PNAME, R.ROM_TYPE,
+		    A.ACM_NUM,  A.ACM_NAME, A.ACM_CITY, A.ACM_DISTR, A.ACM_DETAILADDR, A.REP_PHONE, A.BIZ_REGNUM, A.CHECKIN_TIME, A.CHECKOUT_TIME, A.ACM_EMAIL,  A.ACM_PURL, A.ACM_PNAME, A.LATITUDE, A.LONGITUDE
+		FROM TBOOKING B, TPAYMENT P, TROM R, TACM A
+		WHERE #{bookNum} = B.BOOK_NUM AND B.BOOK_NUM = P.BOOK_NUM AND B.ROM_NUM = R.ROM_NUM AND A.ACM_NUM = R.ACM_NUM
+	</select>
 </mapper>
+

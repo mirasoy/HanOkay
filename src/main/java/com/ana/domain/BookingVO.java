@@ -5,13 +5,10 @@ import java.util.Date;
 
 /*import javax.validation.constraints.Email;*/
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.Data;
 
 @Data
 public class BookingVO {
-
 
 	private String bookNum;
 	private String userNum;
@@ -30,5 +27,5 @@ public class BookingVO {
 	private String bookerEmail;
 	private String bookerPhone;
 	private String bookStatus;
-
+	
 }

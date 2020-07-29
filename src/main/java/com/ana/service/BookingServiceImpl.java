@@ -6,11 +6,14 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ana.domain.AcmRomVO;
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookCancelVO;
 import com.ana.domain.BookStatusVO;
 import com.ana.domain.BookVO;
+import com.ana.domain.BookingInfoVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.PaymentVO;
 import com.ana.mapper.BookingMapper;
 
 import lombok.AllArgsConstructor;
@@ -85,22 +88,41 @@ public class BookingServiceImpl implements BookingService{
 		return mapper.delete(bookNum) ==1 && mapper.changeStatus(bookNum, bookStatus)==1;
 	}
 
-
-	// 예약 페이지 : 예약 정보를 저장한다 & 비정상적인 접근을 막기 위한 유효성 검사 진행
+	
+	
+	
+	
+	
+	// 객실번호로 객실정보와 대응하는 숙소정보를 불러온다
+	@Transactional
 	@Override
-	public int register(BookingVO book) {
-		
-		if(!(book.getBookerFirstname().length() <= 50 && 
-				book.getBookerLastname().length() <= 50 && 
-				book.getBookerEmail().length() <= 100 && 
-				book.getBookerEmail().contains("@"))
-		){
-			System.out.println("올바르지 않은 접근으로 입력 시도!!!");
-			log.info("올바르지 않은 접근으로 입력 시도!!! register......" + book);
-			return 0;
-		}
-		log.info("register......" + book);
-		return mapper.insert(book);
+	public AcmRomVO getAcmInfo(String romNum) {
+		log.info("■■■■■■■■■■■■▶ getAcmInfo: "+ romNum);
+		return mapper.getAcmInfo(romNum);
+	}
+
+	// 예약정보를 저장한다
+	@Transactional
+	@Override
+	public boolean registerBooking(BookingVO booking) {
+		log.info("■■■■■■■■■■■■▶ registerBooking: "+ booking);
+		return mapper.insertBooking(booking);
+	}
+
+	// 결제정보를 저장한다
+	@Transactional
+	@Override
+	public boolean registerPayment(PaymentVO payment) {
+		log.info("■■■■■■■■■■■■▶ registerPayment: "+ payment);
+		return mapper.insertPayment(payment);
+	}
+	
+	// 예약과 관련된 정보를 불러온다
+	@Transactional
+	@Override
+	public BookingInfoVO getBooking(String bookNum) {
+		log.info("■■■■■■■■■■■■▶ getBooking: "+ bookNum);
+		return mapper.getBooking(bookNum);
 	}
 
 }

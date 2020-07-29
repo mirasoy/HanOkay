@@ -3,17 +3,14 @@ package com.ana.mapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ana.domain.AcmVO;
-import com.ana.domain.BookStatusVO;
 import com.ana.domain.BookingVO;
-import com.ana.domain.RomVO;
+import com.ana.domain.PaymentVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -27,48 +24,81 @@ public class BookingMapperTests {
 	private BookingMapper mapper;
 	
 
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★1. testGetList ★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
-
-	@Test
-	public void testInsert() {								
-		mapper.changeStatus("B3", "예약완료");		
-	}
 	
-	// 취소버튼 클릭시 변경됨 ('RS_STT_BC')
-	@Test
-	public void testDelete() {
-		log.info("DELETE COUNT: " + mapper.delete("B1"));
-	}
-
-
-	//현재 예약의 모든 목록을 가져옴
+	//1-1. 현재 예약의 모든 목록을 가져옴  (완)
 	@Test
     public void testGetList() {
 		mapper.getList().forEach(board -> log.info(board));
 	}
 	
-	
-	
-	//1. 지정한 유저 (U1)의 모든 예약 목록을 가져오기 위한 리스트 테스트
+	//1-2. 지정한 유저 (U1)의 모든 예약 목록을 가져오기 위한 리스트 테스트 (완)
 	@Test
 	public void getBookListAll() {
 		mapper.getBookListAll("U1").forEach(board->log.info(board));
 	}
+	
 
+	// 1-3. 지정한 유저 (U1)의 예약중인 목록을 가져오기 위한 리스트 테스트 RS_STT_BK (완) 
+	@Test
+	public void getBookList() {
+		mapper.getBookList("U1").forEach(board->log.info(board));
+	}
+
+	// 1-4. 지정한 유저 (U1)의 예약 취소한 목록을 가져오기 위한 리스트 테스트 RS_STT_BC (완)
+	@Test
+	public void getCancelList() {
+		mapper.getCancelList("U1").forEach(board->log.info(board));
+	}	
+	
+	// 1-5. 지정한 유저 (U1)의 예약 완료한 목록을 가져오기 위한 리스트 테스트  RS_STT_AC (완)
+	@Test
+	public void testCheckout() {
+		mapper.getCheckoutList("U1").forEach(board->log.info(board));
+	}		
 	
 	
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★2. testRead ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	
+	
+	// 예약 번호 B1 을 조회하는 테스트
+	@Test
+	public void testRead() {
+	
+		BookingVO board = mapper.read("B1");
+		log.info(board);
+				
+	}
+	
+
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★3. testUpdate ★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	
+	
+	// 3-1. 대상(U1)의  예약 정보를 업데이트 하는것을 테스트 (완)
 	@Test
 	public void testUpdate() {
 		BookingVO board = new BookingVO();
 	
 		board.setBookNum("B3");
 		board.setUserNum("U1");
-		board.setRomNum("수정된 방번호");
+		board.setRomNum("R24");
 		board.setStaydays(1);
-		board.setGuest(22);
-		board.setBookPrice(123);
+		board.setGuest(1);
+		board.setBookPrice(1);
 		board.setExpectedArr("수정된 예정시간");
-		board.setRequest("수정된 요청사항");		
+		board.setSmoking("1");
+		board.setRequest("수정된 요청사항");	
+		board.setBookerFirstname("수정된 이름");
+		board.setBookerLastname("수정된 성");
+		board.setBookerEmail("수정된 이메일");
+		board.setBookerPhone("1");
+		board.setBookStatus("RS_STT_BC");
 		
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/mm/dd");
 		try {
@@ -80,108 +110,104 @@ public class BookingMapperTests {
 			e.printStackTrace();
 		}
 		
-		
-		board.setSmoking("1");
-
+		int count = mapper.update(board);
+		log.info("UPDATE COUNT: " + count);
 	}
-	
-	//2. 예약중인 목록을 가져오기 위한 리스트 테스트	
-	@Test
-	public void getBookList() {
-		mapper.getBookList("U1").forEach(board->log.info(board));
-	}
-	
-	
-	//3. 취소한 내역으로 상태변화를 업데이트 하는 코드
-	@Test
-	public void testCancel() {
-		mapper.getCancelList("U1").forEach(board2->log.info(board2));
-	}
-	
-	
-	//4. 예약 완료한 리스트
-	@Test
-	public void testCheckout() {
-		mapper.getCheckoutList("A1").forEach(board->log.info(board));
-	}
-	
-	
-	
-	
-//	@Test
-//	public void testUpdate() {
-//		BookingVO board = new BookingVO();
-//	
-//		board.setBookNum("B8");
-//		board.setUserNum("A1");
-//		board.setRomNum("수정된 방번호");
-//		board.setStaydays(1);
-//		board.setGuest(22);
-//		board.setBookPrice(123);
-//		board.setDeposit(1);
-//		board.setExpectedArr("수정된 예정시간");
-//		board.setRequest("수정된 요청사항");
-//		board.setRealArr("수정된 도착시간");
-//		
-//		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/mm/dd");
-//		try {
-//			board.setBookDate(beforeFormat.parse("2020/02/02"));
-//			board.setCheckinDate(beforeFormat.parse("2020/02/02"));
-//			board.setCheckoutDate(beforeFormat.parse("2020/02/02"));
-//			
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		board.setCanceled("1");
-//		board.setSmoking("1");
-//		
-//		
-//		int count = mapper.update(board);
-//		log.info("UPDATE COUNT: " + count);
-//	}
-	
-	
-	
 
 	
-//	@Test
-//	public void testRead() {
-//	
-//		BookingVO board = mapper.read("B1");
-//		log.info(board);
-//		
-//		
-//		
-//	}
 	
+	// 3-2. 예약번호 B2의  예약을 취소한다 ( RS_STT_BK ->  RS_STT_BC 로 업데이트)  (완)
 	
 	@Test
-	public void testInsert2() {
-		BookingVO book = new BookingVO();
-		book.setUserNum("U1");
-		book.setRomNum("R1");
+	public void testDelete() {
+		log.info("DELETE COUNT: " + mapper.delete("B2"));
+	}
+
+	
+
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★4. testInsert ★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	
+	
+	//  예약번호 B2의  예약을 취소한 내역을 저장한다. (Status에 insert)  (완)	
+	@Test
+	public void testInsert() {								
+		mapper.changeStatus("B3", "예약완료");		
+	}
+
+	
+
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	// 객실번호 R210에 해당하는 객실정보와 대응하는 숙소정보를 불러온다.
+	//@Test
+	public void testGetAcmInfo() {
+		log.info(mapper.getAcmInfo("R210"));
+	}
+	
+	// 결제 후 예약정보를 저장한다
+	//@Test
+	public void testInsertBooking() {
+		BookingVO booking = new BookingVO();
+		booking.setUserNum("U1");
+		booking.setRomNum("R24");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			book.setCheckinDate(beforeFormat.parse("2020/8/1"));
-			book.setCheckoutDate(beforeFormat.parse("2020/8/3"));
+			booking.setCheckinDate(beforeFormat.parse("2020/8/1"));
+			booking.setCheckoutDate(beforeFormat.parse("2020/8/3"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		book.setStaydays(2);
-		book.setGuest(2);
-		book.setBookPrice(1004);
-		book.setExpectedArr("PM02");
-		book.setSmoking("1");
-		book.setRequest("뷰 좋은 방 주세요");
-		book.setBookerLastname("테스트");
-		book.setBookerFirstname("테스트");
-		book.setBookerEmail("test@ana.com");
-		book.setBookerPhone("010");
-		book.setBookStatus("RS_STT_BK");
-		mapper.insert(book);
+		booking.setStaydays(2);
+		booking.setGuest(2);
+		booking.setBookPrice(1004);
+		booking.setExpectedArr("PM02");
+		booking.setSmoking("1");
+		booking.setRequest("뷰 좋은 방 주세요");
+		booking.setBookerLastname("테스트");
+		booking.setBookerFirstname("테스트");
+		booking.setBookerEmail("test@ana.com");
+		booking.setBookerPhone("010");
+		booking.setBookStatus("RS_STT_BK");
+		
+		mapper.insertBooking(booking);
 
-		log.info(book);
+		log.info(booking);
+		log.info(mapper.insertBooking(booking));
+	}
+	
+	// 결제정보를 저장한다
+	//@Test
+	public void testInsertPayment() {
+		PaymentVO payment = new PaymentVO();
+		payment.setAcmNum("A1");
+		payment.setBookNum("B1024");
+		payment.setCoupon("0");
+		payment.setDiscount("0");
+		payment.setMileage("0");
+		payment.setPayMethod("test");
+		payment.setPrice("0");
+		payment.setRomNum("R1");
+		payment.setSubtotal("0");
+		payment.setTotal("0");
+		payment.setVat("0");
+		payment.setStaydays("1");
+		payment.setPayStatus("test");
+		payment.setUserNum("U1");
+		
+		mapper.insertPayment(payment);
+		
+		log.info(payment);
+		log.info(mapper.insertPayment(payment));
+	}
+	
+	// "B1"에 해당하는 예약, 결제, 숙소, 객실 정보를 불러온다
+	//@Test
+	public void testGetBooking() {
+		log.info(mapper.getBooking("B1"));
 	}
 }
