@@ -48,8 +48,51 @@ public class WishListMapperTests {
 	}
 	
 	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-	// ★★★★★★★★★★★★★★★★★★★★★★★★★★3. testInsert ★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★3. testRead ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	
 	
+	
+	//하나의 값만 받을수 있다
+	@Test
+	public void testRead() {
+		WishListVO board = mapper.read("U210");
+		log.info(board);
+	}
+	
 
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★4. testDelete ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	
+	@Test
+	public void testDelete() {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■>> DELETE COUNT:" + mapper.delete("W202"));
+	}
+	
+	
+	
+	
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★5. testUpdate ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	@Test
+	public void testUpdate() {
+		WishListVO board = new WishListVO();
+		
+		board.setWishNum("W220");
+		board.setUserNum("U1");
+		board.setAcmNum("A1");
+		board.setListTitle("수정11");
+		board.setListContent("수정11");
+				
+		
+		int count = mapper.update(board);
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■>>UPDATE COUNT: " + count);
+		
+	}
+	
+	
+	
 }

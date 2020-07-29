@@ -4,9 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
+
+
 <mapper namespace="com.ana.mapper.WishListMapper">
-
-
 <!-- 
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★1. ResultMap 을 이용한 mybatis ★★★★★★★★★★★★★★★★
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-	  ★★★★★★★★★★★★★★★★★★★★★★★★★★2. create 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★3. create 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
 -->
 
@@ -58,8 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 
 <insert id="insertSelectKey">
-<selectKey keyProperty="wishNum" order="BEFORE" resultType="String">
-</selectKey>
+	<selectKey keyProperty="wishNum" order="BEFORE" resultType="String">
+	</selectKey>
 
 	insert into TWISH_LIST (WISH_NUM, USER_NUM, ACM_NUM, LIST_TITLE, LIST_CONTENT)
 	values(concat('W',seq_tacm.nextval),#{userNum}, #{acmNum}, #{listTitle}, #{listContent})
@@ -67,5 +67,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 
 
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★4. read 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
 
+
+	<select id="read" resultMap="WishListVOResult">
+		select * from TWISH_LIST where WISH_NUM = #{wishNum}
+	</select>
+	
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★5. delete 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->	
+	
+
+	<delete id="delete">
+		delete from TWISH_LIST where WISH_NUM = #{wishNum}
+	</delete>
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★6. update 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->	
+	
+
+	<update id="update">
+		update twish_list 
+		set 
+		USER_NUM = #{userNum},
+		ACM_NUM =#{acmNum},
+		LIST_TITLE =#{listTitle},
+		LIST_CONTENT = #{listContent}
+		where WISH_NUM= #{wishNum}
+	</update> 
+	
+	
+	
 </mapper>
