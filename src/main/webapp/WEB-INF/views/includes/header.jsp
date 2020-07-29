@@ -15,8 +15,6 @@ String userNum = "";
 String userPriv ="";
 String userStatusCode="";
  
-
-//userNum = "U1";
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
    userLastName = user.getUserLastName();
@@ -130,14 +128,9 @@ if (user != null) {
                      }else if(priv=="GUEST"){
                     	 if(userStatusCode=="ACTIVE")
                         $('#mode').append("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
-                    	 else $('#mode').append("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");
-                    	  
+                    	 else $('#mode').append("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
                      }
-
-      
-                     $("#loginout").append(
-                           "<a href='/user/logout'>로그아웃</a>")
-                           
+                    
                   };    
                 });
                });
@@ -222,12 +215,10 @@ if (user != null) {
                               <li><a href="#">내 관심 숙소</a></li>
                               <li id='mode'></li>
                               <li id="header-menu"><a
-                                 onclick="location.href='/user/login'" style="cursor: pointer"
+                                href='/user/logout'" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"
                                  data-element-name="sign-out-btn" color="primary">
-                                    <div>
-                                       <div id="loginout"></div>
-                                    </div>
+                                    로그아웃
                               </a></li>
                            </ul></li>
                      </ul>
