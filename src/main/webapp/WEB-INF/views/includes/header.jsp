@@ -121,14 +121,14 @@ if (user != null) {
                      priv ='<%=userPriv%>';
                      userStatusCode='<%=userStatusCode%>';
                      if(priv== "ADMIN"){
-                        $('#mode').append("<a href='/admin/adminindex'   style='cursor: pointer'>관리자 모드</a>");
+                        $('#mode').html("<a href='/admin/adminindex'   style='cursor: pointer'>관리자 모드</a>");
                         
                      }else if(priv=="HOST"){
-                        $('#mode').append("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
+                        $('#mode').html("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
                      }else if(priv=="GUEST"){
                     	 if(userStatusCode=="ACTIVE")
-                        $('#mode').append("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
-                    	 else $('#mode').append("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
+                        $('#mode').html("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
+                    	 else $('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
                      }
                     
                   };    
