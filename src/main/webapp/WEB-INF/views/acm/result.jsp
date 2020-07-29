@@ -66,7 +66,7 @@
 
 	<div class="row">
 		<div class="booking-container">
-			<form class="booking-form" action="/acm/result" method='get' onsubmit="return checkValidation()">
+			<form class="booking-form" action="/acm/result" method='get'>
 				<div class="result-container">				
 					<div class="">
 						<div class="no-margin">
@@ -196,7 +196,7 @@
 	</div>
 
 	
-	 <div class="pac-card" id="pac-card">
+	 <!-- <div class="pac-card" id="pac-card">
       <div>
         <div id="title">
           Autocomplete search
@@ -223,7 +223,8 @@
         <input id="pac-input" type="text"
             placeholder="Enter a location">
       </div>
-    </div>
+    </div> -->
+    
     <div id="map"></div>
     <div id="infowindow-content">
       <img src="" width="16" height="16" id="place-icon">

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.QnaMapper">
+
+<resultMap id="QnaVO" type="com.ana.domain.QnaVO">
+		<result column="bno" property="bno" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="writer" property="writer" />
+		<result column="regdate" property="regdate" />
+		<result column="updatedate" property="updateDate" />
+	</resultMap>
+
+<select id="getList" resultMap="QnaVO">
+<![CDATA[
+select * from tqna where bno >0
+]]>
+</select>
+
+<insert id="insert">
+	insert into tqna(bno,title,content,writer)
+	values (seq_qna.nextval, #{title}, #{content}, #{writer})
+</insert>
+
+<insert id="insertSelectKey">
+
+	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+		select seq_qna.nextval from dual
+	</selectKey>
+	
+	insert into tqna(bno,title,content,writer)
+	values (#{bno}, #{title}, #{content}, #{writer})
+</insert>
+
+<select id="read" resultMap="QnaVO">
+	select * from tqna where bno = #{bno}
+</select>
+
+<delete id="delete">
+	delete from tqna where bno = #{bno}
+</delete>
+
+<update id="update">
+	update tqna
+	set title = #{title},
+	content = #{content},
+	writer = #{writer},
+	updateDate = sysdate
+	where bno = #{bno}
+</update>
+
+<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+<select id="getListWithPaging" resultMap="QnaVO">
+<![CDATA[
+select
+	bno, title, content, writer, regdate, updatedate
+from
+	(
+	select /*+INDEX_DESC(TQNA PK_TQNA) */
+		rownum rn, bno, title, content, writer, regdate, updatedate
+	from
+		tqna
+	where 
+]]>
+	
+	<include refid="criteria"></include>
+	
+<![CDATA[
+	rownum <= #{pageNum} * #{amount}
+	)
+	where rn > (#{pageNum}-1) * #{amount}
+]]>
+</select>
+
+<select id="getTotalCount" resultType="int">
+select count(*) from tqna where
+<include refid="criteria"></include>
+ bno > 0
+</select>
+
+</mapper>
