@@ -1,0 +1,109 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<!-- load stylesheets -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+<!-- Google web font "Open Sans" -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Google web font "동해독도(로고)" -->
+<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<!-- Bootstrap style -->
+<link rel="stylesheet" type="text/css"
+   href="${request.contextPath}/resources/css/datepicker.css" >
+<link rel="stylesheet" type="text/css"
+   href="${request.contextPath}/resources/slick/slick.css">
+<link rel="stylesheet" type="text/css"
+   href="${request.contextPath}/resources/slick/slick-theme.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/review.css">
+
+<!-- 메인 CSS style -->
+
+<!-- load JS files -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- jQuery (https://jquery.com/download/) -->
+<script src="${request.contextPath}/resources/js/popper.min.js"></script>
+<!-- https://popper.js.org/ -->
+<script src="${request.contextPath}/resources/js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->
+<script src="${request.contextPath}/resources/js/datepicker.min.js"></script>
+<!-- https://github.com/qodesmith/datepicker -->
+<script src="${request.contextPath}/resources/js/jquery.singlePageNav.min.js"></script>
+<!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
+<script src="${request.contextPath}/resources/slick/slick.min.js"></script>
+<!-- http://kenwheeler.github.io/slick/ -->
+<script src="${request.contextPath}/resources/js/jquery.scrollTo.min.js"></script>
+<!-- https://github.com/flesler/jquery.scrollTo -->
+
+<script src="${request.contextPath}/resources/js/index.js"></script>
+
+<!-- iMask -->
+<script src="https://unpkg.com/imask"></script>
+<!-- 달력 변경 -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="${request.contextPath}/resources/js/select2.js"></script>
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/select2.css" >
+
+
+<script type="text/javascript">
+   $(document)
+         .ready(
+               function() {
+                  //만약 user에 해당하는 세션이 없으면 
+
+                  var priv;
+                  var userStatusCode;
+                //세션에 유저가 없으면
+                $('#myMenuIcon').on("click", function(){
+                	
+               if (<%=user == null %>) {
+                    
+                     //알림 드랍 다운 내부 텍스트를 모두 지우고
+                     $('#myMenuIcon').removeAttr("data-toggle");
+                     $('#notification').empty();
+                     //회원 가입하라고 메세지 주기
+                     //드랍 다운 상자를 responsive로 변경하면 좋겠다
+                     $('#notification')
+                           .append(
+                                 "<li><a href='#'>ana의 회원이 되셔서 <br>더 많은 혜택을 누려보세요!</a></li>");
+                     //내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
+                     $('#myMenuIcon').attr("href", "/user/login");
+                     
+
+                  } else {
+                     priv ='<%=userPriv%>';
+                     userStatusCode='<%=userStatusCode%>';
+                     if(priv== "ADMIN"){
+                        $('#mode').html("<a href='/admin/adminindex'   style='cursor: pointer'>관리자 모드</a>");
+                        
+                     }else if(priv=="HOST"){
+                        $('#mode').html("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
+                     }else if(priv=="GUEST"){
+                    	 if(userStatusCode=="ACTIVE")
+                        $('#mode').html("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
+                    	 else $('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
+                     }
+                    
+                  };    
+                });
+               });
+</script>
+</head>
+
+<!-- 뒤로가기 방지 -->
+<!-- 
+<script type="text/javascript">
+   window.history.forward();
+   function noBack() {
+      window.history.forward();
+   }
+</script>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack(); onunload="">"
+ -->
+
+<body>

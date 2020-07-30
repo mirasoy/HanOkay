@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+
+   <!-- main-content -->
+   <div class="main-content" id="top">
+      <div class="top-bar-bg"></div>
+      <!-- Start : top-bar - 메인 네비게이션 바 : 동적 active 적용 -->
+      <div class="top-bar" id="top-bar">
+         <!-- Start : container-->
+         <div class="container">
+            <div class="row">
+               <nav class="navbar navbar-expand-lg">
+                  <!-- Start : Main Logo : ana의 로고 삽입-->
+                  <a class="navbar-brand mr-auto #top" 
+                     onclick="location.href='${request.contextPath}/acm/list'" style="cursor: pointer">
+                     <img src="${request.contextPath}/resources/img/logo.png" alt="Site logo"></a>
+                  <!-- End : Main Logo -->
+
+                  <!-- Start : hidden button-->
+                  <button type="button" id="nav-toggle"
+                     class="navbar-toggler collapsed" data-toggle="collapse"
+                     data-target="#mainNav" aria-expanded="false"
+                     aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <!-- End : hidden button-->
+
+                  <!-- Start : mainNav : ana 메뉴-->
+                  <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
+                     <ul class="navbar-nav ml-auto">
+
+
+
+                        <!-- Start : mainNav1 - 글러벌-->
+                        <li class="nav-item dropdown"><a
+                           class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           href="#"> <i class="fa fa-globe fa-2x"></i></a>
+                           <ul class="dropdown-menu">
+                              <li><a href="#">ENGLISH(미구현)</a></li>
+                              <li><a href="#">KOREAN</a></li>
+                           </ul></li>
+
+                        <!-- Start : mainNav2 - 알림-->
+                        <li class="nav-item dropdown"><a
+                           class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           href="#"> <i class="fa fa-bell fa-2x"></i></a>
+                           <ul class="dropdown-menu" id="notification">
+                              <li><a href="#">예약이 완료되었습니다</a></li>
+                              <li><a href="#">ana의 회원가입을 환영합니다!</a></li>
+
+                           </ul></li>
+
+                        <!-- Start : mainNav3 - 마이페이지-->
+                        <li class="nav-item dropdown"><a
+                           class="nav-link dropdown-toggle" id="myMenuIcon"
+                           data-toggle="dropdown" href="#"> <i
+                              class="fa fa-user fa-2x"></i></a>
+                           <ul class="dropdown-menu">
+                              <span class="header-menu">마이페이지</span>
+                              <li><a onclick="location.href='/account/myAccount/myProfile'" style="cursor: pointer">프로필</a></li>
+                              <li><a onclick="location.href='/account/myAccount'" style="cursor: pointer">계정</a></li>
+                              <li><a onclick="location.href='/mypage/bookListAll'"
+                                 style="cursor: pointer">나의 예약</a></li>
+                              <li><a onclick="location.href='/review/list'"
+                                 style="cursor: pointer">나의 리뷰</a></li>
+                              <li><a href="#">내 관심 숙소</a></li>
+                              <li id='mode'></li>
+                              <li id="header-menu">
+                              <a href='/user/logout'" style="cursor: pointer"
+                                 id="sign-out-btn" data-selenium="sign-out"
+                                 data-element-name="sign-out-btn" color="primary">로그아웃
+                              </a></li>
+                           </ul></li>
+                     </ul>
+                  </div>
+                  <!-- End : mainNavr -->
+               </nav>
+               <!-- End : GNB -->
+            </div>
+            <!-- row -->
+         </div>
+         <!-- End :  container -->
+      </div>
+      <!-- End : top-bar - 메인 네비게이션 바 -->
+   </div>
