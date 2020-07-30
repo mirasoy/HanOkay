@@ -11,549 +11,10 @@
 	String romPrice = request.getParameter("romPrice");
 	String days = request.getParameter("days");
 %>
-<style>
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/suhee.css">
 
-.page-wrapper{
-    padding: 10px;
-}
-
-.page-contents{
-	display: grid;
-	width: calc(75% - 1.875rem);
-}
-
-.page-sidebar{
-    width: 24%;
-    height: 75%;
-    position: fixed;
-    top: 14.5%;
-    left: 74.5%;
-}
-
-.button_scrolltop {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 100;
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-    font-size: 40px;
-    text-align: center;
-    color: #c6c6c6;
-    border-radius: 4px;
-    -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
-}
-
-.box {
-    font-size: 2vh;
-	width: 100%;
-	background: #fff;
-	padding: 20px;
-	margin: 1%;
-	border-radius: 4px;
-	-webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
-	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
-}
-
-.modal {
-	font-size: 2vh;
-  display: none; 
-  position: fixed;
-  z-index: 1000;
-  padding-top: 100px; 
-  left: 0;
-  top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-	 background-color: #fefefe;
-	 margin: auto;
-	 padding: 20px;
-	 border: 1px solid #888;
-	 width: 90%;
-	 height: 80%;
-	 top: 10%;
-}
-
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover, .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.accordion {
-  width: 100%;
-  height: 100%;
-  float: left;
-  padding: 15px;
-  z-index: 10;
-  background-color: white;
-  overflow: hidden;
-}
-
-@media screen and (max-width: 599px) {
-  .accordion {
-    max-width: 100%;
-  }
-}
-.accordion > div {
-  display: accordion;
-  position: relative;
-  padding: 0 0 0 35px;
-  color: black;
-}
-
-.accordion > div:before {
-  width: 20px;
-  font-weight: bold;
-  text-align: center;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 15px 7.5px;
-  border-right: 1px solid rgba(128, 128, 128, 0.25);
-  margin: 0;
-  color: black;
-}
-.accordion > div input + label {
-  background: #c8dee4;
-  cursor: pointer;
-  display: accordion;
-  padding: 15px 15px;
-  transition: all 0.25s ease-in-out 0.5s, color 0.25s ease-in-out 0.5s;
-  color: black;
-}
-.accordion > div input ~ div {
-  visibility: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: all 0.5s ease-in-out 0.2s, opacity 0.25s ease-in-out 0.25s, padding 0s ease-in-out 0s;
-  width: calc(100% + 35px);
-  margin-left: -35px;
-}
-.accordion > div input ~ div p {
-  padding: 15px;
-}
-.accordion > div input:checked + label {
-  transition: background-color 0s ease-in-out 0s;
-  color: black;
-}
-.accordion > div input:checked ~ div {
-  display: accordion;
-  opacity: 1;
-  visibility: visible;
-  max-height: 350px;
-  transition: all 0.5s ease-in-out 0.2s, opacity 0.25s ease-in-out 0.5s, padding 0s ease-in-out 0s;
-}
-
-.acc-div{
-	background: #c8dee4;
-}
-.acc-contents{
-	width: 100%;
-	background: whitesmoke;
-}
-
-/* 카드결제 */
-.payment-card{
-	display: flex;
-}
-
-.payment-title {
-    width: 100%;
-    text-align: center;
-}
-
-.form-container .field-container:first-of-type {
-    grid-area: name;
-}
-
-.form-container .field-container:nth-of-type(2) {
-    grid-area: number;
-}
-
-.form-container .field-container:nth-of-type(3) {
-    grid-area: expiration;
-}
-
-.form-container .field-container:nth-of-type(4) {
-    grid-area: security;
-}
-
-.field-container input {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.field-container {
-    position: relative;
-}
-
-.form-container {
-    display: grid;
-    grid-column-gap: 10px;
-    grid-template-columns: auto auto;
-    grid-template-rows: 90px 90px 90px;
-    grid-template-areas: "name name""number number""expiration security";
-    max-width: 400px;
-    padding: 20px;
-    color: #707070;
-}
-
-.payment-card label {
-    padding-bottom: 5px;
-    font-size: 13px;
-}
-
-.payment-card input {
-    margin-top: 3px;
-    padding: 15px;
-    font-size: 16px;
-    width: 100%;
-    border-radius: 3px;
-    border: 1px solid #dcdcdc;
-}
-
-.payment-card .ccicon {
-    height: 38px;
-    position: absolute;
-    right: 6px;
-    top: calc(50% - 17px);
-    width: 60px;
-}
-
-/* CREDIT CARD IMAGE STYLING */
-.payment-card .preload * {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
-}
-
-.payment-card .container {
-    width: 100%;
-    max-width: 400px;
-    max-height: 251px;
-    height: 54vw;
-    padding: 20px;
-}
-
-#ccsingle {
-    position: absolute;
-    right: 15px;
-    top: 20px;
-}
-
-#ccsingle svg {
-    width: 100px;
-    max-height: 60px;
-}
-
-.creditcard svg#cardfront,
-.creditcard svg#cardback {
-    width: 100%;
-    -webkit-box-shadow: 1px 5px 6px 0px black;
-    box-shadow: 1px 5px 6px 0px black;
-    border-radius: 22px;
-}
-
-#generatecard{
-    cursor: pointer;
-    float: right;
-    font-size: 12px;
-    color: #fff;
-    padding: 2px 4px;
-    background-color: #909090;
-    border-radius: 4px;
-    cursor: pointer;
-    float:right;
-}
-
-/* CHANGEABLE CARD ELEMENTS */
-.creditcard .lightcolor,
-.creditcard .darkcolor {
-    -webkit-transition: fill .5s;
-    transition: fill .5s;
-}
-
-.creditcard .lightblue {
-    fill: #03A9F4;
-}
-
-.creditcard .lightbluedark {
-    fill: #0288D1;
-}
-
-.creditcard .red {
-    fill: #ef5350;
-}
-
-.creditcard .reddark {
-    fill: #d32f2f;
-}
-
-.creditcard .purple {
-    fill: #ab47bc;
-}
-
-.creditcard .purpledark {
-    fill: #7b1fa2;
-}
-
-.creditcard .cyan {
-    fill: #26c6da;
-}
-
-.creditcard .cyandark {
-    fill: #0097a7;
-}
-
-.creditcard .green {
-    fill: #66bb6a;
-}
-
-.creditcard .greendark {
-    fill: #388e3c;
-}
-
-.creditcard .lime {
-    fill: #d4e157;
-}
-
-.creditcard .limedark {
-    fill: #afb42b;
-}
-
-.creditcard .yellow {
-    fill: #ffeb3b;
-}
-
-.creditcard .yellowdark {
-    fill: #f9a825;
-}
-
-.creditcard .orange {
-    fill: #ff9800;
-}
-
-.creditcard .orangedark {
-    fill: #ef6c00;
-}
-
-.creditcard .grey {
-    fill: #bdbdbd;
-}
-
-.creditcard .greydark {
-    fill: #616161;
-}
-
-/* FRONT OF CARD */
-#svgname {
-    text-transform: uppercase;
-}
-
-#cardfront .st2 {
-    fill: #FFFFFF;
-}
-
-#cardfront .st3 {
-    font-family: 'Source Code Pro', monospace;
-    font-weight: 600;
-}
-
-#cardfront .st4 {
-    font-size: 54.7817px;
-}
-
-#cardfront .st5 {
-    font-family: 'Source Code Pro', monospace;
-    font-weight: 400;
-}
-
-#cardfront .st6 {
-    font-size: 33.1112px;
-}
-
-#cardfront .st7 {
-    opacity: 0.6;
-    fill: #FFFFFF;
-}
-
-#cardfront .st8 {
-    font-size: 24px;
-}
-
-#cardfront .st9 {
-    font-size: 36.5498px;
-}
-
-#cardfront .st10 {
-    font-family: 'Source Code Pro', monospace;
-    font-weight: 300;
-}
-
-#cardfront .st11 {
-    font-size: 16.1716px;
-}
-
-#cardfront .st12 {
-    fill: #4C4C4C;
-}
-
-/* BACK OF CARD */
-#cardback .st0 {
-    fill: none;
-    stroke: #0F0F0F;
-    stroke-miterlimit: 10;
-}
-
-#cardback .st2 {
-    fill: #111111;
-}
-
-#cardback .st3 {
-    fill: #F2F2F2;
-}
-
-#cardback .st4 {
-    fill: #D8D2DB;
-}
-
-#cardback .st5 {
-    fill: #C4C4C4;
-}
-
-#cardback .st6 {
-    font-family: 'Source Code Pro', monospace;
-    font-weight: 400;
-}
-
-#cardback .st7 {
-    font-size: 27px;
-}
-
-#cardback .st8 {
-    opacity: 0.6;
-}
-
-#cardback .st9 {
-    fill: #FFFFFF;
-}
-
-#cardback .st10 {
-    font-size: 24px;
-}
-
-#cardback .st11 {
-    fill: #EAEAEA;
-}
-
-#cardback .st12 {
-    font-family: 'Rock Salt', cursive;
-}
-
-#cardback .st13 {
-    font-size: 37.769px;
-}
-
-/* FLIP ANIMATION */
-.payment-card .container {
-    perspective: 1000px;
-}
-
-.creditcard {
-    width: 100%;
-    max-width: 400px;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    transition: -webkit-transform 0.6s;
-    -webkit-transition: -webkit-transform 0.6s;
-    transition: transform 0.6s;
-    transition: transform 0.6s, -webkit-transform 0.6s;
-    cursor: pointer;
-}
-
-.creditcard .front,
-.creditcard .back {
-    position: absolute;
-    width: 100%;
-    max-width: 400px;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-    color: #47525d;
-}
-
-.creditcard .back {
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
-
-.creditcard.flipped {
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
-
-.container-info .acm-pic{
-	background: black;
-}
-
-.container-info .acm-pic img{
-	width: 25vh;
-}
-
-.container-info{
-	font-size: 2vh;
-}
-
-
-.container-info .acm-title{
-	font-size: 1.5rem;
-	font-weight: bold;
-}
-
-.container-booker input[type="text"], input[type="email"], input[type="tel"]{
-	background-color:#eee; 
-	opacity: 0.5;
-}
-
-.page-contnets .label-required:after {
-  content: "*";
-  color: red;
-  margin-left: 5px;
-}
-
-.page-contnets .td-title{
-    font-size: 2vh;
-    font-weight: bold;
-	text-align: center;
-    padding: 3vh;
-}
-
-.page-contents td{
-	width: 50px;
-	
-}
-
-</style>
-
-<div class = "page-wrapper">
-	<div class = "page-contnets" style="width: calc(75% - 1.875rem);">
+<div class = "page-wrapper page-new">
+	<div class = "page-contnets" style="width: 65%;">
 		<div class = "container-info box" >
 			<table>
 				<tr><td class="acm-pic" rowspan="4">
@@ -566,26 +27,27 @@
 				<tr><td></td><td><c:out value="${info.acmCity} "/> <c:out value="${info.acmDistr} "/> <c:out value="${info.acmDetailaddr} "/></td></tr>
 			</table>
 		</div>
-		
- 	<form name="form" method="post" onsubmit="return checkValidation()">
+	
+	<form action="/booking/get" id="form" method=post>	
 		<div class = "container-booker box" >
 			<table>
-				<tr><td rowspan="6" class="td-title">예약</br>정보</td><td colspan="3"><input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</td><td><input type="hidden" class="label-required">표시는 필수 입력사항입니다.</td></tr>
-				<tr><td><label class="table-lb label-required">First Name</label></td><td><input id="userInfo1" name="firstName" required type="text" value='<%=user.getUserFstName()%>' readonly="readonly"/></td>
-					<td><label class="table-lb label-required">Last Name</label></td><td><input id="userInfo2" name="lastName" required type="text" value='<%=user.getUserLastName()%>' readonly="readonly"/></td>
-					<td><label id="nameMsg" >&nbsp</label></td></tr>
-				<tr><td><label class="table-lb label-required">Email</label></td><td colspan="3"><input id="userInfo3" name="email" required type="email" value='<%=user.getUserEmail()%>' readonly="readonly"/></td>
-					<td><label id="emailMsg" >&nbsp</label><tr><td>
-				<tr><td><label class="table-lb ">Phone</label></td><td colspan="3"><input id="userInfo4" name="phone" type="tel" value='<%=user.getUserPhone()%>' readonly="readonly" /></td>
-					<td><label id="phoneMsg" >&nbsp</label><tr><td>
+				<tr><td rowspan="7" class="td-title">예약</br>정보</td><td colspan="2"><input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</td><td colspan="2"><p class="info"><label class="label-required"></label>표시는 필수 입력사항입니다.</p></td></tr>
+				<tr><td><label class="table-lb label-required">First Name</label></td><td><input id="userInfo1" name="bookerFirstname" required type="text" value='<%=user.getUserFstName()%>' readonly="readonly"/></td>
+					<td><label class="table-lb label-required">Last Name</label></td><td><input id="userInfo2" name="bookerLastname" required type="text" value='<%=user.getUserLastName()%>' readonly="readonly"/></td>
+				<tr><td><label id="nameMsg" >&nbsp</label></td></tr>
+				<tr><td><label class="table-lb label-required">Email</label></td><td colspan="3"><input id="userInfo3" name="bookerEmail" required type="email" value='<%=user.getUserEmail()%>' readonly="readonly"/></td></tr>
+				<tr><td><label id="emailMsg" >&nbsp</label></td></tr>
+				<tr><td><label class="table-lb ">Phone</label></td><td colspan="3"><input id="userInfo4" name="bookerPhone" type="tel" value='<%=user.getUserPhone()%>' readonly="readonly" /></td></tr>
+				<tr><td><label id="phoneMsg" >&nbsp</label></td></tr>
 			</table>
 			
 		</div>
  		
 		<div class = "container-request box" >
 			<table>
-				 <tr><td rowspan="3" class="td-title">추가</br>요청</td><td><label class="lb">도착 예정시간</label></td>
-				 	<td><select name="expectedArr">
+				<tr><td rowspan="5" class="td-title">추가</br>요청</td>
+					<td><label class="lb">도착 예정시간</label></td>
+					<td colspan="2"><select id="expArr">
 							<option value="">-----</option>
 							<option value="PM02">PM02</option>
 							<option value="PM03">PM03</option>
@@ -611,28 +73,57 @@
 							<option value="AM11">AM11</option>
 							<option value="AM12">AM12</option>
 						</select></td></tr>
-					<tr><td><label class="lb">흡연여부</label></td><td>금연객실<input type="radio" name="smoking" value="0" checked="checked">흡연객실<input type="radio" name="smoking" value="1"></td></tr>
-					<tr><td><label class="lb">메세지</label></td><td><input type="text" size="100" id="request" name="request" value="" maxlength="100"></td></tr>
-					<tr><td><input type="hidden" name="bookStatus" value="RS_STT_BK" ></td><td></td></tr>
+				<tr><td colspan="4"><p class="info"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>기본 체크인 시간 ${info.checkinTime} 이전에 도착할 경우, 대기시간이 소요될 수 있습니다.</p></td></tr>
+				<tr><td><label class="lb">흡연여부</label></td>
+					<td colspan="3">금연객실<input type="radio" name="smoking" value="0" checked="checked">&emsp;&emsp;흡연객실<input type="radio" name="smoking" value="1"></td></tr>
+				<tr><td><label class="lb">메세지</label></td>
+					<td colspan="3"><input type="text" id="request" name="request" value="" maxlength="100"></td></tr>
+				<tr><td colspan="4"><p class="info"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 최선을 다해 요청사항을 제공해 드릴 수 있도록 노력하겠습니다.</br>다만, 상황에 따라 요청이 이루어지지 않을 수 있으니 양해 바랍니다.</p></td></tr>
 			</table>
+			<input type="hidden" name="bookStatus" value="RS_STT_BK" >
 						 
 		</div>
 	</div> <!-- end of contents -->
 	
-	<div class = "page-sidebar">
+	<div class = "page-sidebar" style="width: 20%;">
 		<div class = "container-payment box" >
-			<span><%=checkin %> ~ <%=checkout %> (${days}박)</span></br>
-			<span>${info.romName}(${info.romType})</span></br>
-			<span>객실 1개, 인원 <%=person %>명</span></br>
-			<span>(최대 인원: ${info.romCapa}명)</span></br>
 			<table>
-				<tr><td>객실 요금(${days}박 x <%=romPrice%>)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="price"></label></td></tr>
-				<tr><td>세금 10%</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="tax"></label></td></tr>
-				<tr><td id="total-td">합계</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="total"></label></td></tr>
-				<tr><td>(1박당 금액)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="perDay"></label></td></tr>
+				<tr><td><%=checkin %></td><td> ~ </td><td><%=checkout %></td><td>&nbsp;(${days}박)</td></tr>
+				<tr><td colspan="2">${info.romName}</td><td colspan="2">(${info.romType})</td></tr>
+				<tr><td colspan="2">객실 1개, </td><td colspan="2">인원 <%=person %>명</td></tr>
+				<tr><td colspan="4">(최대 인원: ${info.romCapa}명)</td></tr>
 			</table>
-			<a id="modalBtn">결제하기</a>
+			<table>
+				<tr><td>객실 요금(${days}박 x <i class="fa fa-krw" aria-hidden="true"></i><%=romPrice%>)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPrice"></label></td></tr>
+				<tr><td>세금 10%</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblVat"></label></td></tr>
+				<tr><td id="total-td">합계</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblSubtotal"></label></td></tr>
+				<tr><td>(1박당 금액)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPerDay"></label></td></tr>
+				<tr><td colspan="2"></td></tr>
+				<tr><td colspan="2"><p class="info"><label><input type="checkbox" id="agreement"><a href="#" target="_blank">이용약관</a>, <a href="#" target="_blank">개인정보 보호정책</a>을 읽었으며 이에 동의합니다.</label></p></td></tr>
+				<tr><td colspan="2"><a id="modalBtn">결제하기</a></td></tr>
+			</table>
+			
 		</div>
+	</div>
+	<div class = "input-hidden-area">
+		<input type="hidden" name="userNum" id="userNum" value="<%=user.getUserNum()%>">
+		<input type="hidden" name="romNum" id="romNum" value="<%=romNum%>">
+		<input type="hidden" name="checkinDate" id="checkinDate" value="">
+		<input type="hidden" name="checkoutDate" id="checkoutDate" value="">
+		<input type="hidden" name="staydays" id="staydays" value="${days}">
+		<input type="hidden" name="guest" id="guest" value="<%=person%>">
+		<input type="hidden" name="bookPrice" id="bookPrice" value="0">
+		<input type="hidden" name="expectedArr" id="expectedArr" value="">
+		<input type="hidden" name="payMethod" id="payMethod" value="PY_METHOD_LATER">
+		<input type="hidden" name="acmNum" id="acmNum" value="${info.acmNum}">
+		<input type="hidden" name="price" id="price" value="<%=romPrice%>">
+		<input type="hidden" name="vat" id="vat" value="0">
+		<input type="hidden" name="subtotal" id="subtotal" value="0">
+		<input type="hidden" name="coupon" id="coupon" value="0">
+		<input type="hidden" name="mileage" id="mileage" value="0">
+		<input type="hidden" name="discount" id="discount" value="0">
+		<input type="hidden" name="total" id="total" value="0">
+		<input type="hidden" name="payStatus" id="payStatus" value="PY_STATUS_COMP">
 	</div>
 	
 	<div id="paymentModal" class="modal">
@@ -768,6 +259,7 @@
         </div>
     </div>
 			      </p>
+			      <p><input type="submit" value='예약하기'></p>
 			    </div>
 			  </div>
 			  
@@ -776,6 +268,7 @@
 			    <label for="item-two">간편 결제</label>
 			    <div class="acc-contents">
 			      <p><div id="paypal-button-container"></div></p>
+			      <p><p><input type="submit" value='예약하기'></p></p>
 			    </div>
 			  </div>
 			  
@@ -783,26 +276,163 @@
 			    <input type="radio" name="item" id="item-three" hidden />
 			    <label for="item-three">나중에 결제</label>
 			    <div class="acc-contents">
-			      <p>Nothing magical going on here. All we're doing is taking advantage of radio inputs and styling adjacent divs to display when an input is selected.</p>
+			      <p><i class="fa fa-credit-card-alt" aria-hidden="true"></i> 나중에 결제하기를 선택하면, 숙소에 방문해서 현장결제를 할 수 있습니다!</p>
+			      <p><input type="submit" value='예약하기' onclick='inputValue("PY_METHOD_LATER")'></p>
 			    </div>
 			  </div>
 			</div>
-			
-			<input type="submit" data-oper='booking' value='예약하기'>
 		</div>
-	</div>
 	</form>
+	</div>
 	
 	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
 
 </div><!-- end of page -->
 	<script>
+	
 		window.onload = function() {
-			// 숙소 평균 별점
+			// 불러온 유저정보의 연락처가 null일 때 공백으로 치환하여 출력
+			document.getElementById("userInfo4").value= '<%=user.getUserPhone()%>' == "null" ? "" : '<%=user.getUserPhone()%>';
+			
+			// 숙소별 리뷰 별점 평균
 			getStar(); 
+			
+			// 금액 계산하여 출력
 			getPrice();
+			
+		}
+		
+		// 모달
+		let modal = document.getElementById("paymentModal");
+		let btn = document.getElementById("modalBtn");
+		let span = document.getElementsByClassName("close")[0];
+		
+		btn.onclick = function() {
+			if(checkValidation()){
+				modal.style.display = "block";
+			}
+		}
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// 유효성검사 정규식
+		const regFirstnameKo = /^[가-힣]{1,20}$/; //   "U_FSTNAME" Varchar2(60 ) NOT NULL,
+		const regFirstnameEn = /^[a-zA-Z]{1,60}$/; //   "U_FSTNAME" Varchar2(60 ) NOT NULL,
+		const regLastnameKo = /^[가-힣]{1,13}$/; //  "U_LASTNAME" Varchar2(40 ) NOT NULL,
+		const regLastnameEn = /^[a-zA-Z]{1,40}$/; //  "U_LASTNAME" Varchar2(40 ) NOT NULL,
+		const regEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;   // "EMAIL" Varchar2(800 ) NOT NULL,
+		const regPhone = /^[0-9\s]{0,16}$/; //  "U_PHONE" Varchar2(16),
+	
+		const firstname = document.getElementById("userInfo1");
+		const lastname = document.getElementById("userInfo2");
+		const email = document.getElementById("userInfo3");
+		const phone = document.getElementById("userInfo4");
+		
+		const nameMsg = document.getElementById("nameMsg");
+		const emailMsg = document.getElementById("emailMsg");
+		const phoneMsg = document.getElementById("phoneMsg");
+		
+		const agreement = document.getElementById("agreement");
+		
+		function firstnameValid() {
+			if (!firstname.value) {
+				firstname.placeholder = "이름을 입력하지 않았습니다.";
+				firstname.focus();
+				return false;
+			} else if ((!regFirstnameKo.test(firstname.value)&&(!regFirstnameEn.test(firstname.value))) ) {
+				nameMsg.innerText = "이름은 1~60자의 영문 또는 1~20자의 한글만 사용 가능합니다.";
+				firstname.focus();
+				return false;
+			}else{
+				nameMsg.innerHTML = '&nbsp';
+				return true;
+			}
+		}
+		
+		function lastnameValid() {
+			if (!lastname.value) {
+				lastname.placeholder = "성을 입력하지 않았습니다.";
+				lastname.focus();
+				return false; 
+			} else if ((!regLastnameKo.test(lastname.value)&&(!regLastnameEn.test(lastname.value))) ) {
+				nameMsg.innerText = "성은 1~40자의 영문 또는 1~13자의 한글만 사용 가능합니다.";
+				lastname.focus();
+				return false; 
+			}else{
+				nameMsg.innerHTML = '&nbsp';
+				return true;
+			}
+		}
+		
+		function emailValid() {
+			if (!email.value) {
+				email.placeholder = "이메일을 입력하지 않았습니다.";
+				email.focus();
+				return false;
+			} else if (!regEmail.test(email.value) ) {
+				emailMsg.innerText = "올바른 이메일 형식이 아닙니다.";
+				email.focus();
+				return false;
+			}else{
+				emailMsg.innerHTML = '&nbsp';
+				return true;
+			}
+		}
+		
+		function phoneValid() {
+			if (!regPhone.test(phone.value) ) {
+				phoneMsg.innerText = "연락처는 1~16자의 숫자 또는 공백만 가능합니다.";
+				phone.focus();
+				return false;
+			}else{
+				phoneMsg.innerHTML = '&nbsp';
+				return true;
+			}
+		}
+		
+		function checkAgreement() {
+			if(!agreement.checked){
+				agreement.focus();
+				alert("계속 진행하려면 약관에 동의하세요");
+				return false;				
+			}else{
+				return true;
+			}
+		}
+		
+		function checkValidation() {
+			return firstnameValid()&&lastnameValid()&&emailValid()&&phoneValid()&&checkAgreement();
+		}
+		
+		
+		// 예약자정보: 체크박스를 눌렀을 때 실행되는 메서드
+		function setInfo() {
+			if(document.getElementById("cb").checked){
+				
+				// 예약자 정보를 로드하고 입력이 불가능한 상태가 된다
+				document.getElementById("userInfo1").value='<%=user.getUserFstName() %>';
+				document.getElementById("userInfo2").value='<%=user.getUserLastName()%>';
+				document.getElementById("userInfo3").value='<%=user.getUserEmail()%>';
+				document.getElementById("userInfo4").value= '<%=user.getUserPhone()%>' == "null" ? "" : '<%=user.getUserPhone()%>';
+				
+				for(let i = 1; i <= 4; i++){
+					document.getElementById("userInfo"+i).setAttribute('readonly', 'readonly');
+					document.getElementById("userInfo"+i).style.opacity=0.5;
+					document.getElementById("userInfo"+i).style.backgroundColor="#eee";
+				}	
+			}else{
+				
+				// 예약자 정보를 입력 가능한 상태가 된다
+				for(let i = 1; i <= 4; i++){
+					document.getElementById("userInfo"+i).removeAttribute('readonly');
+					document.getElementById("userInfo"+i).style.opacity=1;
+					document.getElementById("userInfo"+i).style.backgroundColor="white";
+				}	
+			}
 		}
 	
+		// 별점
 		function getStar() {
 			let star = "${star}";
 			let stisf = document.getElementById("stisf");
@@ -820,33 +450,46 @@
 			document.getElementById("stisf").style.fontSize="18px";
 		}
 		
+		// 금액
 		function getPrice() {
-			const romPrice = "<%=romPrice%>";
+			const romPrice = '<%=romPrice%>';
 			const days = "${days}";
 			let price = romPrice * days;
-			let tax = price / 10;
-			let total = price + tax;
-			let perDay = total / days;
-			document.getElementById("price").innerHTML = price;
-			document.getElementById("tax").innerHTML = tax; 
-			document.getElementById("total").innerHTML = total;
-			document.getElementById("perDay").innerHTML = perDay;
+			let vat = Math.ceil(price / 10);
+			let subtotal = price + vat;
+			let perDay = Math.ceil(subtotal / days);
+			let discount = 0;
+			let total = subtotal - discount;
+			
+			// 예약페이지 화면 우측의 금액 부분
+			document.getElementById("lblPrice").innerHTML = price;
+			document.getElementById("lblVat").innerHTML = vat; 
+			document.getElementById("lblSubtotal").innerHTML = subtotal;
+			document.getElementById("lblPerDay").innerHTML = perDay;
+			
+			// 예약하기 버튼을 눌렀을 때 저장할 정보 셋팅			
+			document.getElementById("vat").value = vat;
+			document.getElementById("subtotal").value = subtotal; 
+			document.getElementById("total").value = total;
+			document.getElementById("bookPrice").value = total;
 		}
-	</script>
-
-
-	<script>
-		let modal = document.getElementById("paymentModal");
-		let btn = document.getElementById("modalBtn");
-		let span = document.getElementsByClassName("close")[0];
 		
-		btn.onclick = function() {
-		  modal.style.display = "block";
+		// 예약하기 버튼 클릭시 input 태그 안에 필요한 값들을 셋팅
+		function inputValue(method) {
+			document.getElementById("payMethod").value = method; 
+			document.getElementById("expectedArr").value = document.getElementById("expArr").value;
+			document.getElementById("checkinDate").value = toDate('<%=checkin%>');
+			document.getElementById("checkoutDate").value = toDate('<%=checkout%>');
 		}
-		span.onclick = function() {
-		  modal.style.display = "none";
+		
+		// 날짜 String을 Date로 변환
+		function toDate(str) {
+			let year = str.substring(0,4);
+			let month = str.substring(5,7);
+			let day = str.substring(8,10);
+			return new Date(Number(year), Number(month)-1, Number(day));
 		}
-
+		
 	</script>
 
 	 <!-- Include the PayPal JavaScript SDK -->

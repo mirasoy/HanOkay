@@ -6,14 +6,14 @@ import lombok.Data;
 @Data
 public class AcmDetailRevVO{
 	
-	String	revPstnum;
-	String	revPtitle;
-	String	revUsernum;
-	Date	revPregdate;
-	Date	revPupdatedate;
-	Integer	revStisf;
-	String	revAcmnum;
-	String	revContent;
-	String	revPstacti;
+	private	String	revPstnum;
+	private	String	revPtitle;
+	private	String	revUsernum;
+	private	Date	revPregdate;
+	private	Date	revPupdatedate;
+	private	Integer	revStisf;
+	private	String	revAcmnum;
+	private	String	revContent;
+	private	String	revPstacti;
 	
 }

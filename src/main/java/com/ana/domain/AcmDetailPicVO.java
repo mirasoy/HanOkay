@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class AcmDetailPicVO {
 	
-	String	picAcmpurl;
-	String	picAcmpname;
-	String	picAcmpdesc;
+	private	String	picAcmpurl;
+	private	String	picAcmpname;
+	private	String	picAcmpdesc;
 	
 }
