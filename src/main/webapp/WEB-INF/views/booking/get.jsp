@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/suhee.css">
 
-<div class = "page-wrapper page-new">
+<div class = "page-wrapper page-get">
 	<div class = "page-contnets" style="width: 100%;">
 		<div class = "container-bookingNavi box" >
 			<a href="../../acm/list">홈으로가기</a>
