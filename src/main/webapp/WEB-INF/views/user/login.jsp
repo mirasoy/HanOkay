@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../includes/header.jsp"%>
+<%@include file="../includes/header1.jspf"%>
+<%@include file="../includes/header2.jspf"%>
+<%@include file="../includes/header3.jspf"%>
 
 <!-- Cookie가 비어있지 않을 때 checked 속성을 줌 -->
 	<c:if test="${not empty cookie.user_check}">
@@ -20,18 +22,67 @@
 			</tr>
 			<tr>
 				<p>
-				<td>비밀번호: <input type="password" size="50" name="pwd" id="pwd" value="${pwd }" placeholder="비밀번호를 입력해주세요" ><br>
+				<td>비밀번호: <input type="password" size="50" name="pwd" id="pwd" value="${pwd }" placeholder="비밀번호를 입력해주세요" autocomplete="on"><br>
 				</p>
 					<button id="loginButton" type="button" class="btn btn-default">로그인</button>
 					<button id="findPwdBtton" type="button" class="btn btn-default" onclick= "location.href='/account/myAccount/findPwd'">비밀번호 찾기</button>
 					<br>
 					<a href="../register/signUp" >회원가입하기</a>
+					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+					
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<script>
+	//구글 로그인
+	 function onSignIn(googleUser) {
+	        // Useful data for your client-side scripts:
+	        var profile = googleUser.getBasicProfile();
+	        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+	        console.log('Full Name: ' + profile.getName());
+	        console.log('Given Name: ' + profile.getGivenName());
+	        console.log('Family Name: ' + profile.getFamilyName());
+	        console.log("Image URL: " + profile.getImageUrl());
+	        console.log("Email: " + profile.getEmail());
+
+	        // The ID token you need to pass to your backend:
+	        var id_token = googleUser.getAuthResponse().id_token;
+	        console.log("ID Token: " + id_token);
+	 	
+	        $.ajax({
+				type:'POST',
+				url: '${pageContext.request.contextPath}/user/login/tokenSignIn',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: {
+					'idToken': id_token
+				},
+				success: function(data){
+					
+					if (data.msg==0){ //로그인 실패
+						
+						$('#msg').text('로그인 정보가 불일치합니다. 다시 시도해주세요');
+					}
+					
+					else if(data.msg==1){ //로그인 성공 시
+						
+						window.location.href='${pageContext.request.contextPath}/user/welcome';
+					} 
+				
+				},
+				
+		});	 
+ 
+	      /*   var xhr = new XMLHttpRequest();
+	        xhr.open('POST', 'http://localhost/user/login/tokenSignIn');
+	        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	        xhr.onload = function() {
+	          console.log('Signed in as: ' + xhr.responseText);
+	        };
+	        xhr.send('idtoken=' + id_token); 
+	      }  */
+	      }
 	//이메일 정규식 체크
 	function checkEmail(str) {
 		let emailRegex=/^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/;
@@ -89,7 +140,7 @@
 			return result;		
 		});
 		
-		
+	
 	});
 	</script>
 

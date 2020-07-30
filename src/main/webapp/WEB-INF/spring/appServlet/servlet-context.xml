@@ -55,5 +55,20 @@
 	</websocket:handlers>
 	
 	<beans:bean id="echohandeler" class="com.ana.controller.EchoHandler"/>
+	
+	<!-- google Class Bean설정 추가 -->
+<!-- 클라이언트ID와 보안비밀 세팅-->
+	<beans:bean id="googleConnectionFactory"
+	class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<beans:constructor-arg value="942421543250-6pu1jcn9mpo8vda62cop0qnlesr8fh6a.apps.googleusercontent.com" />
+		<beans:constructor-arg value="Awsk9beE6biQ-zR53P4rV13u" />
+	</beans:bean>
+
+ <!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
+	<!-- <beans:bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+		<beans:property name="scope" value="https://www.googleapis.com/auth/plus.login" />
+		<beans:property name="redirectUri" value="http://localhost/user/login/tokenSignIn />
+	</beans:bean>
+ -->
 
 </beans:beans>
