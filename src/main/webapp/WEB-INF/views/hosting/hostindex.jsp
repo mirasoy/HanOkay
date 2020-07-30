@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+	a{
+		color: #21292d !important;
+		}
+		
+	
+</style>
 
 <%@include file="../includes/hostheader.jsp"%>
 	<div class="body">

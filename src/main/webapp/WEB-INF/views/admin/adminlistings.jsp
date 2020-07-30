@@ -2,6 +2,7 @@
 
 <%@include file="../includes/adminheader.jsp"%>
 
+
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>			
 <!-- 중앙정렬 -->

@@ -30,7 +30,6 @@
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
-        </nav> 
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;">
 		<br>

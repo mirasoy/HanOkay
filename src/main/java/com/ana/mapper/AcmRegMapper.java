@@ -12,6 +12,7 @@ public interface AcmRegMapper {
 	
 	public List<AcmVO> getListAcms(@Param("bizRegnum")String bizRegnum, @Param("acmActi")String acmActi);
 	
+	
 	public void newAcmReg(AcmVO vo);//숙소등록**
 	
 	public void insertPhoto(PicVO vo);//숙소사진등록**
