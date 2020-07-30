@@ -15,35 +15,10 @@
 	}
 </style>
 
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/adminheader.jsp"%>
 <!-- nav-sidebar -->
-<nav>
-<div class="navbar-default sidebar" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
-        <ul class="nav" id="side-menu">
-       		<li>
-               <a></a> 
-            </li>
-            <li>
-                <a><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
-            </li>
-            <li>
-                <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
-            </li>
-            <li>
-                <a class="active"><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
-            </li>
-            <li>
-                <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-            </li>
-        </ul>
-    </div>
-    <!-- /.sidebar-collapse -->
-</div>
-            <!-- /.navbar-static-side -->
-</nav>
-	<!-- nav-end -->
-<div id="page-wrapper" style="padding-bottom:50px;">
+
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>			
   <!-- 수정, 삭제 가능하게  -->
   		  

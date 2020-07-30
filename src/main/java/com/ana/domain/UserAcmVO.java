@@ -1,12 +1,24 @@
 package com.ana.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class AcmVO {
+public class UserAcmVO {
+	
+	private String userNum;
+	private String userFstName;
+	private String userLastName;
+	private String userPriv;
+	private String userProfilePicUrl;
+	private String userProfilePicName;
+	private String userStatusCode;
+	
+	//////
+//	private String bizRegisterNumber;
+	private String bizRegnum;
+	/////
 	
 	private String acmNum;
 	private String acmName;
@@ -15,7 +27,6 @@ public class AcmVO {
 	private String acmDetailaddr;
 	
 	private String repPhone;
-	private String bizRegnum;
 	private String checkinTime;
 	private String checkoutTime;
 	private Date acmRegdate;
@@ -36,8 +47,5 @@ public class AcmVO {
 	private String acmStatus;
 	private Integer acmOptcode;
 	
-	private RomVO rom;
-	
-	private List<PicVO> picList;
-
+	private int romSize;
 }

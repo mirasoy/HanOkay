@@ -31,14 +31,25 @@
 		<result column="acm_status" property="acmStatus" />
 		<result column="acm_Optcode" property="acmOptcode" />
 		
-		
 	</resultMap>
+	
+	
+	<resultMap id="AcmPivVo" type="com.ana.domain.PicVO">
+		<result column="ACM_NUM" property="num" />
+		<result column="ACM_PURL" property="purl" />
+		<result column="ACM_PNAME" property="ptitle" />
+		<result column="ACM_PDESC" property="picDesc" />
+	
+	</resultMap>
+
+
+
 
 	<!-- 호스트단에서 숙소등록 -->
 	<!-- 한회원이 운영하는 숙소 다 가져오기 -->
-	<select id="getListHosts" resultMap="AcmVOResult">
+	<select id="getListAcms" resultMap="AcmVOResult">
 		<![CDATA[
-		select * from TACM where biz_Regnum=#{bizRegnum}
+			select * from TACM where biz_Regnum=#{bizRegnum} and acm_acti=#{acmActi}
 		]]>
 	</select>
 	
@@ -96,6 +107,64 @@
 		select * from TACM where biz_Regnum =#{bizRegisterNumber}
 	</select>
 
+
+
+	<!-- ****************admin단**************** -->
+		<resultMap id="UserAcmVOResult" type="com.ana.domain.UserAcmVO">
+		<result property="userNum" column="USER_NUM"/>
+		<result property="userLastName" column="U_LASTNAME"/>
+		<result property="userFstName" column="U_FSTNAME"/>
+		<result property="userPriv" column="U_PRIV"/>
+		<result property="userProfilePicUrl" column="U_PURL" />
+		<result property="userProfilePicName" column="U_PICNAME" />
+		<result property="userStatusCode" column="U_STAT_CODE" />
+	
+		<result column="biz_Regnum" property="bizRegnum" />
+		
+		
+		<result column="acm_Num" property="acmNum" />
+		<result column="acm_Name" property="acmName" />
+		<result column="acm_City" property="acmCity" />
+		<result column="acm_Distr" property="acmDistr" />
+		<result column="acm_Detailaddr" property="acmDetailaddr" />
+		<result column="rep_Phone" property="repPhone" />
+		<result column="acm_Regdate" property="acmRegdate" />
+		<result column="acm_Updatedate" property="acmUpdatedate" />
+		<result column="acm_Type" property="acmType" />
+		
+		<result column="checkin_Time" property="checkinTime" />
+		<result column="checkout_Time" property="checkoutTime" />
+		<result column="sub_Phone" property="subPhone" />
+		<result column="acm_Fax" property="acmFax" />
+		<result column="acm_Email" property="acmEmail" />
+		<result column="acm_Purl" property="acmPurl" />
+		<result column="acm_Pname" property="acmPname" />
+		
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+		<result column="acm_Desc" property="acmDesc" />
+		<result column="acm_Acti" property="acmActi" />
+		<result column="acm_status" property="acmStatus" />
+		<result column="acm_Optcode" property="acmOptcode" />
+		
+	</resultMap>
+	<select id="getadminListAcms" resultMap="UserAcmVOResult">
+		select 
+		U.USER_NUM, U.U_LASTNAME, U.U_FSTNAME,U.U_PRIV, U.U_PURL, U.U_PICNAME, U.U_STAT_CODE, U.BIZ_REGNUM,
+			A.ACM_NUM, A.ACM_NAME, A.ACM_CITY, A.ACM_DISTR, A.ACM_DETAILADDR, A.REP_PHONE,A.ACM_REGDATE,
+			A.ACM_UPDATEDATE, A.ACM_TYPE, A.CHECKIN_TIME, A.CHECKOUT_TIME, A.SUB_PHONE, A.ACM_FAX, A.ACM_EMAIL,
+			A.ACM_PURL, A.ACM_PNAME, A.LATITUDE, A.LONGITUDE, A.ACM_DESC, A.ACM_ACTI, A.ACM_STATUS, A.ACM_OPTCODE
+			
+		 from TUSER U,TACM A 
+		 where U.BIZ_REGNUM= A.BIZ_REGNUM and A.ACM_ACTI=#{acmActi} order by A.ACM_REGDATE
+	</select>
+
+
+	<!-- 사진입력 -->
+	<insert id="insertPhoto">
+	INSERT INTO TACM_PIC(ACM_NUM, ACM_PURL, ACM_PNAME, ACM_PDESC) VALUES
+	(#{num},#{purl},#{ptitle},#{picDesc})
+	</insert>
 
 
 </mapper>

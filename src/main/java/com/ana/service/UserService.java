@@ -43,14 +43,22 @@ public interface UserService {
 	public int executeLogin(@Param("email")String email, @Param("pwd")String pwd, @Param("user_check")String user_check, HttpServletResponse response, HttpSession session);
 	
 	//인증코드를 확인하는 메서드
-	public boolean matchAuthCode(String authCode, String email);
+	public boolean matchAuthCode(@Param("email") String email, @Param("enteredAuthCode") String authCode);
 	
 	//회원상태를 active해주는 메서드
 	@Transactional
-	public boolean grantActive(String email);
+	public boolean grantActive(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session);
 	
 	//해당 이메일을 가진 회원의 authCode를 업데이트 시키는 메서드
 	@Transactional
 	public boolean updateAuthCode(String email, String authCode);
+
+	//user를 db에 등록
+	@Transactional
+	public boolean registerThis(UserVO user);
+	////////////////////////림쨩 ////////////////
 	
+	//세션리뉴얼
+	public UserVO letsNewSession(String userNum);
+
 }

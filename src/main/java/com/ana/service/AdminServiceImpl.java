@@ -5,7 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ana.domain.AcmVO;
+import com.ana.domain.UserAcmVO;
 import com.ana.domain.UserVO;
+import com.ana.mapper.AcmRegMapper;
+import com.ana.mapper.RomRegMapper;
 import com.ana.mapper.UserMapper;
 
 import lombok.AllArgsConstructor;
@@ -16,13 +20,14 @@ import lombok.Setter;
 public class AdminServiceImpl implements AdminService{
 	@Setter(onMethod_= {@Autowired})
 	private UserMapper umapper;
+	
+	@Setter(onMethod_= {@Autowired})
+	private AcmRegMapper amapper;
 
-	@Override
-	public List<UserVO> getPendingHost() {
-		String userStatusCode ="HO_PENDING";
-		
-		return umapper.getPendingHost(userStatusCode);
-	}
+	@Setter(onMethod_= {@Autowired})
+	private RomRegMapper rmapper;
+
+
 
 	@Override
 	public List<UserVO> getAll(String acmNum) {
@@ -38,11 +43,15 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public boolean moditoHost(String userNum) {
-		
+		//회원 호스트 업그레이드
 		UserVO vo = new UserVO();
 		vo.setUserNum(userNum);
 		vo.setUserPriv("HOST");
 		vo.setUserStatusCode("HO_ACTIVE");
+		
+		//숙소 상태도 pending-> active/open 으로 update
+		//AcmVO acm = new AcmVO();
+		
 		
 		return umapper.moditoHost(vo)==1;
 	}
@@ -57,6 +66,25 @@ public class AdminServiceImpl implements AdminService{
 		vo.setBizRegisterNumber("");
 		
 		return umapper.moditoGuest(vo)==1;
+	}
+
+	@Override//pending, active, inactive 숙소들을 가져온다
+	public List<UserAcmVO> getadminListAcms(String acmActi) {
+		List<UserAcmVO> acms=amapper.getadminListAcms(acmActi);
+		int romsize;
+		
+		for(int i=0;i<acms.size();i++) {
+			romsize=rmapper.getRomsize(acms.get(i).getAcmNum());//select count(*) from trom	where acm_num=#{acmNum}
+			acms.get(i).setRomSize(romsize);
+		}
+		
+		return acms; 
+	}
+
+	@Override//active, ho_pending, ho_active의 회원list를 가져온다
+	public List<UserVO> getadminListUsers(String userStatusCode) {
+		
+		return umapper.getadminListUsers(userStatusCode);
 	}
 	
 

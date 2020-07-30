@@ -62,18 +62,22 @@
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;">
 
+
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
-		<br><br>
+		<br>
+		<div class="pull-right">
+		  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">다음으로</button><!-- ajax처리안함 -->
+		</div>
 		<form id="actionForm" action="/hosting/become-host1_6" method="post">
 			  
 			  
 			<div class="opt" id="opt">  
 			  
 			  <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
-			  <h4>5.숙소에서 공통적으로 제공하는 옵션</h4><br>
+			  <h4>숙소에서 공통적으로 제공하는 옵션</h4><br>
 			  <h6>한개 이상의 옵션을 선택하셔야합니다</h6>	
 			  
-			  <h4>5-1.시설 옵션</h4> <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->
+			  <h4> 시설 옵션</h4> <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->
 			  	<input type="checkbox" id="SW" name="acmOptcode" value="1"><label for="SW">수영장</label>
 			   <input type="checkbox" id="PK" name="acmOptcode" value="2"><label for="PK">주차장</label>
 			   <input type="checkbox" id="PU" name="acmOptcode" value="4"><label for="PU">공항 등 교통편 서비스</label>
@@ -91,7 +95,7 @@
 			   
 			   <br><br>
 							  
-			   <h4>5-2.식사 옵션</h4>
+			   <h4> 식사 옵션</h4>
 			   <input type="checkbox" id="BF" name="acmOptcode" value="16384"><label for="BF">조식</label>
 			   <input type="checkbox" id="DN" name="acmOptcode" value="32768"><label for="DN">석식</label>
 			   
@@ -99,14 +103,13 @@
 			   
 
 			   <br><br>
-			  <h4>6.숙소에 대한 설명과 교통편,지켜야할 사항 등을 적어주세요</h4>
-			  <textarea name="acmDesc" id="acmDesc" placeholder="꼼꼼한 숙소설명은 고객들이 숙소를 더 많이 찾게하는 요소입니다"cols="50" rows="5"></textarea>
+			  <h4>숙소에 대한 설명과 교통편,지켜야할 사항 등을 적어주세요</h4>
+			  <textarea class="form-control" name="acmDesc" id="acmDesc" placeholder="꼼꼼한 숙소설명은 고객들이 숙소를 더 많이 찾게하는 요소입니다"cols="50" rows="5"></textarea>
 			 	
 			  
 				  
 		  <!-- 총 검토 -->
 		  <br><br><br>
-		  <button type="button" onclick="if(readyForreg()){romRegit()}">다음으로</button>
 		</form>
 		</div>
 

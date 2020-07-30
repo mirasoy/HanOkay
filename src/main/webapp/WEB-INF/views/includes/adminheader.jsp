@@ -8,17 +8,14 @@
 		UserVO user = (UserVO) session.getAttribute("user");
 		String userLastName = "";
 		String userFstName = "";
-		String userPwd = "";
-		String userNum = "";
-		//userNum = "U1";
+		String userPriv="";
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if (user != null) {
 			userLastName = user.getUserLastName();
 			userFstName = user.getUserFstName();
-			userPwd = user.getUserPwd();
-			userNum = user.getUserNum();
-
+			userPriv = user.getUserPriv();
+			
 		}
 %>
 
@@ -93,6 +90,9 @@
 					<a href="/admin/userStat">회원관리</a>
 				</li>
 				<li class="nav-menu">
+					<a href="/admin/adminlistings">숙소관리</a>
+				</li>
+				<li class="nav-menu">
 					<a href="#">메시지</a>
 				</li>
 				<li class="nav-menu">
@@ -108,9 +108,31 @@
             <ul class="nav navbar-top-links navbar-right">
            		<li class="nav-menu">
 					<a href='/acm/list'>메인으로</a>
+				</li>
+				<li class="nav-menu">
+					<a href='/hosting/listings'>호스트 모드 보기</a>
+				</li>
+				
+					
             </ul>
         </nav>
 
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+	<script>
+	 $(document).ready(function() {
+		  var user='<%=user%>';
+		   if(user==null){
+			   alert("회원만 접근할 수 있습니다");
+			   location.href="/acm/list";
+		   }
+		   
+		   
+		  var priv ='<%=userPriv%>';
+	      if(priv!="ADMIN"){
+	    	  alert("관리자만 접속할수 있습니다");
+	    	  location.href="/acm/list";
+	      } 
+	 });
+	   
+	</script>

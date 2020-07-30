@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ana.domain.AcmVO;
 import com.ana.domain.UserVO;
 
 public interface UserMapper {
@@ -37,13 +38,13 @@ public interface UserMapper {
 	public boolean checkLogin(UserVO user);
 	
 	//입력된 인증코드와 보내진 db의 인증코드가 일치하는 사람이 1명이 맞는지 확인하는 메서드
-	public int matchAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authNum);
+	public int matchAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
 	
 	//user의 상태코드를 'ACTIVE'로 수정하는 메서드
-	public int grantActive(String email);
+	public int grantActive(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
 	
 	//user의 인증코드를 업데이트 하는 메서드
-	public int updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authNum);
+	public int updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
 	
 	
 	/////////////////////////////////림쨩의 영역/////////////////////////////////
@@ -53,15 +54,21 @@ public interface UserMapper {
 	
 	public UserVO isHost(String userNum);
 	
+	//세션새거
+	public UserVO letsNewSession(String userNum);
+	
 	//////////////////////////////어드민단 //////////////////////////////////////
 	
-	public List<UserVO> getPendingHost(String userStatusCode);
+	
+	public List<UserVO> getadminListUsers(String userStatusCode);
 	
 	public UserVO getUser(String userNum);
 	
 	public int moditoHost(UserVO vo);
 	
 	public int moditoGuest(UserVO vo);
+	
+	
 	
 	
 	

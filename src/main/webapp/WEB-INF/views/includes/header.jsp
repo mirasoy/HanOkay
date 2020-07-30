@@ -14,9 +14,7 @@ String userPwd = "";
 String userNum = "";
 String userPriv ="";
 String userStatusCode="";
-
-
-//userNum = "U1";
+ 
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
    userLastName = user.getUserLastName();
@@ -103,9 +101,12 @@ if (user != null) {
                   var priv;
                   var userStatusCode;
                 //세션에 유저가 없으면
-               if (<%=user == null%>) {
-                     // $("#loginout").append("<a href='/user/login'>로그인</a>");
+                $('#myMenuIcon').on("click", function(){
+                	
+               if (<%=user == null %>) {
+                    
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
+                     $('#myMenuIcon').removeAttr("data-toggle");
                      $('#notification').empty();
                      //회원 가입하라고 메세지 주기
                      //드랍 다운 상자를 responsive로 변경하면 좋겠다
@@ -113,7 +114,6 @@ if (user != null) {
                            .append(
                                  "<li><a href='#'>ana의 회원이 되셔서 <br>더 많은 혜택을 누려보세요!</a></li>");
                      //내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
-                     $('#myMenuIcon').removeAttr("data-toggle");
                      $('#myMenuIcon').attr("href", "/user/login");
                      
 
@@ -121,22 +121,18 @@ if (user != null) {
                      priv ='<%=userPriv%>';
                      userStatusCode='<%=userStatusCode%>';
                      if(priv== "ADMIN"){
-                        $('#mode').append("<a href='/admin/adminindex'   style='cursor: pointer'>관리자 모드</a>");
+                        $('#mode').html("<a href='/admin/adminindex'   style='cursor: pointer'>관리자 모드</a>");
                         
                      }else if(priv=="HOST"){
-                        $('#mode').append("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
+                        $('#mode').html("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
                      }else if(priv=="GUEST"){
                     	 if(userStatusCode=="ACTIVE")
-                        $('#mode').append("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
-                    	 else $('#mode').append("<a style='cursor: pointer'>호스트 등록중</a>");
-                    	  
+                        $('#mode').html("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
+                    	 else $('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
                      }
-
-      
-                     $("#loginout").append(
-                           "<a href='/user/logout'>로그아웃</a>")
-                           
+                    
                   };    
+                });
                });
 </script>
 
@@ -211,7 +207,7 @@ if (user != null) {
                               class="fa fa-user fa-2x"></i></a>
                            <ul class="dropdown-menu">
                               <span class="header-menu">마이페이지</span>
-                              <li><a href="#">계정</a></li>
+                              <li><a onclick="location.href='/account/myAccount'" style="cursor: pointer">계정</a></li>
                               <li><a onclick="location.href='/mypage/bookListAll'"
                                  style="cursor: pointer">나의 예약</a></li>
                               <li><a onclick="location.href='/review/list'"
@@ -219,12 +215,10 @@ if (user != null) {
                               <li><a href="#">내 관심 숙소</a></li>
                               <li id='mode'></li>
                               <li id="header-menu"><a
-                                 onclick="location.href='/user/login'" style="cursor: pointer"
+                                href='/user/logout'" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"
                                  data-element-name="sign-out-btn" color="primary">
-                                    <div>
-                                       <div id="loginout"></div>
-                                    </div>
+                                    로그아웃
                               </a></li>
                            </ul></li>
                      </ul>

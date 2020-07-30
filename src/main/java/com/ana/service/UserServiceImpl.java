@@ -1,6 +1,7 @@
 package com.ana.service;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ana.domain.UserVO;
+import com.ana.mapper.UserHisMapper;
 import com.ana.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -20,6 +22,10 @@ import lombok.extern.log4j.Log4j;
 public class UserServiceImpl implements UserService{
 
 	private UserMapper mapper;
+	
+	private EmailService emailService;
+	
+	private UserHisMapper userHisMapper;
 	
 	//회원 가입하는 메서드 구현
 	@Override
@@ -128,17 +134,33 @@ public class UserServiceImpl implements UserService{
 		return mapper.getUserById(email);
 	}
 	
+  
 	//인증코드를 확인하는 메서드
 	@Override
-	public boolean matchAuthCode(@Param("userAuthCode") String authCode, @Param("userEmail") String email) {
-		return mapper.matchAuthCode(authCode, email) ==1;
+	public boolean matchAuthCode( @Param("email") String email, @Param("enteredAuthCode") String authCode) {
+		return mapper.matchAuthCode(email, authCode) ==1;
 	}
 
 	//user의 상태코드를 active 변경하고 업데이트 된 행의 수를 가져오는 메서드
-	 @Override 
-	 public boolean grantActive(String email) {
-		 return mapper.grantActive(email)==1; 
+	@Override 
+	 public boolean grantActive(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session) {
+		System.out.println("email in grantActive: "+ email);
+		System.out.println("enteredAuthCode: "+ authCode);
+		if(matchAuthCode(email, authCode)) {
+			UserVO user= mapper.getUserById(email);
+			user.setUserPwd("");
+			System.out.println("로그인 한다~");
+			session.setAttribute("user", user);
+			System.out.println("세션에 회원객체는~: "+ session.getAttribute("user"));
+			userHisMapper.insertStatCodeChangeHistory(user.getUserNum(),"512",user.getUserNum() );
+			return mapper.grantActive(email, authCode)==1;
+		}
+		else {
+			System.out.println("인증코드 틀림~");
+			return false;
+		}
 	 }
+
 
 	 //user의 인증코드를 업데이트 하게하는 메서드
 	@Override
@@ -147,4 +169,63 @@ public class UserServiceImpl implements UserService{
 	
 	
 	}
+	//중복되는 이메일이 없고 난수를 생성하여 user객체의 setUserAuthCode로 넣어주고 service.register(user)한다 
+	@Transactional
+	@Override
+	public boolean registerThis(UserVO user) {
+		//db에 중복되는 이메일이 없으면
+		if(canRegister(user.getUserEmail())) {
+			//user에게 인증번호(6자리 난수)를 정해주고
+			user.setUserAuthCode(numberGen(6,2));
+			log.info("userAuthCode in userSerivceIMPL:"+ user.getUserAuthCode());
+
+			mapper.insertSelectKey(user);
+			emailService.sendAuthEmail(user.getUserEmail(), user.getUserAuthCode());
+			return true;
+		}
+		
+			return false;
+		
+	}
+	
+	
+	
+	//인증번호 생성 메서드
+	 public static String numberGen(int len, int dupCd ) {
+	        
+	        Random rand = new Random();
+	        String numStr = ""; //난수가 저장될 변수
+	        
+	        for(int i=0;i<len;i++) {
+	            
+	            //0~9 까지 난수 생성
+	            String ran = Integer.toString(rand.nextInt(10));
+	            
+	            if(dupCd==1) {
+	                //중복 허용시 numStr에 append
+	                numStr += ran;
+	            }else if(dupCd==2) {
+	                //중복을 허용하지 않을시 중복된 값이 있는지 검사한다
+	                if(!numStr.contains(ran)) {
+	                    //중복된 값이 없으면 numStr에 append
+	                    numStr += ran;
+	                }else {
+	                    //생성된 난수가 중복되면 루틴을 다시 실행한다
+	                    i-=1;
+	                }
+	            }
+	        }
+	        return numStr;
+	    }
+  	//////////////////////////////////////////////////////////////
+
+	@Override
+	public UserVO letsNewSession(String userNum) {
+		
+		return mapper.letsNewSession(userNum);
+	}
+	
+	
+  
+  
 }
