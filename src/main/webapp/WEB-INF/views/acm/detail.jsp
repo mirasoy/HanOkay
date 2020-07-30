@@ -84,7 +84,7 @@
 		<!-- 편의시설 -->
 		<div class = "container-option" id="option">
 			<label class="sub-title">OPTION</label>
-			<div id=acmOpt>&nbsp;</div>
+			<div id=acmOpt></div>
 		</div>		
 
 		<!-- 숙소위치 -->
@@ -116,7 +116,7 @@
 					</tr>
 				</c:forEach>
 				<c:if test="${empty rev}">
-					<tr><td>첫번째 리뷰의 주인공이 되어보세요!</td></tr>
+					<tr><td>첫 번째 리뷰의 주인공이 되어보세요!<i class="fa fa-smile-o" aria-hidden="true"></i></td></tr>
 				</c:if>
 			</table>
 		</div>		
@@ -128,7 +128,7 @@
 				<table>
 					<c:forEach items="${rom}" var="rom">
 						<tr class= "rom-list" id="${rom.romNum}">
-							<td><span class="rom-title"><c:out value="${rom.romName}" /></span></td>
+							<td class="rom-title"><span ><c:out value="${rom.romName}" /></span></td>
 							<td class="rom-pic"><img alt='객실사진' src='/display?fileName=<c:out value="${rom.romPurl}" /><c:out value="${rom.romPname}" />' />
 							</td>
 							
@@ -148,7 +148,7 @@
 							<td class="table-rom-td rom-opt romOpt" >
 							</td>
 							
-							<td class="table-rom-td rom-price"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/></br>(1박당 객실요금)
+							<td class="table-rom-td rom-price"><i class="fa fa-krw" aria-hidden="true"></i>&nbsp;<fmt:formatNumber value="${rom.romPrice}" type="number"/></br>(1박 기준)
 							</td>
 							
 							<td class="table-rom-td rom-select">
@@ -244,9 +244,12 @@
 				j++;
 			</c:forEach>
 
-			for(let k=0; k<acmOpt.length; k++){
+			let opt = document.getElementById("acmOpt");
+			for(let k=0, cnt=0; k<acmOpt.length; k++){
 				if(acmOpt.charAt(k) == 1){
-					document.getElementById("acmOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+					opt.innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>&nbsp;';
+					cnt++;
+					if(cnt > 1 && cnt % 4 == 0) opt.innerHTML += '</br>';
 				}
 			}
 		}
@@ -264,10 +267,12 @@
 				nameArr[j] = '<c:out value="${romCode.codeCont}" />';
 				j++;
 			</c:forEach>
+			
+			let opt = document.getElementsByClassName("romOpt");
 			for(let l=0; l<romOpt.length; l++){
 				for(let k=0; k<romOpt[l].length; k++){
 					if(romOpt[l].charAt(k) == 1){
-						document.getElementsByClassName("romOpt")[l].innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+						opt[l].innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>&nbsp;&nbsp;';
 					}
 				}
 			}
