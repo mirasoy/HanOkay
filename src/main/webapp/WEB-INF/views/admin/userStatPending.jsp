@@ -13,7 +13,7 @@
   		  
 <div class="row">
 	  <div class="col-lg-12">
-	    <h4>'<c:out value="${getuseracm.userFstName }"/>' 회원님의 숙소상세</h4><br>
+	    <h4>'<c:out value="${pendinghostacm.userFstName }"/>' 회원님의 호스트 요청</h4><br>
 	  </div>
 	  <!-- /.col-lg-12 -->
 </div>
@@ -28,24 +28,24 @@
 	      <div class="panel-body">
 			<div class="form-group">
 	          <label>회원번호</label> <input class="form-control" name='userNum' id='userNum'
-	            value='<c:out value="${getuseracm.userNum }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.userNum }"/>' readonly="readonly">
 	        </div>	
 	        <div class="form-group">
 	          <label>회원이름</label> <input class="form-control" name='userFstName' id='userFstName'
-	            value='<c:out value="${getuseracm.userFstName }"/><c:out value="${pendinghostacm.userLastName }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.userFstName }"/><c:out value="${pendinghostacm.userLastName }"/>' readonly="readonly">
 	        </div>
 	        <div class="form-group">
 	          <label>회원 권한</label> <input class="form-control" name='userPiv'
-	            value='<c:out value="${getuseracm.userPriv }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.userPriv }"/>' readonly="readonly">
 	        </div>
 	
 	        <div class="form-group">
 	          <label>회원 상태</label> <input class="form-control" name='userStatusCode'
-	            value='<c:out value="${getuseracm.userStatusCode }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.userStatusCode }"/>' readonly="readonly">
 	        </div>
 			<div class="form-group">
 	          <label>회원 사업자번호</label> <input class="form-control" name='bizRegnum' id='bizRegnum'
-	            value='<c:out value="${getuseracm.bizRegnum }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.bizRegnum }"/>' readonly="readonly">
 	        </div>
 			
 		</div>
@@ -62,45 +62,45 @@
     <div class="panel panel-default" >
 
       <div class="panel-heading">
-      	숙소정보<label class="pull-right"><c:out value="${getuseracm.acmNum }"/></label>
+      	숙소정보<label class="pull-right"><c:out value="${pendinghostacm.acmNum }"/></label>
       </div>
       <!-- /.panel-heading -->
 	      <div class="panel-body">
 			
 	        <div class="form-group">
 	          <label>숙소이름</label> <input class="form-control" name='acmName' id='acmName'
-	            value='<c:out value="${getuseracm.acmName}"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.acmName}"/>' readonly="readonly">
 	        </div>
 	        <div class="form-group">
 	          <label>숙소유형</label> <input class="form-control" name='acmType' id='acmType'
-	            value='<c:out value="${getuseracm.acmType}"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.acmType}"/>' readonly="readonly">
 	        </div>
 	        <div class="form-group">
 	          <label>숙소 주소</label> <input class="form-control" name='acmAddr'
-	            value='<c:out value="${getuseracm.acmCity}"/>&nbsp;<c:out value="${getuseracm.acmDistr}"/>&nbsp;<c:out value="${getuseracm.acmDetailaddr}"/>' readonly="readonly"> 
+	            value='<c:out value="${pendinghostacm.acmCity}"/>&nbsp;<c:out value="${pendinghostacm.acmDistr}"/>&nbsp;<c:out value="${pendinghostacm.acmDetailaddr}"/>' readonly="readonly"> 
 	        </div>
 	        <div class="form-group">
 	          <label>숙소 대표번호</label> <input class="form-control" name='repPhone'
-	            value='<c:out value="${getuseracm.repPhone }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.repPhone }"/>' readonly="readonly">
 	        </div>
 			<div class="form-group">
 	          <label>호스트 연락처</label> <input class="form-control" name='subPhone'
-	            value='<c:out value="${getuseracm.subPhone }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.subPhone }"/>' readonly="readonly">
 	        </div>
 			<div class="form-group">
 	          <label>체크인, 체크아웃 시간</label> <input class="form-control" name='checkTime'
-	            value='<c:out value="${getuseracm.checkinTime }"/>/<c:out value="${getuseracm.checkoutTime }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.checkinTime }"/>/<c:out value="${pendinghostacm.checkoutTime }"/>' readonly="readonly">
 	        </div>
 	        <div class="form-group">
 	          <label>숙소 이메일</label> <input class="form-control" name='acmEmail'
-	            value='<c:out value="${getuseracm.acmEmail }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.acmEmail }"/>' readonly="readonly">
 	        </div>
 	        <div class="form-group">
 	          <label>숙소 팩스번호</label> <input class="form-control" name='acmFaxr'
-	            value='<c:out value="${getuseracm.acmFax }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.acmFax }"/>' readonly="readonly">
 	        </div>
 			<div class="form-group">
-	          <label>숙소 설명</label> <textarea class="form-control" name='userPiv' readonly="readonly"><c:out value="${getuseracm.acmDesc }"/></textarea>
+	          <label>숙소 설명</label> <textarea class="form-control" name='userPiv' readonly="readonly"><c:out value="${pendinghostacm.acmDesc }"/></textarea>
 	        </div>
 	
 			
@@ -117,24 +117,24 @@
 	      <div class="panel-body">
 			<div class="form-group">
 	          <label>회원번호</label> <input class="form-control" name='userNum' id='userNum'
-	            value='<c:out value="${getuseracm.userNum }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.userNum }"/>' readonly="readonly">
 	        </div>	
 	        <div class="form-group">
 	          <label>회원이름</label> <input class="form-control" name='userFstName' id='userFstName'
-	            value='<c:out value="${getuseracm.userFstName }"/><c:out value="${getuseracm.userLastName }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.userFstName }"/><c:out value="${pendinghostacm.userLastName }"/>' readonly="readonly">
 	        </div>
 	        <div class="form-group">
 	          <label>회원 권한</label> <input class="form-control" name='userPiv'
-	            value='<c:out value="${getuseracm.userPriv }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.userPriv }"/>' readonly="readonly">
 	        </div>
 	
 	        <div class="form-group">
 	          <label>회원 상태</label> <input class="form-control" name='userStatusCode'
-	            value='<c:out value="${getuseracm.userStatusCode }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.userStatusCode }"/>' readonly="readonly">
 	        </div>
 			<div class="form-group">
 	          <label>회원 사업자번호</label> <input class="form-control" name='bizRegnum' id='bizRegnum'
-	            value='<c:out value="${getuseracm.bizRegnum }"/>' readonly="readonly">
+	            value='<c:out value="${pendinghostacm.bizRegnum }"/>' readonly="readonly">
 	        </div>
 			
 		</div>

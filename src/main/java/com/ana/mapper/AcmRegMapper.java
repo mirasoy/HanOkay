@@ -12,6 +12,7 @@ public interface AcmRegMapper {
 	
 	public List<AcmVO> getListAcms(@Param("bizRegnum")String bizRegnum, @Param("acmActi")String acmActi);
 	
+	
 	public void newAcmReg(AcmVO vo);//숙소등록**
 	
 	public void insertPhoto(PicVO vo);//숙소사진등록**
@@ -33,4 +34,8 @@ public interface AcmRegMapper {
 	
 	////////////어드민단////////////
 	public List<UserAcmVO> getadminListAcms(String acmActi);
+	
+	public UserAcmVO getpendingUserAcms(String bizRegnum);
+	//호스트 권한을 주며 active로 변경
+	public int moditoAcmActive(AcmVO acm);
 }

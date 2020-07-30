@@ -3,19 +3,35 @@
 
 <%@include file="../includes/adminheader.jsp"%>
 
+<style>
+	.circle{
+		position:absolute;
+		top:-4px;
+		left:-1px;
+		width:20px;
+		height:20px;
+		border-radius:50%;
+		background-color:red;
+	}
 
-<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
-	<br>			
+</style>
+
+<div id="page-wrapper" style="padding-bottom:50px;margin-left:0px;">
+	<br>	
+	<!-- 중앙정렬 -->
+	<div style="margin-left:15%;margin-right:15%;">				
   <!-- 숙소 방 추가 모달로 띄우기-->
 <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
-  <h3 align="left">총 <c:out value="${size}"/>개의 회원 호스트요청</h3>
-			
-			  
+  <h3 align="left">총 <c:out value="${size}"/>개의 회원</h3><br>
+	<div class="hostpendingisseo">호스트 대기자가 '<c:out value="${hopensize}"/>'명 있습니다!</div>		
+	<br>		  
 		
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading" style="padding-bottom:25px;">
-				호스트 대기자 명단
+			<div class="circle hostpendingisseo"></div>
+				호스트 대기자 명단<label class="pull-right hostpendingisseo">*수락/거절 필요</label>
+      
 			</div>
 
 			<!-- /.panel-heading -->
@@ -25,6 +41,7 @@
 						<tr>
 							<th>회원 번호</th>
 							<th>회원 이름</th>
+							<th>회원 사업자등록</th>
 							<th>회원 권한</th>
 							<th>회원 상태</th>
 						</tr>
@@ -34,10 +51,11 @@
 						<tr>
 							<td><c:out value="${pendinguser.userNum}" /></td>
 							<td>
-								<a class='pendingmove' href='<c:out value="${pendinguser.userNum}"/>'>
+								<a class='pendingmove' href='<c:out value="${pendinguser.bizRegisterNumber}"/>'>
 									<c:out value="${pendinguser.userFstName}" />
 								</a>
 							</td>
+							<td><c:out value="${pendinguser.bizRegisterNumber}" /></td>
 							<td><c:out value="${pendinguser.userPriv}" /></td>
 							<td><c:out value="${pendinguser.userStatusCode}" /></td>
 						</tr>
@@ -65,6 +83,7 @@
 							<th>회원 이름</th>
 							<th>회원 권한</th>
 							<th>회원 상태</th>
+							<th>신고</th>
 						</tr>
 					</thead>
 
@@ -78,6 +97,7 @@
 							</td>
 							<td><c:out value="${activeuser.userPriv}" /></td>
 							<td><c:out value="${activeuser.userStatusCode}" /></td>
+							<td>0</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -100,8 +120,10 @@
 						<tr>
 							<th>회원 번호</th>
 							<th>회원 이름</th>
+							<th>회원 사업자등록</th>
 							<th>회원 권한</th>
 							<th>회원 상태</th>
+							<th>신고</th>
 						</tr>
 					</thead>
 
@@ -113,8 +135,11 @@
 									<c:out value="${hoactiveuser.userFstName}" />
 								</a>
 							</td>
+							<td><c:out value="${hoactiveuser.bizRegisterNumber}" /></td>
 							<td><c:out value="${hoactiveuser.userPriv}" /></td>
 							<td><c:out value="${hoactiveuser.userStatusCode}" /></td>
+							<td>0</td>
+						
 						</tr>
 					</c:forEach>
 				</table>
@@ -125,7 +150,7 @@
 			</div>
 		</div><!-- end hoactivelist -->
 		
-
+</div><!-- 중앙정렬 -->
 
 			
 		<!-- 빈 폼 -->
@@ -141,8 +166,8 @@
 			var actionForm = $("#actionForm");
 			
 			e.preventDefault();
-			actionForm.append("<input type='hidden' name='userNum' value='"+$(this).attr("href")+"'>");
-			actionForm.attr("action","/admin/userStatPendingProc");
+			actionForm.append("<input type='hidden' name='bizRegisterNumber' value='"+$(this).attr("href")+"'>");
+			actionForm.attr("action","/admin/userStatPending");
 			actionForm.submit();
 		});
 		
@@ -151,7 +176,7 @@
 			
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='userNum' value='"+$(this).attr("href")+"'>");
-			actionForm.attr("action","/admin/userStatguestProc");
+			actionForm.attr("action","/admin/userStatguest");
 			actionForm.submit();
 		});
 	
@@ -160,9 +185,19 @@
 			
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='userNum' value='"+$(this).attr("href")+"'>");
-			actionForm.attr("action","/admin/userStathostProc");
+			actionForm.attr("action","/admin/userStathost");
 			actionForm.submit();
 		});
+
+		
+		//대기자 있음을 보여줌
+		var hopensize=<c:out value="${hopensize}"/>;
+		
+		if(hopensize=='0'){
+			$(".hostpendingisseo").css("display","none");
+		}
+	
+	
 	});
 
 </script>
