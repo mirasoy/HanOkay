@@ -4,6 +4,8 @@ package com.ana.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ana.domain.Criteria;
 import com.ana.domain.QnaVO;
@@ -26,11 +28,14 @@ public class QnaServiceImpl implements QnaService{
 		
 		mapper.insertSelectKey(qna);
 	}
-
+	
+	//@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
-	public QnaVO get(Long bno) {
-		
+	public QnaVO get(Long bno, String goHit) {
 		log.info("get......" + bno);
+		if(goHit.equals("Y")) {
+			mapper.boardHit(bno);
+		}
 		return mapper.read(bno);
 	}
 

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/qnaheader.jsp" %>
+<%@include file="../includes/header.jsp" %>
 
+<div class="container">
 <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Board Read</h1>
@@ -43,12 +44,15 @@
                         		<input type='hidden' id='bno' name='bno' value='<c:out value="${qna.bno}"/>'>
                         		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
                         		<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+                        		<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+                        		<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
                         	</form>
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
                 </div>
+            </div>
             </div>
             <!-- /.row -->
             

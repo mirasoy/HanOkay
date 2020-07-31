@@ -48,7 +48,7 @@ public class QnaServiceTests {
 	
 	@Test
 	public void testGet() {
-		log.info(service.get(1L));
+		log.info(service.get(1L,"N"));
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class QnaServiceTests {
 	
 	@Test
 	public void testUpdate() {
-		QnaVO qna = service.get(1L);
+		QnaVO qna = service.get(1L,"N");
 		
 		if(qna==null) {
 			return;

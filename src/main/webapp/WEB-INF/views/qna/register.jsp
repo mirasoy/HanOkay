@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/qnaheader.jsp" %>
+<%@include file="../includes/header.jsp" %>
 
+<div class="container">
 <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Board Register</h1>
@@ -29,8 +30,10 @@
                         	</div>
                         	
                         	<div class="form-group">
-                        		<label>Writer</label> <input class="form-control" name='writer'>
+                        		<label>Writer</label> <input class="form-control" name='userName' value='<%=userLastName %> <%=userFstName %>' readonly="readonly">
                         	</div>
+                        	
+                        	<input class="form-control" type="hidden" name='writer' value='<%=userNum%>'>
                         	
                         	<button type="submit" class="btn btn-default">Submit Button</button>
                         	<button type="reset" class="btn btn-default">Reset Button</button>
@@ -41,6 +44,7 @@
                     </div>
                     <!-- /.panel -->
                 </div>
+            </div>
             </div>
             <!-- /.row -->
 <%@include file="../includes/footer.jsp" %>

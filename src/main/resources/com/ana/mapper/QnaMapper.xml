@@ -3,14 +3,37 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ana.mapper.QnaMapper">
-
-<resultMap id="QnaVO" type="com.ana.domain.QnaVO">
+	
+	<resultMap type="com.ana.domain.UserVO" id="UserVO" >
+		<result property="userNum" column="USER_NUM"/>
+		<result property="userEmail" column="U_EMAIL"/>
+		<result property="userPwd" column="U_PWD"/>
+		<result property="userLastName" column="U_LASTNAME"/>
+		<result property="userFstName" column="U_FSTNAME"/>
+		<result property="userPhone" column="U_PHONE"/>
+		<result property="userBirthday" column="U_BIRTHDAY"/>
+		<result property="userRegisterDate" column="U_REGDATE" />
+		<result property="userRegisterMethod" column="U_REGMETHOD"/>
+		<result property="userPriv" column="U_PRIV"/>
+		<result property="userProfilePicUrl" column="U_PURL" />
+		<result property="userProfilePicName" column="U_PICNAME" />
+		<result property="userIntroduction" column="U_INTRO" />
+		<result property="userLanguage" column="U_LANG" />
+		<result property="userStatusCode" column="U_STAT_CODE" />
+		<result property="bizRegisterNumber" column="BIZ_REGNUM" />
+		<result property="bizRegisterPicUrl" column="BIZ_REGPURL" />
+		<result property="userAuthCode" column="U_AUTH_CODE" />
+	</resultMap>
+	
+	<resultMap type="com.ana.domain.QnaVO" id="QnaVO" >
 		<result column="bno" property="bno" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="writer" property="writer" />
 		<result column="regdate" property="regdate" />
 		<result column="updatedate" property="updateDate" />
+		<result column="hit" property="hit" />
+		<collection property="userVO" resultMap="UserVO"/>
 	</resultMap>
 
 <select id="getList" resultMap="QnaVO">
@@ -35,7 +58,9 @@ select * from tqna where bno >0
 </insert>
 
 <select id="read" resultMap="QnaVO">
-	select * from tqna where bno = #{bno}
+	select * from (select distinct bno, title, content, regdate, updatedate, hit, concat(concat(u_lastname,' '),u_fstname) writer
+        from tuser u, tqna q
+        where  u.user_num = q.writer) where bno = #{bno}
 </select>
 
 <delete id="delete">
@@ -46,7 +71,6 @@ select * from tqna where bno >0
 	update tqna
 	set title = #{title},
 	content = #{content},
-	writer = #{writer},
 	updateDate = sysdate
 	where bno = #{bno}
 </update>
@@ -74,13 +98,16 @@ select * from tqna where bno >0
 <select id="getListWithPaging" resultMap="QnaVO">
 <![CDATA[
 select
-	bno, title, content, writer, regdate, updatedate
+	bno, title, content, writer, regdate, updatedate, hit
 from
 	(
 	select /*+INDEX_DESC(TQNA PK_TQNA) */
-		rownum rn, bno, title, content, writer, regdate, updatedate
+		rownum rn, bno, title, content, writer, regdate, updatedate, hit
 	from
-		tqna
+		(select distinct bno, title, content, regdate, updatedate, hit, concat(concat(u_lastname,' '),u_fstname) writer
+        from tuser u, tqna q
+        where  u.user_num = q.writer
+        order by bno desc) tqna
 	where 
 ]]>
 	
@@ -94,9 +121,18 @@ from
 </select>
 
 <select id="getTotalCount" resultType="int">
-select count(*) from tqna where
+select count(*) from (select distinct bno, title, content , concat(concat(u_lastname,' '),u_fstname) writer
+        from tuser u, tqna q
+        where  u.user_num = q.writer
+        ) where
 <include refid="criteria"></include>
  bno > 0
 </select>
+
+<update id="boardHit" parameterType="long">
+update tqna set
+hit = hit+1
+where bno = #{bno}
+</update>
 
 </mapper>

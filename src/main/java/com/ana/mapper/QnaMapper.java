@@ -25,5 +25,7 @@ public interface QnaMapper {
 	public int delete(Long bno);
 	
 	public int update(QnaVO qna);
+	
+	public void boardHit(Long bno);
 
 }

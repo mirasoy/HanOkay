@@ -22,7 +22,7 @@ public class QnaMapperTests {
 	@Setter(onMethod_=@Autowired)
 	private QnaMapper mapper;
 	
-	@Test
+	//@Test
 	public void testGetList() {
 		mapper.getList().forEach(qna->log.info(qna));
 	}
@@ -51,7 +51,7 @@ public class QnaMapperTests {
 		log.info(qna);
 	}
 	
-	@Test
+	//@Test
 	public void testRead() {
 		QnaVO qna = mapper.read(5L);
 		
@@ -76,7 +76,7 @@ public class QnaMapperTests {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testPaging() {
 		Criteria cri = new Criteria();
 		cri.setPageNum(3);
@@ -85,7 +85,7 @@ public class QnaMapperTests {
 		list.forEach(qna -> log.info(qna));
 	}
 	
-	@Test
+	//@Test
 	public void testSearch() {
 		Criteria cri = new Criteria();
 		cri.setKeyword("새로");
@@ -94,6 +94,15 @@ public class QnaMapperTests {
 		List<QnaVO> list = mapper.getListWithPaging(cri);
 		
 		list.forEach(board -> log.info(board));
+	}
+	
+	@Test
+	public void testBoardHit() {
+		
+		mapper.boardHit(5L);
+		QnaVO qna = mapper.read(5L);
+		
+		log.info(qna);
 	}
 
 }

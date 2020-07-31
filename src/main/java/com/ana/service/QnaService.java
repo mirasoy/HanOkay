@@ -9,7 +9,7 @@ public interface QnaService {
 	
 	public void register(QnaVO qna);
 	
-	public QnaVO get(Long bno);
+	public QnaVO get(Long bno, String goHit);
 	
 	public boolean modify(QnaVO qna);
 	
