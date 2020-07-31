@@ -54,6 +54,12 @@
 
 		<!-- 숙소정보-->
 		<div class = "container-info box" id="info">
+		<!-- 메세지보내기기능 -->
+			<span>
+			<form class = 'right' action='/chat/chatRoom' method='POST'>
+			<input type='hidden' name='chatromnum' value='newChatr::${acmOwnerNum }'>
+			<button class = 'btn right'>메시지보내기</button></form></span>
+		<!-- 메세지보내기기능 -->	
 			<span class="title"><c:out value="${acm.acmName}" /></span>
 			<span id="stisf">&nbsp;</span>
 			<span id="stisf-num">(<c:out value="${star}" />)</span>
@@ -62,6 +68,8 @@
 			&emsp;<i class="fa fa-ellipsis-v" aria-hidden="true"></i>&emsp;<span class="email"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;메일보내기: <a href="mailto:${acm.acmEmail}"><c:out value="${acm.acmEmail}"/></a></span>&nbsp;&nbsp;<span class="copy">주소복사</span><i class="fa fa-clipboard" aria-hidden="true"></i>
 			<input type="hidden" id="email" value="${acm.acmEmail}">
 			</br><span class="desc" ><i class="fa fa-quote-left" aria-hidden="true"></i><c:out value="${acm.acmDesc}" /><i class="fa fa-quote-right" aria-hidden="true"></i></span>
+			
+			
 		</div>
 		
 		<!-- 숙소사진 -->

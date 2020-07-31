@@ -9,7 +9,7 @@ public interface ChatRomService {
 	
 	public ChatRomVO readChat(String chatromnum);
 	public List<ChatRomVO> readChatlist(String userNum1);
-	public void startChat(ChatRomVO vo);
+	public String startChat(ChatRomVO vo);
 	public int updateChatrom(String content, String userNum, String chatromnum);
 	
 }

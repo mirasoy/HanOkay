@@ -28,9 +28,11 @@ public class ChatRomServiceImpl implements ChatRomService{
 	}
 
 	@Override
-	public void startChat(ChatRomVO vo) {
+	public String startChat(ChatRomVO vo) {
 		// TODO Auto-generated method stub
 		mapper.startChat(vo);
+		
+		return vo.getChatromnum();
 	}
 
 	@Override

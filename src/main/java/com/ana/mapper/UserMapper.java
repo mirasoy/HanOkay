@@ -69,7 +69,8 @@ public interface UserMapper {
 	public int moditoGuest(UserVO vo);
 	
 	
-	
+	//사업자번호로 유져불러오기
+	public UserVO  getAcmOwner(String bizregnum);
 	
 	
 }

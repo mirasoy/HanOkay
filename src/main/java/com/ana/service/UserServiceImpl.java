@@ -224,6 +224,12 @@ public class UserServiceImpl implements UserService{
 		
 		return mapper.letsNewSession(userNum);
 	}
+
+	@Override
+	public UserVO getAcmOwner(String bizregnum) {
+		// TODO Auto-generated method stub
+		return mapper.getAcmOwner(bizregnum);
+	}
 	
 	
   
