@@ -188,7 +188,7 @@ String name = (String) session.getAttribute("loginUserNum");
 		}
 		
 		
-		${board.acmName}
+	
 		
 		
 		

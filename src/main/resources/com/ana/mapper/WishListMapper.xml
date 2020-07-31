@@ -39,9 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="getList" resultMap="WishListVOResult">
 <![CDATA[
-	select * from TWISH_LIST 
+	select * from twish_list where user_num='U1'
 ]]>
 </select>
+
 
 
 
@@ -67,6 +68,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 
 
+
+<insert id="insertAjax">
+	insert into TWISH_LIST (WISH_NUM, USER_NUM, ACM_NUM, LIST_TITLE, LIST_CONTENT)
+	values(concat('W',seq_tacm.nextval),#{userNum}, #{acmNum}, #{listTitle}, #{listContent})
+
+</insert>
+
 <!-- 
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★4. read 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -77,6 +85,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="read" resultMap="WishListVOResult">
 		select * from TWISH_LIST where WISH_NUM = #{wishNum}
 	</select>
+	
+
+	
 	
 <!-- 
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -106,6 +117,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where WISH_NUM= #{wishNum}
 	</update> 
 	
+
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★6. 장바구니 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->	
+
+<!-- 장바구니에 동일한 상품 레코트 확인 -->
+
+<select id="wishCart">
+	select count(*) from twish_list where wish_num=#{wishNum}
+</select>
+
 	
 	
 </mapper>

@@ -10,11 +10,18 @@ import com.ana.domain.WishListVO;
 public interface WishListMapper {
 	
 
-	public List<WishListVO> getList();
-	public void insert(WishListVO board);
+	
+	public int insert(WishListVO board); //추가
+	public WishListVO read(String wishNum); //하나 조회
+	public List<WishListVO> getList(); //여러개 조회
+	public int delete(String userNum);	 //삭제
+	public int update(WishListVO board); //수정
+	
+	
 	public void insertSelectKey(WishListVO board);
-	public WishListVO read(String userNum);
-	public int delete(String userNum);	
-	public int update(WishListVO board);
+	public int insertAjax(WishListVO vo);
+	
+	
+	
 
 }

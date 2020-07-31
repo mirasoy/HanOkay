@@ -47,17 +47,37 @@ public class WishListMapperTests {
 		
 	}
 	
+
+	
+	
+	@Test
+	public void testInsertAjax() {
+		WishListVO vo = new WishListVO();
+		vo.setUserNum("U1");
+		vo.setAcmNum("A1");
+		vo.setListTitle("새로 추가 제목");
+		vo.setListContent("새로추가 내용");
+		
+		mapper.insertAjax(vo);
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■vo");
+		
+	}
+	
+	
 	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	// ★★★★★★★★★★★★★★★★★★★★★★★★★★3. testRead ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	
 	
 	
-	//하나의 값만 받을수 있다
+	//찜번호로 검색한다.
 	@Test
 	public void testRead() {
-		WishListVO board = mapper.read("U210");
+		String targetWishNum = "W1";
+		WishListVO board = mapper.read(targetWishNum);
 		log.info(board);
 	}
+	
+
 	
 
 	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

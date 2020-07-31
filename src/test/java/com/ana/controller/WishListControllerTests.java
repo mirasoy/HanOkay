@@ -46,22 +46,30 @@ public class WishListControllerTests {
 	
 	
 	
-	//@Test
+	@Test
 	public void testRegister() throws Exception{
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/acm/register")
-				.param("acmNum", "A100")
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/wishlist/register")
+				
+			
+				.param("userNum", "U1")
+				.param("acmNum", "A1")
+				.param("listTitle", "컨트롤러")
+				.param("listContent", "테스트")
+				
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 	}
 	
-	//@Test
+	@Test
 	public void testGet() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders
-				.get("/acm/get")
-				.param("acmNum", "A1"))
+				.get("/wishlist/get")
+				.param("wishNum", "W1"))
 				.andReturn()
 				.getModelAndView().getModelMap());
 	}
+	
+	
 	
 	//@Test
 	public void testModify() throws Exception {

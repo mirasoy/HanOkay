@@ -9,6 +9,23 @@
 <%@include file="../includes/header.jsp"%>
 <head>
 
+<style>
+.modal-content1 {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	pointer-events: auto;
+}
+
+.modal {
+	z-index: 12000;
+}
+</style>
+
 
 <link rel="stylesheet" type="text/css"
 	href="${request.contextPath}/resources/css/result.css">
@@ -113,164 +130,236 @@
 		</div>
 		<!-- end container -->
 
-<div class="container-1">
+		<div class="container-1">
 
-		<!-- start : gallery_section -->
-		<section class="gallery_section">
-	
-		<!-- start : main_text -->
+			<!-- start : gallery_section -->
+			<section class="gallery_section">
+
+				<!-- start : main_text -->
 				<div class="main_text">
 					<p>?? 개 이상의 숙소</p>
-					<h1 class="banner-title">강남구의 숙소 </h1>
+					<h1 class="banner-title">강남구의 숙소</h1>
 					<ul>
 						<li><a href="#">유연한 환불 정책</a></li>
 						<li><a href="#">숙소 정책</a></li>
 						<li><a href="#">요금</a></li>
 						<li><a href="#">즉시 예약</a></li>
-						<li><a href="#">필터 추가하기</a></li>												
+						<li><a href="#">필터 추가하기</a></li>
 					</ul>
 				</div>
 				<!-- end : main_text -->
 
 
-		<!-- start : gallery_list -->
-	<div id="myTable" class="gallery_list">	
+				<!-- start : gallery_list -->
+				<div id="myTable" class="gallery_list">
 
-		<div>
-				<c:forEach items="${list }" var="acm">	
-				
-			<div class='room room1 move' href='<c:out value="${acm.acmNum}"/>'
-						onclick="location.href='<c:out value="${acm.acmNum}"/>'"
-						style="cursor: pointer;">
-						
-					
-						
-						<div class="room-images">
-							<a href="#">
-								<figure>
-						
-							
-							<img alt='객실사진' src='/display?fileName=<c:out value="${acm.acmPurl}" />s\<c:out value="${acm.acmPname}" />' />
-							
-							
-							</figure>
-								</a>
-						</div>
-						
-						<div class="room-details">
-							<h2 class="title"><a href="#"><c:out value="${acm.acmName}" /></a></h1>							
-							<p class="address"><c:out value="${acm.acmCity }" /> <c:out
-								value="${acm.acmDistr }" /> <c:out
-								value="${acm.acmDetailaddr }" /></p>
-							<p><c:out value="${acm.acmDesc }" /></p>
-							<div class="room-services">
-								<div class="room-service-item"><i class="fa fa-wifi"></i></div>
+					<div>
+						<c:forEach items="${list }" var="acm">
+
+							<div class='room room1 move'
+								href='<c:out value="${acm.acmNum}"/>'
+								onclick="location.href='<c:out value="${acm.acmNum}"/>'"
+								style="cursor: pointer;">
+															
+								<input type="hidden" id="acmTest" value='<c:out value="${acm.acmNum}" />'>
+
+
+
+								<div class="room-images">
+									<a href="#">
+										<figure>
+											<img alt='객실사진'
+												src='/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />' />
+										</figure>
+									</a>
+								</div>
+
+								<div class="room-details">
+									<h2 class="title">
+										<a href="#"><c:out value="${acm.acmName}" /></a>
+										</h1>
+										<p class="address">
+											<c:out value="${acm.acmCity }" />
+											<c:out value="${acm.acmDistr }" />
+											<c:out value="${acm.acmDetailaddr }" />
+										</p>
+										<p>
+											<c:out value="${acm.acmDesc }" />
+										</p>
+										<div class="room-services">
+											<div class="room-service-item">
+												<i class="fa fa-wifi"></i>
+											</div>
+										</div>
+										<div class="room-services">
+											<div class="room-service-item">
+												<i class="fa fa-bath"></i>
+											</div>
+										</div>
+								</div>
+
+								<div class="room-ect">
+									<button id="wishButton" class="wishButton">
+										<i class="fa fa-heart fa-2x"></i>
+									</button>
+									<p>
+										<span> ₩ 100,000</span> / 1박
+									</p>
+								</div>
+
+								<input type="hidden" id="latitude"
+									value='<c:out value="${acm.latitude }" />'> <input
+									type="hidden" id="longitude"
+									value='<c:out value="${acm.longitude }" />'>
+
 							</div>
-							<div class="room-services">
-								<div class="room-service-item"><i class="fa fa-bath"></i></div>
-							</div>									
+						</c:forEach>
+					</div>
+					<!-- 테이블 대신 -->
+
+
+					<!-- end of myTable -->
+
+
+
+
+					<div class='pull-right'>
+						<ul class="pagination">
+
+							<c:if test="${pageMaker.prev}">
+								<li class="paginate_button previous"><a
+									href="${pageMaker.startPage -1}">Previous</a></li>
+							</c:if>
+
+							<c:forEach var="num" begin="${pageMaker.startPage}"
+								end="${pageMaker.endPage}">
+								<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active":""} "><a
+									href="${num}">${num}</a></li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next}">
+								<li class="paginate_button next"><a
+									href="${pageMaker.endPage +1 }">Next</a></li>
+							</c:if>
+						</ul>
+					</div>
+
+					<form id='actionForm' action="/acm/result" method='get'>
+						<input type='hidden' name='pageNum'
+							value='${pageMaker.cri.pageNum}'> <input type='hidden'
+							name='amount' value='${pageMaker.cri.amount}'> <input
+							type='hidden' name='type'
+							value='<c:out value="${pageMaker.cri.type}"/>'> <input
+							type='hidden' name='keyword'
+							value='<c:out value="${pageMaker.cri.keyword}"/>'> <input
+							type='hidden' name='person'
+							value='<c:out value="${pageMaker.cri.person}"/>'> <input
+							type='hidden' name='in'
+							value='<c:out value="${pageMaker.cri.in}"/>'> <input
+							type='hidden' name='out'
+							value='<c:out value="${pageMaker.cri.out}"/>'>
+					</form>
+
+
+				</div>
+
+				<div class="pac-card" id="pac-card">
+					<div>
+						<div id="title">Autocomplete search</div>
+						<div id="type-selector" class="pac-controls">
+							<input type="radio" name="type" id="changetype-all"
+								checked="checked"> <label for="changetype-all">All</label>
+
+							<input type="radio" name="type" id="changetype-establishment">
+							<label for="changetype-establishment">Establishments</label> <input
+								type="radio" name="type" id="changetype-address"> <label
+								for="changetype-address">Addresses</label> <input type="radio"
+								name="type" id="changetype-geocode"> <label
+								for="changetype-geocode">Geocodes</label>
+						</div>
+						<div id="strict-bounds-selector" class="pac-controls">
+							<input type="checkbox" id="use-strict-bounds" value=""> <label
+								for="use-strict-bounds">Strict Bounds</label>
+						</div>
+					</div>
+					<div id="pac-container">
+						<input id="pac-input" type="text" placeholder="Enter a location">
+					</div>
+				</div>
+
+			</section>
+
+			<section class="map_section" id="map">
+				<div id="infowindow-content" class="container">
+					<img src="" width="16" height="16" id="place-icon"> <span
+						id="place-name" class="title"></span><br> <span
+						id="place-address"></span>
+				</div>
+			</section>
+
+
+		</div>
+
+		<!-- wishList 모달창 -->
+
+		<!-- Modal -->
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		
+				<div class="modal-content1">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+
+					</div>
+					<div class="modal-body">				
+						<div class="form-group info-group">
+							<label>#유저번호</label> <input class="form-control" name='userNum'
+								value='<%=user.getUserNum()%>' readonly="readonly">
 						</div>
 						
-						<div class="room-ect">
-							<button><i class="fa fa-heart fa-2x"></i></button>
-							<p> <span> ₩ 100,000</span> / 1박</p>
-						</div>						
-						
-					<input type="hidden" id="latitude"
-						value='<c:out value="${acm.latitude }" />'>
-					<input type="hidden" id="longitude"
-						value='<c:out value="${acm.longitude }" />'>
-						
-					</div>						
-				</c:forEach>
-			</div>
-		<!-- 테이블 대신 -->
-		
-	
-			
-			<!-- end of myTable -->
-			
-	
-			
-			
-			<div class='pull-right'>
-				<ul class="pagination">
+						<div class="form-group info-group">
+							<label>#숙소번호</label> <input class="form-control acmNum"  name='acmNum' readonly="readonly" > 					
+ 							<%-- <label>#숙소번호</label> <input class="form-control" name='acmNum' value='<c:out value="${acmNum}" />' readonly="readonly" >  --%>					
+						</div>
+						<div class="form-group info-group">
+							<label>#타이틀</label> <input class="form-control" name='listTitle'
+								value='' >
+						</div>
+						<div class="form-group info-group">
+							<label>#내용</label> <input class="form-control" name='listContent'
+								value=''>
+						</div>
 
-					<c:if test="${pageMaker.prev}">
-						<li class="paginate_button previous"><a
-							href="${pageMaker.startPage -1}">Previous</a></li>
-					</c:if>
-
-					<c:forEach var="num" begin="${pageMaker.startPage}"
-						end="${pageMaker.endPage}">
-						<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active":""} "><a
-							href="${num}">${num}</a></li>
-					</c:forEach>
-
-					<c:if test="${pageMaker.next}">
-						<li class="paginate_button next"><a
-							href="${pageMaker.endPage +1 }">Next</a></li>
-					</c:if>
-				</ul>
-			</div>
-
-			<form id='actionForm' action="/acm/result" method='get'>
-				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-				<input type='hidden' name='type'
-					value='<c:out value="${pageMaker.cri.type}"/>'> <input
-					type='hidden' name='keyword'
-					value='<c:out value="${pageMaker.cri.keyword}"/>'> <input
-					type='hidden' name='person'
-					value='<c:out value="${pageMaker.cri.person}"/>'> <input
-					type='hidden' name='in'
-					value='<c:out value="${pageMaker.cri.in}"/>'> <input
-					type='hidden' name='out'
-					value='<c:out value="${pageMaker.cri.out}"/>'>
-			</form>
-
-	
-	</div>
-
-		<div class="pac-card" id="pac-card">
-			<div>
-				<div id="title">Autocomplete search</div>
-				<div id="type-selector" class="pac-controls">
-					<input type="radio" name="type" id="changetype-all"
-						checked="checked"> <label for="changetype-all">All</label>
-
-					<input type="radio" name="type" id="changetype-establishment">
-					<label for="changetype-establishment">Establishments</label> <input
-						type="radio" name="type" id="changetype-address"> <label
-						for="changetype-address">Addresses</label> <input type="radio"
-						name="type" id="changetype-geocode"> <label
-						for="changetype-geocode">Geocodes</label>
+					
+					</div>
+					<div class="modal-footer">
+						<button id='modalRegisterBtn' type="button"
+							class="btn btn-primary">Register</button>
+						<button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+					</div>
 				</div>
-				<div id="strict-bounds-selector" class="pac-controls">
-					<input type="checkbox" id="use-strict-bounds" value=""> <label
-						for="use-strict-bounds">Strict Bounds</label>
-				</div>
+			
+				<!-- /.modal-content -->
 			</div>
-			<div id="pac-container">
-				<input id="pac-input" type="text" placeholder="Enter a location">
-			</div>
+			<!-- /.modal-dialog -->
 		</div>
-		
-		</section>
-		
-		<section class="map_section" id="map">
-			<div id="infowindow-content" class="container">
-				<img src="" width="16" height="16" id="place-icon"> <span
-					id="place-name" class="title"></span><br> <span
-					id="place-address"></span>
-			</div>
-		</section>
-	
-	
+		<!-- /.modal -->
+
 	</div>
-</div>
 	<!-- end : wrap -->
 </body>
+
+<script>
+
+
+/* var hidenBtn = document.getElementsByClassName("hidenBtn").value; */
+
+
+
+</script>
 
 <script>
       // This example requires the Places library. Include the libraries=places
@@ -415,10 +504,6 @@
 	async defer></script>
 
 <script>
-
-
-
-
 window.onload = function() {
 	
 	// 숙소 사진
@@ -621,8 +706,189 @@ window.onload = function() {
 												actionForm.attr("action","/acm/detail");
 												actionForm.submit();
 											}); 
-						});
+							 
+							 
+		});
+		
+		
+		
+		
+		
 	</script>
+<script type="text/javascript" src="/resources/js/wishlist.js"></script>
+<script>
+
+
+
+
+$(document).ready(function(){
+	
+	var modal = $(".modal");
+	var modalRegisterBtn = $("#modalRegisterBtn");
+	
+/*  	var room = $(".room");
+	var hidden = $(".hidenBtn")
+	var acmNumgo = $(".acmNum");
+	
+	
+	var hidden2 = hidden.val(room.attr("href")) */
+	
+	var modalInputuserNum = modal.find("input[name='userNum']").val();
+	
+	
+	
+	var modalInputacmNum = $("#acmTest").val();
+
+	/* alert("hiddenVal의 값은"+hiddenVal);
+	alert("modalInputacmNum의 값은"+modalInputacmNum);
+	 */
+	
+	
+/* 	hidden.val(room.attr("href")) */
+	
+	
+	var modalInputlistTitle = modal.find("input[name='listTitle']").val();
+	var modalInputlistContent = modal.find("input[name='listContent']").val();
+	
+/* 	var btn = document.getElementById("wishButton");
+	
+	for(
+			var i=0 ; i<btn.length ; i++
+			){
+		btn[i].onclick = function(e){
+			console.log(e);
+		      $(".modal").modal("show"); 
+		   	  modal.addClass("show") 	
+		
+		
+		};	
+	} */
+	
+	var hiddenVal = $("#acmTest");
+	var acmNum = $(".acmNum");
+
+	acmNum.val(hiddenVal.attr("value"));
+	
+	
+	
+	
+/* 	var wishValue = modalInputwishNum.val();
+	var userValue = modalInputuserNum.val();
+	var acmValue = modalInputacmNum.val();
+	var titleValue = modalInputlistTitle.val();
+	var contentValue = modalInputlistContent.val(); */
+	
+	//클로즈 버튼 클릭시 모달창을 숨긴다.
+	$("#modalCloseBtn").on("click", function(e){
+	    	
+	    	modal.modal('hide');
+	    });
+	
+	
+ 	 $("#wishButton").on("click", function(e){
+	      
+	      alert("하트를 눌렀습니다!"); 
+	      
+	      $(".modal").modal("show"); 
+	   	  modal.addClass("show") 
+	   	  
+	   	var hiddenVal = $("#acmTest");
+	   	var acmNum = $(".acmNum");
+
+	   	acmNum.val(hiddenVal.attr("value"));
+	      
+	    }); 
+ 	 
+ 	 
+ 	 
+ 	 
+		
+	 modalRegisterBtn.on("click", function(e){	 	
+		 
+		var modal = $(".modal");
+		var modalRegisterBtn = $("#modalRegisterBtn");				
+			
+		var modalInputuserNum = modal.find("input[name='userNum']").val();
+		var modalInputacmNum = modal.find("input[name='acmNum']").val();		
+		var modalInputlistTitle = modal.find("input[name='listTitle']").val();
+		var modalInputlistContent = modal.find("input[name='listContent']").val();
+		
+		 wishService.add({
+			 userNum : modalInputuserNum, acmNum: modalInputacmNum, listTitle: modalInputlistTitle, listContent: modalInputlistContent 
+		 }, function(result){
+			 modal.modal('hide');
+			 console.log("Result : " + result)
+		 }
+		)
+		 
+	 });
+	 
+	 
+	 
+	
+})
+
+ var heart = '<c:out value="${get.wishNum}"/>';
+ var modal = $(".modal");
+
+	document.querySelector(".wishButton").addEventListener("click", function(){
+	/* alert("하트를 눌렀습니다!");  */
+	/* self.location="/wishlist/get?wishNum=W253"; */
+	
+		
+	$(".room").attr('onclick', '').unbind('click');
+	
+	
+}); 
+
+
+
+
+//일단 여기서 스톱하고 ajax 하는것으로
+
+document.querySelector(".room-details").addEventListener("click", function(){
+	alert("다른것을 눌렀습니다")
+	$(".room").attr('onclick', 'location.href').bind('click');
+}) ;
+
+/* document.querySelector(".room").addEventListener("click", function(){
+	alert("다른것을 눌렀습니다.!"); 
+	$(".room").attr('onclick', '"location.href='<c:out value="${acm.acmNum}"/>'').bind('click');
+})
+ */
+</script>
+
+<!-- 
+<script type="text/javascript" src="/resources/js/wishlist.js"></script>
+	<script type="text/javascript">
+	
+	console.log("========================");
+	console.log("JS TEST");
+	
+	
+	var wishValue = '<c:out value="${get.wishNum}"/>';
+	var userValue = '<c:out value="${get.userNum}"/>';
+	var acmValue = '<c:out value="${get.acmNum}"/>';
+	var titleValue = '<c:out value="${get.listTitle}"/>';
+	var contentValue = '<c:out value="${get.listContent}"/>';
+	
+	
+	wishService.add(
+			{userNum : userValue, acmNum: acmValue, listTitle: titleValue, listContent: contentValue , wishNum: wishValue}
+			,
+				function(result){
+					/* alert("Result : " + result); */
+					console.log("Result : " + result)
+				}
+			);
+	
+	
+		$(document).ready(function() {
+				console.log(wishService);
+			})  
+	</script> -->
+
+
 <%@include file="../includes/footer.jsp"%>
 
 

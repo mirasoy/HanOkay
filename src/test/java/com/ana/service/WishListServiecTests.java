@@ -46,19 +46,17 @@ public class WishListServiecTests {
 	
 	@Test
 	public void testGet() {
-		log.info(service.get("W1"));
-		
-		//service.getList(new Criteria(2,10)).forEach(acm -> log.info(acm));
+		log.info(service.get("■■■■■■■■■■■■■■■■■■■■■W1"));
 	}
 	
 	@Test
 	public void testGetWishList() {
-		service.getWishList("W1").forEach(board -> log.info(board));
+		service.getWishList("W1").forEach(board -> log.info("■■■■■■■■■■■■■■■■■■■■■W1의 목록을 가져옵니다."+ board));
 	}
 	
 	@Test
 	public void testDelete() {
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■REMOVE RESULT:" + service.remove("W31"));
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■REMOVE RESULT:" + service.remove("W224"));
 	}
 	
 	

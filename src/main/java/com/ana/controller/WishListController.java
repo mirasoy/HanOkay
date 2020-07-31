@@ -9,10 +9,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -54,7 +58,6 @@ public class WishListController {
 		String userPwd="";
 		String userNum="";
 		
-		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
 		userLastname= user.getUserLastName();
 		userFstname=user.getUserFstName();
@@ -67,116 +70,112 @@ public class WishListController {
 	}
 	
 	
+	//조회 페이지
 	
-	//등록
-	@PostMapping("/wishList")
-	public String register(WishListVO board, RedirectAttributes rttr) {
-		log.info("register: " + board);
-		service.register(board);
-		rttr.addFlashAttribute("result", board.getWishNum());
-
-		return "redirect:/wishlist/list";
+	@GetMapping("/get")
+	public void get(@RequestParam("wishNum") String wishNum, Model model) {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■get");
+		model.addAttribute("get", service.get(wishNum));
 	}
 	
-//	// @GetMapping("/get")
-//	public void get(@RequestParam("acmNum") String acmNum, Model model) {
-//		log.info("/get");
-//		model.addAttribute("acm", service.get(acmNum));
+	
+//	@GetMapping("/result")
+//	public void get2(@RequestParam("wishNum") String wishNum, Model model) {
+//		log.info("/result");
+//		model.addAttribute("get", service.get(wishNum));
+//	}
+	
+	
+	//생성페이지
+	@PostMapping("/register")
+	public String register(WishListVO board, RedirectAttributes rttr) {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■register : " + board);
+		service.register(board);
+		rttr.addFlashAttribute("■■■■■■■■■■■■■■■■result", board.getWishNum());
+		return "redirect:/wishlist/list";
+		
+	}
+	
+	@GetMapping("/register")
+	public void register() {}
+	
+	
+	/* 등록작업 ajax */
+	
+	
+	
+	@PostMapping(value = "/register", 
+			consumes = "application/json", 
+			produces = { MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> create(@RequestBody WishListVO board) {
+
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■WishListVO: " + board);
+
+		int insertCount = service.register(board);
+
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■Reply INSERT COUNT: " + insertCount);
+
+		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}	
+	
+	
+	
+	
+
+//	 @GetMapping(value = "/pages/{bno}/{page}",
+//	 produces = {
+//	 MediaType.APPLICATION_XML_VALUE,
+//	 MediaType.APPLICATION_JSON_UTF8_VALUE })
+//	 public ResponseEntity<List<ReplyVO>> getList(
+//	 @PathVariable("page") int page,
+//	 @PathVariable("bno") Long bno) {
+//	
+//	
+//	 log.info("getList.................");
+//	
+//	
+//	 return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
+//	 }	
+	
+	
+	
+	
+//	@RequestMapping("insert.do")
+//	  public String insert(WishListVO board, HttpSession session){
+//		
+//		String wishId = (String) session.getAttribute("wishId");
+//		
+//		board.setWishNum(wishId);
+//찜목록에 기존의 상품이 있는지 검사
+		
+//		 int count = WishListService.countCart(board.getWishNum(), wishId);
+//		 
+//	        count == 0 ? WishListService.update(board) : WishListService.register(board);
+//	        
+//	        if(count == 0){
+//	            // 없으면 insert
+//	            WishListService.register(board);
+//	        } else {
+//	            // 있으면 update
+//	        	WishListService.update(board);
+//	           
+//	        }
+//	        return "redirect:/wishlist/list.do";
 //	}
 //	
-//	//수정
-//	@PostMapping("/modify")
-//	public String modify(AcmVO acm, RedirectAttributes rttr) {
-//		log.info("modify:" + acm);
-//
-//		if (service.modify(acm)) {
-//			rttr.addFlashAttribute("result", "success");
-//		}
-//
-//		return "redirect:/acm/list";
-//	}
 //	
-//	//삭제
-//	@PostMapping("/remove")
-//	public String remove(@RequestParam("acmNum") String acmNum, RedirectAttributes rttr) {
-//		log.info("remove..." + acmNum);
-//		if (service.remove(acmNum)) {
-//			rttr.addFlashAttribute("result", "success");
-//		}
-//		return "redirect:/acm/list";
-//	}
-//
-//	@GetMapping("/register")
-//	public void register() {
-//
-//	}
-//	
-//	//date형식 유효성검사
-//	public boolean validationDate(String checkDate) {
-//		try {
-//			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//
-//			dateFormat.setLenient(false);
-//			dateFormat.parse(checkDate);
-//			return true;
-//
-//		} catch (ParseException e) {
-//			return false;
-//		}
-//	}
-//	
-//	//체크인,아웃 유효성 검사
-//	public boolean checkDate(Criteria cri) throws ParseException {
-//		// 1. 날짜 형식 맞는지 확인
-//		if (!(cri.getIn() == null || cri.getIn().equals("")) && !(cri.getOut() == null || cri.getOut().equals(""))) {
-//			if (!validationDate(cri.getIn()) || !validationDate(cri.getOut())) {
-//				return false;
-//			}
-//			// 2. 체크아웃 날짜가 체크인 보다 이른 날짜인지 확인
-//			int cin = Integer.parseInt(cri.getIn().replace("-", ""));
-//			int cout = Integer.parseInt(cri.getOut().replace("-", ""));
-//			if (cin >= cout) {
-//				return false;
-//			}
-//		}
-//
-//		Calendar cal = Calendar.getInstance();
-//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//		Date date = null;
-//		String in = "", out = "";
-//		// 1. 체크인x 체크아웃 x 오늘내일
-//		if ((cri.getIn() == null || cri.getIn().equals("")) && (cri.getOut() == null || cri.getOut().equals(""))) {
-//
-//			in = df.format(cal.getTime());
-//			cal.add(Calendar.DATE, 1);
-//			out = df.format(cal.getTime());
-//			cri.setIn(in);
-//			cri.setOut(out);
-//			// 2. 체크인 x 체크아웃 o 체크인=체크아웃-1
-//		} else if ((cri.getIn() == null || cri.getIn().equals(""))
-//				&& !(cri.getOut() == null || cri.getOut().equals(""))) {
-//			date = df.parse(cri.getOut());
-//			cal.setTime(date);
-//
-//			out = df.format(cal.getTime());
-//			cal.add(Calendar.DATE, -1);
-//			in = df.format(cal.getTime());
-//
-//			cri.setIn(in);
-//			cri.setOut(out);
-//			// 3. 체크인 o 체크아웃 x 체크아웃=체크인+1
-//		} else if (!(cri.getIn() == null || cri.getIn().equals(""))
-//				&& (cri.getOut() == null || cri.getOut().equals(""))) {
-//			date = df.parse(cri.getIn());
-//			cal.setTime(date);
-//
-//			in = df.format(cal.getTime());
-//			cal.add(Calendar.DATE, 1);
-//			out = df.format(cal.getTime());
-//
-//			cri.setIn(in);
-//			cri.setOut(out);
-//		}
-//		return true;
-//	}
+
+	
+
+
+	
+	
+	
+	
+	
+	
 }
+
+
+

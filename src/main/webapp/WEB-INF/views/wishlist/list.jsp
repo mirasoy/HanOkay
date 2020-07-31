@@ -5,7 +5,7 @@
 
 <%
 	session.setAttribute("loginUserNum", "U1");
-String name = (String) session.getAttribute("loginUserNum");
+	String name = (String) session.getAttribute("loginUserNum");
 %>
 
 <%@include file="../includes/header.jsp"%>
@@ -13,7 +13,7 @@ String name = (String) session.getAttribute("loginUserNum");
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">나의 예약</h1>
+		<h1 class="page-header">찜목록</h1>
 	</div>
 </div>
 
@@ -23,7 +23,7 @@ String name = (String) session.getAttribute("loginUserNum");
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
-				<%=userFstName %>의 예약 중인 목록입니다. (숙박예정)
+				<%=userFstName %>의 장바구니
 			</div>
 			<!-- /.panel-heading -->
 			
@@ -31,20 +31,24 @@ String name = (String) session.getAttribute("loginUserNum");
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>제목</th>
-							<th>내용</th>
-							<th>상품명</th>
-							<th>#번호</th>
-							<th>가격</th>				
+							<th>찜번호</th>
+							<th>유저번호</th>
+							<th>숙소번호</th>
+							<th>목록타이틀</th>
+							<th>목록내용</th>				
 						</tr>
 					</thead>
 
-					<c:forEach items="${wishList}" var="board">
-						<tr>
-							<td name='acmNum' id='acmNum'><c:out value="${board.acmName}" /></td>
-							<td><c:out value="${board.bookNum}" /></td>
 
-			
+<!-- Model에 담긴 데이터 출력 : list를 실행하였을때 boardController는 model을 이용해서 게시물을 목록음 담아서 전달했으므로 이를 출력한다. -->
+
+					<c:forEach items="${list}" var="board">
+						<tr>
+							<td><c:out value="${board.wishNum}" /></td>
+							<td><c:out value="${board.userNum}" /></td>
+							<td><c:out value="${board.acmNum}" /></td>
+							<td><c:out value="${board.listTitle}" /></td>
+							<td><c:out value="${board.listContent}" /></td>
 
 						</tr>
 					</c:forEach>

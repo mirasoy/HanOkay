@@ -150,8 +150,8 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
 }
 
 
-.gallery_list>.room>.room-images>a>figure>img{
-    border: 1px solid;
+.room-images>a>figure>img{
+  
     display: block !important;
     height: 100% !important;
     width: 100% !important;
@@ -161,7 +161,7 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
     z-index: 1 !important;
 }
 
-.gallery_list>.room>.room-images>a>figure{
+.room-images>a>figure{
     height: 100% !important;
     width: 100% !important;
     position: relative !important;

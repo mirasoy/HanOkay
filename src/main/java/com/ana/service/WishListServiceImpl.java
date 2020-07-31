@@ -18,9 +18,9 @@ public class WishListServiceImpl implements WishListService{
 	private WishListMapper mapper;
 	
 	@Override
-	public void register(WishListVO board) {
+	public int register(WishListVO board) {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■register......" + board);		
-		mapper.insert(board);
+		return mapper.insert(board);
 	}
 	
 	
@@ -41,34 +41,18 @@ public class WishListServiceImpl implements WishListService{
 	
 
 	@Override
-	public boolean modify(WishListVO board) {
+	public int modify(WishListVO board) {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■modify......" + board);
-		return mapper.update(board)==1;
+		return mapper.update(board);
 	}
 
 	@Override
-	public boolean remove(String wishNum) {
+	public int remove(String wishNum) {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■remove......" + wishNum);
-		return mapper.delete(wishNum)==1;
+		return mapper.delete(wishNum);
 	}
 
 
-//
-//	@Override
-//	public List<AcmVO> getList(Criteria cri) {
-//		log.info("get List with criteria: " + cri);
-//		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
-//		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-//		return mapper.getListPaging(cri, acmNumList);
-//	}
-//
-//	@Override
-//	public int getTotal(Criteria cri) {
-//		log.info("get total count");
-//		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
-//		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-//		return mapper.getTotalCount(cri, acmNumList);
-//	}
 
 
 }
