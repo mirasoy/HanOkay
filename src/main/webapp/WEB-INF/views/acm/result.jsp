@@ -58,7 +58,7 @@
 
 	<div class="row">
 		<div class="booking-container">
-			<form class="booking-form" action="/acm/result" method='get' onsubmit="return checkValidation()">
+			<form class="booking-form" action="/acm/result" method='get'>
 				<div class="result-container">				
 					<div class="">
 						<div class="no-margin">
@@ -143,7 +143,8 @@
 		<c:forEach items="${list }" var="acm">
 		  
 			<tr class='move' href='<c:out value="${acm.acmNum}"/>' onclick="location.href='<c:out value="${acm.acmNum}"/>'" style="cursor:pointer;"> 
-				<td><img alt="" src="<c:out value="${acm.acmPurl}"/>s\<c:out value="${acm.acmPname}"/>" width="100"></td>
+				<td><img alt='객실사진' src='/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />' width="100"/></td>
+				  
 				<td><c:out value="${acm.acmName}" /></td>
 				<td><c:out value="${acm.acmCity }" /> <c:out value="${acm.acmDistr }" /> <c:out value="${acm.acmDetailaddr }" /></td>
 				<td><c:out value="${acm.acmDesc }" /></td>
@@ -188,7 +189,7 @@
 	</div>
 
 	
-	 <div class="pac-card" id="pac-card">
+	 <!-- <div class="pac-card" id="pac-card">
       <div>
         <div id="title">
           Autocomplete search
@@ -215,7 +216,8 @@
         <input id="pac-input" type="text"
             placeholder="Enter a location">
       </div>
-    </div>
+    </div> -->
+    
     <div id="map"></div>
     <div id="infowindow-content">
       <img src="" width="16" height="16" id="place-icon">
