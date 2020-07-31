@@ -5,21 +5,21 @@ import lombok.Data;
 @Data
 public class AcmDetailVO {
 	
-	String	acmNum;
-	String	acmName;
-	String	acmCity;
-	String	acmDistr;
-	String	acmDetailaddr;
-	String	repPhone;
-	String	acmActi;
-	String	checkinTime;
-	String	checkoutTime;
-	String	subPhone;
-	String	acmFax;
-	String	acmEmail;
-	String	latitude;
-	String	longitude;
-	String	acmDesc;
-	Integer	acmOptcode;
+	private	String	acmNum;
+	private	String	acmName;
+	private	String	acmCity;
+	private	String	acmDistr;
+	private	String	acmDetailaddr;
+	private	String	repPhone;
+	private	String	acmActi;
+	private	String	checkinTime;
+	private	String	checkoutTime;
+	private	String	subPhone;
+	private	String	acmFax;
+	private	String	acmEmail;
+	private	String	latitude;
+	private	String	longitude;
+	private	String	acmDesc;
+	private	Integer	acmOptcode;
 
 }

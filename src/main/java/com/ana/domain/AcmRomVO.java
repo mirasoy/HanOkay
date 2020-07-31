@@ -5,36 +5,36 @@ import lombok.Data;
 @Data
 public class AcmRomVO {
 
-	String 	acmNum;
-	String	acmName;
-	String	acmCity;
-	String	acmDistr;
-	String	acmDetailaddr;
-	String	repPhone;
-	String	acmActi;
-	String	checkinTime;
-	String	checkoutTime;
-	String	subPhone;
-	String	acmFax;
-	String	acmEmail;
-	String	acmPurl;
-	String 	acmPname;
-	String	latitude;
-	String	longitude;
-	String	acmDesc;
-	Integer	acmOptcode;
+	private	String 	acmNum;
+	private	String	acmName;
+	private	String	acmCity;
+	private	String	acmDistr;
+	private	String	acmDetailaddr;
+	private	String	repPhone;
+	private	String	acmActi;
+	private	String	checkinTime;
+	private	String	checkoutTime;
+	private	String	subPhone;
+	private	String	acmFax;
+	private	String	acmEmail;
+	private	String	acmPurl;
+	private	String 	acmPname;
+	private	String	latitude;
+	private	String	longitude;
+	private	String	acmDesc;
+	private	Integer	acmOptcode;
 	
-	String	romNum;
-	String	romName;
-	Integer	romCapa;
-	String	bedType;
-	Integer	bedCnt;
-	Integer	romSize;
-	String	romPurl;
-	String	romPname;
-	Integer	romPrice;
-	String	romType;
-	String	romActi;
-	String	romOptcode;
+	private	String	romNum;
+	private	String	romName;
+	private	Integer	romCapa;
+	private	String	bedType;
+	private	Integer	bedCnt;
+	private	Integer	romSize;
+	private	String	romPurl;
+	private	String	romPname;
+	private	Integer	romPrice;
+	private	String	romType;
+	private	String	romActi;
+	private	String	romOptcode;
 	
 }

@@ -23,6 +23,7 @@ import com.ana.domain.AcmVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AcmRegService;
+import com.ana.service.CodeService;
 import com.ana.service.RomRegService;
 import com.ana.service.UserService;
 
@@ -42,7 +43,8 @@ public class HostController {
 	private AcmRegService aservice;//숙소등록관련서비스
 	@Autowired
 	private UserService uservice;//호스트 사업등록증관련
-	
+	@Autowired
+	private CodeService codeService;
 	
 	//세션에서 유저이름 가져오는 메서드
 	public UserVO getUser(HttpSession session) {
@@ -63,16 +65,10 @@ public class HostController {
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
-	@PostMapping("/listings")
-	public String listingsPost() {
-		return "/hosting/listings";
-	}
-	
 
-	
 	@GetMapping("/listings")
 	public void listingsGet(Model model,HttpSession session) {
-		System.out.println("===숙소보기 페이지!===");
+		System.out.println("===숙소보기 페이지! listingsGet===");
 		UserVO user=getUser(session);
 		if(user==null)return;
 		String userPriv= user.getUserPriv();
@@ -121,6 +117,58 @@ public class HostController {
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
+	
+
+	@PostMapping("/listings")
+	public String listingsPost() {
+		System.out.println("===숙소보기 페이지! listingsPost===");
+		
+		return "/hosting/listings";
+	}
+	
+	@GetMapping("/getAcm")//이미호스트 자기숙소보기
+	public void getAcmGet(String acmNum,Model model, HttpSession session) {
+		System.out.println("===getAcm get===");
+		
+		//선택된 숙소 보기
+		AcmVO selectacm = aservice.getnewAcm(acmNum);
+		model.addAttribute("acm", selectacm);
+		
+		//선택된 숙소의 
+		//List<RomVO> roms=aservice.getListroms(acmNum,"ACTIVE");
+		//model.addAttribute("roms", codeService.getAcmCode());
+		
+
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
+		
+		
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+
+	}
+
+	@GetMapping("/getAcmSwitch")//이미호스트 자기숙소 선택하기
+	public void getAcmSwitchGet(String acmNum,Model model, HttpSession session) {
+		System.out.println("===getAcmSwitch get===");
+		
+		AcmVO vo = aservice.getnewAcm(acmNum);
+		String bizRegnum=getUser(session).getBizRegisterNumber();
+		
+		aservice.getListAcms(bizRegnum,"ACTIVE");
+		
+		model.addAttribute("acm", vo);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+
+	}
+	
+	@PostMapping("/getAcm")
+	public String getAcmPost() {
+		System.out.println("===getAcm post===");
+		
+		return "/hosting/getAcm";
+	}
+	
+	
 	
 	@GetMapping("/progress/reviews")
 	public void reviewsGet() {

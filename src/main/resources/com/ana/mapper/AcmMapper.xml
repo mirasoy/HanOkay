@@ -135,6 +135,7 @@ select * from tacm
 		#{bizRegnum},#{checkinTime},#{checkoutTime})
 	</insert>
 	
+<!-- 체크인,아웃 기간과 겹치게 예약한 방번호 추출 -->
 <select id="getRomNum" resultType="String">
 <![CDATA[
 select ROM_NUM
@@ -144,6 +145,7 @@ or (CHECKIN_DATE<#{out} and CHECKOUT_DATE>=#{out}) or (CHECKIN_DATE>=#{in} and C
 	]]>
 </select>
 
+<!-- 인원수를 만족하고 예약불가인 방번호리스트에 없는 방을 가진 숙소번호 추출 -->
 <select id="getAcmNum" resultType="String">
 <![CDATA[
 select distinct acm_num

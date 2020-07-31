@@ -4,10 +4,14 @@ import java.util.Calendar;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ana.domain.BookingVO;
+import com.ana.domain.PaymentVO;
 import com.ana.service.AcmDetailService;
 import com.ana.service.BookingService;
 
@@ -23,16 +27,46 @@ public class BookingRegisterController {
 	private BookingService service;
 	private AcmDetailService star;
 	
-	@PostMapping("/new")
+
+	// 예약 확인 페이지 : 예약한 정보를 불러온다
+	@GetMapping("/get")
 	public void getInfo(
+			@RequestParam("bookNum") String bookNum,
+			Model model) {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■ 예약정보 불러오는 중...");
+		
+		service.getBooking(bookNum);
+		model.addAttribute("book", service.getBooking(bookNum));
+	}
+	
+	// 예약페이지 -> 예약완료페이지 이동: 예약정보를 저장하고 예약완료 페이지로 이동한다
+	@PostMapping("/get")
+	public String book(
+			BookingVO booking,
+			PaymentVO payment) {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■ 예약 처리 중...");
+		
+		log.info(booking);
+		log.info(service.registerBooking(booking));
+		
+		payment.setBookNum(booking.getBookNum());
+		log.info(payment);
+		log.info(service.registerPayment(payment));
+		
+		return "redirect:/booking/get?bookNum="+booking.getBookNum();
+	}
+	
+	// 상세페이지 -> 예약페이지 이동: 상세페이지에서 가져온 정보로 예약을 위한 정보들을 불러온다
+	@PostMapping("/new") 
+	public void getAcmInfo(
 			@RequestParam("in") String checkin,
 			@RequestParam("out") String checkout,
 			@RequestParam("romNum") String romNum,
 			Model model) {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■ 예약페이지로 이동 중...");
 		model.addAttribute("days", getDiff(checkin, checkout))
-		.addAttribute("star", star.getStisf(service.getInfo(romNum).getAcmNum())) // 숙소별 별점
-		.addAttribute("info", service.getInfo(romNum)); // 객실과 숙소 정보
+		.addAttribute("star", star.getStisf(service.getAcmInfo(romNum).getAcmNum())) // 숙소별 별점
+		.addAttribute("info", service.getAcmInfo(romNum)); // 객실과 숙소 정보
 	}
 	
 	public long getDiff(String in, String out) {

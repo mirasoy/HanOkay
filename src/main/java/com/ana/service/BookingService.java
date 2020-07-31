@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import com.ana.domain.AcmRomVO;
 import com.ana.domain.BookCancelVO;
 import com.ana.domain.BookVO;
+import com.ana.domain.BookingInfoVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.PaymentVO;
 
 public interface BookingService {
 	
@@ -28,8 +30,12 @@ public interface BookingService {
 	public boolean reserveCancel(@Param("bookNum") String bookNum, @Param("bookStatus") String bookStatus); //취소시, insert와 update
 
 	
-//	public int register(BookingVO book);
 	
-	public AcmRomVO getInfo(String romNum); // 객실번호로 객실정보와 대응하는 숙소정보를 불러온다
+	public AcmRomVO getAcmInfo(String romNum); // 객실번호로 객실정보와 대응하는 숙소정보를 불러온다
+	
+	public boolean registerBooking(BookingVO booking); // 예약정보와 결제정보를 저장한다
 
+	public boolean registerPayment(PaymentVO payment); // 예약정보와 결제정보를 저장한다
+
+	public BookingInfoVO getBooking(String bookNum); // 예약완료 후 예약과 관련된 정보를 불러온다
 }

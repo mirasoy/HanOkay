@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ana.domain.AcmRomVO;
 import com.ana.domain.BookCancelVO;
+import com.ana.domain.BookingInfoVO;
 import com.ana.domain.BookVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.PaymentVO;
 
 public interface BookingMapper {
 	
@@ -31,10 +33,12 @@ public interface BookingMapper {
 	
 	
 	
+	public AcmRomVO getAcmInfo(String romNum); // 예약페이지와 예약완료페이지에서 예약을 위한 숙소 및 객실 정보 출력
+
+	public boolean insertBooking(BookingVO booking); // 예약페이지에서 예약 진행
 	
+	public boolean insertPayment(PaymentVO payment); // 예약페이지에서 예약 진행
 	
-	public int insert(BookingVO booking); // 예약페이지에서 예약 진행
-	
-	public AcmRomVO getInfo(String romNum); // 예약페이지와 예약완료페이지에서 예약을 위한 숙소 및 객실 정보 출력
+	public BookingInfoVO getBooking(String bookNum); // 예약완료페이지에서 예약 정보 출력 
 	
 }
