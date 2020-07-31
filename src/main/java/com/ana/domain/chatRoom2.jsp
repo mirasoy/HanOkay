@@ -13,13 +13,16 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	
+	<!-- Zebra-Dialog CDN
+	<script src="resources/js/dialog/zebra_dialog.src.js"></script>
+	<link rel="stylesheet" href="resources/css/dialog/zebra_dialog.css" type="text/css"/>
+	<!-- SocketJS CDN -->
 	<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script> 
 	
 	<title>Chatting page</title>
 </head>
 <body>
-	<h1>Chatting Page (id: ${Userid})</h1>
+	<h1>${toUser.userFstName }님과의 대화</h1>
 	<div>
 		<input type="button" id="chattinglistbtn" value="채팅 참여자 리스트">
 	</div>
@@ -32,7 +35,8 @@
     	<br>
     	<div class="well" id="chatdata">
     		<!-- User Session Info Hidden -->
-    		<input type="hidden" value='${Userid}' id="sessionuserid">
+    		<input type="hidden" value='${Userid}' id="call">
+    		<input type="hidden" value='${toUser.userEmail}' id="recive">
     	</div>
 	</div>
 </body>
@@ -58,7 +62,7 @@ $(function(){
         
 function sendMessage(){      
 	//websocket으로 메시지를 보내겠다.
-  	sock.send($('#sessionuserid').val()+'|'+$("#message").val());     
+  	sock.send($('#call').val()+"::"+$('#recive').val()+"::"+$("#message").val());     
 }
             
 //evt 파라미터는 websocket이 보내준 데이터다.
@@ -75,7 +79,7 @@ function onMessage(evt){  //변수 안에 function자체를 넣음.
 	}
 	
 	//current session id//
-	var currentuser_session = $('#sessionuserid').val();
+	var currentuser_session = $('#call').val();
 	console.log('current session id: ' + currentuser_session);
 	
 	sessionid = strArray[0]; //현재 메세지를 보낸 사람의 세션 등록//

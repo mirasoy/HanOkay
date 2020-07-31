@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.ChatRomMapper">
+	
+	<resultMap id="ChatRomVOresult" type="com.ana.domain.ChatRomVO">
+		<result column="CHATROMNUM" property="chatromnum" />	
+		<result column="PARTICIPANT1" property="participant1" />	
+		<result column="PARTICIPANT2" property="participant2" />
+		<result column="LASTCHAT" property="lastchat" />
+		<result column="LSTACCESSOR" property="lstaccessor" />
+		<result column="UNREAD" property="unread" />
+		<result column="REGDATE" property="regdate" />
+		<result column="UDATEDATE" property="udatedate" />
+	</resultMap>
+
+	
+	
+	<insert id="startChat">
+	<selectKey keyProperty="chatromnum" order="BEFORE"	resultType="String">
+			select concat('CH',SEQ_TCHATROM.nextval) from dual
+	</selectKey>
+		Insert into TCHATROM (CHATROMNUM,PARTICIPANT1,PARTICIPANT2,LASTCHAT,LSTACCESSOR )VALUES(
+		#{chatromnum},#{participant1},#{participant2},#{lastchat},#{lstaccessor}
+		)
+	
+	</insert>
+	
+	<update id="updateChatrom">
+	
+	UPDATE TCHATROM SET lastchat = #{content}  , LSTACCESSOR = #{userNum}, UDATEDATE=sysdate
+	  WHERE CHATROMNUM = #{chatromnum} 
+	
+	</update>
+	 
+	 <select id="readChat" resultMap="ChatRomVOresult">
+	 
+		SELECT * FROM TCHATROM WHERE  CHATROMNUM = #{chatromnum}
+	 </select>
+	 
+	 <select id="readChatlist" resultMap="ChatRomVOresult">
+	 
+		SELECT * FROM TCHATROM WHERE participant1 = #{userNum} OR participant2 =  #{userNum} 
+		order by udatedate DESC
+	 </select>
+
+</mapper>
