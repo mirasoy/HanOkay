@@ -154,4 +154,9 @@
 	</update>
 
 
+	<!-- 사업자번호로 유져가져오기 -->
+	<select id="getAcmOwner" resultMap="UserVO">
+		SELECT * FROM tuser where biz_regnum = #{bizRegisterNumber}
+	</select>
+
 </mapper>

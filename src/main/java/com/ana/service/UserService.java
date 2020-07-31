@@ -61,4 +61,7 @@ public interface UserService {
 	//세션리뉴얼
 	public UserVO letsNewSession(String userNum);
 
+	
+	//사업자등록번호로 호텔주인찾기
+	public UserVO  getAcmOwner(String bizregnum);
 }

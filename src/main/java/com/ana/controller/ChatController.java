@@ -64,13 +64,32 @@ public class ChatController {
 	@PostMapping(value = "chat/chatRoom")
 	public ModelAndView chatRoom(@RequestParam("chatromnum") String chatromnum, ModelAndView mv, HttpSession session) {
 	
-		
+		String otherUser = "";
 		user = (UserVO) session.getAttribute("user");
 		//로그인여부확인
+		System.out.println("도착테스트2"+(chatromnum.split("::")[0].equals("newChatr")));	
 		if (user != null) {
+		
+			//만약 첫 채팅이라면
+	if(chatromnum.split("::")[0].equals("newChatr")) {
+		
+		ChatRomVO chatRoom = new ChatRomVO();
+		String[] chatInfoArr = chatromnum.split("::");
+		chatRoom.setParticipant1(user.getUserNum());
+		chatRoom.setParticipant2(chatInfoArr[1]);
+		chatRoom.setLstaccessor(user.getUserNum());
+		System.out.println(chatInfoArr[1]+"ㅇㅇㅇㅇㅇ");
+		chatRoom.setLastchat(user.getUserFstName()+"님이 입장하였습니다.");
+		
+		
+		chatromnum=  chService.startChat(chatRoom);
+		otherUser = chatInfoArr[1];
+		
+	}else {
 			
+		System.out.println("도착테스트");
 		ChatRomVO vo = chService.readChat(chatromnum);
-		String otherUser = "";
+		
 		
 		//피아식별
 		if( vo.getParticipant1().equals(user.getUserNum())) {
@@ -79,7 +98,7 @@ public class ChatController {
 			otherUser =  vo.getParticipant1();
 		}
 		
-		
+	}
 		//읽음 처리하기
 		List<MsgVO> conversation = service.readConversation(user.getUserNum(), otherUser);
 		//다음 메세지들 중에서 니가 보낸거 고르기
