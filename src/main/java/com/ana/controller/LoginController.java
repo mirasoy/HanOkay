@@ -65,74 +65,86 @@ public class LoginController {
 	public String executeLogin() {
 		return "/error/error";
 	}
-	
-	
-	//구글 로그인
+
+	// 구글 로그인
 	private static final HttpTransport transport = new NetHttpTransport();
-	private static final JsonFactory jsonFactory = new JacksonFactory();	
-	private static final String MY_APP_GOOGLE_CLIENT_ID = "942421543250-6pu1jcn9mpo8vda62cop0qnlesr8fh6a.apps.googleusercontent.com"; 
-	
+	private static final JsonFactory jsonFactory = new JacksonFactory();
+	private static final String MY_APP_GOOGLE_CLIENT_ID = "942421543250-6pu1jcn9mpo8vda62cop0qnlesr8fh6a.apps.googleusercontent.com";
+
 	@RequestMapping(value = "/login/tokenSignIn", method = RequestMethod.POST)
-	public String executeGoogleLogin(@RequestParam MultiValueMap<String, String> body) throws IOException {
-		System.out.println(body.getFirst("idToken"));
-/*GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-    // Specify the CLIENT_ID of the app that accesses the backend:
-    .setAudience(Collections.singletonList(MY_APP_GOOGLE_CLIENT_ID))
-    // Or, if multiple clients access the backend:
-    //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
-    .build();
+	public void executeGoogleLogin(@RequestParam MultiValueMap<String, String> body, HttpSession session,
+			HttpServletResponse response) throws IOException, GeneralSecurityException {
+
+		System.out.println("id Token: " + body.getFirst("idToken"));
+		String idTokenString = body.getFirst("idToken");
+		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
+				// Specify the CLIENT_ID of the app that accesses the backend:
+				.setAudience(Collections.singletonList(MY_APP_GOOGLE_CLIENT_ID))
+				// Or, if multiple clients access the backend:
+				// .setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
+				.build();
 
 // (Receive idTokenString by HTTPS POST)
-String idTokenString= request.getParameter("idToken");
-System.out.println("idTokenString: "+idTokenString.toString());
-GoogleIdToken idToken = verifier.verify(idTokenString);
-if (idToken != null) {
-  Payload payload = idToken.getPayload();
+//String idTokenString= request.getParameter("idToken");
+		System.out.println("idTokenString: " + idTokenString.toString());
+		GoogleIdToken idToken = verifier.verify(idTokenString);
+		int result = 0;
+		JSONObject jso = new JSONObject();
+		if (idToken != null) {
+			Payload payload = idToken.getPayload();
 
-  // Print user identifier
-  String userId = payload.getSubject();
-  System.out.println("User ID: " + userId);
+			// Print user identifier
+			String userId = payload.getSubject();
+			System.out.println("User ID: " + userId);
 
-  // Get profile information from payload
-  String email = payload.getEmail();
-  boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-  String name = (String) payload.get("name");
-  String pictureUrl = (String) payload.get("picture");
-  String locale = (String) payload.get("locale");
-  String familyName = (String) payload.get("family_name");
-  String givenName = (String) payload.get("given_name");
+			// Get profile information from payload
+			String email = payload.getEmail();
+			boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+			String name = (String) payload.get("name");
+			String pictureUrl = (String) payload.get("picture");
+			String locale = (String) payload.get("locale");
+			String familyName = (String) payload.get("family_name");
+			String givenName = (String) payload.get("given_name");
 
-  // Use or store profile information
-  // ...
-  System.out.println("email:"+ email);
-  System.out.println("emailVerified :"+ emailVerified);
-  System.out.println("name:"+ name);
-  System.out.println("familyName:"+familyName);
-  System.out.println("givenName:"+ givenName);
-  
-//  service.executeGoogleLogin(email,familyName, givenName);
-	
-} else {
-  System.out.println("Invalid ID token.");
-}*/
-		return "/user/welcome";
+			// Use or store profile information
+			// ...
+			System.out.println("email:" + email);
+			System.out.println("emailVerified :" + emailVerified);
+			System.out.println("name:" + name);
+			System.out.println("familyName:" + familyName);
+			System.out.println("givenName:" + givenName);
+
+			result = service.executeGoogleLogin(email, familyName, givenName, session);
+
+			jso.put("result", result);
+			PrintWriter out = response.getWriter();
+			out.print(jso);
+		}
+
+		else {
+			System.out.println("Invalid ID token.");
+			jso.put("result", result);
+			PrintWriter out = response.getWriter();
+			out.print(jso);
+		}
+		
+
 	}
-	
-	
+
 	// 로그인 기능하기
 	@RequestMapping(value = "/executeLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public void executeLogin(String email, String pwd, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr,
-			Model model) throws IOException {
+	public void executeLogin(String email, String pwd, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, RedirectAttributes rttr, Model model) throws IOException {
 		System.out.println("executeLogin");
-		JSONObject jso= new JSONObject();
+		JSONObject jso = new JSONObject();
 		log.info("login email: " + email);
 		log.info("login pwd: " + pwd);
-		String user_check= request.getParameter("remember_email");
-		log.info("remember_email checked: "+ user_check);
-		
-		//로그인을 실행하는 서비스 메서드 호출
-		int result= service.executeLogin(email, pwd, user_check, response, session);
+		String user_check = request.getParameter("remember_email");
+		log.info("remember_email checked: " + user_check);
+
+		// 로그인을 실행하는 서비스 메서드 호출
+		int result = service.executeLogin(email, pwd, user_check, response, session);
 		jso.put("msg", result);
 		PrintWriter out = response.getWriter();
 		out.print(jso);

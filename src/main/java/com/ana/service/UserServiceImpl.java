@@ -75,6 +75,43 @@ public class UserServiceImpl implements UserService{
 		session.removeAttribute("email");
 		//세션 정보 초기화
 	}
+	
+	//구글 로그인 메서드
+	@Transactional
+	@Override
+	public int executeGoogleLogin(String email, String userLastName, String userFstName, HttpSession session) {
+		String regMethod= "GOOGLE";
+		int result=0;
+		//1.해당이메일이 db에 있고
+		if(!canRegister(email)) {
+			 //1.1경로가 G이면 세션을 준다
+			if(mapper.checkRegisterMethod(email).equals(regMethod)) {
+				UserVO user= mapper.getUserByEmailAndRegMethod(email, regMethod);
+				System.out.println("user1: "+ user);
+				//우리 페이지에서 로그인 시켜놓게 세션을 준다
+				user.setUserPwd("");
+				session.setAttribute("user", user);
+				result=1;
+				return result;
+			}
+			//1.2회원가입 경로가 G가 아니면 
+			
+		}	
+	
+		//2.없으면 회원가입 시키고 경로에 G를 붙여준다
+		else {
+			//2.1회원가입 시키고 경로에 GOOGLE를 붙여준다
+			mapper.insertUserByGoogle(email, userFstName, userLastName, regMethod);
+			System.out.println("user2:"+mapper.getUserById(email).toString());
+			UserVO user2= mapper.getUserById(email);
+			
+			//세션을 준다
+			user2.setUserPwd("");
+			session.setAttribute("user", user2);
+			result=2;
+		}
+		return result;
+	}
 
 	//로그인하는 메서드 구현
 	@Transactional
@@ -224,6 +261,8 @@ public class UserServiceImpl implements UserService{
 		
 		return mapper.letsNewSession(userNum);
 	}
+
+
 	
 	
   

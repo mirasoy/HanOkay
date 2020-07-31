@@ -1,3 +1,4 @@
+<%@page import="javax.mail.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="../includes/header1.jspf"%>
@@ -38,6 +39,7 @@
 	<script>
 	//구글 로그인
 	 function onSignIn(googleUser) {
+		
 	        // Useful data for your client-side scripts:
 	        var profile = googleUser.getBasicProfile();
 	        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -57,23 +59,30 @@
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 				data: {
 					'idToken': id_token
-				},
-				success: function(data){
 					
-					if (data.msg==0){ //로그인 실패
+					
+				},
+				success: function(data){ 
+						//window.alert("data~~"+data);
+						//window.alert("msg~~"+data.result);
+						var parsedData = JSON.parse(data);
+						//window.alert("parsed data: "+parsedData.result);
 						
+					if (parsedData.result==0){ //로그인 실패
+						//window.alert("msg=2:"+parsedData.result);
 						$('#msg').text('로그인 정보가 불일치합니다. 다시 시도해주세요');
 					}
 					
-					else if(data.msg==1){ //로그인 성공 시
-						
+					else if(parsedData.result==1){ //로그인 성공 시
+						//window.alert("msg=1:"+parsedData.result);
+					
 						window.location.href='${pageContext.request.contextPath}/user/welcome';
 					} 
 				
 				},
 				
 		});	 
- 
+	}
 	      /*   var xhr = new XMLHttpRequest();
 	        xhr.open('POST', 'http://localhost/user/login/tokenSignIn');
 	        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -82,7 +91,9 @@
 	        };
 	        xhr.send('idtoken=' + id_token); 
 	      }  */
-	      }
+
+	 //로그아웃 펑션
+
 	//이메일 정규식 체크
 	function checkEmail(str) {
 		let emailRegex=/^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/;
@@ -95,6 +106,7 @@
 
 	$(document).ready(function() {
 		let formObj = $("form");
+		
 		//페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
 		if ( window.history.replaceState ) {
 	        window.history.replaceState( null, null, window.location.href );
@@ -144,4 +156,4 @@
 	});
 	</script>
 
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../includes/footer.jsp" %>

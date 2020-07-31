@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../includes/header.jsp"%>
+<%@include file="../../includes/header.jsp"%>
 
-	<h4><%=userFstName %>의 계정</h4>
+	<h1>내 프로필</h1>
 	<script>
 	$(document).ready(function(){
 		
@@ -13,4 +13,4 @@
 	});
 	</script>
 
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../../includes/footer.jsp"%>

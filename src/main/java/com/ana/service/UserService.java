@@ -42,6 +42,11 @@ public interface UserService {
 	//로그인하는 메서드
 	public int executeLogin(@Param("email")String email, @Param("pwd")String pwd, @Param("user_check")String user_check, HttpServletResponse response, HttpSession session);
 	
+	//구글계정으로 로그인하는 메서드
+	@Transactional
+	public int executeGoogleLogin(@Param("email") String email, @Param("familyName")String userLastName, @Param("givenName")String userFstName, HttpSession session);
+	
+	
 	//인증코드를 확인하는 메서드
 	public boolean matchAuthCode(@Param("email") String email, @Param("enteredAuthCode") String authCode);
 	
@@ -53,6 +58,7 @@ public interface UserService {
 	@Transactional
 	public boolean updateAuthCode(String email, String authCode);
 
+	
 	//user를 db에 등록
 	@Transactional
 	public boolean registerThis(UserVO user);

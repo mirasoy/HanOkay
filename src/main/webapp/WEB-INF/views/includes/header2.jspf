@@ -90,7 +90,29 @@
                     
                   };    
                 });
+           	
+                
                });
+   
+   //로그아웃 펑션
+	 function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+    
+    //우리 서버에서도 세션 삭제
+    var sess='<%= session.getAttribute("user") %>';
+    alert("sess:"+ sess);
+  
+   // sessionStorage.removeItem('user');
+    //sessionStorage.clear();
+  	}
+	 function onLoad() {
+	      gapi.load('auth2', function() {
+	        gapi.auth2.init();
+	      });
+	    }
 </script>
 </head>
 

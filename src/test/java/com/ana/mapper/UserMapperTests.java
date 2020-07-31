@@ -117,7 +117,7 @@ public class UserMapperTests {
 		log.info("*****GIVE AUTH COUNT: "+ count+ "*****");
 	}
 	
-	@Test
+//	@Test
 	public void giveGrant() {
 		int count= mapper.grantActive("kw@naver.com", "13506");
 		log.info("******GRANT ACTIVE"+ count);
@@ -129,9 +129,22 @@ public class UserMapperTests {
 		log.info(user);
 	}
 	
-	@Test
+//	@Test
 	public void testMatchAuthCode() {
 		int num= mapper.matchAuthCode("srawet6f@mapquest.com", "76097");
 		assertTrue(num==1);
+	}
+	
+//	@Test
+	public void testCheckRegisterMethod() {
+		String method=mapper.checkRegisterMethod("serin@naver.com");
+		log.info(method);
+	}
+	
+	@Test
+	public void testRegisterByGoogle() {
+		mapper.insertUserByGoogle("se@naver.comm", "SeriN", "HEO", "GOOGLE");
+		log.info(mapper.getUserById("se@naver.comm"));
+		
 	}
 }
