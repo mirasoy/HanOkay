@@ -1150,3 +1150,13 @@ footer p { color: white; }
 	text-decoration: none;
 	cursor: pointer;
 }
+
+
+@media (min-width: 1200px)
+.container-1 {
+   max-width: 1140px !important;
+   margin: 0 auto;
+}
+
+
+

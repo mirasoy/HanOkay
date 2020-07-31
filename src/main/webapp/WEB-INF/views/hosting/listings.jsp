@@ -225,7 +225,9 @@ $(document).ready(function(){
 			
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
+
 			actionForm.attr("action","/hosting/getAcm");
+
 			actionForm.submit();
 		});
 	});

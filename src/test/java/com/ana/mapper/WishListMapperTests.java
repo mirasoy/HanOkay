@@ -47,9 +47,72 @@ public class WishListMapperTests {
 		
 	}
 	
+
+	
+	
+	@Test
+	public void testInsertAjax() {
+		WishListVO vo = new WishListVO();
+		vo.setUserNum("U1");
+		vo.setAcmNum("A1");
+		vo.setListTitle("새로 추가 제목");
+		vo.setListContent("새로추가 내용");
+		
+		mapper.insertAjax(vo);
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■vo");
+		
+	}
+	
+	
 	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-	// ★★★★★★★★★★★★★★★★★★★★★★★★★★3. testInsert ★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★3. testRead ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	
 	
+	
+	//찜번호로 검색한다.
+	@Test
+	public void testRead() {
+		String targetWishNum = "W1";
+		WishListVO board = mapper.read(targetWishNum);
+		log.info(board);
+	}
+	
 
+	
+
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★4. testDelete ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	
+	@Test
+	public void testDelete() {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■>> DELETE COUNT:" + mapper.delete("W202"));
+	}
+	
+	
+	
+	
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★5. testUpdate ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	@Test
+	public void testUpdate() {
+		WishListVO board = new WishListVO();
+		
+		board.setWishNum("W220");
+		board.setUserNum("U1");
+		board.setAcmNum("A1");
+		board.setListTitle("수정11");
+		board.setListContent("수정11");
+				
+		
+		int count = mapper.update(board);
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■>>UPDATE COUNT: " + count);
+		
+	}
+	
+	
+	
 }
