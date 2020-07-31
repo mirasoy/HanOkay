@@ -155,6 +155,8 @@
 
 		//파일 미리보기 관련()
 		var uploadResult = $(".uploadResult ul");
+		
+		
 		function showUploadedFile(uplodResultArr) {
 			var str = "";
 			$(uplodResultArr).each(function (i, obj) {
@@ -219,7 +221,7 @@
 				formData.append("uploadFile", files[i]);
 			}
 
-			$.ajax({
+			te$.ajax({
 				url: '/review/uploadAjaxAction',
 				processData: false,
 				contentType: false,
