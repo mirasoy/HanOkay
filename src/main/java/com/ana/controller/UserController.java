@@ -30,7 +30,6 @@ public class UserController {
 	
 	@GetMapping("/account/myAccount")
 	public String showMyAccountPage() {
-		log.info("404올-휴-왜? 여기");
 		return "/account/myAccount";
 	}
 	//account/myAccount/findPwd 를 보여주는 메서드

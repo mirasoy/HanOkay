@@ -34,6 +34,12 @@ if (user != null) {
 
 <html lang="en">
 <head>
+	<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="942421543250-6pu1jcn9mpo8vda62cop0qnlesr8fh6a.apps.googleusercontent.com">
+ 	
+ 	
+ 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> 
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -134,7 +140,30 @@ if (user != null) {
                     
                   };    
                 });
+               
+         
+               
                });
+
+  
+    function signOut() {
+        var auth2 = window.gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');   
+          var sess='<%= session.getAttribute("user") %>';
+          <% session.setAttribute("user", null); %>
+          alert("sess:"+ sess);
+          
+        });
+        auth2.disconnect();
+      }
+	 function onLoad() {
+	      gapi.load('auth2', function() {
+	        gapi.auth2.init();
+	      });
+	    }
+   
+	
 </script>
 
 </head>
@@ -151,7 +180,6 @@ if (user != null) {
  -->
 
 <body>
-
    <!-- main-content -->
    <div class="main-content" id="top">
       <div class="top-bar-bg"></div>
@@ -208,6 +236,7 @@ if (user != null) {
                               class="fa fa-user fa-2x"></i></a>
                            <ul class="dropdown-menu">
                               <span class="header-menu">마이페이지</span>
+                              <li><a onclick="location.href='/account/myAccount/myProfile'" style="cursor: pointer">프로필</a></li>
                               <li><a onclick="location.href='/account/myAccount'" style="cursor: pointer">계정</a></li>
                               <li><a onclick="location.href='/mypage/bookListAll'"
                                  style="cursor: pointer">나의 예약</a></li>
@@ -217,11 +246,11 @@ if (user != null) {
                                  style="cursor: pointer">메시지</a></li>
                               <li><a href="#">내 관심 숙소</a></li>
                               <li id='mode'></li>
-                              <li id="header-menu"><a
-                                href='/user/logout'" style="cursor: pointer"
+                              <li id="header-menu">
+                              <a href="#" onclick='javascript:signOut();' style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"
                                  data-element-name="sign-out-btn" color="primary">
-                                    로그아웃
+                                   		 로그아웃
                               </a></li>
                            </ul></li>
                      </ul>
