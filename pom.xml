@@ -226,8 +226,6 @@
 			<version>2.8.6</version>
 		</dependency>
 
-
-
 		<!-- 이메일 발송 관련 라이브러리 -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -266,8 +264,6 @@
 			<version>1.31.0</version>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/jetty/org.mortbay.jetty -->
 		<!-- https://mvnrepository.com/artifact/jetty/org.mortbay.jetty -->
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
@@ -296,53 +292,12 @@
 			<version>6.0.10.Final</version>
 		</dependency>
 
-		<!-- 구글 지오코딩 -->
+			<!-- 구글 지오코딩 -->
 		<dependency>
-
-    <!-- 디벨롭 시작(8월1일)
-  <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-      <dependency>
-         <groupId>com.google.code.gson</groupId>
-         <artifactId>gson</artifactId>
-         <version>2.8.2</version>
-      </dependency>
-      
-      
-	<!-- 이메일 발송 관련 라이브러리 -->
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>   
-        
-        
-        
-     <!-- 유효성 검사 관련 라이브러리 -->
-     <!-- validation -->
-
-	      <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>6.0.10.Final</version>
-        </dependency>
-	
-	<!-- 구글 지오코딩 -->
-       <dependency> 
-         디벨롭 끝(8월1일)-->
-
 			<groupId>com.google.code.geocoder-java</groupId>
 			<artifactId>geocoder-java</artifactId>
 			<version>0.16</version>
 		</dependency>
-
-
-
-
 
 		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
 		<dependency>
