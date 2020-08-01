@@ -1,145 +1,161 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<style>
-	.room{
-		float:left;
-		width:350px;
-		height:250px;
-	}
-	
-	.exp{
-		font-size:8px;
-	}
-	.container-option{
-		padding: 20px;
-	}
-</style>
 
 <%@include file="../includes/adminheader.jsp"%>
-<!-- nav-sidebar -->
 
-<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
-	<br>			
+  <!-- 숙소 방 추가 모달로 띄우기-->
+<div id="page-wrapper" style="padding-bottom:50px;margin-left:0px;">
+ 
+	<br>	
+		<!-- 중앙정렬 -->
+	<div style="margin-left:15%;margin-right:15%;">			
   <!-- 수정, 삭제 가능하게  -->
   		  
-	<div class="row">
-  <div class="col-lg-12">
-    <h4>'<c:out value="${thisrom.romName }"/>'의  정보</h4>
-  </div>
-  <!-- /.col-lg-12 -->
+<div class="row">
+	  <div class="col-lg-12">
+	    <h4>'<c:out value="${getuseracm.userFstName }"/>' 회원님의 숙소상세</h4><br>
+	  </div>
+	  <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 
 <div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-	<input type="hidden" name='acmNum' id='acmNum' value='<c:out value="${thisrom.acmNum }"/>' readonly="readonly">
-	<input type="hidden" name='romNum' id='romNum' value='<c:out value="${thisrom.romNum }"/>' readonly="readonly">
-   
-      <div class="panel-heading">객실 상세보기
-      <label class="pull-right"><c:out value="${thisrom.acmNum }"/><c:out value="${thisrom.romNum }"/></label>
+  <div class="col-lg-3">
+    <div class="panel panel-default" >
+
+      <div class="panel-heading">회원 정보</div>
+      <!-- /.panel-heading -->
+	      <div class="panel-body">
+			<div class="form-group">
+	          <label>회원번호</label> <input class="form-control" name='userNum' id='userNum'
+	            value='<c:out value="${getuseracm.userNum }"/>' readonly="readonly">
+	        </div>	
+	        <div class="form-group">
+	          <label>회원이름</label> <input class="form-control" name='userFstName' id='userFstName'
+	            value='<c:out value="${getuseracm.userFstName }"/><c:out value="${pendinghostacm.userLastName }"/>' readonly="readonly">
+	        </div>
+	        <div class="form-group">
+	          <label>회원 권한</label> <input class="form-control" name='userPiv'
+	            value='<c:out value="${getuseracm.userPriv }"/>' readonly="readonly">
+	        </div>
+	
+	        <div class="form-group">
+	          <label>회원 상태</label> <input class="form-control" name='userStatusCode'
+	            value='<c:out value="${getuseracm.userStatusCode }"/>' readonly="readonly">
+	        </div>
+			<div class="form-group">
+	          <label>회원 사업자번호</label> <input class="form-control" name='bizRegnum' id='bizRegnum'
+	            value='<c:out value="${getuseracm.bizRegnum }"/>' readonly="readonly">
+	        </div>
+			
+		</div>
+		</div>
+		
+			<button data-oper='uptoHost' class="btn btn-default">호스트 수락</button>
+			<button data-oper='returnHost' class="btn btn-danger">호스트 거절</button><!-- 이유를 써서 알림으로 가게끔 하자2.5차 -->
+			<button data-oper='backtoIndex' class="btn btn-info" >관리자 페이지로</button>
+		
+		
+	</div><!-- col-lg-4 end -->
+	
+  <div class="col-lg-6">
+    <div class="panel panel-default" >
+
+      <div class="panel-heading">
+      	숙소정보<label class="pull-right"><c:out value="${getuseracm.acmNum }"/></label>
       </div>
       <!-- /.panel-heading -->
-      <div class="panel-body">
-        <div class="form-group">
-          <label>객실이름</label> <input class="form-control" name='romName'
-            value='<c:out value="${thisrom.romName }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 타입</label> <input class="form-control" name='romType'
-            value='<c:out value="${thisrom.romType }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실최대수용인원</label> <input class="form-control" name='romCapa'
-            value='<c:out value="${thisrom.romCapa }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>침대 타입</label> <input class="form-control" name='bedType'
-            value='<c:out value="${thisrom.bedType }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>침대 갯수</label> <input class="form-control" name='bedCnt'
-            value='<c:out value="${thisrom.bedCnt }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>객실 크기</label> <input class="form-control" name='romSize'
-            value='<c:out value="${thisrom.romSize }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 1박요금</label> <input class="form-control" name='romPrice'
-            value='<c:out value="${thisrom.romPrice }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 사진</label> <input class="form-control" name='romPurl'
-            value='<c:out value="${thisrom.romPurl }"/>' readonly="readonly">
-        </div>
-		<!-- 편의시설 -->
-		<div class = "container-option booking-form" name="romOptcode">
-			<label>객실 옵션정보(여기 icon 뿌리자)</label>
-			<div id=romOpt>&nbsp;</div>
-		</div>	
-		<div class="form-group">
-          <label>객실 옵션정보</label> <input class="form-control" name='romOptcode'
-            value='<c:out value="${thisrom.romOptcode }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>객실 등록일</label> <input class="form-control" name='romRegdate'
-            value='<c:out value="${thisrom.romRegdate }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 최근 수정일</label> <input class="form-control" name='romUpdatedate'
-            value='<c:out value="${thisrom.romUpdatedate }"/>' readonly="readonly">
-        </div>
+	      <div class="panel-body">
+			
+	        <div class="form-group">
+	          <label>숙소이름</label> <input class="form-control" name='acmName' id='acmName'
+	            value='<c:out value="${getuseracm.acmName}"/>' readonly="readonly">
+	        </div>
+	        <div class="form-group">
+	          <label>숙소유형</label> <input class="form-control" name='acmType' id='acmType'
+	            value='<c:out value="${getuseracm.acmType}"/>' readonly="readonly">
+	        </div>
+	        <div class="form-group">
+	          <label>숙소 주소</label> <input class="form-control" name='acmAddr'
+	            value='<c:out value="${getuseracm.acmCity}"/>&nbsp;<c:out value="${getuseracm.acmDistr}"/>&nbsp;<c:out value="${getuseracm.acmDetailaddr}"/>' readonly="readonly"> 
+	        </div>
+	        <div class="form-group">
+	          <label>숙소 대표번호</label> <input class="form-control" name='repPhone'
+	            value='<c:out value="${getuseracm.repPhone }"/>' readonly="readonly">
+	        </div>
+			<div class="form-group">
+	          <label>호스트 연락처</label> <input class="form-control" name='subPhone'
+	            value='<c:out value="${getuseracm.subPhone }"/>' readonly="readonly">
+	        </div>
+			<div class="form-group">
+	          <label>체크인, 체크아웃 시간</label> <input class="form-control" name='checkTime'
+	            value='<c:out value="${getuseracm.checkinTime }"/>/<c:out value="${getuseracm.checkoutTime }"/>' readonly="readonly">
+	        </div>
+	        <div class="form-group">
+	          <label>숙소 이메일</label> <input class="form-control" name='acmEmail'
+	            value='<c:out value="${getuseracm.acmEmail }"/>' readonly="readonly">
+	        </div>
+	        <div class="form-group">
+	          <label>숙소 팩스번호</label> <input class="form-control" name='acmFaxr'
+	            value='<c:out value="${getuseracm.acmFax }"/>' readonly="readonly">
+	        </div>
+			<div class="form-group">
+	          <label>숙소 설명</label> <textarea class="form-control" name='userPiv' readonly="readonly"><c:out value="${getuseracm.acmDesc }"/></textarea>
+	        </div>
+	
+			
+		</div>
+		</div>
+	</div><!-- col-lg-4 end -->
+		
+		
+	 <div class="col-lg-3">
+    <div class="panel panel-default" >
 
-		<div class="pull-right">
-			<button data-oper='modify' class="btn btn-default">수정하기</button>
-			<button data-oper='remove' class="btn btn-danger">삭제하기</button>
-			<button data-oper='list' class="btn btn-info" >뒤로가기</button>
-		</div>	
-	</div>
-</div></div></div></div>
-
-<!-- 빈 폼 -->
-<form id="actionForm">
-</form>
+      <div class="panel-heading">객실정보</div>
+      <!-- /.panel-heading -->
+	      <div class="panel-body">
+			<div class="form-group">
+	          <label>회원번호</label> <input class="form-control" name='userNum' id='userNum'
+	            value='<c:out value="${getuseracm.userNum }"/>' readonly="readonly">
+	        </div>	
+	        <div class="form-group">
+	          <label>회원이름</label> <input class="form-control" name='userFstName' id='userFstName'
+	            value='<c:out value="${getuseracm.userFstName }"/><c:out value="${getuseracm.userLastName }"/>' readonly="readonly">
+	        </div>
+	        <div class="form-group">
+	          <label>회원 권한</label> <input class="form-control" name='userPiv'
+	            value='<c:out value="${getuseracm.userPriv }"/>' readonly="readonly">
+	        </div>
+	
+	        <div class="form-group">
+	          <label>회원 상태</label> <input class="form-control" name='userStatusCode'
+	            value='<c:out value="${getuseracm.userStatusCode }"/>' readonly="readonly">
+	        </div>
+			<div class="form-group">
+	          <label>회원 사업자번호</label> <input class="form-control" name='bizRegnum' id='bizRegnum'
+	            value='<c:out value="${getuseracm.bizRegnum }"/>' readonly="readonly">
+	        </div>
+			
+		</div>
+		</div>
+		
+		
+	</div><!-- col-lg-4 end -->	
+	
+	
+	
+	
+	
+</div>
+</div>
+		<!-- 빈 폼 -->
+		<form id="actionForm">
+		</form>
 				
+</div>
 
 <script type="text/javascript">
-	//Option출력
-	window.onload=function(){
-		//getRomOpt();
-	}
-	
-	let option = pad(dec2bin("${thisrom.romOptcode }"));
-	function dec2bin(codeNum){
-		return (codeNum >>> 0).toString(2); 
-	}
-	function pad(code) {
-		return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
-	}
-	
-	// 숙소 옵션
-	/*function getAcmOpt() {
-		var iconArr = new Array(); 
-		var codeArr = new Array(); 
-		var nameArr = new Array(); 
-		let j = 0;
-		<c:forEach items="${acmCode}" var="acmCode">
-			iconArr[j] = '<c:out value="${acmCode.codeIcon}" />';
-			codeArr[j] = 'acm' + '<c:out value="${acmCode.codeFull}" />';
-			nameArr[j] = '<c:out value="${acmCode.codeCont}" />';
-			j++;
-		</c:forEach>
-		
-		for(let k=0; k<option.length; k++){
-			if(option.charAt(k) == 1){
-				document.getElementById("romOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
-			}
-		}
-	}*/
-	
-
-
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
 		
@@ -150,19 +166,20 @@
 			var operation=$(this).data("oper");
 			console.log(operation);
 			
-			if(operation==='list'){
+			if(operation==='backtoIndex'){
 				alert("목록으로 돌아갑니다");
-				formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
-				formObj.attr("action","/hosting/become-host2_6");	
-			} else if(operation==='modify'){
-				alert("객실을 수정합니다");
-				formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-				formObj.attr("action","/hosting/modifyRom");
-			} else if(operation==='remove'){
-				if(confirm("정말 삭제하시겠습니까??")==true){
-					formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
-					formObj.attr("action","/hosting/removeRom");
+				formObj.attr("action","/admin/adminindex");	
+			} else if(operation==='uptoHost'){
+				alert("Host전환이 처리되었습니다");
+				formObj.append("<input type='hidden' name='userNum' value='"+$('#userNum').val()+"'>");
+				formObj.append("<input type='hidden' name='bizRegnum' value='"+$('#bizRegnum').val()+"'>");
+				formObj.attr("method","post");
+				formObj.attr("action","/admin/moditoHost");
+			} else if(operation==='returnHost'){
+				if(confirm("회원의 요청을 거절하시겠습니까?")==true){
+					formObj.append("<input type='hidden' name='userNum' value='"+$('#userNum').val()+"'>");
+					formObj.attr("method","post");
+					formObj.attr("action","/admin/moditoGuest");
 				} else {
 					return false;
 				}
@@ -174,6 +191,13 @@
 
 
 </script>
+<%@include file="../includes/footer.jsp"%>
+
+
+
+
+
+
 
 
 

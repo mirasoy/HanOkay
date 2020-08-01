@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/hostheader.jsp"%>
+<style>
+	a{
+		color: #21292d !important;
+		}
+		
+	
+</style>
+
 
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
-	<br>			
+	<br>		
+		<!-- 중앙정렬 -->
+	<div style="margin-left:15%;margin-right:15%;">		
   <!-- 숙소 방 추가 모달로 띄우기-->
   <h3 align="left">총 <c:out value="${size}"/>개의 숙소</h3><br>
 		
@@ -30,8 +40,8 @@
 
 					<c:forEach items="${activelist}" var="activeacm">
 						<tr>
-							<td style="width: 350px;">
-							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${activeacm.acmPurl}" /><c:out value="${activeacm.acmPname }" />'>
+							<td style="width: 150px;">
+							<img style=' width: auto; height: 100px; max-width: 100px; margin-left :20px; border-radius:10px;' id='rPicture' src='/review/display?fileName=<c:out value="${activeacm.acmPurl}" /><c:out value="${activeacm.acmPname }" />'>
 
 							</td>
 							<td>
@@ -141,7 +151,7 @@
 			</div>
 			<!-- end panel -->
 		</div>
-			
+		</div>	
 			
 		<!-- 빈 폼 -->
 		<form id="actionForm">
@@ -193,7 +203,6 @@ $(document).ready(function(){
 	
 	});
 	$(document).ready(function(){
-		var formObj = $("#actionForm");
 		
 		$('button').on("click", function(e){
 			e.preventDefault();
@@ -204,9 +213,8 @@ $(document).ready(function(){
 			
 			if(operation==='newAcm'){
 				alert("새 숙소를 등록합니다");
-				formObj.attr("action","/hosting/become-host");	
+				location.href="/hosting/become-host";
 			}
-			actionForm.submit();
 		});
 	});
 
@@ -217,7 +225,9 @@ $(document).ready(function(){
 			
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
-			actionForm.attr("action","/hosting/become-host2_6");
+
+			actionForm.attr("action","/hosting/getAcm");
+
 			actionForm.submit();
 		});
 	});

@@ -25,11 +25,11 @@ Version: 3.5.4 Timestamp: Sun Aug 30 13:30:32 EDT 2015
 .select2-container .select2-choice {
     display: block;
     height: 26px;
-    padding: 0 0 0 8px;
+ /*    padding: 0 0 0 8px; */
     overflow: hidden;
     position: relative;
 
-    border: 1px solid #aaa;
+  /*   border: 1px solid #aaa; */
     white-space: nowrap;
     line-height: 26px;
     color: #444;
@@ -43,14 +43,16 @@ Version: 3.5.4 Timestamp: Sun Aug 30 13:30:32 EDT 2015
       -webkit-user-select: none;
          -moz-user-select: none;
           -ms-user-select: none;
-              user-select: none;
+
+   /*  
+                 user-select: none;
 
     background-color: #fff;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff));
+   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff));
     background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 50%);
     background-image: -moz-linear-gradient(center bottom, #eee 0%, #fff 50%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#eeeeee', GradientType = 0);
-    background-image: linear-gradient(to top, #eee 0%, #fff 50%);
+    background-image: linear-gradient(to top, #eee 0%, #fff 50%); */
 }
 
 html[dir="rtl"] .select2-container .select2-choice {
@@ -74,7 +76,7 @@ html[dir="rtl"] .select2-container .select2-choice {
 }
 
 .select2-container .select2-choice > .select2-chosen {
-    margin-right: 26px;
+  /*   margin-right: 26px; */
     display: block;
     overflow: hidden;
 
@@ -185,7 +187,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
     right: 0;
     top: 0;
 
-    border-left: 1px solid #aaa;
+  /*   border-left: 1px solid #aaa;
     border-radius: 0 4px 4px 0;
 
     background-clip: padding-box;
@@ -195,7 +197,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
     background-image: -webkit-linear-gradient(center bottom, #ccc 0%, #eee 60%);
     background-image: -moz-linear-gradient(center bottom, #ccc 0%, #eee 60%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#eeeeee', endColorstr = '#cccccc', GradientType = 0);
-    background-image: linear-gradient(to top, #ccc 0%, #eee 60%);
+    background-image: linear-gradient(to top, #ccc 0%, #eee 60%); */
 }
 
 html[dir="rtl"] .select2-container .select2-choice .select2-arrow {

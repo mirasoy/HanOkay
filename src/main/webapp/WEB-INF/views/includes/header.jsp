@@ -66,7 +66,8 @@ if (user != null) {
 <link rel="stylesheet" type="text/css"
    href="${request.contextPath}/resources/slick/slick-theme.css" >
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/review.css">
+
+<link rel="stylesheet" type="text/css" href="../resources/css/review.css">
 
 <!-- 메인 CSS style -->
 
@@ -241,6 +242,8 @@ if (user != null) {
                                  style="cursor: pointer">나의 예약</a></li>
                               <li><a onclick="location.href='/review/list'"
                                  style="cursor: pointer">나의 리뷰</a></li>
+                              <li><a onclick="location.href='/chat/chatList'"
+                                 style="cursor: pointer">메시지</a></li>
                               <li><a href="#">내 관심 숙소</a></li>
                               <li id='mode'></li>
                               <li id="header-menu">

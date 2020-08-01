@@ -49,8 +49,11 @@
 	<beans:bean id="multipartResolver"
 	class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
 	
-	<websocket:handlers>
-		<websocket:mapping handler="echohandeler" path="/echo"/>
+     <websocket:handlers>
+       <websocket:mapping handler="echohandeler" path="/echo"/>
+       <websocket:handshake-interceptors>
+          <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+       </websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>
 	

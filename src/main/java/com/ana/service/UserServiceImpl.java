@@ -263,6 +263,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 
+	@Override
+	public UserVO getAcmOwner(String bizregnum) {
+		// TODO Auto-generated method stub
+		return mapper.getAcmOwner(bizregnum);
+	}
+
 	
 	
   

@@ -26,8 +26,13 @@
 			   
 		}
 %>
-
-
+	<style>
+	.panel-heading {
+	    color: #333;
+	    background-color: #f7cac2 !important;
+	    border-color: #ddd;
+	    }
+	</style>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -59,8 +64,8 @@
 	<style>
 		html,body{
 			font-family:"타이포_쌍문동";
+			background-color:white;
 		}
-		
 		
 		#logo{
 			width:50px;
@@ -74,16 +79,10 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button> -->
-                
-                
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:20px;margin-bottom:0;background-color:white;">
+
+            <div class="navbar-header" style="margin-bottom:15px;">     
 				<!-- 로고자리 -->
                 <a class="navbar-brand" href="/hosting/hostindex">Han:Ok</a>
             </div>
@@ -111,6 +110,9 @@
 			
 			<!-- 오른쪽 nav -->
             <ul class="nav navbar-top-links navbar-right">
+                <li class="nav-menu">
+					<a id="adminonly" href='/admin/adminindex'>관리자 모드 보기</a>
+				</li>
            		
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -158,7 +160,7 @@
                         </li>
                      </ul>
         </nav>
-
+</div>
         
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -171,6 +173,7 @@
 	  var priv ='<%=userPriv%>';
       var userStatusCode='<%=userStatusCode%>';        
                
+      if(priv!="ADMIN")$("#adminonly").css("display","none"); 
       if(userStatusCode=="ACTIVE"){
     	  alert("숙소등록을 한 회원만 접근할 수 있습니다");
     	  location.href="/acm/list";
