@@ -34,12 +34,11 @@ if (user != null) {
 
 <html lang="en">
 <head>
+	<!-- 구글 소셜 로그인 시작 -->
 	<meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="942421543250-i3vvb6s828smd122lqcdr0buvjg2p6ui.apps.googleusercontent.com">
- 	
- 	
  	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> 
-
+	<!-- 구글 소셜 로그인 끝 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -161,19 +160,18 @@ if (user != null) {
         $.ajax({
 			type:'GET',
 			url: '${pageContext.request.contextPath}/user/logout',
-			
-			data: {
-			},
 			success: function(data){
 				window.location.href='${pageContext.request.contextPath}/acm/list';
 				},		
 			}); 	
         
       }
-     
 	 function onLoad() {
 	      gapi.load('auth2', function() {
-	        gapi.auth2.init();
+	        gapi.auth2.init({
+	        	 clientId: '942421543250-i3vvb6s828smd122lqcdr0buvjg2p6ui.apps.googleusercontent.com',
+	        	        scope: 'profile email'
+	        });
 	      });
 	    } 
    
