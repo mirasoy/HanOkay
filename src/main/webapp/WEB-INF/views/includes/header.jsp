@@ -146,22 +146,33 @@ if (user != null) {
                });
 
   
-<%--     function signOut() {
+     function signOut() {
         var auth2 = window.gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
-          console.log('User signed out.');   
-          var sess='<%= session.getAttribute("user") %>';
-          <% session.setAttribute("user", null); %>
-          alert("sess:"+ sess);
-          
+          console.log('User signed out.');         
         });
         auth2.disconnect();
+        
+        
+        $.ajax({
+			type:'GET',
+			url: '${pageContext.request.contextPath}/user/logout',
+			
+			data: {
+			},
+			success: function(data){
+				
+				window.location.href='${pageContext.request.contextPath}/acm/list';
+
+				},		
+			}); 	
+        
       }
 	 function onLoad() {
 	      gapi.load('auth2', function() {
 	        gapi.auth2.init();
 	      });
-	    } --%>
+	    } 
    
 	
 </script>
@@ -247,7 +258,7 @@ if (user != null) {
                               <li><a href="#">내 관심 숙소</a></li>
                               <li id='mode'></li>
                               <li id="header-menu">
-                              <a href="/user/logout" style="cursor: pointer"
+                              <a href="javascript:signOut();" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"
                                  data-element-name="sign-out-btn" color="primary">
                                    		 로그아웃
