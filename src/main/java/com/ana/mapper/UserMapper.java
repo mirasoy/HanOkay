@@ -38,7 +38,7 @@ public interface UserMapper {
 	public UserVO getUserByEmailAndRegMethod(@Param("userEmail")String email, @Param("userRegisterMethod") String registerMethod);
 	
 	// 해당 회원이 있는지 확인하는 메서드
-	public UserVO isValidUser(@Param("userEmail") String email, @Param("userPwd") String pwd);
+	public UserVO isValidUser(@Param("userEmail") String userEmail, @Param("userPwd") String userPwd);
 	
 	//해당 회원의 userNum을 반환
 	public UserVO getUserById(String UserEmail);

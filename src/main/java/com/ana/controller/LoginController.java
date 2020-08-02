@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -66,10 +68,17 @@ public class LoginController {
 		return "/error/error";
 	}
 
+
+	@RequestMapping(value = "/login/executeFBLogin", method = RequestMethod.POST)
+	public void executeFBlogin(String email, String name, String birthday) {
+		System.out.println(email+ ","+ name +","+ birthday);
+	}
+	
+	
 	// 구글 로그인
 	private static final HttpTransport transport = new NetHttpTransport();
 	private static final JsonFactory jsonFactory = new JacksonFactory();
-	private static final String MY_APP_GOOGLE_CLIENT_ID = "942421543250-6pu1jcn9mpo8vda62cop0qnlesr8fh6a.apps.googleusercontent.com";
+	private static final String MY_APP_GOOGLE_CLIENT_ID = "942421543250-i3vvb6s828smd122lqcdr0buvjg2p6ui.apps.googleusercontent.com";
 
 	@RequestMapping(value = "/login/tokenSignIn", method = RequestMethod.POST)
 	public void executeGoogleLogin(@RequestParam MultiValueMap<String, String> body, HttpSession session,

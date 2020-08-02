@@ -114,19 +114,23 @@ public class UserServiceImpl implements UserService{
 	}
 
 	//로그인하는 메서드 구현
-	@Transactional
+
 	@Override
 	public int executeLogin(String email, String pwd, String user_check, HttpServletResponse response, HttpSession session) {
 		System.out.println("유저 서비스에서 이메일: "+ email);
 		System.out.println("유저 서비스에서 ㅂㅣ번: "+ pwd);
 		System.out.println("유저 서비스에서 아이디 기억: "+ user_check);
 		
-		UserVO user= mapper.isValidUser(email, pwd);
+		String userEmail= email;
+		String userPwd= pwd;
+		
+		UserVO user= mapper.isValidUser(userEmail, userPwd);
 		System.out.println("UserService에서 로그인 객체확인:  "+ user);
 		
 		int result=0;
 		//회원 정보 없을 때
 		if(user==null) {
+			System.out.println("회원정보가 없다...!");
 			System.out.println("service에서 반환되는 result 값: "+ result);
 
 			return result;
