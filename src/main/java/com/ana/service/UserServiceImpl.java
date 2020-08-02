@@ -121,7 +121,10 @@ public class UserServiceImpl implements UserService{
 		System.out.println("유저 서비스에서 ㅂㅣ번: "+ pwd);
 		System.out.println("유저 서비스에서 아이디 기억: "+ user_check);
 		
-		UserVO user= mapper.isValidUser(email, pwd);
+		String userEmail= email;
+		String userPwd= pwd;
+		
+		UserVO user= mapper.isValidUser(userEmail, userPwd);
 		System.out.println("UserService에서 로그인 객체확인:  "+ user);
 		
 		int result=0;

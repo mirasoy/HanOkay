@@ -146,7 +146,7 @@ if (user != null) {
                });
 
   
-    function signOut() {
+<%--     function signOut() {
         var auth2 = window.gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
           console.log('User signed out.');   
@@ -161,7 +161,7 @@ if (user != null) {
 	      gapi.load('auth2', function() {
 	        gapi.auth2.init();
 	      });
-	    }
+	    } --%>
    
 	
 </script>
@@ -247,7 +247,7 @@ if (user != null) {
                               <li><a href="#">내 관심 숙소</a></li>
                               <li id='mode'></li>
                               <li id="header-menu">
-                              <a href="#" onclick='javascript:signOut();' style="cursor: pointer"
+                              <a href="/user/logout" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"
                                  data-element-name="sign-out-btn" color="primary">
                                    		 로그아웃
