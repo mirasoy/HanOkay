@@ -147,12 +147,16 @@ if (user != null) {
 
   
      function signOut() {
+    	 //google 로그아웃
         var auth2 = window.gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
           console.log('User signed out.');         
         });
         auth2.disconnect();
         
+        //fb로그아웃
+        /* FB.logout(function(response) {
+		}); */
         
         $.ajax({
 			type:'GET',
@@ -161,13 +165,12 @@ if (user != null) {
 			data: {
 			},
 			success: function(data){
-				
 				window.location.href='${pageContext.request.contextPath}/acm/list';
-
 				},		
 			}); 	
         
       }
+     
 	 function onLoad() {
 	      gapi.load('auth2', function() {
 	        gapi.auth2.init();

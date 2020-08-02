@@ -38,6 +38,11 @@ public class UserController {
 		return "/account/myAccount/findPwd";
 	}
 	
+	@GetMapping("/account/myAccount/myProfile")
+	public String showProfilePage() {
+		return "/account/myAccount/myProfile";
+	}
+	
 	@RequestMapping(value="/account/myAccount/accountRecovery", method=RequestMethod.POST)
 	public void sendEmailToFindPwd(String email) {
 		log.info("email in UserController: "+ email);

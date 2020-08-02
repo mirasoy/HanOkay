@@ -169,7 +169,7 @@
 	   		
 	   		
 	   		  $.ajax({
-					type:'POST',
+					type:'GET',
 					url: '${pageContext.request.contextPath}/user/login/executeFBLogin',
 					dataType: 'json',
 					data: {
