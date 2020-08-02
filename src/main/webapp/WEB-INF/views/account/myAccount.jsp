@@ -9,6 +9,8 @@
 	//페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
 	if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
+        
+        
     }
 	});
 	</script>

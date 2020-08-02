@@ -35,7 +35,7 @@ if (user != null) {
 <html lang="en">
 <head>
 	<meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="942421543250-6pu1jcn9mpo8vda62cop0qnlesr8fh6a.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="942421543250-i3vvb6s828smd122lqcdr0buvjg2p6ui.apps.googleusercontent.com">
  	
  	
  	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> 

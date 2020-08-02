@@ -63,7 +63,7 @@
 	<!-- DB에 존재하는 id와 pwd인지 확인하는 쿼리 -->
 	<select id="isValidUser" resultMap="UserVO">
 	select * from tuser
-	where u_email=#{userEmail} and u_pwd=#{userPwd}
+	where u_email= #{userEmail} and u_pwd= #{userPwd}
 	</select>
 	
 	<!-- 이메일 중복 검사 쿼리 -->
