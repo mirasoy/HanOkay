@@ -162,14 +162,26 @@ public class LoginController {
 
 	// 로그아웃을 하는 기능(=세션에서 user를 제거하는 기능)
 	@GetMapping("/logout")
-	public ModelAndView logout(SessionStatus status, HttpServletRequest request) {
+	public String logout(SessionStatus status, HttpSession session, HttpServletRequest request) {
 		log.info("session 시작: " + status);
+		log.info("session아 있니? :"+ session.toString());
+
+		session = request.getSession(false);
+	    if (session != null) {
+	        session.invalidate();
+	        log.info("session죽었당");
+	    }
+		
+		log.info("session아 아직도 있니? :"+ session);
+
 		// session을 모두 없애줘
 		status.setComplete();
-		ModelAndView mv = new ModelAndView();
+		
 
 		// 이제 로그아웃했을 때 그 로그아웃을 불러온 jsp로 그대로 남아있게 만들어야해(7/13)
 		StringBuffer contextPath = request.getRequestURL();
+		String Referer= request.getHeader("referer");
+		log.info("Referer: "+ Referer);
 		log.info("ContextPath: " + contextPath);
 
 		// 없애기가 성공 되었으면 성공했다는 로그를 찍어줘
@@ -178,8 +190,7 @@ public class LoginController {
 		}
 		// 그리고 acm/list 페이지로 가줘
 		// 하지만 다른 페이지의 헤더에서 로그아웃을 한 경우에 돌아가는 뷰는 해당 뷰여야함...(수정해야해!!)
-		mv.setViewName("/acm/list");
-		return mv;
+		return "/acm/list";
 	}
 
 }
