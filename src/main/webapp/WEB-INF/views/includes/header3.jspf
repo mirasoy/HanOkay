@@ -67,7 +67,7 @@
                               <li><a href="#">내 관심 숙소</a></li>
                               <li id='mode'></li>
                               <li id="header-menu">
-                              <a href="/user/logout" style="cursor: pointer"
+                              <a href="javascript:signOut();" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"
                                  data-element-name="sign-out-btn" color="primary">로그아웃
                               </a></li>
