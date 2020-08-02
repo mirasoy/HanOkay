@@ -77,11 +77,19 @@
 		
 	</update>
 
-	<!-- 어드민단 -->
+	<!-- ********** 어드민단 ********** -->
 	<select id="getRomsize" resultType="int">
 	select count(*) from trom
 	where acm_num=#{acmNum}
 	</select>
-
-
+	
+	 <update id="moditoRomActive">
+		update trom 
+		set rom_acti=#{romActi}, rom_status=#{romStatus}
+		where acm_Num = #{acmNum} 
+	</update>
+	<select id="getRomwithAcm" resultMap="RomVOResult">
+		select * from TROM where acm_NUM =#{acmNum}
+	</select>
+	
 </mapper>

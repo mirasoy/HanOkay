@@ -88,11 +88,10 @@
 				
 			 
 				  
-				  <h4>한:오케이에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4>
-				  <input class="form-control"  style="width:200px;display:inline-block;" id="bizRegnum" name="bizRegnum" placeholder="사업자등록번호" numberOnly><br><br>
+				  <input type="hidden"  style="width:200px;display:inline-block;" id="bizRegnum" name="bizRegnum" value="<c:out value='${biznum}'/>" placeholder="사업자등록번호" numberOnly><br><br>
 			
 				   
-				   <br><br>
+				   <br>
 				  <h4>숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
 				  <label for="checkinTime">체크인시간</label>&nbsp;
 					<select class="form-control"  style="width:150px;display:inline-block;" name="checkinTime" id="checkinTime">

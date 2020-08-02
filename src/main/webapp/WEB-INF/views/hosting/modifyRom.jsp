@@ -63,9 +63,10 @@
             <!-- /.navbar-static-side -->
         </nav>
 	<!-- nav-end -->
-<div id="page-wrapper" style="padding-bottom:50px;">
-	<br>			
-  <!-- 수정, 삭제 가능하게  -->
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
+		<br>
+	<div style="margin-left:15%;margin-right:15%;">	
+	 <!-- 수정, 삭제 가능하게  -->
   		  
 	<div class="row">
   <div class="col-lg-12">
@@ -164,15 +165,6 @@
 	      <input type="checkbox" name="romOptcode" id="RM_OPT_SM" value="16384"><label for="RM_OPT_SM">흡연</label>
 	      <input type="checkbox" name="romOptcode" id="RM_OPT_KC" value="32768"><label for="RM_OPT_KC">개별주방</label>
   		</div>
-		<div class="form-group">
-          <label>객실 등록일</label> <input class="form-control" name='romRegdate'  style="width:300px;display:inline-block;"
-            value='<c:out value="${thisrom.romRegdate }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 최근 수정일</label> <input class="form-control" name='romUpdatedate'  style="width:300px;display:inline-block;"
-            value='<c:out value="${thisrom.romUpdatedate }"/>' readonly="readonly">
-        </div>
-
 	
 			<button data-oper='modify' class="btn btn-default">수정완료</button>
 			<button data-oper='getRom' class="btn btn-info">수정취소</button>
@@ -183,7 +175,7 @@
 </div>
 </div>
 </div>
-
+</div>
 	
 				
 

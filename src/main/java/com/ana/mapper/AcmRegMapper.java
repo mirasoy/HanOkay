@@ -23,6 +23,8 @@ public interface AcmRegMapper {
 	
 	public AcmVO getpendingacm(String bizRegisterNumber);
 	
+	
+	
 	public int delete(String acmNum);
 	
 	
@@ -35,7 +37,9 @@ public interface AcmRegMapper {
 	////////////어드민단////////////
 	public List<UserAcmVO> getadminListAcms(String acmActi);
 	
-	public UserAcmVO getpendingUserAcms(String bizRegnum);
+	public UserAcmVO getUserAcms(String acmNum);
 	//호스트 권한을 주며 active로 변경
 	public int moditoAcmActive(AcmVO acm);
+
+	public UserAcmVO getPendingUserAcms(@Param("bizRegnum") String bizRegnum,@Param("acmActi")String acmActi);
 }

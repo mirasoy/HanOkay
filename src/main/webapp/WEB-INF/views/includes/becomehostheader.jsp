@@ -60,7 +60,7 @@
 	
 	<style>
 		html,body{
-			font-family:"타이포_쌍문동";
+			font-family:Verdana, sans-serif;
 			background-color:white;
 		}
 		
@@ -72,29 +72,37 @@
 			height:160px;
 		}
 		
-.uploadResult {
-	width: 100%;
-	background-color: white;
-	margin-top: 10px;
-
-}
-
-.uploadResult ul {
-	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.uploadResult ul li {
-	list-style: none;
-	padding: 10px;
-}
-
-.uploadResult ul li img{
-	width: 150px;
-	position: static;
-}
+		.uploadResult {
+			width: 100%;
+			background-color: white;
+			margin-top: 10px;
+		
+		}
+		
+		.uploadResult ul {
+			display: flex;
+			flex-flow: row;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.uploadResult ul li {
+			list-style: none;
+			padding: 10px;
+		}
+		
+		.uploadResult ul li img{
+			width: 150px;
+			position: static;
+		}
+		
+		<style>
+		.panel-heading {
+		    color: #333;
+		    background-color: #D2AC70 !important;
+		    border-color: #ddd;
+		 }
+	</style>
 	</style>
 </head>
 
@@ -103,8 +111,8 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:25px;margin-bottom:0;background-color:white;">
-            <div class="navbar-header" style="margin-bottom:15px;">     
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:15px;margin-bottom:0;background-color:white;">
+            <div class="navbar-header" style="margin-bottom:5px;">     
 		      
 				<!-- 로고자리 -->
                 <a class="navbar-brand" href="/hosting/hostindex" >Han:Ok for Host</a>

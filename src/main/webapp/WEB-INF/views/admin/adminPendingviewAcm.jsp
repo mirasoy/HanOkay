@@ -150,8 +150,9 @@
 		</div>
 		</div>
 		
-			<button data-oper='sendmsg' class="btn btn-danger">메세지 보내기</button><!-- 이유를 써서 알림으로 가게끔 하자2.5차 -->
-			<button data-oper='backtoIndex' class="btn btn-info" >관리자 페이지로</button>
+			<button data-oper='apprAcm' class="btn btn-default">숙소 승인</button><!-- 이유를 써서 알림으로 가게끔 하자2.5차 -->
+			<button data-oper='denyAcm' class="btn btn-danger">숙소 거절</button><!-- 이유를 써서 알림으로 가게끔 하자2.5차 -->
+			<button data-oper='backtoIndex' class="btn btn-info" >뒤로가기</button>
 	</div><!-- col-lg-4 end -->
 	
 	
@@ -347,10 +348,22 @@
 			if(operation==='backtoIndex'){
 				alert("목록으로 돌아갑니다");
 				formObj.attr("action","/admin/adminindex");	
-				actionForm.submit();
-			} else if(operation==='sendmsg'){
-				alert("메세지를 보냅니다");
-			} 
+			} else if(operation==='apprAcm'){
+				alert("숙소가 승인되었습니다");
+				formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
+				
+				formObj.attr("method","post");
+				formObj.attr("action","/admin/activeAcm");
+			} else if(operation==='returnHost'){
+				if(confirm("회원의 요청을 거절하시겠습니까?")==true){
+					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
+					formObj.attr("method","post");
+					formObj.attr("action","/admin/inactiveAcm");
+				} else {
+					return false;
+				}
+			}
+			actionForm.submit();
 			
 		});
 	});

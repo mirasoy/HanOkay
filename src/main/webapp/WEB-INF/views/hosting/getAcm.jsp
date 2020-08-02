@@ -6,6 +6,103 @@
 			color: #21292d;
 			}
 			
+		* {box-sizing: border-box}
+	body {font-family: Verdana, sans-serif; margin:0}
+	.mySlides {display: none}
+	img {vertical-align: middle;}
+	
+	/* Slideshow container */
+	.slideshow-container {
+	  max-width: 1000px;
+	  position: relative;
+	  margin: auto;
+	}
+	
+	/* Next & previous buttons */
+	.prev, .next {
+	  cursor: pointer;
+	  position: absolute;
+	  top: 50%;
+	  width: auto;
+	  padding: 16px;
+	  margin-top: -22px;
+	  color: white;
+	  font-weight: bold;
+	  font-size: 18px;
+	  transition: 0.6s ease;
+	  border-radius: 0 3px 3px 0;
+	}
+	
+	/* Position the "next button" to the right */
+	.next {
+	  right: 0;
+	  border-radius: 3px 0 0 3px;
+	}
+	
+	/* On hover, add a black background color with a little bit see-through */
+	.prev:hover, .next:hover {
+	  background-color: rgba(0,0,0,0.8);
+	}
+	
+	/* Caption text */
+	.text {
+	  color: #f2f2f2;
+	  font-size: 15px;
+	  padding: 8px 12px;
+	  position: absolute;
+	  bottom: 8px;
+	  width: 100%;
+	  text-align: center;
+	}
+	
+	/* Number text (1/3 etc) */
+	.numbertext {
+	  color: #f2f2f2;
+	  font-size: 12px;
+	  padding: 8px 12px;
+	  position: absolute;
+	  top: 0;
+	}
+	
+	/* The dots/bullets/indicators */
+	.dot {
+	  cursor: pointer;
+	  height: 15px;
+	  width: 15px;
+	  margin: 0 2px;
+	  background-color: #bbb;
+	  border-radius: 50%;
+	  display: inline-block;
+	  transition: background-color 0.6s ease;
+	}
+	
+	.active, .dot:hover {
+	  background-color: #717171;
+	}
+	
+	/* Fading animation */
+	.fade {
+	  -webkit-animation-name: fade;
+	  -webkit-animation-duration: 1.5s;
+	  animation-name: fade;
+	  animation-duration: 1.5s;
+	}
+	
+	@-webkit-keyframes fade {
+	  from {opacity: .4} 
+	  to {opacity: 1}
+	}
+	
+	@keyframes fade {
+	  from {opacity: .4} 
+	  to {opacity: 1}
+	}
+	
+	/* On smaller screens, decrease text size */
+	@media only screen and (max-width: 300px) {
+	  .prev, .next,.text {font-size: 11px}
+	}
+			
 	</style>
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>		
@@ -13,46 +110,74 @@
 	<div style="margin-left:15%;margin-right:15%;">		
   <!-- 숙소 방 추가 모달로 띄우기-->
 		<div class="col-lg-10">
-		<button type="button" data-oper='backtolist'>숙소 목록으로</button>
-		<button type="button" data-oper='viewMyacm'>숙소 미리보기</button>
+		<button class="btn btn-info" type="button" data-oper='backtolist'>숙소 목록으로</button>
+		<button class="btn btn-info" type="button" data-oper='viewMyacm'>숙소 미리보기</button>
 		</div>
 		<br><br><br>
-		<!-- 숙소사진편집 -->
 		
 			
 		<div class="col-lg-3">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				숙소 '<c:out value="${acm.acmName}" />'
-				
-				<button type="button" class="btn btn-xs pull-right" data-oper='editAcmPic'>숙소 사진 편집</button>
-			</div>
-			<!-- /.panel-heading -->
-			<div class="panel-body">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>대표 숙소 사진</th>
-						</tr>
-					</thead>
-						<tr>
-							<th>
-								<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
-							</th>
-						</tr>
-				</table>
-				
-				
-				  <br>
-				</div>
-				<!--  end panel-body -->
-			</div>
-			<!-- end panel -->
+    <div class="panel panel-default" >
+
+      <!-- /.panel-heading -->
+	      <div class="panel-body">
+			
+	        <div class="form-group">
+	          <label>숙소대표사진</label> <div class="pull-right"><button type="button" data-oper='editAcm'>사진 편집</button></div>
+	          <div class="slideshow-container">
+					<br><br>
+					<div class="mySlides">
+					  <div class="numbertext">1 / 3</div>
+					  <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+							
+					</div>
+					
+					<div class="mySlides">
+					  <div class="numbertext">2 / 3</div>
+					 <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+								
+					</div>
+					
+					<div class="mySlides">
+					  <div class="numbertext">3 / 3</div>
+					  <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+					</div>
+					<div class="mySlides">
+					  <div class="numbertext">3 / 3</div>
+					  <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+					</div>
+					<div class="mySlides">
+					  <div class="numbertext">3 / 3</div>
+					   <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+					</div>
+					
+					
+					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+					<a class="next" onclick="plusSlides(1)">&#10095;</a>
+					
+					</div>
+					<br>
+					
+					<div style="text-align:center">
+					  <span class="dot" onclick="currentSlide(1)"></span> 
+					  <span class="dot" onclick="currentSlide(2)"></span> 
+					  <span class="dot" onclick="currentSlide(3)"></span> 
+					  <span class="dot" onclick="currentSlide(4)"></span> 
+					  <span class="dot" onclick="currentSlide(5)"></span> 
+					  <span class="dot" onclick="currentSlide(6)"></span> 
+					</div>
+	          
+	          
+              </div>
+			
 		</div>
-		
+		</div>
+	</div><!-- col-lg-3 end -->
+	
 		
 		<!-- 숙소 정보 -->
 		
+ 	
 		<div class="col-lg-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -106,9 +231,6 @@
 							<td colspan="5"><div id="acmOpt">&nbsp;</div></td>
 						</tr>
 				</table>
-				
-				
-				  <br>
 				</div>
 				<!--  end panel-body -->
 			</div>
@@ -121,32 +243,30 @@
 		<div class="col-lg-9">
 		<div class="panel panel-default hostonly">
 			<div class="panel-heading">
-				객실 정보<span class="pull-right"><a>전체보기</a>&nbsp;&nbsp;<a>운영중</a>&nbsp;&nbsp;<a>비운영중</a></span>
+				객실 정보
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
+							<th>객실 사진</th>
 							<th>객실 이름</th>
 							<th>객실 유형</th>
-							<th>크기 및 수용인원</th>
-							<th></th>
+							<th>크기 및 인원</th>
+							<th>침대 및 개수</th>
 						</tr>
 					</thead>
 
-					<c:forEach items="${inactivelist}" var="inactiveacm">
+					<c:forEach items="${roms}" var="roms">
 						<tr>
-							<td style="width: 350px;">
-							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${inactiveacm.acmPurl}" /><c:out value="${inactiveacm.acmPname }" />'>
-							</td>
 							<td>
-								<a class='move' href='<c:out value="${inactivelist.acmNum}"/>'>
-									<c:out value="${inactiveacm.acmName}" />
-								</a>
+								<img style=' width: auto; height: 50px; max-width: 100px; margin-left :5px;' id='rPicture' src='/review/display?fileName=<c:out value="${roms.romPurl}" /><c:out value="${roms.romPname }" />'>
 							</td>
-							<td id="<c:out value='${inactiveacm.acmType}'/>"></td>
-							<td><c:out value="${inactiveacm.acmDetailaddr}" /></td>
+							<td><c:out value="${roms.romName}" /></td>
+							<td><c:out value="${roms.romType}" /></td>
+							<td><c:out value="${roms.romSize}" />m2&nbsp;&nbsp;<c:out value="${roms.romCapa}" />명</td>
+							<td><c:out value="${roms.bedType}" />&nbsp;&nbsp;<c:out value="${roms.bedCnt}" />개</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -197,7 +317,7 @@ $(document).ready(function(){
 		}
 	
 		getAcmOpt();	
-		
+		//getRomOpt();
 	});
 	
 	//숙소옵션뿌리기
@@ -269,6 +389,7 @@ $(document).ready(function(){
 			
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
+			
 			actionForm.attr("action","/hosting/getAcm");
 			actionForm.submit();
 		});
@@ -285,6 +406,35 @@ $(document).ready(function(){
 		  }
 	   
 	   });
+	 
+	 var slideIndex = 1;
+		showSlides(slideIndex);
+		
+		function plusSlides(n) {
+		  showSlides(slideIndex += n);
+		}
+		
+		function currentSlide(n) {
+		  showSlides(slideIndex = n);
+		}
+		
+		function showSlides(n) {
+		  var i;
+		  var slides = document.getElementsByClassName("mySlides");
+		  var dots = document.getElementsByClassName("dot");
+		  if (n > slides.length) {slideIndex = 1}    
+		  if (n < 1) {slideIndex = slides.length}
+		  for (i = 0; i < slides.length; i++) {
+		      slides[i].style.display = "none";  
+		  }
+		  for (i = 0; i < dots.length; i++) {
+		      dots[i].className = dots[i].className.replace(" active", "");
+		  }
+		  slides[slideIndex-1].style.display = "block";  
+		  dots[slideIndex-1].className += " active";
+		}
+		
+	 
 </script>
 
 

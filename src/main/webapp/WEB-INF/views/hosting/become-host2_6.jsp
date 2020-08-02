@@ -40,9 +40,10 @@
             <!-- /.navbar-static-side -->
         </nav>
 	<!-- nav-end -->
-<div id="page-wrapper" style="padding-bottom:50px;">
-	<br>	
-	<div class="pull-right">
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
+		<br>
+	<div style="margin-left:15%;margin-right:15%;">	
+	<div class="pull-right" style="width: 150px;position: sticky;top: 10px;">
 		<button data-oper='next' class="form-control"style="width:150px;">객실 추가 완료</button>
 	 </div>
   <form action="become-host-complete" method="post">
@@ -105,6 +106,8 @@
 		<form id="actionForm">
 		</form>
 </div>
+</div>
+
 
 
 <%@include file="../includes/footer.jsp"%>
@@ -148,7 +151,7 @@
 				var openWin;//자식창
 				
 				var _width='800';
-				var _height='500';
+				var _height='800';
 				
 				var _left=Math.ceil((window.screen.width-_width)/2);
 				var _top=Math.ceil((window.screen.width-_height)/2);

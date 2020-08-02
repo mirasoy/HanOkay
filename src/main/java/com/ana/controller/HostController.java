@@ -93,10 +93,13 @@ public class HostController {
 			
 		} else if(userPriv.equals("HOST")){
 			//호스트면
-			System.out.println(2);
 			acmActi="PENDING";
 			List<AcmVO> pendinglist= aservice.getListAcms(bizRegnum,acmActi);
 			model.addAttribute("pendinglist", pendinglist);
+			
+			if(pendinglist.size()!=0) {//심사대기가 하나라도 있으면 안된다
+				model.addAttribute("newnotallowed", true);
+			}
 			size+=pendinglist.size();
 			
 			acmActi="ACTIVE";
@@ -135,12 +138,13 @@ public class HostController {
 		model.addAttribute("acm", selectacm);
 		
 		//선택된 숙소의 
-		//List<RomVO> roms=aservice.getListroms(acmNum,"ACTIVE");
-		//model.addAttribute("roms", codeService.getAcmCode());
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
 		
 
 		//옵션코드List<codeVO>
 		model.addAttribute("acmCode", codeService.getAcmCode());
+		model.addAttribute("romCode", codeService.getRomCode());
 		
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
@@ -193,6 +197,11 @@ public class HostController {
 		System.out.println("겟롬//롬넘이 넘어온다~~~"+romNum);
 		
 		model.addAttribute("thisrom",rservice.getRom(romNum));//RomVO가 나온다
+		
+		//옵션코드List<codeVO>
+		model.addAttribute("romCode", codeService.getRomCode());
+				
+		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
 		return "/hosting/getRom";
@@ -254,6 +263,44 @@ public class HostController {
 			Model model,AcmVO vo,HttpSession session
 	) {
 		System.out.println("post-become-host로넘어오십니까!");
+		String userNum=getUser(session).getUserNum();
+		aservice.newAcmReg(vo,userNum);//숙소 등록 시작!register**
+		
+		model.addAttribute("acmNum", vo.getAcmNum().trim());
+		
+
+		
+		
+		System.out.println(getUser(session).getUserStatusCode());//
+		
+		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
+		System.out.println(user);
+		System.out.println();
+		
+		session.setAttribute("user", user);//세션 새로 걸어준다. 정보가 바뀌었으니
+		
+		System.out.println(getUser(session).getUserStatusCode());//
+		
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+		
+		return "redirect:/hosting/become-host1_6";
+	}
+	
+	
+	@GetMapping("/become-host0")
+	public void becomeHost0Get(Model model,HttpSession session) {
+		System.out.println("become-host0페이지를 띄운다**");
+
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+		model.addAttribute("biznum", getUser(session).getBizRegisterNumber());
+	}
+
+	
+	@PostMapping("/become-host0")
+	public String becomeHost0Post(
+			Model model,AcmVO vo,HttpSession session
+	) {
+		System.out.println("post-become-host0로넘어오십니까!");
 		String userNum=getUser(session).getUserNum();
 		aservice.newAcmReg(vo,userNum);//숙소 등록 시작!register**
 		
@@ -367,7 +414,6 @@ public class HostController {
 	@PostMapping("/become-host2_6")
 	public String becomeHostPost2_6(String acmNum,Model model,HttpSession session) {
 		System.out.println("2_6포스트");
-		System.out.println("보낼것이 아마 없을텐데");
 		
 		model.addAttribute("acmNum", acmNum);
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
@@ -390,9 +436,6 @@ public class HostController {
 		) {
 	
 		System.out.println("===pop열림Post!===");		
-		System.out.println(vo.getRomOptcode());
-		System.out.println("나오냐"+vo.getAcmNum());
-		System.out.println("전체다보이자"+vo.toString());
 		
 		rservice.register(vo);
 		
@@ -434,10 +477,6 @@ public class HostController {
 		System.out.println("pendingAcmGet");
 		String biznum= getUser(session).getBizRegisterNumber();
 		String userStat=getUser(session).getUserStatusCode();
-		System.out.println("찍히니1");
-		System.out.println(biznum);
-		System.out.println(userStat);
-		System.out.println("찍히니2");
 		AcmVO vo=aservice.getpendingacm(biznum);
 		System.out.println(vo.toString());
 		model.addAttribute("pendingacm", vo);
