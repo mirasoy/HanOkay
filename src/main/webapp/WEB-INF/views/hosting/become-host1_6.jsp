@@ -60,12 +60,13 @@
             <!-- /.navbar-static-side -->
         </nav>
 	<!-- nav-end -->
-<div id="page-wrapper" style="padding-bottom:50px;">
-
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
+		<br>
+		<div style="margin-left:15%;margin-right:15%;">	
 
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
 		<br>
-		<div class="pull-right">
+		<div class="pull-right" style="width: 150px;position: sticky;top: 10px;">
 		  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">다음으로</button><!-- ajax처리안함 -->
 		</div>
 		<form id="actionForm" action="/hosting/become-host1_6" method="post">

@@ -46,8 +46,9 @@
             <!-- /.navbar-static-side -->
         </nav>
 	<!-- nav-end -->
-<div id="page-wrapper" style="padding-bottom:50px;">
-			<br>	
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
+		<br>
+	<div style="margin-left:15%;margin-right:15%;">	
 			 <!-- 숙소설명 -->
 	 		<h4><c:out value="${userFstname}"/>님의 새 숙소 "<c:out value="${acmName}"/>"가 등록되었습니다</h4>
 	 		작성하신 숙소는 승인 전 확인과 수정이 가능합니다<br>
@@ -75,8 +76,8 @@
 			console.log(operation);
 			
 			if(operation==='pendingAcm'){
-				alert("pendingAcm");
-				formObj.attr("action","/hosting/listings");	
+				formObj.attr("action","/hosting/listings");
+				
 			} else if(operation==='home'){
 				alert("돌아갑니다");
 				formObj.attr("action","/acm/list");

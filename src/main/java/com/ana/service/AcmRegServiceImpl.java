@@ -34,29 +34,36 @@ public class AcmRegServiceImpl implements AcmRegService{
 	@Transactional
 	@Override
 	public void newAcmReg(AcmVO vo,String userNum) {//회원당 1.숙소추가가 되면서 2.회원상태코드와 회원권한 변경 3.회원히스토리정보가 추가  
-		
+		System.out.println("===== newAcmReg =====");
 		System.out.println("서비스단의 "+vo.toString());
 		System.out.println(vo.getLatitude()+","+vo.getLongitude());
 		amapper.newAcmReg(vo);//acmNum 반환값으로 안가지고나와도 완성되어있다! 
 		
-		UserVO u = new UserVO();
-		u.setUserNum(userNum);
-		u.setBizRegisterNumber(vo.getBizRegnum());//사업자 등록을 추가해준다
-		u.setUserStatusCode("HO_PENDING"); //priv는 계속 guest다
-
-		umapper.becomeHost(u);//이미 HO_ACTIVE면 바꾸지말고-- 21일 이후에 수정하자
 		
-		UserHisVO h =new UserHisVO();
-		h.setUserNum(userNum);
-		h.setInfoCode(1536);
-		h.setChanger(userNum);
-		hmapper.becomeHost(h);//1536
+		UserVO u=umapper.isHost(userNum);
+		System.out.println(u.getUserStatusCode());
+		System.out.println(u.getUserStatusCode().trim().equals("ACTIVE"));
+		if(u.getUserStatusCode().trim().equals("ACTIVE")) {//이미 호스트면 그냥 넘어가게끔
+			UserVO uu=new UserVO();
+			uu.setUserNum(userNum);
+			uu.setBizRegisterNumber(vo.getBizRegnum());//사업자 등록을 추가해준다
+			uu.setUserStatusCode("HO_PENDING"); //priv는 계속 guest다
+			System.out.println("지난다");
+			umapper.becomeHost(uu);//이미 HO_ACTIVE면 바꾸지말고-- 21일 이후에 수정하자
+
+			UserHisVO h =new UserHisVO();
+			h.setUserNum(userNum);
+			h.setInfoCode(1536);
+			h.setChanger(userNum);
+			hmapper.becomeHost(h);//1536
+		}
+		
 		
 		
 		//사진 존재시 사진 넣는 부분
 		if(vo.getPicList()!=null) {
-			for(PicVO picVO : vo.getPicList())
-			{	picVO.setNum(vo.getAcmNum());
+			for(PicVO picVO : vo.getPicList()){	
+				picVO.setNum(vo.getAcmNum());
 				if(picVO.getPicDesc()==null) {
 					picVO.setPicDesc(vo.getAcmName()+"의 사진");
 				}

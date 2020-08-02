@@ -31,7 +31,7 @@
 	    color: #333;
 	    background-color: #f7cac2 !important;
 	    border-color: #ddd;
-	    }
+	 }
 	</style>
 <html>
 <head>
@@ -63,7 +63,7 @@
     <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<style>
 		html,body{
-			font-family:"타이포_쌍문동";
+			font-family:Verdana, sans-serif;
 			background-color:white;
 		}
 		

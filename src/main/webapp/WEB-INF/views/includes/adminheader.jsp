@@ -51,7 +51,7 @@
     <link href="/resources/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
 	<style>
 		html,body{
-			font-family:"타이포_쌍문동";
+			font-family:Verdana, sans-serif;
 			background-color:white;
 		}
 		

@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.RomVO;
 import com.ana.domain.UserAcmVO;
 import com.ana.domain.UserVO;
 import com.ana.mapper.AcmRegMapper;
@@ -40,24 +42,38 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return umapper.getUser(userNum);
 	}
-
+	
+	@Transactional
 	@Override
-	public boolean moditoHost(String userNum, String bizRegnum) {
+	public boolean moditoHost(String userNum, String acmNum) {
+		System.out.println(userNum);
+		System.out.println(acmNum);
 		//회원 호스트 업그레이드
 		UserVO vo = new UserVO();
 		vo.setUserNum(userNum);
 		vo.setUserPriv("HOST");
 		vo.setUserStatusCode("HO_ACTIVE");
+		int n=umapper.moditoHost(vo);
+		System.out.println(n);
+		
 		
 		//숙소 상태도 pending-> active/open 으로 update
-		//AcmVO acm = new AcmVO();
-		
 		AcmVO acm= new AcmVO();
 		acm.setAcmStatus("OPEN");
 		acm.setAcmActi("ACTIVE");
-		acm.setBizRegnum(bizRegnum);
+		acm.setAcmNum(acmNum);
 		
-		return umapper.moditoHost(vo)*amapper.moditoAcmActive(acm)==1;
+		amapper.moditoAcmActive(acm);//이게 문제생기네
+		
+		//숙소에 딸린 객실들도 active/open으로 update
+		RomVO rom= new RomVO();
+		rom.setRomStatus("OPEN");
+		rom.setRomActi("ACTIVE");
+		rom.setAcmNum(acmNum);
+		
+		rmapper.moditoRomActive(rom);
+		
+		return true;//우선 돌아간다고 하자
 	}
 
 	@Override
@@ -92,10 +108,23 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public UserAcmVO getpendingUserAcms(String bizRegnum) {
+	public UserAcmVO getUserAcms(String acmNum) {
 		// TODO Auto-generated method stub
-		return amapper.getpendingUserAcms(bizRegnum);
+		return amapper.getUserAcms(acmNum);
 	}
+
+	@Override
+	public List<RomVO> getRoms(String acmNum) {
+		return rmapper.getRomwithAcm(acmNum);
+	}
+
+	@Override
+	public UserAcmVO getPendingUserAcms(String bizRegnum) {
+		String acmActi="PENDING";
+		System.out.println("서비스단 펜딩");
+		return amapper.getPendingUserAcms(bizRegnum,acmActi);
+	}
+
 	
 
 }

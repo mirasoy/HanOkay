@@ -1,171 +1,141 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<style>
-	.room{
-		float:left;
-		width:350px;
-		height:250px;
-	}
-	
-	.exp{
-		font-size:8px;
-	}
-	.container-option{
-		padding: 20px;
-	}
-</style>
 
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/becomehostheader.jsp"%>
 <!-- nav-sidebar -->
 <nav>
 <div class="navbar-default sidebar" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
-        <ul class="nav" id="side-menu">
-       		<li>
-               <a></a> 
-            </li>
-            <li>
-                <a><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
-            </li>
-            <li>
-                <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
-            </li>
-            <li>
-                <a class="active"><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
-            </li>
-            <li>
-                <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-            </li>
-        </ul>
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+               <li>
+                   <a><c:out value="${userFstname}"/>님 안녕하세요!<br> 숙소 등록을 시작해볼까요?</a> 
+                </li>
+                <li>
+                    <a><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
+                </li>
+                <li>
+                    <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+                </li>
+                <li>
+                    <a class="active"><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+                </li>
+                <li>
+                    <a><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
     </div>
-    <!-- /.sidebar-collapse -->
-</div>
-            <!-- /.navbar-static-side -->
+    <!-- /.navbar-static-side -->
 </nav>
-	<!-- nav-end -->
-<div id="page-wrapper" style="padding-bottom:50px;">
-	<br>			
+<!-- nav-end -->
+	
+  <!-- 숙소 방 추가 모달로 띄우기-->
+<div id="page-wrapper" style="padding-bottom:50px;margin-left:0px;">
+	<br>	
+		<!-- 중앙정렬 -->
+	<div style="margin-left:15%;margin-right:15%;">			
   <!-- 수정, 삭제 가능하게  -->
-  		  
-	<div class="row">
-  <div class="col-lg-12">
-    <h4>'<c:out value="${thisrom.romName }"/>'의  정보</h4>
-  </div>
-  <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-	<input type="hidden" name='acmNum' id='acmNum' value='<c:out value="${thisrom.acmNum }"/>' readonly="readonly">
-	<input type="hidden" name='romNum' id='romNum' value='<c:out value="${thisrom.romNum }"/>' readonly="readonly">
-   
-      <div class="panel-heading">객실 상세보기
-      <label class="pull-right"><c:out value="${thisrom.acmNum }"/><c:out value="${thisrom.romNum }"/></label>
-      </div>
-      <!-- /.panel-heading -->
-      <div class="panel-body">
-        <div class="form-group">
-          <label>객실이름</label> <input class="form-control" name='romName'
-            value='<c:out value="${thisrom.romName }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 타입</label> <input class="form-control" name='romType'
-            value='<c:out value="${thisrom.romType }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실최대수용인원</label> <input class="form-control" name='romCapa'
-            value='<c:out value="${thisrom.romCapa }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>침대 타입</label> <input class="form-control" name='bedType'
-            value='<c:out value="${thisrom.bedType }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>침대 갯수</label> <input class="form-control" name='bedCnt'
-            value='<c:out value="${thisrom.bedCnt }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>객실 크기</label> <input class="form-control" name='romSize'
-            value='<c:out value="${thisrom.romSize }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 1박요금</label> <input class="form-control" name='romPrice'
-            value='<c:out value="${thisrom.romPrice }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 사진</label> <input class="form-control" name='romPurl'
-            value='<c:out value="${thisrom.romPurl }"/>' readonly="readonly">
-        </div>
-		<!-- 편의시설 -->
-		<div class = "container-option booking-form" name="romOptcode">
-			<label>객실 옵션정보(여기 icon 뿌리자)</label>
-			<div id=romOpt>&nbsp;</div>
-		</div>	
-		<div class="form-group">
-          <label>객실 옵션정보</label> <input class="form-control" name='romOptcode'
-            value='<c:out value="${thisrom.romOptcode }"/>' readonly="readonly">
-        </div>
-		<div class="form-group">
-          <label>객실 등록일</label> <input class="form-control" name='romRegdate'
-            value='<c:out value="${thisrom.romRegdate }"/>' readonly="readonly">
-        </div>
-        <div class="form-group">
-          <label>객실 최근 수정일</label> <input class="form-control" name='romUpdatedate'
-            value='<c:out value="${thisrom.romUpdatedate }"/>' readonly="readonly">
-        </div>
-
-		<div class="pull-right">
-			<button data-oper='modify' class="btn btn-default">수정하기</button>
-			<button data-oper='remove' class="btn btn-danger">삭제하기</button>
-			<button data-oper='list' class="btn btn-info" >뒤로가기</button>
-		</div>	
-	</div>
-</div></div></div></div>
-
-<!-- 빈 폼 -->
-<form id="actionForm">
-</form>
-				
-
-<script type="text/javascript">
-	//Option출력
-	window.onload=function(){
-		//getRomOpt();
-	}
-	
-	let option = pad(dec2bin("${thisrom.romOptcode }"));
-	function dec2bin(codeNum){
-		return (codeNum >>> 0).toString(2); 
-	}
-	function pad(code) {
-		return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
-	}
-	
-	// 숙소 옵션
-	/*function getAcmOpt() {
-		var iconArr = new Array(); 
-		var codeArr = new Array(); 
-		var nameArr = new Array(); 
-		let j = 0;
-		<c:forEach items="${acmCode}" var="acmCode">
-			iconArr[j] = '<c:out value="${acmCode.codeIcon}" />';
-			codeArr[j] = 'acm' + '<c:out value="${acmCode.codeFull}" />';
-			nameArr[j] = '<c:out value="${acmCode.codeCont}" />';
-			j++;
-		</c:forEach>
+	    <div class="col-lg-10">
+			<button class="btn btn-default" type="button" data-oper='backtolist'>목록으로</button>
+			<button class="btn btn-danger" type="button" data-oper='romDelete'>객실 삭제</button>
 		
-		for(let k=0; k<option.length; k++){
-			if(option.charAt(k) == 1){
-				document.getElementById("romOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
-			}
-		}
-	}*/
+		</div>
+		<br><br><br>
+<div class="row">
+ <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${thisrom.acmNum}'/>" readonly="readonly">
+  <input type="hidden" id="romNum" name="romNum" value=" <c:out value='${thisrom.romNum}'/>" readonly="readonly">
+	</div><!-- col-lg-4 end -->
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				객실 '<c:out value="${thisrom.romName}" />'
+				
+				<button type="button" class="btn btn-xs pull-right" data-oper='editAcmPic'>숙소 사진 편집</button>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>대표 객실 사진</th>
+						</tr>
+					</thead>
+						<tr>
+							<th height="210px;">
+								<img style=' width: auto; height: 150px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${thisrom.romPurl}" /><c:out value="${thisrom.romPname }" />'>
+							</th>
+						</tr>
+				</table>
+				
+				
+				</div>
+				<!--  end panel-body -->
+			</div>
+			<!-- end panel -->
+		</div>
+		
+		
+		<!-- 객실 정보 -->
+		
+		<div class="col-lg-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				객실 정보 <span class="pull-right"><c:out value="${thisrom.romNum}" />&nbsp;&nbsp;<button type="button" data-oper='editRom'>객실 정보 변경</button></span>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>객실 이름</th>
+							<th>객실 유형</th>
+							<th>객실 가격</th>
+							<th>객실 크기/수용인원</th>
+							<th>침구 정보</th>
+							
+						</tr>
+					</thead>
+
+						<tr>
+							<td><c:out value="${thisrom.romName}" /></td>
+							<td><c:out value="${thisrom.romType}" /></td>
+							<td><c:out value="${thisrom.romPrice}" /></td>
+							<td><c:out value="${thisrom.romSize}" />&nbsp;/&nbsp;<c:out value="${thisrom.romCapa}" /></td>
+							<td><c:out value="${thisrom.bedType}" />&nbsp;/&nbsp;<c:out value="${thisrom.bedCnt}" />개</td>
+						</tr>
+						
+					<thead>
+						<tr>
+							<th colspan="5">객실 옵션</th>
+						</tr>
+					</thead>
+
+						<tr>
+							<td colspan="5"><div id="romOpt">&nbsp;</div></td>
+						</tr>
+				</table>
+				
+				
+				  <br>
+				</div>
+				<!--  end panel-body -->
+			</div>
+			<!-- end panel -->
+		</div>
 	
-
-
+</div>
+</div>
+		<!-- 빈 폼 -->
+		<form id="actionForm">
+		</form>
+				
+</div>
+<script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
 	$(document).ready(function(){
+		getRomOpt();
+		
 		var formObj = $("#actionForm");
 		
 		$('button').on("click", function(e){
@@ -175,30 +145,78 @@
 			var operation=$(this).data("oper");
 			console.log(operation);
 			
-			if(operation==='list'){
+			if(operation==='backtolist'){
 				alert("목록으로 돌아갑니다");
 				formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
 				formObj.attr("action","/hosting/become-host2_6");	
-			} else if(operation==='modify'){
-				alert("객실을 수정합니다");
-				formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-				formObj.attr("action","/hosting/modifyRom");
-			} else if(operation==='remove'){
-				if(confirm("정말 삭제하시겠습니까??")==true){
+			} else if(operation==='romDelete'){
+				
+				if(confirm("객실을 정말 삭제하시겠습니까?")==true){
 					formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
+					formObj.attr("method","post");
 					formObj.attr("action","/hosting/removeRom");
 				} else {
 					return false;
 				}
+			
+			} else if(operation==='editRom'){
+				alert("pop으로 띄우기 수정목록")
+			} else if(operation==='editAcmPic'){
+				alert("사진 바꾸기!")
 			}
 			actionForm.submit();
 		});
 	});
+	
+	
+	//숙소옵션뿌리기
+	function dec2bin(codeNum){
+		return (codeNum >>> 0).toString(2); 
+	}
+	function pad(code) {
+		return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
+	}
+	
+	function getRomOpt() {
+		var iconArr = new Array(); 
+		var codeArr = new Array(); 
+		var nameArr = new Array(); 
+		let option;
+		let j = 0;
 
+		<c:forEach items="${romCode}" var="romCode">
+		
+			iconArr[j] = '<c:out value="${romCode.codeIcon}" />';
+			codeArr[j] = 'acm' + '<c:out value="${romCode.codeFull}" />';
+			nameArr[j] = '<c:out value="${romCode.codeCont}" />';
+			j++;
+
+		</c:forEach>
+		
+		
+				
+		option= pad(dec2bin("${thisrom.romOptcode}"));//10진수 옵션코드를 16자리 2진수로 변환한다(110101010..like this)
+		
+	
+		for(let k=0; k<option.length; k++){
+			if(option.charAt(k) == 1){
+				document.getElementById("romOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
+				
+			}
+		}
+	
+	}
+	
 
 
 </script>
+<%@include file="../includes/footer.jsp"%>
+
+
+
+
+
+
 
 
 

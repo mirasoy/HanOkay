@@ -96,15 +96,52 @@ public class AdminController {
 	
 	
 	@GetMapping("/userStatPending")
-	public void userStatPendingGet(String bizRegisterNumber,Model model,HttpSession session) {
+	public void userStatPendingGet(String bizRegnum,Model model,HttpSession session) {
 		System.out.println("userStatPending Get");
-		System.out.println(bizRegisterNumber);
+		System.out.println(bizRegnum);
 		
-		UserAcmVO pendinghostacm= aservice.getpendingUserAcms(bizRegisterNumber);
+		//숙소정보를 가져온다1
+		UserAcmVO pendinghostacm= aservice.getPendingUserAcms(bizRegnum);
 		System.out.println(pendinghostacm);
-		model.addAttribute("pendinghostacm", pendinghostacm);
+		
+		model.addAttribute("pendinghostacm", pendinghostacm);//숙소뿌리기
+		
+		///////////////////////////////////////////////////////////
+		String acmNum=pendinghostacm.getAcmNum();
+		//숙소에 대한 rom을 가져온다(acmNum필요)2
+		List<RomVO> roms = aservice.getRoms(acmNum);
+		System.out.println("가저온rom"+roms);
+		model.addAttribute("pendingroms", roms);//객실뿌리기
+		
+		
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
 		
 	}
+	
+	@GetMapping("/adminPendingviewAcm")
+	public void adminPendingviewAcmGet(String acmNum,Model model,HttpSession session) {
+		
+		System.out.println("adminPendingviewAcm Get");
+		System.out.println(acmNum);
+		
+		UserAcmVO getuseracm= aservice.getUserAcms(acmNum);
+		System.out.println(getuseracm);
+		model.addAttribute("getuseracm", getuseracm);
+		
+	///////////////////////////////////////////////////////////
+		
+		
+		//숙소에 대한 rom을 가져온다(acmNum필요)2
+		List<RomVO> roms = aservice.getRoms(acmNum);
+		System.out.println("가저온rom"+roms);
+		model.addAttribute("roms", roms);//객실뿌리기
+		
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
+		
+	}
+	
 	
 	@PostMapping("/userStatPending")
 	public String userStatPendingPost(String userNum,Model model,HttpSession session) {
@@ -158,9 +195,9 @@ public class AdminController {
 	
 	
 	@PostMapping("/moditoHost")
-	public String moditoHostPost(String userNum,String bizRegnum,Model model,HttpSession session) {
+	public String moditoHostPost(String userNum, String acmNum, Model model,HttpSession session) {
 		System.out.println("moditoHost Post");
-		aservice.moditoHost(userNum,bizRegnum);
+		aservice.moditoHost(userNum, acmNum);//회원상태, 숙소, 객실 상태를 모두 바꿈
 		
 		
 		//알림 보내기 기능추가할것 나중에
@@ -230,23 +267,58 @@ public class AdminController {
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
+	
+	
+	
 	@GetMapping("/adminviewAcm")
-	public void adminviewAcmGet(String bizRegnum,Model model,HttpSession session) {
+	public void adminviewAcmGet(String acmNum,Model model,HttpSession session) {
 		System.out.println("adminviewAcm Get");
-		System.out.println(bizRegnum);
+		System.out.println(acmNum);
 		
-		UserAcmVO getuseracm= aservice.getpendingUserAcms(bizRegnum);
+		UserAcmVO getuseracm= aservice.getUserAcms(acmNum);
 		System.out.println(getuseracm);
 		model.addAttribute("getuseracm", getuseracm);
 		
-	}
-	
-	@PostMapping("/adminviewAcm")
-	public String adminviewAcmPost(String acmNum,Model model,HttpSession session) {
-		System.out.println("adminviewAcm Post");
+	///////////////////////////////////////////////////////////
 		
 		
-		return "/admin/adminviewAcm";
+		//숙소에 대한 rom을 가져온다(acmNum필요)2
+		List<RomVO> roms = aservice.getRoms(acmNum);
+		System.out.println("가저온rom"+roms);
+		model.addAttribute("roms", roms);//객실뿌리기
+		
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
+		
 	}
 	
+	@PostMapping("/activeAcm")
+	public String activeAcmPost(String acmNum,Model model,HttpSession session) {
+		System.out.println("activeAcm Post");
+		
+		
+		return "/admin/adminlistings";
+	}
+	
+	
+	@GetMapping("/activeAcm")
+	public void adminviewAcmGet() {
+		System.out.println("activeAcm Get");
+	}
+	
+
+	@PostMapping("/inactiveAcm")
+	public String inactiveAcmPost(String acmNum,Model model,HttpSession session) {
+		System.out.println("inactiveAcm Post");
+		
+		
+		return "/admin/adminlistings";
+	}
+	
+	
+	@GetMapping("/inactiveAcm")
+	public void inactiveAcmGet() {
+		System.out.println("inactiveAcm Get");
+	}
+
 }
