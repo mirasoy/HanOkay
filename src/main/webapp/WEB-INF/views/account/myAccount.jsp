@@ -26,7 +26,44 @@ content: " " !important;
  
 }
 
+.header1_SR{
+    color: inherit !important;
+    font-size: 1em !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
 
+.header2_SR{
+	overflow-wrap: break-word !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: 32px !important;
+    font-weight: 800 !important;
+    line-height: 1.125em !important;
+    color: rgb(72, 72, 72) !important;
+    margin: 0px !important;
+}
+
+.nameInHeader_SR{
+	overflow-wrap: break-word !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.375em !important;
+    color: rgb(72, 72, 72) !important;
+    margin: 0px !important;
+}
+
+.emailInHeader_SR{
+	overflow-wrap: break-word !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.375em !important;
+    color: rgb(72, 72, 72) !important;
+    margin: 0px !important;
+}
 
 .cards_SR {
     adding-left: 8px !important;
@@ -104,7 +141,27 @@ content: " " !important;
 	<div class='container'>
 	
 	<div class="out_SR">
-	<h1>내 계정</h1>
+	<section style="display: block">
+	<div style="margin-top: 64px; margin-bottom: 56px; margin-left: 16px;">
+	<h1 tabindex="-1" class="header1_SR">
+		<div class="header2_SR">
+			내 계정
+		</div>
+	</h1>
+	
+	
+	<div style="margin-top: 8px; margin-bottom: 16px;">
+	<span class="nameInHeader_SR">
+	<!-- 이름  -->
+	</span>
+	<span class="emailInHeader_SR">
+	<!-- 이메일  -->
+	</span>
+	</div>
+	</div>
+	</section>
+	
+	
 	<div class="outerbox_SR">
 	
 	
@@ -232,8 +289,17 @@ content: " " !important;
 	</div>
 	</div>
 	<script>
+	//DOM이 준비되면
 	$(document).ready(function(){
 		
+		let name= document.getElementsByClassName("nameInHeader_SR")[0];
+		let email= document.getElementsByClassName("emailInHeader_SR")[0];
+		
+		if(<%=userFstName != null%>){
+			name.textContent='<%=userFstName %> <%=userLastName %> ,';
+			email.textContent='<%=userEmail %>';
+			
+		}
 	//페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
 	if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );

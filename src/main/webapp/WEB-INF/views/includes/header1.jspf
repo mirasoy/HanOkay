@@ -10,6 +10,7 @@
    UserVO user = (UserVO) session.getAttribute("user");
 String userLastName = "";
 String userFstName = "";
+String userEmail="";
 String userPwd = "";
 String userNum = "";
 String userPriv ="";
@@ -19,6 +20,7 @@ String userStatusCode="";
 if (user != null) {
    userLastName = user.getUserLastName();
    userFstName = user.getUserFstName();
+   userEmail = user.getUserEmail();
    userPwd = user.getUserPwd();
    userNum = user.getUserNum();
    userPriv=user.getUserPriv();
