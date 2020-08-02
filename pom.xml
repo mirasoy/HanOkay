@@ -48,6 +48,7 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
@@ -239,22 +240,18 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>3.2.0.RELEASE</version>
+			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.2.0.RELEASE</version>
+			<version>${org.springframework-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>3.2.0.RELEASE</version>
-		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.2.0.RELEASE</version>
+			<version>${org.springframework-version}</version>
 		</dependency>
 
 		<!-- 구글 소셜 로그인 -->
