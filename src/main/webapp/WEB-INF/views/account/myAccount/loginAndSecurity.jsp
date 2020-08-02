@@ -9,7 +9,7 @@
 	<div class='container'>
 	
 	<div class="out_SR">
-	<h1>내 프로필</h1>
+	<h1>로그인 및 보안</h1>
 	
 	</div>
 	</div>
