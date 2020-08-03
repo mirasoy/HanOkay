@@ -18,4 +18,5 @@ public interface RomRegMapper {//호스트단에서 객실관련처리
 	
 	public List<RomVO> getRomwithAcm(String acmNum);
 	
+	
 }

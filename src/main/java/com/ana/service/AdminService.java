@@ -21,6 +21,7 @@ public interface AdminService {
 	
 	//회원숙소 가져오기
 	public UserAcmVO getUserAcms(String acmNum);
+	public UserAcmVO getUserNumAcm(String userNum);
 	
 	public UserAcmVO getPendingUserAcms(String bizRegnum);
 	

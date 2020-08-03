@@ -89,6 +89,8 @@
 			 
 				  
 				  <h4>한:오케이에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4>
+				  <span style="color: black;" id="msg2"><c:out value="${msg2}" /></span><br>
+				
 				  <input class="form-control"  style="width:200px;display:inline-block;" id="bizRegnum" name="bizRegnum" placeholder="사업자등록번호" numberOnly><br><br>
 			
 				   
@@ -284,6 +286,42 @@ function sample6_execDaumPostcode() {
 	     }                            
 	}  
 	var formObj = $("#actionForm");
+	var bizRegnum=$("#bizRegnum").val();
+    var chkbizused=document.getElementById("chkbizused");
+
+    $( "#bizRegnum" ).blur(function() {
+		var bizRegnum=$("#bizRegnum").val();//센다
+		
+ 		if(bizRegnum.length!=10) {
+			$('span#msg2').text("*사업자등록번호형식 10자리로 입력하셔야합니다");
+			bizRegnum=bizRegnum.substring(0, 10);
+ 		} else {
+    	$.ajax({
+         	   type: 'POST',
+         	   url: '/hosting/chkbizused',
+         	   dataType: 'json',
+         	   data: {
+         		   'bizRegnum': bizRegnum
+         	   },
+         	   //async: false,
+         	   success: function(data){
+         		   console.log(data);
+         		  chkbizused=document.getElementById("chkbizused");
+         		   $('span#msg2').text(data.msg2);
+         		
+     	    	if(chkbizused==null){//없으면 추가시켜주고
+	     	    	formObj.append("<input type='hidden' id='chkbizused' name='chkbizused' value='"+data.msg2+"'>");
+	     	    	
+     	    	} else chkbizused.value=data.msg2;//이미 있으면 바꿔치기
+         	   },
+         	   error: function(data){
+         		  window.location.href ="../error/error";
+         	   }
+         	 });
+ 		}
+    	
+        });
+	
 	//유효성 검사
 	function readyForreg() {
 		var chkArr=[];
@@ -351,13 +389,15 @@ function sample6_execDaumPostcode() {
 			bizRegnum.focus();
 			return false;		
 		}
-		if (bizRegnum.value.length!=10) {
-			alert("사업자등록번호형식 10자리로 입력하셔야합니다");
-			bizRegnum.value=bizRegnum.value.substring(0, 10);
-			bizRegnum.focus();
+	 
+	 
+	   //사업자등록 중복검사
+		var chkbizused=document.getElementById("msg2").innerText;
+		if (chkbizused.charAt(0)=='*') {
+			alert("사업자번호를 확인해주세요");
 			return false;		
 		}
-		
+	   
 		//주소 중복검사
 		var chkaddr=document.getElementById("chkaddr");
 		if (chkaddr.value.charAt(0)=='*') {
@@ -557,8 +597,8 @@ function sample6_execDaumPostcode() {
 			}
 		});
 	});
-
 	
+
 	
 	
 </script>

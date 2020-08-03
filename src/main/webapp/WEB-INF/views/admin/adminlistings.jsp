@@ -33,8 +33,8 @@
 						</tr>
 					</thead>
 					<c:forEach items="${pendinglist}" var="pendingacm">
-			<input type="hidden" name="pendingacmuserPriv" id="pendingacmuserPriv" value="<c:out value='${pendingacm.userPriv }'/>">
-			<input type="hidden" name="pendingacmbizRegnum" id="pendingacmbizRegnum" value="<c:out value='${pendingacm.bizRegnum }'/>">
+					<input type="hidden" name="pendingacmuserPriv" id="pendingacmuserPriv" value="<c:out value='${pendingacm.userPriv }'/>">
+					<input type="hidden" name="pendingacmbizRegnum" id="pendingacmbizRegnum" value="<c:out value='${pendingacm.bizRegnum }'/>">
 						<tr>
 							<td><c:out value="${pendingacm.userNum}" /></td>
 							<td><c:out value="${pendingacm.acmNum}" /></td>
@@ -276,7 +276,7 @@ $(document).ready(function(){
 			
 			if(userPriv!="HOST"){//회원권한을 업시켜야하는경우(guest일때)
 				alert("회원권한 부여가 먼저 필요합니다!");
-				actionForm.append("<input type='hidden' name='bizRegnum' value='"+bizRegnum+"'>");
+				actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
 				actionForm.attr("action","/admin/userStatPending");
 					
 			} else { //회원권한이 이미 host일때 

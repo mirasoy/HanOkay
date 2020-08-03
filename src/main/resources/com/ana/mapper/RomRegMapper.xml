@@ -61,6 +61,8 @@
 		delete from trom where rom_Num = #{romNum}
 	</delete>
 
+	
+
 	<!-- 객실 수정 -->
 	<update id="modify">
 		update trom

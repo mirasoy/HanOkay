@@ -8,6 +8,8 @@ import lombok.Data;
 @Data
 public class AcmVO {
 	
+	private String ownerUserNum;//주인필드 추가
+	
 	private String acmNum;
 	private String acmName;
 	private String acmCity;

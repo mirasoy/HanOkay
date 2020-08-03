@@ -18,6 +18,7 @@ import com.ana.domain.UserAcmVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AdminService;
 import com.ana.service.CodeService;
+import com.ana.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -32,6 +33,8 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService aservice;//호스트 사업등록증관련
+	@Autowired
+	private UserService uservice;//호스트 사업등록증관련
 	@Autowired
 	private CodeService codeService;
 	
@@ -93,21 +96,35 @@ public class AdminController {
 	
 	}
 	
+	@GetMapping("/userNum_StatPending")
+	public String userNum_StatPendingGet(String userNum,Model model,HttpSession session) {
+		System.out.println("userNum_StatPending get");
+		//숙소정보를 가져온다1
+		UserAcmVO pendinghostacm= aservice.getUserNumAcm(userNum);
+		System.out.println(pendinghostacm);
+		
+		model.addAttribute("acmNum", pendinghostacm.getAcmNum());
+				
+		return "redirect:/admin/userStatPending";
+	}
+	
+	@PostMapping("/userNum_StatPending")
+	public void userNum_StatPendingPost(String userNum,Model model,HttpSession session) {
+		System.out.println("userNum_StatPending post");
+	}
 	
 	
 	@GetMapping("/userStatPending")
-	public void userStatPendingGet(String bizRegnum,Model model,HttpSession session) {
+	public void userStatPendingGet(String acmNum,Model model,HttpSession session) {
 		System.out.println("userStatPending Get");
-		System.out.println(bizRegnum);
 		
 		//숙소정보를 가져온다1
-		UserAcmVO pendinghostacm= aservice.getPendingUserAcms(bizRegnum);
+		UserAcmVO pendinghostacm= aservice.getUserAcms(acmNum);
 		System.out.println(pendinghostacm);
 		
 		model.addAttribute("pendinghostacm", pendinghostacm);//숙소뿌리기
 		
 		///////////////////////////////////////////////////////////
-		String acmNum=pendinghostacm.getAcmNum();
 		//숙소에 대한 rom을 가져온다(acmNum필요)2
 		List<RomVO> roms = aservice.getRoms(acmNum);
 		System.out.println("가저온rom"+roms);
@@ -199,6 +216,13 @@ public class AdminController {
 		System.out.println("moditoHost Post");
 		aservice.moditoHost(userNum, acmNum);//회원상태, 숙소, 객실 상태를 모두 바꿈
 		
+		///////////////////세션 새로 걸어준다. 정보가 바뀌었으니///////////////
+		System.out.println(getUser(session).getUserStatusCode());
+		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
+		System.out.println(user);
+		session.setAttribute("user", user);
+		System.out.println(getUser(session).getUserStatusCode());
+
 		
 		//알림 보내기 기능추가할것 나중에
 		
@@ -216,6 +240,15 @@ public class AdminController {
 		
 		//guest, active, 사업자번호 리셋
 		aservice.moditoGuest(userNum,acmNum);
+		
+		
+		///////////////////세션 새로 걸어준다. 정보가 바뀌었으니///////////////
+		System.out.println(getUser(session).getUserStatusCode());
+		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
+		System.out.println(user);
+		session.setAttribute("user", user);
+		System.out.println(getUser(session).getUserStatusCode());
+
 		
 		//알림 보내기 기능추가할것 나중에
 		

@@ -38,6 +38,9 @@
 	        <div class="form-group">
 	          <label>회원 상태</label>&nbsp; <c:out value="${pendinghostacm.userStatusCode }"/>
 	        </div>
+	        <div class="form-group">
+	          <label>숙소 상태</label>&nbsp; <span style="color:red;"><c:out value="${pendinghostacm.acmStatus }"/></span>
+	        </div>
 			<div class="form-group">
 	          <label>회원 사업자번호</label>&nbsp; <c:out value="${pendinghostacm.bizRegnum }"/>
 	        </div>
