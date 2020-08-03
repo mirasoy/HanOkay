@@ -158,7 +158,6 @@
 		$('button').on("click", function(e){
 			e.preventDefault();
 			
-			
 			var operation=$(this).data("oper");
 			console.log(operation);
 			

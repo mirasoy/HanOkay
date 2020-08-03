@@ -16,7 +16,6 @@ public interface AdminService {
 	//숙소관리_객실가져오기2
 	public List<RomVO> getRoms(String acmNum);
 	
-	
 	//회원관리
 	public List<UserVO> getadminListUsers(String userStat);
 	

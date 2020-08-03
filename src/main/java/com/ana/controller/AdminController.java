@@ -263,7 +263,6 @@ public class AdminController {
 	}
 	
 
-	
 	@GetMapping("/adminlistings")
 	public void adminlistingsGet(Model model,HttpSession session) {
 		System.out.println("=== 어드민단 숙소보기 페이지!===");

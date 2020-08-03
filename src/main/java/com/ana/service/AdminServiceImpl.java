@@ -112,7 +112,6 @@ public class AdminServiceImpl implements AdminService{
 		return true;//우선 돌아간다고 하자
 	}
 
-	
 	@Override//pending, active, inactive 숙소들을 가져온다
 	public List<UserAcmVO> getadminListAcms(String acmActi) {
 		List<UserAcmVO> acms=amapper.getadminListAcms(acmActi.trim());

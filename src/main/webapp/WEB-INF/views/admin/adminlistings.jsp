@@ -119,7 +119,6 @@
 		
 		
 		<!-- 비활성화된 숙소 -->
-		
 		<div class="col-lg-12" id="inactiveacm">
 		<div class="panel panel-default hostonly">
 			<div class="panel-heading">
