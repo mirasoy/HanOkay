@@ -73,13 +73,12 @@ public class HostController {
 		if(user==null)return;
 		String userPriv= user.getUserPriv();
 		String userStat=user.getUserStatusCode();
-		String bizRegnum=user.getBizRegisterNumber();
-		
+		String ownerUserNum=user.getUserNum();
 		String acmActi;
 		int size=0;
 		System.out.println(userPriv);
 		System.out.println(userStat);
-		System.out.println(bizRegnum);
+		System.out.println(ownerUserNum);
 		
 		if(userPriv==null)return;
 		if(userPriv.equals("GUEST")) {
@@ -87,28 +86,29 @@ public class HostController {
 			//HO_PENDING인경우
 			acmActi="PENDING";
 			System.out.println(1);
-			List<AcmVO> pendinglist= aservice.getListAcms(bizRegnum,acmActi);
+			List<AcmVO> pendinglist= aservice.getListAcms(ownerUserNum,acmActi);
 			model.addAttribute("pendinglist", pendinglist);
 			size+=pendinglist.size();
 			
 		} else if(userPriv.equals("HOST")){
 			//호스트면
 			acmActi="PENDING";
-			List<AcmVO> pendinglist= aservice.getListAcms(bizRegnum,acmActi);
+			List<AcmVO> pendinglist= aservice.getListAcms(ownerUserNum,acmActi);
 			model.addAttribute("pendinglist", pendinglist);
 			
 			if(pendinglist.size()!=0) {//심사대기가 하나라도 있으면 안된다
+				System.out.println("펜딩있음!");
 				model.addAttribute("newnotallowed", true);
 			}
 			size+=pendinglist.size();
 			
 			acmActi="ACTIVE";
-			List<AcmVO> activelist= aservice.getListAcms(bizRegnum,acmActi);
+			List<AcmVO> activelist= aservice.getListAcms(ownerUserNum,acmActi);
 			model.addAttribute("activelist", activelist);
 			size+=activelist.size();
 			
 			acmActi="INACTIVE";
-			List<AcmVO> inactivelist= aservice.getListAcms(bizRegnum,acmActi);
+			List<AcmVO> inactivelist= aservice.getListAcms(ownerUserNum,acmActi);
 			model.addAttribute("inactivelist", inactivelist);
 			size+=inactivelist.size();
 			
@@ -275,7 +275,6 @@ public class HostController {
 		
 		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
 		System.out.println(user);
-		System.out.println();
 		
 		session.setAttribute("user", user);//세션 새로 걸어준다. 정보가 바뀌었으니
 		
@@ -353,6 +352,30 @@ public class HostController {
 		PrintWriter out = response.getWriter();
 		out.print(jso);
 	}
+	
+	//주소 중복검사
+		@RequestMapping(value = "/chkbizused", method = RequestMethod.POST)
+		@ResponseBody
+		public void chkbizusedPost(String bizRegnum, String userNum,HttpServletRequest request, HttpServletResponse response)
+				throws IOException{	
+			System.out.println("사업자번호 체크이다 Post다!");
+			JSONObject jso= new JSONObject();
+			log.info("chkbizused check: " +  bizRegnum);
+			//한글 깨짐 방지
+			response.setContentType("text/plain;charset=UTF-8");
+			String msg2="";
+			//service에게 email을 주고 db를 뒤져오게한다
+			if (aservice.chkbizused(bizRegnum,userNum)) {
+				msg2="해당 사업자등록 번호를 사용하실 수 있습니다";
+				jso.put("msg2", msg2);		
+			} 
+			else {
+				msg2="*사용하실수 없는 사업자등록번호입니다, 관리자에게 문의해주세요!";
+				jso.put("msg2", msg2);
+			}
+			PrintWriter out = response.getWriter();
+			out.print(jso);
+		}
 	
 	@GetMapping("/become-host1_6")
 	public void becomeHostGet1_6(String acmNum,Model model,HttpSession session) {
@@ -489,4 +512,38 @@ public class HostController {
 		model.addAttribute("biznum", getUser(session).getBizRegisterNumber());
 	}
 	
+	@GetMapping("/removeAcm")
+	public void removeAcmGet() {
+		System.out.println("removeAcm페이지를 띄운다**");
+	}
+	
+	@PostMapping("/removeAcm")
+	public String removeAcm(String acmNum,Model model,HttpSession session) {
+		System.out.println("removeAcmPost");
+		String userNum=getUser(session).getUserNum();
+		String userPriv=getUser(session).getUserPriv();
+		System.out.println(acmNum);
+		System.out.println(userNum);
+		System.out.println(userPriv);
+
+		//해당 숙소외 active나 inactive숙소가 여러개 남아있는 사람이면 host/ho_active
+		//해당 숙소외 active나 inactive숙소가 없는 사람은 guest/active로
+		//ho_pending이었던 사람은 guest/active로
+		
+		//acmNum에 관련된 숙소와 객실은 모두 삭제
+		aservice.removeAcm(acmNum, userNum, userPriv);
+		
+		///////////////////세션 새로 걸어준다. 정보가 바뀌었으니///////////////
+		System.out.println(getUser(session).getUserStatusCode());
+		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
+		System.out.println(user);
+		session.setAttribute("user", user);
+		System.out.println(getUser(session).getUserStatusCode());
+				
+		
+		
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+		
+		return "/acm/list";//호스트가 가진 숙소 쪽으로 감
+	}
 }

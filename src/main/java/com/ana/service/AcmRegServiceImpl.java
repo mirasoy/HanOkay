@@ -30,13 +30,18 @@ public class AcmRegServiceImpl implements AcmRegService{
 	private UserMapper umapper;
 	@Setter(onMethod_= {@Autowired})
 	private UserHisMapper hmapper;
+	@Setter(onMethod_= {@Autowired})
+	private RomRegMapper rmapper;
 	
-	@Transactional
 	@Override
 	public void newAcmReg(AcmVO vo,String userNum) {//회원당 1.숙소추가가 되면서 2.회원상태코드와 회원권한 변경 3.회원히스토리정보가 추가  
 		System.out.println("===== newAcmReg =====");
 		System.out.println("서비스단의 "+vo.toString());
 		System.out.println(vo.getLatitude()+","+vo.getLongitude());
+		vo.setOwnerUserNum(userNum);
+		
+		System.out.println(vo.toString());
+
 		amapper.newAcmReg(vo);//acmNum 반환값으로 안가지고나와도 완성되어있다! 
 		
 		
@@ -51,11 +56,6 @@ public class AcmRegServiceImpl implements AcmRegService{
 			System.out.println("지난다");
 			umapper.becomeHost(uu);//이미 HO_ACTIVE면 바꾸지말고-- 21일 이후에 수정하자
 
-			UserHisVO h =new UserHisVO();
-			h.setUserNum(userNum);
-			h.setInfoCode(1536);
-			h.setChanger(userNum);
-			hmapper.becomeHost(h);//1536
 		}
 		
 		
@@ -110,10 +110,10 @@ public class AcmRegServiceImpl implements AcmRegService{
 
 
 	@Override
-	public List<AcmVO> getListAcms(String bizRegnum,String acmActi) {
+	public List<AcmVO> getListAcms(String ownerUserNum,String acmActi) {
 		
 		//호스트이면 사업자등록증에 있는것들을 다 가꾸와
-		return amapper.getListAcms(bizRegnum,acmActi);
+		return amapper.getListAcms(ownerUserNum,acmActi);
 	}
 
 
@@ -142,6 +142,69 @@ public class AcmRegServiceImpl implements AcmRegService{
 		System.out.println(vo.toString());
 		
 		return vo;
+	}
+
+
+	@Override
+	public boolean chkbizused(String bizRegnum, String userNum) {
+		UserVO owner=umapper.getAcmOwner(bizRegnum);
+		
+		if(owner==null)return true;//주인이 없는 번호다
+		else return false; //등록중인 bizRegnum
+	}
+
+
+	@Override
+	public int removeAcm(String acmNum, String userNum, String userPriv) {
+		//해당 숙소외 active나 inactive숙소가 여러개 남아있는 사람이면 host/ho_active
+		//해당 숙소외 active나 inactive숙소가 없는 사람은 guest/active로
+		//ho_pending이었던 사람은 guest/active로
+		System.out.println(acmNum);
+		System.out.println(userNum);
+		System.out.println(userPriv);
+		//acmNum에 관련된 숙소와 객실은 모두 삭제
+		
+		//1.ho_pending하나밖에 없던 guest
+		if(userPriv.equals("GUEST")) {
+			System.out.println("1");
+			UserVO vo= new UserVO();
+			vo.setBizRegisterNumber("");//다시 디폴트시켜놓음
+			vo.setUserPriv("GUEST");
+			vo.setUserStatusCode("ACTIVE");
+			vo.setUserNum(userNum);
+			
+			umapper.moditoGuest(vo);
+			
+		} else {//2.host였던 사람
+			String acmActi="PENDING";
+			//해당 userNum의 acmNum,pending 숙소를 제외한 숙소들이 몇개인지 가져온다
+			String ownerUserNum=userNum;
+			int cnt=amapper.getNotPendingAcms(acmNum,ownerUserNum,acmActi);
+			System.out.println("해당 userNum의 acmNum,pending 숙소를 제외한 숙소들이 몇개인지 가져온다"+cnt);
+			
+			if(cnt==0) {//2-1하나밖에없던 숙소를 지운다
+				System.out.println("2");
+				UserVO vo= new UserVO();
+				vo.setBizRegisterNumber("");//다시 디폴트시켜놓음
+				vo.setUserPriv("GUEST");
+				
+				acmActi="ACTIVE";
+				int cnt2=amapper.getNotPendingAcms(acmNum,ownerUserNum,acmActi);
+				
+				if(cnt2!=0) {
+					vo.setUserStatusCode("HO_PENDING");
+				}else {
+					vo.setUserStatusCode("ACTIVE");
+				}
+				vo.setUserNum(userNum);
+				umapper.moditoGuest(vo);
+
+			//2-2숙소가 더있다. 그냥 넘어간다 회원권한 변경없음
+			} else System.out.println("3");
+		}
+		
+		//숙소, 객실 삭제
+		return amapper.removeAcm(acmNum)*amapper.removeAcmso(acmNum);//몇개의 방이 지워졌나
 	}
 
 

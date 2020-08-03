@@ -41,7 +41,7 @@
 						<tr>
 							<td><c:out value="${pendinguser.userNum}" /></td>
 							<td>
-								<a class='pendingmove' href='<c:out value="${pendinguser.bizRegisterNumber}"/>'>
+								<a class='pendingmove' href='<c:out value="${pendinguser.userNum}"/>'>
 									<c:out value="${pendinguser.userFstName}" />
 								</a>
 							</td>
@@ -156,9 +156,9 @@
 			var actionForm = $("#actionForm");
 			
 			e.preventDefault();
-			actionForm.append("<input type='hidden' name='bizRegnum' value='"+$(this).attr("href")+"'>");
+			actionForm.append("<input type='hidden' name='userNum' value='"+$(this).attr("href")+"'>");
 			
-			actionForm.attr("action","/admin/userStatPending");
+			actionForm.attr("action","/admin/userNum_StatPending");
 			actionForm.submit();
 		});
 		

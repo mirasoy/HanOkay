@@ -76,26 +76,24 @@ public class AdminServiceImpl implements AdminService{
 		return true;//우선 돌아간다고 하자
 	}
 
-	@Transactional
 	@Override
 	public boolean moditoGuest(String userNum, String acmNum) {
 		System.out.println(userNum);
 		System.out.println(acmNum);
 		
-		UserVO vo = new UserVO();
-		vo.setUserNum(userNum);
-		vo.setUserPriv("GUEST");
-		vo.setUserStatusCode("ACTIVE");
-		vo.setBizRegisterNumber("");
-		
-		umapper.moditoGuest(vo);
+//		UserVO vo = new UserVO();
+//		vo.setUserNum(userNum);
+//		vo.setUserPriv("GUEST");
+//		vo.setUserStatusCode("ACTIVE");
+//		vo.setBizRegisterNumber(""); //자기자신이 삭제한게 아니면 NULL화시키지 않는다..우선
+//		
+//		umapper.moditoGuest(vo);
 		////////////////
-		//회원 호스트 업그레이드
 				
 		
 		//숙소 상태도 INACTIVE-> INACTIVE/DENIED
 		AcmVO acm= new AcmVO();
-		acm.setAcmActi("INACTIVE");
+		acm.setAcmActi("PENDING");
 		acm.setAcmStatus("DENIED");
 		acm.setAcmNum(acmNum);
 		
@@ -103,7 +101,7 @@ public class AdminServiceImpl implements AdminService{
 		
 		//숙소에 딸린 객실들도 INACTIVE-> INACTIVE/DENIED
 		RomVO rom= new RomVO();
-		rom.setRomActi("INACTIVE");
+		rom.setRomActi("PENDING");
 		rom.setRomStatus("DENIED");
 		rom.setAcmNum(acmNum);
 		
@@ -150,7 +148,6 @@ public class AdminServiceImpl implements AdminService{
 		return amapper.getPendingUserAcms(bizRegnum,acmActi);
 	}
 
-	@Transactional
 	@Override
 	public boolean activeAcm(String acmNum) {
 		//숙소 상태도 INACTIVE-> INACTIVE/DENIED
@@ -172,7 +169,6 @@ public class AdminServiceImpl implements AdminService{
 		return true;
 	}
 
-	@Transactional
 	@Override
 	public boolean inactiveAcm(String acmNum) {
 		AcmVO acm= new AcmVO();
@@ -191,6 +187,11 @@ public class AdminServiceImpl implements AdminService{
 		rmapper.moditoRomActive(rom);
 		
 		return true;
+	}
+
+	@Override
+	public UserAcmVO getUserNumAcm(String userNum) {
+		return amapper.getUserNumAcm(userNum);
 	}
 
 	

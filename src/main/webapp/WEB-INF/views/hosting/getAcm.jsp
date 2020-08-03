@@ -110,8 +110,9 @@
 	<div style="margin-left:15%;margin-right:15%;">		
   <!-- 숙소 방 추가 모달로 띄우기-->
 		<div class="col-lg-10">
-		<button class="btn btn-info" type="button" data-oper='backtolist'>숙소 목록으로</button>
-		<button class="btn btn-info" type="button" data-oper='viewMyacm'>숙소 미리보기</button>
+		<button class="btn btn-default" type="button" data-oper='backtolist'>숙소 목록으로</button>
+		<button class="btn btn-default" type="button" data-oper='viewMyacm'>숙소 미리보기</button>
+		<button class="btn btn-danger" type="button" data-oper='removeAcm'>숙소 삭제하기</button>
 		</div>
 		<br><br><br>
 		
@@ -176,12 +177,11 @@
 	
 		
 		<!-- 숙소 정보 -->
-		
  	
 		<div class="col-lg-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				숙소 정보 <span class="pull-right"><c:out value="${acm.acmNum}" />&nbsp;&nbsp;&nbsp;<span id="<c:out value="${acm.acmActi}" />"></span>&nbsp;&nbsp;&nbsp;<button type="button" data-oper='editAcm'>숙소 정보 변경</button></span>
+				숙소 정보 <span class="pull-right"><c:out value="${acm.acmNum}" />&nbsp;<span id="<c:out value="${acm.acmActi}" />"></span>&nbsp;&nbsp;&nbsp;<button type="button" data-oper='editAcm'>숙소 정보 변경</button></span>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -200,7 +200,7 @@
 
 						<tr>
 							<td><c:out value="${acm.acmName}" /></td>
-							<td><c:out value="${acm.acmStatus}" /></td>
+							<td><span style="color:red;"><c:out value="${acm.acmStatus}" /></span></td>
 							<td><span id="<c:out value="${acm.acmType}" />"></span></td>
 							<td><c:out value="${acm.repPhone}" /></td>
 							<td><c:out value="${acm.subPhone}" /></td>
@@ -359,7 +359,7 @@ $(document).ready(function(){
 	}
 	
 	$(document).ready(function(){
-		
+		var formObj = $("#actionForm");
 		$('button').on("click", function(e){
 			e.preventDefault();
 			
@@ -378,7 +378,18 @@ $(document).ready(function(){
 				alert("==숙소정보 변경(팝업으로)===")
 			}else if(operation==='editRom'){
 				alert("==객실정보 변경(팝업으로)===")
-			}
+			}else if(operation==='removeAcm'){
+				if(confirm("객실을 정말 삭제하시겠습니까?")==true){//숙소, 객실 INACTIVE되어야함
+					var acmNum="<c:out value='${acm.acmNum}'/>";
+					alert(acmNum);
+					formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
+					formObj.attr("method","post");
+					formObj.attr("action","/hosting/removeAcm");
+					formObj.submit();
+				} else {
+					return false;
+				}
+			}  
 		});
 	});
 
