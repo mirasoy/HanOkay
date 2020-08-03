@@ -27,12 +27,15 @@ public interface AdminService {
 	
 	public UserVO getUser(String userNum);
 
+	
+	//회원측 활성화/비활성화
 	public boolean moditoHost(String userNum, String acmNum);
+	public boolean moditoGuest(String userNum, String acmNum);
 
-	public boolean moditoGuest(String userNum);
+	//숙소측 활성화/비활성화
+	public boolean activeAcm(String acmNum);
+	public boolean inactiveAcm(String acmNum);
 
-	
-	
 	
 
 }
