@@ -3,28 +3,39 @@
 <%@include file="../includes/header1.jspf"%>
 <style type="text/css">
 
+
+
+.container{
+	width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 992px)
+.container {
+    max-width: 960px;
+}
+
+.container_SR{
+	margin-left: auto !important;
+    margin-right: auto !important;
+    width: auto !important;
+    padding-right: 24px !important;
+    padding-left: 24px !important;
+}
+    
 .out_SR{
 	margin-left: -8px !important;
     margin-right: -8px !important;
 }
 
-.out_SR::before{
-content: " " !important;
+.out_SR:before{
+	content: " " !important;
     display: table !important;
 }
 
-.outerbox_SR {
-	/* max-width: 1300px;
-	margin: 0 auto 1em auto;
-	background-color: #fff;
-	padding: 20px;
-	 border-radius: 5px;  */
-	padding-left: 8px !important;
-    padding-right: 8px !important;
-    min-height: 1px !important;
-    position: relative !important;
- 
-}
 
 .header1_SR{
     color: inherit !important;
@@ -65,6 +76,13 @@ content: " " !important;
     margin: 0px !important;
 }
 
+.outerbox_SR {
+	padding-left: 8px !important;
+    padding-right: 8px !important;
+    min-height: 1px !important;
+    position: relative !important;
+}
+
 .cards_SR {
     adding-left: 8px !important;
     padding-right: 8px !important;
@@ -72,7 +90,6 @@ content: " " !important;
     position: relative !important;
     width: 50% !important;
     float: left !important;
-	
 }
  
 @media (min-width: 744px)
@@ -138,8 +155,9 @@ content: " " !important;
 </style>
 <%@include file="../includes/header2.jspf"%>
 <%@include file="../includes/header3.jspf"%>
+<main style="display: block;">
 	<div class='container'>
-	
+	<div class='container_SR'>
 	<div class="out_SR">
 	<section style="display: block">
 	<div style="margin-top: 64px; margin-bottom: 56px; margin-left: 16px;">
@@ -163,7 +181,7 @@ content: " " !important;
 	
 	
 	<div class="outerbox_SR">
-	
+	<div class="out_SR">
 	
 	<div class="cards_SR">
 	<div class=".card">
@@ -284,10 +302,13 @@ content: " " !important;
 	</a>
 	</div>
 	</div>
+	</div>
 	
 	</div>
 	</div>
 	</div>
+	</div>
+	</main>
 	<script>
 	//DOM이 준비되면
 	$(document).ready(function(){

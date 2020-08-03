@@ -16,6 +16,7 @@ String userNum = "";
 String userPriv ="";
 String userStatusCode="";
 
+
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
    userLastName = user.getUserLastName();
@@ -142,16 +143,12 @@ if (user != null) {
                   };    
                 });
                
-         
-               
                });
 
     	 
        
       function signOut() {
-       	 //google 로그아웃
-       
-       	 
+       	 //google 로그아웃   	 
            var auth2 = window.gapi.auth2.getAuthInstance();
            auth2.signOut().then(function () {
              console.log('User signed out.');         
