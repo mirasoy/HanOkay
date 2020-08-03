@@ -119,7 +119,6 @@
 		
 		
 		<!-- 비활성화된 숙소 -->
-		
 		<div class="col-lg-12" id="inactiveacm">
 		<div class="panel panel-default hostonly">
 			<div class="panel-heading">
@@ -182,50 +181,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	//객실 유형 문자바꿔 뿌리기	
-	/*<c:forEach items="${pendinglist}" var="pendingacm">
-		var pendingacmType='<c:out value="${pendingacm.acmType}" />';
-		console.log(pendingacmType);
-		
-		if(pendingacmType.trim()=="P"){//객실별
-			document.getElementById("pendingacmType${pendingacm.acmNum}").innerHTML="객실별";
-		}
-			
-		else if(pendingacmType.trim()=="H"){//집천체
-			document.getElementById("pendingacmType${pendingacm.acmNum}").innerHTML="집전체";
-		}	
 	
-	</c:forEach>
-	
-	
-	
-	<c:forEach items="${activelist}" var="activeacm">
-		var activeacmType='<c:out value="${activeacm.acmType}" />';
-		console.log(activeacmType);
-		
-		if(activeacmType.trim()=="P"){//객실별
-			document.getElementById("activeacmType${activeacm.acmNum}").innerHTML="객실별";
-		}
-			
-		else if(activeacmType.trim()=="H"){//집천체
-			document.getElementById("activeacmType${activeacm.acmNum}").innerHTML="집전체";
-		}
-	
-	</c:forEach>
-		
-	
-	
-	<c:forEach items="${inactivelist}" var="inactiveacm">
-		var inactiveacmType='<c:out value="${inactiveacm.acmType}" />';
-		console.log(inactiveacmType);
-		if(inactiveacmType.trim()=="P"){//객실별
-			document.getElementById("inactiveacmType${inactiveacm.acmNum}").innerHTML="객실별";
-		}
-			
-		else if(inactiveacmType.trim()=="H"){//집천체
-			document.getElementById("inactiveacmType${inactiveacm.acmNum}").innerHTML="집전체";
-		}		
-		
-	</c:forEach>*/
 	
 	getAcmOpt();
 	
@@ -262,7 +218,6 @@ $(document).ready(function(){
 				
 			option= pad(dec2bin("${pendingacm.acmOptcode}"));//10진수 옵션코드를 16자리 2진수로 변환한다(110101010..like this)
 			
-		
 			for(let k=0; k<option.length; k++){
 				if(option.charAt(k) == 1){
 					//document.getElementById("pendingacmOpt${pendingacm.acmNum}").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';

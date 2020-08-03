@@ -210,19 +210,52 @@ public class AdminController {
 		System.out.println("moditoGuest Get");
 	}
 	
-	
-	
 	@PostMapping("/moditoGuest")
-	public String moditoGuestPost(String userNum,Model model,HttpSession session) {
+	public String moditoGuestPost(String userNum, String acmNum,Model model,HttpSession session) {
 		System.out.println("moditoGuest Post");
 		
 		//guest, active, 사업자번호 리셋
-		aservice.moditoGuest(userNum);
+		aservice.moditoGuest(userNum,acmNum);
 		
 		//알림 보내기 기능추가할것 나중에
 		
 		return "redirect:/admin/adminindex";
 	}
+	
+	@GetMapping("/activeAcm")//페이지 자체는 없음
+	public void activeAcmGet() {
+		System.out.println("activeAcm Get");
+	}
+	
+	@GetMapping("/inactiveAcm")//페이지 자체는 없음
+	public void inactiveAcmGet() {
+		System.out.println("inactiveAcm Get");
+	}
+	
+	@PostMapping("/activeAcm")
+	public String activeAcmPost(String acmNum,Model model,HttpSession session) {
+		System.out.println("activeAcm Post");
+		
+		//guest, active, 사업자번호 리셋
+		aservice.activeAcm(acmNum);
+		
+		//알림 보내기 기능추가할것 나중에
+		
+		return "redirect:/admin/adminlistings";
+	}
+	
+	@PostMapping("/inactiveAcm")
+	public String inactiveAcmPost(String acmNum,Model model,HttpSession session) {
+		System.out.println("inactiveAcm Post");
+		
+		//guest, active, 사업자번호 리셋
+		aservice.inactiveAcm(acmNum);
+		
+		//알림 보내기 기능추가할것 나중에
+		
+		return "redirect:/admin/adminlistings";
+	}
+	
 	
 	@PostMapping("/adminlistings")
 	public String adminlistingsPost() {
@@ -230,7 +263,6 @@ public class AdminController {
 	}
 	
 
-	
 	@GetMapping("/adminlistings")
 	public void adminlistingsGet(Model model,HttpSession session) {
 		System.out.println("=== 어드민단 숙소보기 페이지!===");
@@ -252,6 +284,7 @@ public class AdminController {
 		
 		acmActi="INACTIVE";
 		List<UserAcmVO> inactivelist= aservice.getadminListAcms(acmActi);
+		System.out.println(inactivelist);
 		model.addAttribute("inactivelist", inactivelist);
 		size+=inactivelist.size();
 			
@@ -292,33 +325,4 @@ public class AdminController {
 		
 	}
 	
-	@PostMapping("/activeAcm")
-	public String activeAcmPost(String acmNum,Model model,HttpSession session) {
-		System.out.println("activeAcm Post");
-		
-		
-		return "/admin/adminlistings";
-	}
-	
-	
-	@GetMapping("/activeAcm")
-	public void adminviewAcmGet() {
-		System.out.println("activeAcm Get");
-	}
-	
-
-	@PostMapping("/inactiveAcm")
-	public String inactiveAcmPost(String acmNum,Model model,HttpSession session) {
-		System.out.println("inactiveAcm Post");
-		
-		
-		return "/admin/adminlistings";
-	}
-	
-	
-	@GetMapping("/inactiveAcm")
-	public void inactiveAcmGet() {
-		System.out.println("inactiveAcm Get");
-	}
-
 }

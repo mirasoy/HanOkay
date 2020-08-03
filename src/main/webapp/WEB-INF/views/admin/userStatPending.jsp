@@ -158,7 +158,6 @@
 		$('button').on("click", function(e){
 			e.preventDefault();
 			
-			
 			var operation=$(this).data("oper");
 			console.log(operation);
 			
@@ -166,15 +165,16 @@
 				alert("목록으로 돌아갑니다");
 				formObj.attr("action","/admin/adminindex");	
 			} else if(operation==='uptoHost'){
-				alert("Host전환이 처리되었습니다");
+				alert("Host전환이 처리되었습니다");//HOST로 격상, 숙소 객실 ACTIVE전환
 				formObj.append("<input type='hidden' name='userNum' value='"+$('#userNum').val()+"'>");
 				formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
 				
 				formObj.attr("method","post");
 				formObj.attr("action","/admin/moditoHost");
 			} else if(operation==='returnHost'){
-				if(confirm("회원의 요청을 거절하시겠습니까?")==true){
+				if(confirm("회원의 요청을 거절하시겠습니까?")==true){//숙소, 객실 INACTIVE되어야함
 					formObj.append("<input type='hidden' name='userNum' value='"+$('#userNum').val()+"'>");
+					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");	
 					formObj.attr("method","post");
 					formObj.attr("action","/admin/moditoGuest");
 				} else {

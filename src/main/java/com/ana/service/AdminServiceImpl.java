@@ -76,8 +76,11 @@ public class AdminServiceImpl implements AdminService{
 		return true;//우선 돌아간다고 하자
 	}
 
+	@Transactional
 	@Override
-	public boolean moditoGuest(String userNum) {
+	public boolean moditoGuest(String userNum, String acmNum) {
+		System.out.println(userNum);
+		System.out.println(acmNum);
 		
 		UserVO vo = new UserVO();
 		vo.setUserNum(userNum);
@@ -85,12 +88,34 @@ public class AdminServiceImpl implements AdminService{
 		vo.setUserStatusCode("ACTIVE");
 		vo.setBizRegisterNumber("");
 		
-		return umapper.moditoGuest(vo)==1;
+		umapper.moditoGuest(vo);
+		////////////////
+		//회원 호스트 업그레이드
+				
+		
+		//숙소 상태도 INACTIVE-> INACTIVE/DENIED
+		AcmVO acm= new AcmVO();
+		acm.setAcmActi("INACTIVE");
+		acm.setAcmStatus("DENIED");
+		acm.setAcmNum(acmNum);
+		
+		amapper.moditoAcmActive(acm);//이게 문제생기네
+		
+		//숙소에 딸린 객실들도 INACTIVE-> INACTIVE/DENIED
+		RomVO rom= new RomVO();
+		rom.setRomActi("INACTIVE");
+		rom.setRomStatus("DENIED");
+		rom.setAcmNum(acmNum);
+		
+		rmapper.moditoRomActive(rom);
+		
+		return true;//우선 돌아간다고 하자
 	}
 
 	@Override//pending, active, inactive 숙소들을 가져온다
 	public List<UserAcmVO> getadminListAcms(String acmActi) {
-		List<UserAcmVO> acms=amapper.getadminListAcms(acmActi);
+		List<UserAcmVO> acms=amapper.getadminListAcms(acmActi.trim());
+		System.out.println("서비스단:"+acmActi);
 		int romsize;
 		
 		for(int i=0;i<acms.size();i++) {
@@ -123,6 +148,49 @@ public class AdminServiceImpl implements AdminService{
 		String acmActi="PENDING";
 		System.out.println("서비스단 펜딩");
 		return amapper.getPendingUserAcms(bizRegnum,acmActi);
+	}
+
+	@Transactional
+	@Override
+	public boolean activeAcm(String acmNum) {
+		//숙소 상태도 INACTIVE-> INACTIVE/DENIED
+		AcmVO acm= new AcmVO();
+		acm.setAcmStatus("OPEN");
+		acm.setAcmActi("ACTIVE");
+		acm.setAcmNum(acmNum);
+		
+		amapper.moditoAcmActive(acm);
+		
+		//숙소에 딸린 객실들도 active/open으로 update
+		RomVO rom= new RomVO();
+		rom.setRomStatus("OPEN");
+		rom.setRomActi("ACTIVE");
+		rom.setAcmNum(acmNum);
+		
+		rmapper.moditoRomActive(rom);
+		
+		return true;
+	}
+
+	@Transactional
+	@Override
+	public boolean inactiveAcm(String acmNum) {
+		AcmVO acm= new AcmVO();
+		acm.setAcmActi("INACTIVE");
+		acm.setAcmStatus("DENIED");
+		acm.setAcmNum(acmNum);
+		
+		amapper.moditoAcmActive(acm);//이게 문제생기네
+		
+		//숙소에 딸린 객실들도 INACTIVE-> INACTIVE/DENIED
+		RomVO rom= new RomVO();
+		rom.setRomActi("INACTIVE");
+		rom.setRomStatus("DENIED");
+		rom.setAcmNum(acmNum);
+		
+		rmapper.moditoRomActive(rom);
+		
+		return true;
 	}
 
 	

@@ -154,7 +154,6 @@
 		<result column="acm_Acti" property="acmActi" />
 		<result column="acm_status" property="acmStatus" />
 		<result column="acm_Optcode" property="acmOptcode" />
-		
 	</resultMap>
 	<select id="getadminListAcms" resultMap="UserAcmVOResult">
 		select 

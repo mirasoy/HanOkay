@@ -24,7 +24,6 @@ public interface AcmRegMapper {
 	public AcmVO getpendingacm(String bizRegisterNumber);
 	
 	
-	
 	public int delete(String acmNum);
 	
 	

@@ -131,7 +131,7 @@
 	        </div>	
 	        <div class="form-group">
 	          <label>회원이름</label> <input class="form-control" name='userFstName' id='userFstName'
-	            value='<c:out value="${getuseracm.userFstName }"/><c:out value="${pendinghostacm.userLastName }"/>' readonly="readonly">
+	            value='<c:out value="${getuseracm.userFstName }"/><c:out value="${getuseracm.userLastName }"/>' readonly="readonly">
 	        </div>
 	        <div class="form-group">
 	          <label>회원 권한</label> <input class="form-control" name='userPiv'
@@ -139,7 +139,7 @@
 	        </div>
 	
 	        <div class="form-group">
-	          <label>회원 상태</label> <input class="form-control" name='userStatusCode'
+	          <label>회원 상태</label> <input class="form-control" name='userStatusCode' id='userStatusCode'
 	            value='<c:out value="${getuseracm.userStatusCode }"/>' readonly="readonly">
 	        </div>
 			<div class="form-group">
@@ -348,24 +348,33 @@
 			if(operation==='backtoIndex'){
 				alert("목록으로 돌아갑니다");
 				formObj.attr("action","/admin/adminindex");	
-			} else if(operation==='apprAcm'){
-				alert("숙소가 승인되었습니다");
-				formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
-				
-				formObj.attr("method","post");
-				formObj.attr("action","/admin/activeAcm");
-			} else if(operation==='returnHost'){
-				if(confirm("회원의 요청을 거절하시겠습니까?")==true){
-					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
+			} else {
+			
+				var userStat=$("#userStatusCode").val();
+				if(userStat=="HO_PENDING"){
+					alert("권한부여가 필요한 회원의 숙소입니다");//얘네는 여기서 회원, 숙소처리가 동시에 이루어짐
+					formObj.attr("action","/admin/userStat");	
+				}else{
+					var acmNum="<c:out value='${getuseracm.acmNum }'/>";//active시키기
+					formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
 					formObj.attr("method","post");
-					formObj.attr("action","/admin/inactiveAcm");
-				} else {
-					return false;
-				}
+					
+					if(operation==='apprAcm'){//숙소승인
+					formObj.attr("action","/admin/activeAcm");
+					alert("숙소가 활성화됩니다");
+								
+					}else if(operation==='denyAcm'){//숙소거절
+						formObj.attr("action","/admin/inactiveAcm");
+						alert("숙소가 비활성화됩니다");
+					}
+				
 			}
+				
+			
 			actionForm.submit();
 			
-		});
+		}
+	});
 	});
 
 	//숙소옵션뿌리기
