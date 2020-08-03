@@ -48,7 +48,7 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
@@ -247,11 +247,18 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- facebook 소셜 로그인 -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>2.0.3.RELEASE</version>
 		</dependency>
 
 		<!-- 구글 소셜 로그인 -->
@@ -299,20 +306,13 @@
 			<version>2.5-20081211</version>
 		</dependency>
 
-		<!-- facebook 소셜 로그인 -->
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-facebook</artifactId>
-			<version>2.0.3.RELEASE</version>
-		</dependency>
-
 		<!-- 유효성 검사 관련 라이브러리 -->
 		<!-- validation -->
 
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>6.0.10.Final</version>
+			<version>6.0.13.Final</version>
 		</dependency>
 
 		<!-- 구글 지오코딩 -->

@@ -33,13 +33,22 @@
 					찾기</button> <br> <a href="../register/signUp">회원가입하기</a>
 				<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 				<br> 
-				<fb:login-button scope="public_profile,email,user_birthday"
+				<%-- <a href="${facebook_url}"><button
+                                    class="btn btn-primary btn-round" style="width: 100%">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login
+                                </button></a> --%>
+                                 <a href="https://www.facebook.com/v7.0/dialog/oauth?
+        client_id=323895235315656
+        &redirect_uri=https%3A%2F%2Flocalhost%3A8443%2Fuser%2Flogin%2Faouth2
+        &state={state-param}
+        &resource_type=token">Login with Facebook</a>
+				<!-- <fb:login-button scope="public_profile,email,user_birthday"
 					onlogin="checkLoginState();" onclick="FB.login();">
 				</fb:login-button>
 
-				<div id="status"></div> <!-- Load the JS SDK asynchronously --> 
+				<div id="status"></div> Load the JS SDK asynchronously 
 				<script	async defer crossorigin="anonymous"
-					src="https://connect.facebook.net/en_US/sdk.js"></script>
+					src="https://connect.facebook.net/en_US/sdk.js"></script> -->
 			</td>
 		</tr>
 	</table>

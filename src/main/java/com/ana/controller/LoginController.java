@@ -9,9 +9,22 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.logging.Log;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.User;
+import org.springframework.social.facebook.api.UserOperations;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -48,11 +61,17 @@ public class LoginController {
 	@Autowired
 	UserService service;
 
+	@Autowired
+	private FacebookConnectionFactory connectionFactory;
+	
+	@Autowired
+	private OAuth2Parameters oAuth2Parameters;
+	
+	
 	// login 페이지 보여주기
-	@GetMapping("/login")
-	public String showLoginPage() {
-		return "/user/login";
-	}
+	/*
+	 * @GetMapping("/login") public String showLoginPage() { return "/user/login"; }
+	 */
 
 	// welcome 페이지 보여주는 기능
 	@GetMapping("/welcome")
@@ -69,11 +88,66 @@ public class LoginController {
 	}
 
 
-	@RequestMapping(value = "/login/executeFBLogin", method = RequestMethod.POST)
-	public void executeFBlogin(String email, String name, String birthday) {
-		System.out.println(email+ ","+ name +","+ birthday);
-	}
 	
+	@RequestMapping(value = "/user/login", method = { RequestMethod.GET, RequestMethod.POST })
+    public String join(HttpServletResponse response, Model model) {
+        
+        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
+    
+        model.addAttribute("facebook_url", facebook_url);
+        System.out.println("/facebook" + facebook_url);
+ 
+        return "/user/login";
+    }
+	 @RequestMapping(value = "/facebookSignInCallback", method = { RequestMethod.GET, RequestMethod.POST })
+	    public String facebookSignInCallback(@RequestParam String code) throws Exception {
+	 
+	        try {
+	             String redirectUri = oAuth2Parameters.getRedirectUri();
+	            System.out.println("Redirect URI : " + redirectUri);
+	            System.out.println("Code : " + code);
+	 
+	            OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+	            AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, redirectUri, null);
+	            String accessToken = accessGrant.getAccessToken();
+	            System.out.println("AccessToken: " + accessToken);
+	            Long expireTime = accessGrant.getExpireTime();
+	        
+	            
+	            if (expireTime != null && expireTime < System.currentTimeMillis()) {
+	                accessToken = accessGrant.getRefreshToken();
+	               
+	            };
+	            
+	        
+	            Connection<Facebook> connection = connectionFactory.createConnection(accessGrant);
+	            Facebook facebook = connection == null ? new FacebookTemplate(accessToken) : connection.getApi();
+	            UserOperations userOperations = facebook.userOperations();
+	            
+	            try
+	 
+	            {            
+	                String [] fields = { "id", "email",  "name"};
+	                User userProfile = facebook.fetchObject("me", User.class, fields);
+	                System.out.println("유저이메일 : " + userProfile.getEmail());
+	                System.out.println("유저 id : " + userProfile.getId());
+	                System.out.println("유저 name : " + userProfile.getName());
+	                
+	            } catch (MissingAuthorizationException e) {
+	                e.printStackTrace();
+	            }
+	 
+	        
+	        } catch (Exception e) {
+	 
+	            e.printStackTrace();
+	 
+	        }
+	        return "redirect:/acm/list";
+	 
+	    }
+
 	
 	// 구글 로그인
 	private static final HttpTransport transport = new NetHttpTransport();
