@@ -3,8 +3,10 @@ package com.ana.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,7 @@ import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
 import com.ana.domain.PageDTO;
 import com.ana.service.AcmService;
+import com.ana.service.WishListService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -32,11 +35,31 @@ import lombok.extern.log4j.Log4j;
 public class AcmController {
 
 	private AcmService service;
+	private WishListService wishservice;
 	
 	//검색 결과 
+//	@GetMapping({ "/list", "/result" })
+//	public void list(Criteria cri, String acmNum, Model model, HttpSession session) {	
+//		log.info("list: " + cri);
+//
+//		try {
+//			// 날짜 유효성 검사
+//			if (!checkDate(cri)) {
+//				return;
+//			}
+//			
+//			model.addAttribute("list", service.getList(cri));
+//			int total = service.getTotal(cri);
+//			log.info("total: " + total);
+//			model.addAttribute("acmNum", acmNum);
+//			model.addAttribute("pageMaker", new PageDTO(cri, total));
+//		} catch (Exception e) {
+//			return;
+//		}
+//	}
+	
 	@GetMapping({ "/list", "/result" })
-	public void list(Criteria cri, String acmNum, Model model) {
-		log.info("list: " + cri);
+	public void list(Criteria cri, String acmNum, Model model , HttpSession session) {
 
 		try {
 			// 날짜 유효성 검사
@@ -45,14 +68,47 @@ public class AcmController {
 			}
 			
 			model.addAttribute("list", service.getList(cri));
-			int total = service.getTotal(cri);
-			log.info("total: " + total);
+			int total = service.getTotal(cri);		
 			model.addAttribute("acmNum", acmNum);
 			model.addAttribute("pageMaker", new PageDTO(cri, total));
+			model.addAttribute("drawValue", drawValue(service.getList(cri), session));
+			
+			
+			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + total);
+			
 		} catch (Exception e) {
 			return;
 		}
 	}
+	
+	
+	
+	public List<String> drawValue(List<AcmVO> list, HttpSession session){
+	
+	List<String> result = new ArrayList<String>() ;
+	
+	for(AcmVO acmlist : list) {
+		acmlist.getAcmNum();
+		String loginUserNum = (String) session.getAttribute("loginUserNum");
+		wishservice.drawValue(loginUserNum, acmlist.getAcmNum());			
+	
+		
+		if(wishservice.drawValue(loginUserNum, acmlist.getAcmNum())==null) {
+			
+			result.add("fa fa-heart-o fa-2x");
+			
+		}else {
+			
+			result.add("fa fa-heart fa-2x");				
+		}			
+	}
+	log.info("result.size()"+result.size());
+	return result;
+	
+}
+	
+	
+	
 	
 	//등록
 	@PostMapping("/register")

@@ -39,5 +39,7 @@ public class AcmVO {
 	private RomVO rom;
 	
 	private List<PicVO> picList;
+	
+	private String wishNum;
 
 }

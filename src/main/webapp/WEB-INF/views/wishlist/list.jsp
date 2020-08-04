@@ -36,6 +36,7 @@
 							<th>숙소번호</th>
 							<th>목록타이틀</th>
 							<th>목록내용</th>				
+							<th>삭제버튼</th>				
 						</tr>
 					</thead>
 
@@ -49,6 +50,16 @@
 							<td><c:out value="${board.acmNum}" /></td>
 							<td><c:out value="${board.listTitle}" /></td>
 							<td><c:out value="${board.listContent}" /></td>
+							<!-- <td><button data-oper='delete' id="deleteBtn" class="deleteBtn">삭제</button></td>  -->
+ 						<%-- 	<td><a href=remove?wishNum=<c:out value="${board.wishNum}"/> data-oper='deleteBtn' id="deleteBtn" class="deleteBtn">삭제</a></td> --%>
+ 							
+ 					<%-- 	<form role="form" action="/remove=<c:out value="${board.wishNum}"/>" method="post">
+ 							<button type="submit" id="deleteBtn" class="deleteBtn" data-oper='deleteBtn'>삭제하기</button>
+ 						</form> --%>
+ 						
+ 						<%--  <a href="${path}/shop/cart/delete.do?cartId=${row.cartId}">삭제</a> --%>
+ 						
+ 						<td><a href="${path}/wishlist/remove.do?wishNum=${board.wishNum}" id="deleteBtn" class="deleteBtn">삭제</a></td>
 
 						</tr>
 					</c:forEach>
@@ -60,6 +71,42 @@
 		</div>
 	</div>
 	<!-- /.row -->
+<script type="text/javascript" src="/resources/js/wishlist.js"></script>	
+	<script>
+	
+	
+	/* var wishNumValue = '<c:out value="${get.wishNum}"/>';
+	
+	alert("wishNumValue"); */
+/* 	
+	wishService.remove(W334, function(count){
+		console.log(count);
+		if(count==="success"){
+			alert("삭제완료");
+			}
+		}, function(err){
+			alert('ERROR...');
+		
+	});
+	 */
+	
+	
+	
+	
+		
+	var deleteBtn = document.getElementsByClassName("deleteBtn");
+	for(
+			var i=0 ; i<deleteBtn.length ; i++
+			){
+		deleteBtn[i].onclick = function(e){			
+		
+			alert("삭제클릭")	;
+		
+		};	
+	}
+	
+	
+	</script>
 
 
 	<%@include file="../includes/footer.jsp"%>
