@@ -268,7 +268,7 @@
 
 				</div>
 
-				<div class="pac-card" id="pac-card">
+				<!-- <div class="pac-card" id="pac-card">
 					<div>
 						<div id="title">Autocomplete search</div>
 						<div id="type-selector" class="pac-controls">
@@ -290,7 +290,7 @@
 					<div id="pac-container">
 						<input id="pac-input" type="text" placeholder="Enter a location">
 					</div>
-				</div>
+				</div> -->
 
 			</section>
 
@@ -322,7 +322,7 @@
 					<div class="modal-body">				
 						<div class="form-group info-group">
 							<label>#유저번호</label> <input class="form-control" name='userNum'
-								value='<%=user.getUserNum()%>' readonly="readonly">
+								value='<%=userNum%>' readonly="readonly">
 						</div>
 						
 						<div class="form-group info-group">
@@ -378,13 +378,24 @@
 			var latitude = document.getElementById("latitude").value;
 			var longitude = document.getElementById("longitude").value;
 			
+			var arrOpt = new Array();
 			//숙소번호로 해당 위도,경도 값 가져옴
+			let i=0;
 			<c:forEach items="${list }" var="acm">
+			
 			if("${acm.acmNum}"===acmNum){
-				var latitude = ${acm.latitude};
-				var longitude = ${acm.longitude};
+				latitude = ${acm.latitude};
+				longitude = ${acm.longitude};
 			}
+			
+			arrOpt[i]=${acm.acmOptcode};
+				i++;
 			</c:forEach>
+			
+			for(let i=0;i<arrOpt.length;i++){
+				console.log(arrOpt[i]);
+			}
+			
 			
 			var latVal = parseFloat(latitude);
 			var lngVal = parseFloat(longitude);
@@ -496,25 +507,6 @@
 	async defer></script>
 
 <script>
-window.onload = function() {
-	
-	// 숙소 사진
-	let i = 1;
-	<c:forEach items="${pic}" var="pic">
-		document.getElementById("pic"+ i).innerHTML = "<img alt='<c:out value="${pic.picAcmpdesc}" />' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }" />'>";
-		i++;
-	</c:forEach>
-
-}
-
-
-
-
-
-
-
-
-
     $(document).ready(function() { $("#e1").select2(); });
     
  	/* 날짜 선택(수희) */

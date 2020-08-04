@@ -50,7 +50,6 @@
 	            </props>
 	        </property>
 	</bean>
-
 	<mybatis-spring:scan
 		base-package="com.ana.mapper" />
 	<context:component-scan
