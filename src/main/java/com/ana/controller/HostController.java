@@ -151,6 +151,7 @@ public class HostController {
 
 	}
 
+	
 	@GetMapping("/getAcmSwitch")//이미호스트 자기숙소 선택하기
 	public void getAcmSwitchGet(String acmNum,Model model, HttpSession session) {
 		System.out.println("===getAcmSwitch get===");
@@ -233,10 +234,15 @@ public class HostController {
 		return "/hosting/become-host2_6";
 	}
 	
-	@GetMapping("/removeRom")//숙소 삭제버튼을 받으면
+	@GetMapping("/removeRom")//객실 삭제버튼을 받으면===================================================
 	public String removeRomGet(@RequestParam("romNum") String romNum,@RequestParam("acmNum") String acmNum, Model model,HttpSession session) {
-		//System.out.println("롬넘이 넘어온다~~~"+romNum);
-		rservice.remove(romNum);
+		System.out.println("삭제하자 롬넘이 넘어온다~~~"+romNum);
+		
+		model.addAttribute("acmNum", acmNum);
+		
+		
+		boolean removeokay=rservice.remove(romNum);
+		System.out.println("removeokay"+removeokay);
 		
 		List<RomVO> romList=rservice.getList(acmNum);
 		
@@ -246,8 +252,9 @@ public class HostController {
 
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
-		return "/hosting/become-host2_6";
+		return "redirect:/hosting/become-host2_6";
 	}
+	
 	
 	
 	@GetMapping("/become-host")
@@ -517,7 +524,7 @@ public class HostController {
 		System.out.println("removeAcm페이지를 띄운다**");
 	}
 	
-	@PostMapping("/removeAcm")
+	@PostMapping("/removeAcm")//********이게 대박이여`~~
 	public String removeAcm(String acmNum,Model model,HttpSession session) {
 		System.out.println("removeAcmPost");
 		String userNum=getUser(session).getUserNum();

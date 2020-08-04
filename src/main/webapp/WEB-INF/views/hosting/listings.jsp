@@ -5,7 +5,7 @@
 	a{
 		color: #21292d !important;
 		}
-		
+	
 	
 </style>
 
@@ -15,7 +15,7 @@
 		<!-- 중앙정렬 -->
 	<div style="margin-left:15%;margin-right:15%;">		
   <!-- 숙소 방 추가 모달로 띄우기-->
-  <h3 align="left">총 <c:out value="${size}"/>개의 숙소</h3><br>
+  <h3 align="left">'<c:out value="${userFstname}"/>'&nbsp;호스트님의 총 <c:out value="${size}"/>개의 숙소</h3><br>
 		
 		
 		<!-- 영업중인 숙소 -->
@@ -49,7 +49,7 @@
 									<c:out value="${activeacm.acmName}" />
 								</a>
 							</td>
-							<td id="<c:out value='${activeacm.acmType}'/>"></td>
+							<td id="<c:out value='${activeacm.acmType}'/><c:out value='${activeacm.acmNum}'/>"></td>
 							<td><c:out value="${activeacm.acmDetailaddr}" /></td>
 						</tr>
 					</c:forEach>
@@ -93,7 +93,7 @@
 									<c:out value="${pendingacm.acmName}" />
 								</a>
 							</td>
-							<td id="<c:out value='${pendingacm.acmType}'/>"></td>
+							<td id="<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>"></td>
 							<td><c:out value="${pendingacm.acmDetailaddr}" /></td>
 							
 						</tr>
@@ -114,7 +114,7 @@
 		<div class="col-lg-12" id="inactiveacm">
 		<div class="panel panel-default hostonly">
 			<div class="panel-heading">
-				활성화 된 숙소
+				비활성화 된 숙소
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -131,14 +131,14 @@
 					<c:forEach items="${inactivelist}" var="inactiveacm">
 						<tr>
 							<td style="width: 150px;">
-							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${inactiveacm.acmPurl}" /><c:out value="${inactiveacm.acmPname }" />'>
+							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px; border-radius:10px;' id='rPicture' src='/review/display?fileName=<c:out value="${inactiveacm.acmPurl}" /><c:out value="${inactiveacm.acmPname }" />'>
 							</td>
 							<td>
 								<a class='move' href='<c:out value="${inactivelist.acmNum}"/>'>
 									<c:out value="${inactiveacm.acmName}" />
 								</a>
 							</td>
-							<td id="<c:out value='${inactiveacm.acmType}'/>"></td>
+							<td id="<c:out value='${inactiveacm.acmType}'/><c:out value='${inactivelist.acmNum}'/>"></td>
 							<td><c:out value="${inactiveacm.acmDetailaddr}" /></td>
 						</tr>
 					</c:forEach>
@@ -169,22 +169,22 @@ $(document).ready(function(){
 	var pendingacmType='<c:out value="${pendingacm.acmType}" />';
 	console.log(pendingacmType);
 	if(pendingacmType.trim()=="P"){//객실별
-		$('#<c:out value="${pendingacm.acmType}"/>').append("객실별");
+		$("#<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>").append("객실별");
 	}
 		
 	else if(pendingacmType.trim()=="H"){//집천체
-		$('#<c:out value="${pendingacm.acmType}"/>').append("집천체");
+		$("#<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>").append("집천체");
 	}	
 	</c:forEach>
 	<c:forEach items="${activelist}" var="activeacm">
 	var activeacmType='<c:out value="${activeacm.acmType}" />';
 	console.log(activeacmType);
 	if(activeacmType.trim()=="P"){//객실별
-		$('#<c:out value="${activeacm.acmType}"/>').append("객실별");
+		$("#<c:out value='${activeacm.acmType}'/><c:out value='${activeacm.acmNum}'/>").append("객실별");
 	}
 		
 	else if(activeacmType.trim()=="H"){//집천체
-		$('#<c:out value="${activeacm.acmType}"/>').append("집천체");
+		$("#<c:out value='${activeacm.acmType}'/><c:out value='${activeacm.acmNum}'/>").append("집천체");
 	}	
 	</c:forEach>
 		
@@ -192,11 +192,11 @@ $(document).ready(function(){
 	var inactiveacmType='<c:out value="${inactiveacm.acmType}" />';
 	console.log(inactiveacmType);
 	if(inactiveacmType.trim()=="P"){//객실별
-		$('#<c:out value="${inactiveacm.acmType}"/>').append("객실별");
+		$("#<c:out value='${inactiveacm.acmType}'/><c:out value='${inactivelist.acmNum}'/>").append("객실별");
 	}
 		
 	else if(inactiveacmType.trim()=="H"){//집천체
-		$('#<c:out value="${inactiveacm.acmType}"/>').append("집천체");
+		$("#<c:out value='${inactiveacm.acmType}'/><c:out value='${inactivelist.acmNum}'/>").append("집천체");
 	}	
 	
 	</c:forEach>
