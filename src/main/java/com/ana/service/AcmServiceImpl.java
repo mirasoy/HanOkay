@@ -56,7 +56,7 @@ public class AcmServiceImpl implements AcmService{
 		log.info("get List with criteria: " + cri);
 		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
 		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-		return mapper.getListPaging(cri, acmNumList);
+		return mapper.getListPaging(cri, cri.getTypeArr(), acmNumList);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class AcmServiceImpl implements AcmService{
 		log.info("get total count");
 		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
 		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-		return mapper.getTotalCount(cri, acmNumList);
+		return mapper.getTotalCount(cri, cri.getTypeArr(), acmNumList);
 	}
 
 }

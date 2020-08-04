@@ -85,7 +85,7 @@ public class QnaMapperTests {
 		list.forEach(qna -> log.info(qna));
 	}
 	
-	//@Test
+	@Test
 	public void testSearch() {
 		Criteria cri = new Criteria();
 		cri.setKeyword("새로");
@@ -96,7 +96,7 @@ public class QnaMapperTests {
 		list.forEach(board -> log.info(board));
 	}
 	
-	@Test
+	//@Test
 	public void testBoardHit() {
 		
 		mapper.boardHit(5L);

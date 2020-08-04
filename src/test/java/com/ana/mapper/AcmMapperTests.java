@@ -138,21 +138,41 @@ public class AcmMapperTests {
 	}
 	
 	@Test
-		public void testGetListPaging() {
-			Criteria cri = new Criteria();
-			cri.setKeyword("서울");
-			cri.setPerson("1");
-			cri.setIn("2019-04-20");
-			cri.setOut("2019-04-22");
-			List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
-			List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-			acmNumList.forEach(acm -> log.info(acm));
-			List<AcmVO> list = new ArrayList<>();
+	public void testGetListPaging() {
+		Criteria cri = new Criteria();
+//			cri.setKeyword("서울");
+		cri.setCity("서울");
+		cri.setDistr("종로");
+		cri.setPerson("1");
+		cri.setType("TC");
+		cri.setIn("2020-08-01");
+		cri.setOut("2020-09-01");
+		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
+		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
+		//acmNumList.forEach(acm -> log.info(acm));
+		String[] typeArr =cri.getTypeArr();
+		System.out.println(typeArr[0]);
+		List<AcmVO> list = mapper.getListPaging(cri, cri.getTypeArr(), acmNumList);
 		
-			list = mapper.getListPaging(cri, acmNumList);
-			
-			list.forEach(acm -> log.info(acm));
-		}
+		list.forEach(acm -> log.info(acm));
+	}
+	
+	@Test
+	public void testGetTotalCount() {
+		Criteria cri = new Criteria();
+//		cri.setKeyword("서울");
+	cri.setCity("서울");
+	cri.setDistr("종로");
+	cri.setPerson("1");
+	cri.setType("TC");
+	cri.setIn("2020-08-01");
+	cri.setOut("2020-09-01");
+	List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
+	List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
+	int cnt = mapper.getTotalCount(cri, cri.getTypeArr(), acmNumList);
+	log.info("cnt: "+cnt);
+	}
+	
 	
 
 }

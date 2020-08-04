@@ -26,14 +26,12 @@ public interface AcmMapper {
 	
 	public int update(AcmVO acm);
 	
-	public int getTotalCount(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
+	public int getTotalCount(@Param("cri") Criteria cri, @Param("typeArr") String[] typeArr, @Param("acmNum") List<String> acmNum);
 	
 	public List<String> getRomNum(@Param("in") String in,@Param("out") String out);
 	
 	public List<String> getAcmNum(@Param("person") String person, @Param("romNum") List<String> romNum);
 	
-	public List<AcmVO> getListPaging(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
-
-	
+	public List<AcmVO> getListPaging(@Param("cri") Criteria cri, @Param("typeArr") String[] typeArr, @Param("acmNum") List<String> acmNum);
 	
 }
