@@ -48,8 +48,9 @@ public class RomRegServiceImpl implements RomRegService{
 
 
 	@Override
-	public boolean remove(String romNum) {//객실 지우기
-		return mapper.remove(romNum)==1;
+	public boolean remove(String romNum) {//해당 객실 하나 지우기
+		System.out.println("서비스단에서 롬넘넘어오니:"+romNum);
+		return mapper.remove(romNum.trim())==1;
 	}
 
 

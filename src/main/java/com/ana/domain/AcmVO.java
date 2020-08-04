@@ -44,6 +44,7 @@ public class AcmVO {
 	private Double starPoint;
 	
 	private List<PicVO> picList;
-	
+
+	private String wishNum;
 
 }
