@@ -8,11 +8,14 @@
 
 <div class = "page-wrapper page-get">
 	<div class = "page-contnets" style="width: 100%;">
-		<div class = "container-bookingNavi box" >
-			<a href="../../acm/list">홈으로가기</a>
-			<a href="../../acm/detail?person=&in=&out=&acmNum=${book.acmNum}">숙소정보</a>	
-			<a href="../../mypage/bookListAll">나의예약</a>
-			<a href="../../acm/list" target="_blank">예약확정서</a>
+	
+		<div class = "detail-navigation-list container-navigation box">
+			<div class = "detail-navigation-list">
+				<a href="../../acm/list">홈</a>
+				<a href="../../acm/detail?person=&in=&out=&acmNum=${book.acmNum}">숙소정보</a>
+				<a href="../../mypage/bookListAll">나의예약</a>
+				<a href="../../acm/list" target='blank'>예약확정서</a>
+			</div>
 		</div>
 		
 		<div class = "container-bookingInfo box" >
@@ -48,17 +51,4 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-	/* 메일 복사하기 */
-	document.querySelector(".copy").addEventListener("click", function(){
-		var temp = document.createElement('textarea'); 
-		temp.value = document.getElementById("email").value; 
-		document.body.appendChild(temp);
-		temp.select();//select()는 textarea, input 같은 form요소에서만 사용 가능
-		document.execCommand("copy");
-		document.body.removeChild(temp);
-		alert("메일이 복사되었습니다!");
-	});
-	
-</script>
 <%@include file="../includes/footer.jsp"%>

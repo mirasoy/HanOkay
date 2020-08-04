@@ -106,11 +106,11 @@
 			<label class="sub-title">REVIEW</label>
 			<table>
 				<c:forEach items="${rev}" var="rev" begin="0" end="4">
-					<tr style="width:100%;">
+					<tr>
 						<td>
 							<details>						
 								<summary>
-									<span><c:out value="${rev.revPtitle}" />&nbsp;
+									<span><c:out value="${rev.revPtitle}" />&nbsp;<fmt:formatDate value="${rev.revPregdate}" pattern="(yyyy년 M월)"/>
 										<c:choose>
 										    <c:when test="${rev.revStisf >= 3.0}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></c:when>
 										    <c:otherwise><i class="fa fa-thumbs-down" id="test" aria-hidden="true"></i></c:otherwise>
@@ -120,7 +120,6 @@
 		  						<p><c:out value="${rev.revContent}" /></p>
 		  					</details>
 						</td>
-						<td style="vertical-align: top;"><fmt:formatDate value="${rev.revPregdate}" pattern="yyyy-MM"/></td>
 					</tr>
 				</c:forEach>
 				<c:if test="${empty rev}">
