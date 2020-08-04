@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.HostStatsMapper">
+
+<resultMap id="PaymentVOResult" type="com.ana.domain.PaymentVO">
+			
+		<result column=	"ACM_NUM"	property=	"acmNum"	/>
+		<result column=	"ACM_NAME"	property=	"acmName"	/>
+		<result column=	"ROM_NUM"	property=	"romNum"	/>
+		<result column=	"BOOK_NUM"	property=	"bookNum"	/>
+		<result column=	"PAY_NUM"	property=	"payNum"	/>
+		<result column=	"PAY_METHOD"	property=	"payMethod"	/>
+		<result column="staydays" property="staydays" />
+		<result column=	"PAY_TIME"	property=	"payTime"	/>
+		<result column=	"PRICE"	property=	"price"	/>
+		<result column=	"VAT"	property=	"vat"	/>
+		<result column=	"SUBTOTAL"	property=	"subtotal"	/>
+		<result column=	"COUPON"	property=	"coupon"	/>
+		<result column=	"MILEAGE"	property=	"mileage"	/>
+		<result column=	"DISCOUNT"	property=	"discount"	/>
+		<result column=	"TOTAL"	property=	"total"	/>
+		<result column=	"PAY_STATUS"	property=	"payStatus"	/>
+		
+</resultMap>
+	<resultMap id="AcmVOResult" type="com.ana.domain.AcmVO">
+		<result column="acm_Num" property="acmNum" />
+		<result column="acm_Name" property="acmName" />
+		<result column="acm_City" property="acmCity" />
+		<result column="acm_Distr" property="acmDistr" />
+		<result column="acm_Detailaddr" property="acmDetailaddr" />
+		<result column="rep_Phone" property="repPhone" />
+		<result column="acm_Regdate" property="acmRegdate" />
+		<result column="acm_Updatedate" property="acmUpdatedate" />
+		<result column="acm_Type" property="acmType" />
+		
+		<result column="biz_Regnum" property="bizRegnum" />
+		<result column="checkin_Time" property="checkinTime" />
+		<result column="checkout_Time" property="checkoutTime" />
+		<result column="sub_Phone" property="subPhone" />
+		<result column="acm_Fax" property="acmFax" />
+		<result column="acm_Email" property="acmEmail" />
+		<result column="acm_Purl" property="acmPurl" />
+		<result column="acm_Pname" property="acmPname" />
+		
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+		<result column="acm_Desc" property="acmDesc" />
+		<result column="acm_Acti" property="acmActi" />
+		<result column="acm_status" property="acmStatus" />
+		<result column="acm_Optcode" property="acmOptcode" />
+		<result column="sumt" property="sumTotal" />
+		<result column="stisf" property="starPoint" />
+		
+	</resultMap>
+	
+
+<select id="getAllSales" resultMap="PaymentVOResult">
+
+select P.*, a.acm_name from tpayment P, 
+(select acm_num,a.acm_name from tacm a, tuser u where
+a.biz_regnum = u.biz_regnum 
+and
+u.user_num = #{user}) A
+WHERE P.ACM_NUM = A.ACM_NUM
+
+</select>
+
+
+<select id="getAcmSales" resultMap="PaymentVOResult">
+
+select P.*, a.acm_name from tpayment P, 
+(select acm_num,a.acm_name from tacm a, tuser u where
+a.biz_regnum = u.biz_regnum 
+) A
+WHERE P.ACM_NUM = A.ACM_NUM
+AND
+P.ACM_NUM = #{acmNum}
+
+</select>
+
+
+<select id="getAllAcm" resultMap="AcmVOResult">
+select * from TACM where biz_Regnum=#{bizRegnum}
+</select>
+
+<select id="getAcmRank" resultMap="AcmVOResult">
+select acm.*, t.sumt, star.stisf from
+    tacm acm,
+    
+    (select p.acm_num,sum(total) sumt
+    from tpayment P, 
+        (select acm_num,a.biz_regnum from tacm a, tuser u where
+        a.biz_regnum = u.biz_regnum 
+        and 
+        u.user_num = #{user}) A
+      WHERE 
+    P.ACM_NUM = A.ACM_NUM
+    group by cube( p.acm_num)
+    
+    )t,
+    
+    (SELECT 
+    acm_num, NVL(TRUNC(AVG(STISF), 1), 0) AS STISF
+    FROM TREVIEW
+    WHERE PST_ACTI = 'T' 
+    GROUP BY cube( acm_num)
+    )star
+where t.acm_num = acm.acm_num
+and
+star.acm_num = acm.acm_num
+<choose>
+						<when test="criteria == 'stisf' ">
+							ORDER BY stisf DESC
+						</when>
+						<when test="criteria == 'sumt' ">
+							ORDER BY sumt DESC
+						</when>
+</choose>
+
+</select>
+
+
+<select id="getPeriodAllSales" resultMap="PaymentVOResult">
+<![CDATA[
+select P.*, a.acm_name from tpayment P, 
+(select acm_num,a.acm_name from tacm a, tuser u where
+a.biz_regnum = u.biz_regnum 
+and
+u.user_num = #{user}) A
+WHERE 
+P.ACM_NUM = A.ACM_NUM
+AND
+p.pay_time >= TO_DATE( #{start},'YYYY-MM-DD') 
+AND 
+p.pay_time < TO_DATE( #{end},'YYYY-MM-DD')
+]]>
+
+</select>
+<select id="getPeriodAcmSales" resultMap="PaymentVOResult">
+<![CDATA[
+ select
+  P.*, a.acm_name 
+  from tpayment P, 
+  (select 
+  acm_num,a.acm_name 
+  from tacm a, tuser u 
+  where a.biz_regnum = u.biz_regnum ) A 
+  WHERE P.ACM_NUM = A.ACM_NUM 
+  AND P.ACM_NUM =  #{amcNum}
+  AND p.pay_time >= TO_DATE( #{start},'YYYY-MM-DD') 
+  AND p.pay_time < TO_DATE( #{end},'YYYY-MM-DD') 
+]]>
+
+</select>
+
+</mapper>

@@ -39,7 +39,11 @@ public class AcmVO {
 	private Integer acmOptcode;
 	
 	private RomVO rom;
+	private String sumTotal;
+	
+	private Double starPoint;
 	
 	private List<PicVO> picList;
+	
 
 }

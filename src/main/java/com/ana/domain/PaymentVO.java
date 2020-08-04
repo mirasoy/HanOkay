@@ -25,4 +25,8 @@ public class PaymentVO {
 	private String payStatus;
 	private String userNum;
 	
+	private String acmName;
+	private String romName;
+	
+	private String sumTotal;
 }
