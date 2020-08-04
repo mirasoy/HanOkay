@@ -20,6 +20,10 @@ public class Criteria {
 	private String person;
 	private String in;
 	private String out;
+	private String city;
+	private String distr;
+	private String detail;
+	
 	
 	public Criteria() {
 		this(1,10);
