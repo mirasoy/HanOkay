@@ -129,6 +129,9 @@ select distinct acm_num
 						<when test="type == 'W'.toString()">
 							acm_detailaddr like '%'||#{cri.detail}||'%'
 						</when>
+						<when test="type == 'F'.toString()">
+							bitand(acm_optcode,#{cri.acmOpt})=#{cri.acmOpt}
+						</when>
 					</choose>
 				</trim>
 			</foreach>

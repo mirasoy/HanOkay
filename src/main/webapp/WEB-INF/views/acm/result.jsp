@@ -64,7 +64,7 @@
 														value='<c:out value="${pageMaker.cri.keyword}"/>'
 														placeholder="Enter a location">
 												</div>
-												<input type="hidden" value="CW" name="type">
+												<input type="hidden" value="A" id="type" name="type">
 
 
 											</div>
@@ -149,10 +149,69 @@
 						<li><a href="#">숙소 정책</a></li>
 						<li><a href="#">요금</a></li>
 						<li><a href="#">즉시 예약</a></li>
-						<li><a href="#">필터 추가하기</a></li>
+						<li><input type="button" id="myBtn" name="filterAjax" value="필터 추가하기"></li>
 					</ul>
 				</div>
 				<!-- end : main_text -->
+				
+				
+				<!-- 필터버튼 추가 -->
+    <!-- The Modal -->
+    <div id="filterModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form method="GET" action="/acm/result">
+       
+       <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'> 
+       <input type='hidden' name='amount' value='${pageMaker.cri.amount}'> 
+       <input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'> 
+       <input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+       <input type='hidden' name='person' value='<c:out value="${pageMaker.cri.person}"/>'> 
+       <input type='hidden' name='in' value='<c:out value="${pageMaker.cri.in}"/>'> 
+       <input type='hidden' name='out' value='<c:out value="${pageMaker.cri.out}"/>'>
+															
+          <label><input type="checkbox" name="filterAjax" value="1" /> 수영장</label>
+          <label><input type="checkbox" name="filterAjax" value="2" /> 주차장</label>
+          <label
+            ><input type="checkbox" name="filterAjax" value="4" /> 공항 이동 교통편 서비스</label
+          >
+          <label><input type="checkbox" name="filterAjax" value="8" /> 체육관/피트니스</label>
+          <label
+            ><input type="checkbox" name="filterAjax" value="16" /> 24시간 프런트 데스크</label
+          >
+          <label
+            ><input type="checkbox" name="filterAjax" value="32" /> 가족/아동 여행객 친화형
+            시설</label
+          >
+          <label><input type="checkbox" name="filterAjax" value="64" /> 금연</label>
+          <label><input type="checkbox" name="filterAjax" value="128" /> 스파/사우나</label>
+          <label><input type="checkbox" name="filterAjax" value="256" /> 레스토랑</label>
+          <label><input type="checkbox" name="filterAjax" value="512" /> 흡연 구역</label>
+          <label
+            ><input type="checkbox" name="filterAjax" value="1024" /> 반려동물 동반 가능</label
+          >
+          <label
+            ><input type="checkbox" name="filterAjax" value="2048" /> 장애인용 편의
+            시설/서비스</label
+          >
+          <label
+            ><input type="checkbox" name="filterAjax" value="4096" /> 비즈니스 관련 편의
+            시설</label
+          >
+          <label><input type="checkbox" name="filterAjax" value="8192" /> 인터넷</label>
+          <label><input type="checkbox" name="filterAjax" value="16384" /> 조식</label>
+          <label><input type="checkbox" name="filterAjax" value="32768" /> 석식</label>
+          <input id="total_sum" name="acmOpt" type="text" size="20" value='<c:out value="${pageMaker.cri.acmOpt}"/>' readonly />
+          <input id="total" type="submit" value="개의 숙소보기" />
+         
+          <p>
+            <input type="reset" name="filterAjax" value="Reset" />
+          </p>
+        </form>
+      </div>
+    </div>
+    <!-- 필터버튼 끝 -->
 
 
 				<!-- start : gallery_list -->
@@ -485,12 +544,12 @@
         });
         // Sets a listener on a radio button to change the filter type on Places
         // Autocomplete.
-        function setupClickListener(id, types) {
+        /* function setupClickListener(id, types) {
           var radioButton = document.getElementById(id);
           radioButton.addEventListener('click', function() {
             autocomplete.setTypes(types);
           });
-        }
+        } 
         setupClickListener('changetype-all', []);
         setupClickListener('changetype-address', ['address']);
         setupClickListener('changetype-establishment', ['establishment']);
@@ -499,7 +558,7 @@
             .addEventListener('click', function() {
               console.log('Checkbox clicked! New state=' + this.checked);
               autocomplete.setOptions({strictBounds: this.checked});
-            });
+            });*/
       }
     </script>
 <script
@@ -507,7 +566,106 @@
 	async defer></script>
 
 <script>
-    $(document).ready(function() { $("#e1").select2(); });
+//필터 모달창
+ 
+$(function () { //=$(document).ready(function(){
+	
+	
+    $('input[name="filterAjax"]').click(function () {
+      let sum = 0;
+      $('input[name="filterAjax"]:checked').each(function (index, item) {
+        sum += parseInt($(this).val());
+      });
+      
+      $("#total_sum").val(sum);
+      
+      var keyword = $("#pac-input").val();
+      var type = $("#type").val();
+      var cin = $("#in").val();
+      var out = $("#out").val();
+      var person = $("#person").val();
+      var acmOpt = $("#total_sum").val();
+      
+      var allData = {
+  			"keyword": keyword, "type": type, "in": cin,
+  			"out": out, "person": person, "acmOpt": acmOpt
+  	 }
+      
+      console.log(allData);
+      $.ajax({
+    	   type: 'POST',
+    	   url: '/acm/filter',
+    	   dataType: 'json',
+    	   data: allData,
+    	   //async: false,
+    	   success: function(data){
+    		   console.log(data);
+    		  //chkbizused=document.getElementById("chkbizused");
+    		 
+    		   $('#total').val(data.total+"개의 숙소보기");
+    		
+	    	/* if(chkbizused==null){//없으면 추가시켜주고
+    	    	formObj.append("<input type='hidden' id='chkbizused' name='chkbizused' value='"+data.msg2+"'>");
+    	    	
+	    	} else chkbizused.value=data.msg2;//이미 있으면 바꿔치기 */
+    	   },
+    	   error: function(data){
+    		  window.location.href ="../error/error";
+    	   }
+    	 });
+    });
+    getAcmOpt();
+  });
+  
+function dec2bin(codeNum){
+	return (codeNum >>> 0).toString(2); 
+}
+
+function pad(code) {
+	return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
+}
+
+function getAcmOpt() {
+	let option;
+	var acmOpt = $("#total_sum").val();
+	
+	option= pad(dec2bin(acmOpt));//10진수 옵션코드를 16자리 2진수로 변환한다(110101010..like this)
+	
+	var chkbox = $('input[type="checkbox"]');
+	for(let i=0; i<option.length; i++){
+		if(option.charAt(i) == 1){
+			chkbox[15-i].checked = true;
+		}
+	}
+
+}
+
+  // Get the modal
+  var filterModal = document.getElementById("filterModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function () {
+	  filterModal.style.display = "block";
+  };
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function () {
+	  filterModal.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+    	filterModal.style.display = "none";
+    }
+  };
+//필터 모달 끝
     
  	/* 날짜 선택(수희) */
 		var today = new Date();
