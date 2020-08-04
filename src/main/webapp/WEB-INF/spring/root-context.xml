@@ -68,4 +68,20 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 
+	<!--FB 로그인  -->
+	<!-- 테스트 버전 앱 아이디와 시크릿 코드를 추가함 -->
+	 <bean id="connectionFactory"
+        class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="323895235315656" />
+        <constructor-arg value="9e2477b40465fa89917e1b22eb3ec84a" />
+    </bean>
+ 
+    <bean id="oAuth2Parameters"
+        class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="email" />
+        <property name="redirectUri" value="https://localhost:8443/user/login/aouth2" />
+    </bean>
+ 	<!--FB 로그인 끝 -->
+
+
 </beans>

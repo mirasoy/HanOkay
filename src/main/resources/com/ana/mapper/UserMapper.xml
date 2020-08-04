@@ -33,7 +33,16 @@
 	where U_EMAIL=#{userEmail}
 	</update>
 	
-		
+	<!-- email과 회원가입경로로 유저를 가져오는 메서드 -->
+	<select id="getUserByEmailAndRegMethod" resultMap="UserVO">
+	select * from tuser where u_email=#{userEmail} and u_regmethod=#{userRegisterMethod}
+	</select>
+	
+	<!-- email로 회원가입경로를 가져오는 메서드 -->
+	<select id="checkRegisterMethod" resultType="String">
+	select u_regmethod from tuser where u_email=#{userEmail}
+	</select>	
+	
 	<!-- email과 인증코드가 일치하는 회원이 몇명인지 확인하는 메서드 -->	
 	<select id="matchAuthCode" resultType="int">
 	select count (*) from tuser where u_email=#{userEmail} and u_auth_code=#{userAuthCode}
@@ -54,7 +63,7 @@
 	<!-- DB에 존재하는 id와 pwd인지 확인하는 쿼리 -->
 	<select id="isValidUser" resultMap="UserVO">
 	select * from tuser
-	where u_email=#{userEmail} and u_pwd=#{userPwd}
+	where u_email= #{userEmail} and u_pwd= #{userPwd}
 	</select>
 	
 	<!-- 이메일 중복 검사 쿼리 -->
@@ -72,6 +81,15 @@
 	<select id="getListOfUsers" resultMap="UserVO">
 	select * from tuser
 	</select>
+	
+	<!-- 구글아이디로 새로운 유저 가입시키기 -->
+	<insert id="insertUserByGoogle">
+	<selectKey resultType="String" order="BEFORE" keyProperty="userNum">
+	select concat('U',SEQ_TUSER.nextval) from dual 
+	</selectKey>
+	insert into tuser(USER_NUM, U_EMAIL, U_LASTNAME, U_FSTNAME, U_REGMETHOD, U_STAT_CODE) 
+	values(#{userNum}, #{userEmail}, #{userLastName}, #{userFstName}, #{userRegisterMethod},'ACTIVE') 
+	</insert>
 	
 	<!-- 유저 테이블에 한 행 삽입하는 쿼리 -->
 	<insert id="insertUser">
@@ -153,5 +171,10 @@
 		where USER_NUM =#{userNum}
 	</update>
 
+
+	<!-- 사업자번호로 유져가져오기 -->
+	<select id="getAcmOwner" resultMap="UserVO">
+		SELECT * FROM tuser where biz_regnum = #{bizRegisterNumber}
+	</select>
 
 </mapper>

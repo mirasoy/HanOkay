@@ -30,7 +30,6 @@ public class UserController {
 	
 	@GetMapping("/account/myAccount")
 	public String showMyAccountPage() {
-		log.info("404올-휴-왜? 여기");
 		return "/account/myAccount";
 	}
 	//account/myAccount/findPwd 를 보여주는 메서드
@@ -39,11 +38,25 @@ public class UserController {
 		return "/account/myAccount/findPwd";
 	}
 	
+	@GetMapping("/account/myAccount/myProfile")
+	public String showProfilePage() {
+		return "/account/myAccount/myProfile";
+	}
+	
+	@GetMapping("/account/myAccount/myInfo")
+	public String showMyInfoPage() {
+		return "/account/myAccount/myInfo";
+	}
+	
+
+	@GetMapping("/account/myAccount/loginAndSecurity")
+	public String showLoginAndSecurityPage() {
+		return "/account/myAccount/loginAndSecurity";
+	}
+	
 	@RequestMapping(value="/account/myAccount/accountRecovery", method=RequestMethod.POST)
 	public void sendEmailToFindPwd(String email) {
 		log.info("email in UserController: "+ email);
-		
-		
 		
 	}
 }

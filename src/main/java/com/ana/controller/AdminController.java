@@ -18,6 +18,7 @@ import com.ana.domain.UserAcmVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AdminService;
 import com.ana.service.CodeService;
+import com.ana.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -32,6 +33,8 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService aservice;//호스트 사업등록증관련
+	@Autowired
+	private UserService uservice;//호스트 사업등록증관련
 	@Autowired
 	private CodeService codeService;
 	
@@ -93,18 +96,69 @@ public class AdminController {
 	
 	}
 	
+	@GetMapping("/userNum_StatPending")
+	public String userNum_StatPendingGet(String userNum,Model model,HttpSession session) {
+		System.out.println("userNum_StatPending get");
+		//숙소정보를 가져온다1
+		UserAcmVO pendinghostacm= aservice.getUserNumAcm(userNum);
+		System.out.println(pendinghostacm);
+		
+		model.addAttribute("acmNum", pendinghostacm.getAcmNum());
+				
+		return "redirect:/admin/userStatPending";
+	}
+	
+	@PostMapping("/userNum_StatPending")
+	public void userNum_StatPendingPost(String userNum,Model model,HttpSession session) {
+		System.out.println("userNum_StatPending post");
+	}
 	
 	
 	@GetMapping("/userStatPending")
-	public void userStatPendingGet(String bizRegisterNumber,Model model,HttpSession session) {
+	public void userStatPendingGet(String acmNum,Model model,HttpSession session) {
 		System.out.println("userStatPending Get");
-		System.out.println(bizRegisterNumber);
 		
-		UserAcmVO pendinghostacm= aservice.getpendingUserAcms(bizRegisterNumber);
+		//숙소정보를 가져온다1
+		UserAcmVO pendinghostacm= aservice.getUserAcms(acmNum);
 		System.out.println(pendinghostacm);
-		model.addAttribute("pendinghostacm", pendinghostacm);
+		
+		model.addAttribute("pendinghostacm", pendinghostacm);//숙소뿌리기
+		
+		///////////////////////////////////////////////////////////
+		//숙소에 대한 rom을 가져온다(acmNum필요)2
+		List<RomVO> roms = aservice.getRoms(acmNum);
+		System.out.println("가저온rom"+roms);
+		model.addAttribute("pendingroms", roms);//객실뿌리기
+		
+		
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
 		
 	}
+	
+	@GetMapping("/adminPendingviewAcm")
+	public void adminPendingviewAcmGet(String acmNum,Model model,HttpSession session) {
+		
+		System.out.println("adminPendingviewAcm Get");
+		System.out.println(acmNum);
+		
+		UserAcmVO getuseracm= aservice.getUserAcms(acmNum);
+		System.out.println(getuseracm);
+		model.addAttribute("getuseracm", getuseracm);
+		
+	///////////////////////////////////////////////////////////
+		
+		
+		//숙소에 대한 rom을 가져온다(acmNum필요)2
+		List<RomVO> roms = aservice.getRoms(acmNum);
+		System.out.println("가저온rom"+roms);
+		model.addAttribute("roms", roms);//객실뿌리기
+		
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
+		
+	}
+	
 	
 	@PostMapping("/userStatPending")
 	public String userStatPendingPost(String userNum,Model model,HttpSession session) {
@@ -158,10 +212,17 @@ public class AdminController {
 	
 	
 	@PostMapping("/moditoHost")
-	public String moditoHostPost(String userNum,String bizRegnum,Model model,HttpSession session) {
+	public String moditoHostPost(String userNum, String acmNum, Model model,HttpSession session) {
 		System.out.println("moditoHost Post");
-		aservice.moditoHost(userNum,bizRegnum);
+		aservice.moditoHost(userNum, acmNum);//회원상태, 숙소, 객실 상태를 모두 바꿈
 		
+		///////////////////세션 새로 걸어준다. 정보가 바뀌었으니///////////////
+		System.out.println(getUser(session).getUserStatusCode());
+		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
+		System.out.println(user);
+		session.setAttribute("user", user);
+		System.out.println(getUser(session).getUserStatusCode());
+
 		
 		//알림 보내기 기능추가할것 나중에
 		
@@ -173,19 +234,61 @@ public class AdminController {
 		System.out.println("moditoGuest Get");
 	}
 	
-	
-	
 	@PostMapping("/moditoGuest")
-	public String moditoGuestPost(String userNum,Model model,HttpSession session) {
+	public String moditoGuestPost(String userNum, String acmNum,Model model,HttpSession session) {
 		System.out.println("moditoGuest Post");
 		
 		//guest, active, 사업자번호 리셋
-		aservice.moditoGuest(userNum);
+		aservice.moditoGuest(userNum,acmNum);
+		
+		
+		///////////////////세션 새로 걸어준다. 정보가 바뀌었으니///////////////
+		System.out.println(getUser(session).getUserStatusCode());
+		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
+		System.out.println(user);
+		session.setAttribute("user", user);
+		System.out.println(getUser(session).getUserStatusCode());
+
 		
 		//알림 보내기 기능추가할것 나중에
 		
 		return "redirect:/admin/adminindex";
 	}
+	
+	@GetMapping("/activeAcm")//페이지 자체는 없음
+	public void activeAcmGet() {
+		System.out.println("activeAcm Get");
+	}
+	
+	@GetMapping("/inactiveAcm")//페이지 자체는 없음
+	public void inactiveAcmGet() {
+		System.out.println("inactiveAcm Get");
+	}
+	
+	@PostMapping("/activeAcm")
+	public String activeAcmPost(String acmNum,Model model,HttpSession session) {
+		System.out.println("activeAcm Post");
+		
+		//guest, active, 사업자번호 리셋
+		aservice.activeAcm(acmNum);
+		
+		//알림 보내기 기능추가할것 나중에
+		
+		return "redirect:/admin/adminlistings";
+	}
+	
+	@PostMapping("/inactiveAcm")
+	public String inactiveAcmPost(String acmNum,Model model,HttpSession session) {
+		System.out.println("inactiveAcm Post");
+		
+		//guest, active, 사업자번호 리셋
+		aservice.inactiveAcm(acmNum);
+		
+		//알림 보내기 기능추가할것 나중에
+		
+		return "redirect:/admin/adminlistings";
+	}
+	
 	
 	@PostMapping("/adminlistings")
 	public String adminlistingsPost() {
@@ -193,7 +296,6 @@ public class AdminController {
 	}
 	
 
-	
 	@GetMapping("/adminlistings")
 	public void adminlistingsGet(Model model,HttpSession session) {
 		System.out.println("=== 어드민단 숙소보기 페이지!===");
@@ -215,6 +317,7 @@ public class AdminController {
 		
 		acmActi="INACTIVE";
 		List<UserAcmVO> inactivelist= aservice.getadminListAcms(acmActi);
+		System.out.println(inactivelist);
 		model.addAttribute("inactivelist", inactivelist);
 		size+=inactivelist.size();
 			
@@ -230,23 +333,29 @@ public class AdminController {
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
+	
+	
+	
 	@GetMapping("/adminviewAcm")
-	public void adminviewAcmGet(String bizRegnum,Model model,HttpSession session) {
+	public void adminviewAcmGet(String acmNum,Model model,HttpSession session) {
 		System.out.println("adminviewAcm Get");
-		System.out.println(bizRegnum);
+		System.out.println(acmNum);
 		
-		UserAcmVO getuseracm= aservice.getpendingUserAcms(bizRegnum);
+		UserAcmVO getuseracm= aservice.getUserAcms(acmNum);
 		System.out.println(getuseracm);
 		model.addAttribute("getuseracm", getuseracm);
 		
-	}
-	
-	@PostMapping("/adminviewAcm")
-	public String adminviewAcmPost(String acmNum,Model model,HttpSession session) {
-		System.out.println("adminviewAcm Post");
+	///////////////////////////////////////////////////////////
 		
 		
-		return "/admin/adminviewAcm";
+		//숙소에 대한 rom을 가져온다(acmNum필요)2
+		List<RomVO> roms = aservice.getRoms(acmNum);
+		System.out.println("가저온rom"+roms);
+		model.addAttribute("roms", roms);//객실뿌리기
+		
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
+		
 	}
 	
 }

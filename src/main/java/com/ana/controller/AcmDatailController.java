@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.service.AcmDetailService;
+import com.ana.service.AcmService;
 import com.ana.service.CodeService;
+import com.ana.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -23,7 +25,9 @@ import lombok.extern.log4j.Log4j;
 public class AcmDatailController { // 숙소 상세페이지
 	
 	private AcmDetailService service;
+	private AcmService acmService;
 	private CodeService codeService;
+	private UserService userService;
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public void getDetailInfo(@RequestParam("acmNum") String acmNum, 
@@ -40,7 +44,8 @@ public class AcmDatailController { // 숙소 상세페이지
 		.addAttribute("rev", service.getRevList(acmNum))
 		.addAttribute("star", service.getStisf(acmNum))
 		.addAttribute("acmCode", codeService.getAcmCode())
-		.addAttribute("romCode", codeService.getRomCode());
+		.addAttribute("romCode", codeService.getRomCode())
+		.addAttribute("acmOwnerNum", userService.getAcmOwner(acmService.get(acmNum).getBizRegnum()).getUserNum());
 		
 		if(service.getRomList(acmNum, person).isEmpty()) {
 			model.addAttribute("rom", service.getRomAll(acmNum));

@@ -10,7 +10,7 @@ import com.ana.domain.UserAcmVO;
 
 public interface AcmRegMapper {
 	
-	public List<AcmVO> getListAcms(@Param("bizRegnum")String bizRegnum, @Param("acmActi")String acmActi);
+	public List<AcmVO> getListAcms(@Param("ownerUserNum")String ownerUserNum, @Param("acmActi")String acmActi);
 	
 	
 	public void newAcmReg(AcmVO vo);//숙소등록**
@@ -23,6 +23,7 @@ public interface AcmRegMapper {
 	
 	public AcmVO getpendingacm(String bizRegisterNumber);
 	
+	
 	public int delete(String acmNum);
 	
 	
@@ -30,12 +31,22 @@ public interface AcmRegMapper {
 	
 	public int chkaddr(String acmDetailaddr);//중복검사
 	
-
+	//가져온다
+	public int getNotPendingAcms(@Param("acmNum")String acmNum,@Param("ownerUserNum")String ownerUserNum, @Param("acmActi")String acmActi);
+	
+	public int removeAcm(String acmNum);//지운다
+	public int removeAcmso(String acmNum);//지운다
+	
 	
 	////////////어드민단////////////
 	public List<UserAcmVO> getadminListAcms(String acmActi);
 	
-	public UserAcmVO getpendingUserAcms(String bizRegnum);
+	public UserAcmVO getUserAcms(String acmNum);
 	//호스트 권한을 주며 active로 변경
 	public int moditoAcmActive(AcmVO acm);
+
+	public UserAcmVO getPendingUserAcms(@Param("bizRegnum") String bizRegnum,@Param("acmActi")String acmActi);
+
+	public UserAcmVO getUserNumAcm(String userNum);
+	
 }

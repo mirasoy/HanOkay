@@ -11,15 +11,18 @@
 String userLastName = "";
 String userFstName = "";
 String userPwd = "";
+String userEmail="";
 String userNum = "";
 String userPriv ="";
 String userStatusCode="";
- 
+
+
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
    userLastName = user.getUserLastName();
    userFstName = user.getUserFstName();
    userPwd = user.getUserPwd();
+   userEmail = user.getUserEmail();
    userNum = user.getUserNum();
    userPriv=user.getUserPriv();
    userStatusCode=user.getUserStatusCode();
@@ -34,6 +37,11 @@ if (user != null) {
 
 <html lang="en">
 <head>
+	<!-- 구글 소셜 로그인 시작 -->
+	<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="942421543250-i3vvb6s828smd122lqcdr0buvjg2p6ui.apps.googleusercontent.com">
+ 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> 
+	<!-- 구글 소셜 로그인 끝 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,7 +68,8 @@ if (user != null) {
 <link rel="stylesheet" type="text/css"
    href="${request.contextPath}/resources/slick/slick-theme.css" >
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/review.css">
+
+<link rel="stylesheet" type="text/css" href="../resources/css/review.css">
 
 <!-- 메인 CSS style -->
 
@@ -133,7 +142,191 @@ if (user != null) {
                     
                   };    
                 });
+               
                });
+
+    	 
+       
+      function signOut() {
+       	 //google 로그아웃   	 
+           var auth2 = window.gapi.auth2.getAuthInstance();
+           auth2.signOut().then(function () {
+             console.log('User signed out.');         
+           });
+           
+           auth2.disconnect();
+           
+           //fb로그아웃
+           /* FB.logout(function(response) {
+   		}); */
+           
+           $.ajax({
+   			type:'GET',
+   			url: '${pageContext.request.contextPath}/user/logout',
+   			success: function(data){
+   				window.location.href='${pageContext.request.contextPath}/acm/list';
+   				//alert(data);
+   				},		
+   			}); 	
+         }
+            
+   	 function onLoad() {
+   	      gapi.load('auth2', function() {
+   	        gapi.auth2.init({
+   	        	 clientId: '942421543250-i3vvb6s828smd122lqcdr0buvjg2p6ui.apps.googleusercontent.com',
+   	        	 scope: 'profile email'
+   	        });
+   	      });
+   	    }  
+   	 
+	 
+	
+	 function onSignIn(googleUser) {
+			
+	        // Useful data for your client-side scripts:
+	        var profile = googleUser.getBasicProfile();
+	        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+	        console.log('Full Name: ' + profile.getName());
+	        console.log('Given Name: ' + profile.getGivenName());
+	        console.log('Family Name: ' + profile.getFamilyName());
+	        console.log("Image URL: " + profile.getImageUrl());
+	        console.log("Email: " + profile.getEmail());
+
+	        // The ID token you need to pass to your backend:
+	        var id_token = googleUser.getAuthResponse().id_token;
+	        console.log("ID Token: " + id_token);
+	 	
+	        $.ajax({
+				type:'POST',
+				url: '${pageContext.request.contextPath}/user/login/tokenSignIn',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: {
+					'idToken': id_token
+					
+					
+				},
+				success: function(data){ 
+						//window.alert("data~~"+data);
+						//window.alert("msg~~"+data.result);
+						var parsedData = JSON.parse(data);
+						//window.alert("parsed data: "+parsedData.result);
+						
+					if (parsedData.result==0){ //로그인 실패
+						//window.alert("msg=2:"+parsedData.result);
+						$('#msg').text('로그인 정보가 불일치합니다. 다시 시도해주세요');
+					}
+					
+					else if(parsedData.result==1){ //로그인 성공 시
+						//window.alert("msg=1:"+parsedData.result);
+					
+						window.location.href='${pageContext.request.contextPath}/user/welcome';
+					} 
+				
+				},	
+		});	 
+	}
+	      /*   var xhr = new XMLHttpRequest();
+	        xhr.open('POST', 'http://localhost/user/login/tokenSignIn');
+	        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	        xhr.onload = function() {
+	          console.log('Signed in as: ' + xhr.responseText);
+	        };
+	        xhr.send('idtoken=' + id_token); 
+	      }  */
+
+	//FB 로그인
+	      function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+	        console.log('statusChangeCallback');
+	        console.log(response);                   // The current login status of the person.
+	       console.log("Token:"+response.authResponse.accessToken);
+	        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+	          testAPI();  
+	        } else {                                 // Not logged into your webpage or we are unable to tell.
+	          document.getElementById('status').innerHTML = 'Please log ' +
+	            'into this webpage.';
+	        }
+	      }
+
+	      function checkLoginState() {               // Called when a person is finished with the Login Button.
+	        FB.getLoginStatus(function(response) {   // See the onlogin handler
+	          statusChangeCallback(response);
+	        });
+	      }
+
+
+	      window.fbAsyncInit = function() {
+	        FB.init({
+	          appId      : '600224137301572',
+	          cookie     : true,                     // Enable cookies to allow the server to access the session.
+	          xfbml      : true,                     // Parse social plugins on this webpage.
+	          version    : 'v7.0'          			 // Use this Graph API version for this call.
+	        });
+
+
+	        FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+	          statusChangeCallback(response);        // Returns the login status.
+	        });
+	      };
+	     
+	      function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+	        console.log('Welcome!  Fetching your information.... ');
+	      
+	       
+	         FB.api('/me', function(response) {
+	        	 var name=response.name;
+	          console.log('Successful login for: ' + response.name);
+	          
+	          document.getElementById('status').innerHTML =
+	            'Thanks for logging in, ' + response.name + '!';
+	          });
+	         
+	        /*   FB.api('/me', {fields: 'name'}, function(response) { 
+	        	 
+	   	      	console.log("response.id: "+response.id);
+	   	      	console.log("response.name: "+response.name);
+	         }); */
+	   	    
+	   		/* FB.api('/me/picture?type=small',function(response){
+	  			console.log(response.data.url);
+	  		}); */
+	  		
+	   		FB.api('/me', {fields: 'email'}, function(response) {
+	   			var email= response.email;
+	   	      	console.log("response.email: "+response.email);
+	   	    });
+	   		
+	   		FB.api('/me', {fields: 'birthday'}, function(response) {
+	   			var birthday= response.birthday;
+	   	      	console.log("response.birthday: "+ response.birthday);
+	   	    }); 
+	   		
+	   		
+	   		  $.ajax({
+					type:'POST',
+					url: '${pageContext.request.contextPath}/user/login/executeFBLogin',
+					dataType: 'json',
+					data: {
+						'email':email,
+						'name': name,
+						'birthday': birthday
+					},
+					success: function(data){
+						
+						if (data.msg==0){ //로그인 실패
+							
+							$('#msg').text('로그인 정보가 불일치합니다. 다시 시도해주세요');
+						}
+						
+						else if(data.msg==1){ //로그인 성공 시
+							
+							window.location.href='${pageContext.request.contextPath}/user/welcome';
+							} 
+						},		
+					}); 	
+	   			    
+	        
+	      }
+	        
 </script>
 
 </head>
@@ -150,7 +343,6 @@ if (user != null) {
  -->
 
 <body>
-
    <!-- main-content -->
    <div class="main-content" id="top">
       <div class="top-bar-bg"></div>
@@ -207,19 +399,23 @@ if (user != null) {
                               class="fa fa-user fa-2x"></i></a>
                            <ul class="dropdown-menu">
                               <span class="header-menu">마이페이지</span>
+                              <li><a onclick="location.href='/account/myAccount/myProfile'" style="cursor: pointer">프로필</a></li>
                               <li><a onclick="location.href='/account/myAccount'" style="cursor: pointer">계정</a></li>
                               <li><a onclick="location.href='/mypage/bookListAll'"
                                  style="cursor: pointer">나의 예약</a></li>
                               <li><a onclick="location.href='/review/list'"
                                  style="cursor: pointer">나의 리뷰</a></li>
+                              <li><a onclick="location.href='/chat/chatList'"
+                                 style="cursor: pointer">메시지</a></li>
                               <li><a href="#">내 관심 숙소</a></li>
                               <li id='mode'></li>
-                              <li id="header-menu"><a
-                                href='/user/logout'" style="cursor: pointer"
+                              <li id="header-menu">
+                              <a onclick="javascript:signOut();" style="cursor: pointer"
                                  id="sign-out-btn" data-selenium="sign-out"
                                  data-element-name="sign-out-btn" color="primary">
-                                    로그아웃
+                                   		 로그아웃
                               </a></li>
+                              <div style="display: none;" class=" g-signin2"></div>
                            </ul></li>
                      </ul>
                   </div>

@@ -4,15 +4,7 @@
 <%@include file="../includes/adminheader.jsp"%>
 
 <style>
-	.circle{
-		position:absolute;
-		top:-4px;
-		left:-1px;
-		width:20px;
-		height:20px;
-		border-radius:50%;
-		background-color:red;
-	}
+	
 
 </style>
 
@@ -22,14 +14,12 @@
 	<div style="margin-left:15%;margin-right:15%;">				
   <!-- 숙소 방 추가 모달로 띄우기-->
 <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
-  <h3 align="left">총 <c:out value="${size}"/>개의 회원</h3><br>
-	<div class="hostpendingisseo">호스트 대기자가 '<c:out value="${hopensize}"/>'명 있습니다!</div>		
-	<br>		  
+  <h3 align="left">총 <c:out value="${size}"/>명의 회원</h3>
+	<div class="hostpendingisseo" style="color:red;">호스트 대기자가 '<c:out value="${hopensize}"/>'명 있습니다!</div><br>		
 		
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading" style="padding-bottom:25px;">
-			<div class="circle hostpendingisseo"></div>
+			<div class="panel-heading">
 				호스트 대기자 명단<label class="pull-right hostpendingisseo">*수락/거절 필요</label>
       
 			</div>
@@ -51,7 +41,7 @@
 						<tr>
 							<td><c:out value="${pendinguser.userNum}" /></td>
 							<td>
-								<a class='pendingmove' href='<c:out value="${pendinguser.bizRegisterNumber}"/>'>
+								<a class='pendingmove' href='<c:out value="${pendinguser.userNum}"/>'>
 									<c:out value="${pendinguser.userFstName}" />
 								</a>
 							</td>
@@ -70,7 +60,7 @@
 		
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading" style="padding-bottom:25px;">
+			<div class="panel-heading">
 				일반 회원 명단
 			</div>
 
@@ -109,7 +99,7 @@
 		</div><!-- end pendinglist -->		
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading" style="padding-bottom:25px;">
+			<div class="panel-heading">
 				호스트 명단
 			</div>
 
@@ -166,8 +156,9 @@
 			var actionForm = $("#actionForm");
 			
 			e.preventDefault();
-			actionForm.append("<input type='hidden' name='bizRegisterNumber' value='"+$(this).attr("href")+"'>");
-			actionForm.attr("action","/admin/userStatPending");
+			actionForm.append("<input type='hidden' name='userNum' value='"+$(this).attr("href")+"'>");
+			
+			actionForm.attr("action","/admin/userNum_StatPending");
 			actionForm.submit();
 		});
 		
