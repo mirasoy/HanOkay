@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@include file="../../includes/header1.jspf"%>
-
+pageEncoding="UTF-8"%> 
+<%@include file="../../includes/header1.jspf"%>
+<title>HanOkay-개인정보</title>
 <style type="text/css">
   main,
   section,
@@ -309,6 +310,24 @@ pageEncoding="UTF-8"%> <%@include file="../../includes/header1.jspf"%>
     padding-left: var(--spacing-form-element-horizontal, 11px) !important;
     padding-right: var(--spacing-form-element-horizontal, 11px) !important;
   }
+
+  .SpanInsaveBtn {
+    font-size: var(--font-button-font-size, 16px) !important;
+    line-height: var(--font-button-line-height, 24px) !important;
+    letter-spacing: var(--font-button-letter-spacing, normal) !important;
+    font-family: var(
+      --font-button-font-family,
+      Circular,
+      -apple-system,
+      BlinkMacSystemFont,
+      Roboto,
+      Helvetica Neue,
+      sans-serif
+    ) !important;
+    text-transform: var(--font-button-text-transform, undefined) !important;
+    padding-top: var(--font-button-padding-top, undefined) !important;
+    padding-bottom: var(--font-button-padding-bottom, undefined) !important;
+  }
 </style>
 
 <%@include file="../../includes/header2.jspf"%> <%@include
@@ -343,7 +362,9 @@ file="../../includes/header3.jspf"%>
               <div style="margin-top: 8px; margin-bottom: 24px;">
                 <div class="realInfo_SR">
                   <!-- 세션에서 이름 -->
+                  <div class="nameFromSession"></div>
                   <!--수정 눌렸을 때 새로 생성되어야함-->
+                  <div id="showAndHide" style="display:none;">
                   <div
                     style="margin-top: 8px; margin-bottom: 24px;"
                     id="inputBeforeForm_SR"
@@ -395,11 +416,20 @@ file="../../includes/header3.jspf"%>
                               </div>
                             </div>
                           </div>
+
+                          <button
+                            type="submit"
+                            class="saveBtn_SR"
+                            aria-busy="false"
+                          >
+                            <span class="SpanInsaveBtn">
+                              수정
+                            </span>
+                          </button>
                         </div>
                       </div>
-
-                      <button type="submit" class="saveBtn_SR">수정</button>
                     </form>
+                  </div>
                   </div>
                   <!--수정 눌렀을 때 끝-->
                 </div>
@@ -409,7 +439,7 @@ file="../../includes/header3.jspf"%>
             <div class="btn_box">
               <div class="btn_box2">
                 <div class="btn_box3">
-                  <button type="button" class="btn_modify" aria-busy="false">
+                  <button type="button" class="btn_modify" aria-busy="false" onclick='changeInnerText(this);'>
                     수정
                   </button>
                 </div>
@@ -458,7 +488,7 @@ file="../../includes/header3.jspf"%>
                 <div class="realInfo_SR">
                   <!-- 여기에 세션의 이메일 들어가게-->
                   <!--                     <form >
-                    <input type="text">
+                  <input type="text">
                     </form> -->
                 </div>
               </div>
@@ -509,50 +539,61 @@ file="../../includes/header3.jspf"%>
 </div>
 <script>
 
-  function formatDate(date) {
-      var d = new Date(date),
-          month = '' + (d.getMonth() + 1),
-          day = '' + d.getDate(),
-          year = d.getFullYear();
 
-      if (month.length < 2)
-          month = '0' + month;
-      if (day.length < 2)
-          day = '0' + day;
 
-      return [year, month, day].join('/');
-  }
-
-  //DOM이 만들어지면
-  $(document).ready(function(){
-
-  //페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
-  if ( window.history.replaceState ) {
-         window.history.replaceState( null, null, window.location.href );
+   //DOM이 만들어지면
+   $(document).ready(function () {
+     //페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
+     if (window.history.replaceState) {
+       window.history.replaceState(null, null, window.location.href);
      }
 
-  //실명에 세션에 있는 정보들을을 넣어주자1
-  let userNameValue=document.getElementsByClassName("realInfo_SR")[0];
-  let userBdayValue=document.getElementsByClassName("realInfo_SR")[1];
-  let userEmailValue= document.getElementsByClassName("realInfo_SR")[2];
-  let userPhoneNumberValue= document.getElementsByClassName("realInfo_SR")[3];
+     //실명에 세션에 있는 정보들을을 넣어주자
+     let userNameValue = document.getElementsByClassName("realInfo_SR")[0];
+     let userBdayValue = document.getElementsByClassName("realInfo_SR")[1];
+     let userEmailValue = document.getElementsByClassName("realInfo_SR")[2];
+     let userPhoneNumberValue = document.getElementsByClassName("realInfo_SR")[3];
 
-  if(<%=userFstName != null%>){
-  	userNameValue.innerHTML= '<%=userLastName%> <%=userFstName%>';
-  	userEmailValue.innerHTML= '<%=userEmail%>';
+<%--     if(<%=userFstName != null%>){
+   	userNameValue.innerHTML= '<%=userLastName%> <%=userFstName%>';
+   	userEmailValue.innerHTML= '<%=userEmail%>';
 
-  	if(<%=user.getUserBirthday() != null %>){
-  		let bday= '<%=user.getUserBirthday() %>';
-  		let array = bday.split(" ");
-  		userBdayValue.innerHTML= array[5]+"/"+ array[1]+ "/"+ array[2];
-  	}
+   	if(<%=user.getUserBirthday() != null %>){
+   		let bday= '<%=user.getUserBirthday() %>';
+   		let array = bday.split(" ");
+   		userBdayValue.innerHTML= array[5]+"/"+ array[1]+ "/"+ array[2];
+   	}
 
-  	if(<%=user.getUserPhone() != null %>){
-  		userPhoneNumberValue.innerHTML= '+<%=user.getUserPhone() %>';
+   	if(<%=user.getUserPhone() != null %>){
+   		userPhoneNumberValue.innerHTML= '+<%=user.getUserPhone() %>';
+   		}
+     } --%>
+
+  let btnModifyArr= document.getElementsByClassName("btn_modify");
+  let nameModifyDiv=document.getElementById("inputBeforeForm_SR");
+  let showHide= document.getElementById("showAndHide");
+  let nameFromS=document.getElementsByClassName("nameFromSession")[0];
+  
+  
+  if(showHide.style.display==='none'){
+	  nameFromS.innerHTML='세린';
+  } else {
+	  nameFromS.innerHTML="";
+  }
+   });
+
+
+  	function changeInnerText(btnVal){
+  		
+  	if(btnVal.innerText === '수정'){
+  		$("#showAndHide").show();
+  		btnVal.innerText='취소';
+  	} else{
+  		$("#showAndHide").hide();
+  		btnVal.innerText='수정';
   	}
   }
-
-  });
+  	
 </script>
 
 <%@include file="../../includes/footer.jsp"%>
