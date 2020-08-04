@@ -8,6 +8,7 @@
 	margin: 0 auto;
   max-width: 800px;
   padding: 0 20px;
+  background-color: #f2f2f2;
 }
 .chatContainer {
   border: 2px solid #dedede;
@@ -67,6 +68,9 @@
 .chatrom{
     border-width: 0px;
     background-color: lightblue;
+}
+.chatrom:hover{
+	cursor: pointer;
 }
 .unread{
    background-color: orange;
