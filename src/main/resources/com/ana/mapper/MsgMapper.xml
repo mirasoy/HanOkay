@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.MsgMapper">
+	
+	<resultMap id="MsgVOresult" type="com.ana.domain.MsgVO">
+		<result column="MSG_NUM" property="msgNum" />	
+		<result column="UNUM_FROM" property="unumFrom" />	
+		<result column="UNUM_TO" property="unumTo" />
+		<result column="MSG_CONTENT" property="msgContent" />
+		<result column="READ_STATUS" property="readStatus" />
+		<result column="MSG_DATE" property="msgDate" />
+	</resultMap>
+
+	
+	
+	<insert id="sendMsg">
+	<selectKey keyProperty="msgNum" order="BEFORE"	resultType="String">
+			select concat('M',SEQ_MSG.nextval) from dual
+	</selectKey>
+	Insert into TMSG (MSG_NUM,UNUM_FROM,UNUM_TO,MSG_CONTENT,READ_STATUS) VALUES
+	(#{msgNum},#{unumFrom},#{unumTo},#{msgContent},	'F')
+	
+	</insert>
+	
+	<update id="marksRead">
+	
+	UPDATE TMSG SET READ_STATUS = 'T' WHERE MSG_NUM = #{readStatus}
+	
+	</update>
+	 
+	 <select id="readConversation" resultMap="MsgVOresult">
+	 
+		select 
+		*
+		FROM tmsg 
+		where (unum_from = #{userNum1} and unum_to =  #{userNum2}) or (unum_from =  #{userNum2} and unum_to =  #{userNum1}) 
+		order by msg_date
+
+	 </select>
+
+</mapper>

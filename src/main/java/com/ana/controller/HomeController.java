@@ -60,7 +60,7 @@ public class HomeController {
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName) {
-		log.info("fileName: " + fileName);
+		//log.info("fileName: " + fileName);
 		File file = new File(fileName);
 		log.info("file :" + file);
 		ResponseEntity<byte[]> result = null;

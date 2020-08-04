@@ -90,7 +90,7 @@
    <form action="/hosting/become-host2_6" method="get" id='roomForm'>
 <br>
 		<div class="pull-right">
-		  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">객실 등록</button><!-- ajax처리안함 -->
+	  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">객실 등록</button><!-- ajax처리안함 -->
 		</div>
 		
 		
@@ -99,7 +99,7 @@
      <!-- <div id="image_container" style="width:200px;height:200px;"></div>
       <input type="file" id="ROM_PURL" name="ROM_PURL" placeholder="객실 사진" onchange="setThumbnail(event);"> --> 
 
-    <div class="room" id="room" style="width:500px; display:inline-block; background-color:pink;">
+    <div class="room" id="room" style="width:500px; display:inline-block;">
       <div class="form-group">
            <input class="form-control" id="ROM_NAME" name="ROM_NAME" placeholder="객실 이름" style="width:300px;"> 
       </div>
@@ -167,10 +167,10 @@
       <input type="checkbox" name="romOptcode" id="RM_OPT_KC" value="32768"><label for="RM_OPT_KC">개별주방</label>
     </div>
     
-    
- 	<div class="uploadDiv" style="display:inline-block; background-color:orange;">
+    <br><br><br>
+ 	<div class="uploadDiv" style="display:inline-block;">
           <input type="file" name="uploadFile">
-       <div class="uploadResult">
+       <div class="uploadResult" style="border-style: dashed;border-color: #337AB7; width:400px; height:200px;">
           <ul>
 
           </ul>
@@ -322,7 +322,7 @@
 			str2 += "<input type = 'hidden' name = 'romPurl' value='" + jobj.data("path") + "'>";
 		});
 	
-		alert(str2);
+		//alert(str2);
 		formObj.append(str2);
 	
 

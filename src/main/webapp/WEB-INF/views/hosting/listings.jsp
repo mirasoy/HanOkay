@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/hostheader.jsp"%>
+<style>
+	a{
+		color: #21292d !important;
+		}
+		
+	
+</style>
+
 
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>		
@@ -15,8 +23,8 @@
 		<div class="col-lg-12" id="activeacm">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span id="acmlist">영업중인 숙소</span>
-				<button type="button" class="btn btn-xs pull-right" data-oper='newAcm'>새 숙소 등록</button>
+				영업중인 숙소
+				<span id="newallowed"><button  type="button" class="btn btn-xs pull-right" data-oper='newAcm'>새 숙소 등록</button></span>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -32,8 +40,8 @@
 
 					<c:forEach items="${activelist}" var="activeacm">
 						<tr>
-							<td style="width: 350px;">
-							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${activeacm.acmPurl}" /><c:out value="${activeacm.acmPname }" />'>
+							<td style="width: 150px;">
+							<img style='width: auto; height: 100px; max-width: 100px; margin-left :20px; border-radius:10px;' id='rPicture' src='/review/display?fileName=<c:out value="${activeacm.acmPurl}" /><c:out value="${activeacm.acmPname }" />'>
 
 							</td>
 							<td>
@@ -61,7 +69,7 @@
 		<div class="col-lg-12" id="pendingacm">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div id="acmlist">대기중인 숙소</div>
+				심사 대기중인 숙소 <span class="pull-right">재승인을 요청하시거나 삭제하여 새 숙소를 등록하세요!</span>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -77,8 +85,8 @@
 
 					<c:forEach items="${pendinglist}" var="pendingacm">
 						<tr>
-							<td style="width: 350px;">
-							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${pendingacm.acmPurl}" /><c:out value="${pendingacm.acmPname }" />'>
+							<td style="width: 150px;">
+							<img style='width: auto; height: 100px; max-width: 100px; margin-left :20px; border-radius:10px;' id='rPicture' src='/review/display?fileName=<c:out value="${pendingacm.acmPurl}" /><c:out value="${pendingacm.acmPname }" />'>
 							</td>
 							<td>
 								<a class='move' href='<c:out value="${pendingacm.acmNum}"/>'>
@@ -106,7 +114,7 @@
 		<div class="col-lg-12" id="inactiveacm">
 		<div class="panel panel-default hostonly">
 			<div class="panel-heading">
-				<div id="acmlist">비활성화 된 숙소</div>
+				활성화 된 숙소
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -122,7 +130,7 @@
 
 					<c:forEach items="${inactivelist}" var="inactiveacm">
 						<tr>
-							<td style="width: 350px;">
+							<td style="width: 150px;">
 							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${inactiveacm.acmPurl}" /><c:out value="${inactiveacm.acmPname }" />'>
 							</td>
 							<td>
@@ -195,7 +203,6 @@ $(document).ready(function(){
 	
 	});
 	$(document).ready(function(){
-		var formObj = $("#actionForm");
 		
 		$('button').on("click", function(e){
 			e.preventDefault();
@@ -206,9 +213,8 @@ $(document).ready(function(){
 			
 			if(operation==='newAcm'){
 				alert("새 숙소를 등록합니다");
-				formObj.attr("action","/hosting/become-host");	
+				location.href="/hosting/become-host0";
 			}
-			actionForm.submit();
 		});
 	});
 
@@ -219,7 +225,9 @@ $(document).ready(function(){
 			
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='acmNum' value='"+$(this).attr("href")+"'>");
-			actionForm.attr("action","/hosting/regAcm");
+
+			actionForm.attr("action","/hosting/getAcm");
+
 			actionForm.submit();
 		});
 	});
@@ -234,6 +242,11 @@ $(document).ready(function(){
 	   		$("#inactiveacm").css("display","none"); 
 		  }
 	   
+	      var newnotallowed="<c:out value='${newnotallowed}' />";
+	      if(newnotallowed=="true"){
+	    	  $("#newallowed").css("display","none"); 
+	      } 
+	      
 	   });
 </script>
 

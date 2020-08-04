@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ana.mapper.QnaMapper">
+	
+	<resultMap type="com.ana.domain.UserVO" id="UserVO" >
+		<result property="userNum" column="USER_NUM"/>
+		<result property="userEmail" column="U_EMAIL"/>
+		<result property="userPwd" column="U_PWD"/>
+		<result property="userLastName" column="U_LASTNAME"/>
+		<result property="userFstName" column="U_FSTNAME"/>
+		<result property="userPhone" column="U_PHONE"/>
+		<result property="userBirthday" column="U_BIRTHDAY"/>
+		<result property="userRegisterDate" column="U_REGDATE" />
+		<result property="userRegisterMethod" column="U_REGMETHOD"/>
+		<result property="userPriv" column="U_PRIV"/>
+		<result property="userProfilePicUrl" column="U_PURL" />
+		<result property="userProfilePicName" column="U_PICNAME" />
+		<result property="userIntroduction" column="U_INTRO" />
+		<result property="userLanguage" column="U_LANG" />
+		<result property="userStatusCode" column="U_STAT_CODE" />
+		<result property="bizRegisterNumber" column="BIZ_REGNUM" />
+		<result property="bizRegisterPicUrl" column="BIZ_REGPURL" />
+		<result property="userAuthCode" column="U_AUTH_CODE" />
+	</resultMap>
+	
+	<resultMap type="com.ana.domain.QnaVO" id="QnaVO" >
+		<result column="bno" property="bno" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="writer" property="writer" />
+		<result column="regdate" property="regdate" />
+		<result column="updatedate" property="updateDate" />
+		<result column="hit" property="hit" />
+		<collection property="userVO" resultMap="UserVO"/>
+	</resultMap>
+
+<select id="getList" resultMap="QnaVO">
+<![CDATA[
+select * from tqna where bno >0
+]]>
+</select>
+
+<insert id="insert">
+	insert into tqna(bno,title,content,writer)
+	values (seq_qna.nextval, #{title}, #{content}, #{writer})
+</insert>
+
+<insert id="insertSelectKey">
+
+	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+		select seq_qna.nextval from dual
+	</selectKey>
+	
+	insert into tqna(bno,title,content,writer)
+	values (#{bno}, #{title}, #{content}, #{writer})
+</insert>
+
+<select id="read" resultMap="QnaVO">
+	select * from (select distinct bno, title, content, regdate, updatedate, hit, u_lastname|| ' '  ||u_fstname writer
+        from tuser u, tqna q
+        where  u.user_num = q.writer) where bno = #{bno}
+</select>
+
+<delete id="delete">
+	delete from tqna where bno = #{bno}
+</delete>
+
+<update id="update">
+	update tqna
+	set title = #{title},
+	content = #{content},
+	updateDate = sysdate
+	where bno = #{bno}
+</update>
+
+<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+<select id="getListWithPaging" resultMap="QnaVO">
+<![CDATA[
+select
+	bno, title, content, writer, regdate, updatedate, hit
+from
+	(
+	select /*+INDEX_DESC(TQNA PK_TQNA) */
+		rownum rn, bno, title, content, writer, regdate, updatedate, hit
+	from
+		(select distinct bno, title, content, regdate, updatedate, hit, u_lastname|| ' '  ||u_fstname writer
+        from tuser u, tqna q
+        where  u.user_num = q.writer
+        order by bno desc) tqna
+	where 
+]]>
+	
+	<include refid="criteria"></include>
+	
+<![CDATA[
+	rownum <= #{pageNum} * #{amount}
+	)
+	where rn > (#{pageNum}-1) * #{amount}
+]]>
+</select>
+
+<select id="getTotalCount" resultType="int">
+select count(*) from (select distinct bno, title, content , u_lastname|| ' '  ||u_fstname writer
+        from tuser u, tqna q
+        where  u.user_num = q.writer
+        ) where
+<include refid="criteria"></include>
+ bno > 0
+</select>
+
+<update id="boardHit" parameterType="long">
+update tqna set
+hit = hit+1
+where bno = #{bno}
+</update>
+
+</mapper>

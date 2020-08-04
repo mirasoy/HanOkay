@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.AcmRomVO;
 import com.ana.domain.BookingVO;
+import com.ana.domain.PaymentVO;
 import com.ana.domain.RomVO;
 
 import lombok.Setter;
@@ -97,39 +98,66 @@ public class BookingServiceTests {
 	
 	
 	
-	@Test
+	//@Test
 	public void testGetInfo() {
-		log.info(service.getInfo("R210"));
+		log.info(service.getAcmInfo("R210"));
 	}
 	
 	//@Test
-	public void testRegister() {
-		BookingVO book = new BookingVO();
-		book.setUserNum("U999");
-		book.setRomNum("R999");
+	public void testRegisterBooking() {
+		BookingVO booking = new BookingVO();
+		booking.setUserNum("U1");
+		booking.setRomNum("R24");
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			book.setCheckinDate(beforeFormat.parse("2020/8/1"));
-			book.setCheckoutDate(beforeFormat.parse("2020/8/3"));
+			booking.setCheckinDate(beforeFormat.parse("2020/8/1"));
+			booking.setCheckoutDate(beforeFormat.parse("2020/8/3"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		book.setStaydays(2);
-		book.setGuest(2);
-		book.setBookPrice(1004);
-		book.setExpectedArr("PM02");
-		book.setSmoking("1");
-		book.setRequest("뷰 좋은 방 주세요");
-		//book.setRomName("테스트");
-		book.setBookerLastname("테스트");
-		book.setBookerFirstname("테스트");
-		book.setBookerEmail("test@ana.com");
-		book.setBookerPhone("010");
-		book.setBookStatus("RS_STT_BK");
-		//service.register(book);
+		booking.setStaydays(2);
+		booking.setGuest(2);
+		booking.setBookPrice(1004);
+		booking.setExpectedArr("PM02");
+		booking.setSmoking("1");
+		booking.setRequest("뷰 좋은 방 주세요");
+		booking.setBookerLastname("테스트");
+		booking.setBookerFirstname("테스트");
+		booking.setBookerEmail("test@ana.com");
+		booking.setBookerPhone("010");
+		booking.setBookStatus("RS_STT_BK");
+		service.registerBooking(booking);
 
-		log.info("생성된 예약 번호: " + book.getBookNum());
+		log.info("생성된 예약 번호: " + booking.getBookNum());
+	}
+	
+	//@Test
+	public void testRegisterPayment() {
+		PaymentVO payment = new PaymentVO();
+		payment.setAcmNum("A1");
+		payment.setBookNum("B1024");
+		payment.setCoupon("0");
+		payment.setDiscount("0");
+		payment.setMileage("0");
+		payment.setPayMethod("test");
+		payment.setPrice("0");
+		payment.setRomNum("R1");
+		payment.setSubtotal("0");
+		payment.setTotal("0");
+		payment.setVat("0");
+		payment.setStaydays("1");
+		payment.setPayStatus("test");
+		payment.setUserNum("U1");
+		
+		service.registerPayment(payment);
+		
+		log.info(payment);
+		log.info(service.registerPayment(payment));
 	}
 
+	//@Test
+	public void testGetBooking() {
+		log.info(service.getBooking("B1"));
+	}
 
 }

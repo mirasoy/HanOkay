@@ -10,16 +10,19 @@
 <head>
 
 <style>
+
 .modal-content1 {
 	background-color: #fefefe;
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 100%;
+
+	width: 100%
 	display: flex;
 	flex-direction: column;
 	pointer-events: auto;
 }
+
 
 .modal {
 	z-index: 12000;
@@ -41,6 +44,7 @@
 </head>
 
 <body>
+
 
 	<div id="wrap">
 		<div class="container1">
@@ -64,6 +68,7 @@
 
 
 											</div>
+
 										</div>
 
 										<div class="formLayout1">
@@ -267,7 +272,7 @@
 
 				</div>
 
-				<div class="pac-card" id="pac-card">
+				<!-- <div class="pac-card" id="pac-card">
 					<div>
 						<div id="title">Autocomplete search</div>
 						<div id="type-selector" class="pac-controls">
@@ -289,7 +294,7 @@
 					<div id="pac-container">
 						<input id="pac-input" type="text" placeholder="Enter a location">
 					</div>
-				</div>
+				</div> -->
 
 			</section>
 
@@ -350,6 +355,7 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
+
 		<!-- /.modal -->
 
 	</div>
@@ -366,23 +372,34 @@
 </script>
 
 <script>
+
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
       function initMap() {
     	  var acmNum = "${acmNum}";
 			console.log(acmNum);
 			var latitude = document.getElementById("latitude").value;
 			var longitude = document.getElementById("longitude").value;
 			
+			var arrOpt = new Array();
 			//숙소번호로 해당 위도,경도 값 가져옴
+			let i=0;
 			<c:forEach items="${list }" var="acm">
+			
 			if("${acm.acmNum}"===acmNum){
-				var latitude = ${acm.latitude};
-				var longitude = ${acm.longitude};
+				latitude = ${acm.latitude};
+				longitude = ${acm.longitude};
 			}
+			
+			arrOpt[i]=${acm.acmOptcode};
+				i++;
 			</c:forEach>
+			
+			for(let i=0;i<arrOpt.length;i++){
+				console.log(arrOpt[i]);
+			}
+			
 			
 			var latVal = parseFloat(latitude);
 			var lngVal = parseFloat(longitude);
@@ -400,20 +417,15 @@
         var input = document.getElementById('pac-input');
         var types = document.getElementById('type-selector');
         var strictBounds = document.getElementById('strict-bounds-selector');
-
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-
         var autocomplete = new google.maps.places.Autocomplete(input);
-
         // Bind the map's bounds (viewport) property to the autocomplete object,
         // so that the autocomplete requests use the current map bounds for the
         // bounds option in the request.
         autocomplete.bindTo('bounds', map);
-
         // Set the data fields to return when the user selects a place.
         autocomplete.setFields(
             ['address_components', 'geometry', 'icon', 'name']);
-
         var infowindow = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
         infowindow.setContent(infowindowContent);
@@ -422,7 +434,6 @@
 		var size_y = 60;
         var image = new google.maps.MarkerImage(
 				'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
-
 				new google.maps.Size(size_x, size_y),
 				'',
 				'',
@@ -432,7 +443,6 @@
         
         var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
 		var marker;
-
 		marker = new google.maps.Marker({
 			position : latLng, // 마커가 위치할 위도와 경도(변수)
 			map : map,
@@ -445,7 +455,6 @@
           map: map,
           anchorPoint: new google.maps.Point(0, -29)
         }); */
-
         autocomplete.addListener('place_changed', function() {
           infowindow.close();
           marker.setVisible(false);
@@ -456,7 +465,6 @@
             window.alert("No details available for input: '" + place.name + "'");
             return;
           }
-
           // If the place has a geometry, then present it on a map.
           if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
@@ -466,7 +474,6 @@
           }
           marker.setPosition(place.geometry.location);
           marker.setVisible(true);
-
           var address = '';
           if (place.address_components) {
             address = [
@@ -475,13 +482,11 @@
               (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
           }
-
           infowindowContent.children['place-icon'].src = place.icon;
           infowindowContent.children['place-name'].textContent = place.name;
           infowindowContent.children['place-address'].textContent = address;
           infowindow.open(map, marker);
         });
-
         // Sets a listener on a radio button to change the filter type on Places
         // Autocomplete.
         function setupClickListener(id, types) {
@@ -490,12 +495,10 @@
             autocomplete.setTypes(types);
           });
         }
-
         setupClickListener('changetype-all', []);
         setupClickListener('changetype-address', ['address']);
         setupClickListener('changetype-establishment', ['establishment']);
         setupClickListener('changetype-geocode', ['geocode']);
-
         document.getElementById('use-strict-bounds')
             .addEventListener('click', function() {
               console.log('Checkbox clicked! New state=' + this.checked);
@@ -508,25 +511,6 @@
 	async defer></script>
 
 <script>
-window.onload = function() {
-	
-	// 숙소 사진
-	let i = 1;
-	<c:forEach items="${pic}" var="pic">
-		document.getElementById("pic"+ i).innerHTML = "<img alt='<c:out value="${pic.picAcmpdesc}" />' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }" />'>";
-		i++;
-	</c:forEach>
-
-}
-
-
-
-
-
-
-
-
-
     $(document).ready(function() { $("#e1").select2(); });
     
  	/* 날짜 선택(수희) */
@@ -550,10 +534,8 @@ window.onload = function() {
 			},
 			dateFormat: 'yy-mm-dd'
 		});
-
 		// 구글맵 api
 		var address = null;
-
 		/*  function getAddr(){
 		
 		     $.ajax({
@@ -572,17 +554,14 @@ window.onload = function() {
 		           }
 		       });
 		 }; */
-
 		function initMap1() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수
 /*
 			getAddr();
-
 			var latVal = $
 			{
 				boardDTO.lat
 			}
 			; // 게시글 DTO에서 위도값을 가져옴
-
 			var lngVal = $
 			{
 				boardDTO.lon
@@ -610,43 +589,32 @@ window.onload = function() {
 				lat : latVal,
 				lng : lngVal
 			}; // 위도, 경도를 가지는 객체를 생성
-
 			/*     var map = new google.maps.Map(document.getElementById('map'), { // 위의 div id="map" 부분에 지도를 추가하는 부분
 			      zoom: 18, // 확대 정도(ZOOM)
 			      center: uluru // 지도에 표시해주는 중심이 우리가 만든 객체의 위치를 지정해주도록 함
 			    });
 			
 			 */
-
 			var mapOptions = {
-
 				center : mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
 				zoom : 15, // 지도 zoom단계
 				mapTypeId : google.maps.MapTypeId.ROADMAP
-
 			};
-
 			var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
 			mapOptions);
-
 			var size_x = 60; // 마커로 사용할 이미지의 가로 크기
 			var size_y = 60; // 마커로 사용할 이미지의 세로 크기
-
 			// 마커로 사용할 이미지 주소
-
 			var image = new google.maps.MarkerImage(
 					'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
-
 					new google.maps.Size(size_x, size_y),
 					'',
 					'',
 					new google.maps.Size(size_x, size_y));
-
 			<c:forEach items="${list }" var="acm">
 			var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
 			
 			var marker;
-
 			marker = new google.maps.Marker({
 				position : latLng, // 마커가 위치할 위도와 경도(변수)
 				map : map,
@@ -655,17 +623,13 @@ window.onload = function() {
 			});
 			</c:forEach>
 			var content = "${acm.acmName}" ; // 말풍선 안에 들어갈 내용
-
 			// 마커를 클릭했을 때의 이벤트. 말풍선
-
 			var infowindow = new google.maps.InfoWindow({
 				content : content
 			});
-
 			google.maps.event.addListener(marker, "click", function() {
 				infowindow.open(map, marker);
 			});
-
 			/*
 			 단순한 마커로 default로 표시할 때 쓰는 마커 세팅
 			var marker = new google.maps.Marker({
@@ -673,7 +637,6 @@ window.onload = function() {
 			    map: map
 			  });
 			 */
-
 		}
 	</script>
 <!--
@@ -689,7 +652,6 @@ window.onload = function() {
 				.ready(
 						function() {
 							history.replaceState({}, null, null);
-
 							var actionForm = $("#actionForm");
 							$(".paginate_button a").on(
 									"click",
@@ -701,7 +663,6 @@ window.onload = function() {
 												.val($(this).attr("href"));
 										actionForm.submit();
 									});
-
 							 $(".move").on("click",function(e) {
 												e.preventDefault();
 												actionForm.append("<input type='hidden' name='acmNum' value='"

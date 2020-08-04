@@ -5,6 +5,7 @@
 
 <%@include file="../includes/header.jsp"%>
 
+
 <!-- Start : page-wrap : section 시작-->
 <div class="page-wrap">
 
@@ -18,7 +19,7 @@
 						<div class="banner-header">
 							<h1 class="text-uppercase banner-title">Let's begin</h1>
 							<img src="../resources/img/dots-3.png" alt="Dots">
-							<p class="banner-subtitle">We assist you to choose the best.</p>
+							<p class="banner-subtitle">We assist you to choose the best</p>
 							<a href="javascript:void(0)" class="down-arrow-link"><i
 								class="fa fa-2x fa-angle-down down-arrow"></i></a>
 						</div>
@@ -258,7 +259,7 @@
 				</div>
 				<div class="slideshow-description bg-primary1">
 					<h2 class="">[숙소이름]홀리데이 인 리조트</h2>
-					<p>추가 요금 없이 차액까지 환불받아 객실을 변경할 수 있도록 해준 ANA에 감사합니다! ANA와 홀리데이 인의
+					<p>추가 요금 없이 차액까지 환불받아 객실을 변경할 수 있도록 해준 HanOkay에 감사합니다! HanOkay와 홀리데이 인의
 						직원도 친절했습니다. 또한 방이 넓고 수영장이 보이는 뷰가 좋았습니다. 마사지 받고나서 자쿠지에서 반신욕을 했는데 이게
 						진짜 좋았습니다.</p>
 					<a href="#" class="text-uppercase btn btn-white btn-white-primary">Continue
@@ -276,8 +277,8 @@
 				<div
 					class="slideshow-description slideshow-description-left bg-highlight">
 					<h2 class="">[숙소이름]페어몬트 싱가포르</h2>
-					<p>호텔은 심플하고 아주 좋았으며, 아고다에서 많은 도움을 준 것에 대해 정말로 고마움을 표하고 싶습니다.
-						아고다를 계속 이용해온 고객으로 아고다 앱을 가장 좋아하는 앱이라고 할 수 있습니다!</p>
+					<p>호텔은 심플하고 아주 좋았으며, HanOkay에서 많은 도움을 준 것에 대해 정말로 고마움을 표하고 싶습니다.
+						HanOkay를 계속 이용해온 고객으로 HanOkay앱을 가장 좋아하는 앱이라고 할 수 있습니다!</p>
 					<a href="#"
 						class="text-uppercase btn btn-white btn-white-highlight">Continue
 						Reading</a>
@@ -292,7 +293,7 @@
 				</div>
 				<div class="slideshow-description bg-primary1">
 					<h2 class="">[숙소이름]바이욕 스위트 호텔</h2>
-					<p>[숙소소개]친구에게 계속 ANA를 추천하겠습니다 . 가성비갑 더블침대 두개였는데 침대도 널직하고 방도크고
+					<p>[숙소소개]친구에게 계속 HanOkay를 추천하겠습니다 . 가성비갑 더블침대 두개였는데 침대도 널직하고 방도크고
 						깨끗하고 전망도 좋고 다 좋았어요 가격이 저렴해서 걱정했는데 비싼호텔 못지않게 좋았네요</p>
 					<a href="#" class="text-uppercase btn btn-white btn-white-primary">Continue
 						Reading</a>

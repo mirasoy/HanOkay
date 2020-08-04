@@ -51,7 +51,7 @@
     <link href="/resources/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
 	<style>
 		html,body{
-			font-family:"타이포_쌍문동";
+			font-family:Verdana, sans-serif;
 			background-color:white;
 		}
 		
@@ -67,7 +67,9 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:50px;margin-bottom:0;background-color:white;">
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:20px;margin-bottom:0;background-color:white;">
+
             <div class="navbar-header" style="margin-bottom:15px;">
                 
 				<!-- 로고자리 -->

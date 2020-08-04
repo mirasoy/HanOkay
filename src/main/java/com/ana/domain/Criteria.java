@@ -1,5 +1,7 @@
 package com.ana.domain;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,6 +20,10 @@ public class Criteria {
 	private String person;
 	private String in;
 	private String out;
+	private String city;
+	private String distr;
+	private String detail;
+	
 	
 	public Criteria() {
 		this(1,10);
@@ -32,6 +38,17 @@ public class Criteria {
 	
 	public String[] getTypeArr() {
 		return type == null? new String[] {}: type.split("");
+	}
+	
+	public String getListLink() {
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("pageNum", this.pageNum)
+				.queryParam("amount", this.getAmount())
+				.queryParam("type", this.getType())
+				.queryParam("keyword", this.getKeyword());
+		
+		return builder.toUriString();
 	}
 
 }

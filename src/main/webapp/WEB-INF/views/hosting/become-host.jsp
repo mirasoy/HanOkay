@@ -30,15 +30,15 @@
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
-        </nav> 
 	<!-- nav-end -->
-<div id="page-wrapper" style="padding-bottom:50px;">
+<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 		<br>
+		<div style="margin-left:15%;margin-right:15%;">		
 		<!-- 기억하기가 되면 좋겠다  중간저장?-->
-			<div class="pull-right">
+			<div class="pull-right" style="width: 150px;position: sticky;top: 10px;">
 			  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">다음으로</button><!-- ajax처리안함 -->
-			  </div>
-
+		   </div>
+				<br><br>
 			<div class="acm" id="acm">
 				<h4>게스트가 묵게 될 숙소의 유형을 골라주세요!</h4>
 				<input type="radio" id="acmType_house" name="acmTypes" value="H"><label for="rentType1">집 천제</label> 
@@ -62,7 +62,7 @@
 
 
 
-				<div id="notphoto" style="display:inline-block; background-color:pink;">
+				<div id="notphoto" style="display:inline-block;">
 				
 				<div class="form-group">
 				<input class="form-control" type="button" class="form-control" style="width:100px;inline-block;" onclick="sample6_execDaumPostcode()" value="주소 찾기">
@@ -87,14 +87,16 @@
 			
 				
 			 
-				  <br><br>
+				  
 				  <h4>한:오케이에 숙소를 등록하시려면 사업자 등록증은 필수입니다!</h4>
+				  <span style="color: black;" id="msg2"><c:out value="${msg2}" /></span><br>
+				
 				  <input class="form-control"  style="width:200px;display:inline-block;" id="bizRegnum" name="bizRegnum" placeholder="사업자등록번호" numberOnly><br><br>
-				  <!-- 우선 숨겨두겠음 -->
-				  <!-- <input type="hidden" id="bizRegpurl" name="bizRegpurl" placeholder="사업자등록증"><br>
-				   -->
+			
+				   
+				   <br><br>
 				  <h4>숙소의 체크인 체크아웃 타임을 설정해주세요</h4><br>
-				  <label for="checkinTime">체크인시간</label>
+				  <label for="checkinTime">체크인시간</label>&nbsp;
 					<select class="form-control"  style="width:150px;display:inline-block;" name="checkinTime" id="checkinTime">
 					  <option value="PM12">점심12시이후</option>
 					  <option value="PM01">1시이후</option>
@@ -109,7 +111,8 @@
 					  <option value="PM10">10시이후</option>
 					  <option value="anytime">상관없음</option>
 					</select>
-				  <label for="checkouTime">체크아웃시간</label>
+					&nbsp;&nbsp;
+				  <label for="checkouTime">체크아웃시간</label>&nbsp;
 					<select class="form-control"  style="width:150px;display:inline-block;" name="checkoutTime" id="checkoutTime">
 					  <option value="PM09">오전9시이전</option>
 					  <option value="PM10">오전10시이전</option>
@@ -122,9 +125,11 @@
 					  <option value="PM05">5시이전</option>
 					</select>
 				 </div> 
-			  <div class="uploadDiv" style="display:inline-block; background-color:orange;">
+				 <br><br> <br><br>
+				  <h4>대표사진 한 장을 포함해 최대 7개의 숙소사진을 업로드해주세요!</h4>
+			  <div class="uploadDiv" style="display:inline-block;">
                     <input type="file" name="uploadFile" multiple="multiple">
-                 <div class="uploadResult">
+                 <div class="uploadResult" style="border-style: dashed;border-color: #337AB7; width:1235px; height:224px;">
                     <ul>
 
                     </ul>
@@ -134,6 +139,8 @@
 			  
 			  
 			</form>
+		</div>
+		</div>
 		</div>
 
 <%@include file="../includes/footer.jsp"%>
@@ -279,6 +286,42 @@ function sample6_execDaumPostcode() {
 	     }                            
 	}  
 	var formObj = $("#actionForm");
+	var bizRegnum=$("#bizRegnum").val();
+    var chkbizused=document.getElementById("chkbizused");
+
+    $( "#bizRegnum" ).blur(function() {
+		var bizRegnum=$("#bizRegnum").val();//센다
+		
+ 		if(bizRegnum.length!=10) {
+			$('span#msg2').text("*사업자등록번호형식 10자리로 입력하셔야합니다");
+			bizRegnum=bizRegnum.substring(0, 10);
+ 		} else {
+    	$.ajax({
+         	   type: 'POST',
+         	   url: '/hosting/chkbizused',
+         	   dataType: 'json',
+         	   data: {
+         		   'bizRegnum': bizRegnum
+         	   },
+         	   //async: false,
+         	   success: function(data){
+         		   console.log(data);
+         		  chkbizused=document.getElementById("chkbizused");
+         		   $('span#msg2').text(data.msg2);
+         		
+     	    	if(chkbizused==null){//없으면 추가시켜주고
+	     	    	formObj.append("<input type='hidden' id='chkbizused' name='chkbizused' value='"+data.msg2+"'>");
+	     	    	
+     	    	} else chkbizused.value=data.msg2;//이미 있으면 바꿔치기
+         	   },
+         	   error: function(data){
+         		  window.location.href ="../error/error";
+         	   }
+         	 });
+ 		}
+    	
+        });
+	
 	//유효성 검사
 	function readyForreg() {
 		var chkArr=[];
@@ -346,13 +389,15 @@ function sample6_execDaumPostcode() {
 			bizRegnum.focus();
 			return false;		
 		}
-		if (bizRegnum.value.length!=10) {
-			alert("사업자등록번호형식 10자리로 입력하셔야합니다");
-			bizRegnum.value=bizRegnum.value.substring(0, 10);
-			bizRegnum.focus();
+	 
+	 
+	   //사업자등록 중복검사
+		var chkbizused=document.getElementById("msg2").innerText;
+		if (chkbizused.charAt(0)=='*') {
+			alert("사업자번호를 확인해주세요");
 			return false;		
 		}
-		
+	   
 		//주소 중복검사
 		var chkaddr=document.getElementById("chkaddr");
 		if (chkaddr.value.charAt(0)=='*') {
@@ -552,8 +597,8 @@ function sample6_execDaumPostcode() {
 			}
 		});
 	});
-
 	
+
 	
 	
 </script>

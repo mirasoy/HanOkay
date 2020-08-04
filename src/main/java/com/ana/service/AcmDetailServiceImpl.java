@@ -3,6 +3,7 @@ package com.ana.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ana.domain.AcmDetailPicVO;
 import com.ana.domain.AcmDetailRevVO;
@@ -19,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 public class AcmDetailServiceImpl implements AcmDetailService{
 	
 	private AcmDetailMapper mapper;
-	 
+	
 	@Override
 	public AcmDetailVO getAcm(String acmNum) {
 		log.info("■■■■■■■■■■■■▶ getAcm: "+ acmNum);

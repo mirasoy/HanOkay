@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,8 +68,35 @@ public class AcmController {
 				return;
 			}
 			
+			String keyword = StringUtils.replaceEach(cri.getKeyword(), new String[] {"특별시","광역시","충청남도","충청북도","전라북도","전라남도","경상북도","경상남도","강원도","경기도","제주도"}, 
+					  new String[] {"","","충남","충북","전북","전남","경북","경남","강원","경기","제주"});
+			cri.setKeyword(keyword);
+			String[] location = keyword.split(" ");
+			
+			for(int i=0;i<location.length;i++) {
+			log.info("location"+i+": " + location[i]);
+			}
+			if(location.length<=1) { //서울 or 종로 or 대치
+				cri.setType("A");
+			}else if(location.length==2) { //대한민국 서울
+				cri.setType("T");
+				cri.setCity(location[1]);
+			}else if(location.length==3) { //대한민국 서울 종로구
+				cri.setType("TC");
+				cri.setCity(location[1]);
+				cri.setDistr(location[2]);
+			}else {//대한민국 서울 종로구 종로3가 or 그이상
+				cri.setType("TCW");
+				cri.setCity(location[1]);
+				cri.setDistr(location[2]);
+				cri.setDetail(location[3]);
+			};
+			log.info("cri:" + cri);
 			model.addAttribute("list", service.getList(cri));
-			int total = service.getTotal(cri);		
+
+			log.info("여기1");
+			int total = service.getTotal(cri);
+			log.info("total: " + total);
 			model.addAttribute("acmNum", acmNum);
 			model.addAttribute("pageMaker", new PageDTO(cri, total));
 			model.addAttribute("drawValue", drawValue(service.getList(cri), session));
@@ -77,6 +105,7 @@ public class AcmController {
 			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + total);
 			
 		} catch (Exception e) {
+			log.info("error@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return;
 		}
 	}

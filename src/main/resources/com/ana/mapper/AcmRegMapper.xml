@@ -5,6 +5,7 @@
 <mapper namespace="com.ana.mapper.AcmRegMapper">
 
 	<resultMap id="AcmVOResult" type="com.ana.domain.AcmVO">
+		<result column="owner_user" property="ownerUserNum" />
 		<result column="acm_Num" property="acmNum" />
 		<result column="acm_Name" property="acmName" />
 		<result column="acm_City" property="acmCity" />
@@ -49,7 +50,7 @@
 	<!-- 한회원이 운영하는 숙소 다 가져오기 -->
 	<select id="getListAcms" resultMap="AcmVOResult">
 		<![CDATA[
-			select * from TACM where biz_Regnum=#{bizRegnum} and acm_acti=#{acmActi}
+			select * from TACM where  ACM_ACTI=#{acmActi} and owner_user = #{ownerUserNum}
 		]]>
 	</select>
 	
@@ -64,13 +65,17 @@
 
 		INSERT INTO TACM(acm_Num, acm_Name, acm_City,acm_Distr, acm_Detailaddr, rep_Phone, 
 		acm_type,biz_regnum,checkin_time, checkout_time,sub_phone,
-		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude)
+		acm_fax, acm_email, acm_purl,acm_pname, latitude,longitude,owner_user)
 		
 		VALUES (#{acmNum},#{acmName},#{acmCity}, #{acmDistr}, #{acmDetailaddr},#{repPhone},
 		#{acmType},	#{bizRegnum},#{checkinTime},#{checkoutTime},#{subPhone},
-		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude})
+		#{acmFax},#{acmEmail},#{acmPurl},#{acmPname},#{latitude},#{longitude},#{ownerUserNum})
 	</insert>
 	
+	<select id="getNotPendingAcms" resultType="int">
+		select count(*) from tacm
+		where owner_user = #{ownerUserNum} and acm_acti!={acmActi}
+	</select>
 	
 	<!-- 주소 중복체크 -->
 	<select id="chkaddr" resultType="int">
@@ -86,9 +91,15 @@
 	 
 	 
 	<!-- 슥소 삭제 -->
-	<delete id="remove">
+	<delete id="removeAcm">
 		delete from tacm where acm_Num = #{acmNum}
 	</delete>
+	<!-- 슥소 삭제에 따른 객실삭제 -->
+	<delete id="removeAcmso">
+		delete from trom where acm_Num = #{acmNum}
+	</delete>
+	
+	
 
 	<!-- 숙소1_6 정보(opt, desc) 수정 -->
 	<update id="update1_6">
@@ -110,14 +121,14 @@
 
 
 	<!-- ****************admin단**************** -->
-		<update id="moditoAcmActive">
+		
+		 <update id="moditoAcmActive">
 			update tacm 
-			set acm_status=#{acmStatus}, acm_acti=#{acmActi}
-			where biz_regnum = #{bizRegnum} 
+			set acm_acti=#{acmActi}, acm_status=#{acmStatus}
+			where acm_Num = #{acmNum} 
 		</update>
-	
-	
-	
+		
+		
 		<resultMap id="UserAcmVOResult" type="com.ana.domain.UserAcmVO">
 		<result property="userNum" column="USER_NUM"/>
 		<result property="userLastName" column="U_LASTNAME"/>
@@ -154,7 +165,6 @@
 		<result column="acm_Acti" property="acmActi" />
 		<result column="acm_status" property="acmStatus" />
 		<result column="acm_Optcode" property="acmOptcode" />
-		
 	</resultMap>
 	<select id="getadminListAcms" resultMap="UserAcmVOResult">
 		select 
@@ -166,7 +176,7 @@
 		 from TUSER U,TACM A 
 		 where U.BIZ_REGNUM= A.BIZ_REGNUM and A.ACM_ACTI=#{acmActi} order by A.ACM_REGDATE
 	</select>
-	<select id="getpendingUserAcms" resultMap="UserAcmVOResult">
+	<select id="getUserAcms" resultMap="UserAcmVOResult">
 		select 
 		U.USER_NUM, U.U_LASTNAME, U.U_FSTNAME,U.U_PRIV, U.U_PURL, U.U_PICNAME, U.U_STAT_CODE, U.BIZ_REGNUM,
 			A.ACM_NUM, A.ACM_NAME, A.ACM_CITY, A.ACM_DISTR, A.ACM_DETAILADDR, A.REP_PHONE,A.ACM_REGDATE,
@@ -174,9 +184,28 @@
 			A.ACM_PURL, A.ACM_PNAME, A.LATITUDE, A.LONGITUDE, A.ACM_DESC, A.ACM_ACTI, A.ACM_STATUS, A.ACM_OPTCODE
 			
 		 from TUSER U,TACM A 
-		 where U.BIZ_REGNUM= A.BIZ_REGNUM and A.BIZ_REGNUM=#{bizRegnum} order by A.ACM_REGDATE
+		 where U.BIZ_REGNUM= A.BIZ_REGNUM and A.ACM_NUM=#{acmNum} order by A.ACM_REGDATE
 	</select>
-
+	<select id="getUserNumAcm" resultMap="UserAcmVOResult">
+		select 
+		U.USER_NUM, U.U_LASTNAME, U.U_FSTNAME,U.U_PRIV, U.U_PURL, U.U_PICNAME, U.U_STAT_CODE, U.BIZ_REGNUM,
+			A.ACM_NUM, A.ACM_NAME, A.ACM_CITY, A.ACM_DISTR, A.ACM_DETAILADDR, A.REP_PHONE,A.ACM_REGDATE,
+			A.ACM_UPDATEDATE, A.ACM_TYPE, A.CHECKIN_TIME, A.CHECKOUT_TIME, A.SUB_PHONE, A.ACM_FAX, A.ACM_EMAIL,
+			A.ACM_PURL, A.ACM_PNAME, A.LATITUDE, A.LONGITUDE, A.ACM_DESC, A.ACM_ACTI, A.ACM_STATUS, A.ACM_OPTCODE
+			
+		 from TUSER U,TACM A 
+		 where U.USER_NUM= A.OWNER_USER and U.USER_NUM=#{userNum}
+	</select>
+	<select id="getPendingUserAcms" resultMap="UserAcmVOResult">
+		select 
+		U.USER_NUM, U.U_LASTNAME, U.U_FSTNAME,U.U_PRIV, U.U_PURL, U.U_PICNAME, U.U_STAT_CODE, U.BIZ_REGNUM,
+			A.ACM_NUM, A.ACM_NAME, A.ACM_CITY, A.ACM_DISTR, A.ACM_DETAILADDR, A.REP_PHONE,A.ACM_REGDATE,
+			A.ACM_UPDATEDATE, A.ACM_TYPE, A.CHECKIN_TIME, A.CHECKOUT_TIME, A.SUB_PHONE, A.ACM_FAX, A.ACM_EMAIL,
+			A.ACM_PURL, A.ACM_PNAME, A.LATITUDE, A.LONGITUDE, A.ACM_DESC, A.ACM_ACTI, A.ACM_STATUS, A.ACM_OPTCODE
+			
+		 from TUSER U,TACM A 
+		 where U.BIZ_REGNUM= A.BIZ_REGNUM and A.BIZ_REGNUM=#{bizRegnum} and A.ACM_ACTI=#{acmActi} order by A.ACM_REGDATE
+	</select>
 
 
 

@@ -33,52 +33,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ACM_STATUS" property="acmStatus" />
 		<result column="ACM_OPTCODE" property="acmOptcode" />
 	</resultMap>
-
-	<sql id="criteria">
-		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-			<foreach item='type' collection="typeArr">
-				<trim prefix="AND">
-					<choose>
-						<when test="type == 'T'.toString()">
-							e.acm_name like '%'||#{keyword}||'%'
-						</when>
-						<when test="type == 'C'.toString()">
-							e.acm_city like '%'||#{keyword}||'%'
-						</when>
-						<when test="type == 'W'.toString()">
-							e.rom_capa >= #{person}
-						</when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
-	</sql>
-
-
-
-	<select id="getListWithPaging" resultMap="AcmVOResult">
-<![CDATA[
-select
-DISTINCT acm_purl, acm_num, acm_name, acm_city, rep_phone,acm_desc, latitude, longitude
-from
-	(
-	select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
-		rownum rn, e.acm_purl, e.acm_num, e.acm_name, e.acm_city, e.rep_phone,e.acm_desc, e.latitude, e.longitude, e.rom_capa
-	from
-		(select a.acm_purl, a.acm_num, a.acm_name, a.acm_city, a.rep_phone, a.acm_desc, a.longitude, a.latitude, r.rom_capa
-        from trom r, tacm a
-        where r.acm_num = a.acm_num) e
-	where
-]]>
-
-		<include refid="criteria"></include>
-	<![CDATA[
-	rownum <= #{pageNum} * #{amount}
-	)
-	where rn > (#{pageNum}-1) * #{amount}
-]]>
-	</select>
-
 	
 	<!-- 숙소 상세페이지: 숙소 정보와 사진을 불러온다 -->
 	<!-- 예약 확인 페이지: 객실정보 확인을 위해 숙소 정보를 불러온다-->
@@ -135,6 +89,7 @@ select * from tacm
 		#{bizRegnum},#{checkinTime},#{checkoutTime})
 	</insert>
 	
+<!-- 체크인,아웃 기간과 겹치게 예약한 방번호 추출 -->
 <select id="getRomNum" resultType="String">
 <![CDATA[
 select ROM_NUM
@@ -144,6 +99,7 @@ or (CHECKIN_DATE<#{out} and CHECKOUT_DATE>=#{out}) or (CHECKIN_DATE>=#{in} and C
 	]]>
 </select>
 
+<!-- 인원수를 만족하고 예약불가인 방번호리스트에 없는 방을 가진 숙소번호 추출 -->
 <select id="getAcmNum" resultType="String">
 <![CDATA[
 select distinct acm_num
@@ -156,26 +112,49 @@ select distinct acm_num
    </foreach>
 </select>
 
+<sql id="cri">
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="AND">
+					<choose>
+						<when test="type == 'A'.toString()">
+							acm_city||acm_distr||acm_detailaddr like '%'||#{cri.keyword}||'%'
+						</when>
+						<when test="type == 'T'.toString()">
+							acm_city like '%'||#{cri.city}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							acm_distr like '%'||#{cri.distr}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							acm_detailaddr like '%'||#{cri.detail}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 	
 <select id="getListPaging" resultMap="AcmVOResult">
 <![CDATA[
 select 
-    acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
+    acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE
 from 
 (
    select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
-      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
+      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE
    from
       tacm
-   where (acm_city like '%'||#{cri.keyword}||'%' and
-]]>   
+   where 
+     ]]>
+<include refid="cri"></include>
+
    acm_num in
    <foreach collection='acmNum' index='index' item='acmNum' open='(' close=')' separator=','>
       #{acmNum}
    </foreach>
       <![CDATA[
-      ) and 
-       rownum<= #{cri.pageNum} * #{cri.amount}
+       and rownum<= #{cri.pageNum} * #{cri.amount}
        )
    where rn> (#{cri.pageNum}-1) * #{cri.amount}
 ]]>   
@@ -188,16 +167,18 @@ select
 from 
 (
    select
-      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude
+      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE
    from
       tacm
-   where (acm_city like '%'||#{cri.keyword}||'%' and
-]]>   
+   where 
+  ]]>  
+  <include refid="cri"></include>
+  
    acm_num in
    <foreach collection='acmNum' index='index' item='acmNum' open='(' close=')' separator=','>
       #{acmNum}
    </foreach>
-   ))
+   )
 </select>
 
 </mapper>

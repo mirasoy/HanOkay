@@ -26,8 +26,13 @@
 			   
 		}
 %>
-
-
+	<style>
+	.panel-heading {
+	    color: #333;
+	    background-color: #f7cac2 !important;
+	    border-color: #ddd;
+	 }
+	</style>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -58,7 +63,7 @@
     <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<style>
 		html,body{
-			font-family:"타이포_쌍문동";
+			font-family:Verdana, sans-serif;
 			background-color:white;
 		}
 		
@@ -74,7 +79,9 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:30px;margin-bottom:0;background-color:white;">
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:20px;margin-bottom:0;background-color:white;">
+
             <div class="navbar-header" style="margin-bottom:15px;">     
 				<!-- 로고자리 -->
                 <a class="navbar-brand" href="/hosting/hostindex">Han:Ok</a>
