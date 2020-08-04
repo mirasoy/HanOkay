@@ -24,11 +24,13 @@ section, nav, main, header, div{
  	display: block;
   }
   
-@media (min-width: 1200px)
-.container-1 {
-    max-width: 1140px;
-    margin: 0 auto;
-}
+
+  @media (min-width: 1200px) {
+    .container-1 {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+  }
 
   .container {
     width: 100%;
