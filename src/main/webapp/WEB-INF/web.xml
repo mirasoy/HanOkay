@@ -40,9 +40,10 @@
    </servlet>
    
 	<!--세션 60분동안 지속되게 sets the default session timeout to 60 minutes. -->
-  <!--  <session-config>
+   <session-config>
      <session-timeout>60</session-timeout>
-   </session-config> -->
+   </session-config> 
+	<!-- 세션 설정 끝 -->
 
    <servlet-mapping>
       <servlet-name>appServlet</servlet-name>
