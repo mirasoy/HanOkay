@@ -43,7 +43,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Han:ok- Make yourself at home in Korea</title>
+    <title>Han:ok- host's place for better places</title>
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -84,7 +84,7 @@
 
             <div class="navbar-header" style="margin-bottom:15px;">     
 				<!-- 로고자리 -->
-                <a class="navbar-brand" href="/hosting/hostindex">Han:Ok</a>
+                <a class="navbar-brand" href="/hosting/hostindex">Han:Ok for Host</a>
             </div>
             <!-- /.navbar-header -->
 
