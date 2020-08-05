@@ -1,0 +1,46 @@
+.selectGuest{
+	margin-bottom: 0;
+}
+
+.hasDatepicker{
+	border: 0;
+    height: 38px;
+    padding: 12px;
+    width: 100%;
+}
+
+.form-control {
+    background-color: #fff;
+
+}
+
+.inputCheckOut{
+	/* padding-left: 18px; */
+}
+
+.calendar> .right{
+	/* 	padding-left: 18px; */
+}
+
+.checkbox{
+		margin-bottom: 0;
+		    width: 48%;
+   
+}
+
+.checkbox> .calendar{
+	width: 100%;
+}
+
+.checkbox> .calendar> .right{
+	display: inline-block;
+    float: right;
+        width: 100%;
+}
+
+
+.rigthgroup{
+	float: right;
+	   margin-bottom: 2rem;
+}
+

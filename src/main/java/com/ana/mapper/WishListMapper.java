@@ -15,9 +15,12 @@ public interface WishListMapper {
 	public int insert(WishListVO board); //추가
 	public WishListVO read(String wishNum); //하나 조회
 	public List<WishListVO> getList(String loginUserNum); //여러개 조회
-	public boolean delete(String wishNum);	 //삭제
-	public int update(WishListVO board); //수정
 	
+	public boolean delete(String wishNum);	 // ajax 삭제 (찜목록)
+	
+	public boolean wishdelete(String wishNum);	 // ajax 삭제	 (result)
+	
+	public int update(WishListVO board); //수정	
 	
 	public void insertSelectKey(WishListVO board);
 	public int insertAjax(WishListVO vo);
@@ -26,7 +29,7 @@ public interface WishListMapper {
 	
 	public Integer countCart(WishListVO board);		
 	
-	public List<WishListVO> drawValue(@Param("loginUserNum")String loginUserNum, @Param("acmNum") String acmNum);
+	public List<WishListVO> drawValue(@Param("userNum")String userNum, @Param("acmNum") String acmNum);
 	
 	
 	

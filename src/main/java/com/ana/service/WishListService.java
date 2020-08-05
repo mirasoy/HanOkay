@@ -18,11 +18,13 @@ public interface WishListService {
 	public int modify(WishListVO board); //수정 
 	
 	public boolean remove(String wishNum); //삭제
+	
+	public int wishRemove(String wishNum); //삭제
 
 	public int removeAjax(String wishNum);
 	
 	public int countCart(WishListVO wish); //장바구니에 동일한 상품이 있는지 확인
 	
-	public List<WishListVO> drawValue(@Param("loginUserNum")String loginUserNum, @Param("acmNum") String acmNum);
+	public List<WishListVO> drawValue(@Param("userNum")String userNum, @Param("acmNum") String acmNum);
 	
 }

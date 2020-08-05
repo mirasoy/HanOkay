@@ -5,6 +5,8 @@
 
 <%@include file="../includes/header.jsp"%>
 
+<link rel="stylesheet" type="text/css"
+   href="${request.contextPath}/resources/css/list.css">
 
 <!-- Start : page-wrap : section 시작-->
 <div class="page-wrap">
@@ -47,7 +49,7 @@
 							<div class="form-group form-group-1">
 
 								<!-- Start : form-group-2-->
-								<div class="form-group form-group-1">
+								<div class="form-group form-group-1 selectGuest">
 									<label for="inputAdult">Guests</label> <select name="person"
 										class="form-control select" id="inputAdult">
 										<option value="1" selected>1</option>
@@ -60,10 +62,7 @@
 										<option value="8">8</option>
 									</select>
 								</div>
-								<!-- End : form-group-2-->
-
-
-								<!-- End : form-group-4-->
+		
 							</div>
 							<!-- End : form-group-1-->
 
@@ -72,10 +71,10 @@
 						<div class="form-row search-form-row form-group-1">
 
 							<div class="form-group form-group-1">
-								<div class="form-group">
+								<div class="form-group checkbox">
 									<label for="inputCheckOut">Check In Date</label>
 									<div class="ui calendar" id="rangestart">
-										<div class="ui input left icon uigroup leftpadding">
+										<div class="ui input left icon">
 											<i class="calendar icon"></i> <input type="text"
 												placeholder="Start" id="in" name="in" value="">
 										</div>
@@ -83,16 +82,16 @@
 								</div>
 
 
-								<div class="form-group">
-									<label for="inputCheckOut">Check Out Date</label>
+								<div class="form-group checkbox rigthgroup">
+									<label class="inputCheckOut" for="inputCheckOut">Check Out Date</label>
 									<div class="ui calendar" id="rangeend">
-										<div class="ui input left icon uigroup">
+										<div class="ui input right icon uigroup">
 											<i class="calendar icon"></i> <input type="text"
 												placeholder="End" id="out" name="out" value="">
 										</div>
 									</div>
 								</div>
-								<div class="form-group form-group-1 ">
+								<div class=" form-group-1 ">
 									<label for="btnSubmit">&nbsp;</label>
 									<button type="submit"
 										class="submit-btn btn-primary btn btn-search text-uppercase"
