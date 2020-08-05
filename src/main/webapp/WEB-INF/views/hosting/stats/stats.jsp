@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<style>
+	a{
+		color: #21292d !important;
+	}
+</style>	
 
 <%@include file="../../includes/hostheader.jsp"%>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />

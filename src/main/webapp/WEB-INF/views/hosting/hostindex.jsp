@@ -63,18 +63,105 @@
                
                 
                 
-                  <div class="col-lg-6">
-                    <div class="well well-lg" style="height: 200px;">
-                    	오늘 입실
-                    	
+               
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            	오늘 입실
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>도착예정시간</th>
+                                            <th>숙소명/객실명</th>
+                                            <th>예약자</th>
+                                            <th>메세지</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
-                </div><!-- /.col-lg-6 -->
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
                 
-                  <div class="col-lg-6">
-                    <div class="well well-lg" style="height: 200px;">
-						오늘 퇴실
+               <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            	오늘 퇴실
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>도착예정시간</th>
+                                            <th>숙소명/객실명</th>
+                                            <th>예약자</th>
+                                            <th>메세지</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
-                </div><!-- /.col-lg-6 -->
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->  
+                
+                
+                
+                
+                
                 
             </div>
             <!-- /.row -->
