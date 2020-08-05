@@ -181,8 +181,8 @@ String name = (String) session.getAttribute("loginUserNum");
 				console.log(e);
 				modal.style.display = "block";
 				
-				var operation=$(this).data("oper");
-				console.log(operation);
+				/* var operation=$(this).data("oper");
+				console.log(operation); */
 			
 			};	
 		}

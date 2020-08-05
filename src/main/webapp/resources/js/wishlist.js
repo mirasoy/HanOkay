@@ -20,9 +20,35 @@ var wishService= (function(){
 					error(er);
 				}
 			}
-		})
-		
-		
+		})				
 	}	
-	return {add:add};
+	
+	function remove(wishNum, callback, error){
+		$.ajax({
+			type : 'delete',
+			url : '/wishlist/' + wishNum,
+			success : function(result, status, xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error : function(xhr, status, er){
+				if(error){
+					error(er);
+				}
+			}
+		})
+	}
+	
+	
+	
+	
+	
+	
+	
+	return {
+		add:add,
+		remove : remove
+		
+	};
 })();
