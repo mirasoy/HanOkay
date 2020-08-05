@@ -6,9 +6,15 @@
 
 .wrapCon{
 	margin: 0 auto;
-  max-width: 800px;
-  padding: 0 20px;
-  background-color: #f2f2f2;
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 2%;
+    background-color: #f2f2f2;
+    margin-top: 13%;
+    
+}
+.wrapCon h1{
+text-align: center;
 }
 .chatContainer {
   border: 2px solid #dedede;
@@ -55,13 +61,16 @@
     height: 40px;
 }
 .chatList{
-    max-height: 60%;
-    min-height: 60%;
-    overflow: scroll;
+	overflow: scroll;
     overflow-x: hidden;
     font-size: 1.2em;
     position: relative;
+    height: 500px;
+    padding: 20px;
+    background-color: white;
+    
 }
+
 .chatList a{
 	color: black;
 }
@@ -70,6 +79,7 @@
     background-color: lightblue;
 }
 .chatrom:hover{
+	filter: brightness(90%);
 	cursor: pointer;
 }
 .unread{
@@ -84,6 +94,60 @@
     right: 20px;
     top: 91px;
     }
+    
+.wrapCon{
+	margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.chatContainer {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.chatContainer::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.chatContainer img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.chatContainer img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+#message{
+	width: 90%;
+    height: 40px;
+}
+    
 </style>
 
 <div class="container">
