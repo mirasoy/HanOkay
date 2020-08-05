@@ -90,20 +90,34 @@ public class LoginController {
 
 	
 	@RequestMapping(value = "/user/login", method = { RequestMethod.GET, RequestMethod.POST })
-    public String join(HttpServletResponse response, Model model) {
+    public ModelAndView join(HttpServletRequest request, HttpServletResponse response, Model model) {
         
+		log.info("request.getRequestURI(): "+request.getRequestURI());
+		log.info("referer: "+ request.getHeader("referer"));
+		
         OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
         String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
     
         model.addAttribute("facebook_url", facebook_url);
         System.out.println("/facebook" + facebook_url);
  
-        return "/user/login";
-    }
+        String url= "/user/login?url="+  request.getHeader("referer");
+        String url2 = url.substring(url.lastIndexOf("/") -4, url.length()); // => acm/list
+        log.info("url2: "+url2);
+        
+        String here= url+ url2;
+        
+        ModelAndView mv= new ModelAndView();
+        mv.addObject("requestFrom", url2);
+        mv.setViewName("/user/login");
+        
+        return mv;
+	}
+	
 	 @RequestMapping(value = "/facebookSignInCallback", method = { RequestMethod.GET, RequestMethod.POST })
 	    public String facebookSignInCallback(@RequestParam String code) throws Exception {
 	 
-	        try {
+	        try { 
 	             String redirectUri = oAuth2Parameters.getRedirectUri();
 	            System.out.println("Redirect URI : " + redirectUri);
 	            System.out.println("Code : " + code);
@@ -155,7 +169,7 @@ public class LoginController {
 	private static final String MY_APP_GOOGLE_CLIENT_ID = "942421543250-i3vvb6s828smd122lqcdr0buvjg2p6ui.apps.googleusercontent.com";
 
 	@RequestMapping(value = "/login/tokenSignIn", method = RequestMethod.POST)
-	public void executeGoogleLogin(@RequestParam MultiValueMap<String, String> body, HttpSession session,
+	public void executeGoogleLogin(@RequestParam MultiValueMap<String, String> body, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) throws IOException, GeneralSecurityException {
 
 		System.out.println("id Token: " + body.getFirst("idToken"));
@@ -202,6 +216,11 @@ public class LoginController {
 			jso.put("result", result);
 			PrintWriter out = response.getWriter();
 			out.print(jso);
+			
+			StringBuffer contextPath = request.getRequestURL();
+			String Referer= request.getHeader("referer");
+			log.info("Referer: "+ Referer);
+			log.info("ContextPath: " + contextPath);
 		}
 
 		else {
@@ -225,7 +244,14 @@ public class LoginController {
 		log.info("login pwd: " + pwd);
 		String user_check = request.getParameter("remember_email");
 		log.info("remember_email checked: " + user_check);
-
+		
+		//어느 페이지에서 로그인하러 왔냐
+		StringBuffer contextPath = request.getRequestURL();
+		String Referer= request.getHeader("referer");
+		log.info("Referer: "+ Referer);
+		log.info("ContextPath: " + contextPath);
+		log.info("RequestURI(): " + request.getRequestURI());
+		
 		// 로그인을 실행하는 서비스 메서드 호출
 		int result = service.executeLogin(email, pwd, user_check, response, session);
 		jso.put("msg", result);

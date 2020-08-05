@@ -2,7 +2,7 @@
 pageEncoding="UTF-8"%> 
 
 <%@include file="../../includes/header1.jspf"%>
-
+<title>HanOkay-프로필</title>
 <style type="text/css">
 
 *, ::after, ::before {
