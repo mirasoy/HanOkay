@@ -142,14 +142,12 @@ public class WishListMapperTests {
 	
 	
 	@Test
-	public void drawValue() {
-		WishListVO board = new WishListVO();
-		board.setUserNum("U1");
-		board.setAcmNum("A1");
+	public void testDrawValue() {	
+		
+		mapper.drawValue("U1", "A1");
+		
 	
-		
-		
-		log.info("테스트를 해보자■■■■■■■■■■■■■■■■■■■■■■■■>>drawValue: " + board);
+		log.info("테스트를 해보자■■■■■■■■■■■■■■■■■■■■■■■■>>drawValue: " + mapper.drawValue("U1", "A1"));
 	}
 	
 	

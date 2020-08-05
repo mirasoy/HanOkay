@@ -1,0 +1,220 @@
+
+/* 미디어쿼리 --> 사이즈 별로 나열되며 작은것부터 시작한다. */
+@media ( min-width : 576px) {
+	.container {
+		max-width: 540px;
+	}
+}
+
+@media ( min-width : 768px) {
+	.container {
+		max-width: 720px;
+	}
+}
+
+@media ( min-width : 992px) {
+	.container {
+		max-width: 960px;
+	}
+}
+
+@media ( min-width : 1200px) {
+	.container {
+		max-width: 1140px;
+	}
+	.container-1 {
+		max-width: 1140px;
+		margin: 0 auto;
+	}
+}
+
+.contents{
+	margin-left: 220px;
+	
+    padding: 0px 10px;
+}
+
+button:focus {
+    outline: none;
+    outline: none;
+}
+
+
+
+.nav_btn{
+    background-color: #fff;
+ /*    color: #444; */
+    cursor: pointer;
+    padding: 18px;
+    width: 200px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    border-bottom: 1px solid #dadfe6;
+}
+
+.nav_btn_last{
+     border-bottom: none;
+}
+
+.mypage_btn{
+    background-color: #F5F7FF;
+    text-align: center;
+}
+
+
+.accordion {
+    
+ 
+}
+
+.noaccordion {
+    
+    
+}
+
+.side-active, .accordion:hover {
+      background-color: #5392f9;
+    color: #fff;
+}
+
+.accordion:after {
+
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+
+
+.side-panel {
+	padding: 0 18px;
+	background-color: #f5f7ff;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+}
+
+.side-panel>ul{
+	list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-panel>ul>li{
+	/* border: 1px solid red; */
+	    padding: 10px 0 10px 0;
+}
+
+.side-panel>ul>li>a{
+color: #000;
+}
+    
+
+
+.sidebar{
+    width: 200px;
+    border: 1px solid #dadfe6;
+    border-radius: 16px;
+    position: fixed;
+    z-index: 1;
+    top: 265px;
+    background: #fff;
+    overflow-x: hidden;
+    padding: 8px 0;
+}
+
+
+.side-active-top{
+	top: 60px;
+	transition: all 0.2s ease-in-out;
+}
+
+
+
+.sidebar-header{
+    height: 90px;
+    padding: 11px;
+}
+
+.user-pic{
+    float: left;
+    width: 60px;
+    border-radius: 50px;
+/*     border-radius: 12px; */
+    margin-right: 15px;
+    overflow: hidden;
+}
+
+.user-pic>img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.user-info{
+
+    padding-top: 7px;
+}
+
+.user-name{
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+
+.user-name>strong{
+    font-weight: 800;
+}
+
+.user-role{
+    display: block;
+    font-size: 11px;
+    color: #818896;
+
+}
+.user-status{
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+
+.fa-circle{
+    font-size: 8px;
+    margin-right: 4px;
+    color: #5cb85c;
+}
+
+
+
+/* .. top text*/
+
+
+.page-header-top{
+	height: 120px;
+    padding: 25px 0px;
+    border-bottom: 1px solid rgb(221, 221, 221) !important;
+}
+
+
+.page-header{
+	
+    color: #455873;
+    font-weight: 700;
+    font-size: 30px;
+    margin: 0 0 12px 0;
+}
+
+.page-header-top>p{
+
+    font-size: 14px;
+    color: #8592a6;
+    line-height: 18px;
+}
+
+

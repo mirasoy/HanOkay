@@ -83,9 +83,12 @@ public class WishListControllerTests {
 	@Test
 	public void testRemove() throws Exception {
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/wishlist/remove")
-				.param("wishNum", "W338")
+				.param("wishNum", "W422")
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 	}
 
+	
+
+	
 }

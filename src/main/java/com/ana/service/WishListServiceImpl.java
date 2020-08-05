@@ -57,7 +57,16 @@ public class WishListServiceImpl implements WishListService{
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■remove......" + wishNum);
 		return mapper.deleteAjax(wishNum);
 	}
+	
+	@Override
+	public int wishRemove(String wishNum) {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■wishRemove......" + wishNum);
+		return mapper.deleteAjax(wishNum);
+	}
 
+	
+
+	
 
 	@Override
 	public int countCart(WishListVO wish) {
@@ -66,11 +75,9 @@ public class WishListServiceImpl implements WishListService{
 	}
 
 	@Override
-	public List<WishListVO> drawValue(String loginUserNum, String acmNum) {
-
+	public List<WishListVO> drawValue(String userNum, String acmNum) {
 			
-			return mapper.drawValue(loginUserNum,acmNum);
-
+			return mapper.drawValue(userNum,acmNum);
 	}
 
 

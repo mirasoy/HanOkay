@@ -68,7 +68,10 @@ public class WishListServiecTests {
 	
 
 	
-	
+	@Test
+	public void testDrawValue() {
+		log.info(service.drawValue("U1", "A1"));
+	}
 	
 	
 	
