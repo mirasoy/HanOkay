@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +39,6 @@ public class QnaController {
 
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
 

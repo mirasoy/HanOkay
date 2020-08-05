@@ -56,54 +56,58 @@
 
     <!-- Custom Fonts -->
     <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+	html, body {
+		font-family: Verdana, sans-serif;
+		background-color: white;
+	}
 	
+	img {
+		position: absolute;
+		left: 20px;
+		width: 200px;
+		height: 160px;
+	}
 	
-	<style>
-		html,body{
-			font-family:Verdana, sans-serif;
-			background-color:white;
-		}
-		
-		
-		img{
-		position:absolute;
-			left:20px;
-			width:200px;
-			height:160px;
-		}
-		
-		.uploadResult {
-			width: 100%;
-			background-color: white;
-			margin-top: 10px;
-		
-		}
-		
-		.uploadResult ul {
-			display: flex;
-			flex-flow: row;
-			justify-content: center;
-			align-items: center;
-		}
-		
-		.uploadResult ul li {
-			list-style: none;
-			padding: 10px;
-		}
-		
-		.uploadResult ul li img{
-			width: 150px;
-			position: static;
-		}
-		
-		<style>
-		.panel-heading {
-		    color: #333;
-		    background-color: #D2AC70 !important;
-		    border-color: #ddd;
-		 }
-	</style>
-	</style>
+	.uploadResult {
+		width: 100%;
+		background-color: white;
+		margin-top: 10px;
+	}
+	
+	.uploadResult ul {
+		display: flex;
+		flex-flow: row;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.uploadResult ul li {
+		list-style: none;
+		padding: 10px;
+	}
+	
+	.uploadResult ul li img {
+		width: 150px;
+		position: static;
+	}
+	
+	.panel-heading {
+		color: #333;
+		background-color: #D2AC70 !important;
+		border-color: #ddd;
+	}
+	.containerMR{
+		margin-left: 100px;
+	}
+	
+
+</style>
+
 </head>
 
 <body>

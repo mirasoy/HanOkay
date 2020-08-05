@@ -67,8 +67,9 @@
 
 <div class="container">
 <div class ="wrapCon">
-	<h1>${toUser.userFstName }님과 대화중</h1>
-	<div>
+	<a href="/chat/chatList"><button class = "btn"><i class="fa fa-angle-double-left" style="font-size: 2em;" aria-hidden="true"></i></button></a>
+	<b class = "right" style="font-size: 2em;">${toUser.userFstName }님과 대화중</b>
+	<div> 
 	<div class="chatList">
 	</div>
 		<div>

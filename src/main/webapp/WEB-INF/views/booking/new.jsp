@@ -15,7 +15,8 @@
 
 <div class = "page-wrapper page-new">
 	<div class = "page-contnets" style="width: 65%;">
-		<div class = "container-info box" >
+		<form action="/booking/get" id="form" method=post>	
+		<div class = "container-new box" >
 			<table>
 				<tr><td class="acm-pic" rowspan="4">
 						<img alt='숙소사진' src='/display?fileName=<c:out value="${info.acmPurl}" /><c:out value="${info.acmPname}" />' />
@@ -30,24 +31,18 @@
 					</span></td></tr>
 				<tr><td></td><td><c:out value="${info.acmCity} "/> <c:out value="${info.acmDistr} "/> <c:out value="${info.acmDetailaddr} "/></td></tr>
 			</table>
-		</div>
-	
-	<form action="/booking/get" id="form" method=post>	
-		<div class = "container-booker box" >
-			<table>
-				<tr><td rowspan="4" class="td-title">예약</br>정보</td><td colspan="2"><input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</td><td colspan="2"><p class="info"><label class="label-required"></label>표시는 필수 입력사항입니다.</p></td></tr>
+			</br>
+			<table class = "tb-booker">
+				<tr><td rowspan="4" class="td-title">예약</br>정보</td><td colspan="2"><p class="info"><input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</p></td><td colspan="2"><p class="info"><label class="label-required"></label>표시는 필수 입력사항입니다.</p></td></tr>
 				<tr><td><label class="table-lb label-required">First Name</label></td><td><input id="userInfo1" name="bookerFirstname" required type="text" value='<%=user.getUserFstName()%>' readonly="readonly"/></td>
 					<td><label class="table-lb label-required">Last Name</label></td><td><input id="userInfo2" name="bookerLastname" required type="text" value='<%=user.getUserLastName()%>' readonly="readonly"/></td>
 				<tr><td><label class="table-lb label-required">Email</label></td><td colspan="3"><input id="userInfo3" name="bookerEmail" required type="email" value='<%=user.getUserEmail()%>' readonly="readonly"/></td></tr>
 				<tr><td><label class="table-lb ">Phone</label></td><td colspan="3"><input id="userInfo4" name="bookerPhone" type="tel" value='<%=user.getUserPhone()%>' readonly="readonly" /></td></tr>
 			</table>
-			
-		</div>
- 		
-		<div class = "container-request box" >
-			<table>
+			</br>
+			<table class = "tb-request">
 				<tr><td rowspan="5" class="td-title">추가</br>요청</td>
-					<td><label class="lb">도착 예정시간</label></td>
+					<td><label class="table-lb">도착 예정시간</label></td>
 					<td colspan="2"><select id="expArr">
 							<option value="">-----</option>
 							<option value="PM02">PM02</option>
@@ -75,14 +70,14 @@
 							<option value="AM12">AM12</option>
 						</select></td></tr>
 				<tr><td colspan="4"><p class="info"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>기본 체크인 시간 ${info.checkinTime} 이전에 도착할 경우, 대기시간이 소요될 수 있습니다.</p></td></tr>
-				<tr><td><label class="lb">흡연여부</label></td>
-					<td colspan="3">금연객실<input type="radio" name="smoking" value="0" checked="checked">&emsp;&emsp;흡연객실<input type="radio" name="smoking" value="1"></td></tr>
-				<tr><td><label class="lb">메세지</label></td>
+				<tr><td><label class="table-lb">흡연여부</label></td>
+					<td colspan="3"><label class="table-lb">금연객실</label><input type="radio" name="smoking" value="0" checked="checked">&emsp;&emsp;<label class="table-lb">흡연객실</label><input type="radio" name="smoking" value="1"></td></tr>
+				<tr><td><label class="table-lb">메세지</label></td>
 					<td colspan="3"><input type="text" id="request" name="request" value="" maxlength="100"></td></tr>
-				<tr><td colspan="4"><p class="info"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 최선을 다해 요청사항을 제공해 드릴 수 있도록 노력하겠습니다.</br>다만, 상황에 따라 요청이 이루어지지 않을 수 있으니 양해 바랍니다.</p></td></tr>
+				<tr><td colspan="4"><p class="info"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 요청사항을 최대한 제공해 드릴 수 있도록 노력하고 있으나 상황에 따라선 어려울 수 있습니다.</p></td></tr>
 			</table>
 			<input type="hidden" name="bookStatus" value="RS_STT_BK" >
-						 
+			</br>	 
 		</div>
 	</div> <!-- end of contents -->
 	
@@ -109,30 +104,36 @@
 		</div>
 		
 		<div class = "container-payment box" >
-			<table>
-				<tr><td><%=checkin %></td><td> ~ </td><td><%=checkout %></td><td>&nbsp;(${days}박)</td></tr>
-				<tr><td colspan="2">${info.romName}</td><td colspan="2">(${info.romType})</td></tr>
-				<tr><td colspan="2">객실 1개, </td><td colspan="2">인원 <%=person %>명</td></tr>
-				<tr><td colspan="4">(최대 인원: ${info.romCapa}명)</td></tr>
+			<table class = "info">
+				<tr class = "tr-title"><td><%=checkin %> ~ <%=checkout %>&nbsp;(${days}박)</td></tr>
+				<tr class = "tr-title"><td>${info.romName}&nbsp;(${info.romType})</td></tr>
+				<tr class = "tr-title"><td>인원 <%=person %>명&nbsp;(최대: ${info.romCapa}명)</td></tr>
 			</table>
+			</br>
 			<table>
-				<tr><td>객실 요금(${days}박 x <i class="fa fa-krw" aria-hidden="true"></i><%=romPrice%>)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPrice"></label></td></tr>
-				<tr><td>세금 10%</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblVat"></label></td></tr>
-				<tr><td id="total-td">합계</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblSubtotal"></label></td></tr>
-				<tr><td>(1박당 금액)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPerDay"></label></td></tr>
-				<tr><td colspan="2"></td></tr>
-				<tr><td colspan="2"><p class="info"><label><input type="checkbox" id="agreement"><a href="#" target="_blank">이용약관</a>, <a href="#" target="_blank">개인정보 보호정책</a>을 읽었으며 이에 동의합니다.</label></p></td></tr>
-				<tr><td colspan="2"><input type="button" value='카드결제' onclick="book('PY_METHOD_CARD')"></td></tr>
-				<tr><td colspan="2"><input type="button" value='페이팔결제' onclick="book('PY_METHOD_PAYPAL')"></td></tr>
-				<tr><td colspan="2"><input type="button" value='나중에결제' onclick="book('PY_METHOD_LATER')"></td></tr>
-				<tr><td colspan="2"><input type="submit" value='테스트'></td></tr>
-				<tr><td colspan="2"><p>나중에 결제하기를 선택하면, 숙소에 방문해서 현장결제를 할 수 있습니다!</p></td></tr>
+				<tr><td class = "td-title2">객실 요금(${days}박 x <i class="fa fa-krw" aria-hidden="true"></i><%=romPrice%>)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPrice"></label></td></tr>
+				<tr><td class = "td-title2">세금 10%</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblVat"></label></td></tr>
+				<tr class="tr-line"><td class = "td-title3">총액</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblSubtotal"></label></td></tr>
+				<tr><td></td></tr>
+				<tr><td class = "td-title2">쿠폰</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblCoupon"></label></td></tr>
+				<tr><td class = "td-title2">마일리지</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblMileage"></label></td></tr>
+				<tr class="tr-line"><td class = "td-title3">할인액</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblDiscount"></label></td></tr>
+				<tr><td></td></tr>
+				<tr><td class = "td-title4">결제금액</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblTotal"></label></td></tr>
+				<tr><td class = "td-title2">(1박당)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPerDay"></label></td></tr>
+			</table>
+			</br>
+			<table>
+				<tr><td colspan="3"><p class="info"><label><input type="checkbox" id="agreement">  <a href="../policies/terms" target="_blank">이용약관</a>, <a href="../policies/privacy" target="_blank">개인정보 보호정책</a>을 읽었으며 이에 동의합니다.</label></p></td></tr>
+				<tr><td><input type="button" value='카드 결제' onclick="book('PY_METHOD_CARD')"></td><td><input type="button" value='페이팔 결제' onclick="book('PY_METHOD_PAYPAL')"></td><td><input type="button" value='나중에 결제' onclick="book('PY_METHOD_LATER')"></td></tr>
+				<tr><td colspan="3"><p class="info"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> '나중에 결제'로 숙소에서 현장결제를 할 수 있습니다!</p></td></tr>
 				
 			</table>
 			
 		</div>
 	</div>
 	</form>
+	
 	</div>
 	
 	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
@@ -261,14 +262,23 @@
 			let price = romPrice * days;
 			let vat = Math.ceil(price / 10);
 			let subtotal = price + vat;
-			let perDay = Math.ceil(subtotal / days);
+			let coupon  = 0;
+			let mileage = 0;
 			let discount = 0;
 			let total = subtotal - discount;
+			let perDay = Math.ceil(subtotal / days);
 			
 			// 예약페이지 화면 우측의 금액 부분
 			document.getElementById("lblPrice").innerHTML = price;
 			document.getElementById("lblVat").innerHTML = vat; 
 			document.getElementById("lblSubtotal").innerHTML = subtotal;
+
+			document.getElementById("lblCoupon").innerHTML = coupon;
+			document.getElementById("lblMileage").innerHTML = mileage;
+			document.getElementById("lblDiscount").innerHTML = discount;
+
+			document.getElementById("lblTotal").innerHTML = total;
+			
 			document.getElementById("lblPerDay").innerHTML = perDay;
 			
 			// 예약하기 버튼을 눌렀을 때 저장할 정보 셋팅			

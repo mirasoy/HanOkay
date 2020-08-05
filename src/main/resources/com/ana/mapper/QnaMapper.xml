@@ -58,7 +58,7 @@ select * from tqna where bno >0
 </insert>
 
 <select id="read" resultMap="QnaVO">
-	select * from (select distinct bno, title, content, regdate, updatedate, hit, concat(concat(u_lastname,' '),u_fstname) writer
+	select * from (select distinct bno, title, content, regdate, updatedate, hit, u_lastname|| ' '  ||u_fstname writer
         from tuser u, tqna q
         where  u.user_num = q.writer) where bno = #{bno}
 </select>
@@ -104,7 +104,7 @@ from
 	select /*+INDEX_DESC(TQNA PK_TQNA) */
 		rownum rn, bno, title, content, writer, regdate, updatedate, hit
 	from
-		(select distinct bno, title, content, regdate, updatedate, hit, concat(concat(u_lastname,' '),u_fstname) writer
+		(select distinct bno, title, content, regdate, updatedate, hit, u_lastname|| ' '  ||u_fstname writer
         from tuser u, tqna q
         where  u.user_num = q.writer
         order by bno desc) tqna
@@ -121,7 +121,7 @@ from
 </select>
 
 <select id="getTotalCount" resultType="int">
-select count(*) from (select distinct bno, title, content , concat(concat(u_lastname,' '),u_fstname) writer
+select count(*) from (select distinct bno, title, content , u_lastname|| ' '  ||u_fstname writer
         from tuser u, tqna q
         where  u.user_num = q.writer
         ) where
