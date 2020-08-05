@@ -54,9 +54,12 @@
                 </div>
               	<div class="col-lg-2">
                     <div class="well well-lg" style="height: 200px;">
-                    	<div align="center">
+                    	<div align="center" id="weather">
 	                       
-	                        <p>여기 날씨를 넣을거얌</p>
+	                        <p>오늘의 날씨</p>
+	                        
+	                        
+	                        
                     	</div>
                     </div>
                 </div> <!-- /.col-lg-2 -->
@@ -168,5 +171,61 @@
 
 		</div>
 	</div>
+<script type="text/javascript">
+var latitude;
+var longitude;
 
+ 
+$(document).ready(function(){
+	
+	if ("geolocation" in navigator) {	/* geolocation 사용 가능 */
+		navigator.geolocation.getCurrentPosition(function(data) {
+		
+			latitude = data.coords.latitude;
+			longitude = data.coords.longitude;
+			
+			var apiURI = "http://api.openweathermap.org/data/2.5/weather?lat="+Math.trunc(latitude)+"&lon="+Math.trunc(longitude)+"&appid=b20d726fb6666eadaac9a1fd17586b24"
+			    $.ajax({
+			        url: apiURI,
+			        dataType: "json",
+			        type: "GET",
+			        async: "false",
+			        success: function(resp) {
+			        	
+			        	var str = "";
+			        	
+			            str+="현재온도 : "+ (resp.main.temp- 273.15);
+			            str+="현재습도 : "+ resp.main.humidity;
+			            str+="날씨 : "+ resp.weather[0].main;
+			            str+="상세날씨설명 : "+ resp.weather[0].description;
+			            str+="날씨 이미지 : "+ resp.weather[0].icon;
+			            str+="바람   : "+ resp.wind.speed;
+			            str+="나라   : "+ resp.sys.country;
+			            str+="도시이름  : "+ resp.name ;
+			            str+="구름  : "+ (resp.clouds.all) +"%";    
+             
+			            $("#weather").append(str);
+			        }
+			    })
+			
+			
+			
+			
+		}, function(error) {
+			alert(error);
+		}, {
+			enableHighAccuracy: true,
+			timeout: Infinity,
+			maximumAge: 0
+		});
+	} else {	/* geolocation 사용 불가능 */
+		alert('geolocation 사용 불가능');
+	}
+})
+
+
+	
+	
+		
+</script>
 <%@include file="../includes/footer.jsp"%>
