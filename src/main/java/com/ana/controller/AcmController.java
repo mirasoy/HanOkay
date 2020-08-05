@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
 import com.ana.domain.PageDTO;
+import com.ana.domain.UserVO;
 import com.ana.service.AcmService;
 import com.ana.service.WishListService;
 
@@ -37,6 +38,11 @@ public class AcmController {
 
 	private AcmService service;
 	private WishListService wishservice;
+	
+	
+	
+	
+	
 	
 	//검색 결과 
 //	@GetMapping({ "/list", "/result" })
@@ -101,10 +107,12 @@ public class AcmController {
 			model.addAttribute("pageMaker", new PageDTO(cri, total));
 			model.addAttribute("drawValue", drawValue(service.getList(cri), session));
 			
-			
 			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + total);
 			
+			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + drawValue(service.getList(cri), session).size());
+			
 		} catch (Exception e) {
+			System.out.println("오류가 발생했습니다 : "+e.getMessage());
 			log.info("error@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return;
 		}
@@ -112,28 +120,38 @@ public class AcmController {
 	
 	
 	
+
+	
+	
+	
 	public List<String> drawValue(List<AcmVO> list, HttpSession session){
 	
-	List<String> result = new ArrayList<String>() ;
-	
+	List<String> result = new ArrayList<String>() ;	
 	for(AcmVO acmlist : list) {
-		acmlist.getAcmNum();
-		String loginUserNum = (String) session.getAttribute("loginUserNum");
-		wishservice.drawValue(loginUserNum, acmlist.getAcmNum());			
-	
+		acmlist.getAcmNum();				
 		
-		if(wishservice.drawValue(loginUserNum, acmlist.getAcmNum())==null) {
-			
-			result.add("fa fa-heart-o fa-2x");
-			
-		}else {
-			
-			result.add("fa fa-heart fa-2x");				
+		UserVO user= (UserVO)session.getAttribute("user"); 		
+		String userNum="";
+		
+		if(user != null){
+			userNum = user.getUserNum();
+		} 				
+		
+		log.info("■■>>>>>>>>>>>>>>>>>sizze>>>>"+wishservice.drawValue(userNum, acmlist.getAcmNum()).size());
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ acm NUM  은?■■■■■■■■■■■■■■■■"+ acmlist.getAcmNum());
+		
+		wishservice.drawValue(userNum, acmlist.getAcmNum());		
+		if(wishservice.drawValue(userNum, acmlist.getAcmNum()).size()==0) {			
+			result.add("fa fa-heart-o fa-2x openheart");	
+			log.info(1);
+		}else {			
+			result.add("fa fa-heart fa-2x clsheart");	
+			log.info(2);
 		}			
 	}
-	log.info("result.size()"+result.size());
-	return result;
-	
+	log.info("■■■■■■■■■■■■■■■■■■■■■result.size() == ?? "+result.size());
+	log.info("■■■■■■■■■■■■■■■■■■■■■result == ?? "+result);
+	return result;	
 }
 	
 	

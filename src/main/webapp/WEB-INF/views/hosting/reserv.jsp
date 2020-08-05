@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/hostheader.jsp"%>
+<style>
+	a{
+		color: #21292d !important;
+	}
+</style>
 	<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>		
 		<!-- 중앙정렬 -->

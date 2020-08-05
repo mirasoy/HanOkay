@@ -13,8 +13,8 @@ body {
 
 /* 하단의 컨텐츠에 여백을 주고자함  */
 .row {
-	margin-right: 50px;
-	margin-left: 50px;
+	/* margin-right: 50px;
+	margin-left: 50px; */
 }
 
 .content { /* 부모  */
@@ -164,6 +164,10 @@ p:last-child { margin-bottom: 0; }
 }
 
 .dropdown-menu>li>a:hover {
+	color: #61dafb;
+}
+
+.btnHover{
 	color: #61dafb;
 }
 

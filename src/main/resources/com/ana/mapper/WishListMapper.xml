@@ -109,6 +109,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 
+	<delete id="wishdelete">
+		delete from TWISH_LIST where WISH_NUM = #{wishNum}
+	</delete>
+
+
+
 <!-- 
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★6. update 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -156,11 +162,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 -->	
 
 
-<select id="drawValue">
+<select id="drawValue" resultMap="WishListVOResult">
 
 	select *
 	from twish_list w
-	where w.user_num=#{loginUserNum} AND w.ACM_NUM = #{acmNum}
+	where w.user_num=#{userNum} AND w.ACM_NUM = #{acmNum}
 
 </select>
 

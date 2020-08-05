@@ -87,7 +87,7 @@ public class HostController {
 			acmActi="PENDING";
 			System.out.println(1);
 			List<AcmVO> pendinglist= aservice.getListAcms(ownerUserNum,acmActi);
-			model.addAttribute("pendinglist", pendinglist);
+			model.addAttribute("pendinglist", pendinglist);//
 			size+=pendinglist.size();
 			
 		} else if(userPriv.equals("HOST")){
@@ -98,27 +98,28 @@ public class HostController {
 			
 			if(pendinglist.size()!=0) {//심사대기가 하나라도 있으면 안된다
 				System.out.println("펜딩있음!");
-				model.addAttribute("newnotallowed", true);
+				model.addAttribute("newnotallowed", true);//
 			}
 			size+=pendinglist.size();
 			
 			acmActi="ACTIVE";
 			List<AcmVO> activelist= aservice.getListAcms(ownerUserNum,acmActi);
-			model.addAttribute("activelist", activelist);
+			model.addAttribute("activelist", activelist);//
 			size+=activelist.size();
 			
 			acmActi="INACTIVE";
 			List<AcmVO> inactivelist= aservice.getListAcms(ownerUserNum,acmActi);
-			model.addAttribute("inactivelist", inactivelist);
+			model.addAttribute("inactivelist", inactivelist);//
 			size+=inactivelist.size();
 			
 			
 		}
 		
 		System.out.println("전체리스트갯수:"+size);
-		model.addAttribute("size", size);
+		model.addAttribute("size", size);//
 		
-		model.addAttribute("userFstname", getUser(session).getUserFstName());
+		model.addAttribute("userFstname", getUser(session).getUserFstName());//
+		System.out.println("전체리스트뀨뀨뀨뀨뀨뀨뀨갯수:");
 	}
 	
 

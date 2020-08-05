@@ -73,25 +73,7 @@
 	<!-- /.row -->
 <script type="text/javascript" src="/resources/js/wishlist.js"></script>	
 	<script>
-	
-	
-	/* var wishNumValue = '<c:out value="${get.wishNum}"/>';
-	
-	alert("wishNumValue"); */
-/* 	
-	wishService.remove(W334, function(count){
-		console.log(count);
-		if(count==="success"){
-			alert("삭제완료");
-			}
-		}, function(err){
-			alert('ERROR...');
 		
-	});
-	 */
-	
-	
-	
 	
 		
 	var deleteBtn = document.getElementsByClassName("deleteBtn");
