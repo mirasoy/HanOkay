@@ -75,8 +75,8 @@
 	grid-column: 1;
 	padding: 20px;
 	font-size: 1rem;
-	width: 100%;
-    height: 270px;
+	width: 600px;
+    height: 370px;
 }
 
 .container-location{
@@ -85,17 +85,7 @@
 	grid-column: 2;
 	padding: 20px;
     width: 450px;
-    height: 365px;
-}
-
-.container-booker{
-	font-size: 1rem;
-	height: 350px;	
-}
-
-.container-request{
-	font-size: 1rem;
-	height: 220px;
+    height: 465px;
 }
 
 .container-roomlist{
@@ -104,9 +94,17 @@
 }
 
 .container-payment{
-    font-size: 1rem;
-	height: 785px;
+    font-size: 0.8rem;
+	height: 700px;
+    padding: 10px;
 }
+
+.container-new{
+	padding: 20px;
+    font-size: 0.9rem;
+    height: 700px;
+}
+
 .page-wrapper table{
 	width: 100%;
 }
@@ -120,17 +118,14 @@
     padding: 1%;
 }
 
-.page-new table tr{
-    border-top: 10px solid white;
-}
-
-.page-new .container-info .acm-pic{
+.page-new .acm-pic{
 	background: black;
     width: 100px;
 }
 
-.page-new .container-info .acm-pic img{
-	width: 25vh;
+.page-new .acm-pic img{
+	width: 35vh;
+    height: 25vh;
 }
 
 .page-get .acm-pic{
@@ -146,29 +141,48 @@
 	font-size: 1rem;
 }
 
-
 .page-new .acm-title{
 	font-size: 1.5rem;
 	font-weight: bold;
 }
 
 .page-new input[type="checkbox"]{
-	width: 20px;
-	height: 20px;
+	width: 15px;
+	height: 15px;
+}
+
+.page-new .table-lb{
+	font-size: 0.8rem;
+}
+
+.page-new input[type="button"]{
+    background-color: #61dafb;
+    color: #fff;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    margin: 2px;
+    width: 115px;
+    height: 40px;
 }
 
 p.info{
 	font-size: 0.7rem;
 }
 
-.container-booker input[type="text"], input[type="email"], input[type="tel"]{
+.tb-booker  input[type="text"], input[type="email"], input[type="tel"]{
 	background-color:#eee; 
 	opacity: 0.5;
-	width: 100%
+	width: 100%;
+	font-size: 0.8rem;
 }
 
-.container-request input[type="text"], select{
+.tb-request	input[type="text"]{
 	width: 100%;
+	font-size: 0.8rem;
 }
 
 .page-contnets .label-required:after {
@@ -182,6 +196,52 @@ p.info{
     font-weight: bold;
 	text-align: center;
     padding: 3vh;
+    width: 10px;
+}
+
+.page-new .tr-title{
+    font-size: 1.1rem;
+    font-weight: bold;
+	text-align: center;
+    padding: 1vh;
+}
+
+.page-new .td-title2{
+    font-size: 0.7rem;
+    font-weight: 500;
+	text-align: left;
+}
+
+.page-new .td-title3{
+    font-size: 0.7rem;
+    font-weight: 500;
+	text-align: left;
+	color: crimson;
+}
+
+.page-new .td-title4{
+    font-size: 0.9rem;
+    font-weight: 500;
+	text-align: left;
+	color: crimson;
+}
+
+.page-new .tr-line{
+	border-bottom: 1px solid #404040;
+}
+
+.page-get button{
+    background-color: #61dafb;
+    color: #fff;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    margin: 2px;
+    width: 115px;
+    height: 40px;
 }
 
 .box {
@@ -432,6 +492,14 @@ details{
 .rom-title{
     font-size: 50px;
     font-family: 'East Sea Dokdo', cursive;
+}
+
+.container-review p{
+	height: 150px;
+}
+
+.container-review table{
+	width: 600px;
 }
 
 .section {
