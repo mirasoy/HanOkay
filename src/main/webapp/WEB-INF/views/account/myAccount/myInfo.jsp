@@ -554,42 +554,25 @@ file="../../includes/header3.jspf"%>
      let userEmailValue = document.getElementsByClassName("realInfo_SR")[2];
      let userPhoneNumberValue = document.getElementsByClassName("realInfo_SR")[3];
 
-<%--     if(<%=userFstName != null%>){
-   	userNameValue.innerHTML= '<%=userLastName%> <%=userFstName%>';
-   	userEmailValue.innerHTML= '<%=userEmail%>';
-
-   	if(<%=user.getUserBirthday() != null %>){
-   		let bday= '<%=user.getUserBirthday() %>';
-   		let array = bday.split(" ");
-   		userBdayValue.innerHTML= array[5]+"/"+ array[1]+ "/"+ array[2];
-   	}
-
-   	if(<%=user.getUserPhone() != null %>){
-   		userPhoneNumberValue.innerHTML= '+<%=user.getUserPhone() %>';
-   		}
-     } --%>
-
   let btnModifyArr= document.getElementsByClassName("btn_modify");
   let nameModifyDiv=document.getElementById("inputBeforeForm_SR");
   let showHide= document.getElementById("showAndHide");
   let nameFromS=document.getElementsByClassName("nameFromSession")[0];
   
   
-  if(showHide.style.display==='none'){
-	  nameFromS.innerHTML='세린';
-  } else {
-	  nameFromS.innerHTML="";
-  }
    });
 
 
   	function changeInnerText(btnVal){
-  		
+  	  let nameFromS=document.getElementsByClassName("nameFromSession")[0];
+
   	if(btnVal.innerText === '수정'){
   		$("#showAndHide").show();
+  	  	nameFromS.innerHTML="";
   		btnVal.innerText='취소';
   	} else{
   		$("#showAndHide").hide();
+    	nameFromS.innerHTML="세린";
   		btnVal.innerText='수정';
   	}
   }

@@ -3,7 +3,7 @@
 pageEncoding="UTF-8"%> 
 <%@page import="javax.mail.Session"%> 
 <%@include file="../includes/header1.jspf"%>
-<title>HanOkay-로그인</title>
+<title>테스트-로그인</title>
 <style>
   body {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -40,21 +40,36 @@ pageEncoding="UTF-8"%>
       max-width: 960px;
     }
   }
+  .container2_SR{
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    min-height: 1px !important;
+    position: relative !important;
+  }
 
+  @media (min-width: 1128px){  
+.container2_SR {
+    width: 33.33333333333333% !important;
+    float: left !important;
+    margin-left: 33.33333333333333% !important;
+}
+}
+
+.container3_SR{
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    margin: 5px auto!important;
+    border: 1px solid #dadfe6;
+    border-radius: 16px;
+    background-color: #ffffff !important;
+    height: 450px;
+    width: 446px;
+}
   .header1_SR {
     position: relative;
     margin-top: 64px;
     margin-bottom: 56px;
     margin-left: 16px;
-  }
-
-  .h1Tag_SR {
-    color: inherit !important;
-    font-size: 1em !important;
-    font-weight: inherit !important;
-    line-height: inherit !important;
-    margin: 0px !important;
-    padding: 0px !important;
   }
 
   .header2_SR {
@@ -66,11 +81,6 @@ pageEncoding="UTF-8"%>
     line-height: 1.125em !important;
     color: rgb(72, 72, 72) !important;
     margin-left: 4px !important;
-  }
-
-  .content_SR {
-    margin-left: -8px !important;
-    margin-right: -8px !important;
   }
 
   .contentOfInfo_SR {
@@ -86,28 +96,6 @@ pageEncoding="UTF-8"%>
       float: left !important;
     }
   }
-.contentsSec{
-    margin-left: 220px;
-    padding: 0px 10px;
-}
-
-.shapeOfForm{
-    width: 600px;
-    height: 433px;
-    border: 1px solid #dadfe6;
-    border-radius: 16px;
-    position: fixed;
-    z-index: 1;
-    margin: auto;
-    background: #fff;
-    overflow-x: hidden;
-    padding: 8px 0;
-    text-align: center;
-}
-
-  .oneInfo_SR {
-    border-bottom: 1px solid rgb(235, 235, 235) !important;
-  }
 
   .in1_SR {
     display: table !important;
@@ -116,14 +104,13 @@ pageEncoding="UTF-8"%>
   }
 
   .titleOfOneInfo_SR {
-    overflow-wrap: break-word !important;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-      "Helvetica Neue", sans-serif !important;
+    margin: 0px !important;
+    word-wrap: break-word !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
     font-size: 16px !important;
     font-weight: 600 !important;
     line-height: 1.375em !important;
-    color: rgb(72, 72, 72) !important;
-    margin: 0px !important;
+    color: #484848 !important;
   }
   
   .titleOfCheckBox_SR{
@@ -136,137 +123,192 @@ pageEncoding="UTF-8"%>
     color: rgb(72, 72, 72) !important;
     margin: 0px !important;
   }
-  
+
+.oneInfo_SR{
+  margin-bottom: 16px;
+}
   .g-signin2 > div {
     margin: 0 auto;
   }
+
+.oneInputBox_SR{
+  display: block !important;
+  width: 100% !important;
+}
+
+.input{
+    font-size: var(--font-form-element-font-size, 16px) !important;
+    line-height: var(--font-form-element-line-height, 24px) !important;
+    letter-spacing: var(--font-form-element-letter-spacing, normal) !important;
+    font-family: var(--font-form-element-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
+    text-transform: var(--font-form-element-text-transform, undefined) !important;
+    color: #484848 !important;
+    padding-top: var(--spacing-form-element-vertical, 11px) !important;
+    padding-bottom: var(--spacing-form-element-vertical, 11px) !important;
+    font-weight: var(--font-light-font-weight, normal) !important;
+    background-color: transparent !important;
+    padding-left: var(--spacing-form-element-horizontal, 11px) !important;
+    padding-right: var(--spacing-form-element-horizontal, 11px) !important;
+    width: 100%;
+}
 </style>
 
 <%@include file="../includes/header2.jspf"%> <%@include
 file="../includes/header3.jspf"%>
 <div class="container">
-  <!-- Cookie가 비어있지 않을 때 checked 속성을 줌 -->
-  <c:if test="${not empty cookie.user_check}">
-    <c:set value="checked" var="checked" />
-  </c:if>
 
   <div class="out_SR">
     <section>
-      <div class="header1_SR">
-        <h1 tabindex="-1" class="h1Tag_SR">
-          <div class="header2_SR">
-          <div style="margin-top: 20px;">
-           로그인
-          </div>
-          </div>
-        </h1>
-      </div>
-    </section>
-  </div>
-
-  <div class="content_SR">
-  <section class="contentsSec">
-      <div class="shapeOfForm">
-          <div class="contentOfInfo_SR">
-    <form name="loginForm" method="post" style="margin: 58px auto;">
-          <div class="oneInfo_SR">
-            <div class="in1_SR">
-              <span style="color: red;" id="msg"><c:out value="${msg}" /></span>
-              <div class="titleOfOneInfo_SR">
-                Email
-              </div>
-              <input
-                type="text"
-                size="40"
-                name="email"
-                id="email"
-                value="${cookie.user_check.value }"
-                placeholder="서비스 이용을 위해 이메일을 입력해주세요"
-              />
-
-              <div class="titleOfCheckBox_SR">
-                Email 기억하기
-                <input type="checkbox" id="rememberEmail" ${checked } />
-              </div>
-            </div>
-          </div>
-
-          <div class="oneInfo_SR">
-            <div class="in1_SR">
-              <div class="titleOfOneInfo_SR">
-                비밀번호
-              </div>
-              <input
-                type="password"
-                size="40"
-                name="pwd"
-                id="pwd"
-                value="${pwd }"
-                placeholder="비밀번호를 입력해주세요"
-                autocomplete="on"
-              />
-              <div style="margin-top: 10px;">
-                <button id="loginButton" type="button" class="btn btn-default">
-                  로그인
-                </button>
-                <button
-                  id="findPwdBtton"
-                  type="button"
-                  class="btn btn-default"
-                  onclick="location.href='/account/myAccount/findPwd'"
-                >
-                  비밀번호 찾기
-                </button>
-              </div>
-            </div>
-          </div>
+      <div
+      style="
+          position: relative;
+          margin-top: 64px;
+          margin-bottom: 56px;
+          margin-left: 16px;
+        "
+      >
+      <h1><div class="header2_SR">Login</div></h1>
+    </div>
+    <!--  action= "/register/emailAuth" -->
+  </section>
+</div>
 
 
-          <div class="oneInfo_SR">
-            <div class="in1_SR">
-            <div 
+
+
+    <!-- Cookie가 비어있지 않을 때 checked 속성을 줌 -->
+    <c:if test="${not empty cookie.user_check}">
+    <c:set value="checked" var="checked" />
+    </c:if>
+
+<div class="container2_SR">
+  <div style="margin-top:24px">
+<div class="container3_SR">
+  <div style="margin-top:35px;margin-bottom:auto">
+
+  <section>
+    <div>
+      <div style="margin-bottom: 8px;">
+        <div
               class="g-signin2"
               data-onsuccess="onSignIn"
               data-theme="dark"
             ></div>
-            
-            <%--
-            <a href="${facebook_url}"
-              ><button class="btn btn-primary btn-round" style="width: 100%;">
-                <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login
-              </button></a
-            >
-            --%>
-            <a
-              href="https://www.facebook.com/v7.0/dialog/oauth?
-        client_id=323895235315656
-        &redirect_uri=https%3A%2F%2Flocalhost%3A8443%2Fuser%2Flogin%2Faouth2
-        &state={state-param}
-        &resource_type=token"
-              >Login with Facebook</a
-            >
-            <!-- <fb:login-button scope="public_profile,email,user_birthday"
-					onlogin="checkLoginState();" onclick="FB.login();">
-				</fb:login-button>
-
-				<div id="status"></div> Load the JS SDK asynchronously 
-				<script	async defer crossorigin="anonymous"
-					src="https://connect.facebook.net/en_US/sdk.js"></script> -->
-          
-          </div>
-        <input type="text" name="requestFrom" value="${requestFrom}" />
       </div>
-      <div style="margin-top:20px;">
-        <div style="margin-left:310px;  display:inline">
-            <a href="../register/signUp">회원가입하기</a>
-        </div>
-        
-        
-    </form>
     </div>
+
+    <div>
+      <form name="loginForm" method="post">
+        <div class="oneInfo_SR">
+          <div style="margin-bottom: 16px;">
+          <div>
+            <div class="oneInputBox_SR">
+            <span style="color: red;" id="msg"><c:out value="${msg}" /></span>
+            <div class="titleOfOneInfo_SR">
+              Email
+            </div>
+            <input
+            class="input_SR"
+              type="text"
+              style="width:100%"
+              name="email"
+              id="email"
+              value="${cookie.user_check.value }"
+              placeholder="서비스 이용을 위해 이메일을 입력해주세요"
+            />
+          </div>
+         </div>
+        </div>
+
+        <div class="oneInputBox_SR" style="margin: 3px;">
+          <div class="titleOfCheckBox_SR">
+            Email 기억하기
+            <input type="checkbox" id="rememberEmail" ${checked } />
+          </div>
+        </div>
+        </div>
+       
+
+        <div class="oneInfo_SR">
+          <div class="oneInputBox_SR">
+            <div class="titleOfOneInfo_SR">
+              비밀번호
+            </div>
+            <input
+             class="input_SR"
+              type="password"
+              style="width:100%"
+              name="pwd"
+              id="pwd"
+              value="${pwd }"
+              placeholder="비밀번호를 입력해주세요"
+              autocomplete="on"
+            />
+          </div>
+        </div>
+
+            <div style="margin-top: 10px;">
+              <button id="loginButton" type="button" class="btn btn-default" style="width: 100%;">
+                로그인
+              </button>
+            </div>
+            <div style="margin-top: 10px;">
+              <button
+               style="width: 100%;"
+                id="findPwdBtton"
+                type="button"
+                class="btn btn-default"
+                onclick="location.href='/account/myAccount/findPwd'"
+              >
+                비밀번호 찾기
+              </button>
+            </div>
+    </div>
+
+
+    <div class="oneInfo_SR">
+         
+          <%--
+          <a href="${facebook_url}"
+            ><button class="btn btn-primary btn-round" style="width: 100%;">
+              <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login
+            </button></a
+          >
+          --%>
+      <a
+            href="https://www.facebook.com/v7.0/dialog/oauth?
+      client_id=323895235315656
+      &redirect_uri=https%3A%2F%2Flocalhost%3A8443%2Fuser%2Flogin%2Faouth2
+      &state={state-param}
+      &resource_type=token"
+            >Login with Facebook
+      </a>
+          <!-- <fb:login-button scope="public_profile,email,user_birthday"
+        onlogin="checkLoginState();" onclick="FB.login();">
+      </fb:login-button>
+
+      <div id="status"></div> Load the JS SDK asynchronously 
+      <script	async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+        
+      <input type="hidden" name="requestFrom" value="${requestFrom}" />
+    </div>
+
+    <div style="margin-top:25px;">
+      <div style="margin-left:310px;  display:inline">
+          <a href="../register/signUp">회원가입하기</a>
+      </div>
+     </div>
+     </section>
+    </div>
+  </form>
+
 </div>
-    </section>
-  </div>
+</section>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 <script>
