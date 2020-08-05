@@ -153,7 +153,7 @@
 				
 				if(confirm("객실을 정말 삭제하시겠습니까?")==true){
 					formObj.append("<input type='hidden' name='romNum' value='"+$('#romNum').val()+"'>");
-					formObj.attr("method","post");
+					formObj.append("<input type='hidden' name='acmNum' value='"+$('#acmNum').val()+"'>");
 					formObj.attr("action","/hosting/removeRom");
 				} else {
 					return false;
@@ -161,8 +161,10 @@
 			
 			} else if(operation==='editRom'){
 				alert("pop으로 띄우기 수정목록")
+				return;
 			} else if(operation==='editAcmPic'){
 				alert("사진 바꾸기!")
+				return;
 			}
 			actionForm.submit();
 		});

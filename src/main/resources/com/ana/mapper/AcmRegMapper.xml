@@ -74,7 +74,7 @@
 	
 	<select id="getNotPendingAcms" resultType="int">
 		select count(*) from tacm
-		where owner_user = #{ownerUserNum} and acm_acti!={acmActi}
+		where owner_user = #{ownerUserNum} and acm_acti!=#{acmActi}
 	</select>
 	
 	<!-- 주소 중복체크 -->

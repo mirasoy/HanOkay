@@ -7,7 +7,7 @@
 <div class = "page-wrapper">
 	<div class = "page-contnets" style="width: 100%;">
 		<div class = "container-policies box">
-			<h1>HanOkay 한오케이 서비스 약관</h1>
+			<h1>HanOkay 한오케이 개인정보 보호정책</h1>
 		</div>
 	</div>
 </div>

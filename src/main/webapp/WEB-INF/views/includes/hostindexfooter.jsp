@@ -4,7 +4,6 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
     <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
@@ -12,11 +11,20 @@
 
     <!-- DataTables JavaScript -->
     <script src="/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="/resources/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="/resou  <!-- Bootstrap Core JavaScript -->
+  rces/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="/resources/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="/resources/dist/js/sb-admin-2.js"></script>
+
+
+    <!-- jQuery -->
+    <script src="/resources/vendor/jquery/jquery.min.js"></script>
+
+
+
+
 
 
 

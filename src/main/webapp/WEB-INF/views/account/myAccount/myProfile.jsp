@@ -64,12 +64,14 @@ position: relative;
     padding: 0px !important;
 }
 
+
 .item1>p{
     font-size: 14px !important;
     line-height: 18px !important;
     color: #717171 !important;
     margin-bottom: 8px !important;
 }
+
 
 .item2>.user_profile_edit_button{
 font-weight: 800;
