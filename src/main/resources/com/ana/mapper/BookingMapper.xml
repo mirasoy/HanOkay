@@ -352,5 +352,65 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM TBOOKING B, TPAYMENT P, TROM R, TACM A
 		WHERE #{bookNum} = B.BOOK_NUM AND B.BOOK_NUM = P.BOOK_NUM AND B.ROM_NUM = R.ROM_NUM AND A.ACM_NUM = R.ACM_NUM
 	</select>
+	
+	
+	<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★호스트 단이요~~ 감사합니다★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+	-->
+	<resultMap id="hBookVOResult" type="com.ana.domain.BookingVO">
+		<result column="acm_Num" property="acmNum" />
+		<result column="acm_Name" property="acmName" />
+		<result column="rom_Num" property="romNum" />
+		<result column="rom_Name" property="romName" />
+
+		<result column="book_num" property="bookNum" />
+		<result column="user_num" property="userNum" />
+		<result column="booker_firstname" property="bookerFirstname" />
+		<result column="booker_lastname" property="bookerLastname" />
+
+		<result column="guest" property="guest" />
+		<result column="request" property="request" />
+
+		<result column="expected_arr" property="expectedArr" />
+		
+	</resultMap>
+	
+	<select id="dateGetinBooking" resultMap="hBookVOResult">	
+	<![CDATA[
+	SELECT distinct
+	     A.ACM_NAME,A.ACM_NUM,R.ROM_NAME,R.ROM_NUM,
+	    B.BOOK_NUM,B.USER_NUM,B.BOOKER_FIRSTNAME,B.BOOKER_LASTNAME, B.GUEST,B.REQUEST,B.EXPECTED_ARR
+    
+    FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.checkin_date=#{checkinDate} and owner_user=#{ownerUser}
+	]]>
+	</select>
+	
+	<select id="dateGetoutBooking" resultMap="hBookVOResult">	
+	<![CDATA[
+	SELECT distinct
+	     A.ACM_NAME,A.ACM_NUM,R.ROM_NAME,R.ROM_NUM,
+	    B.BOOK_NUM,B.USER_NUM,B.BOOKER_FIRSTNAME,B.BOOKER_LASTNAME, B.GUEST,B.REQUEST,B.EXPECTED_ARR
+    FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.checkout_date=#{checkoutDate} and owner_user=#{ownerUser}
+	]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
 

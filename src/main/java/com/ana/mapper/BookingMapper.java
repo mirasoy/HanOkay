@@ -41,4 +41,11 @@ public interface BookingMapper {
 	
 	public BookingInfoVO getBooking(String bookNum); // 예약완료페이지에서 예약 정보 출력 
 	
+	///호스트단
+	public List<BookVO> dateGetinBooking(@Param("ownerUser") String ownerUser,@Param("checkinDate") String checkinDate); 
+	public List<BookVO> dateGetoutBooking(@Param("ownerUser") String ownerUser,@Param("checkoutDate") String checkoutDate); 
+	
+	
+	
+	
 }
