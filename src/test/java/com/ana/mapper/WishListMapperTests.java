@@ -26,7 +26,8 @@ public class WishListMapperTests {
 	// 1-1. 현재 찜의 모든 목록을 가져옴
 	@Test
 	public void testGetList() {
-		mapper.getList().forEach(board -> log.info(board));
+	
+		mapper.getList("U2").forEach(board -> log.info(board));
 	}
 	
 	
@@ -87,9 +88,14 @@ public class WishListMapperTests {
 	
 	@Test
 	public void testDelete() {
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■>> DELETE COUNT:" + mapper.delete("W202"));
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■>> DELETE COUNT:" + mapper.delete("W337"));
 	}
 	
+	
+	@Test
+	public void deleteAjax() {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■>> DELETE COUNT:" + mapper.deleteAjax("W305"));
+	}
 	
 	
 	
@@ -113,6 +119,36 @@ public class WishListMapperTests {
 		
 	}
 	
+
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★6. 장바구니 확인 ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	
+	@Test
+	public void testcountCart() {
+		WishListVO board = new WishListVO();
+		board.setUserNum("U1");
+		board.setAcmNum("A1");
+		
+		int count = mapper.countCart(board);
+		
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■>>testWishCart COUNT: " + count);
+	}
+	
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★7. 하트의 확인  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★		
+	
+	
+	@Test
+	public void testDrawValue() {	
+		
+		mapper.drawValue("U1", "A1");
+		
+	
+		log.info("테스트를 해보자■■■■■■■■■■■■■■■■■■■■■■■■>>drawValue: " + mapper.drawValue("U1", "A1"));
+	}
 	
 	
 }

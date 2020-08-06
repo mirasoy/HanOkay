@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<!-- %@include file="../includes/header.jsp"% -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HanOkay 한오케이 서비스 약관</title>
-</head>
-<body>
-	<h1>HanOkay 한오케이서비스 약관</h1>
+<%@include file="../includes/header.jsp"%>
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/suhee.css">
+<script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 
-	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
-</body>
-<%-- <%@include file="../includes/footer.jsp"%> --%>
+<div class = "page-wrapper">
+	<div class = "page-contnets" style="width: 100%;">
+		<div class = "container-policies box">
+			<h1>HanOkay 한오케이 서비스 약관</h1>
+		</div>
+	</div>
+</div>
+
+	
+<%@include file="../includes/footer.jsp"%>
 </html>

@@ -5,6 +5,8 @@
 
 <%@include file="../includes/header.jsp"%>
 
+<link rel="stylesheet" type="text/css"
+   href="${request.contextPath}/resources/css/list.css">
 
 <!-- Start : page-wrap : section 시작-->
 <div class="page-wrap">
@@ -47,7 +49,7 @@
 							<div class="form-group form-group-1">
 
 								<!-- Start : form-group-2-->
-								<div class="form-group form-group-1">
+								<div class="form-group form-group-1 selectGuest">
 									<label for="inputAdult">Guests</label> <select name="person"
 										class="form-control select" id="inputAdult">
 										<option value="1" selected>1</option>
@@ -60,10 +62,7 @@
 										<option value="8">8</option>
 									</select>
 								</div>
-								<!-- End : form-group-2-->
-
-
-								<!-- End : form-group-4-->
+		
 							</div>
 							<!-- End : form-group-1-->
 
@@ -72,10 +71,10 @@
 						<div class="form-row search-form-row form-group-1">
 
 							<div class="form-group form-group-1">
-								<div class="form-group">
+								<div class="form-group checkbox">
 									<label for="inputCheckOut">Check In Date</label>
 									<div class="ui calendar" id="rangestart">
-										<div class="ui input left icon uigroup leftpadding">
+										<div class="ui input left icon">
 											<i class="calendar icon"></i> <input type="text"
 												placeholder="Start" id="in" name="in" value="">
 										</div>
@@ -83,16 +82,16 @@
 								</div>
 
 
-								<div class="form-group">
-									<label for="inputCheckOut">Check Out Date</label>
+								<div class="form-group checkbox rigthgroup">
+									<label class="inputCheckOut" for="inputCheckOut">Check Out Date</label>
 									<div class="ui calendar" id="rangeend">
-										<div class="ui input left icon uigroup">
+										<div class="ui input right icon uigroup">
 											<i class="calendar icon"></i> <input type="text"
 												placeholder="End" id="out" name="out" value="">
 										</div>
 									</div>
 								</div>
-								<div class="form-group form-group-1 ">
+								<div class=" form-group-1 ">
 									<label for="btnSubmit">&nbsp;</label>
 									<button type="submit"
 										class="submit-btn btn-primary btn btn-search text-uppercase"
@@ -118,6 +117,121 @@
 <!-- .container-outer -->
 </section>
 <!-- End : banner-->
+
+<!-- Start : section-1 : 숙박 섹션 -->
+<section id="section-0" class="recommendByWeather">
+    <div class="container">
+        <div class="text-1">
+            <div class="mx-auto about-text-wrap text-center">
+                <h2 class="text-uppercase mb-4">
+                    오늘의 <strong>추천 여행코스</strong>
+                </h2>
+                <p class="mb-4">날씨에 따른 근처 추천 관광지.</p>
+
+				<div class="about-section">
+
+					<div>
+
+
+						<div class="iconW sun-shower">
+							<div class="cloud"></div>
+							<div class="sun">
+								<div class="rays"></div>
+							</div>
+							<div class="rain"></div>
+						</div>
+
+						<div class="iconW thunder-storm">
+							<div class="cloud"></div>
+							<div class="lightning">
+								<div class="bolt"></div>
+								<div class="bolt"></div>
+							</div>
+						</div>
+
+						<div class="iconW cloudy">
+							<div class="cloud"></div>
+							<div class="cloud"></div>
+						</div>
+
+						<div class="iconW flurries">
+							<div class="cloud"></div>
+							<div class="snow">
+								<div class="flake"></div>
+								<div class="flake"></div>
+							</div>
+						</div>
+
+						<div class="iconW sunny">
+							<div class="sun">
+								<div class="rays"></div>
+							</div>
+						</div>
+
+						<div class="iconW rainy">
+							<div class="cloud"></div>
+							<div class="rain"></div>
+						</div>
+					</div>
+
+
+					<h1 id="weatherTitle"></h1>
+					<h2 id="weatherSub"></h2><br>
+					<h5 id="weatherinfo"></h5>
+
+				</div>
+
+
+                <div class="rowInfo">
+                    <div class="column">
+                        <div class="rec-card">
+                        	<div class = "imgBox">
+                            <img id="cardImg1" src="" alt="Jane" style="width:100%">
+                            </div>
+                            <div >
+                                <h2 id="placeTitle1" ></h2>
+                                <p class="rec-title" id="placeTitle1-1"></p>
+                                
+                                <p><button id="btn1" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="rec-card">
+                        <div class = "imgBox">
+                            <img id="cardImg2" src="" alt="Mike" style="width:100%">
+                          </div>
+                            <div >
+                                <h2  id="placeTitle2"></h2>
+                                   <p class="rec-title" id="placeTitle1-2"></p>
+                                <p><button id="btn2" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="rec-card">
+                         <div class = "imgBox">
+                            <img id="cardImg3" src="" alt="John" style="width:100%">
+                              </div>
+                            <div>
+                                <h2 id="placeTitle3"></h2>
+                                    <p class="rec-title" id="placeTitle1-3"></p>
+                                <p><button id="btn3" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<div id='recom'>
+</div>
+<!-- /.row -->
 
 <!-- Start : section-1 : 숙박 섹션 -->
 <section id="section-1">

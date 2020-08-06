@@ -28,10 +28,50 @@
 .modal {
 	z-index: 12000;
 }
+
 /* 확대/축소 등 구글 지도의 기본 UI 감추기 */
 .gmnoprint, .gm-control-active.gm-fullscreen-control {
 	display: none;
 }
+
+
+.modal-content1{
+    border-radius: 12px !important;
+}
+
+.modal-body{
+	border: 1px solid red;
+	height: 120px;
+}
+
+.modal-footer{
+    border: 1px solid black;
+}
+
+.h1Name{
+		font-size: 14px;
+    font-weight: 800;
+    padding-top: 5px;
+    text-align: center !important;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+.closeBtn{
+
+        float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+        padding: 0;
+    background: 0 0;
+    border: 0;
+}
+
+
 </style>
 
 
@@ -217,17 +257,17 @@
 				<div id="myTable" class="gallery_list">
 
 					<div>
-						<c:forEach items="${list }" var="acm">
+						<c:forEach items="${list}" var="acm">
 
 							<div class='room room1 move'
+
 								href='<c:out value="${acm.acmNum}"/>' style="cursor: pointer;">
 
 								<input type="hidden" id="acmTest"
 									value='<c:out value="${acm.acmNum}" />'>
 
 
-
-								<div class="room-images">
+								<div class="room-images" onclick="location.href='<c:out value="${acm.acmNum}"/>'">
 									<a href="#">
 										<figure>
 											<img alt='객실사진'
@@ -236,7 +276,7 @@
 									</a>
 								</div>
 
-								<div class="room-details">
+								<div class="room-details" onclick="location.href='<c:out value="${acm.acmNum}"/>'">
 									<h2 class="title">
 										<a href="#"><c:out value="${acm.acmName}" /></a>
 										</h1>
@@ -264,15 +304,21 @@
 										</div> -->
 								</div>
 
-								<div class="room-ect">
-									<button id="wishButton" class="wishButton">
-										<i class="fa fa-heart fa-2x"></i>
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+
+								<div class="room-ect" value='<c:out value="${acm.acmNum}" />'>
+									<button id="wishButton" class="wishButton" value='<c:out value="${acm.acmNum}" />'>
+										<i></i>
 									</button>
 									<p>
 										<span> ₩ ${acm.acmPrice}</span> / 1박
 									</p>
 								</div>
 
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 								<input type="hidden" id="latitude"
 									value='<c:out value="${acm.latitude }" />'> <input
 									type="hidden" id="longitude"
@@ -376,24 +422,35 @@
 
 				<div class="modal-content1">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
+						<h1 class="h1Name">당신의 여행을 찜하세요</h1>
+						<button type="button" class="closeBtn" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 
 					</div>
-					<div class="modal-body">
-						<div class="form-group info-group">
+
+					<div class="modal-body">				
+						<div class="form-group info-group sr-only">
 							<label>#유저번호</label> <input class="form-control" name='userNum'
 								value='<%=userNum%>' readonly="readonly">
 						</div>
-
-						<div class="form-group info-group">
-							<label>#숙소번호</label> <input class="form-control acmNum"
-								name='acmNum' readonly="readonly">
-							<%-- <label>#숙소번호</label> <input class="form-control" name='acmNum' value='<c:out value="${acmNum}" />' readonly="readonly" >  --%>
+						
+						<div class="form-group info-group sr-only">
+							<label>#숙소번호</label> <input class="form-control acmNum"  name='acmNum' readonly="readonly" > 					
+ 							<%-- <label>#숙소번호</label> <input class="form-control" name='acmNum' value='<c:out value="${acmNum}" />' readonly="readonly" >  --%>					
 						</div>
 						<div class="form-group info-group">
-							<label>#타이틀</label> <input class="form-control" name='listTitle'
-								value=''>
+							<label>#타이틀</label> 
+							<!-- <input class="form-control" name='listTitle' value='' > -->
+							<select class="form-control" name='listTitle' value=''>
+							    <option value="분류없음" hidden>분류선택</option>
+							    <option value="관광">관광</option>
+							    <option value="휴식">휴식</option>
+							    <option value="쇼핑">쇼핑</option>
+							</select>
+								
+								
+								
+
 						</div>
 						<div class="form-group info-group">
 							<label>#내용</label> <input class="form-control" name='listContent'
@@ -945,88 +1002,98 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 
 
 
+$(document).ready(function(){	
 
-$(document).ready(function(){
+	
+	/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■찜하면 하트에 불이 들어오게끔 하는 코드를 적용한다. ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+	
+	var wishBtn = $(".wishButton"); //배열 	
+	var i = 0;
+	
+				
+	<c:forEach items="${drawValue}" var="drawValue">		
+		wishBtn[i].childNodes[1].setAttribute("class","<c:out value="${drawValue}" />");
+		wishBtn[i].childNodes[1].setAttribute("id","heart");
+		i++;		
+	</c:forEach>
+	
+	
+	
+	
+	/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/	
+	
+
 	
 	var modal = $(".modal");
-	var modalRegisterBtn = $("#modalRegisterBtn");
-	
-/*  	var room = $(".room");
-	var hidden = $(".hidenBtn")
-	var acmNumgo = $(".acmNum");
-	
-	
-	var hidden2 = hidden.val(room.attr("href")) */
-	
-	var modalInputuserNum = modal.find("input[name='userNum']").val();
-	
-	
-	
-	var modalInputacmNum = $("#acmTest").val();
-
-	/* alert("hiddenVal의 값은"+hiddenVal);
-	alert("modalInputacmNum의 값은"+modalInputacmNum);
-	 */
-	
-	
-/* 	hidden.val(room.attr("href")) */
-	
-	
-	var modalInputlistTitle = modal.find("input[name='listTitle']").val();
+	var modalRegisterBtn = $("#modalRegisterBtn");	
+	var modalInputuserNum = modal.find("input[name='userNum']").val();		
+	var modalInputacmNum = $("#acmTest").val();		
+	//var modalInputlistTitle = modal.find("select[name='listTitle']").val();
+	var modalInputlistTitle = $("select[name='listTitle']").val();
 	var modalInputlistContent = modal.find("input[name='listContent']").val();
 	
-/* 	var btn = document.getElementById("wishButton");
-	
-	for(
-			var i=0 ; i<btn.length ; i++
-			){
-		btn[i].onclick = function(e){
-			console.log(e);
-		      $(".modal").modal("show"); 
-		   	  modal.addClass("show") 	
-		
-		
-		};	
-	} */
-	
-	var hiddenVal = $("#acmTest");
-	var acmNum = $(".acmNum");
-
-	acmNum.val(hiddenVal.attr("value"));
-	
-	
-	
-	
-/* 	var wishValue = modalInputwishNum.val();
-	var userValue = modalInputuserNum.val();
-	var acmValue = modalInputacmNum.val();
-	var titleValue = modalInputlistTitle.val();
-	var contentValue = modalInputlistContent.val(); */
 	
 	//클로즈 버튼 클릭시 모달창을 숨긴다.
-	$("#modalCloseBtn").on("click", function(e){
-	    	
-	    	modal.modal('hide');
-	    });
+	$("#modalCloseBtn").on("click", function(e){	    	
+	    	modal.modal('hide');      	      		      		
+	});
 	
 	
- 	 $("#wishButton").on("click", function(e){
-	      
-	      alert("하트를 눌렀습니다!"); 
-	      
-	      $(".modal").modal("show"); 
-	   	  modal.addClass("show") 
-	   	  
-	   	var hiddenVal = $("#acmTest");
-	   	var acmNum = $(".acmNum");
+	
+/* 	찜버튼 클릭하면 이벤트 발생 (이때 class로 받아와야 for문이 된다,,,) */
+	var btn = document.getElementsByClassName("wishButton");
+	for(var i=0; i<btn.length; i++){btn[i].onclick=function(e){
+		var modalInputuserNum = modal.find("input[name='userNum']").val();
+		var modalInputacmNum = $("#acmTest").val();				
+		var heartbtn = $(".fa-heart");
+		var thisbtn = this;
+		 e.stopImmediatePropagation();
+		
+		if($(this).length>0){
+			var val1 = $(this).attr('value');
+			console.log("당신이 클릭한 숙소의 번호는 "+val1);					
+			var acmNum = $(".acmNum");
+			acmNum.val(val1);	
+			
+		}					
+		if(modalInputuserNum == ""){								
+ 			alert("로그인이 필요합니다.")
+ 			}else{
+ 				
+				alert("하트를 눌렀습니다!"); 
+ 				
+				
+			
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+									
+			
 
-	   	acmNum.val(hiddenVal.attr("value"));
-	      
-	    }); 
- 	 
- 	 
- 	 
- 	 
+					if($(this).children(0).hasClass("fa-heart")==1){
+
+						alert("이미 추가한 숙소입니다.");
+						
+						
+						
+						
+
+						}else{
+							alert("찜합니다.");
+							$(this).children().attr('class','fa fa-heart fa-2x');
+							$(".modal").modal("show"); 
+		 					modal.addClass("show") ;
+							
+						}
+ 				}  									
+			}		
+	}
+	
+
+
+ 
+	/* btn의 자식인 i클래스의 .attr('class','fa fa-heart fa-2x');의 상태라면 */
+	
+ 
 		
 	 modalRegisterBtn.on("click", function(e){	 	
 		 
@@ -1035,83 +1102,37 @@ $(document).ready(function(){
 			
 		var modalInputuserNum = modal.find("input[name='userNum']").val();
 		var modalInputacmNum = modal.find("input[name='acmNum']").val();		
-		var modalInputlistTitle = modal.find("input[name='listTitle']").val();
+		var modalInputlistTitle = $("select[name='listTitle']").val();
 		var modalInputlistContent = modal.find("input[name='listContent']").val();
+		
+	
+		
+		
+		alert(1);
 		
 		 wishService.add({
 			 userNum : modalInputuserNum, acmNum: modalInputacmNum, listTitle: modalInputlistTitle, listContent: modalInputlistContent 
 		 }, function(result){
 			 modal.modal('hide');
 			 console.log("Result : " + result)
+			 
+			 
+			 if(result==("fail..")){
+				 alert("이미 등록된 숙소입니다.")
+			 }
 		 }
 		)
 		 
 	 });
 	 
-	 
-	 
-	
+
 })
 
- var heart = '<c:out value="${get.wishNum}"/>';
- var modal = $(".modal");
-
-	document.querySelector(".wishButton").addEventListener("click", function(){
-	/* alert("하트를 눌렀습니다!");  */
-	/* self.location="/wishlist/get?wishNum=W253"; */
-	
-		
-	$(".room").attr('onclick', '').unbind('click');
-	
-	
-}); 
 
 
-
-
-//일단 여기서 스톱하고 ajax 하는것으로
-
-document.querySelector(".room-details").addEventListener("click", function(){
-	alert("다른것을 눌렀습니다")
-	$(".room").attr('onclick', 'location.href').bind('click');
-}) ;
-
-/* document.querySelector(".room").addEventListener("click", function(){
-	alert("다른것을 눌렀습니다.!"); 
-	$(".room").attr('onclick', '"location.href='<c:out value="${acm.acmNum}"/>'').bind('click');
-})
- */
 </script>
 
-<!-- 
-<script type="text/javascript" src="/resources/js/wishlist.js"></script>
-	<script type="text/javascript">
-	
-	console.log("========================");
-	console.log("JS TEST");
-	
-	
-	var wishValue = '<c:out value="${get.wishNum}"/>';
-	var userValue = '<c:out value="${get.userNum}"/>';
-	var acmValue = '<c:out value="${get.acmNum}"/>';
-	var titleValue = '<c:out value="${get.listTitle}"/>';
-	var contentValue = '<c:out value="${get.listContent}"/>';
-	
-	
-	wishService.add(
-			{userNum : userValue, acmNum: acmValue, listTitle: titleValue, listContent: contentValue , wishNum: wishValue}
-			,
-				function(result){
-					/* alert("Result : " + result); */
-					console.log("Result : " + result)
-				}
-			);
-	
-	
-		$(document).ready(function() {
-				console.log(wishService);
-			})  
-	</script> -->
+
 
 
 <%@include file="../includes/footer.jsp"%>

@@ -36,7 +36,7 @@ public class WishListServiceImpl implements WishListService{
 	@Override
 	public List<WishListVO> getWishList(String loginUserNum) {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■getList...........");
-		return mapper.getList();
+		return mapper.getList(loginUserNum);
 	}
 	
 
@@ -47,11 +47,38 @@ public class WishListServiceImpl implements WishListService{
 	}
 
 	@Override
-	public int remove(String wishNum) {
+	public boolean remove(String wishNum) {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■remove......" + wishNum);
 		return mapper.delete(wishNum);
 	}
+	
+	@Override
+	public int removeAjax(String wishNum) {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■remove......" + wishNum);
+		return mapper.deleteAjax(wishNum);
+	}
+	
+	@Override
+	public int wishRemove(String wishNum) {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■wishRemove......" + wishNum);
+		return mapper.deleteAjax(wishNum);
+	}
 
+	
+
+	
+
+	@Override
+	public int countCart(WishListVO wish) {
+		
+		return mapper.countCart(wish);
+	}
+
+	@Override
+	public List<WishListVO> drawValue(String userNum, String acmNum) {
+			
+			return mapper.drawValue(userNum,acmNum);
+	}
 
 
 

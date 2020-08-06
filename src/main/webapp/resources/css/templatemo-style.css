@@ -13,8 +13,8 @@ body {
 
 /* 하단의 컨텐츠에 여백을 주고자함  */
 .row {
-	margin-right: 50px;
-	margin-left: 50px;
+	/* margin-right: 50px;
+	margin-left: 50px; */
 }
 
 .content { /* 부모  */
@@ -167,6 +167,10 @@ p:last-child { margin-bottom: 0; }
 	color: #61dafb;
 }
 
+.btnHover{
+	color: #61dafb;
+}
+
 #header-menu {
 	box-sizing: border-box;
 	line-height: 1.43;
@@ -254,6 +258,7 @@ p:last-child { margin-bottom: 0; }
     overflow: auto;
     top: 0px;
     left: 0px;
+    background: rgba(0, 0, 0, 0.3);
     /* background: linear-gradient(rgb(121, 193, 204), rgb(190, 224, 208)); */
 }
 .banner-bg {
@@ -261,7 +266,7 @@ p:last-child { margin-bottom: 0; }
     min-height: 850px;
     position: relative;
     background-color: skyblue;
-    /* background-size: 100%; */
+    background-size: cover;
 
 }
 .banner-row { 
@@ -917,6 +922,7 @@ footer p { color: white; }
     padding-top: 50px;
   }
   .fh5co-tours > div { /*컨테이너*/
+    border-radius: 20px;
     display: block;
     color: #000;
     position: relative;

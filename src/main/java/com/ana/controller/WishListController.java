@@ -14,7 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,17 +75,29 @@ public class WishListController {
 	//조회 페이지
 	
 	@GetMapping("/get")
-	public void get(@RequestParam("wishNum") String wishNum, Model model) {
+	public void get(Model model, HttpSession session) {
+		
+		String loginUserNum = (String) session.getAttribute("loginUserNum");
+		
+		UserVO user= (UserVO)session.getAttribute("user"); 
+		String userLastname="";
+		String userFstname="";
+		String userPwd="";
+		String userNum="";
+		//userNum = "U1";
+
+		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if(user != null){
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
+		userNum= user.getUserNum();
+		} 
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■get");
-		model.addAttribute("get", service.get(wishNum));
+		model.addAttribute("get", service.get(loginUserNum));
 	}
 	
 	
-//	@GetMapping("/result")
-//	public void get2(@RequestParam("wishNum") String wishNum, Model model) {
-//		log.info("/result");
-//		model.addAttribute("get", service.get(wishNum));
-//	}
 	
 	
 	//생성페이지
@@ -98,81 +112,51 @@ public class WishListController {
 	
 	@GetMapping("/register")
 	public void register() {}
+		
 	
 	
-	/* 등록작업 ajax */
-	
-	
-	
+	//책에서는 new
 	@PostMapping(value = "/register", 
 			consumes = "application/json", 
 			produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> create(@RequestBody WishListVO board) {
 
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■WishListVO: " + board);
-
-		int insertCount = service.register(board);
-
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■Reply INSERT COUNT: " + insertCount);
-
-		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}	
-	
-	
-	
-	
-
-//	 @GetMapping(value = "/pages/{bno}/{page}",
-//	 produces = {
-//	 MediaType.APPLICATION_XML_VALUE,
-//	 MediaType.APPLICATION_JSON_UTF8_VALUE })
-//	 public ResponseEntity<List<ReplyVO>> getList(
-//	 @PathVariable("page") int page,
-//	 @PathVariable("bno") Long bno) {
-//	
-//	
-//	 log.info("getList.................");
-//	
-//	
-//	 return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
-//	 }	
-	
-	
-	
-	
-//	@RequestMapping("insert.do")
-//	  public String insert(WishListVO board, HttpSession session){
-//		
-//		String wishId = (String) session.getAttribute("wishId");
-//		
-//		board.setWishNum(wishId);
-//찜목록에 기존의 상품이 있는지 검사
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■WishListVO////////////////////////: " + board);
 		
-//		 int count = WishListService.countCart(board.getWishNum(), wishId);
-//		 
-//	        count == 0 ? WishListService.update(board) : WishListService.register(board);
-//	        
-//	        if(count == 0){
-//	            // 없으면 insert
-//	            WishListService.register(board);
-//	        } else {
-//	            // 있으면 update
-//	        	WishListService.update(board);
-//	           
-//	        }
-//	        return "redirect:/wishlist/list.do";
+		if(service.countCart(board)==0) {
+			int insertCount = service.register(board);
+			
+			log.info("service.countCart(board)==0" + service.countCart(board));
+			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■Reply INSERT COUNT: " + insertCount);
+
+			return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
+					: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<>("fail..", HttpStatus.OK);		
+		
+	}	
+
+	
+    @RequestMapping("remove.do")
+    public String delete(@RequestParam String wishNum){
+    	service.remove(wishNum);
+        return "redirect:/wishlist/list";
+    }
+    
+  
+//    @DeleteMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE })
+//	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
+//
+//		log.info("remove: " + String);
+//
+//		return service.wishRemove(rno) == 1 
+//				? new ResponseEntity<>("success", HttpStatus.OK)
+//				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//
 //	}
-//	
-//	
-
-	
 
 
-	
-	
-	
-	
 	
 	
 }

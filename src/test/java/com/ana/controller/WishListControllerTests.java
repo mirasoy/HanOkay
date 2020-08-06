@@ -42,7 +42,6 @@ public class WishListControllerTests {
 				.getModelAndView()
 				.getModelMap());
 	}
-
 	
 	
 	
@@ -64,7 +63,7 @@ public class WishListControllerTests {
 	public void testGet() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders
 				.get("/wishlist/get")
-				.param("wishNum", "W1"))
+				.param("wishNum", "W334"))
 				.andReturn()
 				.getModelAndView().getModelMap());
 	}
@@ -81,12 +80,15 @@ public class WishListControllerTests {
 		log.info(resultPage);
 	}
 	
-	//@Test
+	@Test
 	public void testRemove() throws Exception {
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/acm/remove")
-				.param("acmNum", "A33")
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/wishlist/remove")
+				.param("wishNum", "W422")
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 	}
 
+	
+
+	
 }

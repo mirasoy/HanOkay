@@ -70,6 +70,7 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
 
 <link rel="stylesheet" type="text/css" href="../resources/css/review.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/recommend.css"> 
 
 <!-- 메인 CSS style -->
 
@@ -98,6 +99,10 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="${request.contextPath}/resources/js/select2.js"></script>
+
+<script src="${request.contextPath}/resources/js/recommend.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/select2.css" >
 
 
@@ -398,16 +403,13 @@ if (user != null) {
                            data-toggle="dropdown" href="#"> <i
                               class="fa fa-user fa-2x"></i></a>
                            <ul class="dropdown-menu">
-                              <span class="header-menu">마이페이지</span>
-                              <li><a onclick="location.href='/account/myAccount/myProfile'" style="cursor: pointer">프로필</a></li>
-                              <li><a onclick="location.href='/account/myAccount'" style="cursor: pointer">계정</a></li>
-                              <li><a onclick="location.href='/mypage/bookListAll'"
-                                 style="cursor: pointer">나의 예약</a></li>
-                              <li><a onclick="location.href='/review/list'"
-                                 style="cursor: pointer">나의 리뷰</a></li>
-                              <li><a onclick="location.href='/chat/chatList'"
-                                 style="cursor: pointer">메시지</a></li>
-                              <li><a href="#">내 관심 숙소</a></li>
+                              <span class="header-menu">메뉴를 선택하세요</span>
+                           
+                              <li><a onclick="location.href='/account/myAccount/myProfile'" style="cursor: pointer">마이페이지</a></li>
+                              <li><a onclick="location.href='/wishlist/list'" style="cursor: pointer"> 관심목록</a></li>
+                              <li><a onclick="location.href='/qna/list'" style="cursor: pointer">게시판</a></li>
+                          
+                              <li><a onclick="location.href='/account/myAccount/'" style="cursor: pointer">설정</a></li>                                                   
                               <li id='mode'></li>
                               <li id="header-menu">
                               <a onclick="javascript:signOut();" style="cursor: pointer"

@@ -56,8 +56,23 @@ public class WishListServiecTests {
 	
 	@Test
 	public void testDelete() {
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■REMOVE RESULT:" + service.remove("W224"));
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■REMOVE RESULT:" + service.remove("W334"));
 	}
+	
+	@Test
+	public void removeAjax() {
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■REMOVE RESULT:" + service.removeAjax("W341"));
+	}
+	
+	
+	
+
+	
+	@Test
+	public void testDrawValue() {
+		log.info(service.drawValue("U1", "A1"));
+	}
+	
 	
 	
 	@Test

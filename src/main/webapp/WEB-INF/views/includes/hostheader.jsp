@@ -43,7 +43,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Han:ok- Make yourself at home in Korea</title>
+    <title>Han:ok- host's place for better places</title>
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -61,6 +61,9 @@
 
     <!-- Custom Fonts -->
     <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- 미라 css -->
+    <link rel="stylesheet" type="text/css" href="/resources/css/stats.css">
 	<style>
 		html,body{
 			font-family:Verdana, sans-serif;
@@ -84,7 +87,7 @@
 
             <div class="navbar-header" style="margin-bottom:15px;">     
 				<!-- 로고자리 -->
-                <a class="navbar-brand" href="/hosting/hostindex">Han:Ok</a>
+                <a class="navbar-brand" href="/hosting/hostindex">Han:Ok for Host</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -97,16 +100,15 @@
 					<a href="/hosting/listings">숙소</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/hosting/inbox">메시지</a>
+					<a href="/chat/chatList">메시지</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/hosting/progress/reviews">성취도</a>
+					<a href="/hosting/stats/statsChart">성취도</a>
 				</li>
 				<li class="nav-menu">
 					<a href="/hosting/help">도움말</a>
 				</li>
 			</ul>
-			
 			
 			<!-- 오른쪽 nav -->
             <ul class="nav navbar-top-links navbar-right">

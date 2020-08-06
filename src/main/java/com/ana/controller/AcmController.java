@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +28,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
 import com.ana.domain.PageDTO;
+import com.ana.domain.UserVO;
 import com.ana.service.AcmService;
 import com.ana.service.CodeService;
+import com.ana.service.WishListService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -39,13 +43,38 @@ import lombok.extern.log4j.Log4j;
 public class AcmController {
 
 	private AcmService service;
+	private WishListService wishservice;
+	
+	
+	
+	
+	
 	
 	private CodeService codeService;
 	
 	//검색 결과 
+//	@GetMapping({ "/list", "/result" })
+//	public void list(Criteria cri, String acmNum, Model model, HttpSession session) {	
+//		log.info("list: " + cri);
+//
+//		try {
+//			// 날짜 유효성 검사
+//			if (!checkDate(cri)) {
+//				return;
+//			}
+//			
+//			model.addAttribute("list", service.getList(cri));
+//			int total = service.getTotal(cri);
+//			log.info("total: " + total);
+//			model.addAttribute("acmNum", acmNum);
+//			model.addAttribute("pageMaker", new PageDTO(cri, total));
+//		} catch (Exception e) {
+//			return;
+//		}
+//	}
+	
 	@GetMapping({ "/list", "/result" })
-	public void list(Criteria cri, String acmNum, Model model) {
-		log.info("list: " + cri);
+	public void list(Criteria cri, String acmNum, Model model , HttpSession session) {
 
 		try {
 			// 날짜 유효성 검사
@@ -59,17 +88,26 @@ public class AcmController {
 			model.addAttribute("acmCode", codeService.getAcmCode());
 			log.info("cri:" + cri);
 			model.addAttribute("list", service.getList(cri));
+
 			log.info("여기1");
 			int total = service.getTotal(cri);
 			log.info("total: " + total);
 			model.addAttribute("acmNum", acmNum);
 			model.addAttribute("pageMaker", new PageDTO(cri, total));
+			model.addAttribute("drawValue", drawValue(service.getList(cri), session));
+			
+			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + total);
+			
+			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + drawValue(service.getList(cri), session).size());
+			
 		} catch (Exception e) {
+			System.out.println("오류가 발생했습니다 : "+e.getMessage());
 			log.info("error@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			return;
 		}
 	}
 	
+
 	@RequestMapping(value = "/filter", method = RequestMethod.POST)
 	@ResponseBody
 	public void chkFilter(Criteria cri, String totSum, HttpServletRequest request, HttpServletResponse response)
@@ -89,6 +127,46 @@ public class AcmController {
 		PrintWriter out = response.getWriter();
 		out.print(jso);
 	}
+
+	
+	
+
+	
+	
+	
+	public List<String> drawValue(List<AcmVO> list, HttpSession session){
+	
+	List<String> result = new ArrayList<String>() ;	
+	for(AcmVO acmlist : list) {
+		acmlist.getAcmNum();				
+		
+		UserVO user= (UserVO)session.getAttribute("user"); 		
+		String userNum="";
+		
+		if(user != null){
+			userNum = user.getUserNum();
+		} 				
+		
+		log.info("■■>>>>>>>>>>>>>>>>>sizze>>>>"+wishservice.drawValue(userNum, acmlist.getAcmNum()).size());
+		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ acm NUM  은?■■■■■■■■■■■■■■■■"+ acmlist.getAcmNum());
+		
+		wishservice.drawValue(userNum, acmlist.getAcmNum());		
+		if(wishservice.drawValue(userNum, acmlist.getAcmNum()).size()==0) {			
+			result.add("fa fa-heart-o fa-2x openheart");	
+			log.info(1);
+		}else {			
+			result.add("fa fa-heart fa-2x clsheart");	
+			log.info(2);
+		}			
+	}
+	log.info("■■■■■■■■■■■■■■■■■■■■■result.size() == ?? "+result.size());
+	log.info("■■■■■■■■■■■■■■■■■■■■■result == ?? "+result);
+	return result;	
+}
+	
+	
+	
+
 	
 	//등록
 	@PostMapping("/register")

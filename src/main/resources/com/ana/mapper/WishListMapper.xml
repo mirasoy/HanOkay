@@ -39,7 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="getList" resultMap="WishListVOResult">
 <![CDATA[
-	select * from twish_list where user_num='U1'
+	select * from twish_list where user_num=#{loginUserNum}
+	
+
 ]]>
 </select>
 
@@ -99,6 +101,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete">
 		delete from TWISH_LIST where WISH_NUM = #{wishNum}
 	</delete>
+	
+
+	
+	<delete id="deleteAjax">
+		delete from TWISH_LIST where WISH_NUM = #{wishNum}
+	</delete>
+
+
+	<delete id="wishdelete">
+		delete from TWISH_LIST where WISH_NUM = #{wishNum}
+	</delete>
+
+
 
 <!-- 
 	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -128,9 +143,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 장바구니에 동일한 상품 레코트 확인 -->
 
-<select id="wishCart">
-	select count(*) from twish_list where wish_num=#{wishNum}
+<select id="countCart" resultType="Integer">
+
+	
+	SELECT COUNT(*)
+        FROM twish_list
+        WHERE USER_NUM= #{userNum} 
+        AND ACM_NUM = #{acmNum}
+	
+	
 </select>
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★7. 하트가 중복 되는지 확인 ★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->	
+
+
+<select id="drawValue" resultMap="WishListVOResult">
+
+	select *
+	from twish_list w
+	where w.user_num=#{userNum} AND w.ACM_NUM = #{acmNum}
+
+</select>
+
+
+
 
 	
 	

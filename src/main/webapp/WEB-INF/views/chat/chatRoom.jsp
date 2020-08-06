@@ -12,7 +12,7 @@
 
 .chatContainer {
   border: 2px solid #dedede;
-  background-color: #f1f1f1;
+  background-color: #ffe6e6;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
@@ -20,7 +20,7 @@
 
 .darker {
   border-color: #ccc;
-  background-color: #ddd;
+  background-color: #e6f7ff;
 }
 
 .chatContainer::after {
@@ -57,18 +57,26 @@
     height: 40px;
 }
 .chatList{
-    max-height: 500px;
-    min-height: 500px;
-    overflow: scroll;
+     overflow: scroll;
     overflow-x: hidden;
+    font-size: 1.2em;
+    position: relative;
+    height: 500px;
+    padding: 20px;
+    margin: 1%;
+    border: solid 2px #ddd;
+    background-color: white;
+    border-radius: 2%;
 }
+
 
 </style>
 
 <div class="container">
 <div class ="wrapCon">
-	<h1>${toUser.userFstName }님과 대화중</h1>
-	<div>
+	<a href="/chat/chatList"><button class = "btn"><i class="fa fa-angle-double-left" style="font-size: 2em;" aria-hidden="true"></i></button></a>
+	<b class = "right" style="font-size: 2em;">${toUser.userFstName }님과 대화중</b>
+	<div> 
 	<div class="chatList">
 	</div>
 		<div>
