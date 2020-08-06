@@ -2,6 +2,7 @@ package com.ana.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.BookVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AcmRegService;
+import com.ana.service.BookingService;
 import com.ana.service.CodeService;
 import com.ana.service.RomRegService;
 import com.ana.service.UserService;
@@ -45,6 +48,8 @@ public class HostController {
 	private UserService uservice;//호스트 사업등록증관련
 	@Autowired
 	private CodeService codeService;
+	@Autowired
+	private BookingService bservice;
 	
 	//세션에서 유저이름 가져오는 메서드
 	public UserVO getUser(HttpSession session) {
@@ -57,11 +62,59 @@ public class HostController {
 	///////////////////////
 	@GetMapping("/hostindex")
 	public void indexGet(Model model,HttpSession session) {
+		System.out.println("호스트 인덱스다~~ ");
+		
+		//호스트 주인
+		String ownerUser= getUser(session).getUserNum();
+		
+		
+		
+		///오늘의 날짜
+		Calendar cal = Calendar.getInstance();
+		//System.out.println(cal);
+		
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int dayo=cal.get(Calendar.DAY_OF_WEEK);
+		
+		String koryoil="";
+		
+		if(dayo==0)koryoil="일";
+		else if(dayo==1)koryoil="월";
+		else if(dayo==2)koryoil="화";
+		else if(dayo==3)koryoil="수";
+		else if(dayo==4)koryoil="목";
+		else if(dayo==5)koryoil="금";
+		else if(dayo==6)koryoil="토";
+		
+		
+		
+		String todayform=year+"."+month+"."+day+"("+koryoil+")";
+		
+		
+		//String today=year+"-"+month+"-"+day;
+
+		String today="2020-8-1";
+		model.addAttribute("todayform",today);
+
+		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,today);
+		if(chkin.size()==0)model.addAttribute("chkinSize", 0);
+		else model.addAttribute("chkinSize", chkin.size());
+		
+		
+		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,today);
+		model.addAttribute("chkin", chkin);
+		model.addAttribute("chkout", chkout);
+		
+		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
 	@GetMapping("/reserv")
 	public void reservGet(Model model,HttpSession session) {
+		UserVO user=getUser(session);
+		if(user.getUserPriv().equals("GUEST"))return;
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
@@ -385,6 +438,7 @@ public class HostController {
 			out.print(jso);
 		}
 	
+		
 	@GetMapping("/become-host1_6")
 	public void becomeHostGet1_6(String acmNum,Model model,HttpSession session) {
 		System.out.println("become-hos1_6창 열림~");
