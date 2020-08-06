@@ -7,6 +7,17 @@
 
 <link rel="stylesheet" type="text/css"
    href="${request.contextPath}/resources/css/list.css">
+   
+   <link rel="stylesheet" type="text/css"
+	href="${request.contextPath}/resources/css/result.css">
+	
+	<style>
+	
+.pt8px{
+	 padding-top: 7px;
+}
+	
+	</style>
 
 <!-- Start : page-wrap : section 시작-->
 <div class="page-wrap">
@@ -30,82 +41,119 @@
 				</div>
 				<!-- End : banner-row-header -->
 
-				<!-- Start : section-search : 검색창-->
-				<div class="row banner-row" id="section-search">
 
-					<form action="/acm/result" method="get"
-						class="search-form section-pad-2"
-						onsubmit="return checkValidation()">
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■여기부터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
-						<div class="form-row search-form-row">
-							<div class="form-group form-group-pad form-group-1">
-								<label for="inputCity">Location</label> <input type="hidden"
-									value="CW" name="type"> 
+
+
+<div class="container1">
+			<section class="search_section">
+				<div class="row1">
+					<div class="booking-container">
+						<form class="booking-form1" action="/acm/result" method='get'
+							onsubmit="return checkValidation()">
+							<div class="result-container">
+								<div>
+									<div class="no-margin1">
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<div id="pac-container">
+													<span>Location</span> <input class="form-control2"
+														id="pac-input" type="text" name="keyword"
+														value='<c:out value="${pageMaker.cri.keyword}"/>'
+														placeholder="Enter a location">
+												</div>
+												<input type="hidden" value="CW" name="type">
+
+
+											</div>
+
+										</div>
+
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<span>Check In</span>
+												<div class="ui calendar" id="rangestart">
+													<div class="ui input left icon width400">
+														<i class="calendar icon"></i> <input type="text"
+															placeholder="Start" id="in" name="in"
+															value="<c:out value="${pageMaker.cri.in}"/>">
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<span>Check out</span>
+												<div class="ui calendar" id="rangeend">
+													<div class="ui input left icon width400">
+														<i class="calendar icon"></i> <input type="text"
+															placeholder="End" id="out" name="out"
+															value="<c:out value="${pageMaker.cri.out}"/>">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<span>Guests</span> <select class="form-control1"
+													id="person" name="person">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+												</select> <span class="select-arrow"></span>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								
+								<div class="">
+									<div class="form-btn1">
+
+										<button
+											class="submit-btn btn btn-primary btn btn-search text-uppercase"
+											id="submitBtn" type="submit">
+											<i class="fa fa-search"></i>
+											
+											
 									
-									<input class="form-control" id="pac-input" type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'
-            placeholder="Enter a location">
+											
+											
+										</button>
+									</div>
+								</div>
+								
+								
+								
+								
+								
+								
 								
 							</div>
-							<div class="form-group form-group-1">
-
-								<!-- Start : form-group-2-->
-								<div class="form-group form-group-1 selectGuest">
-									<label for="inputAdult">Guests</label> <select name="person"
-										class="form-control select" id="inputAdult">
-										<option value="1" selected>1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-									</select>
-								</div>
-		
-							</div>
-							<!-- End : form-group-1-->
-
-						</div>
-						<!-- form-row -->
-						<div class="form-row search-form-row form-group-1">
-
-							<div class="form-group form-group-1">
-								<div class="form-group checkbox">
-									<label for="inputCheckOut">Check In Date</label>
-									<div class="ui calendar" id="rangestart">
-										<div class="ui input left icon">
-											<i class="calendar icon"></i> <input type="text"
-												placeholder="Start" id="in" name="in" value="">
-										</div>
-									</div>
-								</div>
-
-
-								<div class="form-group checkbox rigthgroup">
-									<label class="inputCheckOut" for="inputCheckOut">Check Out Date</label>
-									<div class="ui calendar" id="rangeend">
-										<div class="ui input right icon uigroup">
-											<i class="calendar icon"></i> <input type="text"
-												placeholder="End" id="out" name="out" value="">
-										</div>
-									</div>
-								</div>
-								<div class=" form-group-1 ">
-									<label for="btnSubmit">&nbsp;</label>
-									<button type="submit"
-										class="submit-btn btn-primary btn btn-search text-uppercase"
-										id="submitBtn">Check Availability</button>
-								</div>
-							</div>
-						</div>
-
-
-					</form>
+						</form>
+					</div>
 				</div>
-				</form>
+				<!-- end of row -->
 
-				<!-- 여기까지 -->
+
+			</section>
+		</div>
+		<!-- end container -->
+
+
+
+
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■여기부터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
 
 			</div>

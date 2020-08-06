@@ -271,10 +271,10 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
 	width: 100%;
 }
 
-.fa{
+/* .fa{
 	float: left;!important;
 }
-
+ */
 
 .room-ect{
     width: calc(19% - 1.875rem);
@@ -361,12 +361,12 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
 }
 
 .formLayout1{
-    flex: 1.5 0 0% !important;
+    flex: 1.5 0 0% ;
 
-    display: block !important;
-    position: relative !important;
-    z-index: 2 !important;
-    background-clip: padding-box !important;
+    display: block ;
+    position: relative ;
+    z-index: 2 ;
+    background-clip: padding-box;
     border: 1px solid transparent !important;
     border-radius: 32px !important;
     padding: 10px 32px !important;
@@ -393,13 +393,13 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
     text-transform: uppercase !important;
 }
 .form-group1>.form-control1{
-   /*  display: block !important; */
+   height: 20px;
     border: 0px !important;
     margin: 0px !important;
-    padding-top: 4px;
+   
     width: 100% ;
     background: none !important;
-    font-size: 14px !important;
+  font-size: 12px !important;
     line-height: 18px !important;
     font-weight: 600 !important;
     color: #222222 !important;
@@ -441,6 +441,10 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
 
 
 
+.noneMneu{
+	display: none;
+}
+
 /* 미디어쿼리 --> 사이즈 별로 나열되며 작은것부터 시작한다. */
 
 @media (min-width: 576px) {
@@ -449,17 +453,68 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
 	}
 	
 	
+	
 }
 @media (min-width: 768px) {
     .container {
         max-width: 720px;
     }
 }
+
 @media (min-width: 992px) {
     .container {
         max-width: 960px;
-    }
+    }	
+    
+
+    
 }
+
+
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .dropdown{
+    display: none;
+    }
+    
+    .noneMneu{
+    display: block;
+        padding: 15px;
+            background: white;
+    }
+   
+    
+    .pac-target-input{
+        width: 78%;
+   
+    height: 30px;
+    }
+
+    
+    .result-container>div:nth-child(1){
+   	 	width: 90%
+    }
+    
+    
+    
+    .formLayout1:nth-child(2){
+    	display:none;
+    }
+    .formLayout1:nth-child(3){
+    	display:none;
+    }
+	.formLayout1:nth-child(4){
+		display:none;
+    }
+    
+}
+
+
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1140px;
@@ -468,4 +523,25 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
 	.container-1{
 		max-width: 1140px;
 	}
+	
+	/* .no-margin1{
+	width: 68%;
+	}
+	
+	 .formLayout1:nth-child(1){
+    	width: 43%;
+    }
+	
+	 .formLayout1:nth-child(2){
+    	width: 35%;
+    }
+	 .formLayout1:nth-child(3){
+    	width: 38%;
+    }
+	 .formLayout1:nth-child(4){
+    	
+    } */
+		
+		
+		
 }
