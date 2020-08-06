@@ -27,6 +27,7 @@ import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
 import com.ana.domain.PageDTO;
 import com.ana.service.AcmService;
+import com.ana.service.CodeService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -38,6 +39,8 @@ import lombok.extern.log4j.Log4j;
 public class AcmController {
 
 	private AcmService service;
+	
+	private CodeService codeService;
 	
 	//검색 결과 
 	@GetMapping({ "/list", "/result" })
@@ -53,6 +56,7 @@ public class AcmController {
 			//지역 문자열핸들링&타입셋팅
 			chkLocation(cri);
 			
+			model.addAttribute("acmCode", codeService.getAcmCode());
 			log.info("cri:" + cri);
 			model.addAttribute("list", service.getList(cri));
 			log.info("여기1");

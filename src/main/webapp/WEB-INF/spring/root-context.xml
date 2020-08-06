@@ -15,14 +15,14 @@
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 
-		<property name="driverClassName"
-			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="hanokay"></property>
-		<property name="password" value="1234"></property>
+      <property name="driverClassName"
+         value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+      <property name="jdbcUrl"
+         value="jdbc:log4jdbc:oracle:thin:@hanokay.cvgigvuis47p.ap-northeast-2.rds.amazonaws.com:1521:hanokay"></property>
+      <property name="username" value="admin"></property>
+      <property name="password" value="dlth126!"></property>
 
-	</bean>
+   </bean>
 
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
