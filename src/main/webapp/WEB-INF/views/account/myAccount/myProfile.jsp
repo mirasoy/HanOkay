@@ -10,11 +10,11 @@ pageEncoding="UTF-8"%>
 <style>
 
 	.container-1{
-	    border: 1px solid red;
+	  
 	}
 
 	.contents{
-	 	border: 1px solid green;
+	 
 	}
 	
 	.contents-2{
@@ -46,8 +46,6 @@ position: relative;
     padding-bottom: 30px;
 
 }
-
-
 
 
 
@@ -97,6 +95,71 @@ font-size: 22px;
     padding: 0;
     text-decoration: underline !important;
 }
+
+
+#peek {
+	height : 100%;
+	position : relative;
+	
+	display: none;
+	list-style: none;
+	padding: 0;
+	margin: 20px 0;  
+  
+  
+}
+
+#peek>li{
+margin-bottom: 25px;
+
+}
+
+
+.btn {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    padding: 12px 20px;
+}
+
+.btn-primary{
+
+color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.textToggleArea{
+
+    color: inherit !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    appearance: none !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 400 !important;
+    border-style: none !important;
+    box-shadow: rgb(176, 176, 176) 0px 0px 0px 1px inset !important;
+    box-sizing: border-box !important;
+    color: rgb(34, 34, 34) !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    background-color: #fff;
+
+}
+
+.textToggle>p{
+    margin: 0;
+}
+
+.on{
+    display: block !important;
+}
+
+
+
+
 
 
 </style>
@@ -167,6 +230,8 @@ font-size: 22px;
 	    </div>
 	
 	</section>
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■메인컨텐츠■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 	
 <section class="contents">
 	<section class="contents-2">
@@ -177,6 +242,44 @@ font-size: 22px;
 			</div>
 			<div class="item2 items">
 				<button type="button" class="user_profile_edit_button" >프로필 수정하기</button>
+				
+				
+				<ul id="peek">
+					<li>
+						<div class="textToggle">
+							<p>소개</p>
+							<textarea name="about" rows="4" autocomplete="off" class="textToggleArea"></textarea>
+						</div>
+					</li>
+					
+					<li>
+						<div class="textToggle">
+							<p>구사언어</p>
+							<textarea name="about" rows="2" autocomplete="off" class="textToggleArea"></textarea>
+						</div>
+					</li>
+					
+					<li>
+						<div class="textToggle">
+							<p>프로필 사진 업로드</p>
+							<div class="uploadDiv">
+								<input type="file" name="uploadFile" multiple="multiple">
+							<div class="uploadResult">
+								<ul>
+
+								</ul>
+							</div>
+						</div>
+						</div>
+					</li>
+						
+					
+					<button class="btn btn-primary">수정하기</button>																							
+					<button class="btn btn-red">취소하기</button>																							
+				</ul>
+
+				
+				
 			</div>		
 			
 			<div class="item3 items">
@@ -188,6 +291,22 @@ font-size: 22px;
 </section>
 
 <script>
+
+
+
+$(".user_profile_edit_button").on('click',function(){	
+
+	$("#peek").addClass('on')	
+});
+
+
+$(".btn-red").on('click',function(){	
+	
+	$("#peek").removeClass('on')	
+});
+
+
+
 
 var acc = document.getElementsByClassName("accordion");
 var i;
