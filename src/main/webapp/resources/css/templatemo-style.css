@@ -258,6 +258,7 @@ p:last-child { margin-bottom: 0; }
     overflow: auto;
     top: 0px;
     left: 0px;
+    background: rgba(0, 0, 0, 0.3);
     /* background: linear-gradient(rgb(121, 193, 204), rgb(190, 224, 208)); */
 }
 .banner-bg {
@@ -265,7 +266,7 @@ p:last-child { margin-bottom: 0; }
     min-height: 850px;
     position: relative;
     background-color: skyblue;
-    /* background-size: 100%; */
+    background-size: cover;
 
 }
 .banner-row { 
@@ -921,6 +922,7 @@ footer p { color: white; }
     padding-top: 50px;
   }
   .fh5co-tours > div { /*컨테이너*/
+    border-radius: 20px;
     display: block;
     color: #000;
     position: relative;

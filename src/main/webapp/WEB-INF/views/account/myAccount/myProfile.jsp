@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 	}
 	
 	.contents-2{
-		height: 1000px;
+
 		box-shadow: none !important;
 	}
 
