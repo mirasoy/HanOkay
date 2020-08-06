@@ -122,7 +122,7 @@ public class AcmMapperTests {
 		Criteria cri = new Criteria();
 		cri.setIn("2019-04-20");
 		cri.setOut("2019-04-22");
-		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
+		List<String> romNumList = mapper.getRomNum(cri);
 	
 		romNumList.forEach(acm -> log.info(acm));
 	}
@@ -132,27 +132,27 @@ public class AcmMapperTests {
 		cri.setIn("2019-04-20");
 		cri.setOut("2019-04-22");
 		cri.setPerson("2");
-		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
-		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-		acmNumList.forEach(acm -> log.info(acm));
+		List<String> romNumList = mapper.getRomNum(cri);
+		//List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
+		//acmNumList.forEach(acm -> log.info(acm));
 	}
 	
-	@Test
+	//@Test
 	public void testGetListPaging() {
 		Criteria cri = new Criteria();
 //			cri.setKeyword("서울");
 		cri.setCity("서울");
 		cri.setDistr("종로");
-		cri.setPerson("1");
+		cri.setPerson("2");
 		cri.setType("TC");
 		cri.setIn("2020-08-01");
 		cri.setOut("2020-09-01");
-		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
-		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
+		List<String> romNumList = mapper.getRomNum(cri);
+		//List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
 		//acmNumList.forEach(acm -> log.info(acm));
 		String[] typeArr =cri.getTypeArr();
 		System.out.println(typeArr[0]);
-		List<AcmVO> list = mapper.getListPaging(cri, cri.getTypeArr(), acmNumList);
+		List<AcmVO> list = mapper.getListPaging(romNumList,cri);
 		
 		list.forEach(acm -> log.info(acm));
 	}
@@ -163,13 +163,13 @@ public class AcmMapperTests {
 //		cri.setKeyword("서울");
 	cri.setCity("서울");
 	cri.setDistr("종로");
-	cri.setPerson("1");
+	cri.setPerson("7");
 	cri.setType("TC");
 	cri.setIn("2020-08-01");
 	cri.setOut("2020-09-01");
-	List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
-	List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-	int cnt = mapper.getTotalCount(cri, cri.getTypeArr(), acmNumList);
+	List<String> romNumList = mapper.getRomNum(cri);
+	//List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
+	int cnt = mapper.getTotalCount(romNumList,cri);
 	log.info("cnt: "+cnt);
 	}
 	

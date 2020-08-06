@@ -20,6 +20,7 @@ public class Criteria {
 	private String person;
 	private String in;
 	private String out;
+	private String acmOpt;
 	private String city;
 	private String distr;
 	private String detail;
@@ -34,6 +35,7 @@ public class Criteria {
 		this.amount= amount;
 		this.keyword="";
 		this.person="1";
+		this.acmOpt="0";
 	}
 	
 	public String[] getTypeArr() {

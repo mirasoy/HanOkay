@@ -15,6 +15,7 @@
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 
+
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl"
@@ -22,7 +23,7 @@
 		<property name="username" value="admin"></property>
 		<property name="password" value="dlth126!"></property>
 
-	</bean>
+   </bean>
 
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"

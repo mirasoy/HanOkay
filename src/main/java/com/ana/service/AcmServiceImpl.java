@@ -54,17 +54,17 @@ public class AcmServiceImpl implements AcmService{
 	@Override
 	public List<AcmVO> getList(Criteria cri) {
 		log.info("get List with criteria: " + cri);
-		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
-		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-		return mapper.getListPaging(cri, cri.getTypeArr(), acmNumList);
+		List<String> romNumList = mapper.getRomNum(cri);
+		//List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
+		return mapper.getListPaging(romNumList,cri);
 	}
 
 	@Override
 	public int getTotal(Criteria cri) {
 		log.info("get total count");
-		List<String> romNumList = mapper.getRomNum(cri.getIn(),cri.getOut());
-		List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
-		return mapper.getTotalCount(cri, cri.getTypeArr(), acmNumList);
+		List<String> romNumList = mapper.getRomNum(cri);
+		//List<String> acmNumList = mapper.getAcmNum(cri.getPerson(),romNumList);
+		return mapper.getTotalCount(romNumList,cri);
 	}
 
 }

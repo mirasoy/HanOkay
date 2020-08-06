@@ -32,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ACM_ACTI" property="acmActi" />
 		<result column="ACM_STATUS" property="acmStatus" />
 		<result column="ACM_OPTCODE" property="acmOptcode" />
+		<result column="ACM_price" property="acmPrice" />
 	</resultMap>
 	
 	<!-- 숙소 상세페이지: 숙소 정보와 사진을 불러온다 -->
@@ -94,12 +95,12 @@ select * from tacm
 <![CDATA[
 select ROM_NUM
 from TBOOKING
-where (CHECKIN_DATE <=#{in} and #{out} <= CHECKOUT_DATE) or (CHECKIN_DATE<=#{in} and CHECKOUT_DATE>#{in})
-or (CHECKIN_DATE<#{out} and CHECKOUT_DATE>=#{out}) or (CHECKIN_DATE>=#{in} and CHECKOUT_DATE <=#{out})
+where (CHECKIN_DATE <=#{cri.in} and #{cri.out} <= CHECKOUT_DATE) or (CHECKIN_DATE<=#{cri.in} and CHECKOUT_DATE>#{cri.in})
+or (CHECKIN_DATE<#{cri.out} and CHECKOUT_DATE>=#{cri.out}) or (CHECKIN_DATE>=#{cri.in} and CHECKOUT_DATE <=#{cri.out})
 	]]>
 </select>
 
-<!-- 인원수를 만족하고 예약불가인 방번호리스트에 없는 방을 가진 숙소번호 추출 -->
+<!-- 인원수를 만족하고 예약불가인 방번호리스트에 없는 방을 가진 숙소번호 추출 
 <select id="getAcmNum" resultType="String">
 <![CDATA[
 select distinct acm_num
@@ -110,11 +111,11 @@ select distinct acm_num
    <foreach collection='romNum' index='index' item='romNum' open='(' close=')' separator=','>
       #{romNum}
    </foreach>
-</select>
+</select>-->
 
 <sql id="cri">
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-			<foreach item='type' collection="typeArr">
+			<foreach item='type' collection="cri.typeArr">
 				<trim prefix="AND">
 					<choose>
 						<when test="type == 'A'.toString()">
@@ -129,32 +130,43 @@ select distinct acm_num
 						<when test="type == 'W'.toString()">
 							acm_detailaddr like '%'||#{cri.detail}||'%'
 						</when>
+						<when test="type == 'F'.toString()">
+							bitand(acm_optcode,#{cri.acmOpt})=#{cri.acmOpt}
+						</when>
 					</choose>
 				</trim>
 			</foreach>
 		</trim>
 	</sql>
 	
+	<!-- 151~161줄: 인원수를 만족하고 예약가능한 방(예약불가인 방번호리스트에 없는 방)을 가진 숙소를 추출--> 
+	<!-- 164: 검색 타입에 따라 조건절 추가 -->
+	<!-- 168~170: 페이징 처리-->
 <select id="getListPaging" resultMap="AcmVOResult">
 <![CDATA[
 select 
-    acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE
+    acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE, acm_price
 from 
 (
    select /*+INDEX_DESC(to_number(substr(acm_num,2))) */
-      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE
+      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE, acm_price
    from
-      tacm
+      (select a.acm_purl, a.acm_pname, a.acm_num, a.acm_name, a.acm_city, a.acm_distr, a.acm_detailaddr, a.rep_phone, a.acm_desc, a.latitude, a.longitude, a.ACM_OPTCODE, min(r.rom_price) acm_price
+        from tacm a, trom r
+        where a.acm_num = r.acm_num and (rom_capa >= to_number(#{cri.person})) and 
+        ]]>
+           ROM_NUM not in 
+        	<foreach collection='romNum' index='index' item='romNum' open='(' close=')' separator=','>
+      		#{romNum}
+   			</foreach>
+        group by a.acm_purl, a.acm_pname, a.acm_num, a.acm_name, a.acm_city, a.acm_distr, a.acm_detailaddr, a.rep_phone, a.acm_desc, a.latitude, a.longitude, a.ACM_OPTCODE
+        order by to_number(substr(a.acm_num,2)))
    where 
-     ]]>
+
 <include refid="cri"></include>
 
-   acm_num in
-   <foreach collection='acmNum' index='index' item='acmNum' open='(' close=')' separator=','>
-      #{acmNum}
-   </foreach>
       <![CDATA[
-       and rownum<= #{cri.pageNum} * #{cri.amount}
+       rownum<= #{cri.pageNum} * #{cri.amount}
        )
    where rn> (#{cri.pageNum}-1) * #{cri.amount}
 ]]>   
@@ -167,18 +179,23 @@ select
 from 
 (
    select
-      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE
+      rownum rn, acm_purl, acm_pname, acm_num, acm_name, acm_city, acm_distr, acm_detailaddr, rep_phone,acm_desc, latitude, longitude, ACM_OPTCODE, acm_price
    from
-      tacm
+      (select a.acm_purl, a.acm_pname, a.acm_num, a.acm_name, a.acm_city, a.acm_distr, a.acm_detailaddr, a.rep_phone, a.acm_desc, a.latitude, a.longitude, a.ACM_OPTCODE, min(r.rom_price) acm_price
+        from tacm a, trom r
+        where a.acm_num = r.acm_num and (rom_capa >= to_number(#{cri.person})) and 
+        ]]>
+           ROM_NUM not in 
+        	<foreach collection='romNum' index='index' item='romNum' open='(' close=')' separator=','>
+      		#{romNum}
+   			</foreach>
+        group by a.acm_purl, a.acm_pname, a.acm_num, a.acm_name, a.acm_city, a.acm_distr, a.acm_detailaddr, a.rep_phone, a.acm_desc, a.latitude, a.longitude, a.ACM_OPTCODE
+        )
    where 
-  ]]>  
   <include refid="cri"></include>
-  
-   acm_num in
-   <foreach collection='acmNum' index='index' item='acmNum' open='(' close=')' separator=','>
-      #{acmNum}
-   </foreach>
-   )
+  <![CDATA[
+   rownum>0)
+]]>
 </select>
 
 </mapper>
