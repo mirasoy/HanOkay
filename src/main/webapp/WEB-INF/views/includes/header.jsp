@@ -70,6 +70,7 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
 
 <link rel="stylesheet" type="text/css" href="../resources/css/review.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/recommend.css"> 
 
 <!-- 메인 CSS style -->
 
@@ -98,6 +99,10 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="${request.contextPath}/resources/js/select2.js"></script>
+
+<script src="${request.contextPath}/resources/js/recommend.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/select2.css" >
 
 
