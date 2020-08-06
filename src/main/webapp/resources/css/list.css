@@ -4,9 +4,10 @@
 
 .hasDatepicker{
 	border: 0;
-    height: 38px;
-    padding: 12px;
+
+  /*   padding: 12px; */
     width: 100%;
+        height: 22px;
 }
 
 .form-control {
@@ -44,3 +45,33 @@
 	   margin-bottom: 2rem;
 }
 
+
+
+/* 미디어쿼리 --> 사이즈 별로 나열되며 작은것부터 시작한다. */
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+	}
+	
+	
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+	}
+	
+	.container-1{
+		max-width: 1140px;
+	}
+}
