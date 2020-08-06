@@ -119,6 +119,121 @@
 <!-- End : banner-->
 
 <!-- Start : section-1 : 숙박 섹션 -->
+<section id="section-0" class="recommendByWeather">
+    <div class="container">
+        <div class="text-1">
+            <div class="mx-auto about-text-wrap text-center">
+                <h2 class="text-uppercase mb-4">
+                    오늘의 <strong>추천 여행코스</strong>
+                </h2>
+                <p class="mb-4">날씨에 따른 근처 추천 관광지.</p>
+
+				<div class="about-section">
+
+					<div>
+
+
+						<div class="iconW sun-shower">
+							<div class="cloud"></div>
+							<div class="sun">
+								<div class="rays"></div>
+							</div>
+							<div class="rain"></div>
+						</div>
+
+						<div class="iconW thunder-storm">
+							<div class="cloud"></div>
+							<div class="lightning">
+								<div class="bolt"></div>
+								<div class="bolt"></div>
+							</div>
+						</div>
+
+						<div class="iconW cloudy">
+							<div class="cloud"></div>
+							<div class="cloud"></div>
+						</div>
+
+						<div class="iconW flurries">
+							<div class="cloud"></div>
+							<div class="snow">
+								<div class="flake"></div>
+								<div class="flake"></div>
+							</div>
+						</div>
+
+						<div class="iconW sunny">
+							<div class="sun">
+								<div class="rays"></div>
+							</div>
+						</div>
+
+						<div class="iconW rainy">
+							<div class="cloud"></div>
+							<div class="rain"></div>
+						</div>
+					</div>
+
+
+					<h1 id="weatherTitle"></h1>
+					<h2 id="weatherSub"></h2><br>
+					<h5 id="weatherinfo"></h5>
+
+				</div>
+
+
+                <div class="rowInfo">
+                    <div class="column">
+                        <div class="rec-card">
+                        	<div class = "imgBox">
+                            <img id="cardImg1" src="" alt="Jane" style="width:100%">
+                            </div>
+                            <div >
+                                <h2 id="placeTitle1" ></h2>
+                                <p class="rec-title" id="placeTitle1-1"></p>
+                                
+                                <p><button id="btn1" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="rec-card">
+                        <div class = "imgBox">
+                            <img id="cardImg2" src="" alt="Mike" style="width:100%">
+                          </div>
+                            <div >
+                                <h2  id="placeTitle2"></h2>
+                                   <p class="rec-title" id="placeTitle1-2"></p>
+                                <p><button id="btn2" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="rec-card">
+                         <div class = "imgBox">
+                            <img id="cardImg3" src="" alt="John" style="width:100%">
+                              </div>
+                            <div>
+                                <h2 id="placeTitle3"></h2>
+                                    <p class="rec-title" id="placeTitle1-3"></p>
+                                <p><button id="btn3" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<div id='recom'>
+</div>
+<!-- /.row -->
+
+<!-- Start : section-1 : 숙박 섹션 -->
 <section id="section-1">
 	<div class="container">
 		<div class="text-1">
