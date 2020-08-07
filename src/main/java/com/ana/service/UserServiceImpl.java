@@ -1,15 +1,18 @@
 package com.ana.service;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ana.domain.UserProfileVO;
 import com.ana.domain.UserVO;
 import com.ana.mapper.UserHisMapper;
 import com.ana.mapper.UserMapper;
@@ -24,6 +27,8 @@ public class UserServiceImpl implements UserService{
 	private UserMapper mapper;
 	
 	private EmailService emailService;
+	
+	private RevService revService;
 	
 	private UserHisMapper userHisMapper;
 	
@@ -229,6 +234,43 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
+	//session에 담긴 user객체의 userNum으로 프로필 정보를 가져오는 
+	@Override
+	public UserProfileVO showProfile(HttpSession session) {
+		UserVO user= (UserVO)session.getAttribute("user");
+		log.info("session에 담겨있던 user는!!: "+ user);	
+	
+		return mapper.getUserProfile(user.getUserNum());
+	}
+
+	@Override
+	public boolean updateProfile(UserProfileVO profile) {
+		log.info("service impl에서의 profile: "+ profile);
+		  try { 
+			  //만약 profileVO의 변수값 중에 null이 있으면 empty string으로 변경시켜준다
+			  //myBatis error를 피하기 위해서
+				for(Field field :profile.getClass().getDeclaredFields()){
+			            field.setAccessible(true);
+			            String name = field.getName();
+			            Object value = field.get(profile);
+			            
+			            if(value== null) {
+			            	value="";
+			            	field.set(profile, "");
+			            }
+			            System.out.println(name+" : "+value.toString());
+			          
+			        }    
+			    }catch(Exception e){
+			        log.info("VO 변수, 값 추출 에러");
+			    }
+			    System.out.println("profile ****"+ profile);
+		
+		return mapper.updateProfile(profile)==1;
+	}
+	
+	
+  
 	
 	
 	//인증번호 생성 메서드
@@ -273,8 +315,5 @@ public class UserServiceImpl implements UserService{
 		return mapper.getAcmOwner(bizregnum);
 	}
 
-	
-	
-  
   
 }

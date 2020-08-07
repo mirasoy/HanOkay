@@ -3,7 +3,7 @@
 pageEncoding="UTF-8"%> 
 <%@page import="javax.mail.Session"%> 
 <%@include file="../includes/header1.jspf"%>
-<title>테스트-로그인</title>
+<title>HanOkay- 로그인</title>
 <style>
   body {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -167,7 +167,7 @@ file="../includes/header3.jspf"%>
           margin-left: 16px;
         "
       >
-      <h1><div class="header2_SR">Login</div></h1>
+      <h1><div class="header2_SR">회원가입</div></h1>
     </div>
     <!--  action= "/register/emailAuth" -->
   </section>
@@ -291,7 +291,7 @@ file="../includes/header3.jspf"%>
       <script	async defer crossorigin="anonymous"
         src="https://connect.facebook.net/en_US/sdk.js"></script> -->
         
-      <input type="hidden" name="requestFrom" value="${requestFrom}" />
+      <input type="text" name="requestFrom" value="${requestFrom}" />
     </div>
 
     <div style="margin-top:25px;">

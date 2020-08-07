@@ -70,7 +70,9 @@
     background: 0 0;
     border: 0;
 }
-
+.move{
+background-color: red;
+}
 
 </style>
 
@@ -269,6 +271,7 @@
 
 
 								<div class="room-images">
+
 									<a href="#">
 										<figure>
 											<img alt='객실사진'
@@ -277,7 +280,9 @@
 									</a>
 								</div>
 
+
 								<div class="room-details">
+
 									<h2 class="title">
 										<a href="#"><c:out value="${acm.acmName}" /></a>
 										</h1>
@@ -487,6 +492,44 @@
 
 </script>
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
+		$("#e1").val('<c:out value="${pageMaker.cri.keyword}"/>');
+	
+		$(document)
+				.ready(
+						function() {
+							history.replaceState({}, null, null);
+							var actionForm = $("#actionForm");
+							$(".paginate_button a").on(
+									"click",
+									function(e) {
+										e.preventDefault();
+										console.log('click');
+										actionForm
+												.find("input[name='pageNum']")
+												.val($(this).attr("href"));
+										actionForm.submit();
+									});
+							 $(".move").on("click",function(e) {
+												e.preventDefault();
+												alert(11);
+												actionForm.append("<input type='hidden' name='acmNum' value='"
+																+ $(this).attr("href")
+																+ "'>");
+												actionForm.attr("action","/acm/detail");
+												actionForm.submit();
+											}); 
+							 
+							 
+		});
+		
+		
+		
+		
+		
+	</script>
 <script>
 
       // This example requires the Places library. Include the libraries=places
@@ -560,7 +603,7 @@
         var markers = new Array(10); 
         let j=0;
         var contentString= new Array(10);
-	
+      
         var list = new Array();
         <c:forEach items="${list}" var="acm">
         list[j] = {
@@ -569,15 +612,17 @@
         		"longitude" :${acm.longitude},
         		"acmPrice" :${acm.acmPrice},
         		"contentString" :
-        			"<div id='move2' href='<c:out value="${acm.acmNum}"/>' style='cursor: pointer;'>"+
-					'<img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" width="50" height="50"/>'
-							+'<br /><h6>' + '${acm.acmName}' + '</h6></div>' ,
-							
+        			'<a href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=${pageMaker.cri.person}&in=${pageMaker.cri.in}&out=${pageMaker.cri.out}&acmNum=<c:out value="${acm.acmNum}"/>" >'
+        		    +'<div  id="mira"' 
+        			+"href='<c:out value="${acm.acmNum}"/>' style='text-align: center;  width: 120px; cursor: pointer;color: black;'>"+
+					'<div style=" height: 90px;overflow: hidden;"><img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" style = "width: 100%;"/></div>'
+					+ '${acm.acmName}' + '</div></a>' ,
                  }
         j++;
         </c:forEach>
+     
         
-        
+            
         
        
         
@@ -915,7 +960,8 @@ function getAcmOpt2(arrOpt,acmNumArr) {
   span.onclick = function () {
 	  filterModal.style.display = "none";
   };
-
+  
+  var modal = $(".modal");
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target == filterModal) {
@@ -947,6 +993,7 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 		});
 		
 	</script>
+
 
 
 <script type="text/javascript">
@@ -986,6 +1033,7 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 		
 		
 	</script>
+
 <script type="text/javascript" src="/resources/js/wishlist.js"></script>
 <script>
 

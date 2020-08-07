@@ -2,6 +2,8 @@ package com.ana.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.ana.domain.RevPicVO;
 import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
@@ -31,4 +33,7 @@ public interface RevService {
 	
 	//revome all photo in review
 	public boolean removeAllPhoto(String pstNum);
+	
+	//user가 쓴 리뷰의 총 갯수를 가져오는 메서드(세린)
+	public int getMyReviewCount(HttpSession session);
 }

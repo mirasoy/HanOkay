@@ -24,8 +24,29 @@
 		<result property="bizRegisterPicUrl" column="BIZ_REGPURL" />
 		<result property="userAuthCode" column="U_AUTH_CODE" />
 	</resultMap>
-		
-		
+	
+	<resultMap id="UserProfileVO" type="com.ana.domain.UserProfileVO">
+		<result property="userNum" column="USER_NUM"/>
+		<result property="userIntroduction" column="U_INTRO"/>
+		<result property="userLanguage" column="U_LANG"/>
+		<result property="userPictureName" column="U_PICNAME"/>
+		<result property="userPictureUrl" column="U_PURL"/>
+	</resultMap>
+	
+	<select id="getUserProfile" resultMap="UserProfileVO">
+	select U_INTRO, U_LANG, U_PICNAME, U_PURL from tuser where USER_NUM=#{userNum}
+	</select>
+	
+	<update id="updateProfile">
+	update tuser
+	set
+	U_INTRO=#{userIntroduction},
+	U_LANG=#{userLanguage},
+	U_PICNAME=#{userPictureName},
+	U_PURL=#{userPictureUrl}
+	where USER_NUM=#{userNum}
+	</update>
+	
 	<update id="updateAuthCode">
 	update tuser
 	set

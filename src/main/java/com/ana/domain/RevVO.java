@@ -25,6 +25,9 @@ public class RevVO {
 	private String purl;
 	private String pname;
 	private Date pregdate;
+	private String acmpurl;
+	private String acmpname;
+	
 	
 	private List<RevPicVO> picList;
 }

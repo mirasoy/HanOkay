@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ana.domain.AcmDetailPicVO;
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserVO;
+import com.ana.service.AcmDetailService;
 import com.ana.service.AcmRegService;
 import com.ana.service.BookingService;
 import com.ana.service.CodeService;
@@ -50,6 +52,8 @@ public class HostController {
 	private CodeService codeService;
 	@Autowired
 	private BookingService bservice;
+	@Autowired
+	private AcmDetailService pservice;
 	
 	//세션에서 유저이름 가져오는 메서드
 	public UserVO getUser(HttpSession session) {
@@ -57,18 +61,10 @@ public class HostController {
 		if(user==null)return null;
 		return user;
 	}
-
-	
-	///////////////////////
-	@GetMapping("/hostindex")
-	public void indexGet(Model model,HttpSession session) {
-		System.out.println("호스트 인덱스다~~ ");
-		
-		//호스트 주인
-		String ownerUser= getUser(session).getUserNum();
-		
-		
-		
+	static String koryoil="";
+	 
+	//오늘의 날짜를 갔다줌
+	public String getCal() {
 		///오늘의 날짜
 		Calendar cal = Calendar.getInstance();
 		//System.out.println(cal);
@@ -78,7 +74,6 @@ public class HostController {
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		int dayo=cal.get(Calendar.DAY_OF_WEEK);
 		
-		String koryoil="";
 		
 		if(dayo==0)koryoil="일";
 		else if(dayo==1)koryoil="월";
@@ -88,22 +83,32 @@ public class HostController {
 		else if(dayo==5)koryoil="금";
 		else if(dayo==6)koryoil="토";
 		
+		String today=year+"-"+month+"-"+day;
+		return today;
+	}
+	
+	
+	
+	///////////////////////
+	@GetMapping("/hostindex")
+	public void indexGet(Model model,HttpSession session) {
+		System.out.println("호스트 인덱스다~~ ");
 		
+		//호스트 주인
+		String ownerUser= getUser(session).getUserNum();
 		
-		String todayform=year+"."+month+"."+day+"("+koryoil+")";
-		
-		
-		//String today=year+"-"+month+"-"+day;
 
-		String today="2020-8-1";
-		model.addAttribute("todayform",today);
+		//가라임
+		//String today="2020-8-7";
+		
+		model.addAttribute("todayform",getCal()+"("+koryoil+")");
 
-		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,today);
+		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,getCal());
 		if(chkin.size()==0)model.addAttribute("chkinSize", 0);
 		else model.addAttribute("chkinSize", chkin.size());
 		
 		
-		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,today);
+		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,getCal());
 		model.addAttribute("chkin", chkin);
 		model.addAttribute("chkout", chkout);
 		
@@ -114,9 +119,41 @@ public class HostController {
 	@GetMapping("/reserv")
 	public void reservGet(Model model,HttpSession session) {
 		UserVO user=getUser(session);
-		if(user.getUserPriv().equals("GUEST"))return;
-		model.addAttribute("userFstname", getUser(session).getUserFstName());
+
+		//운영중인 숙소들을 끌어옴
+		String acmActi="ACTIVE";
+		//호스트의 userNum=ownerUser로 숙소를 끌고온다
+		List<AcmVO> acms=aservice.getListAcms(user.getUserNum(), acmActi);
+		model.addAttribute("acms", acms);
+		
+		
+		model.addAttribute("userFstname", user.getUserFstName());
 	}
+	
+	//숙소가 선택될때마다 숙소에대한 객실들을 가져오자
+		@RequestMapping(value = "/returnRoms", method = RequestMethod.POST)
+		@ResponseBody
+		public void selAcmPost(String acmDetailaddr,HttpServletRequest request, HttpServletResponse response)
+				throws IOException{	
+			System.out.println("주소중복체크 Post다!");
+			JSONObject jso= new JSONObject();
+			log.info("acmDetailaddr check: " +  acmDetailaddr);
+			//한글 깨짐 방지
+			response.setContentType("text/plain;charset=UTF-8");
+			String msg="";
+			//service에게 email을 주고 db를 뒤져오게한다
+			if (aservice.chkaddr(acmDetailaddr)) {
+				msg="해당 주소를 사용하실 수 있습니다";
+				jso.put("msg", msg);		
+			} 
+			else {
+				msg="*같은 주소지에 이미 등록된 숙소가 있습니다!";
+				jso.put("msg", msg);
+			}
+			PrintWriter out = response.getWriter();
+			out.print(jso);
+		}
+	
 	
 
 	@GetMapping("/listings")
@@ -200,6 +237,10 @@ public class HostController {
 		model.addAttribute("acmCode", codeService.getAcmCode());
 		model.addAttribute("romCode", codeService.getRomCode());
 		
+		//숙소사진List<AcmDetailPicVO>
+		List<AcmDetailPicVO> acmPics = pservice.getPicList(acmNum);
+		System.out.println(acmPics.size());
+		model.addAttribute("acmPics", acmPics);
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 
