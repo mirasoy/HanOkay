@@ -238,24 +238,36 @@ color: #fff;
 		<div class="card1">
 			<div class="item1 items">
 				<h1>안녕하세요 저는 <%=userFstName %>입니다.</h1>
-				<p>회원가입 : 2020</p>
+				<p id="userRegisterDate">회원가입일 : 2020</p>
 			</div>
 			<div class="item2 items">
-				<button type="button" class="user_profile_edit_button" >프로필 수정하기</button>
+			<div class="profileRead">
+				<div>
+				<span>자기소개</span>
+				<div>
+				<c:out value="${profile.userIntroduction}" />
+				</div>
 				
+				<span>사용언어</span>
+				<div>
+				<c:out value="${profile.userLanguage}" />
+				</div>
+				</div>
+			</div>
+				<button type="button" class="user_profile_edit_button" >프로필 수정하기</button>
 				
 				<ul id="peek">
 					<li>
 						<div class="textToggle">
 							<p>소개</p>
-							<textarea name="about" rows="4" autocomplete="off" class="textToggleArea"></textarea>
+							<textarea name="about" rows="4" autocomplete="off" id="selfIntro" class="textToggleArea"><c:out value="${profile.userIntroduction}" /></textarea>
 						</div>
 					</li>
 					
 					<li>
 						<div class="textToggle">
 							<p>구사언어</p>
-							<textarea name="about" rows="2" autocomplete="off" class="textToggleArea"></textarea>
+							<textarea name="about" rows="2" autocomplete="off" id="lang" class="textToggleArea">${profile.userLanguage}</textarea>
 						</div>
 					</li>
 					
@@ -283,7 +295,7 @@ color: #fff;
 			</div>		
 			
 			<div class="item3 items">
-				<h1>★ 후기 0개 </h1>
+				<h1>★ 후기 <c:out value="${reviewCount}" />개 </h1>
 				<button type="button" class="review_edit_button" >내가 작성한 후기</button>
 			</div>											
 		</div>
@@ -291,21 +303,49 @@ color: #fff;
 </section>
 
 <script>
-
-
+//글자수 유효성 체크 메서드
+function checkLetter(){
+	let self= $("#selfIntro").val();
+	let langu= $("#lang").val();
+}
 
 $(".user_profile_edit_button").on('click',function(){	
-
+	$(".profileRead").hide();
 	$("#peek").addClass('on')	
 });
 
 
 $(".btn-red").on('click',function(){	
-	
-	$("#peek").removeClass('on')	
+	$(".profileRead").show();
+	$("#peek").removeClass('on');	
 });
 
-
+$(".btn-primary").on('click', function(){
+	
+	let lang= $("#lang").val();
+	let selfIntro= $("#selfIntro").val();
+	
+	$.ajax({
+        type: "POST",
+        url: "/account/myAccount/updateMyProfile",
+        dataType: "json",
+        data: {
+          userNum: '<%=userNum %>',
+          userIntroduction : selfIntro,
+          userLanguage : lang
+        },
+        //async: false,
+        success: function (data) {
+         if(data.msg =='success'){
+        	 window.alert("수정 완료!");
+        	 $(".profileRead").show();
+        	 $("#peek").removeClass('on');
+  
+         }
+        }
+        
+   });
+});
 
 
 var acc = document.getElementsByClassName("accordion");
@@ -324,11 +364,10 @@ for (i = 0; i < acc.length; i++) {
 }
 
 
-
   $(document).ready(function () {
     //페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
     if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
+    window.history.replaceState(null, null, window.location.href);  
     }
   });
 </script>

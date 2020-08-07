@@ -328,9 +328,7 @@ if (user != null) {
 	      }
 	        
 </script>
-
 </head>
-
 <!-- 뒤로가기 방지 -->
 <!-- 
 <script type="text/javascript">

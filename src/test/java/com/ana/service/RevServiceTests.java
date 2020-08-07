@@ -5,11 +5,14 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
+import com.ana.domain.UserVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -31,7 +34,7 @@ public class RevServiceTests {
 		assertNotNull(service);
 	}
 	
-	@Test
+//	@Test
 	public void testRegister() {
 		RevVO post = new RevVO();
 		post.setBrdCode("rev");
@@ -47,23 +50,23 @@ public class RevServiceTests {
 		log.info("생성된 리뷰의 번호: " + post.getPstNum());
 	}
 	
-@Test
+//	@Test
 	public void testGetList() {
 		service.getList().forEach(post->log.info(post));
 	}
 	
-	@Test
+//	@Test
 	public void testGet() {
 		log.info(service.get("8"));
 	}
 	
-	@Test
+//	@Test
 	public void testDelete() {
 		//게시물\의 존재 여부를 확인하고 테스트할 것
 		log.info("REMOVE RESULT: " + service.remove("78"));
 	}
 	
-	@Test
+//	@Test
 	public void testUpdate() {
 		RevVO post = service.get("34");
 		
@@ -75,14 +78,16 @@ public class RevServiceTests {
 		log.info("MODIFY RESULT: "+service.modify(post));
 	}
 	
-	@Test
+//	@Test
 	public void testReadByBookNum() {
 		log.info("MODIFY RESULT: "+service.getByBooknum("B15"));
 	}
 	
-	@Test
+//	@Test
 	public void testGetMyList() {
 		service.getUserList("U1").forEach(post->log.info(post));
 	}
+	
+	
 	
 }

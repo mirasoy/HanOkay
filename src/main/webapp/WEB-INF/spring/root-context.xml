@@ -13,7 +13,7 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+<!-- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
@@ -21,13 +21,23 @@
 			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
 		<property name="username" value="hanokay"></property>
 		<property name="password" value="1234"></property>
+		<property name="maximumPoolSize" value="20"></property>
 
-	</bean>
+	</bean> -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+      <property name="driverClassName"
+         value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+      <property name="jdbcUrl"
+         value="jdbc:log4jdbc:oracle:thin:@hanokay.cvgigvuis47p.ap-northeast-2.rds.amazonaws.com:1521:hanokay"></property>
+      <property name="username" value="admin"></property>
+      <property name="password" value="dlth126!"></property>
+   </bean>
 
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
+		<property name="maximumPoolSize" value="3"></property>
 	</bean>
 
 	<bean id="sqlSessionFactory"

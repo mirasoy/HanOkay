@@ -5,11 +5,13 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
+import com.ana.domain.UserVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -72,5 +74,7 @@ public class RevPostServiceTests {
 //		post.setPTitle("제목 수정합니다. ");
 //		log.info("MODIFY RESULT: "+service.modify(post));
 //	}
+	
+
 
 }
