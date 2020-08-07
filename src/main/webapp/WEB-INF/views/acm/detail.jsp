@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@include file="../includes/header.jsp"%>
 <% String person = request.getParameter("person"); %>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/suhee.css">
@@ -46,9 +47,9 @@
 		<div class = "detail-navigation-list container-navigation box">
 			<div class = "detail-navigation-list">
 				<a href="#info">INFO</a>
-				<a href="#review">REVIEW</a>
+				<a href="#review-all">REVIEW</a>
 				<a href="#location">LOCATION</a>
-				<a href="#roomlist">ROOM</a>
+				<a href="#room-list">ROOM</a>
 			</div>
 		</div>
 
@@ -117,7 +118,14 @@
 										</c:choose>
 									</span>
 								</summary>
-		  						<p><c:out value="${rev.revContent}" /></p>
+								<c:choose>
+								        <c:when test="${fn:length(rev.revContent) gt 90}">
+								        <c:out value="${fn:substring(rev.revContent, 0, 89)} ... (중략) ">
+								        </c:out></c:when>
+								        <c:otherwise>
+								        <c:out value="${rev.revContent}">
+								        </c:out></c:otherwise>
+								</c:choose>
 		  					</details>
 						</td>
 					</tr>
@@ -125,12 +133,13 @@
 				<c:if test="${empty rev}">
 					<tr><td>첫 번째 리뷰의 주인공이 되어보세요!<i class="fa fa-smile-o" aria-hidden="true"></i></td></tr>
 				</c:if>
+				<tr><td><a href="#review-all">리뷰 더보기</a></td></tr>
 			</table>
 		</div>		
 		</div>
 		
 		<!-- 객실리스트 -->
-		<div class = "container-roomlist box" id="roomlist">
+		<div class = "container-roomlist box" id="room-list">
 			<label class="sub-title">ROOM</label></br>
 				<table>
 					<c:forEach items="${rom}" var="rom">
@@ -171,6 +180,10 @@
 				예약 가능한 객실이 없습니다<i class="fa fa-meh-o" aria-hidden="true"></i></br>
 			</c:if>		
 		</div>		
+		
+		<div class = "container-reviewall box" id="review-all">
+			
+		</div>
 		
        	<form action="/booking/new" id="form" method=post>
       		<input type="hidden" name="in" id="form-in" value="${in}">
@@ -253,7 +266,7 @@
 
 			let opt = document.getElementById("acmOpt");
 			for(let k=0, cnt=0; k<acmOpt.length; k++){
-				if(acmOpt.charAt(k) == 1){
+				if(acmOpt.charAt(15-k) == 1){
 					opt.innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>&nbsp;';
 					cnt++;
 					if(cnt > 1 && cnt % 4 == 0) opt.innerHTML += '</br>';
@@ -278,7 +291,7 @@
 			let opt = document.getElementsByClassName("romOpt");
 			for(let l=0; l<romOpt.length; l++){
 				for(let k=0; k<romOpt[l].length; k++){
-					if(romOpt[l].charAt(k) == 1){
+					if(romOpt[l].charAt(15-k) == 1){
 						opt[l].innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>&nbsp;&nbsp;';
 					}
 				}

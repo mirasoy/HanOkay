@@ -76,7 +76,7 @@
 	padding: 20px;
 	font-size: 1rem;
 	width: 600px;
-    height: 370px;
+    height: 300px;
 }
 
 .container-location{
@@ -85,7 +85,7 @@
 	grid-column: 2;
 	padding: 20px;
     width: 450px;
-    height: 465px;
+    height: 390px;
 }
 
 .container-roomlist{
@@ -123,7 +123,7 @@
     width: 100px;
 }
 
-.page-new .acm-pic img{
+.page-new 		.acm-pic img{
 	width: 35vh;
     height: 25vh;
 }
