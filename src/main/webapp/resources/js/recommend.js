@@ -102,19 +102,19 @@ var latitude;
 
 		//관광지 정보 가져오기
         function visitkorea(url) {
+        	 console.log("url > " + url);
             $.ajax({
                 url: url,
                 dataType: "json",
                 type: "GET",
                 async: "false",
                 success: function (resp) {
-                    console.log("성공!...");
+                    console.log("!!성공!...");
                     var result = resp.response.body.items.item;
                     console.log("검색된갯수" + resp.response.body.totalCount);
 					
                     //정보 화면에 넣는 펑션에 넘기기
                     write(result,resp.response.body.totalCount);
-
                 },
                 error: function (resultArr) {
                 	
