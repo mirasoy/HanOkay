@@ -805,43 +805,6 @@ position: fixed;
 </script>
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
-		$("#e1").val('<c:out value="${pageMaker.cri.keyword}"/>');
-	
-		$(document)
-				.ready(
-						function() {
-							history.replaceState({}, null, null);
-							var actionForm = $("#actionForm");
-							$(".paginate_button a").on(
-									"click",
-									function(e) {
-										e.preventDefault();
-										console.log('click');
-										actionForm
-												.find("input[name='pageNum']")
-												.val($(this).attr("href"));
-										actionForm.submit();
-									});
-							 $(".move").on("click",function(e) {
-												e.preventDefault();
-												alert(11);
-												actionForm.append("<input type='hidden' name='acmNum' value='"
-																+ $(this).attr("href")
-																+ "'>");
-												actionForm.attr("action","/acm/detail");
-												actionForm.submit();
-											}); 
-							 
-							 
-		});
-		
-		
-		
-		
-		
-	</script>
 <script>
 
       // This example requires the Places library. Include the libraries=places
@@ -1270,7 +1233,6 @@ function getAcmOpt2(arrOpt,acmNumArr) {
   // When the user clicks the button, open the modal
   btn.onclick = function () {
 	  filterModal.style.display = "block";
-	  
 	
 	  base.addClass('modal-open');
 
@@ -1320,7 +1282,6 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 
 <script type="text/javascript">
 		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
-		$("#e1").val('<c:out value="${pageMaker.cri.keyword}"/>');
 	
 		$(document)
 				.ready(
@@ -1339,7 +1300,6 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 									});
 							 $(".move").on("click",function(e) {
 												e.preventDefault();
-												alert('move clicked');
 												actionForm.append("<input type='hidden' name='acmNum' value='"
 																+ $(this).attr("href")
 																+ "'>");
