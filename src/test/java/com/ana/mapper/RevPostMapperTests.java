@@ -23,9 +23,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 
 public class RevPostMapperTests {
-	
-	@Setter(onMethod_= @Autowired)
-	private RevPostMapper mapper;
+	/*
+	 * @Setter(onMethod_= @Autowired) private RevPostMapper mapper;
+	 */
 	
 	/*
 	
@@ -95,26 +95,26 @@ public class RevPostMapperTests {
 	*/
 	
 	
-	//@Test
-	public void testGetList2() {
-		mapper.getAcmList("A2").forEach(post -> log.info(post));
-	}
-	
-	
-	//@Test
-    public void testGetList() {
-		mapper.getList().forEach(post -> log.info(post));
-	}
-	
-	//@Test
-    public void insertPhoto() {
-    	
-		RevPicVO vo = new RevPicVO();
-		vo.setPstNum("RV44");
-		vo.setPname("e0d2fa25-c60c-4980-a3d9-3cd185db8616_2.gif");
-		vo.setPurl("c:/upload/review/2020/07/20/");
-		
-		mapper.insertPhoto(vo);
+//	//@Test
+//	public void testGetList2() {
+//		mapper.getAcmList("A2").forEach(post -> log.info(post));
+//	}
+//	
+//	
+//	//@Test
+//    public void testGetList() {
+//		mapper.getList().forEach(post -> log.info(post));
+//	}
+//	
+//	//@Test
+//    public void insertPhoto() {
+//    	
+//		RevPicVO vo = new RevPicVO();
+//		vo.setPstNum("RV44");
+//		vo.setPname("e0d2fa25-c60c-4980-a3d9-3cd185db8616_2.gif");
+//		vo.setPurl("c:/upload/review/2020/07/20/");
+//		
+//		mapper.insertPhoto(vo);
 
 
 }
