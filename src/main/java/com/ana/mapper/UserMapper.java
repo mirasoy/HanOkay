@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ana.domain.AcmVO;
+import com.ana.domain.UserProfileVO;
 import com.ana.domain.UserVO;
 
 public interface UserMapper {
@@ -55,8 +56,14 @@ public interface UserMapper {
 	//user의 인증코드를 업데이트 하는 메서드
 	public int updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
 	
+	//userNum으로 프로필을 가져오는 메서드
+	public UserProfileVO getUserProfile(@Param("userNum") String userNum);
 	
-	/////////////////////////////////림쨩의 영역/////////////////////////////////
+	//프로필을 업데이트 하는 메서드
+	public int updateProfile(UserProfileVO profile);
+	
+	
+		/////////////////////////////////림쨩의 영역/////////////////////////////////
 	
 	//숙소등록을 처음 시작할때 사업자번호등록
 	public int becomeHost(UserVO u);

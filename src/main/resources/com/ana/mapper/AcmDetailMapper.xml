@@ -45,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<resultMap id="AcmDetailRevVOResult" type="com.ana.domain.AcmDetailRevVO">
+		<result column="PST_NUM" property="revPstnum" />
 		<result column="P_TITLE" property="revPtitle" />
 		<result column="USER_NUM" property="revUsernum" />
 		<result column="P_REGDATE" property="revPregdate" />
@@ -92,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 숙소리뷰 리스트(숙소번호 기준 + 활성화된 상태) -->
 	<select id="getRevList" resultMap="AcmDetailRevVOResult">
 		SELECT 
-		    P_TITLE, USER_NUM, P_REGDATE, P_UPDATEDATE, STISF, CONTENT, PST_ACTI
+		    PST_NUM, P_TITLE, USER_NUM, P_REGDATE, P_UPDATEDATE, STISF, CONTENT, PST_ACTI
 		FROM TREVIEW
 		WHERE ACM_NUM = #{acmNum} AND PST_ACTI = 'T'
 	</select>	
