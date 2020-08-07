@@ -46,14 +46,14 @@
 	     </select>
 	
 	      <select class="form-control" style="width:160px;display:inline-block;" name="ROM_NUM" id="ROM_NUM" onchange="categChange(this)">
-	        <option>숙소 선택</option>
+	        <option>객실 선택</option>
 	     </select>
 	
 		<div id="content">
 		    <div>
 				<!-- /top -->
 				<div class="space">
-				    <span id="start">2020-08-01</span> <a href="#" onclick="picker.show(); return false;">Change</a>
+				    <span id="start">2020-08-01</span> <a href="#" onclick="picker.show(); return false;">월별로 찾기</a>
 				</div>
 			</div>
 		</div>
