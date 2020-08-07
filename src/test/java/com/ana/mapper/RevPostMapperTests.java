@@ -7,6 +7,7 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -103,7 +104,7 @@ public void testGetMyList() {
 	}
 	
 	
-//	@Test
+	//@Test
     public void testGetList() {
 		mapper.getList().forEach(post -> log.info(post));
 	}
@@ -118,7 +119,7 @@ public void testGetMyList() {
 		
 		mapper.insertPhoto(vo);
     }
-	@Test
+//	@Test
 	public void deletePhoto() {
 		
 		RevPicVO vo = new RevPicVO();
@@ -129,15 +130,6 @@ public void testGetMyList() {
 		mapper.deletePhoto(vo);
 	}
     
-
-
-
-
-
-	
-	
-
-	
 	
 
 }

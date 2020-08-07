@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +14,9 @@ import com.ana.domain.RevDetailVO;
 import com.ana.domain.RevPicVO;
 import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
+import com.ana.domain.UserVO;
 import com.ana.mapper.RevDetailMapper;
+import com.ana.mapper.RevMapper;
 import com.ana.mapper.RevPostMapper;
 
 import lombok.AllArgsConstructor;
@@ -165,6 +169,14 @@ public class RevServiceImpl implements RevService {
 				mapper.insertPhoto(pic);
 			}
 		}
+	}
+
+
+	@Override
+	public int getMyReviewCount(HttpSession session) {
+		UserVO user= (UserVO) session.getAttribute("user");
+		return mapper.getMyReviewCount(user.getUserNum());
+		
 	}
 
 }

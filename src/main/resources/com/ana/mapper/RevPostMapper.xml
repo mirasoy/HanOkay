@@ -45,6 +45,10 @@
 		<result column="PST_PREGDATE" property="pregdate" />
 	</resultMap>
 
+	<!-- 내가 쓴 리뷰 갯수 by 세린 -->
+	<select id="getMyReviewCount" resultType="int">
+	select count (*) from treview where user_num=#{userNum}	
+	</select>
 
 	<resultMap id="RevPicVo" type="com.ana.domain.RevPicVO">
 		<result column="PST_NUM" property="pstNum" />
