@@ -11,6 +11,7 @@
 .card{
     margin-bottom: 50px;
     box-shadow: 0 4px 10px 0 #bec2c9;
+    height: 300px;
 }
 
 .item{
@@ -20,29 +21,39 @@
 }
 
 
-.hotel-picture{
-    float: left;
+.clickable-card{
+	width: 100%;
+    height: 100%;
+	border: 1px solid red;
 }
 
+.hotel-picture{
+	
+    float: left;
+       width: 30%;
+	border: 1px solid black;}
+
 .hotel-picture>figure{
-    width: 231px;
+   
     margin: 0;
-    height: 221px;
+        height: 240px;
 }
 
 .hotel-picture>figure>img{
     font-family: "object-fit:cover";
     object-fit: cover;
-    height: 221px;
-    width: 231px;
+    height: 100%;
+    width: 100%;
     vertical-align: middle;
     border: 0;
 }
 
 
 .info-container{
-    width: 66%;
+    width: 70%;
     float: right;
+    border: 1px solid blue;
+    height: 100%;
 }
 
 .checkin-checkout-info-panel{
@@ -61,7 +72,7 @@
 
 .hotel-info-top{
     vertical-align: top;
-    padding: 30px 16px 0;
+    padding: 30px 16px 30px;
     margin-bottom: 0;
     list-style: none;
 }

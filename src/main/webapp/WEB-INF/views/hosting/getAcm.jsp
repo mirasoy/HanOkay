@@ -117,7 +117,7 @@
 		<br><br><br>
 		
 			
-		<div class="col-lg-3">
+	<div class="col-lg-3">
     <div class="panel panel-default" >
 
       <!-- /.panel-heading -->
@@ -127,54 +127,53 @@
 	          <label>숙소대표사진</label> <div class="pull-right"><button type="button" data-oper='editAcm'>사진 편집</button></div>
 	          <div class="slideshow-container">
 					<br><br>
-					<div class="mySlides">
-					  <div class="numbertext">1 / 3</div>
-					  <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
-							
+
+					<div class="mySlides" id="mySlide0">
+					  <div class="numbertext">1 / 6</div>
 					</div>
 					
-					<div class="mySlides">
-					  <div class="numbertext">2 / 3</div>
-					 <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
-								
+					<div class="mySlides" id="mySlide1">
+					  <div class="numbertext">2 / 6</div>
+					  
 					</div>
-					
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					  <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+
+					<div class="mySlides" id="mySlide2">
+					  <div class="numbertext">3 / 6</div>
 					</div>
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					  <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+
+					<div class="mySlides" id="mySlide3">
+					  <div class="numbertext">4 / 6</div>
 					</div>
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					   <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+
+					<div class="mySlides" id="mySlide4">
+					  <div class="numbertext">5 / 6</div>
+					</div>
+
+					<div class="mySlides" id="mySlide5">
+					  <div class="numbertext">6 / 6</div>
 					</div>
 					
 					
 					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 					<a class="next" onclick="plusSlides(1)">&#10095;</a>
-					
-					</div>
+				<!-- 여기에 넣쟈 -->	
 					<br>
 					
-					<div style="text-align:center">
-					  <span class="dot" onclick="currentSlide(1)"></span> 
-					  <span class="dot" onclick="currentSlide(2)"></span> 
-					  <span class="dot" onclick="currentSlide(3)"></span> 
-					  <span class="dot" onclick="currentSlide(4)"></span> 
-					  <span class="dot" onclick="currentSlide(5)"></span> 
-					  <span class="dot" onclick="currentSlide(6)"></span> 
-					</div>
+			<div id="dots" style="text-align:center">
+	           <span class="dot" onclick="currentSlide(1)"></span> 
+			   <span class="dot" onclick="currentSlide(2)"></span> 
+			   <span class="dot" onclick="currentSlide(3)"></span> 
+			   <span class="dot" onclick="currentSlide(4)"></span> 
+			   <span class="dot" onclick="currentSlide(5)"></span> 
+			   <span class="dot" onclick="currentSlide(6)"></span> 
+			</div>
 	          
-	          
-              </div>
+          </div>
 			
 		</div>
 		</div>
 	</div><!-- col-lg-3 end -->
-	
+	</div>	
 		
 		<!-- 숙소 정보 -->
  	
@@ -279,7 +278,7 @@
 			<!-- end panel -->
 		</div>
 		
-		</div>	
+		
 			
 		<!-- 빈 폼 -->
 		<form id="actionForm">
@@ -287,7 +286,7 @@
 				
 			
 		</div>
-
+</div>
 				
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -312,13 +311,31 @@ $(document).ready(function(){
 			$('#<c:out value="${acm.acmType}"/>').append("집전체");
 		}
 			
-		else if(acmType.trim()=="P"){//집천체
+		else if(acmType.trim()=="PD"){//집천체
 			$('#<c:out value="${acm.acmType}"/>').append("객실별");
 		}
 	
-		getAcmOpt();	
+		getAcmOpt();
 		//getRomOpt();
-	});
+		
+		//사진슬라이드 펑션 부르기
+		let mySlides=new Array();
+
+		for(let i=0;i<6;i++){
+			mySlides[i]=document.getElementById("mySlide"+ i);//넣는곳
+		}
+		
+		let j=0;
+		<c:forEach items="${acmPics}" var="pic">
+			mySlides[j].innerHTML+="<img style='align:center;width: 300px; height:auto;' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }"/>'>";
+			j++;
+		</c:forEach>
+	
+	/*<div class="mySlides">
+		 <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname }" />'>
+	</div>*/
+});
+	
 	
 	//숙소옵션뿌리기
 	function dec2bin(codeNum){
@@ -456,3 +473,4 @@ $(document).ready(function(){
 
 
 <%@include file="../includes/footer.jsp"%>
+`

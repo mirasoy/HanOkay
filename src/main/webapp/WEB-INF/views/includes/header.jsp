@@ -70,6 +70,7 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
 
 <link rel="stylesheet" type="text/css" href="../resources/css/review.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/recommend.css"> 
 
 <!-- 메인 CSS style -->
 
@@ -98,6 +99,10 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="${request.contextPath}/resources/js/select2.js"></script>
+
+<script src="${request.contextPath}/resources/js/recommend.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/select2.css" >
 
 
@@ -405,13 +410,21 @@ if (user != null) {
                               <li><a onclick="location.href='/account/myAccount/'" style="cursor: pointer">설정</a></li>                                                   
                               <li id='mode'></li>
                               <li id="header-menu">
-                              <a onclick="javascript:signOut();" style="cursor: pointer"
-                                 id="sign-out-btn" data-selenium="sign-out"
-                                 data-element-name="sign-out-btn" color="primary">
+                              <a onclick="javascript:signOut();" style="cursor: pointer" id="sign-out-btn" data-selenium="sign-out" data-element-name="sign-out-btn" color="primary">
                                    		 로그아웃
                               </a></li>
                               <div style="display: none;" class=" g-signin2"></div>
                            </ul></li>
+                           
+                            <li class="nav-item noneMneu"><a
+										onclick="location.href='/account/myAccount/myProfile'"
+										style="cursor: pointer">마이페이지</a></li>
+							 <li class="nav-item noneMneu"><a onclick="location.href='/wishlist/list'"
+										style="cursor: pointer"> 관심목록</a></li>
+							 <li class="nav-item noneMneu"><a onclick="location.href='/qna/list'"
+										style="cursor: pointer">게시판</a></li>
+							 <li class="nav-item noneMneu"><a onclick="location.href='/account/myAccount/'"
+										style="cursor: pointer">설정</a></li>
                      </ul>
                   </div>
                   <!-- End : mainNavr -->

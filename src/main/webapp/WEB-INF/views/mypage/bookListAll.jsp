@@ -119,7 +119,7 @@ int i = 0;
 	                        <li>
 		                        <div class="booking-status-panel" data-selenium="booking-status-label">
 			                        <i class="ficon ficon-16 ficon-check-circle mmb-booking-status-icon-green"></i>
-			                        <span class="button-item-2" id="<c:out value="${board.bookNum}" />"></span>
+			                     
 		                        </div>
 	                        </li>
 	                    </ul>
@@ -142,6 +142,7 @@ int i = 0;
 	                </div>
 	
 	                <div class="button-item-2">
+	                   	<span class="button-item-2" id="<c:out value="${board.bookNum}" />"></span>
 	                    <button>정보보기</button>
 	                </div>
 	            </div>
@@ -160,6 +161,8 @@ int i = 0;
 
 
 <script>
+
+
 	
 	var acc = document.getElementsByClassName("accordion");
 	var i;

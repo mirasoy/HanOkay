@@ -38,4 +38,20 @@ public interface BookingService {
 	public boolean registerPayment(PaymentVO payment); // 예약정보와 결제정보를 저장한다
 
 	public BookingInfoVO getBooking(String bookNum); // 예약완료 후 예약과 관련된 정보를 불러온다
+
+
+
+
+	///호스트단 림쨩
+	public List<BookVO> dateGetinBooking(String ownerUser,String checkinDate);
+	public List<BookVO> dateGetoutBooking(String ownerUser,String checkoutDate);
+
+
+
+
+
+
+
+
+
 }

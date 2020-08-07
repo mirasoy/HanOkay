@@ -34,14 +34,14 @@
                     <div class="well well-lg" style="height: 200px;">
                     	<div align="center">
 	                        <h5 style="color:blue;">Today</h5>
-	                        <h3 style="margin-top:0px;margin-bottom:20px;">2020.8.5(수)</h3>
+	                        <div style="margin-top:0px;margin-bottom:20px;font-size:25px;">${todayform }</div>
 	                        <div id="rsvSum">
 	                        <div>
 	                        	<div style="font-size:30px;">17</div>
                     			<span>입금대기</span>
                     		</div>
 	                        <div >
-	                        	<div style="font-size:30px;">3</div>
+	                        	<div style="font-size:30px;">${chkinSize }</div>
                     			<span>예약완료</span>
                     		</div>
                     		 <div >
@@ -78,31 +78,23 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>도착예정시간</th>
+                                            <th>예약번호</th>
+                                            <th>예상도착시간</th>
                                             <th>숙소명/객실명</th>
-                                            <th>예약자</th>
-                                            <th>메세지</th>
+                                            <th>예약자/인원</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach items="${chkin}" var="chkin">
                                         <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td><c:out value="${chkin.bookNum}" /></td>
+                                            <td><c:out value="${chkin.expectedArr}" /></td>
+                                            <td>[<c:out value="${chkin.acmName}" />]<c:out value="${chkin.romName}" /></td>
+                                            <td><c:out value="${chkin.bookerFirstname}" />&nbsp;<c:out value="${chkin.bookerLastname}" />/<c:out value="${chkin.guest}" />명</td>
+                                        
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                      </c:forEach>   
                                     </tbody>
                                 </table>
                             </div>
@@ -125,31 +117,23 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>도착예정시간</th>
+                                            <th>예약번호</th>
+                                            <th>예상도착시간</th>
                                             <th>숙소명/객실명</th>
-                                            <th>예약자</th>
-                                            <th>메세지</th>
+                                            <th>예약자/인원</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach items="${chkout}" var="chkout">
                                         <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td><c:out value="${chkout.bookNum}" /></td>
+                                            <td><c:out value="${chkout.expectedArr}" /></td>
+                                            <td>[<c:out value="${chkout.acmName}" />]<c:out value="${chkout.romName}" /></td>
+                                            <td><c:out value="${chkout.bookerFirstname}" />&nbsp;<c:out value="${chkout.bookerLastname}" />/<c:out value="${chkout.guest}" />명</td>
+                                        
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                      </c:forEach>   
                                     </tbody>
                                 </table>
                             </div>
@@ -177,6 +161,10 @@ var longitude;
 
  
 $(document).ready(function(){
+	
+	
+	
+	
 	
 	if ("geolocation" in navigator) {	/* geolocation 사용 가능 */
 		navigator.geolocation.getCurrentPosition(function(data) {

@@ -125,4 +125,19 @@ public class BookingServiceImpl implements BookingService{
 		return mapper.getBooking(bookNum);
 	}
 
+	
+	
+	
+	
+	///호스트단 
+	@Override
+	public List<BookVO> dateGetinBooking(String ownerUser,String checkinDate) {
+		return mapper.dateGetinBooking(ownerUser,checkinDate);
+	}
+
+	@Override
+	public List<BookVO> dateGetoutBooking(String ownerUser,String checkoutDate) {
+		return mapper.dateGetoutBooking(ownerUser,checkoutDate);
+	}
+
 }

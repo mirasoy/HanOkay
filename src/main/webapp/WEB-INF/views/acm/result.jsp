@@ -10,22 +10,28 @@
 <head>
 
 <style>
+.map_section>div>div>div>div:nth-child(3)>div:last-child>div>div {
+	visibility: visible !important;
+	border: 1px solid pink;
+}
 
 .modal-content1 {
 	background-color: #fefefe;
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #888;
-
-	width: 100%
-	display: flex;
+	width: 100% display: flex;
 	flex-direction: column;
 	pointer-events: auto;
 }
 
-
 .modal {
 	z-index: 12000;
+}
+
+/* 확대/축소 등 구글 지도의 기본 UI 감추기 */
+.gmnoprint, .gm-control-active.gm-fullscreen-control {
+	display: none;
 }
 
 
@@ -103,7 +109,7 @@
 														value='<c:out value="${pageMaker.cri.keyword}"/>'
 														placeholder="Enter a location">
 												</div>
-												<input type="hidden" value="CW" name="type">
+												<input type="hidden" value="A" id="type" name="type">
 
 
 											</div>
@@ -188,10 +194,63 @@
 						<li><a href="#">숙소 정책</a></li>
 						<li><a href="#">요금</a></li>
 						<li><a href="#">즉시 예약</a></li>
-						<li><a href="#">필터 추가하기</a></li>
+						<li><input type="button" id="myBtn" name="filterAjax"
+							value="필터 추가하기"></li>
 					</ul>
 				</div>
 				<!-- end : main_text -->
+
+
+				<!-- 필터버튼 추가 -->
+				<!-- The Modal -->
+				<div id="filterModal" class="modal">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<form method="GET" action="/acm/result">
+
+							<input type='hidden' name='pageNum'
+								value='${pageMaker.cri.pageNum}'> <input type='hidden'
+								name='amount' value='${pageMaker.cri.amount}'> <input
+								type='hidden' name='type'
+								value='<c:out value="${pageMaker.cri.type}"/>'> <input
+								type='hidden' name='keyword'
+								value='<c:out value="${pageMaker.cri.keyword}"/>'> <input
+								type='hidden' name='person'
+								value='<c:out value="${pageMaker.cri.person}"/>'> <input
+								type='hidden' name='in'
+								value='<c:out value="${pageMaker.cri.in}"/>'> <input
+								type='hidden' name='out'
+								value='<c:out value="${pageMaker.cri.out}"/>'> <label><input
+								type="checkbox" name="filterAjax" value="1" /> 수영장</label> <label><input
+								type="checkbox" name="filterAjax" value="2" /> 주차장</label> <label><input
+								type="checkbox" name="filterAjax" value="4" /> 공항 이동 교통편 서비스</label> <label><input
+								type="checkbox" name="filterAjax" value="8" /> 체육관/피트니스</label> <label><input
+								type="checkbox" name="filterAjax" value="16" /> 24시간 프런트 데스크</label> <label><input
+								type="checkbox" name="filterAjax" value="32" /> 가족/아동 여행객 친화형
+								시설</label> <label><input type="checkbox" name="filterAjax"
+								value="64" /> 금연</label> <label><input type="checkbox"
+								name="filterAjax" value="128" /> 스파/사우나</label> <label><input
+								type="checkbox" name="filterAjax" value="256" /> 레스토랑</label> <label><input
+								type="checkbox" name="filterAjax" value="512" /> 흡연 구역</label> <label><input
+								type="checkbox" name="filterAjax" value="1024" /> 반려동물 동반 가능</label> <label><input
+								type="checkbox" name="filterAjax" value="2048" /> 장애인용 편의
+								시설/서비스</label> <label><input type="checkbox" name="filterAjax"
+								value="4096" /> 비즈니스 관련 편의 시설</label> <label><input
+								type="checkbox" name="filterAjax" value="8192" /> 인터넷</label> <label><input
+								type="checkbox" name="filterAjax" value="16384" /> 조식</label> <label><input
+								type="checkbox" name="filterAjax" value="32768" /> 석식</label> <input
+								id="total_sum" name="acmOpt" type="text" size="20"
+								value='<c:out value="${pageMaker.cri.acmOpt}"/>' readonly /> <input
+								id="total" type="submit" value="개의 숙소보기" />
+
+							<p>
+								<button type="button" id="reset">reset</button>
+							</p>
+						</form>
+					</div>
+				</div>
+				<!-- 필터버튼 끝 -->
 
 
 				<!-- start : gallery_list -->
@@ -201,11 +260,12 @@
 						<c:forEach items="${list}" var="acm">
 
 							<div class='room room1 move'
-								href='<c:out value="${acm.acmNum}"/>'
-								<%-- onclick="location.href='<c:out value="${acm.acmNum}"/>'" --%>
-								style="cursor: pointer;">
-															
-								<input type="hidden" id="acmTest" value='<c:out value="${acm.acmNum}" />'>
+
+								href='<c:out value="${acm.acmNum}"/>' style="cursor: pointer;">
+
+								<input type="hidden" id="acmTest"
+									value='<c:out value="${acm.acmNum}" />'>
+
 
 								<div class="room-images" onclick="location.href='<c:out value="${acm.acmNum}"/>'">
 									<a href="#">
@@ -228,7 +288,11 @@
 										<p>
 											<c:out value="${acm.acmDesc }" />
 										</p>
-										<div class="room-services">
+										<div class="container-option" id="option">
+											<label class="sub-title">OPTION</label>
+											<div id='<c:out value="${acm.acmNum}" />'></div>
+										</div>
+										<!-- <div class="room-services">
 											<div class="room-service-item">
 												<i class="fa fa-wifi"></i>
 											</div>
@@ -237,7 +301,7 @@
 											<div class="room-service-item">
 												<i class="fa fa-bath"></i>
 											</div>
-										</div>
+										</div> -->
 								</div>
 
 
@@ -249,7 +313,7 @@
 										<i></i>
 									</button>
 									<p>
-										<span> ₩ 100,000</span> / 1박
+										<span> ₩ ${acm.acmPrice}</span> / 1박
 									</p>
 								</div>
 
@@ -351,11 +415,11 @@
 		<!-- wishList 모달창 -->
 
 		<!-- Modal -->
-		
+
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
-		
+
 				<div class="modal-content1">
 					<div class="modal-header">
 						<h1 class="h1Name">당신의 여행을 찜하세요</h1>
@@ -363,6 +427,7 @@
 							aria-hidden="true">&times;</button>
 
 					</div>
+
 					<div class="modal-body">				
 						<div class="form-group info-group sr-only">
 							<label>#유저번호</label> <input class="form-control" name='userNum'
@@ -385,13 +450,14 @@
 								
 								
 								
+
 						</div>
 						<div class="form-group info-group">
 							<label>#내용</label> <input class="form-control" name='listContent'
 								value=''>
 						</div>
 
-					
+
 					</div>
 					<div class="modal-footer">
 						<button id='modalRegisterBtn' type="button"
@@ -399,7 +465,7 @@
 						<button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
 					</div>
 				</div>
-			
+
 				<!-- /.modal-content -->
 			</div>
 			<!-- /.modal-dialog -->
@@ -419,7 +485,7 @@
 
 
 </script>
-
+<script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script>
 
       // This example requires the Places library. Include the libraries=places
@@ -432,6 +498,7 @@
 			var longitude = document.getElementById("longitude").value;
 			
 			var arrOpt = new Array();
+			var acmNumArr = new Array();
 			//숙소번호로 해당 위도,경도 값 가져옴
 			let i=0;
 			<c:forEach items="${list }" var="acm">
@@ -440,19 +507,20 @@
 				latitude = ${acm.latitude};
 				longitude = ${acm.longitude};
 			}
-			
+			acmNumArr[i]='${acm.acmNum}';
 			arrOpt[i]=${acm.acmOptcode};
 				i++;
 			</c:forEach>
 			
-			for(let i=0;i<arrOpt.length;i++){
-				console.log(arrOpt[i]);
-			}
+			
+			
+			
+			getAcmOpt2(arrOpt,acmNumArr);
 			
 			
 			var latVal = parseFloat(latitude);
 			var lngVal = parseFloat(longitude);
-    	  var mapLocation = {
+    	  	var mapLocation = {
   				lat : latVal,
   				lng : lngVal
   			};
@@ -475,30 +543,152 @@
         // Set the data fields to return when the user selects a place.
         autocomplete.setFields(
             ['address_components', 'geometry', 'icon', 'name']);
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
+        var infoWindow = new google.maps.InfoWindow();
+        /* var infowindowContent = document.getElementById('infowindow-content');
+        infoWindow.setContent(infowindowContent); */
         
         var size_x = 60; // 마커로 사용할 이미지의 가로 크기
-		var size_y = 60;
+		var size_y = 30;
         var image = new google.maps.MarkerImage(
-				'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
-				new google.maps.Size(size_x, size_y),
-				'',
-				'',
+        		'${request.contextPath}/resources/img/marker.png',
+				null,
+				null,
+				null,
 				new google.maps.Size(size_x, size_y));
         
-        <c:forEach items="${list }" var="acm">
         
-        var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
-		var marker;
-		marker = new google.maps.Marker({
+        $("#move2").on("click",function(e) {
+			e.preventDefault();
+			alert('move2 clicked');
+			/* actionForm.append("<input type='hidden' name='acmNum' value='"
+							+ $(this).attr("href")
+							+ "'>");
+			actionForm.attr("action","/acm/detail");
+			actionForm.submit(); */
+		}); 
+        
+        
+        var markers = new Array(10); 
+        let j=0;
+        var contentString= new Array(10);
+	
+        var list = new Array();
+        <c:forEach items="${list}" var="acm">
+        list[j] = {
+        		"acmName" : '${acm.acmName}' ,
+        		"latitude" :${acm.latitude},
+        		"longitude" :${acm.longitude},
+        		"acmPrice" :${acm.acmPrice},
+        		"contentString" :
+        			"<div id='move2' href='<c:out value="${acm.acmNum}"/>' style='cursor: pointer;'>"+
+					'<img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" width="50" height="50"/>'
+							+'<br /><h6>' + '${acm.acmName}' + '</h6></div>' ,
+							
+                 }
+        j++;
+        </c:forEach>
+        
+        
+        
+       
+        
+        for(let k=0;k<list.length;k++){
+        var latLng = {lat:parseFloat(list[k].latitude), lng:parseFloat(list[k].longitude)};
+		//var marker;
+		markers[k] = new google.maps.Marker({
 			position : latLng, // 마커가 위치할 위도와 경도(변수)
 			map : map,
+			label:{
+					text: '￦' + list[k].acmPrice,
+					color:'white',
+				  },
 			icon : image, // 마커로 사용할 이미지(변수)
-			title : "${acm.acmName}" // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+			//title : list[k].acmName, // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+			num : j
 		});
-		</c:forEach>
+		
+		 
+		
+		      
+		markers[k].addListener('click', function(){
+			infoWindow.setContent(list[k].contentString);
+			infoWindow.open(map,markers[k]);
+			
+		});
+		
+        }
+        
+        
+    
+        
+        
+      /*  
+        var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
+		//var marker;
+		markers[j] = new google.maps.Marker({
+			position : latLng, // 마커가 위치할 위도와 경도(변수)
+			map : map,
+			label:{
+					text: '￦' + "20000",
+					color:'white',
+				  },
+			icon : image, // 마커로 사용할 이미지(변수)
+			title : "${acm.acmName}", // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+			num : j
+		});
+		
+		/* var contentString2 =
+			'<div style="width:200px;height:200px;"><a href="#" name="detail_go"><input type="hidden" value="'
+			+'<br /><h4>' + markers[j].title + '</h4>' + '</div>';  */
+		/*
+		contentString[j] =	
+					'<img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" width="50" height="50"/>'
+							+'<br /><h6>' + '${acm.acmName}' + '</h6>' ;
+		      
+		markers[j].addListener('click', function(){
+			alert('${acm.acmName} clicked');
+			alert('j:' + j);
+			alert('contentString[j]:' + contentString[j-1]);
+			infoWindow.setContent(contentString[j]);
+			infoWindow.open(map,markers[j]);
+			
+		});
+		j++; */
+		
+		/*
+		var content = "${acm.acmName}" ; // 말풍선 안에 들어갈 내용
+		// 마커를 클릭했을 때의 이벤트. 말풍선
+		var infowindow = new google.maps.InfoWindow({
+			content : content
+		});
+		google.maps.event.addListener(marker, "click", function() {
+			infowindow.open(map, marker);
+		});
+		*/
+		//참고
+		/* var image = new google.maps.MarkerImage(app.img()+'/booking/icon3.png',null,null,null,new google.maps.Size())
+		var markers = new Array(data.list.length);
+		var infoWindow = new google.maps.InfoWindow();
+		$.each(data.list, function(i,item){
+			var latlng={lat: parseFloat(item.latitude),lng:parseFloat(item.longitude)};
+			markers[i] = new google.maps.Marker({
+				position: latlng,
+				map:map,
+				label:{
+					text: '\' + item.price,
+					color:'white',
+				},
+				icon:image,
+			});
+			var contentString =
+				'<div style="width:200px;height:200px;"><a href="#" name="detail_go"><input type="hidden" value="'
+				+'<br /><h4>' + item.title + '</h4>' + '</div>';
+			markers[i].addListener('click', function(){
+				infoWindow.setContent(contentString);
+				infoWindow.open(map,markers[i]);
+			});
+		}); */
+		//참고 끝
 		
        /*  var marker = new google.maps.Marker({
           map: map,
@@ -538,12 +728,12 @@
         });
         // Sets a listener on a radio button to change the filter type on Places
         // Autocomplete.
-        function setupClickListener(id, types) {
+        /* function setupClickListener(id, types) {
           var radioButton = document.getElementById(id);
           radioButton.addEventListener('click', function() {
             autocomplete.setTypes(types);
           });
-        }
+        } 
         setupClickListener('changetype-all', []);
         setupClickListener('changetype-address', ['address']);
         setupClickListener('changetype-establishment', ['establishment']);
@@ -552,15 +742,198 @@
             .addEventListener('click', function() {
               console.log('Checkbox clicked! New state=' + this.checked);
               autocomplete.setOptions({strictBounds: this.checked});
-            });
+            });*/
       }
     </script>
+<!--
+                    아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함
+                    key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.
+                 -->
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&libraries=places&callback=initMap"
 	async defer></script>
 
 <script>
-    $(document).ready(function() { $("#e1").select2(); });
+//필터 모달창
+
+$(function () { //=$(document).ready(function(){
+	$("#reset").click(function(){
+		var chkbox = $('input[type="checkbox"]');
+		for(let i=0; i<chkbox.length; i++){
+				chkbox[i].checked = false;
+		}
+		
+		var keyword = $("#pac-input").val();
+	      var type = $("#type").val();
+	      var cin = $("#in").val();
+	      var out = $("#out").val();
+	      var person = $("#person").val();
+	      var acmOpt = 0;
+	      
+	      var allData = {
+	  			"keyword": keyword, "type": type, "in": cin,
+	  			"out": out, "person": person, "acmOpt": acmOpt
+	  	 }
+		
+		$.ajax({
+	    	   type: 'POST',
+	    	   url: '/acm/filter',
+	    	   dataType: 'json',
+	    	   data: allData,
+	    	   //async: false,
+	    	   success: function(data){
+	    		   console.log(data);
+	    		  //chkbizused=document.getElementById("chkbizused");
+	    		 
+	    		   $('#total').val(data.total+"개의 숙소보기");
+	    		
+		    	/* if(chkbizused==null){//없으면 추가시켜주고
+	    	    	formObj.append("<input type='hidden' id='chkbizused' name='chkbizused' value='"+data.msg2+"'>");
+	    	    	
+		    	} else chkbizused.value=data.msg2;//이미 있으면 바꿔치기 */
+	    	   },
+	    	   error: function(data){
+	    		  window.location.href ="../error/error";
+	    	   }
+	    	 });
+		
+		});
+	
+	
+    $('input[name="filterAjax"]').click(function () {
+      let sum = 0;
+      $('input[name="filterAjax"]:checked').each(function (index, item) {
+        sum += parseInt($(this).val());
+      });
+      
+      $("#total_sum").val(sum);
+      
+      var keyword = $("#pac-input").val();
+      var type = $("#type").val();
+      var cin = $("#in").val();
+      var out = $("#out").val();
+      var person = $("#person").val();
+      var acmOpt = $("#total_sum").val();
+      
+      var allData = {
+  			"keyword": keyword, "type": type, "in": cin,
+  			"out": out, "person": person, "acmOpt": acmOpt
+  	 }
+      
+      console.log(allData);
+      $.ajax({
+    	   type: 'POST',
+    	   url: '/acm/filter',
+    	   dataType: 'json',
+    	   data: allData,
+    	   //async: false,
+    	   success: function(data){
+    		   console.log(data);
+    		  //chkbizused=document.getElementById("chkbizused");
+    		 
+    		   $('#total').val(data.total+"개의 숙소보기");
+    		
+	    	/* if(chkbizused==null){//없으면 추가시켜주고
+    	    	formObj.append("<input type='hidden' id='chkbizused' name='chkbizused' value='"+data.msg2+"'>");
+    	    	
+	    	} else chkbizused.value=data.msg2;//이미 있으면 바꿔치기 */
+    	   },
+    	   error: function(data){
+    		  window.location.href ="../error/error";
+    	   }
+    	 });
+    });
+    getAcmOpt();
+   
+  });
+
+
+function dec2bin(codeNum){
+	return (codeNum >>> 0).toString(2); 
+}
+
+function pad(code) {
+	return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
+}
+
+function getAcmOpt() {
+	let option;
+	var acmOpt = $("#total_sum").val();
+	
+	option= pad(dec2bin(acmOpt));//10진수 옵션코드를 16자리 2진수로 변환한다(110101010..like this)
+	
+	var chkbox = $('input[type="checkbox"]');
+	for(let i=0; i<option.length; i++){
+		if(option.charAt(i) == 1){
+			chkbox[15-i].checked = true;
+		}
+	}
+
+}
+
+//숙소 옵션
+function getAcmOpt2(arrOpt,acmNumArr) {
+	let iconArr = new Array(); 
+	let codeArr = new Array(); 
+	let nameArr = new Array();
+	
+	let acmOpt2 = new Array(arrOpt.length);
+	let opt = new Array();
+	for(let i=0;i<arrOpt.length;i++){
+		console.log(arrOpt[i]);
+		acmOpt2[i] = pad(dec2bin(arrOpt[i]));
+		console.log("2:"+ acmOpt2[i]);
+		opt[i]= document.getElementById(acmNumArr[i]);
+		console.log("3:"+opt[i]);
+	}
+	
+	
+	
+	
+	let j = 0;
+	<c:forEach items="${acmCode}" var="acmCode">
+		iconArr[j] = '<c:out value="${acmCode.codeIcon}" />';
+		codeArr[j] = 'acm' + '<c:out value="${acmCode.codeFull}" />';
+		nameArr[j] = '<c:out value="${acmCode.codeCont}" />';
+		j++;
+	</c:forEach>
+	
+	for(let h=0;h<acmOpt2.length;h++){
+		for(let k=0; k<acmOpt2[h].length; k++){
+			if(acmOpt2[h].charAt(acmOpt2[h].length-1-k) == 1){
+				opt[h].innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true">&nbsp</i>'+'</span>';
+			}
+		}
+		opt[h].innerHTML += '<br>';
+	}
+}
+
+  // Get the modal
+  var filterModal = document.getElementById("filterModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function () {
+	  filterModal.style.display = "block";
+  };
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function () {
+	  filterModal.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+    	filterModal.style.display = "none";
+    }
+  };
+//필터 모달 끝
     
  	/* 날짜 선택(수희) */
 		var today = new Date();
@@ -583,115 +956,9 @@
 			},
 			dateFormat: 'yy-mm-dd'
 		});
-		// 구글맵 api
-		var address = null;
-		/*  function getAddr(){
 		
-		     $.ajax({
-		           type:'post',
-		           headers:{
-		               "Content-Type":"application/json"
-		           },
-		           async : false, // ajax를 동기화(순서대로) 처리해야하는 경우 true로하거나 기술하지 않으면 비동기로 작동한다.
-		           url:"/board/category/getAddr?userId=${boardDTO.userId}",
-		           dataType:"text",
-		           success : function(result){
-		               if ( result != null ){
-		                   console.log("넘어온 값 : " + result);
-		                   address = result;  
-		               }
-		           }
-		       });
-		 }; */
-		function initMap1() { // 지도 요청시 callback으로 호출될 메서드 부분으로 지도를 맨처음 초기화하고, 표시해주는 함수
-/*
-			getAddr();
-			var latVal = $
-			{
-				boardDTO.lat
-			}
-			; // 게시글 DTO에서 위도값을 가져옴
-			var lngVal = $
-			{
-				boardDTO.lon
-			}
-			; // 게시글 DTO에서 경도값을 가져옴
-*/			
-			var acmNum = "${acmNum}";
-			console.log(acmNum);
-			var latitude = document.getElementById("latitude").value;
-			var longitude = document.getElementById("longitude").value;
-			
-			//숙소번호로 해당 위도,경도 값 가져옴
-			<c:forEach items="${list }" var="acm">
-			if("${acm.acmNum}"===acmNum){
-				var latitude = ${acm.latitude};
-				var longitude = ${acm.longitude};
-			}
-			</c:forEach>
-			
-			var latVal = parseFloat(latitude);
-			var lngVal = parseFloat(longitude);
-			console.log('initMap');
-			
-			var mapLocation = {
-				lat : latVal,
-				lng : lngVal
-			}; // 위도, 경도를 가지는 객체를 생성
-			/*     var map = new google.maps.Map(document.getElementById('map'), { // 위의 div id="map" 부분에 지도를 추가하는 부분
-			      zoom: 18, // 확대 정도(ZOOM)
-			      center: uluru // 지도에 표시해주는 중심이 우리가 만든 객체의 위치를 지정해주도록 함
-			    });
-			
-			 */
-			var mapOptions = {
-				center : mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
-				zoom : 15, // 지도 zoom단계
-				mapTypeId : google.maps.MapTypeId.ROADMAP
-			};
-			var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
-			mapOptions);
-			var size_x = 60; // 마커로 사용할 이미지의 가로 크기
-			var size_y = 60; // 마커로 사용할 이미지의 세로 크기
-			// 마커로 사용할 이미지 주소
-			var image = new google.maps.MarkerImage(
-					'http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png',
-					new google.maps.Size(size_x, size_y),
-					'',
-					'',
-					new google.maps.Size(size_x, size_y));
-			<c:forEach items="${list }" var="acm">
-			var latLng = {lat:parseFloat(${acm.latitude}), lng:parseFloat(${acm.longitude})};
-			
-			var marker;
-			marker = new google.maps.Marker({
-				position : latLng, // 마커가 위치할 위도와 경도(변수)
-				map : map,
-				icon : image, // 마커로 사용할 이미지(변수)
-				title : "${acm.acmName}" // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
-			});
-			</c:forEach>
-			var content = "${acm.acmName}" ; // 말풍선 안에 들어갈 내용
-			// 마커를 클릭했을 때의 이벤트. 말풍선
-			var infowindow = new google.maps.InfoWindow({
-				content : content
-			});
-			google.maps.event.addListener(marker, "click", function() {
-				infowindow.open(map, marker);
-			});
-			/*
-			 단순한 마커로 default로 표시할 때 쓰는 마커 세팅
-			var marker = new google.maps.Marker({
-			    position: uluru,
-			    map: map
-			  });
-			 */
-		}
 	</script>
-<!--
-                    아래는 서버로부터 지도를 로딩하기 위해 요청하는 경로 async는 비동기로 로딩하도록해 지도 로딩 중 다른 웹 부분들이 열릴 수 있도록하기 위함
-                    key부분에는 자신의 키를 넣고, 로딩이 완료되면 callback에 지정한 함수를 수행하게 됨.
-                 -->
+
 
 <script type="text/javascript">
 		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
@@ -714,6 +981,7 @@
 									});
 							 $(".move").on("click",function(e) {
 												e.preventDefault();
+												alert('move clicked');
 												actionForm.append("<input type='hidden' name='acmNum' value='"
 																+ $(this).attr("href")
 																+ "'>");

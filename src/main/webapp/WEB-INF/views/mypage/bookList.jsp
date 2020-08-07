@@ -17,14 +17,16 @@ String name = (String) session.getAttribute("loginUserNum");
 
 <div class="container-1">
 
-<div class="">
-	<div class="col-lg-12">
-		<h1 class="page-header">나의 예약</h1>
-		<p><%=userFstName %>의  예약 중인 목록입니다. (숙박예정)</p>
-	</div>
-	<!-- /.col-lg-12 -->
-</div>
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">나의 예약</h1>
+			<p><%=userFstName %>의 투숙 예정 목록입니다.</p>
+		</div>
+	</div>
+	
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■사이드바■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->	
 	
 <section class="sidebar">
 	    <div class="sidebar_detail">

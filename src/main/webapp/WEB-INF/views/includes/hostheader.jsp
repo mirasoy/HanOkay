@@ -23,8 +23,8 @@
 			userNum = user.getUserNum();
 			userPriv=user.getUserPriv();
 		   userStatusCode=user.getUserStatusCode();
-			   
 		}
+		
 %>
 	<style>
 	.panel-heading {
@@ -183,8 +183,6 @@
       } else if(userStatusCode=="HO_PENDING"){
    		$("#hostonly").css("display","none"); 
 	  }
-   
-   
    });
 </script>
 

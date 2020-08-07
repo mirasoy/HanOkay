@@ -37,6 +37,7 @@ public class AcmVO {
 	private String acmActi;
 	private String acmStatus;
 	private Integer acmOptcode;
+	private Integer acmPrice;
 	
 	private RomVO rom;
 	private String sumTotal;
