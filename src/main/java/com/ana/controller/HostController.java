@@ -409,15 +409,11 @@ public class HostController {
 		
 
 		
-		
-		System.out.println(getUser(session).getUserStatusCode());//
+		//세션 다시주기
 		
 		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
 		System.out.println(user);
-		System.out.println();
-		
 		session.setAttribute("user", user);
-		
 		System.out.println(getUser(session).getUserStatusCode());//
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
