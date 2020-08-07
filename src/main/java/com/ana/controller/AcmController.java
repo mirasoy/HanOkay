@@ -44,35 +44,9 @@ public class AcmController {
 
 	private AcmService service;
 	private WishListService wishservice;
-	
-	
-	
-	
-	
-	
 	private CodeService codeService;
 	
 	//검색 결과 
-//	@GetMapping({ "/list", "/result" })
-//	public void list(Criteria cri, String acmNum, Model model, HttpSession session) {	
-//		log.info("list: " + cri);
-//
-//		try {
-//			// 날짜 유효성 검사
-//			if (!checkDate(cri)) {
-//				return;
-//			}
-//			
-//			model.addAttribute("list", service.getList(cri));
-//			int total = service.getTotal(cri);
-//			log.info("total: " + total);
-//			model.addAttribute("acmNum", acmNum);
-//			model.addAttribute("pageMaker", new PageDTO(cri, total));
-//		} catch (Exception e) {
-//			return;
-//		}
-//	}
-	
 	@GetMapping({ "/list", "/result" })
 	public void list(Criteria cri, String acmNum, Model model , HttpSession session) {
 
@@ -81,24 +55,24 @@ public class AcmController {
 			if (!checkDate(cri)) {
 				return;
 			}
-			
+			log.info("cri1:" + cri);
 			//지역 문자열핸들링&타입셋팅
 			chkLocation(cri);
-			
+			log.info("cri2:" + cri);
 			model.addAttribute("acmCode", codeService.getAcmCode());
-			log.info("cri:" + cri);
+			
 			model.addAttribute("list", service.getList(cri));
 
-			log.info("여기1");
+			//log.info("여기1");
 			int total = service.getTotal(cri);
 			log.info("total: " + total);
 			model.addAttribute("acmNum", acmNum);
 			model.addAttribute("pageMaker", new PageDTO(cri, total));
 			model.addAttribute("drawValue", drawValue(service.getList(cri), session));
 			
-			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + total);
+			//log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + total);
 			
-			log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + drawValue(service.getList(cri), session).size());
+			//log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + drawValue(service.getList(cri), session).size());
 			
 		} catch (Exception e) {
 			System.out.println("오류가 발생했습니다 : "+e.getMessage());
@@ -147,20 +121,20 @@ public class AcmController {
 			userNum = user.getUserNum();
 		} 				
 		
-		log.info("■■>>>>>>>>>>>>>>>>>sizze>>>>"+wishservice.drawValue(userNum, acmlist.getAcmNum()).size());
-		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ acm NUM  은?■■■■■■■■■■■■■■■■"+ acmlist.getAcmNum());
+		//log.info("■■>>>>>>>>>>>>>>>>>sizze>>>>"+wishservice.drawValue(userNum, acmlist.getAcmNum()).size());
+		//log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ acm NUM  은?■■■■■■■■■■■■■■■■"+ acmlist.getAcmNum());
 		
 		wishservice.drawValue(userNum, acmlist.getAcmNum());		
 		if(wishservice.drawValue(userNum, acmlist.getAcmNum()).size()==0) {			
 			result.add("fa fa-heart-o fa-2x openheart");	
-			log.info(1);
+			//log.info(1);
 		}else {			
 			result.add("fa fa-heart fa-2x clsheart");	
-			log.info(2);
+			//log.info(2);
 		}			
 	}
-	log.info("■■■■■■■■■■■■■■■■■■■■■result.size() == ?? "+result.size());
-	log.info("■■■■■■■■■■■■■■■■■■■■■result == ?? "+result);
+	//log.info("■■■■■■■■■■■■■■■■■■■■■result.size() == ?? "+result.size());
+	//log.info("■■■■■■■■■■■■■■■■■■■■■result == ?? "+result);
 	return result;	
 }
 	
@@ -213,29 +187,31 @@ public class AcmController {
 	
 	//지역 문자열 핸들링&타입 선택
 	public void chkLocation(Criteria cri) {
-		String keyword = StringUtils.replaceEach(cri.getKeyword(), new String[] {"특별시","광역시","충청남도","충청북도","전라북도","전라남도","경상북도","경상남도","강원도","경기도","제주도"}, 
-				  new String[] {"","","충남","충북","전북","전남","경북","경남","강원","경기","제주"});
+		String keyword = StringUtils.replaceEach(cri.getKeyword(), new String[] {"대한민국","서울시","특별시","광역시","충청남도","충청북도","전라북도","전라남도","경상북도","경상남도","강원도","경기도","제주도"}, 
+				  new String[] {"","서울","","","충남","충북","전북","전남","경북","경남","강원","경기","제주"}).trim();
 		cri.setKeyword(keyword);
 		String[] location = keyword.split(" ");
 		
 //		for(int i=0;i<location.length;i++) {
 //		log.info("location"+i+": " + location[i]);
 //		}
+		
+		//대한민국 서울
+		//서울
+		//서울 종로구
 		if(location.length<=1) { //서울 or 종로 or 대치
 			cri.setType("A");
-		}else if(location.length==2) { //대한민국 서울
-			cri.setType("T");
-			cri.setCity(location[1]);
-		}else if(location.length==3) { //대한민국 서울 종로구
+		}else if(location.length==2) { //서울 종로구
 			cri.setType("TC");
-			cri.setCity(location[1]);
-			cri.setDistr(location[2]);
-		}else {//대한민국 서울 종로구 종로3가 or 그이상
+			cri.setCity(location[0]);
+			cri.setDistr(location[1]);
+		}else{ //서울 종로구 종로3가 or 그이상
 			cri.setType("TCW");
-			cri.setCity(location[1]);
-			cri.setDistr(location[2]);
-			cri.setDetail(location[3]);
-		};
+			cri.setCity(location[0]);
+			cri.setDistr(location[1]);
+			cri.setDetail(location[2]);
+		}
+		
 		//옵션체크했을경우 타입에 F붙임
 		if(!cri.getAcmOpt().equals("0")) {
 			cri.setType(cri.getType().concat("F"));

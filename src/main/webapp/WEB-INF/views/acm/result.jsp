@@ -70,7 +70,9 @@
     background: 0 0;
     border: 0;
 }
-
+.move{
+background-color: red;
+}
 
 
 
@@ -284,7 +286,7 @@ position: fixed;
 
 <link rel="stylesheet" type="text/css"
 	href="${request.contextPath}/resources/css/result.css">
-
+	
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -406,6 +408,7 @@ position: fixed;
 				</div>
 				<!-- end : main_text -->
 
+				
 
 				<!-- 필터버튼 추가 -->
 				<!-- The Modal -->
@@ -576,7 +579,10 @@ position: fixed;
 									value='<c:out value="${acm.acmNum}" />'>
 
 
-								<div class="room-images" ">
+
+								<div class="room-images">
+
+
 									<a href="#">
 										<figure>
 											<img alt='객실사진'
@@ -585,7 +591,10 @@ position: fixed;
 									</a>
 								</div>
 
-								<div class="room-details"">
+
+								<div class="room-details">
+
+
 									<h2 class="title">
 										<a href="#"><c:out value="${acm.acmName}" /></a>
 										</h1>
@@ -795,6 +804,44 @@ position: fixed;
 
 </script>
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
+		$("#e1").val('<c:out value="${pageMaker.cri.keyword}"/>');
+	
+		$(document)
+				.ready(
+						function() {
+							history.replaceState({}, null, null);
+							var actionForm = $("#actionForm");
+							$(".paginate_button a").on(
+									"click",
+									function(e) {
+										e.preventDefault();
+										console.log('click');
+										actionForm
+												.find("input[name='pageNum']")
+												.val($(this).attr("href"));
+										actionForm.submit();
+									});
+							 $(".move").on("click",function(e) {
+												e.preventDefault();
+												alert(11);
+												actionForm.append("<input type='hidden' name='acmNum' value='"
+																+ $(this).attr("href")
+																+ "'>");
+												actionForm.attr("action","/acm/detail");
+												actionForm.submit();
+											}); 
+							 
+							 
+		});
+		
+		
+		
+		
+		
+	</script>
 <script>
 
       // This example requires the Places library. Include the libraries=places
@@ -802,7 +849,7 @@ position: fixed;
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
       function initMap() {
     	  var acmNum = "${acmNum}";
-			console.log(acmNum);
+			//console.log(acmNum);
 			var latitude = document.getElementById("latitude").value;
 			var longitude = document.getElementById("longitude").value;
 			
@@ -856,31 +903,19 @@ position: fixed;
         /* var infowindowContent = document.getElementById('infowindow-content');
         infoWindow.setContent(infowindowContent); */
         
-        var size_x = 60; // 마커로 사용할 이미지의 가로 크기
+        var size_x = 70; // 마커로 사용할 이미지의 가로 크기
 		var size_y = 30;
         var image = new google.maps.MarkerImage(
-        		'${request.contextPath}/resources/img/marker.png',
+        		'${request.contextPath}/resources/img/marker5.png',
 				null,
 				null,
 				null,
 				new google.maps.Size(size_x, size_y));
         
-        
-        $("#move2").on("click",function(e) {
-			e.preventDefault();
-			alert('move2 clicked');
-			/* actionForm.append("<input type='hidden' name='acmNum' value='"
-							+ $(this).attr("href")
-							+ "'>");
-			actionForm.attr("action","/acm/detail");
-			actionForm.submit(); */
-		}); 
-        
-        
         var markers = new Array(10); 
         let j=0;
         var contentString= new Array(10);
-	
+      
         var list = new Array();
         <c:forEach items="${list}" var="acm">
         list[j] = {
@@ -889,15 +924,17 @@ position: fixed;
         		"longitude" :${acm.longitude},
         		"acmPrice" :${acm.acmPrice},
         		"contentString" :
-        			"<div id='move2' href='<c:out value="${acm.acmNum}"/>' style='cursor: pointer;'>"+
-					'<img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" width="50" height="50"/>'
-							+'<br /><h6>' + '${acm.acmName}' + '</h6></div>' ,
-							
+        			'<a href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=${pageMaker.cri.person}&in=${pageMaker.cri.in}&out=${pageMaker.cri.out}&acmNum=<c:out value="${acm.acmNum}"/>" >'
+        		    +'<div  id="mira"' 
+        			+"href='<c:out value="${acm.acmNum}"/>' style='text-align: center;  width: 120px; cursor: pointer;color: black;'>"+
+					'<div style=" height: 90px;overflow: hidden;"><img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" style = "width: 100%;"/></div>'
+					+ '${acm.acmName}' + '</div></a>' ,
                  }
         j++;
         </c:forEach>
+     
         
-        
+            
         
        
         
@@ -1091,7 +1128,7 @@ $(function () { //=$(document).ready(function(){
 	    	   data: allData,
 	    	   //async: false,
 	    	   success: function(data){
-	    		   console.log(data);
+	    		   //console.log(data);
 	    		  //chkbizused=document.getElementById("chkbizused");
 	    		 
 	    		   $('#total').val(data.total+"개의 숙소보기");
@@ -1129,7 +1166,7 @@ $(function () { //=$(document).ready(function(){
   			"out": out, "person": person, "acmOpt": acmOpt
   	 }
       
-      console.log(allData);
+      //console.log(allData);
       $.ajax({
     	   type: 'POST',
     	   url: '/acm/filter',
@@ -1137,7 +1174,7 @@ $(function () { //=$(document).ready(function(){
     	   data: allData,
     	   //async: false,
     	   success: function(data){
-    		   console.log(data);
+    		   //console.log(data);
     		  //chkbizused=document.getElementById("chkbizused");
     		 
     		   $('#total').val(data.total+"개의 숙소보기");
@@ -1189,11 +1226,11 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 	let acmOpt2 = new Array(arrOpt.length);
 	let opt = new Array();
 	for(let i=0;i<arrOpt.length;i++){
-		console.log(arrOpt[i]);
+		//console.log(arrOpt[i]);
 		acmOpt2[i] = pad(dec2bin(arrOpt[i]));
-		console.log("2:"+ acmOpt2[i]);
+		//console.log("2:"+ acmOpt2[i]);
 		opt[i]= document.getElementById(acmNumArr[i]);
-		console.log("3:"+opt[i]);
+		//console.log("3:"+opt[i]);
 	}
 	
 	
@@ -1245,7 +1282,8 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 
 	  base.removeClass('modal-open');
   };
-
+  
+  var modal = $(".modal");
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target == filterModal) {
@@ -1279,6 +1317,7 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 	</script>
 
 
+
 <script type="text/javascript">
 		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
 		$("#e1").val('<c:out value="${pageMaker.cri.keyword}"/>');
@@ -1292,7 +1331,7 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 									"click",
 									function(e) {
 										e.preventDefault();
-										console.log('click');
+										//console.log('click');
 										actionForm
 												.find("input[name='pageNum']")
 												.val($(this).attr("href"));
@@ -1316,6 +1355,7 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 		
 		
 	</script>
+
 <script type="text/javascript" src="/resources/js/wishlist.js"></script>
 <script>
 
@@ -1370,7 +1410,7 @@ $(document).ready(function(){
 		
 		if($(this).length>0){
 			var val1 = $(this).attr('value');
-			console.log("당신이 클릭한 숙소의 번호는 "+val1);					
+			//console.log("당신이 클릭한 숙소의 번호는 "+val1);					
 			var acmNum = $(".acmNum");
 			acmNum.val(val1);	
 			
@@ -1433,7 +1473,7 @@ $(document).ready(function(){
 			 userNum : modalInputuserNum, acmNum: modalInputacmNum, listTitle: modalInputlistTitle, listContent: modalInputlistContent 
 		 }, function(result){
 			 modal.modal('hide');
-			 console.log("Result : " + result)
+			 //console.log("Result : " + result)
 			 
 			 
 			 if(result==("fail..")){

@@ -1,0 +1,12 @@
+﻿/* COMMON */
+.hidden { display: none; }
+
+/* toolbar */
+#toolbar { background: url('elements/calendar_silver_allday30.gif') repeat-x; height: 25px; line-height: 25px; border-left: 1px solid #666; border-top: 1px solid #666; border-right: 1px solid #666; color: #666; }
+#toolbar .right { float:right; text-align: right; padding-right: 5px; }
+#toolbar a { color: #000; text-decoration:none; }
+#toolbar a:hover {color: #666; }
+
+.tip { margin-bottom: 10px; }
+
+.note { margin-top: 10px; margin-bottom: 10px; }

@@ -1,0 +1,30 @@
+body { 
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 10pt;
+}
+
+.pro {
+    display: inline-block;
+    font-size: 8px;
+    padding: 2px;
+    background-color: #999;
+    color: white;
+    border-radius: 2px;	
+    position: relative;
+    top: -1px;
+}
+
+.new {
+    display: inline-block;
+    font-size: 8px;
+    padding: 2px;
+    background-color: #87ab13;
+    color: white;
+    border-radius: 2px;
+    position: relative;
+    top: -1px;
+}
+
+.table-front a img { box-shadow: 2px 2px 10px rgba(0,0,0,0.2); border: 0px none; }    
+.table-front { table-layout: fixed; border: 0px none; position: relative; left: -200px; margin-left: 20px; margin-top: 20px; }
+.table-front td { width: 290px; vertical-align: top; }

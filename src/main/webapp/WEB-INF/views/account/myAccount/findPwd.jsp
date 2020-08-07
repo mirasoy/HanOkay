@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../../includes/header.jsp"%>
+<%@include file="../../includes/header1.jspf"%>
+<title>HanOkay-패스워드 찾기</title>
+<%@include file="../../includes/header2.jspf"%>
+<%@include file="../../includes/header3.jspf"%>
 
 	<form name="form" method="post">
 		<table border="1" width="500px">
@@ -53,7 +56,6 @@
 		
 	
 	});
-	
 	
 	});
 	</script>

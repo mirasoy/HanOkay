@@ -42,6 +42,8 @@ public interface RevPostMapper {
 	public int deletePhoto(RevPicVO revPicVO);
 	//리뷰의 모든사진삭제
 	public int deleteAllPhoto(String pstNum);
+	//user가 쓴 리뷰의 총 갯수(세린
+	public int getMyReviewCount(String userNum);
 	
 	
 }
