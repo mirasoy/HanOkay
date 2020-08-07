@@ -24,6 +24,7 @@ public class Criteria {
 	private String city;
 	private String distr;
 	private String detail;
+
 	
 	
 	public Criteria() {

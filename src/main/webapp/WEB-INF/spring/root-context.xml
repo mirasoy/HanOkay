@@ -22,6 +22,7 @@
 			value="jdbc:log4jdbc:oracle:thin:@hanokay.cvgigvuis47p.ap-northeast-2.rds.amazonaws.com:1521:hanokay"></property>
 		<property name="username" value="admin"></property>
 		<property name="password" value="dlth126!"></property>
+		
 
    </bean>
 
@@ -29,6 +30,7 @@
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
+		<property name="maximumPoolSize" value="3"></property>
 	</bean>
 
 	<bean id="sqlSessionFactory"
