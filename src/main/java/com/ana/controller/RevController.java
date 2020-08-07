@@ -167,7 +167,7 @@ public class RevController {
 	@GetMapping("/get")
 	public void get(@RequestParam("pstNum") String pstNum, Model model) {
 
-		log.info("/get" + service.get(pstNum));
+		log.info("/get reivew > " + service.get(pstNum));
 		log.info("/get" + service.getPhoto(pstNum));
 
 		model.addAttribute("review", service.get(pstNum));
