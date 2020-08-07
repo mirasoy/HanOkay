@@ -55,7 +55,7 @@ public class RevPostMapperTests {
 	
 	
 	
-	@Test
+	//@Test
 	public void testInsert() {
 		RevVO post = new RevVO();
 		post.setBrdCode("REV");
@@ -72,17 +72,14 @@ public class RevPostMapperTests {
 		log.info(post);
 	}
 	
-	 @Test
+	// @Test
 	public void testReadByBookNum() {
 		RevVO post = mapper.readByBookNum("B5");
 		log.info(post);
 	}
 	
 
-    @Test
-public void testGetMyList() {
-	mapper.getUserBookingACList("U1").forEach(post -> log.info(post));
-}
+
 
 
  
@@ -118,7 +115,7 @@ public void testGetMyList() {
 		
 		mapper.insertPhoto(vo);
     }
-	@Test
+	//@Test
 	public void deletePhoto() {
 		
 		RevPicVO vo = new RevPicVO();
@@ -131,7 +128,10 @@ public void testGetMyList() {
     
 
 
-
+    @Test
+public void testGetMyList() {
+	mapper.getUserBookingACList("U1").forEach(post -> log.info(post));
+}
 
 
 	

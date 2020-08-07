@@ -70,7 +70,9 @@
     background: 0 0;
     border: 0;
 }
-
+.move{
+background-color: red;
+}
 
 </style>
 
@@ -267,7 +269,7 @@
 									value='<c:out value="${acm.acmNum}" />'>
 
 
-								<div class="room-images" onclick="location.href='<c:out value="${acm.acmNum}"/>'">
+								<div class="room-images" >
 									<a href="#">
 										<figure>
 											<img alt='객실사진'
@@ -276,7 +278,7 @@
 									</a>
 								</div>
 
-								<div class="room-details" onclick="location.href='<c:out value="${acm.acmNum}"/>'">
+								<div class="room-details" >
 									<h2 class="title">
 										<a href="#"><c:out value="${acm.acmName}" /></a>
 										</h1>
@@ -486,6 +488,44 @@
 
 </script>
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
+		$("#e1").val('<c:out value="${pageMaker.cri.keyword}"/>');
+	
+		$(document)
+				.ready(
+						function() {
+							history.replaceState({}, null, null);
+							var actionForm = $("#actionForm");
+							$(".paginate_button a").on(
+									"click",
+									function(e) {
+										e.preventDefault();
+										console.log('click');
+										actionForm
+												.find("input[name='pageNum']")
+												.val($(this).attr("href"));
+										actionForm.submit();
+									});
+							 $(".move").on("click",function(e) {
+												e.preventDefault();
+												alert(11);
+												actionForm.append("<input type='hidden' name='acmNum' value='"
+																+ $(this).attr("href")
+																+ "'>");
+												actionForm.attr("action","/acm/detail");
+												actionForm.submit();
+											}); 
+							 
+							 
+		});
+		
+		
+		
+		
+		
+	</script>
 <script>
 
       // This example requires the Places library. Include the libraries=places
@@ -556,16 +596,7 @@
 				null,
 				new google.maps.Size(size_x, size_y));
         
-        
-        $("#move2").on("click",function(e) {
-			e.preventDefault();
-			alert('move2 clicked');
-			/* actionForm.append("<input type='hidden' name='acmNum' value='"
-							+ $(this).attr("href")
-							+ "'>");
-			actionForm.attr("action","/acm/detail");
-			actionForm.submit(); */
-		}); 
+       
         
         
         var markers = new Array(10); 
@@ -580,15 +611,19 @@
         		"longitude" :${acm.longitude},
         		"acmPrice" :${acm.acmPrice},
         		"contentString" :
-        			"<div id='move2' href='<c:out value="${acm.acmNum}"/>' style='cursor: pointer;'>"+
+        			"<div class='move' onclick='" 
+        			+'alert("plz");'
+					+ 'actionForm.append("'
+					+ '<input type="hidden" name="acmNum" value="${acm.acmNum}"'
+					+' ">");actionForm.attr("action","/acm/detail");'		
+					+'actionForm.submit();'				
+        			+"' href='<c:out value="${acm.acmNum}"/>' style='cursor: pointer;'>"+
 					'<img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" width="50" height="50"/>'
-							+'<br /><h6>' + '${acm.acmName}' + '</h6></div>' ,
-							
+					+'<br /><h6>' + '${acm.acmName}' + '</h6></div>' 
                  }
         j++;
         </c:forEach>
-        
-        
+              
         
        
         
@@ -926,7 +961,8 @@ function getAcmOpt2(arrOpt,acmNumArr) {
   span.onclick = function () {
 	  filterModal.style.display = "none";
   };
-
+  
+  var modal = $(".modal");
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target == modal) {
@@ -960,43 +996,6 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 	</script>
 
 
-<script type="text/javascript">
-		$("#person").val('<c:out value="${pageMaker.cri.person}"/>');
-		$("#e1").val('<c:out value="${pageMaker.cri.keyword}"/>');
-	
-		$(document)
-				.ready(
-						function() {
-							history.replaceState({}, null, null);
-							var actionForm = $("#actionForm");
-							$(".paginate_button a").on(
-									"click",
-									function(e) {
-										e.preventDefault();
-										console.log('click');
-										actionForm
-												.find("input[name='pageNum']")
-												.val($(this).attr("href"));
-										actionForm.submit();
-									});
-							 $(".move").on("click",function(e) {
-												e.preventDefault();
-												alert('move clicked');
-												actionForm.append("<input type='hidden' name='acmNum' value='"
-																+ $(this).attr("href")
-																+ "'>");
-												actionForm.attr("action","/acm/detail");
-												actionForm.submit();
-											}); 
-							 
-							 
-		});
-		
-		
-		
-		
-		
-	</script>
 <script type="text/javascript" src="/resources/js/wishlist.js"></script>
 <script>
 
