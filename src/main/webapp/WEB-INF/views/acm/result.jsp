@@ -12,7 +12,7 @@
 <style>
 .map_section>div>div>div>div:nth-child(3)>div:last-child>div>div {
 	visibility: visible !important;
-	border: 1px solid pink;
+	
 }
 
 .modal-content1 {
@@ -74,6 +74,213 @@
 background-color: red;
 }
 
+
+
+.resultModal{
+    -webkit-box-align: center !important;
+    padding: 40px !important;
+    position: fixed !important;
+    top: 10%;
+    right: 25%;
+    bottom: 10%;
+    left: 25%;
+    border-radius: 20px;
+}
+
+
+.filterText{
+
+   
+    position: relative;
+    margin: 0 auto;
+    -webkit-box-pack: center !important;
+    padding-top: 24px !important;
+    /* padding-bottom: 16px !important; */
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    color: rgb(34, 34, 34) !important;
+    font-size: 18px !important;
+    line-height: 24px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    /* justify-content: center !important; */
+    flex-shrink: 0 !important;
+
+}
+.filterText>h1{
+    font-size: 22px;
+    margin-bottom: 13px;
+}
+
+/* .filterText>.close{
+    border: 1px solid red;
+    position: absolute;
+    top: 20p;
+    left: -360px;
+    top: 0px;
+} */
+
+.resultModal>form{
+
+
+padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+    height: 100% !important;
+    width: 100%;
+    overflow: auto !important;
+    border-top: 1px solid rgb(235, 235, 235);
+}
+
+
+.checkDiv{
+	
+	display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+    border-bottom: 1px solid rgb(235, 235, 235) !important;
+}
+
+.checkTitle{
+	
+}
+
+.checkTitle>p{
+color: inherit !important;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: inherit !important;
+
+    margin-bottom: 10px;
+   
+}
+
+
+.checkSub{
+
+	-webkit-box-direction: normal !important;
+    -webkit-box-orient: horizontal !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+}
+
+
+
+.checkSub>.container{
+     display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    /* cursor: pointer; */
+    font-size: 15px;
+    line-height: 26px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkSub> .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+      cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #61dafb;
+    border: 1px solid transparent;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+     left: 8px;
+    top: 4px;
+    width: 9px;
+    height: 14px;
+    border: solid white;
+    /* border-radius: 12px; */
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+.checkSub>label{
+    flex-basis: 50%;
+}
+
+.labelLast{
+    flex-basis: 100% !important;
+}
+
+
+.btn-sky{
+    float: left;
+    padding: 12px;
+    border: 0;
+    background-color: #61dafb;
+    border-radius: 10px;
+    color: #fff;
+        cursor: pointer;
+    font-weight: 600;
+    
+    margin-right: 9px;
+}
+
+
+.btnDiv{
+
+position: fixed;
+    bottom: 113px;
+    width: 100%;
+    right: 1;
+    right: -60.5%;
+    /* left: 100px;
+
+}
+
+
+
 </style>
 
 
@@ -90,7 +297,7 @@ background-color: red;
 
 </head>
 
-<body>
+<body class="body">
 
 
 	<div id="wrap">
@@ -192,12 +399,11 @@ background-color: red;
 					<p>?? 개 이상의 숙소</p>
 					<h1 class="banner-title">강남구의 숙소</h1>
 					<ul>
-						<li><a href="#">유연한 환불 정책</a></li>
-						<li><a href="#">숙소 정책</a></li>
+					
 						<li><a href="#">요금</a></li>
-						<li><a href="#">즉시 예약</a></li>
+					
 						<li><input type="button" id="myBtn" name="filterAjax"
-							value="필터 추가하기"></li>
+							value="필터 검색하기"></li>
 					</ul>
 				</div>
 				<!-- end : main_text -->
@@ -208,49 +414,152 @@ background-color: red;
 				<!-- The Modal -->
 				<div id="filterModal" class="modal">
 					<!-- Modal content -->
-					<div class="modal-content">
-						<span class="close">&times;</span>
-						<form method="GET" action="/acm/result">
+					<div class="modal-content resultModal">
+					
+					<div class="modal-header filterText">
+						<h1 class="h1Name">당신의 필터를 골라주세요</h1>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
 
-							<input type='hidden' name='pageNum'
-								value='${pageMaker.cri.pageNum}'> <input type='hidden'
-								name='amount' value='${pageMaker.cri.amount}'> <input
-								type='hidden' name='type'
-								value='<c:out value="${pageMaker.cri.type}"/>'> <input
-								type='hidden' name='keyword'
-								value='<c:out value="${pageMaker.cri.keyword}"/>'> <input
-								type='hidden' name='person'
-								value='<c:out value="${pageMaker.cri.person}"/>'> <input
-								type='hidden' name='in'
-								value='<c:out value="${pageMaker.cri.in}"/>'> <input
-								type='hidden' name='out'
-								value='<c:out value="${pageMaker.cri.out}"/>'> <label><input
-								type="checkbox" name="filterAjax" value="1" /> 수영장</label> <label><input
-								type="checkbox" name="filterAjax" value="2" /> 주차장</label> <label><input
-								type="checkbox" name="filterAjax" value="4" /> 공항 이동 교통편 서비스</label> <label><input
-								type="checkbox" name="filterAjax" value="8" /> 체육관/피트니스</label> <label><input
-								type="checkbox" name="filterAjax" value="16" /> 24시간 프런트 데스크</label> <label><input
-								type="checkbox" name="filterAjax" value="32" /> 가족/아동 여행객 친화형
-								시설</label> <label><input type="checkbox" name="filterAjax"
-								value="64" /> 금연</label> <label><input type="checkbox"
-								name="filterAjax" value="128" /> 스파/사우나</label> <label><input
-								type="checkbox" name="filterAjax" value="256" /> 레스토랑</label> <label><input
-								type="checkbox" name="filterAjax" value="512" /> 흡연 구역</label> <label><input
-								type="checkbox" name="filterAjax" value="1024" /> 반려동물 동반 가능</label> <label><input
-								type="checkbox" name="filterAjax" value="2048" /> 장애인용 편의
-								시설/서비스</label> <label><input type="checkbox" name="filterAjax"
-								value="4096" /> 비즈니스 관련 편의 시설</label> <label><input
-								type="checkbox" name="filterAjax" value="8192" /> 인터넷</label> <label><input
-								type="checkbox" name="filterAjax" value="16384" /> 조식</label> <label><input
-								type="checkbox" name="filterAjax" value="32768" /> 석식</label> <input
-								id="total_sum" name="acmOpt" type="text" size="20"
-								value='<c:out value="${pageMaker.cri.acmOpt}"/>' readonly /> <input
-								id="total" type="submit" value="개의 숙소보기" />
-
-							<p>
-								<button type="button" id="reset">reset</button>
-							</p>
-						</form>
+					</div>
+							<form method="GET" action="/acm/result">
+							    <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'><input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+							    <input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+							    <input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+							    <input type='hidden' name='person' value='<c:out value="${pageMaker.cri.person}"/>'>
+							    <input type='hidden' name='in' value='<c:out value="${pageMaker.cri.in}"/>'>
+							    <input type='hidden' name='out' value='<c:out value="${pageMaker.cri.out}"/>'>
+					
+					<div class="checkDiv">	
+						<div class="checkTitle">
+							<p>편의시설</p>
+						</div>
+						
+						<div class="checkSub">
+							<label class="container">수영장
+								<input class="checkbox" type="checkbox" name="filterAjax" value="1" /> 
+								<span class="checkmark"></span>
+							</label>
+							
+								<label class="container">주차장
+								<input type="checkbox" name="filterAjax" value="2" />
+								<span class="checkmark"></span>
+							</label>
+							
+								<label class="container">체육관/피트니스
+								<input class="checkbox" type="checkbox" name="filterAjax" value="8" /> 
+								<span class="checkmark"></span>
+							</label>
+							
+								<label class="container">스파/사우나
+								<input class="checkbox" type="checkbox" name="filterAjax" value="128" /> 
+								<span class="checkmark"></span>
+							</label>
+							
+								<label class="container">레스토랑
+								<input class="checkbox" type="checkbox" name="filterAjax" value="256" /> 
+								<span class="checkmark"></span>
+							</label>
+							
+							<label class="container">흡연 구역
+								<input class="checkbox" type="checkbox" name="filterAjax" value="512" /> 
+								<span class="checkmark"></span>
+							</label>
+							
+							
+							
+						</div>
+					</div>
+					
+					<div class="checkDiv">	
+						<div class="checkTitle">
+							<p>시설</p>
+						</div>
+						
+						<div class="checkSub">
+						
+						<label class="container"> 가족/아동 여행객 친화형 시설
+								<input class="checkbox" type="checkbox" name="filterAjax" value="32" /> 
+								<span class="checkmark"></span>
+							</label>
+							
+								<label class="container"> 장애인용 편의 시설/서비스
+								<input class="checkbox" type="checkbox" name="filterAjax" value="2048" /> 
+								<span class="checkmark"></span>
+							</label>
+							<label class="container labelLast"> 비즈니스 관련 편의 시설
+								<input class="checkbox" type="checkbox" name="filterAjax" value="4096" /> 
+								<span class="checkmark"></span>
+							</label>
+						
+						
+						</div>
+					</div>
+					
+					
+					<div class="checkDiv">	
+						<div class="checkTitle">
+							<p>숙소이용규칙</p>
+						</div>
+						
+						<div class="checkSub">
+						
+								<label class="container"> 금연
+								<input class="checkbox" type="checkbox" name="filterAjax" value="64" /> 
+								<span class="checkmark"></span>
+							</label>
+									<label class="container">반려동물 동반 가능
+								<input class="checkbox" type="checkbox" name="filterAjax" value="1024" /> 
+								<span class="checkmark"></span>
+							</label>
+						
+						
+						</div>
+					</div>
+					
+					<div class="checkDiv">	
+						<div class="checkTitle">
+							<p>서비스</p>
+						</div>
+						
+						<div class="checkSub">
+						<label class="container">공항 이동 교통편 서비스
+								<input class="checkbox" type="checkbox" name="filterAjax" value="4" /> 
+								<span class="checkmark"></span>
+							</label>
+												<label class="container">24시간 프런트 데스크
+								<input class="checkbox" type="checkbox" name="filterAjax" value="16" /> 
+								<span class="checkmark"></span>
+							</label>
+												<label class="container">인터넷
+								<input class="checkbox" type="checkbox" name="filterAjax" value="8192" /> 
+								<span class="checkmark"></span>
+							</label>
+												<label class="container">조식
+								<input class="checkbox" type="checkbox" name="filterAjax" value="16384" /> 
+								<span class="checkmark"></span>
+							</label>
+												<label class="container labelLast">석식
+								<input class="checkbox" type="checkbox" name="filterAjax" value="32768" /> 
+								<span class="checkmark"></span>
+							</label>					
+					
+						</div>
+					</div>
+					
+					
+						
+		
+							    <div class="btnDiv">
+							    <input id="total_sum" name="acmOpt" type="hidden" size="20" value='<c:out value="${pageMaker.cri.acmOpt}"/>' readonly /> 
+							    <input id="total" class="btn-sky" type="submit" value="개의 숙소보기" />
+							    <p>
+							        <button type="button" id="reset" class="btn-sky">reset</button>
+							    </p>
+							    
+							    </div>
+							   
+							</form>
 					</div>
 				</div>
 				<!-- 필터버튼 끝 -->
@@ -270,7 +579,9 @@ background-color: red;
 									value='<c:out value="${acm.acmNum}" />'>
 
 
+
 								<div class="room-images">
+
 
 									<a href="#">
 										<figure>
@@ -282,6 +593,7 @@ background-color: red;
 
 
 								<div class="room-details">
+
 
 									<h2 class="title">
 										<a href="#"><c:out value="${acm.acmName}" /></a>
@@ -422,7 +734,7 @@ background-color: red;
 
 		<!-- Modal -->
 
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		<div class="modal fade wishmodal" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 
@@ -944,21 +1256,31 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 
   // Get the modal
   var filterModal = document.getElementById("filterModal");
+  
+  var body = document.getElementsByTagName("body");
 
   // Get the button that opens the modal
   var btn = document.getElementById("myBtn");
 
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
+  
+  var base = $('.body');
 
   // When the user clicks the button, open the modal
   btn.onclick = function () {
 	  filterModal.style.display = "block";
+	  
+	
+	  base.addClass('modal-open');
+
   };
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function () {
 	  filterModal.style.display = "none";
+
+	  base.removeClass('modal-open');
   };
   
   var modal = $(".modal");
@@ -1061,7 +1383,7 @@ $(document).ready(function(){
 	
 
 	
-	var modal = $(".modal");
+	var modal = $(".wishmodal");
 	var modalRegisterBtn = $("#modalRegisterBtn");	
 	var modalInputuserNum = modal.find("input[name='userNum']").val();		
 	var modalInputacmNum = $("#acmTest").val();		
@@ -1117,7 +1439,7 @@ $(document).ready(function(){
 						}else{
 							alert("찜합니다.");
 							$(this).children().attr('class','fa fa-heart fa-2x');
-							$(".modal").modal("show"); 
+							$(".wishmodal").modal("show"); 
 		 					modal.addClass("show") ;
 							
 						}
@@ -1134,7 +1456,7 @@ $(document).ready(function(){
 		
 	 modalRegisterBtn.on("click", function(e){	 	
 		 
-		var modal = $(".modal");
+		var modal = $(".wishmodal");
 		var modalRegisterBtn = $("#modalRegisterBtn");				
 			
 		var modalInputuserNum = modal.find("input[name='userNum']").val();
