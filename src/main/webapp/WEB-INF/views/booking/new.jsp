@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/suhee.css">
 
 <div class = "page-wrapper page-new">
-	<div class = "page-contnets" style="width: 65%;">
+	<div class = "page-contnets" style="width: 720px;">
 		<form action="/booking/get" id="form" method=post>	
 		<div class = "container-new box" >
 			<table>
@@ -81,7 +81,7 @@
 		</div>
 	</div> <!-- end of contents -->
 	
-	<div class = "page-sidebar" style="width: 20%;">
+	<div class = "page-sidebar" style="width: 380px;">
 		<div class = "input-hidden-area">
 			<input type="hidden" name="userNum" id="userNum" value="<%=user.getUserNum()%>">
 			<input type="hidden" name="romNum" id="romNum" value="<%=romNum%>">

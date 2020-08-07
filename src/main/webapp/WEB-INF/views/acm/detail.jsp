@@ -47,7 +47,7 @@
 		<div class = "detail-navigation-list container-navigation box">
 			<div class = "detail-navigation-list">
 				<a href="#info">INFO</a>
-				<a href="#review-all">REVIEW</a>
+				<a href="#review">REVIEW</a>
 				<a href="#location">LOCATION</a>
 				<a href="#room-list">ROOM</a>
 			</div>
@@ -111,7 +111,7 @@
 						<td>
 							<details>						
 								<summary>
-									<span><c:out value="${rev.revPtitle}" />&nbsp;<fmt:formatDate value="${rev.revPregdate}" pattern="(yyyy년 M월)"/>
+									<span class = "details-summary" style="font-weight: bold"><c:out value="${rev.revPtitle}" />&nbsp;<fmt:formatDate value="${rev.revPregdate}" pattern="(작성일: yyyy년 M월)"/>
 										<c:choose>
 										    <c:when test="${rev.revStisf >= 3.0}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></c:when>
 										    <c:otherwise><i class="fa fa-thumbs-down" id="test" aria-hidden="true"></i></c:otherwise>
@@ -119,22 +119,36 @@
 									</span>
 								</summary>
 								<c:choose>
-								        <c:when test="${fn:length(rev.revContent) gt 90}">
-								        <c:out value="${fn:substring(rev.revContent, 0, 89)} ... (중략) ">
-								        </c:out></c:when>
-								        <c:otherwise>
-								        <c:out value="${rev.revContent}">
-								        </c:out></c:otherwise>
+							        <c:when test="${fn:length(rev.revContent) gt 90}">
+							        <c:out value="${fn:substring(rev.revContent, 0, 89)} ... (중략) ">
+							        </c:out></c:when>
+							        <c:otherwise>
+							        <c:out value="${rev.revContent}">
+							        </c:out></c:otherwise>
 								</c:choose>
 		  					</details>
 						</td>
 					</tr>
 				</c:forEach>
+				<c:if test="${!empty rev}">
+					<tr><td><button class="btn right" id="modalBtn">리뷰 더보기</button></td></tr>
+				</c:if>
 				<c:if test="${empty rev}">
 					<tr><td>첫 번째 리뷰의 주인공이 되어보세요!<i class="fa fa-smile-o" aria-hidden="true"></i></td></tr>
 				</c:if>
-				<tr><td><a href="#review-all">리뷰 더보기</a></td></tr>
 			</table>
+			<div id="reviewModal" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<c:forEach items="${rev}" var="rev">
+						<div class="reviewPst" style='box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: white;margin: 1%; padding: 1%"'>
+						<a href="/review/get?pstNum=<c:out value='${rev.revPstnum}'/>">
+							[글 번호: <c:out value='${rev.revPstnum}'/>] <c:out value="${rev.revPtitle}" />&nbsp;<fmt:formatDate value="${rev.revPregdate}" pattern="(작성일: yyyy년 M월)"/>
+						</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
 		</div>		
 		</div>
 		
@@ -181,10 +195,6 @@
 			</c:if>		
 		</div>		
 		
-		<div class = "container-reviewall box" id="review-all">
-			
-		</div>
-		
        	<form action="/booking/new" id="form" method=post>
       		<input type="hidden" name="in" id="form-in" value="${in}">
       		<input type="hidden" name="out" id="form-out" value="${out}">
@@ -219,6 +229,19 @@
 			getRomOpt();
 		}
 
+		// 리뷰 모달창
+		let modal = document.getElementById("reviewModal");
+		let modalBtn = document.getElementById("modalBtn");
+		let modalSpan = document.getElementsByClassName("close")[0];
+		let reviewPst = document.getElementsByClassName("reveiwPst");
+		
+		modalBtn.onclick = function() {
+			modal.style.display = "block";
+		}
+		modalSpan.onclick = function() {
+			modal.style.display = "none";
+		}
+		
 		/* // 객실 선택
 		function selectRoom(romNum) {
 			let room = document.getElementById(romNum);
