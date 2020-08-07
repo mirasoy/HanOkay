@@ -51,6 +51,55 @@ body{
 	 padding-top: 7px;
 	     height: 100px;
 }
+
+.dropbtnpp {
+  /* background-color: #3498DB; */
+  color: black;
+  padding: 0px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtnpp:hover, .dropbtnpp:focus {
+  background-color: #2980B9;
+}
+
+.dropdownpp {
+  position: relative;
+
+}
+
+.dropdown-contentpp {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-contentpp .people {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownpp .people:hover {background-color: #ddd;}
+
+.showpp {display: block;   
+ top: 145%;}
+
+.ppBtn{
+width: 20px;
+height: 20px;
+text-align : center;
+border-radius: 50%;
+background-color: #ededed;
+}
+
 	
 	
 .bgwhite{
@@ -263,21 +312,37 @@ float: right;
 														</div>
 													</div>
 												</div>
-												<div class="formLayout1">
-													<div class="form-group1 pt8px">
-														<span>Guests</span> <select class="form-control1"
-															id="person" name="person">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5</option>
-															<option value="6">6</option>
-															<option value="7">7</option>
-															<option value="8">8</option>
-														</select> <span class="select-arrow"></span>
-													</div>
-												</div>
+
+											</div>
+										</div>
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<span>Guests</span>
+  <!-- <div class="ui dropdownpp">
+  <div onclick="myFunction()" class="dropbtnpp">인원수</div>
+  <div id="myDropdownpp" class="dropdown-contentpp">
+    <div  class = "people">성인 : <button type="button" class="ppBtn">-</button><button type="button" class="ppBtn">+</button></div>  
+  	<div class = "people">아동 : <button type="button" class="ppBtn">-</button><button type="button" class="ppBtn">+</button></div>  
+  </div>
+</div>
+		 -->
+		 
+		 
+		 										 <select class="form-control1"
+		 
+													id="person" name="person">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+												</select> 
+												
+												
+												<span class="select-arrow"></span>
 
 											</div>
 										</div>
@@ -721,7 +786,39 @@ function showSlides() {
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&libraries=places&callback=initAutocomplete"
 	async defer></script>
+	
+	
+
 <script type="text/javascript">
+
+
+
+
+
+
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdownpp").classList.toggle("showpp");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtnpp')) {
+    var dropdowns = document.getElementsByClassName("dropdown-contentpp");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('showpp')) {
+        openDropdown.classList.remove('showpp');
+      }
+    }
+  }
+}
+
+
+
+
 	//참고
 
 

@@ -69,11 +69,13 @@
 
 				//숫자를 별로 변경하기 
 					let star = "";
-					for (let a = 0; a < <c:out value="${review.stisf }" />; a++) {
+					var sti = <c:out value="${review.stisf }" /> +0 
+					if('<c:out value="${review.stisf }" />'!=""){
+					for (let a = 0; a < sti ; a++) {
 						star = star + '★';
 					}
 					document.getElementById('star').innerHTML = star;
-
+					}
 					//리뷰사진뿌리기
 					
 					<c:forEach items="${reviewP }" var="picture">

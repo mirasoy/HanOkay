@@ -69,9 +69,6 @@ public class BookingRegisterController {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■ 예약페이지로 이동 중...");
 		
 		
-		 String url= "/user/login?url="+  request.getHeader("referer");
-	     String url2 = url.substring(url.lastIndexOf("/") -4, url.length()); // => acm/list
-	     log.info("■■■■■■■■■■■■■■url2: "+url2);
 		
 	     
 	     

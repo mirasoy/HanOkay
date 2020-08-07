@@ -110,11 +110,17 @@ var latitude;
                 async: "false",
                 success: function (resp) {
                     console.log("!!성공!...");
+                    if(resp.response.header.resultCode=='00'){
+                    	
                     var result = resp.response.body.items.item;
                     console.log("검색된갯수" + resp.response.body.totalCount);
-					
+
                     //정보 화면에 넣는 펑션에 넘기기
                     write(result,resp.response.body.totalCount);
+                    
+                    }else{
+                    	$(".recommendByWeather").hide();     
+                    }
                 },
                 error: function (resultArr) {
                 	
