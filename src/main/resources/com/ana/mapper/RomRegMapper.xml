@@ -44,7 +44,7 @@
 	<insert id="registerRom">
 		<selectKey keyProperty="romNum" order="BEFORE"
 			resultType="String">
-			select concat('R',seq_tacm.nextval) from dual
+			select concat('R',SEQ_TROM.nextval) from dual
 		</selectKey>
 
 		insert into TROM(ACM_NUM, ROM_NUM, ROM_NAME, ROM_CAPA, 

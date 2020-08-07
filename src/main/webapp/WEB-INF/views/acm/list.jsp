@@ -51,7 +51,7 @@ body{
 	 padding-top: 7px;
 	     height: 100px;
 }
-<<<<<<< HEAD
+
 .dropbtnpp {
   /* background-color: #3498DB; */
   color: black;
@@ -100,8 +100,6 @@ border-radius: 50%;
 background-color: #ededed;
 }
 
-	</style>
-=======
 	
 	
 .bgwhite{
@@ -237,7 +235,6 @@ float: right;
 
 </style>
 
->>>>>>> branch 'develop' of https://github.com/mirasoy/projectAna.git
 
 <!-- Start : page-wrap : section 시작-->
 <div class="page-wrap">
