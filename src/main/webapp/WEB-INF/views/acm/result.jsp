@@ -396,8 +396,8 @@ position: fixed;
 
 				<!-- start : main_text -->
 				<div class="main_text">
-					<p>?? 개 이상의 숙소</p>
-					<h1 class="banner-title">강남구의 숙소</h1>
+					<p>${pageMaker.total} 개의 숙소</p>
+					<h1 class="banner-title">${pageMaker.cri.keyword} 의 숙소</h1>
 					<ul>
 					
 						<li><a href="#">요금</a></li>
