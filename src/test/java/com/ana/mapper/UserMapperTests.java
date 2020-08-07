@@ -2,6 +2,7 @@ package com.ana.mapper;
 
 import static org.junit.Assert.assertTrue;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.junit.Test;
@@ -9,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.ana.domain.UserProfileVO;
 import com.ana.domain.UserVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -141,10 +144,44 @@ public class UserMapperTests {
 		log.info(method);
 	}
 	
-	@Test
+//	@Test
 	public void testRegisterByGoogle() {
 		mapper.insertUserByGoogle("se@naver.comm", "SeriN", "HEO", "GOOGLE");
 		log.info(mapper.getUserById("se@naver.comm"));
 		
 	}
+	
+//	@Test
+	public void testGetUserProfile() {
+		log.info(mapper.getUserProfile("U7"));
+	}
+	
+	@Test
+	public void testUpdateProfile() {
+		UserProfileVO profile=new UserProfileVO();
+		profile.setUserNum("U22");
+		profile.setUserLanguage("Spanish");
+		profile.setUserIntroduction("Hello Everybody");
+		
+	    try { 
+		for(Field field :profile.getClass().getDeclaredFields()){
+	            field.setAccessible(true);
+	            String name = field.getName();
+	            Object value = field.get(profile);
+	            
+	            if(value== null) {
+	            	value="";
+	            	field.set(profile, "");
+	            }
+	            System.out.println(name+" : "+value.toString());
+	          
+	        }    
+	    }catch(Exception e){
+	        log.info("VO 변수, 값 추출 에러");
+	    }
+	    System.out.println("profile ****"+ profile);
+	    
+	    assertTrue(mapper.updateProfile(profile)==1);
+	}
 }
+

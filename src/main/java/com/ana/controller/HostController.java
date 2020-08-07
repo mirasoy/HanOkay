@@ -61,18 +61,10 @@ public class HostController {
 		if(user==null)return null;
 		return user;
 	}
-
-	
-	///////////////////////
-	@GetMapping("/hostindex")
-	public void indexGet(Model model,HttpSession session) {
-		System.out.println("호스트 인덱스다~~ ");
-		
-		//호스트 주인
-		String ownerUser= getUser(session).getUserNum();
-		
-		
-		
+	static String koryoil="";
+	 
+	//오늘의 날짜를 갔다줌
+	public String getCal() {
 		///오늘의 날짜
 		Calendar cal = Calendar.getInstance();
 		//System.out.println(cal);
@@ -82,7 +74,6 @@ public class HostController {
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		int dayo=cal.get(Calendar.DAY_OF_WEEK);
 		
-		String koryoil="";
 		
 		if(dayo==0)koryoil="일";
 		else if(dayo==1)koryoil="월";
@@ -92,24 +83,32 @@ public class HostController {
 		else if(dayo==5)koryoil="금";
 		else if(dayo==6)koryoil="토";
 		
-		
-		
-		String todayform=year+"."+month+"."+day+"("+koryoil+")";
-		
-		
 		String today=year+"-"+month+"-"+day;
+		return today;
+	}
+	
+	
+	
+	///////////////////////
+	@GetMapping("/hostindex")
+	public void indexGet(Model model,HttpSession session) {
+		System.out.println("호스트 인덱스다~~ ");
+		
+		//호스트 주인
+		String ownerUser= getUser(session).getUserNum();
+		
 
 		//가라임
 		//String today="2020-8-7";
 		
-		model.addAttribute("todayform",todayform);
+		model.addAttribute("todayform",getCal()+"("+koryoil+")");
 
-		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,today);
+		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,getCal());
 		if(chkin.size()==0)model.addAttribute("chkinSize", 0);
 		else model.addAttribute("chkinSize", chkin.size());
 		
 		
-		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,today);
+		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,getCal());
 		model.addAttribute("chkin", chkin);
 		model.addAttribute("chkout", chkout);
 		

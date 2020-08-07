@@ -5,14 +5,19 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.AssertFalse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.ana.domain.UserProfileVO;
 import com.ana.domain.UserVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -91,7 +96,7 @@ public class UserServiceTests {
 	}
 
 	
-	@Test 
+//	@Test 
 	public void testMatchAuth() {
 		assertTrue(service.matchAuthCode("admin@hanokay.com", "00000"));
 		
@@ -99,8 +104,19 @@ public class UserServiceTests {
 	
 	private void AssertFalse(boolean checkEmail) {
 		// TODO Auto-generated method stub
+	}
+
+	//userNum으로 프로필 정보 가져와
+	@Test
+	public void testShowProfile() {
+		MockHttpServletRequest request= new MockHttpServletRequest();
+		HttpSession session= request.getSession();
+		UserProfileVO prof= new UserProfileVO();
+		prof.setUserNum("U85");
+		session.setAttribute("userProfile", prof);
+		UserProfileVO u= service.showProfile( session);
+		log.info("userProfileVO: "+ u);
 		
 	}
-	
 }
 

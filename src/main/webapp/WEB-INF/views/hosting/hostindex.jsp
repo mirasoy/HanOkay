@@ -23,7 +23,6 @@
 	<br>		
 		<!-- 중앙정렬 -->
 	<div style="margin-left:15%;margin-right:15%;">		
-		 <h1><c:out value="${userFstname}"/> 호스트님 안녕하세요!</h1>
 		<br>	
 
  <!-- /.row -->
@@ -123,7 +122,7 @@
                                     <thead>
                                         <tr>
                                             <th>예약번호</th>
-                                            <th>예상도착시간</th>
+                                            <th>예약상태</th>
                                             <th>숙소명/객실명</th>
                                             <th>예약자/인원</th>
                                             
@@ -133,7 +132,7 @@
                                     <c:forEach items="${chkin}" var="chkin">
                                         <tr>
                                             <td><c:out value="${chkin.bookNum}" /></td>
-                                            <td><c:out value="${chkin.expectedArr}" /></td>
+                                            <td><c:out value="${chkin.bookStatus}" /></td>
                                             <td>[<c:out value="${chkin.acmName}" />]<c:out value="${chkin.romName}" /></td>
                                             <td><c:out value="${chkin.bookerFirstname}" />&nbsp;<c:out value="${chkin.bookerLastname}" />/<c:out value="${chkin.guest}" />명</td>
                                         
@@ -162,7 +161,7 @@
                                     <thead>
                                         <tr>
                                             <th>예약번호</th>
-                                            <th>예상도착시간</th>
+                                            <th>예약상태</th>
                                             <th>숙소명/객실명</th>
                                             <th>예약자/인원</th>
                                             
@@ -172,8 +171,8 @@
                                     <c:forEach items="${chkout}" var="chkout">
                                         <tr>
                                             <td><c:out value="${chkout.bookNum}" /></td>
-                                            <td><c:out value="${chkout.expectedArr}" /></td>
-                                            <td>[<c:out value="${chkout.acmName}" />]<c:out value="${chkout.romName}" /></td>
+                                             <td><c:out value="${chkout.bookStatus}" /></td>
+                                             <td>[<c:out value="${chkout.acmName}" />]<c:out value="${chkout.romName}" /></td>
                                             <td><c:out value="${chkout.bookerFirstname}" />&nbsp;<c:out value="${chkout.bookerLastname}" />/<c:out value="${chkout.guest}" />명</td>
                                         
                                         </tr>
