@@ -598,11 +598,10 @@ background-color: red;
         
        
         
-        
         var markers = new Array(10); 
         let j=0;
         var contentString= new Array(10);
-	
+      
         var list = new Array();
         <c:forEach items="${list}" var="acm">
         list[j] = {
@@ -611,19 +610,17 @@ background-color: red;
         		"longitude" :${acm.longitude},
         		"acmPrice" :${acm.acmPrice},
         		"contentString" :
-        			"<div class='move' onclick='" 
-        			+'alert("plz");'
-					+ 'actionForm.append("'
-					+ '<input type="hidden" name="acmNum" value="${acm.acmNum}"'
-					+' ">");actionForm.attr("action","/acm/detail");'		
-					+'actionForm.submit();'				
-        			+"' href='<c:out value="${acm.acmNum}"/>' style='cursor: pointer;'>"+
-					'<img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" width="50" height="50"/>'
-					+'<br /><h6>' + '${acm.acmName}' + '</h6></div>' 
+        			'<a href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=${pageMaker.cri.person}&in=${pageMaker.cri.in}&out=${pageMaker.cri.out}&acmNum=<c:out value="${acm.acmNum}"/>" >'
+        		    +'<div  id="mira"' 
+        			+"href='<c:out value="${acm.acmNum}"/>' style='text-align: center;  width: 120px; cursor: pointer;color: black;'>"+
+					'<div style=" height: 90px;overflow: hidden;"><img src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" style = "width: 100%;"/></div>'
+					+ '${acm.acmName}' + '</div></a>' ,
                  }
         j++;
         </c:forEach>
-              
+     
+        
+            
         
        
         

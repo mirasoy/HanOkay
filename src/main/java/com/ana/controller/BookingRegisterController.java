@@ -2,6 +2,9 @@ package com.ana.controller;
 
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,9 +65,17 @@ public class BookingRegisterController {
 			@RequestParam("in") String checkin,
 			@RequestParam("out") String checkout,
 			@RequestParam("romNum") String romNum,
-			Model model) {
+			Model model, HttpServletRequest request	) {
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■ 예약페이지로 이동 중...");
-		model.addAttribute("days", getDiff(checkin, checkout))
+		
+		
+		 String url= "/user/login?url="+  request.getHeader("referer");
+	     String url2 = url.substring(url.lastIndexOf("/") -4, url.length()); // => acm/list
+	     log.info("■■■■■■■■■■■■■■url2: "+url2);
+		
+	     
+	     
+	     model.addAttribute("days", getDiff(checkin, checkout))
 		.addAttribute("star", star.getStisf(service.getAcmInfo(romNum).getAcmNum())) // 숙소별 별점
 		.addAttribute("info", service.getAcmInfo(romNum)); // 객실과 숙소 정보
 	}

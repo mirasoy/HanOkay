@@ -158,6 +158,11 @@
 			
 		}
 		
+		//
+		 
+		
+
+		
  		// 모달
 	/*	let modal = document.getElementById("paymentModal");
 		let btn = document.getElementById("modalBtn");
