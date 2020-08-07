@@ -53,14 +53,58 @@
                     </div>
                 </div>
               	<div class="col-lg-2">
-                    <div class="well well-lg" style="height: 200px;">
+                    <div class="well well-lg" style="height: 200px;      background-color: #a1d5e6 !important;    color: #a1d5e6 ;">
                     	<div align="center" id="weather">
 	                       
-	                        <p>오늘의 날씨</p>
-	                        
-	                        
+	                        <h4 style=" color: black ;">오늘의 날씨</h4>
+	                      
+	                        <div>
+
+
+						<div class="iconW sun-shower">
+							<div class="cloud"></div>
+							<div class="sun">
+								<div class="rays"></div>
+							</div>
+							<div class="rain"></div>
+						</div>
+
+						<div class="iconW thunder-storm">
+							<div class="cloud"></div>
+							<div class="lightning">
+								<div class="bolt"></div>
+								<div class="bolt"></div>
+							</div>
+						</div>
+
+						<div class="iconW cloudy">
+							<div class="cloud"></div>
+							<div class="cloud"></div>
+						</div>
+
+						<div class="iconW flurries">
+							<div class="cloud"></div>
+							<div class="snow">
+								<div class="flake"></div>
+								<div class="flake"></div>
+							</div>
+						</div>
+
+						<div class="iconW sunny">
+							<div class="sun">
+								<div class="rays"></div>
+							</div>
+						</div>
+
+						<div class="iconW rainy">
+							<div class="cloud"></div>
+							<div class="rain"></div>
+						</div>
+					</div>
+	                     
 	                        
                     	</div>
+                    	    <p id="Wdegree" style=" color: black; text-align: center; margin-top: 108px; margin-left: 0; background-color: white;"></p> 
                     </div>
                 </div> <!-- /.col-lg-2 -->
                
@@ -162,8 +206,24 @@ var longitude;
  
 $(document).ready(function(){
 	
-	
-	
+	var weatherMap = new Map();
+	  
+    weatherMap.set("Mist","cloudy");
+    weatherMap.set("Smoke","cloudy");
+    weatherMap.set("Haze","cloudy");
+    weatherMap.set("Dust","cloudy");
+    weatherMap.set("Fog","cloudy");
+    weatherMap.set("Sand","cloudy");
+    weatherMap.set("Ash","cloudy");
+    weatherMap.set("Squall","cloudy");
+    weatherMap.set("Clouds","cloudy");
+    weatherMap.set("Snow","flurries");
+    weatherMap.set("Tornado","flurries");
+    weatherMap.set("Drizzle","rainy");
+    weatherMap.set("Rain","rainy");
+    weatherMap.set("Clear","sunny");
+    weatherMap.set("Thunderstorm","thunder-storm");
+
 	
 	
 	if ("geolocation" in navigator) {	/* geolocation 사용 가능 */
@@ -180,8 +240,17 @@ $(document).ready(function(){
 			        async: "false",
 			        success: function(resp) {
 			        	
-			        	var str = "";
+			        	  $(".iconW").hide();
+		                  
+	                        //날씨저장
+	                        weather = resp.weather[0].main;
+							//날씨 이모티콘 보여주기									
+	                        $("."+weatherMap.get(weather)).show();
+							
+	                        $("#Wdegree").text("온도 : "+(resp.main.temp- 273.15)+"도");
 			        	
+			        	var str = "";
+			        	/* 
 			            str+="현재온도 : "+ (resp.main.temp- 273.15);
 			            str+="현재습도 : "+ resp.main.humidity;
 			            str+="날씨 : "+ resp.weather[0].main;
@@ -190,7 +259,7 @@ $(document).ready(function(){
 			            str+="바람   : "+ resp.wind.speed;
 			            str+="나라   : "+ resp.sys.country;
 			            str+="도시이름  : "+ resp.name ;
-			            str+="구름  : "+ (resp.clouds.all) +"%";    
+			            str+="구름  : "+ (resp.clouds.all) +"%";     */
              
 			            $("#weather").append(str);
 			        }

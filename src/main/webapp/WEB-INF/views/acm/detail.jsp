@@ -189,6 +189,12 @@
 	<script>
 
 		window.onload = function() {
+			
+			 if (window.history.replaceState) {
+			      window.history.replaceState(null, null, window.location.href);
+			    }
+			
+			
 			// 인원 선택
 			document.getElementById("person").value= <%=person%>; 
 			// 숙소 평균 별점
@@ -400,6 +406,13 @@
 			document.getElementById("form-in").value = document.getElementById("in").value;
 			document.getElementById("form-out").value = document.getElementById("out").value;
 			document.getElementById("form-person").value = document.getElementById("person").value;
+			
+			
+			location.href = "/acm/detail?pageNum=1&amount=10&type=A&keyword=&person="
+					+document.getElementById("person").value+"&in="
+					+document.getElementById("in").value+"&out="+document.getElementById("out").value+"&acmNum=${acm.acmNum}"
+			
+			
 		}
 		
 		// 예약하기

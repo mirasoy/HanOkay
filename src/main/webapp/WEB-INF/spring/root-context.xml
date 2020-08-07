@@ -28,6 +28,7 @@
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		destroy-method="close">
+		<property name="maximumPoolSize" value="3"></property>
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 
