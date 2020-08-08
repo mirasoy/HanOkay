@@ -78,9 +78,9 @@ background-color: red;
 
 .resultModal{
     -webkit-box-align: center !important;
-    padding: 40px !important;
+    padding: 30px 20px 80px 20px !important;
     position: fixed !important;
-    top: 10%;
+        top: 10%;
     right: 25%;
     bottom: 10%;
     left: 25%;
@@ -270,15 +270,44 @@ color: inherit !important;
 
 .btnDiv{
 
+   
+    left: 50%;
+    margin-left: -138px;
+
 position: fixed;
     bottom: 113px;
     width: 100%;
-    right: 1;
-    right: -60.5%;
-    /* left: 100px;
+ 
+
 
 }
 
+
+.btn-filter{
+
+    float: left;
+    padding: 12px;
+    border: 0;
+  
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+
+}
+
+.btn-pink{
+	        width: 127px;
+    background-color: #f9b6bb;
+	    
+}
+
+
+.btn-sky{
+margin-right: 16px;
+background-color: #a7e0f4;
+
+}
 
 
 </style>
@@ -552,9 +581,9 @@ position: fixed;
 		
 							    <div class="btnDiv">
 							    <input id="total_sum" name="acmOpt" type="hidden" size="20" value='<c:out value="${pageMaker.cri.acmOpt}"/>' readonly /> 
-							    <input id="total" class="btn-sky" type="submit" value="개의 숙소보기" />
+							    <input id="total" class="btn-filter btn-sky" type="submit" value="개의 숙소보기" />
 							    <p>
-							        <button type="button" id="reset" class="btn-sky">reset</button>
+							        <button type="button" id="reset" class="btn-filter btn-pink">reset</button>
 							    </p>
 							    
 							    </div>
