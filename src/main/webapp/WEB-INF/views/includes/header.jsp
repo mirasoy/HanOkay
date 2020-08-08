@@ -137,10 +137,11 @@ if (user != null) {
                         
                      }else if(priv=="HOST"){
                         $('#mode').html("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
-                     }else if(priv=="GUEST"){
-                    	 if(userStatusCode=="ACTIVE")
+                     }else if(priv=="GUEST"){ 
                         $('#mode').html("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
-                    	 else $('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
+                     }
+                     else if(priv=="HO_PENDING"){
+                    	$('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
                      }
                     
                   };    
