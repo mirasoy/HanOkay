@@ -1,0 +1,77 @@
+.selectGuest{
+	margin-bottom: 0;
+}
+
+.hasDatepicker{
+	border: 0;
+
+  /*   padding: 12px; */
+    width: 100%;
+        height: 22px;
+}
+
+.form-control {
+    background-color: #fff;
+
+}
+
+.inputCheckOut{
+	/* padding-left: 18px; */
+}
+
+.calendar> .right{
+	/* 	padding-left: 18px; */
+}
+
+.checkbox{
+		margin-bottom: 0;
+		    width: 48%;
+   
+}
+
+.checkbox> .calendar{
+	width: 100%;
+}
+
+.checkbox> .calendar> .right{
+	display: inline-block;
+    float: right;
+        width: 100%;
+}
+
+
+.rigthgroup{
+	float: right;
+	   margin-bottom: 2rem;
+}
+
+
+
+/* 미디어쿼리 --> 사이즈 별로 나열되며 작은것부터 시작한다. */
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+	}
+	
+	
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+	}
+	
+	.container-1{
+		max-width: 1140px;
+	}
+}

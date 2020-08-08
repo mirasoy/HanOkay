@@ -14,6 +14,7 @@ public class ErrorController {
 
 	@GetMapping("/error")
 	public String showErrorPage() {
+		log.info("error/error --ERRORCONTROLLER");
 		return "error/error";
 	}
 }

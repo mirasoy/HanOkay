@@ -22,11 +22,8 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/MyPage/*")
+@RequestMapping("/mypage/*")
 @AllArgsConstructor
-
-
-
 
 
 
@@ -41,8 +38,10 @@ public class BookingController {
 	  String userFstname="";
 	      
 	      if(user!=null) {
-	         userFstname=user.getFstname();
+	         userFstname=user.getUserFstName();
 	      }
+	      
+
 	      
 	      return userFstname;
 	   }
@@ -67,9 +66,9 @@ public class BookingController {
 
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
 		
@@ -89,11 +88,13 @@ public class BookingController {
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
+
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
+
 		log.info("bookList");
 		model2.addAttribute("bookList", service.getBookList(userNum));
 	}
@@ -111,12 +112,14 @@ public class BookingController {
 		String userNum="";
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+
 		if(user != null){ //내가 user가 맞다면 정보를 가져와야겠다.
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
+
 		
 		
 		log.info("checkout 완료된 예약입니다.");
@@ -136,12 +139,13 @@ public class BookingController {
 		
 		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 		if(user != null){
-		userLastname= user.getLastname();
-		userFstname=user.getFstname();
-		userPwd= user.getPwd();
+
+		userLastname= user.getUserLastName();
+		userFstname=user.getUserFstName();
+		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
-		
+
 		log.info("cancelled 취소된 예약입니다.");
 		model4.addAttribute("cancelled", service.getCancelList(userNum));		
 	}
@@ -175,7 +179,7 @@ public class BookingController {
 		if(service.modify(info)) {
 			rttr.addFlashAttribute("result", "success");
 		}		
-		return "redirect:/MyPage/bookList";
+		return "redirect:/mypage/bookList";
 	}
 
 //예약 취소  ( 취소시, 상태를 변화시키고, 로그에 저장한다 )
@@ -185,8 +189,10 @@ public class BookingController {
 		if(service.reserveCancel(bookNum,"RS_STT_BC")) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/MyPage/bookList";
+		return "redirect:/mypage/bookList";
 	}
+	
+
 	
 
 	

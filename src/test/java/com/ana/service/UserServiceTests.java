@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import javax.validation.constraints.AssertFalse;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,30 +32,28 @@ public class UserServiceTests {
 		assertNotNull(service);
 	}
 
-	@Test
+//	@Test
 	public void testRegister() {
 		UserVO user = new UserVO();
 
-		user.setEmail("jiha@naver.com");
-		user.setPwd("Bimil123@");
+		user.setUserEmail("jiha@naver.com");
+		user.setUserPwd("Bimil123@");
 
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			user.setBirthday(beforeFormat.parse("2010/11/11"));
+			user.setUserBirthday(beforeFormat.parse("2010/11/11"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		user.setLastname("Jiha");
-		user.setFstname("Kim");
-		user.setUserPriv("GU");
-		user.setRegMethod("m");
+		user.setUserLastName("Jiha");
+		user.setUserFstName("Kim");
 		user.setUserPhone("");
 		service.register(user);
 		log.info("생성된 회원번호: " + user.getUserNum());
 
 	}
 
-	@Test
+//	@Test
 	public void testGet() {
 		if (service.get("U1") == null) {
 			log.info("********없는 회원입니다!***********");
@@ -61,13 +62,13 @@ public class UserServiceTests {
 		}
 	}
 
-	@Test
+//	@Test
 	public void testDelete() {
-		log.info("REMOVE RESULT: " + service.remove("U1"));
+		log.info("REMOVE RESULT: " + service.remove("U190"));
 
 	}
 
-	@Test
+//	@Test
 	public void testUpdate() {
 
 		UserVO user = service.get("U10");
@@ -76,16 +77,30 @@ public class UserServiceTests {
 		}
 		log.info("MOODIFY RESULT: " + service.modify(user));
 	}
-
 	
-	@Test
-	public void testIsValidUser() {
-		assertTrue(service.isValidUser("serin9811@naver.com", "Serin9811@"));
-	}
 
-	@Test
+
+//	@Test
 	public void testGetUserById() {
 		log.info("GET USER BY EMAIL: "+ service.getUserById("mira@naver.com"));
 	}
+	
+//	@Test
+	public void testEmailCheck() {
+		AssertFalse(service.canRegister("serin@naver.com"));
+	}
+
+	
+	@Test 
+	public void testMatchAuth() {
+		assertTrue(service.matchAuthCode("admin@hanokay.com", "00000"));
+		
+	}
+	
+	private void AssertFalse(boolean checkEmail) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
 

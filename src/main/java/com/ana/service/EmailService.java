@@ -7,7 +7,7 @@ public interface EmailService {
     public void sendMail(EmailDTO dto);
     
     //회원가입 시 필요한 인증메일 발송하기
-    public boolean sendAuthEmail(String email);
+    public boolean sendAuthEmail(String email, String authCode);
 }
 
  

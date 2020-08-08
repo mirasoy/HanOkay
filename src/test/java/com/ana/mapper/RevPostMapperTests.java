@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ana.domain.RevPicVO;
 import com.ana.domain.RevPostVO;
 import com.ana.domain.RevVO;
 
@@ -24,74 +25,118 @@ public class RevPostMapperTests {
 	
 	@Setter(onMethod_= @Autowired)
 	private RevPostMapper mapper;
-		
-	//@Test
-	public void testGetList2() {
-		mapper.getAcmList("A2").forEach(post -> log.info(post));
-	}
 	
-	//	@Test
-    public void testGetList() {
-		mapper.getList().forEach(post -> log.info(post));
-	}
+	/*
 	
-//@Test
-public void testGetMyList() {
-	mapper.getMyList("U1").forEach(post -> log.info(post));
-}
-
-
-
-
-
- 
-   @Test
-	public void testRead() {
-		RevVO post = mapper.read("5");
-			log.info(post);
-   }
-	
-//	@Test
+	@Test
 	public void testDelete() {
-		log.info("DELETE COUNT: " + mapper.delete("3"));
+		log.info("DELETE COUNT: " + mapper.delete("RV1"));
 	}
 	
-//@Test
+	
+@Test
 	public void testUpdate() {
 		RevVO post = new RevVO();
 		post.setBrdCode("rev");
 		post.setTitle("수정한 제목제목");
 		post.setUserNum("추가된작성자");
-		post.setPstNum("33");
+		post.setPstNum("RV1");
 		post.setAcmNum("a18");
 		post.setBookNum("B18");
 		post.setContent("181818");
 		post.setRevPurl("/a.jpg");
 		post.setStisf(3);
-//		int count = mapper.update(post);
-//		log.info("UPDATE COUNT: " + count);
+		
+		int count = mapper.update(post);
+		log.info("UPDATE COUNT: " + count);
 		
     }
 	
 	
 	
-//@Test
+	
+	@Test
 	public void testInsert() {
 		RevVO post = new RevVO();
-		post.setBrdCode("rev");
+		post.setBrdCode("REV");
 		post.setTitle("추가제목");
-		post.setUserNum("추가된작성자");
-		
-		post.setAcmNum("a18");
+		post.setUserNum("U18");
+		post.setAcmNum("A18");
 		post.setBookNum("B18");
 		post.setContent("181818");
-		post.setRevPurl("/a.jpg");
-		post.setStisf(3);
+		post.setStisf(4);
+		
 		
 		mapper.insert(post);
 		
 		log.info(post);
 	}
+	
+	 @Test
+	public void testReadByBookNum() {
+		RevVO post = mapper.readByBookNum("B5");
+		log.info(post);
+	}
+	
+
+    @Test
+public void testGetMyList() {
+	mapper.getUserBookingACList("U1").forEach(post -> log.info(post));
+}
+
+
+ 
+  @Test
+	public void testRead() {
+		RevVO post = mapper.read("RV5");
+			log.info(post);
+   }
+	 
+	
+
+	*/
+	
+	
+	//@Test
+	public void testGetList2() {
+		mapper.getAcmList("A2").forEach(post -> log.info(post));
+	}
+	
+	
+//	@Test
+    public void testGetList() {
+		mapper.getList().forEach(post -> log.info(post));
+	}
+	
+	//@Test
+    public void insertPhoto() {
+    	
+		RevPicVO vo = new RevPicVO();
+		vo.setPstNum("RV44");
+		vo.setPname("e0d2fa25-c60c-4980-a3d9-3cd185db8616_2.gif");
+		vo.setPurl("c:/upload/review/2020/07/20/");
+		
+		mapper.insertPhoto(vo);
+    }
+	@Test
+	public void deletePhoto() {
+		
+		RevPicVO vo = new RevPicVO();
+		vo.setPstNum("RV44");
+		vo.setPname("e0d2fa25-c60c-4980-a3d9-3cd185db8616_2.gif");
+		vo.setPurl("c:/upload/review/2020/07/20/");
+		
+		mapper.deletePhoto(vo);
+	}
+    
+
+
+
+
+
+	
+	
+
 	
 	
 

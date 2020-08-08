@@ -5,6 +5,20 @@
 
 <%@include file="../includes/header.jsp"%>
 
+<link rel="stylesheet" type="text/css"
+   href="${request.contextPath}/resources/css/list.css">
+   
+   <link rel="stylesheet" type="text/css"
+	href="${request.contextPath}/resources/css/result.css">
+	
+	<style>
+	
+.pt8px{
+	 padding-top: 7px;
+}
+	
+	</style>
+
 <!-- Start : page-wrap : section 시작-->
 <div class="page-wrap">
 
@@ -18,7 +32,7 @@
 						<div class="banner-header">
 							<h1 class="text-uppercase banner-title">Let's begin</h1>
 							<img src="../resources/img/dots-3.png" alt="Dots">
-							<p class="banner-subtitle">We assist you to choose the best.</p>
+							<p class="banner-subtitle">We assist you to choose the best</p>
 							<a href="javascript:void(0)" class="down-arrow-link"><i
 								class="fa fa-2x fa-angle-down down-arrow"></i></a>
 						</div>
@@ -27,98 +41,119 @@
 				</div>
 				<!-- End : banner-row-header -->
 
-				<!-- Start : section-search : 검색창-->
-				<div class="row banner-row" id="section-search">
 
-					<form action="/acm/result" method="get"
-						class="search-form section-pad-2"
-						onsubmit="return checkValidation()">
-
-						<div class="form-row search-form-row">
-							<div class="form-group form-group-pad form-group-1">
-								<label for="inputCity">Location</label> <input type="hidden"
-									value="CW" name="type"> <select class="form-control"
-									name="keyword" id="e1"
-									value='<c:out value="${pageMaker.cri.keyword}"/>'>
-									<option value="서울">서울특별시</option>
-									<option value="경기">경기도</option>
-									<option value="충북">충청북도</option>
-									<option value="충남">충청남도</option>
-									<option value="경북">경상북도</option>
-									<option value="경남">경상남도</option>
-									<option value="대구">대구광역시</option>
-									<option value="대전">대전광역시</option>
-									<option value="부산">부산광역시</option>
-									<option value="인천">인천광역시</option>
-									<option value="강원">강원도</option>
-									<option value="전북">전라북도</option>
-									<option value="전남">전라남도</option>
-									<option value="제주">제주특별자치도</option>
-								</select>
-							</div>
-							<div class="form-group form-group-1">
-
-								<!-- Start : form-group-2-->
-								<div class="form-group form-group-1">
-									<label for="inputAdult">Guests</label> <select name="person"
-										class="form-control select" id="inputAdult">
-										<option value="1" selected>1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-									</select>
-								</div>
-								<!-- End : form-group-2-->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■여기부터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
 
-								<!-- End : form-group-4-->
-							</div>
-							<!-- End : form-group-1-->
 
-						</div>
-						<!-- form-row -->
-						<div class="form-row search-form-row form-group-1">
+<div class="container1">
+			<section class="search_section">
+				<div class="row1">
+					<div class="booking-container">
+						<form class="booking-form1" action="/acm/result" method='get'
+							onsubmit="return checkValidation()">
+							<div class="result-container">
+								<div>
+									<div class="no-margin1">
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<div id="pac-container">
+													<span>Location</span> <input class="form-control2"
+														id="pac-input" type="text" name="keyword"
+														value='<c:out value="${pageMaker.cri.keyword}"/>'
+														placeholder="Enter a location">
+												</div>
+												<input type="hidden" value="CW" name="type">
 
-							<div class="form-group form-group-1">
-								<div class="form-group">
-									<label for="inputCheckOut">Check In Date</label>
-									<div class="ui calendar" id="rangestart">
-										<div class="ui input left icon uigroup leftpadding">
-											<i class="calendar icon"></i> <input type="text"
-												placeholder="Start" id="in" name="in" value="">
+
+											</div>
+
 										</div>
+
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<span>Check In</span>
+												<div class="ui calendar" id="rangestart">
+													<div class="ui input left icon width400">
+														<i class="calendar icon"></i> <input type="text"
+															placeholder="Start" id="in" name="in"
+															value="<c:out value="${pageMaker.cri.in}"/>">
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<span>Check out</span>
+												<div class="ui calendar" id="rangeend">
+													<div class="ui input left icon width400">
+														<i class="calendar icon"></i> <input type="text"
+															placeholder="End" id="out" name="out"
+															value="<c:out value="${pageMaker.cri.out}"/>">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="formLayout1">
+											<div class="form-group1 pt8px">
+												<span>Guests</span> <select class="form-control1"
+													id="person" name="person">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+												</select> <span class="select-arrow"></span>
+											</div>
+										</div>
+
 									</div>
 								</div>
+								
+								<div class="">
+									<div class="form-btn1">
 
-
-								<div class="form-group">
-									<label for="inputCheckOut">Check Out Date</label>
-									<div class="ui calendar" id="rangeend">
-										<div class="ui input left icon uigroup">
-											<i class="calendar icon"></i> <input type="text"
-											placeholder="End" id="out" name="out" value="">
-										</div>
+										<button
+											class="submit-btn btn btn-primary btn btn-search text-uppercase"
+											id="submitBtn" type="submit">
+											<i class="fa fa-search"></i>
+											
+											
+									
+											
+											
+										</button>
 									</div>
 								</div>
-								<div class="form-group form-group-1 ">
-									<label for="btnSubmit">&nbsp;</label>
-									<button type="submit"
-										class="submit-btn btn-primary btn btn-search text-uppercase"
-										id="submitBtn">Check Availability</button>
-								</div>
+								
+								
+								
+								
+								
+								
+								
 							</div>
-						</div>
-
-
-					</form>
+						</form>
+					</div>
 				</div>
-				</form>
+				<!-- end of row -->
 
-				<!-- 여기까지 -->
+
+			</section>
+		</div>
+		<!-- end container -->
+
+
+
+
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■여기부터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
 
 			</div>
@@ -130,6 +165,121 @@
 <!-- .container-outer -->
 </section>
 <!-- End : banner-->
+
+<!-- Start : section-1 : 숙박 섹션 -->
+<section id="section-0" class="recommendByWeather">
+    <div class="container">
+        <div class="text-1">
+            <div class="mx-auto about-text-wrap text-center">
+                <h2 class="text-uppercase mb-4">
+                    오늘의 <strong>추천 여행코스</strong>
+                </h2>
+                <p class="mb-4">날씨에 따른 근처 추천 관광지.</p>
+
+				<div class="about-section">
+
+					<div>
+
+
+						<div class="iconW sun-shower">
+							<div class="cloud"></div>
+							<div class="sun">
+								<div class="rays"></div>
+							</div>
+							<div class="rain"></div>
+						</div>
+
+						<div class="iconW thunder-storm">
+							<div class="cloud"></div>
+							<div class="lightning">
+								<div class="bolt"></div>
+								<div class="bolt"></div>
+							</div>
+						</div>
+
+						<div class="iconW cloudy">
+							<div class="cloud"></div>
+							<div class="cloud"></div>
+						</div>
+
+						<div class="iconW flurries">
+							<div class="cloud"></div>
+							<div class="snow">
+								<div class="flake"></div>
+								<div class="flake"></div>
+							</div>
+						</div>
+
+						<div class="iconW sunny">
+							<div class="sun">
+								<div class="rays"></div>
+							</div>
+						</div>
+
+						<div class="iconW rainy">
+							<div class="cloud"></div>
+							<div class="rain"></div>
+						</div>
+					</div>
+
+
+					<h1 id="weatherTitle"></h1>
+					<h2 id="weatherSub"></h2><br>
+					<h5 id="weatherinfo"></h5>
+
+				</div>
+
+
+                <div class="rowInfo">
+                    <div class="column">
+                        <div class="rec-card">
+                        	<div class = "imgBox">
+                            <img id="cardImg1" src="" alt="Jane" style="width:100%">
+                            </div>
+                            <div >
+                                <h2 id="placeTitle1" ></h2>
+                                <p class="rec-title" id="placeTitle1-1"></p>
+                                
+                                <p><button id="btn1" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="rec-card">
+                        <div class = "imgBox">
+                            <img id="cardImg2" src="" alt="Mike" style="width:100%">
+                          </div>
+                            <div >
+                                <h2  id="placeTitle2"></h2>
+                                   <p class="rec-title" id="placeTitle1-2"></p>
+                                <p><button id="btn2" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="rec-card">
+                         <div class = "imgBox">
+                            <img id="cardImg3" src="" alt="John" style="width:100%">
+                              </div>
+                            <div>
+                                <h2 id="placeTitle3"></h2>
+                                    <p class="rec-title" id="placeTitle1-3"></p>
+                                <p><button id="btn3" class="recommend-btn">근처 숙소 보기</button></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<div id='recom'>
+</div>
+<!-- /.row -->
 
 <!-- Start : section-1 : 숙박 섹션 -->
 <section id="section-1">
@@ -271,7 +421,7 @@
 				</div>
 				<div class="slideshow-description bg-primary1">
 					<h2 class="">[숙소이름]홀리데이 인 리조트</h2>
-					<p>추가 요금 없이 차액까지 환불받아 객실을 변경할 수 있도록 해준 ANA에 감사합니다! ANA와 홀리데이 인의
+					<p>추가 요금 없이 차액까지 환불받아 객실을 변경할 수 있도록 해준 HanOkay에 감사합니다! HanOkay와 홀리데이 인의
 						직원도 친절했습니다. 또한 방이 넓고 수영장이 보이는 뷰가 좋았습니다. 마사지 받고나서 자쿠지에서 반신욕을 했는데 이게
 						진짜 좋았습니다.</p>
 					<a href="#" class="text-uppercase btn btn-white btn-white-primary">Continue
@@ -289,8 +439,8 @@
 				<div
 					class="slideshow-description slideshow-description-left bg-highlight">
 					<h2 class="">[숙소이름]페어몬트 싱가포르</h2>
-					<p>호텔은 심플하고 아주 좋았으며, 아고다에서 많은 도움을 준 것에 대해 정말로 고마움을 표하고 싶습니다.
-						아고다를 계속 이용해온 고객으로 아고다 앱을 가장 좋아하는 앱이라고 할 수 있습니다!</p>
+					<p>호텔은 심플하고 아주 좋았으며, HanOkay에서 많은 도움을 준 것에 대해 정말로 고마움을 표하고 싶습니다.
+						HanOkay를 계속 이용해온 고객으로 HanOkay앱을 가장 좋아하는 앱이라고 할 수 있습니다!</p>
 					<a href="#"
 						class="text-uppercase btn btn-white btn-white-highlight">Continue
 						Reading</a>
@@ -305,7 +455,7 @@
 				</div>
 				<div class="slideshow-description bg-primary1">
 					<h2 class="">[숙소이름]바이욕 스위트 호텔</h2>
-					<p>[숙소소개]친구에게 계속 ANA를 추천하겠습니다 . 가성비갑 더블침대 두개였는데 침대도 널직하고 방도크고
+					<p>[숙소소개]친구에게 계속 HanOkay를 추천하겠습니다 . 가성비갑 더블침대 두개였는데 침대도 널직하고 방도크고
 						깨끗하고 전망도 좋고 다 좋았어요 가격이 저렴해서 걱정했는데 비싼호텔 못지않게 좋았네요</p>
 					<a href="#" class="text-uppercase btn btn-white btn-white-primary">Continue
 						Reading</a>
@@ -320,6 +470,7 @@
 </div>
 <!-- End : main-content -->
 <script>
+
         $(document).ready(function() { $("#e1").select2(); });
 		
      	/* 날짜 선택(수희) */
@@ -356,28 +507,36 @@
 	</p>
 </footer>
 
-
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&libraries=places&callback=initAutocomplete"
+	async defer></script>
 <script type="text/javascript">
 	//참고
-	function initAutocomplete(){
-	autocomplete = new google.maps.places.Autocomplete(
-			/** @type{!HTMLInputElement} */(document.getElementById('autocomplete')),
-			{types: ['geocode'],componentRestrictions: {country: 'kr'}});
-	autocomplete.addListener('place_changed', fillInAddress);
-
-	}
 	
-	function fillInAddress(){
-		var place = autocomplete.getPlace();
-		$('#lat').prop('value',place.geometry.location.lat());
-		$('#lng').prop('value',place.geometry.location.lng());
-		console.log(place.formatted_address);
-		console.log('?');
-		if(document.getElementById('country')!=null){
-			fill_addr();
+		function initAutocomplete() {
+			autocomplete = new google.maps.places.Autocomplete(
+			/** @type{!HTMLInputElement} */
+			(document.getElementById('pac-input')), {
+				types : [ 'geocode' ],
+				componentRestrictions : {
+					country : 'kr'
+				}
+			});
+			autocomplete.addListener('place_changed', fillInAddress);
+
 		}
-	}
+
+		function fillInAddress() {
+			var place = autocomplete.getPlace();
+			$('#lat').prop('value', place.geometry.location.lat());
+			$('#lng').prop('value', place.geometry.location.lng());
+			console.log(place.formatted_address);
+			console.log('?');
+			if (document.getElementById('country') != null) {
+				fill_addr();
+			}
+		}
+	
 	//참고 끝
-		
-	</script>
+</script>
 </html>

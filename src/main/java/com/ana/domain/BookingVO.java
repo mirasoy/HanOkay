@@ -5,16 +5,13 @@ import java.util.Date;
 
 /*import javax.validation.constraints.Email;*/
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.Data;
 
 @Data
 public class BookingVO {
 
-
 	private String bookNum;
-	private String userNum;
+	private String userNum;//예약한 사람번호
 	private String romNum;
 	private Date bookDate;
 	private Date checkinDate;
@@ -25,12 +22,14 @@ public class BookingVO {
 	private String expectedArr;
 	private String smoking;
 	private String request;
-	private String realArr;
-	private String romName;
-	private String bookerLastname;
+	private String bookerLastname;//예약자 정보
 	private String bookerFirstname;
 	private String bookerEmail;
 	private String bookerPhone;
 	private String bookStatus;
-
+	
+	//소림추가
+	private String acmName;
+	private String acmNum;
+	private String romName;
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.ana.domain.AcmVO;
 import com.ana.domain.Criteria;
+import com.ana.domain.PicVO;
 
 public interface AcmMapper {
 	
@@ -25,14 +26,12 @@ public interface AcmMapper {
 	
 	public int update(AcmVO acm);
 	
-	public int getTotalCount(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
+	public int getTotalCount(@Param("romNum") List<String> romNum, @Param("cri") Criteria cri);
 	
-	public List<String> getRomNum(@Param("in") String in,@Param("out") String out);
+	public List<String> getRomNum(@Param("cri") Criteria cri);
 	
-	public List<String> getAcmNum(@Param("person") String person, @Param("romNum") List<String> romNum);
+	//public List<String> getAcmNum(@Param("person") String person, @Param("romNum") List<String> romNum);
 	
-	public List<AcmVO> getListPaging(@Param("cri") Criteria cri, @Param("acmNum") List<String> acmNum);
-
-	
+	public List<AcmVO> getListPaging(@Param("romNum") List<String> romNum, @Param("cri") Criteria cri);
 	
 }

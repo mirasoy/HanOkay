@@ -38,8 +38,7 @@ public class RegisterControllerTests {
 
 	@Test
 	public void testCheckEmail() throws Exception {
-		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/register/checkEmail").param("email", "jiha@naver.com"))
-				.andReturn().getModelAndView().getModelMap());
+		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/register/checkEmail").param("email", "serin@naver.com")));
 
 	}
 

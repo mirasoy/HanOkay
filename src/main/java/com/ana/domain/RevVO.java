@@ -1,6 +1,7 @@
 package com.ana.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -13,7 +14,6 @@ public class RevVO {
 	private String userNum;
 	private Date regDate;
 	private Date updateDate;
-	private String revPurl;
 	private Integer stisf;
 	private String acmNum;
 	private String bookNum;
@@ -22,5 +22,9 @@ public class RevVO {
 	private String acmName;
 	private String checkInDay;
 	private String checkOutDay;
+	private String purl;
+	private String pname;
+	private Date pregdate;
 	
+	private List<RevPicVO> picList;
 }

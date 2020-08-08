@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="com.ana.mapper.WishListMapper">
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★1. ResultMap 을 이용한 mybatis ★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	 ResultMap은 DB 필드값과 DTO객체의 프라퍼티(변수)명이 다를 때 사용한다.	  
+-->
+
+
+
+<resultMap id="WishListVOResult" type="com.ana.domain.WishListVO">
+		<result column="WISH_NUM" property="wishNum" />
+		<result column="USER_NUM" property="userNum" />
+		<result column="ACM_NUM" property="acmNum" />
+		<result column="LIST_TITLE" property="listTitle" />	
+		<result column="LIST_CONTENT" property="listContent" />	
+		
+</resultMap>
+
+
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★2. 리스트 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+
+<!-- 문자열 비교연산자나 부등호를 처리할 때 "<![CDATA[" 를 사용 -->
+
+<select id="getList" resultMap="WishListVOResult">
+<![CDATA[
+	select * from twish_list where user_num=#{loginUserNum}
+	
+
+]]>
+</select>
+
+
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★3. create 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+<insert id="insert">
+	insert into TWISH_LIST (WISH_NUM, USER_NUM, ACM_NUM, LIST_TITLE, LIST_CONTENT)
+	values(concat('W',seq_tacm.nextval),#{userNum}, #{acmNum}, #{listTitle}, #{listContent})
+
+</insert>
+
+<insert id="insertSelectKey">
+	<selectKey keyProperty="wishNum" order="BEFORE" resultType="String">
+	</selectKey>
+
+	insert into TWISH_LIST (WISH_NUM, USER_NUM, ACM_NUM, LIST_TITLE, LIST_CONTENT)
+	values(concat('W',seq_tacm.nextval),#{userNum}, #{acmNum}, #{listTitle}, #{listContent})
+
+</insert>
+
+
+
+<insert id="insertAjax">
+	insert into TWISH_LIST (WISH_NUM, USER_NUM, ACM_NUM, LIST_TITLE, LIST_CONTENT)
+	values(concat('W',seq_tacm.nextval),#{userNum}, #{acmNum}, #{listTitle}, #{listContent})
+
+</insert>
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★4. read 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->
+
+
+	<select id="read" resultMap="WishListVOResult">
+		select * from TWISH_LIST where WISH_NUM = #{wishNum}
+	</select>
+	
+
+	
+	
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★5. delete 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->	
+	
+
+	<delete id="delete">
+		delete from TWISH_LIST where WISH_NUM = #{wishNum}
+	</delete>
+	
+
+	
+	<delete id="deleteAjax">
+		delete from TWISH_LIST where WISH_NUM = #{wishNum}
+	</delete>
+
+
+	<delete id="wishdelete">
+		delete from TWISH_LIST where WISH_NUM = #{wishNum}
+	</delete>
+
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★6. update 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->	
+	
+
+	<update id="update">
+		update twish_list 
+		set 
+		USER_NUM = #{userNum},
+		ACM_NUM =#{acmNum},
+		LIST_TITLE =#{listTitle},
+		LIST_CONTENT = #{listContent}
+		where WISH_NUM= #{wishNum}
+	</update> 
+	
+
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★6. 장바구니 추가 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->	
+
+<!-- 장바구니에 동일한 상품 레코트 확인 -->
+
+<select id="countCart" resultType="Integer">
+
+	
+	SELECT COUNT(*)
+        FROM twish_list
+        WHERE USER_NUM= #{userNum} 
+        AND ACM_NUM = #{acmNum}
+	
+	
+</select>
+
+
+<!-- 
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★7. 하트가 중복 되는지 확인 ★★★★★★★★★★★★★★★★★★★★★★★
+	  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★	 
+-->	
+
+
+<select id="drawValue" resultMap="WishListVOResult">
+
+	select *
+	from twish_list w
+	where w.user_num=#{userNum} AND w.ACM_NUM = #{acmNum}
+
+</select>
+
+
+
+
+	
+	
+</mapper>

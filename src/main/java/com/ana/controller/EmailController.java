@@ -30,13 +30,16 @@ public class EmailController {
     public String send(@ModelAttribute EmailDTO dto, Model model) {
         try {
  
-            emailService.sendMail(dto); // dto (메일관련 정보)를 sendMail에 저장함
+            emailService.sendMail(dto); // dto (메일관련 정보)를 sendMail에 저장함                       
             model.addAttribute("message", "이메일이 발송되었습니다."); // 이메일이 발송되었다는 메시지를 출력시킨다.
+            return "/mypage/bookList";
  
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("message", "이메일 발송 실패..."); // 이메일 발송이 실패되었다는 메시지를 출력
+            return "/mypage/bookList";
         }
-        return "/email/write"; // 실패했으므로 다시 write jsp 페이지로 이동함
+       
+       // 실패했으므로 다시 write jsp 페이지로 이동함
     }
 }

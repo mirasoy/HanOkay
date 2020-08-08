@@ -13,10 +13,10 @@
 	text-align: center;
 	padding-top: 15px;
 }
-.active{
+
+.active {
 	font-weight: bold;
 }
-
 
 #star a {
 	font-size: 2em;
@@ -28,3 +28,98 @@
 	font-size: 2em;
 	color: red;
 }
+
+.uploadResult {
+	width: 100%;
+	background-color: white;
+	margin-top: 10px;
+
+}
+
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+.uploadResult ul li img{
+	width: 150px;
+}
+
+.MR-contain{
+	
+	background-color: gray;
+	margin-top: 10px;
+}
+
+.MR-heading{
+	background-color: #E6E6E6;
+	padding :10px;
+}
+.MR-body{
+	background-color: gray;
+	padding :10px;
+	   margin-bottom: 30px;
+	   border-radius : 15px;
+}
+
+.wrapCon{
+	margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.chatContainer {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.chatContainer::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.chatContainer img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.chatContainer img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+#message{
+	width: 90%;
+    height: 40px;
+}
+
+

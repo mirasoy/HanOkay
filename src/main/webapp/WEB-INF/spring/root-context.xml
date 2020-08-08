@@ -3,28 +3,34 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 
+
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="tmpproject"></property>
-		<property name="password" value="1234"></property>
-
-	</bean>
+			value="jdbc:log4jdbc:oracle:thin:@hanokay.cvgigvuis47p.ap-northeast-2.rds.amazonaws.com:1521:hanokay"></property>
+		<property name="username" value="admin"></property>
+		<property name="password" value="dlth126!"></property>
+		<property name="maximumPoolSize" value="20"></property>
+   </bean>
 
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
-		destroy-method="close">
-		<constructor-arg ref="hikariConfig" />
-	</bean>
+      destroy-method="close">
+      <constructor-arg ref="hikariConfig" />
+      <property name="maximumPoolSize" value="3"></property>
+   </bean>
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -46,7 +52,6 @@
 	            </props>
 	        </property>
 	</bean>
-
 	<mybatis-spring:scan
 		base-package="com.ana.mapper" />
 	<context:component-scan
@@ -57,5 +62,28 @@
 	  <property name="maxUploadSize" value="100000000" />
 	  <property name="maxInMemorySize" value="100000000" />
 	</bean>
+	
+	<!-- 트랜잭션 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!--FB 로그인  -->
+	<!-- 테스트 버전 앱 아이디와 시크릿 코드를 추가함 -->
+	 <bean id="connectionFactory"
+        class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="323895235315656" />
+        <constructor-arg value="9e2477b40465fa89917e1b22eb3ec84a" />
+    </bean>
+ 
+    <bean id="oAuth2Parameters"
+        class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="email" />
+        <property name="redirectUri" value="https://localhost:8443/user/login/aouth2" />
+    </bean>
+ 	<!--FB 로그인 끝 -->
+
 
 </beans>

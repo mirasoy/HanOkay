@@ -13,8 +13,8 @@ body {
 
 /* 하단의 컨텐츠에 여백을 주고자함  */
 .row {
-	margin-right: 50px;
-	margin-left: 50px;
+	/* margin-right: 50px;
+	margin-left: 50px; */
 }
 
 .content { /* 부모  */
@@ -97,11 +97,11 @@ p:last-child { margin-bottom: 0; }
 .top-bar.active .navbar-brand { font-size: 1.4rem; }
 
 .top-bar .navbar-brand img {
-    width: 60px;
+    width: 110px;
     height: auto;
 }
 
-.top-bar.active .navbar-brand img { width: 40px; }
+.top-bar.active .navbar-brand img { width: 60px; }
 
 .top-bar a { color: 61dafb; }
 
@@ -167,6 +167,10 @@ p:last-child { margin-bottom: 0; }
 	color: #61dafb;
 }
 
+.btnHover{
+	color: #61dafb;
+}
+
 #header-menu {
 	box-sizing: border-box;
 	line-height: 1.43;
@@ -223,7 +227,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 .navbar-toggler { 
-    border-color: rgb(104, 199, 187);
+    border-color: #61dafb;
     border-radius: 0;
     cursor: pointer;
 }
@@ -247,13 +251,14 @@ p:last-child { margin-bottom: 0; }
 
 .banner-header { color: white; }
 .banner-overlay {
-    z-index: 1;
+   /*  z-index: 1; */
     height: 100%;
     width: 100%;
-    position: absolute;
-    overflow: auto;
+    /* position: absolute; */
+/*     overflow: auto;
     top: 0px;
-    left: 0px;
+    left: 0px; */
+/*     background: rgba(0, 0, 0, 0.3); */
     /* background: linear-gradient(rgb(121, 193, 204), rgb(190, 224, 208)); */
 }
 .banner-bg {
@@ -261,14 +266,15 @@ p:last-child { margin-bottom: 0; }
     min-height: 850px;
     position: relative;
     background-color: skyblue;
-    /* background-size: 100%; */
+    background-size: cover;
 
 }
 .banner-row { 
     position: relative;
-    z-index: 100;
+    /* z-index: 100; */
     justify-content: center;
     padding-top: 100px;
+        padding-bottom: 40px;
 }
 .banner-row-header { text-align: center; }
 .down-arrow-link { 
@@ -917,6 +923,7 @@ footer p { color: white; }
     padding-top: 50px;
   }
   .fh5co-tours > div { /*컨테이너*/
+    border-radius: 20px;
     display: block;
     color: #000;
     position: relative;
@@ -1150,3 +1157,13 @@ footer p { color: white; }
 	text-decoration: none;
 	cursor: pointer;
 }
+
+
+@media (min-width: 1200px)
+.container-1 {
+   max-width: 1140px !important;
+   margin: 0 auto;
+}
+
+
+

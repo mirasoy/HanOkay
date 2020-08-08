@@ -18,6 +18,8 @@
     <!-- Custom Theme JavaScript -->
     <script src="/resources/dist/js/sb-admin-2.js"></script>
 
+
+
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
@@ -31,7 +33,7 @@
     });
     </script>
 
-
+ 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> 
 </body>
 
 </html>
