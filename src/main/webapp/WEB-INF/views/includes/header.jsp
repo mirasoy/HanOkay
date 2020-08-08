@@ -46,7 +46,7 @@ if (user != null) {
 <meta http-equiv="Expires" content="0;">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>HanOkay 한오케이 -Make yourself At home in Korea!</title>
+<title>Han:Ok 한오케이 -Make yourself At home in Korea!</title>
 
 
 

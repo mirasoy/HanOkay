@@ -277,7 +277,8 @@ public class UserServiceImpl implements UserService{
 			//난수를 다시 생성
 			String authCode=numberGen(6,2);
 			if(updateAuthCode(email, authCode)) {
-				emailService.sendAuthEmail(email, authCode);				
+				emailService.sendAuthEmail(email, authCode);
+				return true;
 			}
 
 		}
