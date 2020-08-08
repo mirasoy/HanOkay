@@ -29,12 +29,12 @@ public class AcmDetailMapperTests {
 	
 	@Test
 	public void testGetRomAll() { // 객실정보 리스트
-		mapper.getRomAll("A1").forEach(rom -> log.info(rom));
+		//mapper.getRomAll("A1").forEach(rom -> log.info(rom));
 	}
 	
 	@Test
 	public void testGetRomList() { // 객실정보 리스트
-		mapper.getRomList("A1", "1").forEach(rom -> log.info(rom));
+		//mapper.getRomList("A1", "1").forEach(rom -> log.info(rom));
 	}
 	
 	@Test
