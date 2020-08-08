@@ -311,7 +311,7 @@ $(document).ready(function(){
 			$('#<c:out value="${acm.acmType}"/>').append("집전체");
 		}
 			
-		else if(acmType.trim()=="PD"){//집천체
+		else if(acmType.trim()=="PD"||acmType.trim()=="P"){//집천체
 			$('#<c:out value="${acm.acmType}"/>').append("객실별");
 		}
 	

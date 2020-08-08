@@ -16,8 +16,13 @@
 padding: 0;
 }
 
+.contents {
+    margin-left: 0;
+    padding: 0px 10px;
+}
+
 .contents-2 {
-    margin-left: 45px;
+   
  
     margin-top: 26px;
 
@@ -42,46 +47,6 @@ padding: 0;
 
 
 
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■사이드바■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-	
-	<section class="sidebar">
-	    <div class="sidebar_detail">	
-	        <div class="sidebar-header">
-	            <div class="user-pic"> <img src="${request.contextPath}/resources/img/user.jpg" alt="유저이미지"></div>
-	            <div class="user-info">
-	                <span class="user-name">	               
-	             		<strong><%=userFstName%></strong>님
-	                </span>
-	                <span class="user-role">Administrator</span>
-	                <span class="user-status">
-	                    <i class="fa fa-circle"></i>
-	                    <span>Online</span>
-	                </span>
-	            </div>
-	        </div>
-	        <button class="mypage_btn nav_btn">마이페이지</button>	     
-	        <button class="noaccordion nav_btn">프로필</button>	        
-	        <button class="accordion nav_btn">나의 예약</button>
-	        <div class="side-panel">
-	          <ul>	       	              
-				<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
-				<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
-				<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>	              	              
-	          </ul>
-	        </div>
-	        
-	        <button class="accordion nav_btn">나의 리뷰</button>
-	        <div class="side-panel">
-	          <ul>	       	              
-				<li class="item1"><a href="/review/list">전체목록</a></li>
-				<li class="item2"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
-				<li class="item3"><a href="/review/unwrittenReviewlist">미작성 리뷰</a></li>             	              
-	          </ul>
-	        </div>           	            
-	         <button class="noaccordion nav_btn nav_btn_last" onclick="location.href='/chat/chatList'">나의 채팅</button>	
-	    </div>
-	</section>
 	
 
 	<section class="contents">
@@ -123,7 +88,10 @@ padding: 0;
 <!-- end of container-1 --> 
 
 
+<script type="text/javascript">
 
+
+</script>
 
 
 

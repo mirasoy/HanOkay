@@ -82,8 +82,8 @@
 			   <input class="form-control"  style="width:200px;display:inline-block;" id="acmFax" name="acmFax" value="" placeholder="숙소  팩스번호(필수아님)" numberOnly><br><br>
 
 				<!-- 위도경도 임시로 넣어줌 ********* 위도경도 바꾸는 api 넣어야함-->
-				<input type="hidden" id="latitude" name="latitude" value="36.7307216">
-				<input type="hidden" id="longitude" name="longitude" value="128.6216116">
+				<input type="hidden" id="latitude" name="latitude" value="">
+				<input type="hidden" id="longitude" name="longitude" value="">
 			
 				
 			 

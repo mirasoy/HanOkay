@@ -1,16 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp"%>
+<!-- 사이트바 CSS -->
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
+
 
 <style>
 
+
+
+::-webkit-scrollbar { display: none; } 
+.container{ -ms-overflow-style: none; } 
+.container::-webkit-scrollbar{ display:none; } 
+
+body{
+height: 800px;
+}
+
+.mouse-icon{
+	display:none !important;
+}
+
+.contents-2 {
+    margin-left: 45px;
+    box-shadow: none; 
+    transition: box-shadow .3s ease;
+    margin-top: 26px;
+    height: 274px;
+}
+
 .wrapCon{
-	margin: 0 auto;
+margin: 0 auto;
     max-width: 800px;
     padding: 20px;
     border-radius: 2%;
     background-color: #f2f2f2;
+    background-color: #fff;
     margin-top: 13%;
+    box-shadow: 0 4px 10px 0 #bec2c9;
     
 }
 .wrapCon h1{
@@ -151,15 +179,28 @@ text-align: center;
 </style>
 
 <div class="container">
-<div class ="wrapCon">
-	<h1>대화-목록</h1>
-	<div >
-	<div class="chatList">
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">채팅하기</h1>
+			<p><%=userFstName %>님,대화를 시작해보세요! </p>
+		</div>	
 	</div>
-	</div>
-	</div>
-	</div>
-	
+<%@include file="../includes/sidebar.jsp"%>
+
+
+<section class="contents">
+	<section class="contents-2">
+		<div class ="wrapCon">			
+			<div>
+				<div class="chatList">
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+</section>
 	
 </body>
 
@@ -219,4 +260,5 @@ function messageListLoad(){  //변수 안에 function자체를 넣음.
     
   
 </script>
+	<%@include file="../includes/footer.jsp"%>
 </html>

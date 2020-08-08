@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp"%>
+<!-- 사이트바 CSS -->
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
+
 
 <div class="container">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h1>Write Review</h1>
-			</div>
+						<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">리뷰쓰기</h1>
+			<p><%=userFstName %>님, 기록을 시작해보세요</p>
+		</div>
+	</div>
 			<div class="panel-body">
 				<form id="form" action="/review/register" method="post">
 					<table class="table table-striped table-bordered table-hover bookList">
