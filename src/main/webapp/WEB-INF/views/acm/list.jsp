@@ -759,32 +759,29 @@ function showSlides() {
 		$("#e1").select2();
 	});
 
-	/* 날짜 선택(수희) */
+	// 날짜 선택
 	var today = new Date();
-
-	$("#out").datepicker(
-			{
-				minDate : new Date(today.getFullYear(), today.getMonth(), today
-						.getDate() + 1),
-				maxDate : new Date(today.getFullYear() + 1, today.getMonth(),
-						today.getDate()),
-				dateFormat : 'yy-mm-dd',
-			});
-	$("#in").datepicker(
-			{
-				minDate : 0,
-				maxDate : new Date(today.getFullYear() + 1, today.getMonth(),
-						today.getDate() - 1),
-				onSelect : function(selectedDate) {
-					var nextDay = new Date(selectedDate);
-					nextDay.setDate(nextDay.getDate() + 1);
-					$("#out").datepicker("option", "minDate", nextDay);
-					var nextMonth = new Date(selectedDate);
-					nextMonth.setDate(nextMonth.getDate() + 90);
-					$("#out").datepicker("option", "maxDate", nextMonth);
-				},
-				dateFormat : 'yy-mm-dd'
-			});
+	$("#out").datepicker({
+		minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
+		maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+		numberOfMonths: 1,
+		dateFormat: 'yy-mm-dd'
+	});
+	$("#in").datepicker({
+		minDate: 0,
+		maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
+		numberOfMonths: 1,
+		dateFormat: 'yy-mm-dd',
+		onSelect: function(selectedDate) {
+			var nextDay = new Date(selectedDate);
+			nextDay.setDate(nextDay.getDate() + 1);
+		  $("#out").datepicker("option","minDate", nextDay);
+			var nextMonth = new Date(selectedDate);
+			nextMonth.setDate(nextMonth.getDate() + 90);
+		  $("#out").datepicker("option","maxDate", nextMonth);
+		  $("#out").datepicker("open");
+		}
+	});
 </script>
 
 <!-- 달력 변경. 끝 -->

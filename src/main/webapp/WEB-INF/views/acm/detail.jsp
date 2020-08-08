@@ -7,16 +7,26 @@
 <% String person = request.getParameter("person"); %>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/suhee.css">
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
-
+	
 <div class = "page-wrapper">
 	<div class = "page-contnets" style="width: 100%;">
-	
+
+		 <!-- 네비게이션 -->
+		<div class = "detail-navigation-list container-navigation box">
+			<div class = "detail-navigation-list">
+				<a href="#info">INFO</a>
+				<a href="#review">REVIEW</a>
+				<a href="#location">LOCATION</a>
+				<a href="#room-list">ROOM</a>
+			</div>
+		</div> 
+			
 		<!-- 검색 조건 -->
 		<div class = "container-search box" id="datepicker">
 				<form>
 					<div class="booking-search-row"> 
 						<div class="row">
-							<div class="booking-group" >
+							<div class="booking-group">
 								<span class="form-label">Checkin</span>
 								<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="${in}" onchange="search()">
 							</div>
@@ -43,24 +53,20 @@
 				</form>
 		</div>
 
-		<!-- 네비게이션 -->
-		<div class = "detail-navigation-list container-navigation box">
-			<div class = "detail-navigation-list">
-				<a href="#info">INFO</a>
-				<a href="#review">REVIEW</a>
-				<a href="#location">LOCATION</a>
-				<a href="#room-list">ROOM</a>
-			</div>
-		</div>
-
 		<!-- 숙소정보-->
 		<div class = "container-info box" id="info">
-		<!-- 메세지보내기기능 -->
+			<!-- 메세지보내기기능 -->
 			<span>
-			<form class = 'right' action='/chat/chatRoom' method='POST'>
-			<input type='hidden' name='chatromnum' value='newChatr::${acmOwnerNum }'>
-			<button class = 'btn right'>메시지보내기</button></form></span>
-		<!-- 메세지보내기기능 -->	
+				<form class = 'right' action='/chat/chatRoom' method='POST'>
+				<input type='hidden' name='chatromnum' value='newChatr::${acmOwnerNum }'>
+				<button id="message" class = 'btn right' style="width:100%;height: 100%;"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i></button></form>
+			</span>
+			<!-- 찜목록 기능 -->
+			<button id="wishButton" class="wishButton btn right" value='<c:out value="${acm.acmNum}" />'>
+				<i class="fa fa-heart-o fa-2x openheart" id="heart"></i>
+			</button>
+			
+			<!-- 숙소정보 -->
 			<span class="title"><c:out value="${acm.acmName}" /></span>
 			<span id="stisf">&nbsp;</span>
 			<span id="stisf-num">(<c:out value="${star}" />)</span>
@@ -164,7 +170,21 @@
 							
 							<td class="table-rom-td"><span class="rom-type"><c:out value="${rom.romType}" /></span>&nbsp;
 							<span class="rom-size"><c:out value="${rom.romSize}" />(m²)</span>
-							</br><i class="fa fa-user" aria-hidden="true"></i>&emsp;<span class="rom-capa"><c:out value="${rom.romCapa}" />명</span>
+							</br>
+								<c:choose>
+									<c:when test="${rom.romCapa eq '1'}"><i class="fa fa-user" aria-hidden="true"></i></c:when>
+									<c:when test="${rom.romCapa eq '2'}"><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i></c:when>
+									<c:when test="${rom.romCapa eq '3'}"><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i></c:when>
+									<c:when test="${rom.romCapa eq '4'}"><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i></c:when>
+									<c:when test="${rom.romCapa eq '5'}"><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i></c:when>
+									<c:when test="${rom.romCapa eq '6'}"><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i></c:when>
+									<c:when test="${rom.romCapa eq '7'}"><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i></c:when>
+									<c:when test="${rom.romCapa eq '8'}"><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i></c:when>
+									<c:otherwise>
+										<c:out value="${rom.romCapa}" /><i class="fa fa-user" aria-hidden="true"></i>
+									</c:otherwise>
+								</c:choose>
+								&emsp;<span class="rom-capa"><c:out value="${rom.romCapa}" />명</span>
 							</br><span class="rom-bed"><i class="fa fa-bed" aria-hidden="true"></i>&emsp;<c:out value="${rom.bedType}" />&nbsp;
 								<c:choose>
 									<c:when test="${rom.bedType eq '온돌'}"> </c:when>
@@ -210,7 +230,6 @@
 </div><!-- end of page -->
 
 	<script>
-
 		window.onload = function() {
 			
 			 if (window.history.replaceState) {
@@ -234,18 +253,21 @@
 			getAcmOpt(); 
 			getRomOpt();
 		}
-
+		
+		
 		// 리뷰 모달창
 		let modal = document.getElementById("reviewModal");
 		let modalBtn = document.getElementById("modalBtn");
 		let modalSpan = document.getElementsByClassName("close")[0];
 		let reviewPst = document.getElementsByClassName("reveiwPst");
 		
-		modalBtn.onclick = function() {
-			modal.style.display = "block";
-		}
-		modalSpan.onclick = function() {
-			modal.style.display = "none";
+		if(document.getElementById("modalBtn")){
+			modalBtn.onclick = function() {
+				modal.style.display = "block";
+			}
+			modalSpan.onclick = function() {
+				modal.style.display = "none";
+			}
 		}
 		
 		/* // 객실 선택
@@ -265,7 +287,6 @@
 		// 옵션 코드(10진수 옵션코드를 16자리 2진수로 변환한다)
 		let acmOpt = pad(dec2bin("${acm.acmOptcode}"));
 		let romOpt = new Array(); 
-
 		let j = 0;
 		<c:forEach items="${rom}" var="rom">
 			romOpt[j] = pad(dec2bin('<c:out value="${rom.romOptcode}" />'));
@@ -292,7 +313,6 @@
 				nameArr[j] = '<c:out value="${acmCode.codeCont}" />';
 				j++;
 			</c:forEach>
-
 			let opt = document.getElementById("acmOpt");
 			for(let k=0, cnt=0; k<acmOpt.length; k++){
 				if(acmOpt.charAt(15-k) == 1){
@@ -359,17 +379,16 @@
 		
 		// 날짜 선택
 		var today = new Date();
-
 		$("#out").datepicker({
 			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
-			numberOfMonths: 2,
+			numberOfMonths: 1,
 			dateFormat: 'yy-mm-dd'
 		});
 		$("#in").datepicker({
 			minDate: 0,
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
-			numberOfMonths: 2,
+			numberOfMonths: 1,
 			dateFormat: 'yy-mm-dd',
 			onSelect: function(selectedDate) {
 				var nextDay = new Date(selectedDate);
@@ -456,7 +475,6 @@
 			// 객실 선택시 실행되어 해당 객실번호와 객실가격을 폼에 저장한다
 			document.getElementById("form-romNum").value = romNum;
 			document.getElementById("form-romPrice").value = romPrice;
-
  			// 로그인 확인, 인원 디폴트값, 1박 이상 선택 확인
 			if('<%=user%>'=="null" || '<%=user%>' == null){
 				alert("로그인이 필요합니다!");
@@ -474,6 +492,85 @@
 			document.getElementById("form").submit();
 		}
 		
+		// 찜 목록 추가
+		$(document).ready(function(){	
+			var wishBtn = $(".wishButton"); //배열 	
+			var i = 0;
+			<c:forEach items="${drawValue}" var="drawValue">		
+				wishBtn[i].childNodes[1].setAttribute("class","<c:out value="${drawValue}" />");
+				wishBtn[i].childNodes[1].setAttribute("id","heart");
+				i++;		
+			</c:forEach>
+			var modal = $(".wishmodal");
+			var modalRegisterBtn = $("#modalRegisterBtn");	
+			var modalInputuserNum = modal.find("input[name='userNum']").val();		
+			var modalInputacmNum = $("#acmTest").val();		
+			//var modalInputlistTitle = modal.find("select[name='listTitle']").val();
+			var modalInputlistTitle = $("select[name='listTitle']").val();
+			var modalInputlistContent = modal.find("input[name='listContent']").val();
+			//클로즈 버튼 클릭시 모달창을 숨긴다.
+			$("#modalCloseBtn").on("click", function(e){	    	
+			    	modal.modal('hide');      	      		      		
+			});
+		/* 	찜버튼 클릭하면 이벤트 발생 (이때 class로 받아와야 for문이 된다,,,) */
+			var btn = document.getElementsByClassName("wishButton");
+			for(var i=0; i<btn.length; i++){btn[i].onclick=function(e){
+				var modalInputuserNum = modal.find("input[name='userNum']").val();
+				var modalInputacmNum = $("#acmTest").val();				
+				var heartbtn = $(".fa-heart");
+				var thisbtn = this;
+				 e.stopImmediatePropagation();
+				
+				if($(this).length>0){
+					var val1 = $(this).attr('value');
+					//console.log("당신이 클릭한 숙소의 번호는 "+val1);					
+					var acmNum = $(".acmNum");
+					acmNum.val(val1);	
+					
+				}					
+				if(modalInputuserNum == ""){								
+		 			alert("로그인이 필요합니다.")
+		 			}else{
+						alert("하트를 눌렀습니다!"); 
+							if($(this).children(0).hasClass("fa-heart")==1){
+								alert("이미 추가한 숙소입니다.");
+								}else{
+									alert("찜합니다.");
+									$(this).children().attr('class','fa fa-heart fa-2x');
+									$(".wishmodal").modal("show"); 
+				 					modal.addClass("show") ;
+								}
+		 				}  									
+					}		
+			}
+			
+			/* btn의 자식인 i클래스의 .attr('class','fa fa-heart fa-2x');의 상태라면 */
+			 modalRegisterBtn.on("click", function(e){	 	
+				var modal = $(".wishmodal");
+				var modalRegisterBtn = $("#modalRegisterBtn");				
+				var modalInputuserNum = modal.find("input[name='userNum']").val();
+				var modalInputacmNum = modal.find("input[name='acmNum']").val();		
+				var modalInputlistTitle = $("select[name='listTitle']").val();
+				var modalInputlistContent = modal.find("input[name='listContent']").val();
+				
+				alert(1);
+				
+				 wishService.add({
+					 userNum : modalInputuserNum, acmNum: modalInputacmNum, listTitle: modalInputlistTitle, listContent: modalInputlistContent 
+				 }, function(result){
+					 modal.modal('hide');
+					 //console.log("Result : " + result)
+					 
+					 if(result==("fail..")){
+						 alert("이미 등록된 숙소입니다.")
+					 }
+				 }
+				)
+				 
+			 });
+			 
+		
+		})
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
