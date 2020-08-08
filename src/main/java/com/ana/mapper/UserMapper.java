@@ -62,8 +62,7 @@ public interface UserMapper {
 	//프로필을 업데이트 하는 메서드
 	public int updateProfile(UserProfileVO profile);
 	
-	
-		/////////////////////////////////림쨩의 영역/////////////////////////////////
+	/////////////////////////////////림쨩의 영역/////////////////////////////////
 	
 	//숙소등록을 처음 시작할때 사업자번호등록
 	public int becomeHost(UserVO u);
