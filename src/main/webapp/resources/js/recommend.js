@@ -69,8 +69,11 @@ var latitude;
 						$("#weatherSub").text(weatherMap.get(resp.weather[0].main)[3]);
 						$("#weatherinfo").text("지금 온도는 "+(resp.main.temp - 273.15)+"도  / 습도는 "+resp.main.humidity+"% 입니다!");
 						
+						var apiKey1 = "qLpipJxWB54Fl1U2T%2Bk8vm7cxwqy18yBmlWu5%2BTPJOeQMe3pbKuVz6C6RtaU6aCbn%2BcELXjbSipNGV%2F%2FJRDN5w%3D%3D";
+						var apiKey2 = "IZQB1Z9xPNfP5RbhSjGRpp%2F5q%2FGHWt730x5MzgZVVMb6Zqqu0iUWqR5vcGRU578MfKvZtBC%2FO8rm4q3URCmP0g%3D%3D";
+						
 						//관광지 url생성
-						visitkoreaUri = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=qLpipJxWB54Fl1U2T%2Bk8vm7cxwqy18yBmlWu5%2BTPJOeQMe3pbKuVz6C6RtaU6aCbn%2BcELXjbSipNGV%2F%2FJRDN5w%3D%3D"
+						visitkoreaUri = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey="+"IZQB1Z9xPNfP5RbhSjGRpp%2F5q%2FGHWt730x5MzgZVVMb6Zqqu0iUWqR5vcGRU578MfKvZtBC%2FO8rm4q3URCmP0g%3D%3D"
                             + "&contentTypeId="
                             + weatherMap.get(resp.weather[0].main)[0]
                             + "&mapX=" + longitude + "&mapY=" + latitude +

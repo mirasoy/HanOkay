@@ -44,5 +44,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM TCHATROM WHERE participant1 = #{userNum} OR participant2 =  #{userNum} 
 		order by udatedate DESC
 	 </select>
+	 
+	 <select id="findChatRom" resultMap="ChatRomVOresult">
+	 
+		SELECT
+        *
+		fROM tchatrom
+		where( participant1=#{userNum1} and participant2 = #{userNum2}) OR ( participant1=#{userNum2} and participant2 = #{userNum1})
+	 </select>
+	 
+	 
 
 </mapper>
