@@ -104,7 +104,7 @@ public class HostController {
 		
 		CalendarVO today = getCal();
 		//가라임
-		//String today="2020-8-7";
+		//String todays="2020-8-7";
 		
 		String todayform=today.getYear()+"년 "+ today.getMonth()+"월 "+ today.getDay()+"일 ("+today.getYoil()+")";
 		String todays=today.getYear()+"-"+today.getMonth()+"-"+today.getDay();
@@ -113,16 +113,26 @@ public class HostController {
 		System.out.println("Date형식으로 끌어올 오늘의 날짜:"+todays);
 		
 		model.addAttribute("todayform",todayform);
-
+		
+		//입실수
 		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,todays);
+		model.addAttribute("chkin", chkin);
 		if(chkin.size()==0)model.addAttribute("chkinSize", 0);
 		else model.addAttribute("chkinSize", chkin.size());
 		
-		
+		//퇴실수
 		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,todays);
-		model.addAttribute("chkin", chkin);
 		model.addAttribute("chkout", chkout);
+		model.addAttribute("chkoutSize", chkout.size());
 		
+		//워크인 결제 갯수
+		int payLater=bservice.dateGetinPayLater(ownerUser,todays);
+		System.out.println("결제대기자"+payLater);
+		model.addAttribute("payLater", payLater);
+		
+		//결제완료한 사람수
+		int payed=chkin.size()-payLater;
+		model.addAttribute("payed", payed);
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}

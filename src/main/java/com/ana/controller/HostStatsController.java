@@ -91,6 +91,7 @@ public class HostStatsController {
 		model.addAttribute("list",rankList);
 		}
 		
+		model.addAttribute("userFstname", user.getUserFstName());
 	}
 	@GetMapping("/stats")
 	public void modipendingAcmGet(Model model,HttpSession session) {
@@ -105,6 +106,7 @@ public class HostStatsController {
 			model.addAttribute("salesList",sService.getAllSales(user.getUserNum()));
 		}
 		
+		model.addAttribute("userFstname", user.getUserFstName());
 	}
 	
 	
@@ -137,8 +139,8 @@ public class HostStatsController {
 	}
 	
 	@GetMapping("/statsRank")
-	public void statsRank() {
-		
+	public void statsRank(Model model,HttpSession session) {
+		model.addAttribute("userFstname", user.getUserFstName());
 	}
 	
 	
