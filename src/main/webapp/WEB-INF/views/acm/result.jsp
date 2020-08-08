@@ -24,6 +24,13 @@
 	flex-direction: column;
 	pointer-events: auto;
 }
+.modal-content2 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
 
 .modal {
 	z-index: 12000;
@@ -119,7 +126,20 @@ background-color: red;
     left: -360px;
     top: 0px;
 } */
-
+/* The Modal (background) */
+.priceModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 .resultModal>form{
 
 
@@ -277,6 +297,7 @@ color: inherit !important;
 position: fixed;
     bottom: 100px;
     width: 100%;
+
  
 
 
@@ -294,7 +315,19 @@ position: fixed;
     cursor: pointer;
     font-weight: 600;
 
+
 }
+/*가격 슬라이더 시작*/
+.price-slider {
+    
+    width: 300px;
+  margin: 40vh auto;
+}
+/*
+input, label {
+    font-family: fantasy !important;
+  }*/
+
 
 .btn-pink{
 	        width: 127px;
@@ -310,9 +343,34 @@ background-color: #a7e0f4;
 }
 
 
+  .custom-slider {
+    height: 5px !important;
+  }
+
+  .custom-handle {
+    background: #fff !important;
+    border-color: #54a0c1 !important;
+    border-radius: 10px;
+    height: 20px !important;
+    width: 20px !important;
+    top: -0.6em !important;
+    box-shadow: 0px 0px 3px #3c6d59;
+  }
+
+  .custom-range {
+    background: #54a0c1;
+  }
+
+  button.apply {
+    margin-top: 2rem;
+  }
+/*가격 슬라이더 끝*/
+
+
 </style>
-
-
+<!-- 가격 슬라이더 시작-->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- 가격 슬라이더 끝-->
 <link rel="stylesheet" type="text/css"
 	href="${request.contextPath}/resources/css/result.css">
 	
@@ -429,15 +487,42 @@ background-color: #a7e0f4;
 					<h1 class="banner-title">${pageMaker.cri.keyword} 의 숙소</h1>
 					<ul>
 					
-						<li><a href="#">요금</a></li>
+						<li><input type="button" id="priceBtn" name="filterAjax"
+							value="요금"></li>
 					
 						<li><input type="button" id="myBtn" name="filterAjax"
-							value="필터 검색하기"></li>
+							value="필터 추가하기"></li>
 					</ul>
 				</div>
 				<!-- end : main_text -->
 
-				
+				<div id="priceModal" class="modal">
+					<div class="modal-content">
+    					<span class="closePrice">&times;</span>
+    					<form method="GET" action="/acm/result">
+							    <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'><input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+							    <input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+							    <input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+							    <input type='hidden' name='person' value='<c:out value="${pageMaker.cri.person}"/>'>
+							    <input type='hidden' name='in' value='<c:out value="${pageMaker.cri.in}"/>'>
+							    <input type='hidden' name='out' value='<c:out value="${pageMaker.cri.out}"/>'>
+    							<input type='hidden' name='acmOpt' value='<c:out value="${pageMaker.cri.acmOpt}"/>'>
+  
+						<div class="price-slider">
+    						<p>
+					    	 <label for="amount">Price range:</label>
+					    	 <input type="text" id="amount" readonly style="border:0;">
+					   		</p>
+
+					    	<div id="slider-range" class="custom-slider" name="filterAjax"></div>
+					    	<input type='hidden' id='min' name='minPrice' >
+					    	<input type='hidden' id='max' name='maxPrice' >
+					    	<!--  <button class="apply" onclick="getSliderValues()">apply</button>-->
+					    	<input id="priceTotal" class="btn-sky" type="submit" value="개의 숙소보기" />
+			    	   </div>
+			    	   </form>
+			       </div>
+			   </div>
 
 				<!-- 필터버튼 추가 -->
 				<!-- The Modal -->
@@ -458,6 +543,8 @@ background-color: #a7e0f4;
 							    <input type='hidden' name='person' value='<c:out value="${pageMaker.cri.person}"/>'>
 							    <input type='hidden' name='in' value='<c:out value="${pageMaker.cri.in}"/>'>
 							    <input type='hidden' name='out' value='<c:out value="${pageMaker.cri.out}"/>'>
+							    <input type='hidden' name='minPrice' value='<c:out value="${pageMaker.cri.minPrice}"/>'>
+								<input type='hidden' name='maxPrice' value='<c:out value="${pageMaker.cri.maxPrice}"/>'>
 					
 					<div class="checkDiv">	
 						<div class="checkTitle">
@@ -474,13 +561,42 @@ background-color: #a7e0f4;
 								<input type="checkbox" name="filterAjax" value="2" />
 								<span class="checkmark"></span>
 							</label>
+							<label class="container">공항 이동 교통편 서비스
+								<input class="checkbox" type="checkbox" name="filterAjax" value="4" /> 
+								<span class="checkmark"></span>
+							</label>
 							
 								<label class="container">체육관/피트니스
 								<input class="checkbox" type="checkbox" name="filterAjax" value="8" /> 
 								<span class="checkmark"></span>
 							</label>
+								<label class="container">24시간 프런트 데스크
+								<input class="checkbox" type="checkbox" name="filterAjax" value="16" /> 
+								<span class="checkmark"></span>
+							</label>
+							<label class="container"> 가족/아동 여행객 친화형 시설
+								<input class="checkbox" type="checkbox" name="filterAjax" value="32" /> 
+								<span class="checkmark"></span>
+							</label>
+							<label class="container labelLast"> 금연
+								<input class="checkbox" type="checkbox" name="filterAjax" value="64" /> 
+								<span class="checkmark"></span>
+							</label>
 							
-								<label class="container">스파/사우나
+								
+							
+							
+							
+						</div>
+					</div>
+					
+					<div class="checkDiv">	
+						<div class="checkTitle">
+							<p>시설</p>
+						</div>
+						
+						<div class="checkSub">
+						<label class="container">스파/사우나
 								<input class="checkbox" type="checkbox" name="filterAjax" value="128" /> 
 								<span class="checkmark"></span>
 							</label>
@@ -494,32 +610,13 @@ background-color: #a7e0f4;
 								<input class="checkbox" type="checkbox" name="filterAjax" value="512" /> 
 								<span class="checkmark"></span>
 							</label>
-							
-							
-							
-						</div>
-					</div>
-					
-					<div class="checkDiv">	
-						<div class="checkTitle">
-							<p>시설</p>
-						</div>
 						
-						<div class="checkSub">
+							<label class="container">반려동물 동반 가능
+								<input class="checkbox" type="checkbox" name="filterAjax" value="1024" /> 
+								<span class="checkmark"></span>
+							</label>
 						
-						<label class="container"> 가족/아동 여행객 친화형 시설
-								<input class="checkbox" type="checkbox" name="filterAjax" value="32" /> 
-								<span class="checkmark"></span>
-							</label>
-							
-								<label class="container"> 장애인용 편의 시설/서비스
-								<input class="checkbox" type="checkbox" name="filterAjax" value="2048" /> 
-								<span class="checkmark"></span>
-							</label>
-							<label class="container labelLast"> 비즈니스 관련 편의 시설
-								<input class="checkbox" type="checkbox" name="filterAjax" value="4096" /> 
-								<span class="checkmark"></span>
-							</label>
+								
 						
 						
 						</div>
@@ -532,16 +629,16 @@ background-color: #a7e0f4;
 						</div>
 						
 						<div class="checkSub">
-						
-								<label class="container"> 금연
-								<input class="checkbox" type="checkbox" name="filterAjax" value="64" /> 
+						<label class="container"> 장애인용 편의 시설/서비스
+								<input class="checkbox" type="checkbox" name="filterAjax" value="2048" /> 
 								<span class="checkmark"></span>
 							</label>
-									<label class="container">반려동물 동반 가능
-								<input class="checkbox" type="checkbox" name="filterAjax" value="1024" /> 
+							<label class="container"> 비즈니스 관련 편의 시설
+								<input class="checkbox" type="checkbox" name="filterAjax" value="4096" /> 
 								<span class="checkmark"></span>
 							</label>
-						
+								
+									
 						
 						</div>
 					</div>
@@ -552,14 +649,8 @@ background-color: #a7e0f4;
 						</div>
 						
 						<div class="checkSub">
-						<label class="container">공항 이동 교통편 서비스
-								<input class="checkbox" type="checkbox" name="filterAjax" value="4" /> 
-								<span class="checkmark"></span>
-							</label>
-												<label class="container">24시간 프런트 데스크
-								<input class="checkbox" type="checkbox" name="filterAjax" value="16" /> 
-								<span class="checkmark"></span>
-							</label>
+						
+											
 												<label class="container">인터넷
 								<input class="checkbox" type="checkbox" name="filterAjax" value="8192" /> 
 								<span class="checkmark"></span>
@@ -580,8 +671,10 @@ background-color: #a7e0f4;
 						
 		
 							    <div class="btnDiv">
+
 							    <input id="total_sum" name="acmOpt" type="hidden" size="20" value='<c:out value="${pageMaker.cri.acmOpt}"/>' readonly /> 
 							    <input id="total" class="btn-filter btn-sky" type="submit" value="개의 숙소보기" />
+
 							    <p>
 							        <button type="button" id="reset" class="btn-filter btn-pink">reset</button>
 							    </p>
@@ -717,6 +810,16 @@ background-color: #a7e0f4;
 							value='<c:out value="${pageMaker.cri.in}"/>'> <input
 							type='hidden' name='out'
 							value='<c:out value="${pageMaker.cri.out}"/>'>
+							<input
+							type='hidden' name='acmOpt'
+							value='<c:out value="${pageMaker.cri.acmOpt}"/>'>
+							<input
+							type='hidden' name='minPrice'
+							value='<c:out value="${pageMaker.cri.minPrice}"/>'>
+							<input
+							type='hidden' name='maxPrice'
+							value='<c:out value="${pageMaker.cri.maxPrice}"/>'>
+							
 					</form>
 
 
@@ -1090,27 +1193,147 @@ background-color: #a7e0f4;
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&libraries=places&callback=initMap"
 	async defer></script>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+
 //필터 모달창
 
 $(function () { //=$(document).ready(function(){
+	
+var maxPriceRange= ${pageMaker.cri.maxPrice};
+if(maxPriceRange>500000){
+	maxPriceRange=500000;
+}
+	$( "#slider-range" ).slider({
+	      range: true,
+	      min: 0,
+	      max: 500000,
+	      step: 100,
+	      classes: {
+	        "ui-slider": "custom-slider",
+	        "ui-slider-handle": "custom-handle",
+	        "ui-slider-range": "custom-range"
+	      },
+	      values: [ ${pageMaker.cri.minPrice}, maxPriceRange ],
+	      slide: function( event, ui ) {
+	    	  
+	        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+	        $('#min').val(ui.values[ 0 ]);
+	    	$('#max').val(ui.values[ 1 ]);
+	    	if($('#max').val()==500000){
+	    		  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"+");
+	    	}
+	      }
+	    });
+	$('#min').val($( "#slider-range" ).slider( "values", 0));
+	$('#max').val($( "#slider-range" ).slider( "values", 1));
+	    // 初期表示
+	if($('#max').val()==500000){
+		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0) +
+                " - $" + $( "#slider-range" ).slider( "values", 1 ) +"+");
+	  }else{
+	    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0) +
+	                       " - $" + $( "#slider-range" ).slider( "values", 1 ) );	
+	  }
+	    $('#slider-range').on('mouseup', function(){ // 이벤트 
+
+	    	var keyword = $("#pac-input").val();
+	        var type = $("#type").val();
+	        var cin = $("#in").val();
+	        var out = $("#out").val();
+	        var person = $("#person").val();
+	        var acmOpt = $("#total_sum").val();
+	        var minPrice = $("#min").val();
+	        var maxPrice = $("#max").val();
+	       
+	       var allData = {
+	    			"keyword": keyword, "type": type, "in": cin,
+	    			"out": out, "person": person, "acmOpt": acmOpt, "minPrice": minPrice, "maxPrice": maxPrice
+	    	 }
+	       console.log("acmOpt: "+acmOpt);
+	       console.log("minPrice: "+minPrice);
+	       console.log("maxPrice: "+maxPrice);
+	       console.log(allData);
+	    	$.ajax({
+	     	   type: 'POST',
+	     	   url: '/acm/filter',
+	     	   dataType: 'json',
+	     	   data: allData,
+	     	   //async: false,
+	     	   success: function(data){
+	     		   //console.log(data);
+	     		  //chkbizused=document.getElementById("chkbizused");
+	     		 
+	     		   $('#priceTotal').val(data.total+"개의 숙소보기");
+	     		
+	 	    	/* if(chkbizused==null){//없으면 추가시켜주고
+	     	    	formObj.append("<input type='hidden' id='chkbizused' name='chkbizused' value='"+data.msg2+"'>");
+	     	    	
+	 	    	} else chkbizused.value=data.msg2;//이미 있으면 바꿔치기 */
+	     	   },
+	     	   error: function(data){
+	     		  window.location.href ="../error/error";
+	     	   }
+	     	 });
+	    	
+	    });
+
+	    	
+	    
+	 // Get the modal
+	    var priceModal = document.getElementById("priceModal");
+	    
+	   
+
+	    // Get the button that opens the modal
+	    var priceBtn = document.getElementById("priceBtn");
+
+	    // Get the <span> element that closes the modal
+	    var spanPrice = document.getElementsByClassName("closePrice")[0];
+	    
+	
+
+	    // When the user clicks the button, open the modal
+	    priceBtn.onclick = function () {
+	    	priceModal.style.display = "block";
+	  	
+
+	    };
+
+	    // When the user clicks on <span> (x), close the modal
+	    spanPrice.onclick = function () {
+	    	priceModal.style.display = "none";
+
+	    };
+	    
+	   
+	    // When the user clicks anywhere outside of the modal, close it
+	    window.onclick = function (event) {
+	      if (event.target == priceModal) {
+	    	  priceModal.style.display = "none";
+	      }
+	    };
+
 	$("#reset").click(function(){
 		var chkbox = $('input[type="checkbox"]');
 		for(let i=0; i<chkbox.length; i++){
 				chkbox[i].checked = false;
 		}
+		$("#total_sum").val(0);
 		
 		var keyword = $("#pac-input").val();
 	      var type = $("#type").val();
 	      var cin = $("#in").val();
 	      var out = $("#out").val();
 	      var person = $("#person").val();
-	      var acmOpt = 0;
+	      var acmOpt = $("#total_sum").val();
+	      var minPrice = $("#min").val();
+	      var maxPrice = $("#max").val();
 	      
 	      var allData = {
 	  			"keyword": keyword, "type": type, "in": cin,
-	  			"out": out, "person": person, "acmOpt": acmOpt
+	  			"out": out, "person": person, "acmOpt": acmOpt, "minPrice": minPrice, "maxPrice": maxPrice
 	  	 }
 		
 		$.ajax({
@@ -1152,10 +1375,15 @@ $(function () { //=$(document).ready(function(){
       var out = $("#out").val();
       var person = $("#person").val();
       var acmOpt = $("#total_sum").val();
+      var minPrice = $("#min").val();
+      var maxPrice = $("#max").val();
+      console.log("acmOpt: "+acmOpt);
+     console.log("minPrice: "+minPrice);
+     console.log("maxPrice: "+maxPrice);
       
       var allData = {
   			"keyword": keyword, "type": type, "in": cin,
-  			"out": out, "person": person, "acmOpt": acmOpt
+  			"out": out, "person": person, "acmOpt": acmOpt, "minPrice": minPrice, "maxPrice": maxPrice
   	 }
       
       //console.log(allData);
@@ -1170,6 +1398,7 @@ $(function () { //=$(document).ready(function(){
     		  //chkbizused=document.getElementById("chkbizused");
     		 
     		   $('#total').val(data.total+"개의 숙소보기");
+    		   $('#priceTotal').val(data.total+"개의 숙소보기");
     		
 	    	/* if(chkbizused==null){//없으면 추가시켜주고
     	    	formObj.append("<input type='hidden' id='chkbizused' name='chkbizused' value='"+data.msg2+"'>");

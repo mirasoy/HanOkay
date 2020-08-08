@@ -216,6 +216,15 @@ public class AcmController {
 		if(!cri.getAcmOpt().equals("0")) {
 			cri.setType(cri.getType().concat("F"));
 		}
+//		//요금필터 최대치로 했을경우 그 이상 까지 검색되도록
+		if(cri.getMaxPrice().equals("500000")) {
+			cri.setMaxPrice("9999999");
+		}
+//		//요금필터 사용시(초기값(0,500000)이 아닐시)
+//		if(!cri.getMinPrice().equals("0")||!cri.getMaxPrice().equals("9999999")) {
+//			cri.setType(cri.getType().concat("M"));
+//		}
+		
 	}
 	
 	//date형식 유효성검사
