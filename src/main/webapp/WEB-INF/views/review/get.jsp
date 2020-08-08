@@ -2,13 +2,21 @@
 	pageEncoding="UTF-8"%> 
 
 <%@include file="../includes/header.jsp"%>
+<!-- 사이트바 CSS -->
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
 
 <div class="container">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h1>나의 예약 목록</h1>
-				</div>
+			<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">리뷰보기</h1>
+			<p><%=userFstName %>님, 추억이 떠오르시나요?</p>
+		</div>
+	</div>
 				<div class="panel-body">
 					<form id="operForm" action="/review/modify" method="get">
 						<table class="table table-striped table-bordered table-hover bookList">

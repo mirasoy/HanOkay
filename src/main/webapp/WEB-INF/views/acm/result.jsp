@@ -275,7 +275,7 @@ color: inherit !important;
     margin-left: -138px;
 
 position: fixed;
-    bottom: 113px;
+    bottom: 100px;
     width: 100%;
  
 

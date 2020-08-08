@@ -26,19 +26,34 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 2%;
     padding: 2%
 }
+
+.panel-body{
+
+    margin-top: 26px;
+
+}
+
 </style>
+
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
+
 <div class="container">
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">나의 작성한 리뷰</h1>
+			<p><%=userFstName %>님이 작성해주신 리뷰입니다. '추억'을 통해 과거로의 시간여행을 다녀오셔요 !</p>
+		</div>
+	</div>
+
+<%@include file="../includes/sidebar.jsp"%>
+
+<section class="contents">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<ul class="bookbar">
-					<li class="item1"><a href="/review/list">전체목록</a></li>
-					<li class="item2 on"><a href="/review/writtenReviewlist">작성한
-							리뷰</a></li>
-					<li class="item3"><a href="/review/unwrittenReviewlist">미작성
-							리뷰</a></li>
-				</ul>
-			</div>
+
 
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -94,6 +109,9 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		alert(msg);
 		}
 	});
+	
+			
+	
 	
 	</script>
 </body>

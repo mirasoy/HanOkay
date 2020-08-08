@@ -133,6 +133,7 @@
 
 .button-item{
     font-weight: 700;
+        box-shadow: 0 4px 10px 0 #bec2c9;
     border-top: 1px solid;
     width: 100%;
     display: -webkit-box;

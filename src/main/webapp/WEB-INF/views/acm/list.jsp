@@ -233,6 +233,20 @@ float: right;
 
 
 
+.scrollPlz{
+display: block;
+    margin-top: 7px;
+    font-weight: 500;
+}
+
+.fa-angle-down:before {
+    content: "\f107";
+    animation-name: drop;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
 </style>
 
 
@@ -252,6 +266,7 @@ float: right;
 							<p class="banner-subtitle">We assist you to choose the best</p>
 							<a href="javascript:void(0)" class="down-arrow-link"><i
 								class="fa fa-2x fa-angle-down down-arrow"></i></a>
+							<a class="scrollPlz">scroll</a>
 						</div>
 					</div>
 					<!-- col-xs-12 -->

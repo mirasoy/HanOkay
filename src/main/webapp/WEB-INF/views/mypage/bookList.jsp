@@ -15,67 +15,19 @@ String name = (String) session.getAttribute("loginUserNum");
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
 
 
-<div class="container-1">
+
+<div class="container">
 
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
 	<div class="page-header-content">
 		<div class="page-header-top">
-			<h1 class="page-header">나의 예약</h1>
-			<p><%=userFstName %>의 투숙 예정 목록입니다.</p>
+			<h1 class="page-header">나의 투숙예정</h1>
+			<p><%=userFstName %>님! 곧 떠날 여행의 설레임을 함께해요!</p>
 		</div>
 	</div>
-	
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■사이드바■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->	
-	
-<section class="sidebar">
-	    <div class="sidebar_detail">
-	
-	        <div class="sidebar-header">
-	            <div class="user-pic"> <img src="${request.contextPath}/resources/img/user.jpg" alt="유저이미지"></div>
-	            <div class="user-info">
-	                <span class="user-name">	               
-	             		<strong><%=userFstName%></strong>님
-	                </span>
-	                <span class="user-role">Administrator</span>
-	                <span class="user-status">
-	                    <i class="fa fa-circle"></i>
-	                    <span>Online</span>
-	                </span>
-	            </div>
-	        </div>
-	        <button class="mypage_btn nav_btn">마이페이지</button>
-	        
 
-	        <button class="noaccordion nav_btn">프로필</button>
-	        
-	        <button class="accordion nav_btn">나의 예약</button>
-	        <div class="side-panel">
-	          <ul>	       	              
-				<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
-				<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
-				<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>	              	              
-	          </ul>
-	        </div>
-	        
-	        <button class="accordion nav_btn">나의 리뷰</button>
-	        <div class="side-panel">
-	          <ul>	       	              
-				<li class="item1"><a href="/review/list">전체목록</a></li>
-				<li class="item2"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
-				<li class="item3"><a href="/review/unwrittenReviewlist">미작성 리뷰</a></li>             	              
-	          </ul>
-	        </div>
-	           
-
-	            
-	         <button class="noaccordion nav_btn nav_btn_last" onclick="location.href='/chat/chatList'">나의 채팅</button>
-	           
-	
-	    </div>
-	
-	</section>
+<%@include file="../includes/sidebar.jsp"%>
 	
 <section class="contents">
 	<section class="contents-2">
@@ -209,28 +161,11 @@ String name = (String) session.getAttribute("loginUserNum");
 	<!-- /.row -->
 
 
-	<script>
-	
-	
-	var acc = document.getElementsByClassName("accordion");
-	var i;
-	
-	for (i = 0; i < acc.length; i++) {
-	  acc[i].addEventListener("click", function() {
-	    this.classList.toggle("side-active");
-	    var panel = this.nextElementSibling;
-	    if (panel.style.maxHeight) {
-	      panel.style.maxHeight = null;
-	    } else {
-	      panel.style.maxHeight = panel.scrollHeight + "px";
-	    } 
-	  });
-	}
-	
-	
-	
+<!-------------------------------------------- 사이드 메뉴에 대한 JS ---------------------------------------------->
+	<script>	
 
-	//클릭 된것의 value를 가져온다.
+	
+	
 		
 		
 	
