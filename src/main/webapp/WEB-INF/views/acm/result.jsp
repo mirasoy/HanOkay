@@ -1512,17 +1512,19 @@ function getAcmOpt2(arrOpt,acmNumArr) {
   };
 //필터 모달 끝
     
- 	/* 날짜 선택(수희) */
+		// 날짜 선택
 		var today = new Date();
-		
 		$("#out").datepicker({
 			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+			numberOfMonths: 1,
 			dateFormat: 'yy-mm-dd'
 		});
 		$("#in").datepicker({
 			minDate: 0,
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
+			numberOfMonths: 1,
+			dateFormat: 'yy-mm-dd',
 			onSelect: function(selectedDate) {
 				var nextDay = new Date(selectedDate);
 				nextDay.setDate(nextDay.getDate() + 1);
@@ -1530,8 +1532,8 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 				var nextMonth = new Date(selectedDate);
 				nextMonth.setDate(nextMonth.getDate() + 90);
 			  $("#out").datepicker("option","maxDate", nextMonth);
-			},
-			dateFormat: 'yy-mm-dd'
+			  $("#out").datepicker("open");
+			}
 		});
 		
 	</script>
