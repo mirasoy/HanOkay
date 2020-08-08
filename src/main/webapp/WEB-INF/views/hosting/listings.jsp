@@ -168,7 +168,7 @@ $(document).ready(function(){
    <c:forEach items="${pendinglist}" var="pendingacm">
    var pendingacmType='<c:out value="${pendingacm.acmType}" />';
    console.log(pendingacmType);
-   if(pendingacmType.trim()=="PD"){//객실별
+   if(pendingacmType.trim()=="PD"||pendingacmType.trim()=="P"){//객실별
       $("#<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>").append("객실별");
    }
       
@@ -176,10 +176,14 @@ $(document).ready(function(){
       $("#<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>").append("집천체");
    }   
    </c:forEach>
+   
+   
+   
+   
    <c:forEach items="${activelist}" var="activeacm">
    var activeacmType='<c:out value="${activeacm.acmType}" />';
    console.log(activeacmType);
-   if(activeacmType.trim()=="PD"){//객실별
+   if(activeacmType.trim()=="PD"||activeacmType.trim()=="P"){//객실별
       $("#<c:out value='${activeacm.acmType}'/><c:out value='${activeacm.acmNum}'/>").append("객실별");
    }
       

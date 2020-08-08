@@ -45,7 +45,7 @@
 	        
 	     </select>
 	
-	      <select class="form-control" style="width:160px;display:inline-block;" name="ROM_NUM" id="ROM_NUM" onchange="categChange(this)">
+	      <select class="form-control" style="width:160px;display:inline-block;" name="ROM_NUM" id="ROM_NUM" onchange="selectRom(this)">
 	        <option>객실 선택</option>
 	     </select>
 	
@@ -53,7 +53,7 @@
 		    <div>
 				<!-- /top -->
 				<div class="space">
-				    <span id="start">2020-08-01</span> <a href="#" onclick="picker.show(); return false;">월별로 찾기</a>
+				    <span id="start">${todays}</span> <a href="#" onclick="picker.show(); return false;">월별로 찾기</a>
 				</div>
 			</div>
 		</div>
@@ -74,10 +74,8 @@
             dp.update();
         }
     });
-</script>
 
-
-<script type="text/javascript">
+    
     var dp = new DayPilot.Month("dp");
 
     // view
@@ -88,7 +86,7 @@
         var duration = Math.floor(Math.random() * 1.2);
         var start = Math.floor(Math.random() * 6) - 3; // -3 to 3
 
-        var e = new DayPilot.Event({
+        /*var e = new DayPilot.Event({
             start: new DayPilot.Date("2020-08-04T00:00:00"),
             end: new DayPilot.Date("2020-08-15T12:00:00"),
             id: DayPilot.guid(),
@@ -103,10 +101,12 @@
             text: "ddddd " 
         });
         dp.events.add(e);
-    //}
+    }
+    */
 
-    // event creating
-    dp.onTimeRangeSelected = function (args) {
+    // event creating 이벤트 생성은 막겠따
+    
+   /* dp.onTimeRangeSelected = function (args) {
         var name = prompt("New event name:", "Event");
         dp.clearSelection();
         if (!name) return;
@@ -122,7 +122,7 @@
 	    dp.onEventClicked = function(args) {
         alert("clicked: " + args.e.id());
     };
-    
+    */
     dp.init();
 
 	$(document).ready(function() {
@@ -145,40 +145,53 @@
 		
 	});
 
-function categChange(e){
+	//숙소가 선택되면 일어나는 이벤트
+	function categChange(e){
+		//선택되면 객실 option 다 비워주기
+		$("select#ROM_NUM option").remove();
+		//alert(e.value);//숙소 번호나옴
+		
+		//객체에 property추가
+		var obj= new Object();
+		obj.romNum="romNum";
+		obj.romName="romName";
+		
+		var jsonData = JSON.stringify(obj);
+		var acmNum=e.value;
+		   $.ajax({
+	      	   type: 'POST',
+	      	   url: '/hosting/returnRoms',
+	      	   dataType: 'json',
+	      	   data: {
+	      		   'acmNum': acmNum
+	      	   },
+	      	   //async: false,
+	      	   success: function(data){
+	      		   console.log("제이슨이가지고 돌아와따:"+data);
+					
+	      		   var romSelect=document.getElementById("ROM_NUM");
+	     			console.log("길이:"+data.length);	
+	      		   for(var i=0;i<data.length;i++){
+	      			   //alert(data[i]);
+	      			   var splited=data[i].split('=');
+	      			   
+	      			   var opt = document.createElement("option");
+		     		 	opt.innerHTML=splited[0];
+		     			opt.value=splited[1];
+		     		 	romSelect.appendChild(opt);
+	      		   }
+	      	   
+	      	   },
+	      	   error: function(data){
+	      		   alert("제이슨에러!");
+	      		  window.location.href ="../error/error";
+	      	   }
+	      	 });
+	}
 	
-	alert(e.value);//숙소 번호나옴
-	
-	var acmNum=e.value;
-	   $.ajax({
-      	   type: 'POST',
-      	   url: '/hosting/returnRoms',
-      	   dataType: 'json',
-      	   data: {
-      		   'acmNum': acmNum
-      	   },
-      	   //async: false,
-      	   success: function(data){
-      		   console.log(data);
-      		   $('span#msg').text(data.msg);
-      		
-      		   var chkaddr=document.getElementById("chkaddr");
-     	    	if(chkaddr==null){//없으면 추가시켜주고
-	     	    	formObj.append("<input type='hidden' id='chkaddr' name='chkaddr' value='"+data.msg+"'>");
-	     	    	
-	     	    	
-	     	    	//임시
-	     	    	formObj.append("<input type='hidden' id='latitude' name='latitude' value='"+35.8133295+"'>");
-	     	    	formObj.append("<input type='hidden' id='longitude' name='longitude' value='"+129.1894108+"'>");
-     	    	}
-     	    		else chkaddr.value=data.msg;//이미 있으면 바꿔치기
-      	   },
-      	   error: function(data){
-      		  window.location.href ="../error/error";
-      	   }
-      	 });
-}
-
+	function selectRom(e){
+		alert("객실 선택!"+e.value);
+	}
 
 
 </script>	
