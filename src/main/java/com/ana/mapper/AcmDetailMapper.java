@@ -8,6 +8,7 @@ import com.ana.domain.AcmDetailPicVO;
 import com.ana.domain.AcmDetailRevVO;
 import com.ana.domain.AcmDetailRomVO;
 import com.ana.domain.AcmDetailVO;
+import com.ana.domain.Criteria;
 
 public interface AcmDetailMapper {
 	
@@ -15,9 +16,11 @@ public interface AcmDetailMapper {
 
 	public List<AcmDetailPicVO> getPicList(String acmNum); // 숙소사진 리스트
 	
-	public List<AcmDetailRomVO> getRomAll(String acmNum); // 객실정보 리스트
+	public List<String> getRomNum(@Param("in") String checkin, @Param("out") String checkout);
 	
-	public List<AcmDetailRomVO> getRomList(@Param("acmNum") String acmNum, @Param("person") String person); // 객실정보 리스트
+	public List<AcmDetailRomVO> getRomAll(@Param("romNum") List<String> romNum, @Param("acmNum") String acmNum); // 객실정보 리스트
+	
+	public List<AcmDetailRomVO> getRomList(@Param("romNum") List<String> romNum, @Param("acmNum") String acmNum, @Param("person") String person); // 객실정보 리스트
 	
 	public List<AcmDetailRevVO> getRevList(String acmNum); // 숙소리뷰 리스트
 	

@@ -65,6 +65,13 @@
   font-size: 18px;
 }
 
+.panel-body{
+margin-left: 45px;
+    transition: box-shadow .3s ease;
+    margin-top: 26px;
+    height: 274px;
+}
+
 
 @media only screen and (max-width: 600px) {
   .columns-r {
@@ -81,57 +88,16 @@
 
 	<div class="page-header-content">
 		<div class="page-header-top">
-			<h1 class="page-header">나의 관심 목록</h1>
-			<p><%=userFstName %>님의 관심있는 여행지는 어디입니까? </p>
+			<h1 class="page-header">나의 리뷰 목록</h1>
+			<p><%=userFstName %>님 여행은 즐거우셨나요? 추억을 이곳에 간직하시겠습니까? </p>
 		</div>
 	</div>
 
 
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■사이드바■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-	
-	<section class="sidebar">
-	    <div class="sidebar_detail">	
-	        <div class="sidebar-header">
-	            <div class="user-pic"> <img src="${request.contextPath}/resources/img/user.jpg" alt="유저이미지"></div>
-	            <div class="user-info">
-	                <span class="user-name">	               
-	             		<strong></strong>님
-	                </span>
-	                <span class="user-role">Administrator</span>
-	                <span class="user-status">
-	                    <i class="fa fa-circle"></i>
-	                    <span>Online</span>
-	                </span>
-	            </div>
-	        </div>
-	        <button class="mypage_btn nav_btn">마이페이지</button>	     
-	        <button class="noaccordion nav_btn">프로필</button>	        
-	        <button class="accordion nav_btn">나의 예약</button>
-	        <div class="side-panel">
-	          <ul>	       	              
-				<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
-				<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
-				<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>	              	              
-	          </ul>
-	        </div>
-	        
-	        <button class="accordion nav_btn">나의 리뷰</button>
-	        <div class="side-panel">
-	          <ul>	       	              
-				<li class="item1"><a href="/review/list">전체목록</a></li>
-				<li class="item2"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
-				<li class="item3"><a href="/review/unwrittenReviewlist">미작성 리뷰</a></li>             	              
-	          </ul>
-	        </div>           	            
-	         <button class="noaccordion nav_btn nav_btn_last" onclick="location.href='/chat/chatList'">나의 채팅</button>	
-	    </div>
-	</section>
-
+<%@include file="../includes/sidebar.jsp"%>
 
 <section class="contents">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
+	
 	
 
 
@@ -142,10 +108,9 @@
 					</div>
 				</div>
 				<!--  end panel-body -->
-			</div>
+		
 			<!-- end panel -->
-		</div>
-	</div>
+
 	
 	</section>
 	<!-- /.row -->
@@ -184,6 +149,10 @@
 		
 		</c:forEach>
 	</script>
+	
+	
+	
+	
 </body>
 <%@include file="../includes/footer.jsp"%>
 

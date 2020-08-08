@@ -35,22 +35,30 @@
 	                        <h5 style="color:blue;">Today</h5>
 	                        <div style="margin-top:0px;margin-bottom:20px;font-size:25px;">${todayform }</div>
 	                        <div id="rsvSum">
-	                        <div>
-	                        	<div style="font-size:30px;">17</div>
-                    			<span>입금대기</span>
-                    		</div>
 	                        <div >
 	                        	<div style="font-size:30px;">${chkinSize }</div>
                     			<span>예약완료</span>
+                    		</div>
+                    		<div>
+	                        	<div style="font-size:30px;">${payed }</div>
+                    			<span>결제완료</span>
+                    		</div>
+	                        <div>
+	                        	<div style="font-size:30px;">${payLater }</div>
+                    			<span>워크인결제</span>
                     		</div>
                     		 <div >
 	                        	<div style="font-size:30px;">0</div>
                     			<span>예약취소</span>
                     		</div>
+                    		
+                    		
                     		</div>
                     	</div>
                     </div>
                 </div>
+                
+                <!-- 오늘의 날씨 구역 -->
               	<div class="col-lg-2">
                     <div class="well well-lg" style="height: 200px;      background-color: #a1d5e6 !important;    color: #a1d5e6 ;">
                     	<div align="center" id="weather">
@@ -113,7 +121,7 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	오늘 입실
+                            	오늘 입실<span class="pull-right">입실 수: ${chkinSize}</span>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -132,8 +140,8 @@
                                     <c:forEach items="${chkin}" var="chkin">
                                         <tr>
                                             <td><c:out value="${chkin.bookNum}" /></td>
-                                            <td><c:out value="${chkin.bookStatus}" /></td>
-                                            <td>[<c:out value="${chkin.acmName}" />]<c:out value="${chkin.romName}" /></td>
+                                            <td id="<c:out value='${chkin.bookStatus}'/><c:out value='${chkin.bookNum}'/>"></td>
+                                             <td>[<c:out value="${chkin.acmName}" />]<c:out value="${chkin.romName}" /></td>
                                             <td><c:out value="${chkin.bookerFirstname}" />&nbsp;<c:out value="${chkin.bookerLastname}" />/<c:out value="${chkin.guest}" />명</td>
                                         
                                         </tr>
@@ -149,10 +157,12 @@
                 </div>
                 <!-- /.col-lg-6 -->
                 
+                
+                <!-- 퇴실자 -->
                <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	오늘 퇴실
+                            	오늘 퇴실<span class="pull-right">퇴실 수: ${chkoutSize}</span>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -171,7 +181,7 @@
                                     <c:forEach items="${chkout}" var="chkout">
                                         <tr>
                                             <td><c:out value="${chkout.bookNum}" /></td>
-                                             <td><c:out value="${chkout.bookStatus}" /></td>
+                                             <td id="<c:out value='${chkout.bookStatus}'/><c:out value='${chkout.bookNum}'/>"></td>
                                              <td>[<c:out value="${chkout.acmName}" />]<c:out value="${chkout.romName}" /></td>
                                             <td><c:out value="${chkout.bookerFirstname}" />&nbsp;<c:out value="${chkout.bookerLastname}" />/<c:out value="${chkout.guest}" />명</td>
                                         
@@ -205,6 +215,34 @@ var longitude;
  
 $(document).ready(function(){
 	
+	//예약상태 표기
+	//입실자
+	<c:forEach items="${chkin}" var="chkin">
+	   var bookStatus='<c:out value="${chkin.bookStatus}" />';
+	   console.log(bookStatus);
+	   if(bookStatus.trim()=="RS_STT_BK"){//입실자:RS_STT_BK(예약중 투숙예정) RS_STT_CI(체크인)
+	      $("#<c:out value='${chkin.bookStatus}'/><c:out value='${chkin.bookNum}'/>").append("입실대기");
+	   }
+	      
+	   else if(bookStatus.trim()=="RS_STT_CI"){//체크인
+	      $("#<c:out value='${chkin.bookStatus}'/><c:out value='${chkin.bookNum}'/>").append("체크인완료");
+	   }   
+   </c:forEach>
+	   
+   //퇴실자
+   <c:forEach items="${chkout}" var="chkout">
+   var bookStatus='<c:out value="${chkout.bookStatus}" />';
+   console.log(bookStatus);
+   if(bookStatus.trim()=="RS_STT_BK"){//입실자:RS_STT_BK(투숙중) RS_STT_AC(체크아웃)
+      $("#<c:out value='${chkout.bookStatus}'/><c:out value='${chkout.bookNum}'/>").append("퇴실대기");
+   }
+      
+   else if(bookStatus.trim()=="RS_STT_AC"){//체크아웃완료
+      $("#<c:out value='${chkout.bookStatus}'/><c:out value='${chkout.bookNum}'/>").append("체크아웃완료");
+   }   
+	</c:forEach>
+
+	//날씨표기
 	var weatherMap = new Map();
 	  
     weatherMap.set("Mist","cloudy");

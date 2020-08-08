@@ -28,12 +28,12 @@ public class AcmDetailServiceTests {
 	
 	@Test
 	public void testGetRomAll() { // 객실정보 리스트
-		service.getRomAll("A1").forEach(rom -> log.info(rom));
+		//service.getRomAll("A1").forEach(rom -> log.info(rom));
 	}
 	
 	@Test
 	public void testGetRomList() { // 객실정보 리스트
-		service.getRomList("A1", "1").forEach(rom -> log.info(rom));
+		//service.getRomList("A1", "1").forEach(rom -> log.info(rom));
 	}
 	
 	@Test

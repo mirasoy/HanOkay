@@ -13,9 +13,9 @@ public interface AcmDetailService {
 
 	public List<AcmDetailPicVO> getPicList(String acmNum); // 숙소사진 리스트
 	
-	public List<AcmDetailRomVO> getRomAll(String acmNum); // 객실정보 리스트
+	public List<AcmDetailRomVO> getRomAll(String checkin,String checkout,String acmNum); // 객실정보 리스트
 	
-	public List<AcmDetailRomVO> getRomList(String acmNum, String person); // 객실정보 리스트
+	public List<AcmDetailRomVO> getRomList(String checkin,String checkout,String acmNum, String person); // 객실정보 리스트
 	
 	public List<AcmDetailRevVO> getRevList(String acmNum); // 숙소리뷰 리스트
 	

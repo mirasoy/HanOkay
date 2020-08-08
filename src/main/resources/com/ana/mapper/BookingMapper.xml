@@ -399,7 +399,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	
+	<select id="dateGetinPayLater" resultType="int">
+		 select count(*) 
+		FROM TBOOKING B, TACM A, TPAYMENT P,TROM R
+		where  B.BOOK_NUM=P.BOOK_NUM AND R.ACM_NUM=A.ACM_NUM AND B.ROM_NUM=R.ROM_NUM 
+		AND B.checkin_date=#{checkinDate} and A.owner_user=#{ownerUser} and P.PAY_METHOD='PY_METHOD_LATER'
+	</select>
 	
 	
 	

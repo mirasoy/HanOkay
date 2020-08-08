@@ -207,14 +207,7 @@ public class UserServiceImpl implements UserService{
 		}
 	 }
 
-
-	 //user의 인증코드를 업데이트 하게하는 메서드
-	@Override
-	public boolean updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode")String authCode) {
-		return mapper.updateAuthCode(email ,authCode)==1;
 	
-	
-	}
 	//중복되는 이메일이 없고 난수를 생성하여 user객체의 setUserAuthCode로 넣어주고 service.register(user)한다 
 	@Transactional
 	@Override
@@ -231,7 +224,6 @@ public class UserServiceImpl implements UserService{
 		}
 		
 			return false;
-		
 	}
 	
 	//session에 담긴 user객체의 userNum으로 프로필 정보를 가져오는 
@@ -268,8 +260,31 @@ public class UserServiceImpl implements UserService{
 		
 		return mapper.updateProfile(profile)==1;
 	}
+
+	//user의 인증코드를 업데이트 하게하는 메서드
+	@Override
+	public boolean updateAuthCode(@Param("email") String email, @Param("authCode") String authCode) {
+		return mapper.updateAuthCode(email, authCode) == 1;
+	}
 	
-	
+	//해당 email의 유저에게 인증코드를 발송하는 메서드(회원가입 인증코드 재발송 / 비밀번호 찾기)
+	@Override
+	public boolean sendAuthCode(String email) {
+		System.out.println("email 왔니 서비스에:: "+ email);
+		
+		//db에 있는지 확인하고
+		if(!canRegister(email)) {
+			//난수를 다시 생성
+			String authCode=numberGen(6,2);
+			if(updateAuthCode(email, authCode)) {
+				emailService.sendAuthEmail(email, authCode);
+				return true;
+			}
+
+		}
+		return false;
+	}
+
   
 	
 	

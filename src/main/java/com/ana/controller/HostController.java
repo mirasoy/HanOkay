@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ana.domain.AcmDetailPicVO;
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookVO;
+import com.ana.domain.CalendarVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AcmDetailService;
@@ -61,33 +63,37 @@ public class HostController {
 		if(user==null)return null;
 		return user;
 	}
-	static String koryoil="";
 	 
 	//오늘의 날짜를 갔다줌
-	public String getCal() {
+	public CalendarVO getCal() {
 		///오늘의 날짜
 		Calendar cal = Calendar.getInstance();
 		//System.out.println(cal);
 		
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int day = cal.get(Calendar.DAY_OF_MONTH);
-		int dayo=cal.get(Calendar.DAY_OF_WEEK);
+		CalendarVO today = new CalendarVO(); 
+		today.setYear(cal.get(Calendar.YEAR));
+		today.setMonth(cal.get(Calendar.MONTH) + 1);
+		today.setDay(cal.get(Calendar.MONTH) + 1);
+		today.setYoilInt(cal.get(Calendar.DAY_OF_WEEK));
+		today.setYoil(getTodayYoil(today.getYoilInt()));
 		
-		
-		if(dayo==0)koryoil="일";
-		else if(dayo==1)koryoil="월";
-		else if(dayo==2)koryoil="화";
-		else if(dayo==3)koryoil="수";
-		else if(dayo==4)koryoil="목";
-		else if(dayo==5)koryoil="금";
-		else if(dayo==6)koryoil="토";
-		
-		String today=year+"-"+month+"-"+day;
 		return today;
 	}
 	
-	
+	//요일값 한글로 반환
+	public String getTodayYoil(int yoilInt) {
+		String yoil = null;
+		System.out.println(yoilInt);
+		if(yoilInt==1)yoil="일";
+		else if(yoilInt==2)yoil="월";
+		else if(yoilInt==3)yoil="화";
+		else if(yoilInt==4)yoil="수";
+		else if(yoilInt==5)yoil="목";
+		else if(yoilInt==6)yoil="금";
+		else if(yoilInt==7)yoil="토";
+		
+		return yoil;
+	}
 	
 	///////////////////////
 	@GetMapping("/hostindex")
@@ -97,21 +103,37 @@ public class HostController {
 		//호스트 주인
 		String ownerUser= getUser(session).getUserNum();
 		
-
+		CalendarVO today = getCal();
 		//가라임
-		//String today="2020-8-7";
+		//String todays="2020-8-7";
 		
-		model.addAttribute("todayform",getCal()+"("+koryoil+")");
-
-		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,getCal());
+		String todayform=today.getYear()+"년 "+ today.getMonth()+"월 "+ today.getDay()+"일 ("+today.getYoil()+")";
+		String todays=today.getYear()+"-"+today.getMonth()+"-"+today.getDay();
+		
+		System.out.println("출력 오늘의 날짜:"+todayform);
+		System.out.println("Date형식으로 끌어올 오늘의 날짜:"+todays);
+		
+		model.addAttribute("todayform",todayform);
+		
+		//입실수
+		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,todays);
+		model.addAttribute("chkin", chkin);
 		if(chkin.size()==0)model.addAttribute("chkinSize", 0);
 		else model.addAttribute("chkinSize", chkin.size());
 		
-		
-		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,getCal());
-		model.addAttribute("chkin", chkin);
+		//퇴실수
+		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,todays);
 		model.addAttribute("chkout", chkout);
+		model.addAttribute("chkoutSize", chkout.size());
 		
+		//워크인 결제 갯수
+		int payLater=bservice.dateGetinPayLater(ownerUser,todays);
+		System.out.println("결제대기자"+payLater);
+		model.addAttribute("payLater", payLater);
+		
+		//결제완료한 사람수
+		int payed=chkin.size()-payLater;
+		model.addAttribute("payed", payed);
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
@@ -126,6 +148,10 @@ public class HostController {
 		List<AcmVO> acms=aservice.getListAcms(user.getUserNum(), acmActi);
 		model.addAttribute("acms", acms);
 		
+		//오늘 날짜 삽입
+		CalendarVO today = getCal();
+		String todays=today.getYear()+"-"+today.getMonth()+"-"+today.getDay();
+		model.addAttribute("todays",todays);
 		
 		model.addAttribute("userFstname", user.getUserFstName());
 	}
@@ -133,25 +159,35 @@ public class HostController {
 	//숙소가 선택될때마다 숙소에대한 객실들을 가져오자
 		@RequestMapping(value = "/returnRoms", method = RequestMethod.POST)
 		@ResponseBody
-		public void selAcmPost(String acmDetailaddr,HttpServletRequest request, HttpServletResponse response)
+		public void returnRomsPost(String acmNum,HttpServletRequest request, HttpServletResponse response)
 				throws IOException{	
-			System.out.println("주소중복체크 Post다!");
-			JSONObject jso= new JSONObject();
-			log.info("acmDetailaddr check: " +  acmDetailaddr);
+			System.out.println("숙소가 선택되었다!!객실을 가져오자");
+			
+			//제이슨에 List<RomVO>를 담아오자
+			JSONObject job= new JSONObject();
+			JSONArray jarr= new JSONArray();
+			log.info("acmNum check: " +  acmNum);
+			
 			//한글 깨짐 방지
 			response.setContentType("text/plain;charset=UTF-8");
-			String msg="";
-			//service에게 email을 주고 db를 뒤져오게한다
-			if (aservice.chkaddr(acmDetailaddr)) {
-				msg="해당 주소를 사용하실 수 있습니다";
-				jso.put("msg", msg);		
+			
+			//service에게 acmNum을 주고 rom들을 뒤져오게한다
+			List<RomVO> list=rservice.getList(acmNum);
+					
+			if (list!=null) {//return List<RomVO>
+				for(int i=0;i<list.size();i++) {
+					String set=list.get(i).getRomName()+"="+list.get(i).getRomNum();
+					System.out.println("*겟i:"+set);
+					
+					jarr.add(set);
+				}
+				System.out.println("***"+jarr.toJSONString());
 			} 
 			else {
-				msg="*같은 주소지에 이미 등록된 숙소가 있습니다!";
-				jso.put("msg", msg);
+				System.out.println("선택한 숙소에 객실이 없습니다");
 			}
 			PrintWriter out = response.getWriter();
-			out.print(jso);
+			out.print(jarr);
 		}
 	
 	
@@ -409,15 +445,11 @@ public class HostController {
 		
 
 		
-		
-		System.out.println(getUser(session).getUserStatusCode());//
+		//세션 다시주기
 		
 		UserVO user=uservice.letsNewSession(getUser(session).getUserNum());
 		System.out.println(user);
-		System.out.println();
-		
 		session.setAttribute("user", user);
-		
 		System.out.println(getUser(session).getUserStatusCode());//
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());

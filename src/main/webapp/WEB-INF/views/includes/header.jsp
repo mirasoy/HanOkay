@@ -33,8 +33,6 @@ if (user != null) {
 
 
 
-
-
 <html lang="en">
 <head>
 	<!-- 구글 소셜 로그인 시작 -->
@@ -48,7 +46,7 @@ if (user != null) {
 <meta http-equiv="Expires" content="0;">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>HanOkay 한오케이 -Make yourself At home in Korea!</title>
+<title>Han:Ok 한오케이 -Make yourself At home in Korea!</title>
 
 
 
@@ -72,7 +70,7 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="../resources/css/review.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/recommend.css"> 
 
-<!-- 메인 CSS style -->
+
 
 <!-- load JS files -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -139,10 +137,11 @@ if (user != null) {
                         
                      }else if(priv=="HOST"){
                         $('#mode').html("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
-                     }else if(priv=="GUEST"){
-                    	 if(userStatusCode=="ACTIVE")
+                     }else if(priv=="GUEST"){ 
                         $('#mode').html("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
-                    	 else $('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
+                     }
+                     else if(priv=="HO_PENDING"){
+                    	$('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
                      }
                     
                   };    
@@ -331,7 +330,13 @@ if (user != null) {
 	   			    
 	        
 	      }
-	        
+
+	      
+	      
+	      
+	      
+	      
+	      
 </script>
 </head>
 <!-- 뒤로가기 방지 -->
@@ -346,6 +351,9 @@ if (user != null) {
  -->
 
 <body>
+
+
+
    <!-- main-content -->
    <div class="main-content" id="top">
       <div class="top-bar-bg"></div>
@@ -436,4 +444,10 @@ if (user != null) {
          <!-- End :  container -->
       </div>
       <!-- End : top-bar - 메인 네비게이션 바 -->
+      
+      <div class="mouse-icon aside">
+			<div class="wheel">스크롤을 내리면 작품을 감상할 수 있습니다.</div>
+		</div>
+      
+      
    </div>
