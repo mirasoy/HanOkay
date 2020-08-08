@@ -33,8 +33,6 @@ if (user != null) {
 
 
 
-
-
 <html lang="en">
 <head>
 	<!-- 구글 소셜 로그인 시작 -->
@@ -72,7 +70,7 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="../resources/css/review.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/recommend.css"> 
 
-<!-- 메인 CSS style -->
+
 
 <!-- load JS files -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -331,7 +329,13 @@ if (user != null) {
 	   			    
 	        
 	      }
-	        
+
+	      
+	      
+	      
+	      
+	      
+	      
 </script>
 </head>
 <!-- 뒤로가기 방지 -->
@@ -346,6 +350,9 @@ if (user != null) {
  -->
 
 <body>
+
+
+
    <!-- main-content -->
    <div class="main-content" id="top">
       <div class="top-bar-bg"></div>
@@ -436,4 +443,10 @@ if (user != null) {
          <!-- End :  container -->
       </div>
       <!-- End : top-bar - 메인 네비게이션 바 -->
+      
+      <div class="mouse-icon aside">
+			<div class="wheel">스크롤을 내리면 작품을 감상할 수 있습니다.</div>
+		</div>
+      
+      
    </div>
