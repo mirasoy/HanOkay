@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -147,6 +148,10 @@ public class HostController {
 		List<AcmVO> acms=aservice.getListAcms(user.getUserNum(), acmActi);
 		model.addAttribute("acms", acms);
 		
+		//오늘 날짜 삽입
+		CalendarVO today = getCal();
+		String todays=today.getYear()+"-"+today.getMonth()+"-"+today.getDay();
+		model.addAttribute("todays",todays);
 		
 		model.addAttribute("userFstname", user.getUserFstName());
 	}
@@ -154,25 +159,35 @@ public class HostController {
 	//숙소가 선택될때마다 숙소에대한 객실들을 가져오자
 		@RequestMapping(value = "/returnRoms", method = RequestMethod.POST)
 		@ResponseBody
-		public void selAcmPost(String acmDetailaddr,HttpServletRequest request, HttpServletResponse response)
+		public void returnRomsPost(String acmNum,HttpServletRequest request, HttpServletResponse response)
 				throws IOException{	
-			System.out.println("주소중복체크 Post다!");
-			JSONObject jso= new JSONObject();
-			log.info("acmDetailaddr check: " +  acmDetailaddr);
+			System.out.println("숙소가 선택되었다!!객실을 가져오자");
+			
+			//제이슨에 List<RomVO>를 담아오자
+			JSONObject job= new JSONObject();
+			JSONArray jarr= new JSONArray();
+			log.info("acmNum check: " +  acmNum);
+			
 			//한글 깨짐 방지
 			response.setContentType("text/plain;charset=UTF-8");
-			String msg="";
-			//service에게 email을 주고 db를 뒤져오게한다
-			if (aservice.chkaddr(acmDetailaddr)) {
-				msg="해당 주소를 사용하실 수 있습니다";
-				jso.put("msg", msg);		
+			
+			//service에게 acmNum을 주고 rom들을 뒤져오게한다
+			List<RomVO> list=rservice.getList(acmNum);
+					
+			if (list!=null) {//return List<RomVO>
+				for(int i=0;i<list.size();i++) {
+					String set=list.get(i).getRomName()+"="+list.get(i).getRomNum();
+					System.out.println("*겟i:"+set);
+					
+					jarr.add(set);
+				}
+				System.out.println("***"+jarr.toJSONString());
 			} 
 			else {
-				msg="*같은 주소지에 이미 등록된 숙소가 있습니다!";
-				jso.put("msg", msg);
+				System.out.println("선택한 숙소에 객실이 없습니다");
 			}
 			PrintWriter out = response.getWriter();
-			out.print(jso);
+			out.print(jarr);
 		}
 	
 	
