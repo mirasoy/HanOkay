@@ -63,7 +63,7 @@ form {
     border: 1px solid #dadfe6;
     border-radius: 16px;
     background-color: #ffffff !important;
-    height: 450px;
+    height: 480px;
     width: 446px;
 }
 
@@ -187,15 +187,14 @@ form {
     </c:if>
 
 <div class="container2_SR">
-  <div style="margin-top:24px">
 <div class="container3_SR">
   <div style="margin-top:35px;margin-bottom:auto">
 
   <section>
     <div>
       <div style="margin-bottom: 8px;">
-							<div class="g-signin2" data-onsuccess="onSignIn"  data-theme="dark"></div>
-						</div>
+	   <div class="g-signin2" data-onsuccess="onSignIn"  data-theme="dark"></div>
+	 </div>
     </div>
 
     <div>
@@ -271,42 +270,23 @@ form {
 
     <div class="oneInfo_SR">
          
-          <%--
-          <a href="${facebook_url}"
-            ><button class="btn btn-primary btn-round" style="width: 100%;">
-              <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login
-            </button></a
-          >
-          --%>
-      <a
-            href="https://www.facebook.com/v7.0/dialog/oauth?
-      client_id=323895235315656
-      &redirect_uri=https%3A%2F%2Flocalhost%3A8443%2Fuser%2Flogin%2Faouth2
-      &state={state-param}
-      &resource_type=token"
-            >Login with Facebook
-      </a>
-          <!-- <fb:login-button scope="public_profile,email,user_birthday"
-        onlogin="checkLoginState();" onclick="FB.login();">
-      </fb:login-button>
-
-      <div id="status"></div> Load the JS SDK asynchronously 
-      <script	async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+         
         
       <input type="text" name="requestFrom" value="${requestFrom}" />
     </div>
 
     <div style="margin-top:25px;">
-      <div style="margin-left:310px;  display:inline; font-size:14px;">
-          <a href="../register/signUp" style="color:#007bff;">회원가입하기</a>
+      	<div style="margin-left: 104px;">
+          Han:Ok의 회원이 되어 더 많은 혜택을 누려보세요!
+     	</div>
+      <div style="margin-left:310px; font-size:14px;">
+         <a href="../register/signUp" style="color:#007bff;">회원가입하기</a>
       </div>
     </div>
     
     </section>
     </div>
    </div>
-  </div>
  </div>
 </div>
 

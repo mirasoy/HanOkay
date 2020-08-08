@@ -3,6 +3,11 @@
 pageEncoding="UTF-8"%> 
 <%@include file="../includes/header1.jspf"%>
 <title>Han:Ok - 회원가입</title>
+<style>
+#sendAgainBtn:hover{
+	cursor:pointer;
+}
+</style>
 <%@include file="../includes/header2.jspf"%>
 <%@include file="../includes/header3.jspf"%>
 
@@ -38,7 +43,7 @@ pageEncoding="UTF-8"%>
 			<br>
 			<div>
 				<span>인증번호가 도착하지 않았나요? </span>
-				<a style="color:#007bff" id="sendAgainBtn">인증번호 재발송</a>
+				<a style="color:#007bff;" id="sendAgainBtn">인증번호 재발송</a>
 				<br>
 			</div>
 				<input type="hidden" name="email" id= "email" value="${email }"><br>
@@ -53,6 +58,7 @@ pageEncoding="UTF-8"%>
 
 		
 	<script> 
+	//가입하기 버튼
 	$('#registerBtn').on("click", function(){
 		
 		let email= $("#email").val();
@@ -86,6 +92,7 @@ pageEncoding="UTF-8"%>
 		});
 	 });
 	
+	//인증번호 재발송 버튼 
 	$('#sendAgainBtn').on("click", function(){
 		let email= $("#email").val();
 		alert("email: "+ email);
@@ -108,7 +115,7 @@ pageEncoding="UTF-8"%>
             	 
               }
               else if (data.msg === 'fail'){
-            	alert("인증번호가 틀렸습니다! 인증번호를 다시 입력하세요. 인증번호를 재발급 받고싶다면 인증번호 재발급 버튼을 누르세요");
+            	alert("인증번호 재발송에 실패했습니다! 다른 이메일 주소로 다시 가입하세요");
             }
            },
           error: function (data) {
