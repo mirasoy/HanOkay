@@ -34,6 +34,13 @@
 		]]>
 	</select>
 	
+	<select id="getRomList" resultType="String">
+		<![CDATA[
+		select rom_num from TROM where ACM_NUM=#{acmNum}
+		]]>
+	</select>
+	
+	
 	<!-- 객실 하나하나의 정보 가져오기 -->
 	<select id="getRom" resultMap="RomVOResult">
 		select * from TROM where ROM_NUM =#{romNum}

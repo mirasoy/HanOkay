@@ -61,6 +61,12 @@ public class RomRegServiceImpl implements RomRegService{
 		return mapper.modify(rom)==1;
 	}
 
+
+	@Override
+	public List<String> getRomList(String acmNum) {
+		return mapper.getRomList(acmNum);
+	}
+
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.ana.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ana.domain.AcmDetailPicVO;
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookVO;
+import com.ana.domain.BookingVO;
 import com.ana.domain.CalendarVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserVO;
@@ -151,6 +154,7 @@ public class HostController {
 		//오늘 날짜 삽입
 		CalendarVO today = getCal();
 		String todays=today.getYear()+"-"+today.getMonth()+"-"+today.getDay();
+		System.out.println("예약단 todays:"+todays);
 		model.addAttribute("todays",todays);
 		
 		model.addAttribute("userFstname", user.getUserFstName());
@@ -164,7 +168,6 @@ public class HostController {
 			System.out.println("숙소가 선택되었다!!객실을 가져오자");
 			
 			//제이슨에 List<RomVO>를 담아오자
-			JSONObject job= new JSONObject();
 			JSONArray jarr= new JSONArray();
 			log.info("acmNum check: " +  acmNum);
 			
@@ -189,7 +192,82 @@ public class HostController {
 			PrintWriter out = response.getWriter();
 			out.print(jarr);
 		}
-	
+		
+		@RequestMapping(value = "/returnRsrvs", method = RequestMethod.POST)
+		@ResponseBody
+		public void returnRsrvsPost(String acmNum,HttpServletRequest request, HttpServletResponse response)
+				throws IOException{	
+			
+			System.out.println("객실이 선택되었다!!예약정보를 뒤져오자");
+			log.info("acmNum check: " +  acmNum);
+
+			//한글 깨짐 방지
+			response.setContentType("text/plain;charset=UTF-8");
+		
+			List<String> list=rservice.getRomList(acmNum);
+			System.out.println("갖고나온 romNum드을:"+list+"/"+list.size()+"개");
+			
+			//제이슨에 List<BookingVO>를 담아오자
+			//JSONObject job= new JSONObject();
+			JSONArray jarr= new JSONArray();
+			if(list!=null) {
+				for(int i=0;i<list.size();i++) {
+					List<BookingVO> rsvs=bservice.getBookinfoRoms(list.get(i).trim());//romNum당
+					System.out.println("rom"+i+"의.."+rsvs.size()+"개"+rsvs);
+					for(int j=0;j<rsvs.size();j++) {
+						BookingVO rsv=rsvs.get(i);
+						String set=rsv.getCheckinDate()+"="+rsv.getCheckoutDate()+"="+rsv.getBookNum()+"="+rsv.getUserNum()+"="+rsv.getBookerFirstname()+"="+rsv.getBookPrice()+"="+rsv.getRomNum()+"="+rsv.getRomName();
+						System.out.println("set"+j+":"+set);
+						jarr.add(set);
+					}
+				}
+				
+				System.out.println("***"+jarr.toJSONString());
+				
+			}else {
+				System.out.println("선택한 숙소에 객실이 없습니다");
+			}
+			
+			PrintWriter out = response.getWriter();
+			out.print(jarr);
+		}
+		
+		
+		
+		
+		//객실이 선택되면 선택된 객실의 예약정보를 다 가져오자
+		/*@RequestMapping(value = "/returnRsrvs", method = RequestMethod.POST)
+		@ResponseBody
+		public void returnRsrvsPost(String romNum,HttpServletRequest request, HttpServletResponse response)
+				throws IOException{	
+			System.out.println("객실이 선택되었다!!예약정보를 뒤져오자");
+			
+			//제이슨에 List<RomVO>를 담아오자
+			//JSONObject job= new JSONObject();
+			JSONArray jarr= new JSONArray();
+			log.info("romNum check: " +  romNum);
+			
+			//한글 깨짐 방지
+			response.setContentType("text/plain;charset=UTF-8");
+			
+			//service에게 acmNum을 주고 rom들을 뒤져오게한다
+			List<BookingVO> list=bservice.getBookinfoRoms(romNum);
+			System.out.println(list);		
+			if (list!=null) {//return List<RomVO>
+				for(int i=0;i<list.size();i++) {
+					String set=list.get(i).getCheckinDate()+"="+list.get(i).getCheckoutDate()+"="+list.get(i).getUserNum()+"="+list.get(i).getBookerFirstname()+"="+list.get(i).getBookPrice();
+					System.out.println("*겟i:"+set);
+					
+					jarr.add(set);
+				}
+				System.out.println("***"+jarr.toJSONString());
+			} 
+			else {
+				System.out.println("선택한 숙소에 객실이 없습니다");
+			}
+			PrintWriter out = response.getWriter();
+			out.print(jarr);
+		}*/
 	
 
 	@GetMapping("/listings")

@@ -48,7 +48,7 @@ public interface BookingService {
 
 	public int dateGetinPayLater(String ownerUser,String today);
 
-
+	public List<BookingVO> getBookinfoRoms(String romNum);
 
 
 
