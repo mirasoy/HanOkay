@@ -9,6 +9,10 @@ pageEncoding="UTF-8"%>
 
 <style>
 
+body{
+height: 800px;
+}
+
 .mouse-icon{
 display:none;
 }

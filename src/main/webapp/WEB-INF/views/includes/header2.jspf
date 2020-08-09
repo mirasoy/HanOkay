@@ -18,7 +18,30 @@
    href="${request.contextPath}/resources/slick/slick-theme.css" >
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/templatemo-style.css">
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/review.css">
+<style type="text/css">
+@keyframes ringbell{
+    0.0%{
+        transform: rotate(45deg);
+    }
+    100%{
+        transform: rotate(45deg);
+    }
+    25.4%{
+        transform: rotate(-45deg);
+    }
+    49.7%{
+        transform: rotate(45deg);
+    }
+    74.7%{
+        transform: rotate(-45deg);
+    }
+}
 
+/* Add the animation: property to whichever element you want to animate */
+.ringbell{
+    animation: ringbell 0.5s ease 0s 2 normal none;
+}
+</style>
 <!-- 메인 CSS style -->
 
 <!-- load JS files -->
@@ -127,6 +150,29 @@
 	        gapi.auth2.init();
 	      });
 	    } 
+	 
+     
+		//안읽메세지갯수
+	   		  $.ajax({
+					type:'POST',
+					url: '/unreadMsg',
+					dataType: 'text',
+					data: {
+						'userNum':'d',
+					},
+					success: function(data){
+						if(data>0){
+						$("#bell").addClass("ringbell")		
+						$('#notification').empty();
+						 $('#notification')
+	                     .append(
+	                           "<li><a href='/chat/chatList'>안읽은 메세지 : "+data+"개</a></li>");
+						}
+					}
+		      
+		      
+					}); 	
+	 
 </script>
 </head>
 

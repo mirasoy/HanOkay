@@ -170,9 +170,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public boolean inactiveAcm(String acmNum) {
+	public boolean denyAcm(String acmNum) {
 		AcmVO acm= new AcmVO();
-		acm.setAcmActi("INACTIVE");
+		acm.setAcmActi("PENDING");
 		acm.setAcmStatus("DENIED");
 		acm.setAcmNum(acmNum);
 		
@@ -180,7 +180,7 @@ public class AdminServiceImpl implements AdminService{
 		
 		//숙소에 딸린 객실들도 INACTIVE-> INACTIVE/DENIED
 		RomVO rom= new RomVO();
-		rom.setRomActi("INACTIVE");
+		rom.setRomActi("PENDING");
 		rom.setRomStatus("DENIED");
 		rom.setAcmNum(acmNum);
 		

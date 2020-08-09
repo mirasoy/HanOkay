@@ -148,6 +148,19 @@ margin-left: 45px;
 
 		
 		</c:forEach>
+		
+	/* 	클릭시 화면 최상단으로 */
+		$(".aside").on("click",function(evt){
+			$("html,body").stop().animate({
+				scrollTop : 0
+			},400);
+
+			evt.preventDefault();
+		});
+
+		
+		
+		
 	</script>
 	
 	
