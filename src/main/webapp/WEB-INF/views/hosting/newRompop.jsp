@@ -85,27 +85,25 @@
 
 
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
-   <input type="hidden" id="ACM_NUM" name="ACM_NUM" >
-   <!-- 숙소 방 추가 모달로 띄우기-->
-   <form action="/hosting/modiRompop" id='roomForm'>
-	<br>
 
-		<div class="col-lg-10">
-		<select class="form-control"  style="width:150px;display:inline-block;" name="romNum" id="romNum">
-			
-		</select>
-			<span class="pull-right">
-				<button class="btn btn-default" type="button" data-oper='modiRom'>숙소 수정</button>
-				<button class="btn btn-danger" type="button" data-oper='removeRom'>객실 삭제</button>
-			</span>
+   <input type="hidden" id="ACM_NUM" name="ACM_NUM" value="">
+   <!-- 숙소 방 추가 모달로 띄우기-->
+   <form action="/hosting/become-host2_6" method="get" id='roomForm'>
+<br>
+		<div class="pull-right">
+	  	<button class="form-control"style="width:150px;" type="button" onclick="if(readyForreg()){romRegit()}">객실 등록</button><!-- ajax처리안함 -->
 		</div>
 		
-		<br><br>
+		
+      <h4>개별객실(베드룸) 추가하기</h4>
 
      <!-- <div id="image_container" style="width:200px;height:200px;"></div>
       <input type="file" id="ROM_PURL" name="ROM_PURL" placeholder="객실 사진" onchange="setThumbnail(event);"> --> 
 
     <div class="room" id="room" style="width:500px; display:inline-block;">
+      <div class="form-group">
+           <input class="form-control" id="ROM_NAME" name="ROM_NAME" placeholder="객실 이름" style="width:300px;"> 
+      </div>
       
       	<label for="ROM_TYPE">객실 타입</label>
          <select class="form-control" name="ROM_TYPE" id="ROM_TYPE" style="width:100px;display:inline-block;">
@@ -182,100 +180,11 @@
 	</div>
  
    </form>
-		
-		<!-- 빈 폼 -->
-		<form id="actionForm">
-		</form>
+
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-	$(document).ready(function(){
-	var acmRoms=document.getElementById("romNum");
-		
-		//회원(호스트)에 대한 숙소 깔아주기
-		<c:forEach items="${roms}" var="roms">
-		 	var opt = document.createElement("option");
-			opt.value="${roms.romNum}";
-		 	opt.innerHTML="${roms.romName}";
-		 	acmRoms.appendChild(opt);
-		</c:forEach>
-		
-		
-	});
-	
-	//버튼을 클릭하면
-	$(document).ready(function(){
-		var formObj = $("#actionForm");
-		var acmForm = $("#acmForm");
-
-
-		$('button').on("click", function(e){
-			e.preventDefault();
-			
-			var romNum = $("#romNum").val();//숙소번호 select에서 선택된 value
-			var acmNum = $("#ACM_NUM").val();
-			
-			var operation=$(this).data("oper");
-			console.log(operation);
-			
-			if(operation==='modiRom'){
-				if(readyForreg()===true){
-					
-					regiPhoto();
-
-					var romType = $("#ROM_TYPE").val();//룸타입
-					var romCapa = $("#ROM_CAPA").val();//객실최대인원수
-					var bedType = $("#BED_TYPE").val();//침대유형
-					var bedCnt = $("#BED_CNT").val();//침대갯수
-					var romSize = $("#ROM_SIZE").val();//객실크기
-					var romPrice = $("#ROM_PRICE").val();//객실가격
-					var romPname =$("input[name='romPname']").val();//사진이름
-					var romPurl = $("input[name='romPurl']").val();//사진이름
-					
-					//name/value 형태로 담는다
-					var allData = {
-						"acmNum": acmNum, "romType": romType, "romNum":romNum,
-						"romCapa": romCapa, "bedType": bedType, "bedCnt": bedCnt, "romSize": romSize,
-						"romPrice": romPrice, "romOptcode": romOptcode, "romPurl":romPurl, "romPname":romPname
-					}
-					$.ajax({
-						url: 'modiRompop',
-						type: "POST",
-						data: allData,
-						success: function (data) {
-							alert("객실이 수정되었습니다!");
-							self.close();
-							opener.document.location.href="/hosting/getAcm?acmNum="+acmNum;//약간 리로드
-						}
-					});
-				}
-			} else if(operation==='removeRom'){//getAcm 페이지
-				if(confirm("객실을 정말 삭제하시겠습니까?")==true){//객실 삭제
-					//alert(romNum+acmNum);
-					var allData = {
-						"acmNum": acmNum, "romNum":romNum
-					}
-					
-					$.ajax({
-						url: 'removeRom',
-						type: "GET",
-						data: allData,
-						success: function (data) {
-							alert("객실이 삭제되었습니다!");
-							self.close();
-							opener.document.location.href="/hosting/getAcm?acmNum="+acmNum;//약간 리로드
-						}
-					});
-					
-				} else {
-					return false;
-				}
-			
-			}  
-		});
-	});
 	
 	var chkArr = []; //배열 초기화
 	var romOptcode=0;
@@ -349,6 +258,39 @@
 	   }
 	   
 
+	function romRegit() {
+		
+		regiPhoto();
+				
+		var acmNum = $("#ACM_NUM").val();//숙소번호
+		var romName = $("#ROM_NAME").val();//객실이름
+		var romCapa = $("#ROM_CAPA").val();//객실최대인원수
+		var bedType = $("#BED_TYPE").val();//침대유형
+		var bedCnt = $("#BED_CNT").val();//침대갯수
+		var romSize = $("#ROM_SIZE").val();//객실크기
+		var romPrice = $("#ROM_PRICE").val();//객실가격
+		var romType = $("#ROM_TYPE").val();//룸타입
+		var romPname =$("input[name='romPname']").val();//사진이름
+		var romPurl = $("input[name='romPurl']").val();//사진이름
+		
+		//name/value 형태로 담는다
+		var allData = {
+			"acmNum": acmNum, "romType": romType, "romName": romName,
+			"romCapa": romCapa, "bedType": bedType, "bedCnt": bedCnt, "romSize": romSize,
+			"romPrice": romPrice, "romOptcode": romOptcode, "romPurl":romPurl, "romPname":romPname
+		}
+		$.ajax({
+			url: 'become-host2_6pop',
+			type: "POST",
+			data: allData,
+			success: function (data) {
+				alert("객실이 추가되었습니다.");
+				self.close();
+				opener.document.location.href="/hosting/getAcm?acmNum="+acmNum;
+			}
+		});
+	}
+	
 	
 	
 	
@@ -356,6 +298,9 @@
 	$("input:text[numberOnly]").on("keyup", function () {
 		$(this).val($(this).val().replace(/[^0-9]/g, ""));
 	});
+	
+	
+	
 	
 	
 
