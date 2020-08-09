@@ -96,7 +96,7 @@
                            <c:out value="${pendingacm.acmName}" />
                         </a>
                      </td>
-                     <td style="color:red;"><c:out value="${pendingacm.acmStatus}" /></td>
+                     <td style="color:red;" id="<c:out value='${pendingacm.acmStatus}' /><c:out value='${pendingacm.acmNum}' />"></td>
                      <td id="<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>"></td>
                      <td><c:out value="${pendingacm.acmDetailaddr}" /></td>
                      
@@ -171,17 +171,35 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-      
+   
+	
+	
+	
+	
+	
+	
+	
    <c:forEach items="${pendinglist}" var="pendingacm">
    var pendingacmType='<c:out value="${pendingacm.acmType}" />';
+   var pendingacmStatus='<c:out value="${pendingacm.acmStatus}" />';
    console.log(pendingacmType);
+   console.log(pendingacmStatus);
+   
    if(pendingacmType.trim()=="PD"||pendingacmType.trim()=="P"){//객실별
       $("#<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>").append("객실별");
    }
       
    else if(pendingacmType.trim()=="H"){//집천체
       $("#<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>").append("집천체");
-   }   
+   }
+   
+   if(pendingacmStatus.trim()=="PENDING"){//
+	      $("#<c:out value='${pendingacm.acmStatus}'/><c:out value='${pendingacm.acmNum}'/>").append("승인대기중");
+	   }
+	      
+ 	else if(pendingacmStatus.trim()=="REREG"){//집천체
+     $("#<c:out value='${pendingacm.acmStatus}'/><c:out value='${pendingacm.acmNum}'/>").append("재승인대기중");
+  	}
    </c:forEach>
    
    

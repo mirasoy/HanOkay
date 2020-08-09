@@ -81,17 +81,17 @@
 			  <h4> 시설 옵션</h4> <!-- checkbox는 name값을 key값으로 갖기때문에 같게 두고, value값만 다르게 준다 -->
 			  	<input type="checkbox" id="SW" name="acmOptcode" value="1"><label for="SW">수영장</label>
 			   <input type="checkbox" id="PK" name="acmOptcode" value="2"><label for="PK">주차장</label>
-			   <input type="checkbox" id="PU" name="acmOptcode" value="4"><label for="PU">공항 등 교통편 서비스</label>
+			   <input type="checkbox" id="PU" name="acmOptcode" value="4"><label for="PU">픽업 서비스</label>
 			   <input type="checkbox" id="GM" name="acmOptcode" value="8"><label for="GM">체육관/피트니스</label>
-			   <input type="checkbox" id="FD" name="acmOptcode" value="16"><label for="FD">24시간 프런트 데스크</label>
-			   <input type="checkbox" id="FA" name="acmOptcode" value="32"><label for="FA">가족/아동 여행객 친화형 시설</label>
+			   <input type="checkbox" id="FD" name="acmOptcode" value="16"><label for="FD">24시간 프런트</label>
+			   <input type="checkbox" id="FA" name="acmOptcode" value="32"><label for="FA">가족/아동 친화형</label>
 			   <input type="checkbox" id="NS" name="acmOptcode" value="64"><label for="NS">금연</label>
 			   <input type="checkbox" id="SP" name="acmOptcode" value="128"><label for="SP">스파/사우나</label><br>
 			   <input type="checkbox" id="RT" name="acmOptcode" value="256"><label for="RT"> 레스토랑</label>
 			   <input type="checkbox" id="SA" name="acmOptcode" value="512"><label for="SA"> 흡연구역</label>
-			   <input type="checkbox" id="WP" name="acmOptcode" value="1024"><label for="WP">반려동물 동반 가능</label>
-			   <input type="checkbox" id="AD" name="acmOptcode" value="2048"><label for="AD">장애인용 편의시설/서비스</label>
-			   <input type="checkbox" id="VC" name="acmOptcode" value="4096"><label for="VC">비즈니스 관련 편의 시설</label>
+			   <input type="checkbox" id="WP" name="acmOptcode" value="1024"><label for="WP">반려동물 동반</label>
+			   <input type="checkbox" id="AD" name="acmOptcode" value="2048"><label for="AD">장애우 시설/서비스</label>
+			   <input type="checkbox" id="VC" name="acmOptcode" value="4096"><label for="VC">비즈니스 특화</label>
 			   <input type="checkbox" id="WF" name="acmOptcode" value="8192"><label for="WF">인터넷</label>
 			   
 			   <br><br>
@@ -113,7 +113,7 @@
 		  <br><br><br>
 		</form>
 		</div>
-
+</div>
 <!-- return readyForreg() -->
 
 

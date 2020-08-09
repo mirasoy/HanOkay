@@ -28,5 +28,7 @@ public interface AcmRegService {//호스트 등록단에서
 	public int removeAcm(String acmNum, String userNum, String userPriv);
 	//숙소 재신청
 	public boolean reregAcm(String acmNum);
+	//숙소 변경
+	public boolean modiAcm(AcmVO vo);
 	
 }
