@@ -291,6 +291,13 @@
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	//사진크게보기
+	var img = document.getElementsByTagName("img");
+    for (var x = 0; x < img.length; x++) {
+      img.item(x).onclick=function() {window.open(this.src)}; 
+    }
+	
 		
 	var acmAc='<c:out value="${acm.acmActi}" />';//숙소ACTIVE여부
 		console.log(acmAc);
@@ -327,7 +334,7 @@ $(document).ready(function(){
 		
 		let j=0;
 		<c:forEach items="${acmPics}" var="pic">
-			mySlides[j].innerHTML+="<img style='align:center;width: 300px; height:auto;' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }"/>'>";
+			mySlides[j].innerHTML+="<img style='align:center;max-width: 250px; width:auto;height:300px;' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }"/>'>";
 			j++;
 		</c:forEach>
 	

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ana.domain.AcmDetailPicVO;
 import com.ana.domain.AcmVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserAcmVO;
 import com.ana.domain.UserVO;
+import com.ana.service.AcmDetailService;
 import com.ana.service.AdminService;
 import com.ana.service.CodeService;
 import com.ana.service.UserService;
@@ -37,6 +39,8 @@ public class AdminController {
 	private UserService uservice;//호스트 사업등록증관련
 	@Autowired
 	private CodeService codeService;
+	@Autowired
+	private AcmDetailService pservice;
 	
 	//세션에서 유저이름 가져오는 메서드
 	public UserVO getUser(HttpSession session) {
@@ -156,6 +160,12 @@ public class AdminController {
 		
 		//옵션코드List<codeVO>
 		model.addAttribute("acmCode", codeService.getAcmCode());
+		
+		//숙소사진List<AcmDetailPicVO>
+		List<AcmDetailPicVO> acmPics = pservice.getPicList(acmNum);
+		System.out.println(acmPics.size());
+		model.addAttribute("acmPics", acmPics);
+		
 		
 	}
 	
@@ -277,12 +287,12 @@ public class AdminController {
 		return "redirect:/admin/adminlistings";
 	}
 	
-	@PostMapping("/inactiveAcm")
-	public String inactiveAcmPost(String acmNum,Model model,HttpSession session) {
-		System.out.println("inactiveAcm Post");
+	@PostMapping("/denyAcm")
+	public String denyAcmPost(String acmNum,Model model,HttpSession session) {
+		System.out.println("denyAcm Post");
 		
 		//guest, active, 사업자번호 리셋
-		aservice.inactiveAcm(acmNum);
+		aservice.denyAcm(acmNum);
 		
 		//알림 보내기 기능추가할것 나중에
 		
@@ -356,6 +366,11 @@ public class AdminController {
 		//옵션코드List<codeVO>
 		model.addAttribute("acmCode", codeService.getAcmCode());
 		
+		//숙소사진List<AcmDetailPicVO>
+		List<AcmDetailPicVO> acmPics = pservice.getPicList(acmNum);
+		System.out.println(acmPics.size());
+		model.addAttribute("acmPics", acmPics);
+				
 	}
 	
 }

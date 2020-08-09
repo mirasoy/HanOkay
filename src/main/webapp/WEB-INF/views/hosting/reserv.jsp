@@ -54,6 +54,7 @@
 				<!-- /top -->
 				<div class="space">
 				    <span id="start" style="font-size:20px;">${todays}</span> <a href="#" onclick="picker.show(); return false;">달력에서 선택</a>
+					<button type="button" onclick="window.location.reload()">reset</button>
 				</div>
 			</div>
 		</div>
