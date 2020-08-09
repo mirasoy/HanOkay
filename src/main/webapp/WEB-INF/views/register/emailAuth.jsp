@@ -31,8 +31,8 @@ pageEncoding="UTF-8"%>
 			</div>
 		
 			<div class="contents_txt">
-				<h2>메일 발송 완료!</h2>
-				<p>입력하신 이메일 주소로 인증 링크를 발송했습니다. <br> <span class="red">링크를 클릭</span>하여 가입을 진행해주세요.</p>
+				<h2>이메일 발송 완료!</h2>
+				<p>입력하신 이메일 주소로 인증코드를 발송했습니다. </p>
 			</div>
 						
 			<form method="post" class="Emailform">
@@ -42,8 +42,8 @@ pageEncoding="UTF-8"%>
 				<button type="button" id="registerBtn" class="btn btn-sumbit">가입하기</button>
 			<br>
 			<div>
-				<span>인증번호가 도착하지 않았나요? </span>
-				<a style="color:#007bff;" id="sendAgainBtn">인증번호 재발송</a>
+				<span>인증코드가 도착하지 않았나요? </span>
+				<a style="color:#007bff;" id="sendAgainBtn">인증코드 재발송</a>
 				<br>
 			</div>
 				<input type="hidden" name="email" id= "email" value="${email }"><br>
@@ -83,7 +83,7 @@ pageEncoding="UTF-8"%>
 	            	  window.location.href="../acm/list";
 	            } 
 	              else if (data.msg === 'fail'){
-	            	alert("인증번호가 틀렸습니다! 인증번호를 다시 입력하세요. 인증번호를 재발급 받고싶다면 인증번호 재발급 버튼을 누르세요");
+	            	alert("인증코드가 틀렸습니다! 인증코드를 다시 입력하세요. 인증코드를 재발급 받고싶다면 인증코드 재발급 버튼을 누르세요");
 	            }
 	           },
 	          error: function (data) {
@@ -95,7 +95,7 @@ pageEncoding="UTF-8"%>
 	//인증번호 재발송 버튼 
 	$('#sendAgainBtn').on("click", function(){
 		let email= $("#email").val();
-		alert("email: "+ email);
+		alert(email+ "로 인증코드를 재발송합니다.");
 		
 		$.ajax({
             type: "POST",
@@ -111,11 +111,11 @@ pageEncoding="UTF-8"%>
              
        
               if(data.msg ==='success'){
-            	  alert("인증번호가 재발송되었습니다!현재페이지에서 다시 인증번호를 입력하세요");
+            	  alert("인증코드가 재발송되었습니다!현재페이지에서 다시 인증코드를 입력하세요");
             	 
               }
               else if (data.msg === 'fail'){
-            	alert("인증번호 재발송에 실패했습니다! 다른 이메일 주소로 다시 가입하세요");
+            	alert("인증코드 재발송에 실패했습니다! 다른 이메일 주소로 다시 가입하세요");
             }
            },
           error: function (data) {

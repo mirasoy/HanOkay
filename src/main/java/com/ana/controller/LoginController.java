@@ -169,6 +169,7 @@ public class LoginController {
 	private static final String MY_APP_GOOGLE_CLIENT_ID = "942421543250-i3vvb6s828smd122lqcdr0buvjg2p6ui.apps.googleusercontent.com";
 
 	@RequestMapping(value = "/login/tokenSignIn", method = RequestMethod.POST)
+	@ResponseBody
 	public void executeGoogleLogin(@RequestParam MultiValueMap<String, String> body, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) throws IOException, GeneralSecurityException {
 
@@ -214,6 +215,7 @@ public class LoginController {
 			result = service.executeGoogleLogin(email, familyName, givenName, session);
 
 			jso.put("result", result);
+			log.info("%%%%%%%%%%result: "+ result);
 			PrintWriter out = response.getWriter();
 			out.print(jso);
 			
