@@ -41,26 +41,26 @@ public class ChatController {
 	private UserService uService;
 	@Autowired
 	private ChatRomService chService;
-
-	@RequestMapping(value = "chat/chattingView", method = RequestMethod.GET)
-	public ModelAndView chat(@RequestParam("toID") String toID, ModelAndView mv, HttpSession session) {
-
-		user = (UserVO) session.getAttribute("user");
-		if (user != null) {
-
-			UserVO toUser = uService.getUserById(toID);
-
-			mv.setViewName("chat/chatRoom");
-			mv.addObject("user", user);
-			mv.addObject("conversation", service.readConversation(user.getUserNum(), toID));
-			System.out.println("toUser ---->>>>" + toUser);
-			mv.addObject("toUser", toUser);
-
-		} else {
-			mv.setViewName("acm/list");
-		}
-		return mv;
-	}
+//
+//	@RequestMapping(value = "chat/chattingView", method = RequestMethod.GET)
+//	public ModelAndView chat(@RequestParam("toID") String toID, ModelAndView mv, HttpSession session) {
+//
+//		user = (UserVO) session.getAttribute("user");
+//		if (user != null) {
+//
+//			UserVO toUser = uService.getUserById(toID);
+//
+//			mv.setViewName("chat/chatRoom");
+//			mv.addObject("user", user);
+//			mv.addObject("conversation", service.readConversation(user.getUserNum(), toID));
+//			System.out.println("toUser ---->>>>" + toUser);
+//			mv.addObject("toUser", toUser);
+//
+//		} else {
+//			mv.setViewName("acm/list");
+//		}
+//		return mv;
+//	}
 
 	@PostMapping(value = "chat/chatRoom")
 	public ModelAndView chatRoom
@@ -190,8 +190,6 @@ public class ChatController {
 					}
 
 					// 안읽은 메세지 몇개인지 알려주기
-				
-					
 					
 					
 					List<MsgVO> conversation = service.readConversation(user.getUserNum(),
@@ -211,6 +209,7 @@ public class ChatController {
 					// 다음 메세지들 중에서 니가 보낸거 고르기
 					
 					log.info("4");
+					log.info(vo.getOtherUser().getUserFstName()+":unread::" + count);
 					vo.setUnread("" + count);
 				}
 				mv.addObject("requestURL", url);
@@ -274,4 +273,21 @@ public class ChatController {
 		return null;
 	}
 
+	@PostMapping(value = "/unreadMsg")
+	@ResponseBody
+	public ResponseEntity<String> unreadMsg(HttpSession session) {
+		
+		user = (UserVO) session.getAttribute("user");
+		// 로그인 여부확인하기
+		if (user != null) {
+		service.unreadMsg(user.getUserNum());
+		return new ResponseEntity<String>(""+(service.unreadMsg(user.getUserNum())),HttpStatus.OK);
+		}
+		return null;
+		
+	}
+	
+	
+	
+	
 }

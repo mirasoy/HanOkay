@@ -51,6 +51,8 @@ text-align: center;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
+  position: relative;
+}
 }
 .darker {
   border-color: #ccc;
@@ -240,11 +242,12 @@ function messageListLoad(){  //변수 안에 function자체를 넣음.
 	}		
 	
 	
-		if(<c:out value="${chatList.unread }" />!=0){
-			str2 += "<div class='unread'><p><c:out value="${chatList.unread }" /></p></div>"
-		}
+	
 		
 			str2 += "<div class='chatContainer chatrom' value='<c:out value="${chatList.chatromnum }" />'>"
+			if(<c:out value="${chatList.unread }" />!=0){
+				str2 += "<div class='unread'><p><c:out value="${chatList.unread }" /></p></div>"
+			}
 			str2 += "<img src='http://www.jisadong.com/data/file/fun/3034803641_BYV8GFmL_2391224.jpeg'  class ='right' style='width:100%;'>"
 			str2 += "<p><h5><c:out value="${chatList.otherUser.userFstName }" /><c:out value="${chatList.otherUser.userLastName }" /></h5></p>"
 			str2 += "<p><c:out value="${chatList.lastchat }" /></p> "

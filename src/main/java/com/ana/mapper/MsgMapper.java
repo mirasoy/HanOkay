@@ -12,5 +12,7 @@ public interface MsgMapper {
 	
 	public int marksRead(String MsgNum);
 	
+	public Integer unreadMsg(String userNum);
+	
 	public List<MsgVO> readConversation(@Param("userNum1") String userNum1, @Param("userNum2") String userNum2);
 }

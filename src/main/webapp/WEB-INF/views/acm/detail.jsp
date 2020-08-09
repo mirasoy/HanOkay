@@ -68,6 +68,7 @@ String checkout = request.getParameter("out");
 			<span>
 				<form class = 'right' action='/chat/chatRoom' method='POST'>
 				<input type='hidden' name='chatromnum' value='newChatr::${acmOwnerNum }'>
+				<input type='hidden' name='requestURL' value='new'>
 				<button id="message" class = 'btn right' style="width:100%;height: 100%;"><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i></button></form>
 			</span>
 			<!-- 찜목록 기능 -->
