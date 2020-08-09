@@ -10,4 +10,12 @@ public class WishListVO {
 	private String acmNum;
 	private String listTitle;
 	private String listContent;
+	
+	private AcmVO acm;
+	{
+		acm = new AcmVO();
+	}
+	
+	
+	
 }
