@@ -757,6 +757,21 @@ public class HostController {
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
-		return "/acm/list";//호스트가 가진 숙소 쪽으로 감
+		return "/hosting/listings";//호스트가 가진 숙소 쪽으로 감
 	}
+	
+	@GetMapping("/reregAcm")
+	public void reregAcmGet() {
+		System.out.println("reregAcm페이지를 띄운다**");
+	}
+	
+	@PostMapping("/reregAcm")//재신청~
+	public String reregAcm(String acmNum,Model model,HttpSession session) {
+		System.out.println("reregAcmPost");
+		aservice.reregAcm(acmNum);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+		
+		return "redirect:/hosting/listings";//호스트가 가진 숙소 쪽으로 감
+	}
+	
 }

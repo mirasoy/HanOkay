@@ -38,7 +38,7 @@
 		<br>		
 		<!-- 중앙정렬 -->
 		<div style="margin-left:15%;margin-right:15%;">		
-		 <h3><c:out value="${userFstname}"/> 호스트님의 숙소별 모아보기</h3>
+		 <h3><c:out value="${userFstname}"/> 호스트님의 숙소별 예약 모아보기</h3>
 
 	      <select class="form-control" style="width:160px;display:inline-block;" name="ACM_NUM" id="ACM_NUM" onchange="categChange(this)">
 	        <option>숙소 선택</option>
