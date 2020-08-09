@@ -237,17 +237,12 @@ String checkout = request.getParameter("out");
 	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
 
 </div><!-- end of page -->
-
+<script type="text/javascript" src="/resources/js/wishlist.js"></script>
 	<script>
 			window.onload = function() {
 				 if (window.history.replaceState) {
 				      window.history.replaceState(null, null, window.location.href);
 				    }
-			
-			// 인원, 날짜 셋팅
-			document.getElementById("person").value= <%=person%>; 
-			document.getElementById("in").value = '<%=checkin%>';
-			document.getElementById("out").value = '<%=checkout%>'; 
 			
 			// 숙소 평균 별점
 			getStar(); 
@@ -266,6 +261,10 @@ String checkout = request.getParameter("out");
 			getAcmOpt(); 
 			getRomOpt();
 			
+			// 인원, 날짜 셋팅
+			document.getElementById("person").value= <%=person%>; 
+			document.getElementById("in").value = '<%=checkin%>';
+			document.getElementById("out").value = '<%=checkout%>'; 
 		}
 		
 		
