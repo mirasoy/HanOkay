@@ -137,6 +137,7 @@ throws IOException{
 	
 	//인증코드를 재생성하고 이메일 재발송하는 메서드
 	@PostMapping("/sendAgain")
+	@ResponseBody
 	public void sendAuthEmailAgain(String email, HttpServletResponse response) throws IOException {
 		log.info(":::email 왔냐: "+ email);
 	
@@ -149,10 +150,7 @@ throws IOException{
 		else {
 			jso.put("msg", "fail");
 		}
-		
-		
-		
-		
+			
 		PrintWriter out= response.getWriter();
 		out.print(jso);
 	}

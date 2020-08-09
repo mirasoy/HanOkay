@@ -60,7 +60,11 @@ public interface UserService {
 	@Transactional 
 	public boolean updateAuthCode(@Param("email") String email, @Param("authCode") String authCode);
 	 
-
+	//pwd 찾기에서 authcode
+	@Transactional
+	public boolean sendAuthCode2FindPwd(@Param("email")String email);
+	
+	
 	@Transactional
 	public boolean sendAuthCode(String email);
 	
@@ -75,6 +79,8 @@ public interface UserService {
 	//프로필 정보를 업데이트 하는 메서드
 	public boolean updateProfile(UserProfileVO profile);
 	
+	@Transactional
+	public boolean matchAuthCodeAndGiveSession(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session);
 	
 	////////////////////////림쨩 ////////////////
 	

@@ -46,6 +46,7 @@ form {
     padding-right: 8px !important;
     min-height: 1px !important;
     position: relative !important;
+    top: 155px;
   }
 
   @media (min-width: 1128px){  
@@ -160,7 +161,7 @@ form {
 <%@include file="../includes/header3.jspf"%>
 
 <div class="container">
-
+<div style="position:absolute; margin-top:0;margin-bottom:0;margin-left:0;margin-right:0;">
   <div class="out_SR">
     <section>
       <div
@@ -169,13 +170,15 @@ form {
           margin-top: 64px;
           margin-bottom: 56px;
           margin-left: 16px;
+          postion: relative;
         ">
       <h1>
-      <div class="header2_SR">Han:Ok에서 그동안 몰랐던 국내여행지의 아름다움을 발견해보세요 </div>
+      <div class="header2_SR" >Han:Ok에서 그동안 몰랐던 국내여행지의 아름다움을 발견해보세요 </div>
       </h1>
     </div>
     <!--  action= "/register/emailAuth" -->
   </section>
+</div>
 </div>
 
 
@@ -247,23 +250,27 @@ form {
         </div>
       </div>
 
-       <div style="margin-top: 10px;">
-           <button id="loginButton" type="button" class="btn btn-default" style="width: 100%;">
+		<div style="margin-top: 25px;">
+       		<div style="margin-top: 10px;">
+           		<button id="loginButton" type="button" class="btn btn-default" style="width: 100%;">
                	로그인
-           </button>
-       </div>
+         		</button>
+       		</div>
        
-         <div style="margin-top: 10px;">
-            <button
-               style="width: 100%;"
-                id="findPwdBtton"
-                type="button"
-                class="btn btn-default"
-                onclick="location.href='/account/myAccount/findPwd'"
-              >
-                비밀번호 찾기
-            </button>
+       	  	<div style="margin-top: 10px;">
+	           	 <button
+	               style="width: 100%;"
+	                id="findPwdBtton"
+	                type="button"
+	                class="btn btn-default"
+	                onclick="location.href='/account/myAccount/findPwd'"
+	              >
+              		  비밀번호 찾기
+           		 </button>
+         
+         	 </div>
           </div>
+          
         </form>
     </div>
 
@@ -272,10 +279,10 @@ form {
          
          
         
-      <input type="text" name="requestFrom" value="${requestFrom}" />
+      <input type="hidden" name="requestFrom" value="${requestFrom}" />
     </div>
 
-    <div style="margin-top:25px;">
+    <div style="margin-top:45px; font-weight: 500">
       	<div style="margin-left: 104px;">
           Han:Ok의 회원이 되어 더 많은 혜택을 누려보세요!
      	</div>

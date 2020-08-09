@@ -77,7 +77,7 @@ var latitude;
                             "&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=O&numOfRows=50&pageNo=1&_type=json"
 
 						//관광지 검색 펑션 실행
-                        visitkorea(visitkoreaUri);
+           //             visitkorea(visitkoreaUri);
 
                     },
                     error: function (resultArr) {

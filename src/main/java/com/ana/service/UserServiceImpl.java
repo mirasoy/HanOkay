@@ -100,7 +100,9 @@ public class UserServiceImpl implements UserService{
 				return result;
 			}
 			//1.2회원가입 경로가 G가 아니면 
-			
+			//이미 해당이메일로 id/pw 가입한 적이 있다.
+			//이럴때는 그 해당 이메일로 로그인하게 해야함
+			//return 1;
 		}	
 	
 		//2.없으면 회원가입 시키고 경로에 G를 붙여준다
@@ -261,6 +263,8 @@ public class UserServiceImpl implements UserService{
 		return mapper.updateProfile(profile)==1;
 	}
 
+	
+	
 	//user의 인증코드를 업데이트 하게하는 메서드
 	@Override
 	public boolean updateAuthCode(@Param("email") String email, @Param("authCode") String authCode) {
@@ -272,7 +276,7 @@ public class UserServiceImpl implements UserService{
 	public boolean sendAuthCode(String email) {
 		System.out.println("email 왔니 서비스에:: "+ email);
 		
-		//db에 있는지 확인하고
+		//db에 해당 이메일이 있으면
 		if(!canRegister(email)) {
 			//난수를 다시 생성
 			String authCode=numberGen(6,2);
@@ -282,11 +286,45 @@ public class UserServiceImpl implements UserService{
 			}
 
 		}
+		//db에 해당 이메일이 없음!
 		return false;
 	}
 
-  
-	
+
+	@Override
+	public boolean sendAuthCode2FindPwd(String email) {
+		System.out.println("email 왔니 서비스에:: "+ email);
+		
+		//db에 해당 이메일이 있으면
+		if(!canRegister(email)) {
+			//난수를 다시 생성
+			String authCode=numberGen(6,2);
+			if(updateAuthCode(email, authCode)) {
+				emailService.sendAuthEmail2FindPwd(email, authCode);
+				return true;
+			}
+
+		}
+		//db에 해당 이메일이 없음!
+		return false;
+	}
+
+	@Transactional
+	@Override
+	public boolean matchAuthCodeAndGiveSession(@Param("email") String email, @Param("enteredAuthCode")String authCode, HttpSession session) {
+		
+		if(matchAuthCode(email, authCode)) {
+			UserVO user= getUserById(email);
+			user.setUserPwd("");
+			System.out.println("인증코드 맞으니까 로그인 시켜주께~~~");
+			
+			session.setAttribute("user", user);
+			System.out.println("세션에 있는 유저는!!"+ user );
+			return true;
+		}
+		System.out.println("인증코드가 틀려버렸네 ㅠ");
+		return false;
+	}
 	
 	//인증번호 생성 메서드
 	 public static String numberGen(int len, int dupCd ) {
@@ -330,5 +368,7 @@ public class UserServiceImpl implements UserService{
 		return mapper.getAcmOwner(bizregnum);
 	}
 
-  
+	
+
+
 }
