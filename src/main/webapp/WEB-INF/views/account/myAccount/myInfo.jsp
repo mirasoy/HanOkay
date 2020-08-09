@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
 <%@include file="../../includes/header1.jspf"%>
-<title>HanOkay-개인정보</title>
+<title>Han:Ok - 개인정보</title>
 <style type="text/css">
   main,
   section,

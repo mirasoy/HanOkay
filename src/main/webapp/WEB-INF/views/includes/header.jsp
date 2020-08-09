@@ -144,12 +144,15 @@ if (user != null) {
                     
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
                      $('#myMenuIcon').removeAttr("data-toggle");
-                     $('#notification').empty();
+
+
                      //회원 가입하라고 메세지 주기
+                    
                      //드랍 다운 상자를 responsive로 변경하면 좋겠다
-                     $('#notification')
-                           .append(
-                                 "<li><a href='#'>ana의 회원이 되셔서 <br>더 많은 혜택을 누려보세요!</a></li>");
+                     $('#msgText')
+                           .html(
+                                 "ana의 회원이 되셔서 더 많은 혜택을 누려보세요!");
+                     
                      //내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
                      $('#myMenuIcon').attr("href", "/user/login");
                      
@@ -441,7 +444,7 @@ if (user != null) {
                            href="#"> <i class="fa fa-bell fa-2x" id="bell"></i></a>
                            <ul class="dropdown-menu" id="notification">
                            
-							<li><a href='/chat/chatList'>도착한 메세지가 없습니다.</a></li>
+							<li><a href='/chat/chatList' id="msgText">도착한 메세지가 없습니다.</a></li>
                            </ul></li>
 
                         <!-- Start : mainNav3 - 마이페이지-->
