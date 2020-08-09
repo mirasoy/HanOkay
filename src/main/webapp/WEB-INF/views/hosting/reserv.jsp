@@ -53,7 +53,7 @@
 		    <div>
 				<!-- /top -->
 				<div class="space">
-				    <span id="start">${todays}</span> <a href="#" onclick="picker.show(); return false;">월별로 찾기</a>
+				    <span id="start" style="font-size:20px;">${todays}</span> <a href="#" onclick="picker.show(); return false;">달력에서 선택</a>
 				</div>
 			</div>
 		</div>
@@ -76,9 +76,13 @@
     });
 
     
+    // behavior and appearance 기본셋팅값
     var dp = new DayPilot.Month("dp");
-    // behavior and appearance
     dp.theme = "month_green";
+   
+    
+    
+    
     var today=document.getElementById("start").innerText;
 	//alert("오늘:"+today);
     // view
@@ -88,6 +92,7 @@
     // for (var i = 0; i < 10; i++) {
         var duration = Math.floor(Math.random() * 1.2);
         var start = Math.floor(Math.random() * 6) - 3; // -3 to 3
+	    dp.init();
 
         /*var e = new DayPilot.Event({
             start: new DayPilot.Date("2020-08-04"),
@@ -126,7 +131,7 @@
         alert("clicked: " + args.e.id());
     };
     */
-    dp.init();
+    
 
 	$(document).ready(function() {
 	    var url = window.location.href;
@@ -193,17 +198,15 @@
 	      	   }
 	      	 });
 	}*/
-	
 	//객실이 선택되면 예약된 정보들을 다 가져오자
 	function categChange(e){
-		alert("객실 선택!"+e.value);
 		var acmNum=e.value;
-		console.log("객실선택!"+acmNum);
-		
 		//초기화인가..
-		dp.init();
-		
-		
+		 dp = new DayPilot.Month("dp");
+		 dp.theme = "month_green";
+		 
+		 
+		 
 		var obj= new Object();
 		obj.romNum="romNum";
 		obj.romName="romName";
@@ -269,7 +272,7 @@
 	      	            id: DayPilot.guid(),
 	      	            text: note
 	      	        });
-	      			
+	      			dp.clearSelection();
 	      			 dp.events.add(e);
 	      		   
 	      		   }
@@ -284,7 +287,7 @@
 		
 	
 	}
-
+	
 	
 	function getFormatDate(date){
 		//Sun Nov 22 00:00:00 KST 2020 의 형식으로 옴..

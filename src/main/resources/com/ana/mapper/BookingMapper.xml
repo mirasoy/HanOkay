@@ -411,7 +411,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getBookinfoRoms" resultMap="hBookVOResult">	<!-- 투숙취소빼고 가져온다 -->
 	<![CDATA[
-	SELECT distinct
+	SELECT 
 		R.ROM_NUM,R.ROM_NAME,A.ACM_NUM,A.ACM_NAME,
 	    B.BOOK_NUM,B.checkin_Date,B.cheCkout_Date,B.book_status,
 	    B.book_Price, B.booker_firstname,B.user_num
