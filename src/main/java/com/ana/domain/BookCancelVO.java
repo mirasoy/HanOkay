@@ -15,6 +15,8 @@ public class BookCancelVO {
 	private Date checkinDate;
 	private Date checkoutDate;
 	private Integer bookPrice;
+	private String acmPurl;
+	private String acmPname;
 
 	
 	

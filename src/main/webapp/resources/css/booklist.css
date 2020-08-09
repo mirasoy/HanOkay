@@ -133,7 +133,7 @@
 
 .button-item{
     font-weight: 700;
-        box-shadow: 0 4px 10px 0 #bec2c9;
+     /*    box-shadow: 0 4px 10px 0 #bec2c9; */
     border-top: 1px solid;
     width: 100%;
     display: -webkit-box;
@@ -199,6 +199,8 @@
 
 }
 
+
+
 .button-item-2>button{
 
     background-color: #61dafb;
@@ -209,8 +211,16 @@
     border-radius: 3px;
     display: inline-block;
     margin-bottom: 0;
-    padding: 8px 32px;
+      margin: 10px;
     cursor: pointer;
     border: none;
     outline: 0;
+}
+
+.button-item-2>button>a{
+	  color: #fff;
+	  
+
+    padding: 8px 32px;
+    display: block;
 }
