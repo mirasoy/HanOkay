@@ -21,4 +21,5 @@ public interface AcmService {
 	
 	public int getTotal(Criteria cri);
 
+	public List<AcmVO> getSeoulList();
 }

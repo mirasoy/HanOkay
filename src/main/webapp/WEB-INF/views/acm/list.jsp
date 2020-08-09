@@ -333,16 +333,7 @@ display: block;
 										<div class="formLayout1">
 											<div class="form-group1 pt8px">
 												<span>Guests</span>
-  <!-- <div class="ui dropdownpp">
-  <div onclick="myFunction()" class="dropbtnpp">인원수</div>
-  <div id="myDropdownpp" class="dropdown-contentpp">
-    <div  class = "people">성인 : <button type="button" class="ppBtn">-</button><button type="button" class="ppBtn">+</button></div>  
-  	<div class = "people">아동 : <button type="button" class="ppBtn">-</button><button type="button" class="ppBtn">+</button></div>  
-  </div>
-</div>
-		 -->
-		 
-		 
+  
 		 										 <select class="form-control1"
 		 
 													id="person" name="person">
