@@ -388,7 +388,7 @@ if (user != null) {
                            class="nav-link dropdown-toggle" data-toggle="dropdown"
                            href="#"> <i class="fa fa-globe fa-2x"></i></a>
                            <ul class="dropdown-menu">
-                              <li><a href="#">ENGLISH(미구현)</a></li>
+                              <li><a href="#">ENGLISH</a></li>
                               <li><a href="#">KOREAN</a></li>
                            </ul></li>
 
@@ -398,7 +398,7 @@ if (user != null) {
                            href="#"> <i class="fa fa-bell fa-2x"></i></a>
                            <ul class="dropdown-menu" id="notification">
                               <li><a href="#">예약이 완료되었습니다</a></li>
-                              <li><a href="#">ana의 회원가입을 환영합니다!</a></li>
+                              <li><a href="#">회원가입을 환영합니다.</a></li>
 
                            </ul></li>
 
