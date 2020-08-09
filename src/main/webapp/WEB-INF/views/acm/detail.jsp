@@ -583,14 +583,14 @@ String checkout = request.getParameter("out");
 				if(modalInputuserNum == ""){								
 		 			alert("로그인이 필요합니다.")
 		 			}else{
-						alert("하트를 눌렀습니다!"); 
+						//alert("하트를 눌렀습니다!"); 
 							if($(this).children(0).hasClass("fa-heart")==1){
 								alert("이미 추가한 숙소입니다.");
 								}else{
-									alert("찜합니다.");
+									alert("찜 목록에 추가했습니다.");
 									$(this).children().attr('class','fa fa-heart fa-2x');
-									$(".wishmodal").modal("show"); 
-				 					modal.addClass("show") ;
+									//$(".wishmodal").modal("show"); 
+				 					//modal.addClass("show") ;
 								}
 		 				}  									
 					}		
@@ -605,12 +605,12 @@ String checkout = request.getParameter("out");
 				var modalInputlistTitle = $("select[name='listTitle']").val();
 				var modalInputlistContent = modal.find("input[name='listContent']").val();
 				
-				alert(1);
+				//alert(1);
 				
 				 wishService.add({
 					 userNum : modalInputuserNum, acmNum: modalInputacmNum, listTitle: modalInputlistTitle, listContent: modalInputlistContent 
 				 }, function(result){
-					 modal.modal('hide');
+					// modal.modal('hide');
 					 //console.log("Result : " + result)
 					 
 					 if(result==("fail..")){
