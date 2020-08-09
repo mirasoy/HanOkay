@@ -38,16 +38,16 @@
 		<br>		
 		<!-- 중앙정렬 -->
 		<div style="margin-left:15%;margin-right:15%;">		
-		 <h3><c:out value="${userFstname}"/> 호스트님의 숙소, 객실별 모아보기</h3>
+		 <h3><c:out value="${userFstname}"/> 호스트님의 숙소별 모아보기</h3>
 
 	      <select class="form-control" style="width:160px;display:inline-block;" name="ACM_NUM" id="ACM_NUM" onchange="categChange(this)">
 	        <option>숙소 선택</option>
 	        
 	     </select>
 	
-	      <select class="form-control" style="width:160px;display:inline-block;" name="ROM_NUM" id="ROM_NUM" onchange="selectRom(this)">
+	     <!--  <select class="form-control" style="width:160px;display:inline-block;" name="ROM_NUM" id="ROM_NUM" onchange="selectRom(this)">
 	        <option>객실 선택</option>
-	     </select>
+	     </select> -->
 	
 		<div id="content">
 		    <div>
@@ -77,9 +77,12 @@
 
     
     var dp = new DayPilot.Month("dp");
-
+    // behavior and appearance
+    dp.theme = "month_green";
+    var today=document.getElementById("start").innerText;
+	//alert("오늘:"+today);
     // view
-    dp.startDate = "2020-08-01";  // or just dp.startDate = "2013-03-25";
+    dp.startDate = today;  // or just dp.startDate = "2013-03-25";
 
     // generate and load events
     // for (var i = 0; i < 10; i++) {
@@ -87,13 +90,13 @@
         var start = Math.floor(Math.random() * 6) - 3; // -3 to 3
 
         /*var e = new DayPilot.Event({
-            start: new DayPilot.Date("2020-08-04T00:00:00"),
-            end: new DayPilot.Date("2020-08-15T12:00:00"),
+            start: new DayPilot.Date("2020-08-04"),
+            end: new DayPilot.Date("2020-08-15"),
             id: DayPilot.guid(),
             text: "dd " 
         });
         dp.events.add(e);
-
+        
         var e = new DayPilot.Event({
             start: new DayPilot.Date("2020-08-09T00:00:00"),
             end: new DayPilot.Date("2020-08-15T12:00:00"),
@@ -130,6 +133,8 @@
 	    var filename = url.substring(url.lastIndexOf('/')+1);
 	    if (filename === "") filename = "index.html";
 	    $(".menu a[href='" + filename + "']").addClass("selected");
+
+
 	});
 	        
 	$(document).ready(function(){
@@ -146,7 +151,7 @@
 	});
 
 	//숙소가 선택되면 일어나는 이벤트
-	function categChange(e){
+	/*function categChange(e){
 		//선택되면 객실 option 다 비워주기
 		$("select#ROM_NUM option").remove();
 		//alert(e.value);//숙소 번호나옴
@@ -187,12 +192,125 @@
 	      		  window.location.href ="../error/error";
 	      	   }
 	      	 });
-	}
+	}*/
 	
-	function selectRom(e){
+	//객실이 선택되면 예약된 정보들을 다 가져오자
+	function categChange(e){
 		alert("객실 선택!"+e.value);
+		var acmNum=e.value;
+		console.log("객실선택!"+acmNum);
+		
+		//초기화인가..
+		dp.init();
+		
+		
+		var obj= new Object();
+		obj.romNum="romNum";
+		obj.romName="romName";
+		obj.checkinDate="checkinDate";
+		obj.checkoutDate="checkoutDate";
+		obj.bookNum="bookNum";
+		obj.bookerFirstname="bookerFirstname";
+		obj.bookPrice="bookPrice";	
+		
+		obj.userNum="userNum";		
+		obj.bookerFirstname="bookerFirstname";		
+		
+		var jsonData = JSON.stringify(obj);
+		
+		 
+		$.ajax({
+	      	   type: 'POST',
+	      	   url: '/hosting/returnRsrvs',
+	      	   dataType: 'json',
+	      	   data: {
+	      		   'acmNum': acmNum
+	      	   },
+	      	   //async: false,
+	      	   success: function(data){
+	      		   console.log("제이슨예약정보를 가지고 돌아와따:"+data);//개많을거임
+					
+	     			console.log("길이:"+data.length);	
+	      		   for(var i=0;i<data.length;i++){
+	      			   //alert(data[i]);
+	      			   var splited=data[i].split('=');
+	      			   
+	      			   var chkinDate=splited[0];
+	      			   console.log("변환전:"+chkinDate);
+	      			   chkinDate = getFormatDate(chkinDate);
+	      			   console.log("변환되어 받음:"+chkinDate);
+	      			   
+	      			   var chkoutDate=splited[1];
+	      			   console.log("변환전:"+chkoutDate);
+	      			   chkoutDate = getFormatDate(chkoutDate);
+	      			   console.log("변환되어 받음:"+chkoutDate);
+	      			   
+	      			   
+	      			   var bookNum=splited[2];
+	      			   var userNum=splited[3];
+	      			   var bookerFirstname=splited[4];
+	      			   var bookPrice=splited[5];
+	      			   var romNum=splited[6];
+	      			   var romName=splited[7];
+	      			   
+	      			   
+	      			   
+	      			    console.log(chkinDate);
+	      			 	console.log(chkoutDate);
+		      			console.log(userNum);
+		      			console.log(bookerFirstname);
+		      			console.log(bookPrice);
+	      			   	
+		      			var note="["+bookNum+"]"+romName+"/"+userNum+"_"+bookerFirstname+"/"+bookPrice+"원";
+		      			
+	      			 var e = new DayPilot.Event({
+	      	            start: new DayPilot.Date(chkinDate),
+	      	            end: new DayPilot.Date(chkoutDate),
+	      	            id: DayPilot.guid(),
+	      	            text: note
+	      	        });
+	      			
+	      			 dp.events.add(e);
+	      		   
+	      		   }
+	      		 	
+	      		   dp.init();
+	      	   },
+	      	   error: function(data){
+	      		   alert("제이슨에러!");
+	      		  window.location.href ="../error/error";
+	      	   }
+	      	 });
+		
+	
 	}
 
+	
+	function getFormatDate(date){
+		//Sun Nov 22 00:00:00 KST 2020 의 형식으로 옴..
+		
+		var year=date.substring(date.length-4);
+	    var month = date.substring(4,7);
+	    if(month=="Jan")month="01";
+	    else if(month=="Feb")month="02";
+	    else if(month=="Mar")month="03";
+	    else if(month=="Apr")month="04";
+	    else if(month=="May")month="05";
+	    else if(month=="Jun")month="06";
+	    else if(month=="Jul")month="07";
+	    else if(month=="Aug")month="08";
+	    else if(month=="Sep")month="09";
+	    else if(month=="Oct")month="10";
+	    else if(month=="Nov")month="11";
+	    else if(month=="Dec")month="12";
+	    
+	    var day=date.substring(8,10);
+	    
+	    
+	    var date=year + '-' + month + '-' + day; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+	    console.log("변환:"+date);
+	    return date;        
+	}
 
 </script>	
 	
