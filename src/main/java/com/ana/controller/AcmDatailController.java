@@ -46,16 +46,8 @@ public class AcmDatailController { // 숙소 상세페이지
 		.addAttribute("acmCode", codeService.getAcmCode())
 		.addAttribute("romCode", codeService.getRomCode())
 		.addAttribute("acmOwnerNum", userService.getAcmOwner(acmService.get(acmNum).getBizRegnum()).getUserNum());
-		log.info("@@@@1:"+checkin+" "+checkout);
 		String[] tmp = getDate(checkin , checkout);
-		log.info("@@@@2:"+checkin+" "+checkout);
-		if(service.getRomList(checkin,checkout,acmNum, person).isEmpty()) {
-			model.addAttribute("rom", service.getRomAll(checkin,checkout,acmNum));
-		}else {
-			model.addAttribute("rom", service.getRomList(checkin,checkout,acmNum, person));
-		}
-		
-		//String[] tmp = getDate(checkin , checkout);
+		model.addAttribute("rom", service.getRomList(checkin,checkout,acmNum, person));
 		model.addAttribute("in", tmp[0])
 		.addAttribute("out", tmp[1]);
 	}

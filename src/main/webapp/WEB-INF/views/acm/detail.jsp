@@ -4,9 +4,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@include file="../includes/header.jsp"%>
-<% String person = request.getParameter("person"); %>
+<% 
+String person = request.getParameter("person"); 
+String checkin = request.getParameter("in"); 
+String checkout = request.getParameter("out"); 
+%>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/suhee.css">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="${request.contextPath}/resources/css/t-datepicker-blue.css" rel="stylesheet" type="text/css">
+<script src="${request.contextPath}/resources/js/t-datepicker.js"></script>
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
+
 	
 <div class = "page-wrapper">
 	<div class = "page-contnets" style="width: 100%;">
@@ -23,34 +31,35 @@
 			
 		<!-- 검색 조건 -->
 		<div class = "container-search box" id="datepicker">
-				<form>
-					<div class="booking-search-row"> 
-						<div class="row">
-							<div class="booking-group">
-								<span class="form-label">Checkin</span>
-								<input class="form-control" type="text" placeholder="Start" id="in" name="in" value="${in}" onchange="search()">
-							</div>
-							<div class="booking-group">
-								<span class="form-label">Checkout</span>
-								<input class="form-control" type="text" placeholder="End" id="out" name="out" value="${out}" onchange="search()">
-							</div>
-							<div class="booking-group"  >
-								<span class="form-label">Person</span>
-									<select name="person" class="form-control select" id="person" style="height: 65px" onchange="search()">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-									</select>
-								<span class="select-arrow"></span>
+				<div class="booking-search-row"> 
+					<div class="row">
+						<div class="booking-group2"  >
+							<div class="t-datepicker">
+							  <div class="t-check-in"></div>
+							  <div class="t-check-out"></div>
 							</div>
 						</div>
+						
+						<div class="booking-group"  >
+							<span class="form-label">Person</span>
+								<select name="person" class="form-control select" id="person" style="height: 65px">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+								</select>
+							<span class="select-arrow"></span>
+						</div>
+						
+						<div class="booking-group0" >
+							<button onclick="search()"><i class="fa fa-search" aria-hidden="true"></i></button>
+						</div>
 					</div>
-				</form>
+				</div>
 		</div>
 
 		<!-- 숙소정보-->
@@ -230,28 +239,33 @@
 </div><!-- end of page -->
 
 	<script>
-		window.onload = function() {
+			window.onload = function() {
+				 if (window.history.replaceState) {
+				      window.history.replaceState(null, null, window.location.href);
+				    }
 			
-			 if (window.history.replaceState) {
-			      window.history.replaceState(null, null, window.location.href);
-			    }
-			
-			
-			// 인원 선택
+			// 인원, 날짜 셋팅
 			document.getElementById("person").value= <%=person%>; 
+			document.getElementById("in").value = '<%=checkin%>';
+			document.getElementById("out").value = '<%=checkout%>'; 
+			
 			// 숙소 평균 별점
 			getStar(); 
+			
 			// 숙소 사진
 			let i = 1;
 			<c:forEach items="${pic}" var="pic">
 				document.getElementById("pic"+ i).innerHTML = "<img alt='<c:out value="${pic.picAcmpdesc}" />' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }" />'>";
 				i++;
 			</c:forEach>
+			
 			// 구글맵 
 			initMap(); 
+			
 			// 숙소, 객실 옵션
 			getAcmOpt(); 
 			getRomOpt();
+			
 		}
 		
 		
@@ -378,7 +392,7 @@
 		}
 		
 		// 날짜 선택
-		var today = new Date();
+/* 		var today = new Date();
 		$("#out").datepicker({
 			minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
 			maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
@@ -395,11 +409,11 @@
 				nextDay.setDate(nextDay.getDate() + 1);
 			  $("#out").datepicker("option","minDate", nextDay);
 				var nextMonth = new Date(selectedDate);
-				nextMonth.setDate(nextMonth.getDate() + 90);
+				nextMonth.setDate(nextMonth.getDate() + r0);
 			  $("#out").datepicker("option","maxDate", nextMonth);
 			  $("#out").datepicker("open");
 			}
-		});
+		}); */
 		
 		// 리뷰(하나만 선택되게)
 		for(let i=0; i<document.getElementsByTagName("details").length; i++ ){
@@ -458,14 +472,10 @@
 			
 		// 검색값 변경
 		function search() {
-			document.getElementById("form-in").value = document.getElementById("in").value;
-			document.getElementById("form-out").value = document.getElementById("out").value;
-			document.getElementById("form-person").value = document.getElementById("person").value;
-			
-			
-			location.href = "/acm/detail?pageNum=1&amount=10&type=A&keyword=&person="
-					+document.getElementById("person").value+"&in="
-					+document.getElementById("in").value+"&out="+document.getElementById("out").value+"&acmNum=${acm.acmNum}"
+			location.href = "/acm/detail?pageNum=1&amount=10&type=A&keyword=&person="+document.getElementById("person").value
+					+"&in="+document.getElementById("in").value
+					+"&out="+document.getElementById("out").value
+					+"&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=${acm.acmNum}";
 			
 			
 		}
@@ -571,6 +581,14 @@
 			 
 		
 		})
+	</script>
+	<script>
+	 $(document).ready(function(){
+	    // Call global the function
+	    $('.t-datepicker').tDatePicker({
+	      // options here
+	    });
+	  });
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfPvjuhr6JlAFHlbwqn_I5VfzqglJ7iSo&callback=initMap">
