@@ -215,7 +215,7 @@ public class HostController {
 					List<BookingVO> rsvs=bservice.getBookinfoRoms(list.get(i).trim());//romNum당
 					System.out.println("rom"+i+"의.."+rsvs.size()+"개"+rsvs);
 					for(int j=0;j<rsvs.size();j++) {
-						BookingVO rsv=rsvs.get(i);
+						BookingVO rsv=rsvs.get(j);
 						String set=rsv.getCheckinDate()+"="+rsv.getCheckoutDate()+"="+rsv.getBookNum()+"="+rsv.getUserNum()+"="+rsv.getBookerFirstname()+"="+rsv.getBookPrice()+"="+rsv.getRomNum()+"="+rsv.getRomName();
 						System.out.println("set"+j+":"+set);
 						jarr.add(set);
