@@ -260,10 +260,10 @@ form {
        	  	<div style="margin-top: 10px;">
 	           	 <button
 	               style="width: 100%;"
-	                id="findPwdBtton"
+	                id="findPwdBtton"                 
 	                type="button"
 	                class="btn btn-default"
-	                onclick="location.href='/account/myAccount/findPwd'"
+	                onclick="location.href='/account/findPwd'"
 	              >
               		  비밀번호 찾기
            		 </button>

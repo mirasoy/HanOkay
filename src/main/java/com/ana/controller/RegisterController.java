@@ -103,7 +103,7 @@ throws IOException{
 			return mv;
 		} else {
 			model.addAttribute("msg2", "already");
-			mv.setViewName("/account/myAccount/findPwd");
+			mv.setViewName("/account/findPwd");
 			return mv;
 		}
 	}

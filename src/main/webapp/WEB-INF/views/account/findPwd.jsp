@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../../includes/header1.jspf"%>
+<%@include file="../includes/header1.jspf"%>
 <title>HanOkay - 비밀번호 찾기</title>
 <style>
 main{
@@ -93,9 +93,10 @@ body{
     line-height: 1.375em !important;
     color: #484848 !important;
 }
+
 </style>
-<%@include file="../../includes/header2.jspf"%>
-<%@include file="../../includes/header3.jspf"%>
+<%@include file="../includes/header2.jspf"%>
+<%@include file="../includes/header3.jspf"%>
 
 
 <main>
@@ -187,7 +188,7 @@ body{
 		
            $.ajax({
          	   type: 'POST',
-         	   url: '/account/myAccount/accountRecovery',
+         	   url: '/account/accountRecovery',
          	   dataType: 'json',
          	   data: {
          		   'email': email
@@ -202,21 +203,20 @@ body{
          		   else if(data.msg ==='success'){
          			  
          			  hiddenEmail.val(data.hiddenEmail);
-         			  hiddenForm.attr("action","/account/myAccount/emailAuth"); 
+         			  hiddenForm.attr("action","/account/emailAuth"); 
          			  hiddenForm.submit();
          		   }
          		  
          	   },
          	   error: function(data){
-         		  window.location.href ="../../error/error";
+         		  window.location.href ="../error/error";
          	   }
          	 });
 		 
 		
 	
 	});
-	
 
 	</script>
 
-<%@include file="../../includes/footer.jsp"%>
+<%@include file="../includes/footer.jsp"%>
