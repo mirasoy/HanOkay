@@ -13,6 +13,8 @@ public interface AcmMapper {
 	
 	public List<AcmVO> getList();
 	
+	public List<AcmVO> getSeoulList();
+	
 	public List<AcmVO> getListWithPaging(Criteria cri);
 	
 	public void insert(AcmVO acm);
