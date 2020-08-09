@@ -145,7 +145,7 @@
 		J.book_num = #{bookNum}
 
 		ORDER BY
-		J.checkin_Date
+		J.checkin_Date DESC
 
 	</select>
 
@@ -201,7 +201,7 @@
 		J.user_num =#{loginUser}
 
 		ORDER BY
-		J.checkin_Date
+		J.checkin_Date  DESC
 
 	</select>
 

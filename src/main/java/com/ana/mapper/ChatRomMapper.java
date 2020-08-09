@@ -15,6 +15,8 @@ public interface ChatRomMapper {
 	
 	public List<ChatRomVO> readChatlist(String userNum1);
 	
+	public List<ChatRomVO> findChatRom(@Param("userNum1") String userNum1, @Param("userNum2") String userNum2);
+	
 	public ChatRomVO readChat(String userNum1);
 	
 }

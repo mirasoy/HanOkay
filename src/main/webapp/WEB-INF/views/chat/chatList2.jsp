@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<%@include file="../includes/header.jsp"%>
+<%@include file="../includes/hostheader.jsp"%>
 <!-- 사이트바 CSS -->
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
@@ -188,7 +188,6 @@ text-align: center;
 			<p><%=userFstName %>님,대화를 시작해보세요! </p>
 		</div>	
 	</div>
-<%@include file="../includes/sidebar.jsp"%>
 
 
 <section class="contents">

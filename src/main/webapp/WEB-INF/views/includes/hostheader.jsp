@@ -100,7 +100,7 @@
 					<a href="/hosting/listings">숙소</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/chat/chatList">메시지</a>
+					<a href="/chat/chatList2">메시지</a>
 				</li>
 				<li class="nav-menu">
 					<a href="/hosting/stats/statsChart">성취도</a>

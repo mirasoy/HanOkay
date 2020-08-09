@@ -1,5 +1,7 @@
 package com.ana.mapper;
 
+import static org.junit.Assert.assertTrue;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,9 +48,14 @@ public class ChatRomMapperTests {
 
 	}
 
-	@Test
+	//Test
 	public void readChatlist() {
 		log.info("update cnt >> " + mapper.readChatlist("U1"));
+	}
+	@Test
+	public void findChatRom() {
+		//log.info("update cnt >> " + mapper.findChatRom("U111","U10").getChatromnum()==null);
+		assertTrue(mapper.findChatRom("U111","U10").size()==0);
 	}
 
 }
