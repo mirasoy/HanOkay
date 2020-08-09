@@ -36,8 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		*
 		FROM tmsg 
 		where (unum_from = #{userNum1} and unum_to =  #{userNum2}) or (unum_from =  #{userNum2} and unum_to =  #{userNum1}) 
-		order by msg_date
+		order by msg_date 
 
 	 </select>
-
+	 
+	 <select id="unreadMsg" resultType="Integer">
+	 select count(*) from tmsg where unum_to = #{userNum} and  read_status = 'F'
+</select>
 </mapper>

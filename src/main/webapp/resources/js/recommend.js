@@ -67,17 +67,21 @@ var latitude;
 						//날씨 멘트 넣기
 						$("#weatherTitle").text(weatherMap.get(resp.weather[0].main)[2]);
 						$("#weatherSub").text(weatherMap.get(resp.weather[0].main)[3]);
-						$("#weatherinfo").text("지금 온도는 "+(resp.main.temp - 273.15)+"도  / 습도는 "+resp.main.humidity+"% 입니다!");
+						$("#weatherinfo").text("지금 온도는 "+Math.trunc(resp.main.temp - 273.15)+"도  / 습도는 "+resp.main.humidity+"% 입니다!");
+						
+						var apiKey1 = "qLpipJxWB54Fl1U2T%2Bk8vm7cxwqy18yBmlWu5%2BTPJOeQMe3pbKuVz6C6RtaU6aCbn%2BcELXjbSipNGV%2F%2FJRDN5w%3D%3D";
+						var apiKey2 = "IZQB1Z9xPNfP5RbhSjGRpp%2F5q%2FGHWt730x5MzgZVVMb6Zqqu0iUWqR5vcGRU578MfKvZtBC%2FO8rm4q3URCmP0g%3D%3D";
 						
 						//관광지 url생성
-						visitkoreaUri = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=qLpipJxWB54Fl1U2T%2Bk8vm7cxwqy18yBmlWu5%2BTPJOeQMe3pbKuVz6C6RtaU6aCbn%2BcELXjbSipNGV%2F%2FJRDN5w%3D%3D"
-                            + "&contentTypeId="
+						visitkoreaUri = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey="+	
+						apiKey1 + "&contentTypeId="
                             + weatherMap.get(resp.weather[0].main)[0]
                             + "&mapX=" + longitude + "&mapY=" + latitude +
                             "&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=O&numOfRows=50&pageNo=1&_type=json"
 
 						//관광지 검색 펑션 실행
-                        visitkorea(visitkoreaUri);
+
+                        //visitkorea(visitkoreaUri);
 
                     },
                     error: function (resultArr) {
@@ -109,8 +113,8 @@ var latitude;
                 type: "GET",
                 async: "false",
                 success: function (resp) {
-                    console.log("!!성공!...");
-                    if(resp.response.header.resultCode=='00'){
+                    console.log(resp.response.header.resultCode + "<<");
+                    if(resp.response.header.resultCode=='0000'){
                     	
                     var result = resp.response.body.items.item;
                     console.log("검색된갯수" + resp.response.body.totalCount);
@@ -132,17 +136,18 @@ var latitude;
 
 
         function write(result,count) {
-       			jj=result;
+        	
         	var numSet = new Set()
         	
         	while (numSet.size<3) {
-        		numSet.add(Math.trunc(Math.random()*50));
+        		numSet.add(Math.trunc(Math.random()*count));
        			}	
-        	
         	
         	
         	var setNum = 1;
         	numSet.forEach(function(element){
+        		
+        		
         		$("#cardImg"+setNum).attr("src", result[element].firstimage);
         		$("#btn"+setNum).val(result[element].addr1.split(" ")[1]);
         		$("#placeTitle"+setNum).text(result[element].title);

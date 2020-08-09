@@ -47,6 +47,12 @@ public class ChatRomServiceImpl implements ChatRomService{
 		return mapper.readChat(chatromnum);
 	}
 
+	@Override
+	public List<ChatRomVO> findChatRom(String userNum1, String userNum2) {
+		// TODO Auto-generated method stub
+		return mapper.findChatRom(userNum1, userNum2);
+	}
+
 	
 
 

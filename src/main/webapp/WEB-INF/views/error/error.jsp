@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HanOkay-ERROR!</title>
+<title>Han:OK - ERROR!</title>
 <style type="text/css">
 .btn {
     cursor: pointer;
@@ -18,7 +18,10 @@
 </head>
 
 <body style="background-image: url(../resources/img/error.jpg);  background-size: 80%; background-repeat: no-repeat;">
-<div >
+<div>
+	<div>
+	예상치 못한 에러가 발생하였습니다.
+	</div>
 	<button id="sendMain" class = 'btn' onclick="window.location.href='${request.contextPath}/acm/list'">홈으로</button>
 	</div>
 	<ul>

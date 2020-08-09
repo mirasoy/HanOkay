@@ -73,7 +73,7 @@ String name = (String)session.getAttribute("loginUserNum");
 	                    <div class="booking-info-bottom">
 	                        <div class="price m150-price">
 	                            <div class="price-currency" data-selenium="payment-currency">KRW</div>
-	                            <div class="price-ammount" data-selenium="payment-ammount">640,349</div>
+	                           <div class="price-ammount" data-selenium="payment-ammount"><c:out value="${board.bookPrice}" /></div>
 	                        </div>
 	                    </div>
 	                </div>

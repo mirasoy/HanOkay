@@ -55,7 +55,7 @@
 					<button class="btn right" onclick="sendoption()">확인</button>
 					
 				</div>
-				<div class = "containBody">
+				<div class = "containBody" style="  width: 120%;">
 					<table class="table table-striped table-bordered table-hover salesList ">
 						<thead>
 							<tr class='fixed_top'>
@@ -146,9 +146,9 @@ function updateList(result) {
 		
 		var paymathod = ""
 		if(obj.payMethod==	'PY_METHOD_CARD'){
-			paymathod = "카드결제";		}
+			paymathod = "카드";		}
 		else if(obj.payMethod==	'PY_METHOD_LATER'){
-			paymathod = "현장결제";		}
+			paymathod = "현장";		}
 		else if(obj.payMethod==	'PY_METHOD_PAYPAL'){
 			paymathod = "페이팔";		}
 		

@@ -142,8 +142,12 @@ public class BookingServiceImpl implements BookingService{
 
 	@Override
 	public int dateGetinPayLater(String ownerUser, String today) {
-		// TODO Auto-generated method stub
 		return mapper.dateGetinPayLater(ownerUser,today);
+	}
+
+	@Override
+	public List<BookingVO> getBookinfoRoms(String romNum) {
+		return mapper.getBookinfoRoms(romNum);
 	}
 
 }

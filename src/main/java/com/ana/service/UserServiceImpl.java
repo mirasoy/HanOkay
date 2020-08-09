@@ -100,7 +100,9 @@ public class UserServiceImpl implements UserService{
 				return result;
 			}
 			//1.2회원가입 경로가 G가 아니면 
-			
+			//이미 해당이메일로 id/pw 가입한 적이 있다.
+			//이럴때는 그 해당 이메일로 로그인하게 해야함
+			//return 1;
 		}	
 	
 		//2.없으면 회원가입 시키고 경로에 G를 붙여준다
@@ -207,14 +209,7 @@ public class UserServiceImpl implements UserService{
 		}
 	 }
 
-
-	 //user의 인증코드를 업데이트 하게하는 메서드
-	@Override
-	public boolean updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode")String authCode) {
-		return mapper.updateAuthCode(email ,authCode)==1;
 	
-	
-	}
 	//중복되는 이메일이 없고 난수를 생성하여 user객체의 setUserAuthCode로 넣어주고 service.register(user)한다 
 	@Transactional
 	@Override
@@ -231,7 +226,6 @@ public class UserServiceImpl implements UserService{
 		}
 		
 			return false;
-		
 	}
 	
 	//session에 담긴 user객체의 userNum으로 프로필 정보를 가져오는 
@@ -268,10 +262,69 @@ public class UserServiceImpl implements UserService{
 		
 		return mapper.updateProfile(profile)==1;
 	}
+
 	
 	
-  
+	//user의 인증코드를 업데이트 하게하는 메서드
+	@Override
+	public boolean updateAuthCode(@Param("email") String email, @Param("authCode") String authCode) {
+		return mapper.updateAuthCode(email, authCode) == 1;
+	}
 	
+	//해당 email의 유저에게 인증코드를 발송하는 메서드(회원가입 인증코드 재발송 / 비밀번호 찾기)
+	@Override
+	public boolean sendAuthCode(String email) {
+		System.out.println("email 왔니 서비스에:: "+ email);
+		
+		//db에 해당 이메일이 있으면
+		if(!canRegister(email)) {
+			//난수를 다시 생성
+			String authCode=numberGen(6,2);
+			if(updateAuthCode(email, authCode)) {
+				emailService.sendAuthEmail(email, authCode);
+				return true;
+			}
+
+		}
+		//db에 해당 이메일이 없음!
+		return false;
+	}
+
+
+	@Override
+	public boolean sendAuthCode2FindPwd(String email) {
+		System.out.println("email 왔니 서비스에:: "+ email);
+		
+		//db에 해당 이메일이 있으면
+		if(!canRegister(email)) {
+			//난수를 다시 생성
+			String authCode=numberGen(6,2);
+			if(updateAuthCode(email, authCode)) {
+				emailService.sendAuthEmail2FindPwd(email, authCode);
+				return true;
+			}
+
+		}
+		//db에 해당 이메일이 없음!
+		return false;
+	}
+
+	@Transactional
+	@Override
+	public boolean matchAuthCodeAndGiveSession(@Param("email") String email, @Param("enteredAuthCode")String authCode, HttpSession session) {
+		
+		if(matchAuthCode(email, authCode)) {
+			UserVO user= getUserById(email);
+			user.setUserPwd("");
+			System.out.println("인증코드 맞으니까 로그인 시켜주께~~~");
+			
+			session.setAttribute("user", user);
+			System.out.println("세션에 있는 유저는!!"+ user );
+			return true;
+		}
+		System.out.println("인증코드가 틀려버렸네 ㅠ");
+		return false;
+	}
 	
 	//인증번호 생성 메서드
 	 public static String numberGen(int len, int dupCd ) {
@@ -315,5 +368,7 @@ public class UserServiceImpl implements UserService{
 		return mapper.getAcmOwner(bizregnum);
 	}
 
-  
+	
+
+
 }

@@ -24,6 +24,7 @@
 						<tr>
 							<th>호스트 </th>
 							<th>숙소 번호</th>
+							<th>숙소 상태</th>
 							<th>숙소 이름</th>
 							<th>숙소 유형</th>
 							<th>대표 번호 </th>
@@ -38,6 +39,8 @@
 						<tr>
 							<td><c:out value="${pendingacm.userNum}" /></td>
 							<td><c:out value="${pendingacm.acmNum}" /></td>
+							<td><div id="<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />">&nbsp;</div></td>
+							
 							<td>
 								<a class='pendingmove' href='<c:out value="${pendingacm.acmNum}"/>'>
 									<c:out value="${pendingacm.acmName}" />
@@ -267,6 +270,26 @@ $(document).ready(function(){
 
 	//해당 숙소 상세보기(권한 수정 페이지로)
 	$(document).ready(function(){
+	
+		//대기 숙소들 
+	  <c:forEach items="${pendinglist}" var="pendingacm">
+	   var pendingacmType='<c:out value="${pendingacm.acmStatus}" />';
+	   console.log(pendingacmType);
+	   if(pendingacmType.trim()=="PENDING"){//객실별
+	      $("#<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />").append("신청");
+	   }
+	      
+	   else if(pendingacmType.trim()=="DENIED"){//집천체
+	      $("#<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />").append("승인거절");
+	   }   
+	   else if(pendingacmType.trim()=="REREG"){//집천체
+		      $("#<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />").append("재신청");
+		   } 
+	   </c:forEach>
+		   
+		
+		
+		
 		var actionForm = $("#actionForm");
 		
 		$(".pendingmove").on("click", function(e){

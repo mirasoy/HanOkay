@@ -45,7 +45,7 @@
                     		</div>
 	                        <div>
 	                        	<div style="font-size:30px;">${payLater }</div>
-                    			<span>워크인결제</span>
+                    			<span>현장결제</span>
                     		</div>
                     		 <div >
 	                        	<div style="font-size:30px;">0</div>
@@ -284,7 +284,7 @@ $(document).ready(function(){
 							//날씨 이모티콘 보여주기									
 	                        $("."+weatherMap.get(weather)).show();
 							
-	                        $("#Wdegree").text("온도 : "+(resp.main.temp- 273.15)+"도");
+	                        $("#Wdegree").text("온도 : "+Math.trunc(resp.main.temp- 273.15)+"도");
 			        	
 			        	var str = "";
 			        	/* 

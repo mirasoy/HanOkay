@@ -33,6 +33,7 @@
                   <tr>
                      <th>숙소 사진</th>
                      <th>숙소 이름</th>
+                     <th>숙소 상태</th>
                      <th>숙소 유형</th>
                      <th>숙소 위치</th>
                   </tr>
@@ -49,6 +50,7 @@
                            <c:out value="${activeacm.acmName}" />
                         </a>
                      </td>
+                      <td><c:out value="${activeacm.acmStatus}" /></td>
                      <td id="<c:out value='${activeacm.acmType}'/><c:out value='${activeacm.acmNum}'/>"></td>
                      <td><c:out value="${activeacm.acmDetailaddr}" /></td>
                   </tr>
@@ -78,6 +80,7 @@
                   <tr>
                      <th>숙소 사진</th>
                      <th>숙소 이름</th>
+                     <th>숙소 상태</th>
                      <th>숙소 유형</th>
                      <th>숙소 위치</th>
                   </tr>
@@ -93,6 +96,7 @@
                            <c:out value="${pendingacm.acmName}" />
                         </a>
                      </td>
+                     <td style="color:red;"><c:out value="${pendingacm.acmStatus}" /></td>
                      <td id="<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>"></td>
                      <td><c:out value="${pendingacm.acmDetailaddr}" /></td>
                      
@@ -123,6 +127,7 @@
                   <tr>
                      <th>숙소 사진</th>
                      <th>숙소 이름</th>
+                     <th>숙소 상태</th>
                      <th>숙소 유형</th>
                      <th>숙소 위치</th>
                   </tr>
@@ -131,13 +136,15 @@
                <c:forEach items="${inactivelist}" var="inactiveacm">
                   <tr>
                      <td style="width: 150px;">
-                     <img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px; border-radius:10px;' id='rPicture' src='/review/display?fileName=<c:out value="${inactiveacm.acmPurl}" /><c:out value="${inactiveacm.acmPname }" />'>
+                     <img style='width: auto; height: 100px; max-width: 100px; margin-left :20px; border-radius:10px;' id='rPicture' src='/review/display?fileName=<c:out value="${inactiveacm.acmPurl}" /><c:out value="${inactiveacm.acmPname }" />'>
                      </td>
                      <td>
                         <a class='move' href='<c:out value="${inactiveacm.acmNum}"/>'>
                            <c:out value="${inactiveacm.acmName}" />
                         </a>
                      </td>
+                     <td><c:out value="${inactiveacm.acmStatus}" /></td>
+                  
                      <td id="<c:out value='${inactiveacm.acmType}'/><c:out value='${inactiveacm.acmNum}'/>"></td>
                      <td><c:out value="${inactiveacm.acmDetailaddr}" /></td>
                   </tr>

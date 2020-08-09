@@ -82,7 +82,8 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		if ("<c:out value="${rev.pstNum }" />" != "") {
 			var str = "";
 			
-			str += '<a href="/review/get?pstNum=<c:out value="${rev.pstNum }" />" /><div class="reveiwPst"><span class="heading-rPost"><c:out value="${rev.acmName }" /></span>'
+			str += '<a href="/review/get?pstNum=<c:out value="${rev.pstNum }" />" /><div class="reveiwPst">'
+				+'<span class="heading-rPost"><c:out value="${rev.title }" /></span>'
 			
 					if('<c:out value="${rev.stisf }" />'!=''){				
 					for (let a = 0; a < <c:out value="${rev.stisf }" />+0; a++) {
@@ -95,7 +96,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			
 			str += '<p>투숙기간 : <c:out value="${rev.checkInDay }" />  ~  <c:out value="${rev.checkOutDay }" /></p>'
 			str += '<hr style="border:3px solid #f1f1f1">'
-			str += '<h5><c:out value="${rev.title }" /></h5></div></a>'
+			str += '<h5><c:out value="${rev.acmName }" /></h5></div></a>'
 			
 			
 			$(".bookList").append(str);
@@ -110,7 +111,14 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
 	});
 	
-			
+					$(".aside").on("click",function(evt){
+						$("html,body").stop().animate({
+							scrollTop : 0
+						},400);
+
+						evt.preventDefault();
+					});
+
 	
 	
 	</script>

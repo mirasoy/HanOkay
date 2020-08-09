@@ -563,14 +563,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-1.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_11.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>3 nights + Flight 5*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>게스트하우스 바리</h3>
+								<span>서울시 종로구 / 1인 1박 특별가 </span> <span class="price"> 17,000원 </span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A12">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -578,14 +578,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-2.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_6.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>4 nights + Flight 5*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>공산성게스트하우스</h3>
+								<span>충남 공주시  / 8인 특별가! </span> <span class="price"> 50,000 원 </span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A7">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -593,14 +593,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-3.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_20.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>2 nights + Flight 4*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>무위(無爲) </h3>
+								<span>서울시 종로구 / 1인실 1박 가격 </span> <span class="price"> 13,000 원</span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-02-09&out=2020-02-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A21">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -608,14 +608,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-4.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_67.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>3 nights + Flight 5*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>1900s Hanok </h3>
+								<span>고즈넉한 분위기의 한옥 스테이</span> <span class="price"> 50,000 원</span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A68">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -623,14 +623,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-5.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_81.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>4 nights + Flight 5*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>무렵</h3>
+								<span>전주의 최신 숙소</span> <span class="price">150,000원</span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=%EC%A0%84%EC%A3%BC&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A82">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -638,14 +638,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-6.jpg"
+							<img src="/display?fileName=C:/upload/room/room_p_86.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>2 nights + Flight 4*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn  btn-outline" href="#">Book Now <i
+								<h3>돈암서원 한옥마을</h3>
+								<span>충남 논산시 / 럭셔리 1인실</span> <span class="price">70,000 원</span>
+								<a class="btn  btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A55">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -677,33 +677,33 @@ display: block;
 		<div class="container-outer">
 			<section class="slideshow-section">
 				<div class="slideshow">
-					<img src="../resources/img/img-01.jpg" alt="Image"> <img
-						src="../resources/img/img-02.jpg" alt="Image"> <img
-						src="../resources/img/img-03.jpg" alt="Image">
+					<img src="/display?fileName=C:/upload/review/rev_p_36.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_35.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_34.jpg" alt="Image">
 				</div>
 				<div class="slideshow-description bg-primary1">
-					<h2 class="">[숙소이름]홀리데이 인 리조트</h2>
-					<p>추가 요금 없이 차액까지 환불받아 객실을 변경할 수 있도록 해준 HanOkay에 감사합니다! HanOkay와
-						홀리데이 인의 직원도 친절했습니다. 또한 방이 넓고 수영장이 보이는 뷰가 좋았습니다. 마사지 받고나서 자쿠지에서
-						반신욕을 했는데 이게 진짜 좋았습니다.</p>
-					<a href="#" class="text-uppercase btn btn-white btn-white-primary">Continue
+					<h2 class="">[교동게하]따뜻하고 전통적인 한옥게스트하우스!</h2>
+					<p>부모님 모시고 한옥 두 게스트하우스 방문했는데 한옥의 매력 제대로 느끼고 갑니다~<br>
+북촌 마을이 내려다보여서 전망도 좋고 방도 깔끔하고 통풍 잘 되서 정말정말 좋았어요!</p>
+					<a href="http://localhost/review/get?pstNum=RV17" class="text-uppercase btn btn-white btn-white-primary">Continue
 						Reading</a>
 				</div>
 			</section>
 			<section class="clearfix slideshow-section slideshow-section-reverse">
 
 				<div class="right slideshow slideshow-highlight">
-					<img src="../resources/img/img-02.jpg" alt="Image"> <img
-						src="../resources/img/img-03.jpg" alt="Image"> <img
-						src="../resources/img/img-01.jpg" alt="Image">
+					<img src="/display?fileName=C:/upload/review/rev_p_26.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_26.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_26.jpg" alt="Image">
 				</div>
 
 				<div
 					class="slideshow-description slideshow-description-left bg-highlight">
-					<h2 class="">[숙소이름]페어몬트 싱가포르</h2>
-					<p>호텔은 심플하고 아주 좋았으며, HanOkay에서 많은 도움을 준 것에 대해 정말로 고마움을 표하고
-						싶습니다. HanOkay를 계속 이용해온 고객으로 HanOkay앱을 가장 좋아하는 앱이라고 할 수 있습니다!</p>
-					<a href="#"
+					<h2 class="">[남화제]Hanok Heaven</h2>
+					<p>Loved our stay in this lovely, old area of Seoul. Felt like a proper, authentic Korean experience.<br>
+					 Well worth paying an extra few Won for en suite wet-room as I couldnt be doing with all the shoes-on, shoes-off business!<br>
+					  Sleeping on the futons (i.e. on the floor) with buckwheat pillows was surprisingly comfortable and the under-floor heating much appreciated.</p>
+					<a href="http://localhost/review/get?pstNum=RV22"
 						class="text-uppercase btn btn-white btn-white-highlight">Continue
 						Reading</a>
 				</div>
@@ -711,15 +711,16 @@ display: block;
 			</section>
 			<section class="slideshow-section">
 				<div class="slideshow">
-					<img src="../resources/img/img-03.jpg" alt="Image"> <img
-						src="../resources/img/img-02.jpg" alt="Image"> <img
-						src="../resources/img/img-01.jpg" alt="Image">
+					<img src="/display?fileName=C:/upload/review/rev_p_3.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_28.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_3.jpg" alt="Image">
 				</div>
 				<div class="slideshow-description bg-primary1">
-					<h2 class="">[숙소이름]바이욕 스위트 호텔</h2>
-					<p>[숙소소개]친구에게 계속 HanOkay를 추천하겠습니다 . 가성비갑 더블침대 두개였는데 침대도 널직하고
-						방도크고 깨끗하고 전망도 좋고 다 좋았어요 가격이 저렴해서 걱정했는데 비싼호텔 못지않게 좋았네요</p>
-					<a href="#" class="text-uppercase btn btn-white btn-white-primary">Continue
+					<h2 class="">[낙안제]정원이 아름다운 숙소 </h2>
+					<p>[한옥 정원이 너무 아름다웠고, 숙소 내부도 안락하고 따뜻하니 좋았습니다.
+이불보도 굉장히 두꺼워 푹신하고 편하게 잠들 수 있었어요!
+직원분들도 친절하고 깨끗해서 재방문하고싶습니다.</p>
+					<a href="http://localhost/review/get?pstNum=RV8" class="text-uppercase btn btn-white btn-white-primary">Continue
 						Reading</a>
 				</div>
 			</section>
@@ -759,32 +760,29 @@ function showSlides() {
 		$("#e1").select2();
 	});
 
-	/* 날짜 선택(수희) */
+	// 날짜 선택
 	var today = new Date();
-
-	$("#out").datepicker(
-			{
-				minDate : new Date(today.getFullYear(), today.getMonth(), today
-						.getDate() + 1),
-				maxDate : new Date(today.getFullYear() + 1, today.getMonth(),
-						today.getDate()),
-				dateFormat : 'yy-mm-dd',
-			});
-	$("#in").datepicker(
-			{
-				minDate : 0,
-				maxDate : new Date(today.getFullYear() + 1, today.getMonth(),
-						today.getDate() - 1),
-				onSelect : function(selectedDate) {
-					var nextDay = new Date(selectedDate);
-					nextDay.setDate(nextDay.getDate() + 1);
-					$("#out").datepicker("option", "minDate", nextDay);
-					var nextMonth = new Date(selectedDate);
-					nextMonth.setDate(nextMonth.getDate() + 90);
-					$("#out").datepicker("option", "maxDate", nextMonth);
-				},
-				dateFormat : 'yy-mm-dd'
-			});
+	$("#out").datepicker({
+		minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
+		maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
+		numberOfMonths: 1,
+		dateFormat: 'yy-mm-dd'
+	});
+	$("#in").datepicker({
+		minDate: 0,
+		maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
+		numberOfMonths: 1,
+		dateFormat: 'yy-mm-dd',
+		onSelect: function(selectedDate) {
+			var nextDay = new Date(selectedDate);
+			nextDay.setDate(nextDay.getDate() + 1);
+		  $("#out").datepicker("option","minDate", nextDay);
+			var nextMonth = new Date(selectedDate);
+			nextMonth.setDate(nextMonth.getDate() + 90);
+		  $("#out").datepicker("option","maxDate", nextMonth);
+		  $("#out").datepicker("open");
+		}
+	});
 </script>
 
 <!-- 달력 변경. 끝 -->

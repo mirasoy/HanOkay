@@ -83,44 +83,6 @@ throws IOException{
 		out.print(jso);
 	}
 	
-	//인증메일을 발송하는 기능
-	/*
-	 * @RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
-	public ModelAndView sendAuthEmail(UserVO user, Model model) {
-		log.info("email authentication: "+ user);	
-		ModelAndView mv= new ModelAndView();
-		
-		//db에 중복되는 이메일이 없다면(신규가입자 재확인)
-		 if(service.canRegister(user.getUserEmail())) {
-			 //중복없는 6자리 난수를 생성해서 user객체에 넣어준다
-			 user.setUserAuthCode(numberGen(6, 2));
-			 log.info("userAuthCode: " + user.getUserAuthCode());
-			 //이 user에게 이메일을 보낸다
-			if(emailService.sendAuthEmail(user.getUserEmail(), user.getUserAuthCode())) {
-				//성공적으로 보냈으면
-				//db에 이 user를 pending상태로 저장시킨다
-				service.register(user);
-				//보낸 이메일 주소를 인증코드 확인 페이지에서 알수 있게 hidden값으로 들어갈 수 있게 넣는다
-				model.addAttribute("email", user.getUserEmail());
-				//인증코드 확인 페이지를 보여준다
-				mv.setViewName("register/emailAuth");
-			}
-			else {
-				//성공적으로 못보냇으면
-				//회원가입 페이지로 돌려보낸다
-				//실패했다고 알려준다(발송의 실패)--이거 구현해야함
-				mv.setViewName("reister/signUp");
-				return mv;
-				
-			}
-		} else {
-			//db에 이미 해당하는 email이 있으면
-			//회원정보가 있다고 알리고 findPwd페이지로 다시 가게 한다
-			mv.setViewName("account/myAccount/findPwd");
-		} 
-		 return mv;
-	} */
-	
 	//emailAuth 페이지를 get방식으로 접근하면 에러페이지를 보여주자
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.GET)
 	public String cannotGetEmailAuth() {
@@ -128,18 +90,20 @@ throws IOException{
 		return "/register/emailAuth";
 	}
 		
+	//emailAuth에 post방식으로 접근	
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
 	public ModelAndView sendEmailAuthAndRegister(UserVO user, Model model) {
-		log.info("email authentication 159: "+ user);
+		log.info("email authentication : "+ user);
 		
 		ModelAndView mv= new ModelAndView();
+		
 		if(service.registerThis(user)) {
 			model.addAttribute("email", user.getUserEmail());
 			mv.setViewName("/register/emailAuth");
 			return mv;
 		} else {
 			model.addAttribute("msg2", "already");
-			mv.setViewName("/account/myAccount/findPwd");
+			mv.setViewName("/account/findPwd");
 			return mv;
 		}
 	}
@@ -150,67 +114,44 @@ throws IOException{
 		return "/error/registerFail";
 	}
 	
-	//emailAuth 페이지에서 인증코드를 입력하고 인증코드 확인 버튼 누르면 실행되는 메서드
-	 /*@PostMapping("/submitAuth")
-	public String submitAuthNum(String enteredAuthCode, String email, Model model, RedirectAttributes rttr) {
-		log.info("authNum: "+ enteredAuthCode);
-		
-		//사용자가 입력한 값(인증번호)를 받아와서 DB의 인증코드 값이랑 같다면
-		if(service.matchAuthCode(email, enteredAuthCode)) {
-			//해당하는 이메일 사용자의 상태를 activ로 변경시킨다
-			service.grantActive(email);
-			UserVO user=service.getUserById(email);
-			//user_info_history에도 남기기
-			userHistorySerivce.insertStatCodeChangeHistory(user.getUserNum(), "512", service.getUserById(email).getUserNum());
-			//가져온 user의 비번은 빈문자열 처리해주기
-			user.setUserPwd("");
-			//변경해준 user객체를 가져와서 session에 담기
-			model.addAttribute("user", user);
-			log.info("user 인증성공 후 세션에 담아라~!! "+ user);
-			
-			return "/user/welcome";
-		}
-		
-		//입력코드가 틀렸다면
-		else {
-			rttr.addFlashAttribute("msg", "인증코드가 틀렸습니다! 다시 인증코드를 입력하세요!");
-			return "redirect:/register/emailAuth";
-		}		
-	}
-	*/
-	
+
 	@PostMapping("/submitAuth")
-	public String submitAuthCode(String email, String enteredAuthCode, RedirectAttributes rttr, HttpSession session ){
+	@ResponseBody
+	public void submitAuthCode(String email, String enteredAuthCode, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		log.info(":::email 왔냐: "+ email);
+		log.info(":::enteredAuthCode 왔냐: "+ enteredAuthCode);
+		HttpSession session =request.getSession(true);
 		
-		if(service.grantActive(email, enteredAuthCode, session)) {
-			return "/user/welcome";
+		JSONObject jso= new JSONObject();
+		jso.put("msg", "success");
+		
+		if(service.grantActive(email, enteredAuthCode, session)){
+			jso.put("msg", "success");
 		}
-		rttr.addFlashAttribute("email", email);
-		rttr.addFlashAttribute("msg", "인증코드 불일치! 인증이메일을 재발송 하세요");
-		rttr.addFlashAttribute("msgAboutEmail", "fail");
-		return "redirect:/register/emailAuth";
-		
+		else {
+			jso.put("msg", "fail");
+		}
+		PrintWriter out= response.getWriter();
+		out.print(jso);
 	}
 	
 	//인증코드를 재생성하고 이메일 재발송하는 메서드
-	/*@PostMapping("/sendAgain")
-	public String sendAuthEmailAgain(String email, RedirectAttributes rttr) {
+	@PostMapping("/sendAgain")
+	@ResponseBody
+	public void sendAuthEmailAgain(String email, HttpServletResponse response) throws IOException {
+		log.info(":::email 왔냐: "+ email);
+	
 		
-		//email이 db에 있는 지 확인하고
-		if(!(service.canRegister(email))) {
-			//새로운 인증코드를 생성
-			String authCode=numberGen(6, 2);
-			//DB에 사용자의 인증코드를 업데이트 해주고(transactional사용해야해!!!)
-			if(service.updateAuthCode(email, authCode)) {
-				
-				//사용자 인증코드를 다시 발송시킨다
-				emailService.sendAuthEmail(email, authCode);
-			};
-			
-			//인증코드가 재발송 되었다고 어떻게 다시 알려주지!!!!
-			rttr.addFlashAttribute("msgAboutEmail", "emailSent");
-			return "redirect:/register/emailAuth";
+		JSONObject jso= new JSONObject();
+		
+		if(service.sendAuthCode(email)){
+			jso.put("msg", "success");
 		}
-		return "/register/registerFail";
-	}*/
+		else {
+			jso.put("msg", "fail");
+		}
+			
+		PrintWriter out= response.getWriter();
+		out.print(jso);
+	}
 }

@@ -161,7 +161,6 @@
 		//
 		 
 		
-
 		
  		// 모달
 	/*	let modal = document.getElementById("paymentModal");
@@ -190,7 +189,6 @@
 				}
 			}
 		}
-
 		// 카드결제
 		function payCard() {
 	        
@@ -198,12 +196,13 @@
 			const name = document.getElementById("userInfo1").value + document.getElementById("userInfo2").value;
 			const tel = document.getElementById("userInfo4").value;
 			const amount = document.getElementById("total").value;
+			const guest = document.getElementById("guest").value;
 				
 			IMP.request_pay({
 			    pg : 'html5_inicis',
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '${info.acmName}:${info.romName}(${days})',
+			    name : '${info.acmName}:${info.romName}(${days}박 '+guest+'명)',
 			    amount : amount,
 			    buyer_email : email,
 			    buyer_name : name,
@@ -259,7 +258,6 @@
 			});
 		}
 		
-
 		// 금액
 		function getPrice() {
 			const romPrice = '<%=romPrice%>';
@@ -274,17 +272,15 @@
 			let perDay = Math.ceil(subtotal / days);
 			
 			// 예약페이지 화면 우측의 금액 부분
-			document.getElementById("lblPrice").innerHTML = price;
-			document.getElementById("lblVat").innerHTML = vat; 
-			document.getElementById("lblSubtotal").innerHTML = subtotal;
-
-			document.getElementById("lblCoupon").innerHTML = coupon;
-			document.getElementById("lblMileage").innerHTML = mileage;
-			document.getElementById("lblDiscount").innerHTML = discount;
-
-			document.getElementById("lblTotal").innerHTML = total;
+			document.getElementById("lblPrice").innerHTML = price.toLocaleString();
+			document.getElementById("lblVat").innerHTML = vat.toLocaleString(); 
+			document.getElementById("lblSubtotal").innerHTML = subtotal.toLocaleString();
+			document.getElementById("lblCoupon").innerHTML = coupon.toLocaleString();
+			document.getElementById("lblMileage").innerHTML = mileage.toLocaleString();
+			document.getElementById("lblDiscount").innerHTML = discount.toLocaleString();
+			document.getElementById("lblTotal").innerHTML = total.toLocaleString();
 			
-			document.getElementById("lblPerDay").innerHTML = perDay;
+			document.getElementById("lblPerDay").innerHTML = perDay.toLocaleString();
 			
 			// 예약하기 버튼을 눌렀을 때 저장할 정보 셋팅			
 			document.getElementById("vat").value = vat;

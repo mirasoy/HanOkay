@@ -3,48 +3,50 @@
 pageEncoding="UTF-8"%> 
 <%@page import="javax.mail.Session"%> 
 <%@include file="../includes/header1.jspf"%>
-<title>HanOkay- 로그인</title>
+<title>Han:Ok - 로그인</title>
+
 <style>
-  body {
+body {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     font-size: 13px;
     font-weight: 300;
   }
-  main,
-  section,
-  header,
-  div {
+main,
+section,
+header,
+div {
     display: block;
   }
 
-  form {
+form {
     display: block;
     margin-top: 0em;
   }
 
-  *,
+*,
   ::after,
   ::before {
     box-sizing: border-box;
   }
 
-  .container {
+.container {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
   }
-  @media (min-width: 992px) {
+@media (min-width: 992px) {
     .container {
       max-width: 960px;
     }
   }
-  .container2_SR{
+.container2_SR{
     padding-left: 8px !important;
     padding-right: 8px !important;
     min-height: 1px !important;
     position: relative !important;
+    top: 155px;
   }
 
   @media (min-width: 1128px){  
@@ -62,17 +64,18 @@ pageEncoding="UTF-8"%>
     border: 1px solid #dadfe6;
     border-radius: 16px;
     background-color: #ffffff !important;
-    height: 450px;
+    height: 480px;
     width: 446px;
 }
-  .header1_SR {
+
+.header1_SR {
     position: relative;
     margin-top: 64px;
     margin-bottom: 56px;
     margin-left: 16px;
-  }
+}
 
-  .header2_SR {
+.header2_SR {
     overflow-wrap: break-word !important;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
       "Helvetica Neue", sans-serif !important;
@@ -81,29 +84,29 @@ pageEncoding="UTF-8"%>
     line-height: 1.125em !important;
     color: rgb(72, 72, 72) !important;
     margin-left: 4px !important;
-  }
+}
 
-  .contentOfInfo_SR {
+.contentOfInfo_SR {
     padding-left: 8px !important;
     padding-right: 8px !important;
     min-height: 1px !important;
     position: relative !important;
-  }
+}
 
-  @media (min-width: 744px) {
-    .contentOfInfo_SR {
+@media (min-width: 744px) {
+.contentOfInfo_SR {
       width: 100% !important;
       float: left !important;
-    }
-  }
+   }
+}
 
-  .in1_SR {
+.in1_SR {
     display: table !important;
     width: 100% !important;
     border-spacing: 0px !important;
-  }
+}
 
-  .titleOfOneInfo_SR {
+.titleOfOneInfo_SR {
     margin: 0px !important;
     word-wrap: break-word !important;
     font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
@@ -111,9 +114,9 @@ pageEncoding="UTF-8"%>
     font-weight: 600 !important;
     line-height: 1.375em !important;
     color: #484848 !important;
-  }
+}
   
-  .titleOfCheckBox_SR{
+.titleOfCheckBox_SR{
   	overflow-wrap: break-word !important;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
       "Helvetica Neue", sans-serif !important;
@@ -122,14 +125,15 @@ pageEncoding="UTF-8"%>
     line-height: 1.375em !important;
     color: rgb(72, 72, 72) !important;
     margin: 0px !important;
-  }
+}
 
 .oneInfo_SR{
   margin-bottom: 16px;
 }
-  .g-signin2 > div {
+
+.g-signin2 > div {
     margin: 0 auto;
-  }
+}
 
 .oneInputBox_SR{
   display: block !important;
@@ -153,10 +157,11 @@ pageEncoding="UTF-8"%>
 }
 </style>
 
-<%@include file="../includes/header2.jspf"%> <%@include
-file="../includes/header3.jspf"%>
-<div class="container">
+<%@include file="../includes/header2.jspf"%> 
+<%@include file="../includes/header3.jspf"%>
 
+<div class="container">
+<div style="position:absolute; margin-top:0;margin-bottom:0;margin-left:0;margin-right:0;">
   <div class="out_SR">
     <section>
       <div
@@ -165,12 +170,15 @@ file="../includes/header3.jspf"%>
           margin-top: 64px;
           margin-bottom: 56px;
           margin-left: 16px;
-        "
-      >
-      <h1><div class="header2_SR">회원가입</div></h1>
+          postion: relative;
+        ">
+      <h1>
+      <div class="header2_SR" >Han:Ok에서 그동안 몰랐던 국내여행지의 아름다움을 발견해보세요 </div>
+      </h1>
     </div>
     <!--  action= "/register/emailAuth" -->
   </section>
+</div>
 </div>
 
 
@@ -182,19 +190,14 @@ file="../includes/header3.jspf"%>
     </c:if>
 
 <div class="container2_SR">
-  <div style="margin-top:24px">
 <div class="container3_SR">
   <div style="margin-top:35px;margin-bottom:auto">
 
   <section>
     <div>
       <div style="margin-bottom: 8px;">
-        <div
-              class="g-signin2"
-              data-onsuccess="onSignIn"
-              data-theme="dark"
-            ></div>
-      </div>
+	   <div class="g-signin2" data-onsuccess="onSignIn"  data-theme="dark"></div>
+	 </div>
     </div>
 
     <div>
@@ -226,13 +229,13 @@ file="../includes/header3.jspf"%>
             <input type="checkbox" id="rememberEmail" ${checked } />
           </div>
         </div>
-        </div>
+      </div>
        
 
-        <div class="oneInfo_SR">
-          <div class="oneInputBox_SR">
+      <div class="oneInfo_SR">
+        <div class="oneInputBox_SR">
             <div class="titleOfOneInfo_SR">
-              비밀번호
+              	비밀번호
             </div>
             <input
              class="input_SR"
@@ -244,72 +247,56 @@ file="../includes/header3.jspf"%>
               placeholder="비밀번호를 입력해주세요"
               autocomplete="on"
             />
-          </div>
         </div>
+      </div>
 
-            <div style="margin-top: 10px;">
-              <button id="loginButton" type="button" class="btn btn-default" style="width: 100%;">
-                로그인
-              </button>
-            </div>
-            <div style="margin-top: 10px;">
-              <button
-               style="width: 100%;"
-                id="findPwdBtton"
-                type="button"
-                class="btn btn-default"
-                onclick="location.href='/account/myAccount/findPwd'"
-              >
-                비밀번호 찾기
-              </button>
-            </div>
+		<div style="margin-top: 25px;">
+       		<div style="margin-top: 10px;">
+           		<button id="loginButton" type="button" class="btn btn-default" style="width: 100%;">
+               	로그인
+         		</button>
+       		</div>
+       
+       	  	<div style="margin-top: 10px;">
+	           	 <button
+	               style="width: 100%;"
+	                id="findPwdBtton"                 
+	                type="button"
+	                class="btn btn-default"
+	                onclick="location.href='/account/findPwd'"
+	              >
+              		  비밀번호 찾기
+           		 </button>
+         
+         	 </div>
+          </div>
+          
+        </form>
     </div>
 
 
     <div class="oneInfo_SR">
          
-          <%--
-          <a href="${facebook_url}"
-            ><button class="btn btn-primary btn-round" style="width: 100%;">
-              <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login
-            </button></a
-          >
-          --%>
-      <a
-            href="https://www.facebook.com/v7.0/dialog/oauth?
-      client_id=323895235315656
-      &redirect_uri=https%3A%2F%2Flocalhost%3A8443%2Fuser%2Flogin%2Faouth2
-      &state={state-param}
-      &resource_type=token"
-            >Login with Facebook
-      </a>
-          <!-- <fb:login-button scope="public_profile,email,user_birthday"
-        onlogin="checkLoginState();" onclick="FB.login();">
-      </fb:login-button>
-
-      <div id="status"></div> Load the JS SDK asynchronously 
-      <script	async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+         
         
-      <input type="text" name="requestFrom" value="${requestFrom}" />
+      <input type="hidden" name="requestFrom" value="${requestFrom}" />
     </div>
 
-    <div style="margin-top:25px;">
-      <div style="margin-left:310px;  display:inline">
-          <a href="../register/signUp">회원가입하기</a>
+    <div style="margin-top:45px; font-weight: 500">
+      	<div style="margin-left: 104px;">
+          Han:Ok의 회원이 되어 더 많은 혜택을 누려보세요!
+     	</div>
+      <div style="margin-left:310px; font-size:14px;">
+         <a href="../register/signUp" style="color:#007bff;">회원가입하기</a>
       </div>
-     </div>
-     </section>
     </div>
-  </form>
+    
+    </section>
+    </div>
+   </div>
+ </div>
+</div>
 
-</div>
-</section>
-</div>
-</div>
-</div>
-</div>
-</div>
 
 <script>
   //구글 로그인

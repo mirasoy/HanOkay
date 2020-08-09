@@ -16,5 +16,7 @@ public class BookVO {
 	private Date checkinDate;
 	private Date checkoutDate;
 	private Integer bookPrice;
+	private String acmPurl;
+	private String acmPname;
 
 }

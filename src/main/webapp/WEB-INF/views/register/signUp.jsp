@@ -1,6 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
-<title>HanOkay-회원가입</title>
+pageEncoding="UTF-8"%> 
+
+<%@include file="../includes/header1.jspf"%>
+<title>Han:Ok - 회원가입</title>
+<%@include file="../includes/header2.jspf"%>
+<%@include file="../includes/header3.jspf"%>
 
 <!-- Register CSS -->
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/register.css" >
@@ -29,12 +34,20 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
   <div class="content_SR">   
     <form class="contentOfInfo_SR" method="post" id="form">
       <div style="margin-bottom: 16px;">
+      
+          <div>
+        	<span style="color: red; font-size: 18px" id="msg1">
+              <c:out value="${msg1 }" />
+            </span>
+              <br />   
+          </div>
+      
         <div class="titleOfOneInfo_SR">
             Email(*)
       </div>
             <div class="inputBox_SR">   
             <div class="inputBox2_SR">
-            
+                      
             <input
               type="text"
               size="57"
@@ -49,13 +62,6 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
               이메일 중복체크
             </button>
           </div>
-      </div>
-
-          
-      <div>
-        <span style="color: red;" id="msg1"
-              ><c:out value="${msg1 }" /></span
-            ><br />   
       </div>
 
       <div style="margin-bottom: 16px;">
@@ -94,17 +100,25 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
      </div>
     </div>
        
-    <div style="margin-bottom: 16px;">
+  <div style="margin-bottom: 16px;">
+  
+  	<div>
       <span style="color: black;" id="msg2"
-      ><c:out value="${msg2 }" /></span
-    ><br />
-    <span style="color: black;" id="msg3"
-      ><c:out value="${msg3 }" /></span
-    ><br />
-      <div class="titleOfOneInfo_SR">
+      ><c:out value="${msg2 }" />
+      </span>
+  	</div>
+  	
+ 	<div>
+      <span style="color: black;" id="msg3">
+      <c:out value="${msg3 }" />
+     </span>
+    </div>
+    
+    <div class="titleOfOneInfo_SR">
         성(*)
-      </div>
-        <div class="inputBox_SR">
+    </div>
+    
+    <div class="inputBox_SR">
       <div class="inputBox2_SR"> 
        <input
        type="text"
@@ -140,8 +154,8 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
   <div class="titleOfOneInfo_SR">
     생년월일(*)
   </div>
-<div class="inputBox_SR">
-<div class="inputBox2_SR"> 
+  <div class="inputBox_SR">
+  <div class="inputBox2_SR"> 
   <input type="text" size="57" id="date" placeholder="생년월일을 선택하세요"/>
 </div>
 </div>
@@ -189,15 +203,14 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
         value="${assureEmail}"
         />
       </form>
-      
-      이미 HanOkay의 계정이 있나요? <a href="../user/login">로그인으로 돌아가기</a>
-      
-    </div>
-  	</div>
+      <div style="font-size: 18px; display:inline; margin-left: 80px;">
+     	 이미 Han:Ok의 계정이 있나요? 
+      	<a href="../user/login" style="color: #007bff">로그인으로 돌아가기</a>
+      </div>
     </div>
   </div>
- </div>
 </div>
+
 <script>
   //빈값체크
   function isEmpty(target) {

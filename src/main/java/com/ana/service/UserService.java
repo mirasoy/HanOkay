@@ -57,9 +57,17 @@ public interface UserService {
 	public boolean grantActive(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session);
 	
 	//해당 이메일을 가진 회원의 authCode를 업데이트 시키는 메서드
+	@Transactional 
+	public boolean updateAuthCode(@Param("email") String email, @Param("authCode") String authCode);
+	 
+	//pwd 찾기에서 authcode
 	@Transactional
-	public boolean updateAuthCode(String email, String authCode);
-
+	public boolean sendAuthCode2FindPwd(@Param("email")String email);
+	
+	
+	@Transactional
+	public boolean sendAuthCode(String email);
+	
 	//세션에 있는 유저의 profile 정보들을 가져오는 메서드
 	@Transactional
 	public UserProfileVO showProfile(HttpSession session);
@@ -71,6 +79,8 @@ public interface UserService {
 	//프로필 정보를 업데이트 하는 메서드
 	public boolean updateProfile(UserProfileVO profile);
 	
+	@Transactional
+	public boolean matchAuthCodeAndGiveSession(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session);
 	
 	////////////////////////림쨩 ////////////////
 	

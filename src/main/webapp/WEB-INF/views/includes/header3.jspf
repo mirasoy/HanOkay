@@ -44,11 +44,9 @@
                         <!-- Start : mainNav2 - 알림-->
                         <li class="nav-item dropdown"><a
                            class="nav-link dropdown-toggle" data-toggle="dropdown"
-                           href="#"> <i class="fa fa-bell fa-2x"></i></a>
+                           href="#"> <i class="fa fa-bell fa-2x"  id="bell"></i></a>
                            <ul class="dropdown-menu" id="notification">
-                              <li><a href="#">예약이 완료되었습니다</a></li>
-                              <li><a href="#">ana의 회원가입을 환영합니다!</a></li>
-
+                            <li><a href='/chat/chatList'>도착한 메세지가 없습니다.</a></li>
                            </ul></li>
 
                         <!-- Start : mainNav3 - 마이페이지-->
