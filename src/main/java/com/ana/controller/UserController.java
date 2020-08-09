@@ -171,4 +171,20 @@ public class UserController {
 		PrintWriter out= response.getWriter();
 		out.print(jso);
 	}
+	
+	@RequestMapping(value="/account/myAccount/showUpdatedProfile", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, UserProfileVO> showUpdatedProfile(String userNum, HttpServletResponse response) throws IOException {
+		log.info("uSerNum넘어 왔니??!!!!"+ userNum);
+		UserProfileVO profile= service.getUserProfileBy(userNum);
+		profile.setUserNum(userNum);
+		log.info("service에서 넘겨받은 profile!!!!!!!!!"+ profile);
+		
+		  Map<String, UserProfileVO> map = new HashMap<String, UserProfileVO>();
+		  map.put("profile", profile);
+		  log.info("map: "+ map.get("profile"));
+		 
+		  return map;
+		
+ 	}
 }

@@ -264,6 +264,13 @@ public class UserServiceImpl implements UserService{
 	}
 
 	
+	@Override
+	public UserProfileVO getUserProfileBy(String userNum) {
+		System.out.println("userNum in SErviceIMPL: "+ userNum);
+		UserProfileVO profile=mapper.getUserProfile(userNum);
+		System.out.println("profile: "+ profile);
+		return profile;
+	}
 	
 	//user의 인증코드를 업데이트 하게하는 메서드
 	@Override
@@ -367,6 +374,8 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return mapper.getAcmOwner(bizregnum);
 	}
+
+
 
 	
 

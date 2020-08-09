@@ -89,15 +89,20 @@ pageEncoding="UTF-8"%>
 		
 		<div class="outerbox_SR">
 			<div class="container3_SR">
-				<div style="margin: 30px auto;">
-					<div style="font-size: 25px;">
-					<p>오늘은 우리나라의  어느 곳을 여행하고 싶으신가요?</p>
-					<p>검색만 하세요.<br>
-					저희 한오케이가 <%=userFstName %>님이 그동안 모르고 지냈던
+				<div style="margin: 49px auto;">
+					<div style="font-size: 25px; text-align:center;">
+					<p>오늘은 우리나라의 <br>어느 곳을 여행하고 싶으신가요?</p>
+					<div style="margin-top: 44px; text-align:center; font-weight:400">
+					<p>검색만 하세요.</p>
+					</div>
+					<div style="margin-top:5px; text-align:center;">
+					<p>
+					저희 한오케이가 <br> <%=userFstName %>님이 그동안 모르고 지냈던<br>
 					아름다운 우리나라를 보여드릴게요.</p>
 					</div>
+					</div>
 				
-					<div style="margin-top:165px; margin-left:215px; font-size: 20px;">
+					<div style="margin-top:106px; margin-left:215px; font-size: 20px;">
 					<a href="../acm/list" style="color:#077bff" id="goBackIndex">한옥 검색하러 가기</a>
 					</div>
 				

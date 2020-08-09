@@ -203,23 +203,30 @@ margin-left: -2px;
 		<div class="card1">
 			<div class="item1 items">
 				<h1>안녕하세요 저는 <%=userFstName %>입니다.</h1>
-				<p id="userRegisterDate">회원가입일 : 2020</p>
+				
 			</div>
 			<div class="item2 items">
 			<div class="profileRead">
-				<div>
-				<span>자기소개</span>
-				<div>
+				<div style="margin-bottom: 20px;">
+				<div style="margin-top: 20px;">
+				<span style="font-weight:800; font-size: 20px;">자기소개</span>
+				<div style="margin-top: 7px; font-weight:400;" id="selfIntrod">
 				<c:out value="${profile.userIntroduction}" />
 				</div>
+				</div>
 				
-				<span>사용언어</span>
-				<div>
+				<div style="margin-top: 20px;">
+				<span  style="margin-top: 17px; font-weight:800; font-size: 20px;">사용언어</span>
+				<div style="margin-top: 7px; font-weight:400;" id="langu">
 				<c:out value="${profile.userLanguage}" />
 				</div>
 				</div>
+				</div>
+			
 			</div>
+			
 				<button type="button" class="user_profile_edit_button" >프로필 수정하기</button>
+			
 				
 				<ul id="peek">
 					<li>
@@ -299,10 +306,29 @@ $(".btn-primary").on('click', function(){
           userIntroduction : selfIntro,
           userLanguage : lang
         },
-        //async: false,
+        async: false,
         success: function (data) {
          if(data.msg =='success'){
         	 window.alert("수정 완료!");
+        	 
+        	
+        	 $.ajax({
+        	        type: "POST",
+        	        url: "/account/myAccount/showUpdatedProfile",
+        	        dataType: "json",
+        	        data: {
+        	          'userNum': '<%=userNum %>',
+        	        },
+        	        success: 
+        	        	function(data, profile) {
+        	        	
+        	        	console.log(data);
+        	        	console.log("data.profile: "+data.profile.userIntroduction);
+        	        	$("#selfIntrod").text(data.profile.userIntroduction);
+        	        	$("#langu").text(data.profile.userLanguage);
+        	        	}, 
+        	        });
+        	 
         	 $(".profileRead").show();
         	 $("#peek").removeClass('on');
   

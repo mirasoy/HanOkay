@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="../../includes/header1.jspf"%>
-<title>HanOkay-로그인 및 보안</title>
+<title>Han:Ok - 로그인 및 보안</title>
 <style type="text/css">
+.container{
+
+}
+
 
 </style>
 <%@include file="../../includes/header2.jspf"%>
