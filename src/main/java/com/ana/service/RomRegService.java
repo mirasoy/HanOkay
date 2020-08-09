@@ -17,4 +17,7 @@ public interface RomRegService {//호스트 등록단에서
 	public boolean remove(String romNum);
 
 	public List<String> getRomList(String acmNum);
+
+	//객실 수정
+	public boolean modiRom(RomVO vo); 
 }

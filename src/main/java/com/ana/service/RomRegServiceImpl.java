@@ -67,6 +67,13 @@ public class RomRegServiceImpl implements RomRegService{
 		return mapper.getRomList(acmNum);
 	}
 
+
+	@Override
+	public boolean modiRom(RomVO vo) {
+		
+		return mapper.modiRom(vo)==1;
+	}
+
 	
 	
 	

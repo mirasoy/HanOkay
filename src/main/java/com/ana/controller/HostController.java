@@ -179,7 +179,7 @@ public class HostController {
 					
 			if (list!=null) {//return List<RomVO>
 				for(int i=0;i<list.size();i++) {
-					String set=list.get(i).getRomName()+"="+list.get(i).getRomNum();
+					String set=list.get(i).getRomName()+"="+list.get(i).getRomSize()+"="+list.get(i).getRomPrice();
 					System.out.println("*겟i:"+set);
 					
 					jarr.add(set);
@@ -447,13 +447,41 @@ public class HostController {
 		acmNum=acmNum.trim();
 		System.out.println(acmNum);
 		model.addAttribute("acmNum", acmNum);
-		
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
 	
 	
 	@PostMapping("/modiRompop")//객실추가할때
 	public String modiRompopPost(
+			RomVO vo,Model model
+		) {
+	
+		System.out.println("========modiRompop Post========");		
+		System.out.println(vo);
+		rservice.modiRom(vo);
+		
+		model.addAttribute("acmNum", vo.getAcmNum());
+		
+		
+		return "redirect:/hosting/getAcm"; //겟인가
+	}
+	
+	@GetMapping("/newRompop")
+	public void newRompopGet(String acmNum,Model model,HttpSession session) {
+		System.out.println("========modiRompop Get========");
+		acmNum=acmNum.trim();
+		System.out.println(acmNum);
+		model.addAttribute("acmNum", acmNum);
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+	
+	
+	@PostMapping("/newRompop")//객실추가할때
+	public String newRompopPost(
 			RomVO vo,Model model
 		) {
 	
@@ -475,21 +503,14 @@ public class HostController {
 	public String removeRomGet(@RequestParam("romNum") String romNum,@RequestParam("acmNum") String acmNum, Model model,HttpSession session) {
 		System.out.println("삭제하자 롬넘이 넘어온다~~~"+romNum);
 		
-		model.addAttribute("acmNum", acmNum);
 		
 		
 		boolean removeokay=rservice.remove(romNum);
 		System.out.println("removeokay"+removeokay);
 		
-		List<RomVO> romList=rservice.getList(acmNum);
+		model.addAttribute("acmNum", acmNum);
 		
-		model.addAttribute("list", romList);
-		model.addAttribute("size", romList.size());
-		
-
-		model.addAttribute("userFstname", getUser(session).getUserFstName());
-		
-		return "redirect:/hosting/become-host2_6";
+		return "redirect:/hosting/getAcm";
 	}
 	
 	

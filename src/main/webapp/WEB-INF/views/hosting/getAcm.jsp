@@ -187,7 +187,7 @@
 				<span class="pull-right"><c:out value="${acm.acmNum}" />&nbsp;<span id="<c:out value="${acm.acmActi}" />"></span>
 				&nbsp;<button type="button" data-oper='editAcm'>숙소 정보 변경</button>
 				</span>
-				
+				<input type="hidden" name="acmNum" id="acmNum" value='<c:out value="${acm.acmNum}" />'>
 				<br><br>
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
@@ -255,7 +255,7 @@
 		<div class="col-lg-9">
 		<div class="panel panel-default hostonly">
 			<div class="panel-heading">
-				객실 정보<button class="pull-right" type="button" data-oper='editRom'>객실 정보 변경</button>
+				객실 정보<span class="pull-right"><button type="button" data-oper='editRom'>객실 정보 변경</button>&nbsp;<button type="button" data-oper='newRom'>객실 추가</button></span>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -403,7 +403,7 @@ $(document).ready(function(){
 	
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
-		var acmNum="<c:out value='${acm.acmNum}'/>";
+		var acmNum=$('#acmNum').val();
 
 		$('button').on("click", function(e){
 			e.preventDefault();
@@ -416,11 +416,28 @@ $(document).ready(function(){
 				alert("숙소목록으로 돌아갑니다");
 				location.href="/hosting/listings";
 			} else if(operation==='viewMyacm'){
-				alert("==준비중(팝업으로)===")
+				alert("==준비중(검색시 객실 연출 페이지)===");
 			}else if(operation==='editAcm'){
 				formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
 				formObj.attr("action","/hosting/modiAcm");
 				formObj.submit();					
+			} else if(operation==='newRom'){
+				var openWin;//자식창
+				
+				var _width='800';
+				var _height='800';
+				
+				var _left=Math.ceil((window.screen.width-_width)/2);
+				var _top=Math.ceil((window.screen.width-_height)/2);
+				
+				
+		        window.name = "parentForm";
+		        
+
+		        // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+		        openWin = window.open('/hosting/newRompop?acmNum='+acmNum,'childForm',
+		        		'width='+_width+', height='+_height+', left='+_left+', top='+_top+', resizable = no, scrollbars = no');   
+		        
 			}else if(operation==='editRom'){
 				var openWin;//자식창
 				
@@ -430,7 +447,6 @@ $(document).ready(function(){
 				var _left=Math.ceil((window.screen.width-_width)/2);
 				var _top=Math.ceil((window.screen.width-_height)/2);
 				
-				var acmNum=$('#acmNum').val();
 				
 		        window.name = "parentForm";
 		        
@@ -447,7 +463,7 @@ $(document).ready(function(){
 				formObj.attr("action","/hosting/reregAcm");
 				formObj.submit();
 			}else if(operation==='removeAcm'){
-				if(confirm("객실을 정말 삭제하시겠습니까?")==true){//숙소, 객실 INACTIVE되어야함
+				if(confirm("숙소를 정말 삭제하시겠습니까?")==true){//숙소, 객실 INACTIVE되어야함
 					alert(acmNum);
 					formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
 					formObj.attr("method","post");

@@ -71,19 +71,17 @@
 	
 
 	<!-- 객실 수정 -->
-	<update id="modify">
-		update trom
-		set rom_name=#{romName},
+	<update id="modiRom">
+		update trom set
 		rom_type=#{romType},
 		rom_capa=#{romCapa},
 		bed_type=#{bedType},
 		bed_cnt=#{bedCnt},
 		rom_size=#{romSize},
 		rom_price=#{romPrice},
-		rom_purl=#{romPurl},
-		rom_loca = #{romLoca}
+		rom_pname=#{romPname},
+		rom_purl=#{romPurl}
 		where rom_Num = #{romNum} 
-		
 	</update>
 
 	<!-- ********** 어드민단 ********** -->
