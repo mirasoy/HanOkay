@@ -8,67 +8,48 @@
 
 <div class="container">
 		<div class="col-lg-12">
-			<div class="panel panel-default">
+		<div class="panel panel-default">
 			<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
-	<div class="page-header-content">
-		<div class="page-header-top">
-			<h1 class="page-header">리뷰보기</h1>
-			<p><%=userFstName %>님, 추억이 떠오르시나요?</p>
-		</div>
-	</div>
-				<div class="panel-body">
-					<form id="operForm" action="/review/modify" method="get">
-						<table class="table table-striped table-bordered table-hover bookList">
-							<thead>
-								<tr>
-									<td colspan="1">
-										<c:out value="${review.bookNum }" />
-									</td>
-									<td colspan="2">
-										<c:out value="${review.acmName }" />
-									</td>
-									<td id="star"></td>
-								</tr>
-								<tr>
-									<td>
-										<b>체크인</b>
-									</td>
-									<td>
-										<c:out value="${review.checkInDay }" />
-									</td>
-									<td>
-										<b>체크아웃</b>
-									</td>
-									<td>
-										<c:out value="${review.checkOutDay }" />
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4">
-										<B><c:out value="${review.title }" /></B>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4">
-										<c:out value="${review.content }" />
-									</td>
-								</tr>
-								
-
-							</thead>
-							<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
-						</table>
-						<div id='revPicture' style='margin-bottom: 40px'>
-						</div>
-						<button class='btn' type="submit">리뷰수정/삭제</button>
-						<a href="/review/list"><button type="button" class='btn'>리스트로 돌아가기</button></a>
-					</form>
+			<div class="page-header-content">
+				<div class="page-header-top">
+					<h1 class="page-header">리뷰보기</h1>
+					<p><%=userFstName%>님, 추억이 떠오르시나요?
+					</p>
 				</div>
 			</div>
+			<%@include file="../includes/sidebar.jsp"%>
+			<section class="contents">
+				<div class="panel-body">
+					<form id="operForm" action="/review/modify" method="get">
+
+						<div class="postRV"
+							style="border: 3px solid #f1f1f1; background-color: white; border-radius: 5em; margin: 2%; padding: 5%;">
+							<b
+								style="font-size: 2em; border-right: 5px solid #f1f1f1; margin-right: 1em; padding-right: 1em;">${review.title }
+							</b> <span id="star"
+								style="padding-right: 1em; color: red; font-size: 1.5em; margin-right: 1em;">
+							</span>
+							<hr style="border: 2px solid #f1f1f1">
+							<span style="margin-left: 1em; font-size: 1.5em;"><b>${review.acmName }</b></span>
+							<span>${review.checkInDay }~${review.checkOutDay }</span>
+							<hr style="border: 3px solid #f1f1f1">
+							${review.content }
+							<hr style="border: 3px solid #f1f1f1">
+							<div id='revPicture'></div>
+							<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
+						</div>
+						<div class="right">
+							<button class='btn' type="submit">리뷰수정/삭제</button>
+							<a href="/review/list"><button type="button" class='btn'>리스트로
+									돌아가기</button></a>
+						</div>
+					</form>
+				</div>
 		</div>
 	</div>
-
+	</div>
+	</section>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		$(document)
