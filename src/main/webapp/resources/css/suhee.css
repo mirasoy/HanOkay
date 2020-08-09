@@ -1318,3 +1318,25 @@ details{
 	opacity: .25;
 	cursor: auto
 }
+
+.modal-content1 {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 100% display: flex;
+	flex-direction: column;
+	pointer-events: auto;
+}
+
+.modal-content2 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal {
+	z-index: 12000;
+}
