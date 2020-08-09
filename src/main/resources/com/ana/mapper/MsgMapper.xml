@@ -39,5 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by msg_date 
 
 	 </select>
-
+	 
+	 <select id="unreadMsg" resultType="Integer">
+	 select count(*) from tmsg where unum_to = #{userNum} and  read_status = 'F'
+</select>
 </mapper>

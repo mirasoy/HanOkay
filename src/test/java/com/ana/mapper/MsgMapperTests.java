@@ -3,12 +3,18 @@ package com.ana.mapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ana.domain.MsgVO;
 import com.ana.domain.RevPicVO;
@@ -39,7 +45,7 @@ public class MsgMapperTests {
 		mapper.sendMsg(vo);
 	}
 	
-	@Test
+	//@Test
 	public void marksRead() {
 		
 		//og.info("count "+ mapper.marksRead("M202"));
@@ -47,6 +53,11 @@ public class MsgMapperTests {
 		mapper.readConversation("-", "2");
 	}
     
+	@Test
+	public void unreadMsg() {
+		log.info("......................................"+mapper.unreadMsg("U10"));
+		
+	}
 
 
 

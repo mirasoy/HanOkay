@@ -31,10 +31,10 @@
 								style="padding-right: 1em; color: red; font-size: 1.5em; margin-right: 1em;">
 							</span>
 							<hr style="border: 2px solid #f1f1f1">
-							<span style="margin-left: 1em; font-size: 1.5em;"><b>${review.acmName }</b></span>
-							<span>${review.checkInDay }~${review.checkOutDay }</span>
+							<span style="margin-right: 1em; font-size: 1.5em;"><b>${review.acmName }</b></span>
+							<span >  ${review.checkInDay }~${review.checkOutDay }</span>
 							<hr style="border: 3px solid #f1f1f1">
-							${review.content }
+							<span style="font-size: 1.2em; ">${review.content }</span>
 							<hr style="border: 3px solid #f1f1f1">
 							<div id='revPicture'></div>
 							<input type="hidden" name="pstNum" value='<c:out value="${review.pstNum }" />'>
@@ -70,7 +70,7 @@
 					<c:forEach items="${reviewP }" var="picture">
 
 					$("#revPicture").append
-					("<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${picture.purl }" /><c:out value="${picture.pname }" />'>");
+					("<img style=' width: auto; height: 200px; max-width: 300px; margin :1%;' id='rPicture' src='/review/display?fileName=<c:out value="${picture.purl }" /><c:out value="${picture.pname }" />'>");
 		
 					</c:forEach>
 				

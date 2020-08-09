@@ -102,7 +102,32 @@ if (user != null) {
 
 
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/select2.css" >
+<style type="text/css">
 
+
+@keyframes ringbell{
+    0.0%{
+        transform: rotate(45deg);
+    }
+    100%{
+        transform: rotate(45deg);
+    }
+    25.4%{
+        transform: rotate(-45deg);
+    }
+    49.7%{
+        transform: rotate(45deg);
+    }
+    74.7%{
+        transform: rotate(-45deg);
+    }
+}
+
+/* Add the animation: property to whichever element you want to animate */
+.ringbell{
+    animation: ringbell 0.5s ease 0s 2 normal none;
+}
+</style>
 
 <script type="text/javascript">
    $(document)
@@ -332,10 +357,27 @@ if (user != null) {
 	      }
 
 	      
+	//안읽메세지갯수
+   		  $.ajax({
+				type:'POST',
+				url: '/unreadMsg',
+				dataType: 'text',
+				data: {
+					'userNum':'d',
+				},
+				success: function(data){
+					if(data>0){
+					$("#bell").addClass("ringbell")		
+					$('#notification').empty();
+					 $('#notification')
+                     .append(
+                           "<li><a href='/chat/chatList'>안읽은 메세지 : "+data+"개</a></li>");
+					}
+				}
 	      
 	      
-	      
-	      
+				}); 	
+			    
 	      
 </script>
 </head>
@@ -396,11 +438,10 @@ if (user != null) {
                         <!-- Start : mainNav2 - 알림-->
                         <li class="nav-item dropdown"><a
                            class="nav-link dropdown-toggle" data-toggle="dropdown"
-                           href="#"> <i class="fa fa-bell fa-2x"></i></a>
+                           href="#"> <i class="fa fa-bell fa-2x" id="bell"></i></a>
                            <ul class="dropdown-menu" id="notification">
-                              <li><a href="#">예약이 완료되었습니다</a></li>
-                              <li><a href="#">회원가입을 환영합니다.</a></li>
-
+                           
+							<li><a href='/chat/chatList'>도착한 메세지가 없습니다.</a></li>
                            </ul></li>
 
                         <!-- Start : mainNav3 - 마이페이지-->

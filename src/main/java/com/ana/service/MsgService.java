@@ -10,5 +10,7 @@ public interface MsgService {
 	
 	public int marksRead(String MsgNum);
 	
+	public int unreadMsg(String userNum);
+	
 	public void sendMsg(MsgVO vo);
 }
