@@ -563,14 +563,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-1.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_11.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>3 nights + Flight 5*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>게스트하우스 바리</h3>
+								<span>서울시 종로구 / 1인 1박 특별가 </span> <span class="price"> 17,000원 </span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A12">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -578,14 +578,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-2.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_6.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>4 nights + Flight 5*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>공산성게스트하우스</h3>
+								<span>충남 공주시  / 8인 특별가! </span> <span class="price"> 50,000 원 </span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A7">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -593,14 +593,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-3.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_20.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>2 nights + Flight 4*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>무위(無爲) </h3>
+								<span>서울시 종로구 / 1인실 1박 가격 </span> <span class="price"> 13,000 원</span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-02-09&out=2020-02-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A21">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -608,14 +608,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-4.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_67.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>3 nights + Flight 5*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>1900s Hanok </h3>
+								<span>고즈넉한 분위기의 한옥 스테이</span> <span class="price"> 50,000 원</span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A68">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -623,14 +623,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-5.jpg"
+							<img src="/display?fileName=C:/upload/acm/amc_p_81.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>4 nights + Flight 5*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn btn-outline" href="#">Book Now <i
+								<h3>무렵</h3>
+								<span>전주의 최신 숙소</span> <span class="price">150,000원</span>
+								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=%EC%A0%84%EC%A3%BC&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A82">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -638,14 +638,14 @@ display: block;
 					<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
 						data-animate-effect="fadeIn">
 						<div href="#">
-							<img src="../resources/img/place-6.jpg"
+							<img src="/display?fileName=C:/upload/room/room_p_86.jpg"
 								alt="Free HTML5 Website Template by FreeHTML5.co"
 								class="img-responsive">
 							<div class="desc">
 								<span></span>
-								<h3>Hotel title</h3>
-								<span>2 nights + Flight 4*Hotel</span> <span class="price">$1,000</span>
-								<a class="btn  btn-outline" href="#">Book Now <i
+								<h3>돈암서원 한옥마을</h3>
+								<span>충남 논산시 / 럭셔리 1인실</span> <span class="price">70,000 원</span>
+								<a class="btn  btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A55">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>

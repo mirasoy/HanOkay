@@ -2,6 +2,7 @@ package com.ana.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +63,15 @@ public class ChatController {
 	}
 
 	@PostMapping(value = "chat/chatRoom")
-	public ModelAndView chatRoom(@RequestParam("chatromnum") String chatromnum, ModelAndView mv, HttpSession session) {
+	public ModelAndView chatRoom
+			(@RequestParam("chatromnum") String chatromnum, @RequestParam("requestURL") String requestURL, ModelAndView mv, HttpSession session) {
 
+		
+		
 		String otherUser = "";
 		user = (UserVO) session.getAttribute("user");
 		// 로그인여부확인
-		System.out.println("도착테스트2" + (chatromnum.split("::")[0].equals("newChatr")));
+		System.out.println("어디서왓니 >> " + requestURL);
 		if (user != null) {
 
 			// 만약 호스트에 넘어온 채팅이라면이라면
@@ -78,24 +82,19 @@ public class ChatController {
 				// 진짜 첫 채팅인지 확인하기
 
 				if (chService.findChatRom(chatInfoArr[1], user.getUserNum()).size() != 0) {
-					
+
 					System.out.println(">>>처음 아님");
-								
-					
+
 					chatromnum = chService.findChatRom(chatInfoArr[1], user.getUserNum()).get(0).getChatromnum();
-					
-					
+
 					ChatRomVO vo = chService.readChat(chatromnum);
-					
-					
-					
+
 					// 피아식별
 					if (vo.getParticipant1().equals(user.getUserNum())) {
 						otherUser = vo.getParticipant2();
 					} else {
 						otherUser = vo.getParticipant1();
 					}
-					
 
 				} else {
 					System.out.println(">>> 첫채팅 시자ㅣㄱ함");
@@ -127,37 +126,36 @@ public class ChatController {
 
 			}
 
-			
-			
-			
 			// 읽음 처리하기
 			List<MsgVO> conversation = service.readConversation(user.getUserNum(), otherUser);
-			
+
 			// 다음 메세지들 중에서 니가 보낸거 고르기
-			
-			if(conversation.size()!=0) {
-				
-				
+
+			if (conversation.size() != 0) {
+
 				for (MsgVO msg : conversation) {
 					if (msg.getUnumTo().contentEquals(user.getUserNum())) {
 						// 읽엇다고 처리하기
 						service.marksRead(msg.getMsgNum());
 					}
 				}
-				
+
 			}
 
-			
-			System.out.println("채팅방 참여자  상대방>"+otherUser+ "나>"+ user.getUserFstName() );
-			
-			
-			
+			System.out.println("채팅방 참여자  상대방>" + otherUser + "나>" + user.getUserFstName());
+
 			// 값넘기기
 			mv.addObject("user", user);
 			mv.addObject("chatromnum", chatromnum);
 			mv.addObject("toUser", uService.get(otherUser));
 			mv.addObject("conversation", conversation);
-			mv.setViewName("chat/chatRoom");
+			
+			if(requestURL.equals("hosting")) {
+				mv.setViewName("chat/chatRoom2");
+				
+				}else {
+					mv.setViewName("chat/chatRoom");
+				}
 		} else {
 			// 비로그인 로그인시키기
 			mv.setViewName("/user/login");
@@ -165,50 +163,75 @@ public class ChatController {
 		return mv;
 	}
 
-	
-	
-	
-	@GetMapping(value = "chat/chatList")
-	public ModelAndView chatList(ModelAndView mv, HttpSession session) {
+	@GetMapping({"chat/chatList","chat/chatList2"})
+	public ModelAndView chatList(ModelAndView mv, HttpSession session, HttpServletRequest request) {
 		log.info("__");
 		user = (UserVO) session.getAttribute("user");
 		if (user != null) {
-			// 채팅방받아오기
-			List<ChatRomVO> chattingRoomList = chService.readChatlist(user.getUserNum());
 
-			for (ChatRomVO vo : chattingRoomList) {
+			// 넘어온 위치 파악하기
+			String url = request.getHeader("referer").split("/")[3]; // => acm/list
 			
-				
-				// 채팅 방 상대편알려주기
-				
-				if (vo.getParticipant1().equals(user.getUserNum())) {
-					vo.setOtherUser(uService.get(vo.getParticipant2()));
-				} else {
-					vo.setOtherUser(uService.get(vo.getParticipant1()));
-				}
 
-				// 안읽은 메세지 몇개인지 알려주기
+			// 채팅방받아오기
+			
+			
+			if (null!= chService.readChatlist(user.getUserNum()) ) {
 				
+				List<ChatRomVO> chattingRoomList = chService.readChatlist(user.getUserNum());
 				
-				List<MsgVO> conversation = service.readConversation(user.getUserNum(), vo.getOtherUser().getUserNum());
+				for (ChatRomVO vo : chattingRoomList) {
+					// 채팅 방 상대편알려주기
+
+					if (vo.getParticipant1().equals(user.getUserNum())) {
+						vo.setOtherUser(uService.get(vo.getParticipant2()));
+					} else {
+						vo.setOtherUser(uService.get(vo.getParticipant1()));
+					}
+
+					// 안읽은 메세지 몇개인지 알려주기
 				
-				int count = 0;
-				if(conversation.size()!=0) {
 					
-					for (MsgVO msg : conversation) {
-						if (msg.getUnumTo().contentEquals(user.getUserNum())) {
-							if (msg.getReadStatus().trim().equals("F")) {
-								count++;
+					
+					
+					List<MsgVO> conversation = service.readConversation(user.getUserNum(),
+							vo.getOtherUser().getUserNum());
+
+					int count = 0;
+					if (conversation.size() != 0) {
+
+						for (MsgVO msg : conversation) {
+							if (msg.getUnumTo().contentEquals(user.getUserNum())) {
+								if (msg.getReadStatus().trim().equals("F")) {
+									count++;
+								}
 							}
 						}
 					}
+					// 다음 메세지들 중에서 니가 보낸거 고르기
+					
+					log.info("4");
+					vo.setUnread("" + count);
 				}
-				// 다음 메세지들 중에서 니가 보낸거 고르기
-				vo.setUnread("" + count);
+				mv.addObject("requestURL", url);
+				mv.addObject("chatList", chattingRoomList);
+
+				if(url.equals("hosting")) {
+				mv.setViewName("chat/chatList2");
+				
+				}else {
+					mv.setViewName("chat/chatList");
+				}
+				return mv;
+				
+				
+				
+			}else {
+				mv.setViewName("/user/login");
+				return mv;
 			}
-			mv.addObject("chatList", chattingRoomList);
-			mv.setViewName("chat/chatList");
-			return mv;
+			
+			
 		} else {
 			mv.setViewName("/user/login");
 			return mv;
@@ -220,30 +243,30 @@ public class ChatController {
 	public ResponseEntity<List<MsgVO>> sendMsg(MsgVO vo, HttpSession session) {
 
 		user = (UserVO) session.getAttribute("user");
-		//로그인 여부확인하기
+		// 로그인 여부확인하기
 		if (user != null) {
-			
-			//빈메세지 아닐때만 전송하기
+
+			// 빈메세지 아닐때만 전송하기
 			if (vo.getMsgContent() != "" && vo.getMsgContent() != null) {
-			
-				//메세지 전송하기-저장하기
+
+				// 메세지 전송하기-저장하기
 				service.sendMsg(vo);
-				
-				System.out
-						.println("저장 Msg : " + vo.getMsgContent() + "::" +  vo.getUnumFrom() + ">>>>" +vo.getUnumTo()+ "::" + vo.getChatromnum());
-				
-				//저장정보업데이트하기
+
+				System.out.println("저장 Msg : " + vo.getMsgContent() + "::" + vo.getUnumFrom() + ">>>>" + vo.getUnumTo()
+						+ "::" + vo.getChatromnum());
+
+				// 저장정보업데이트하기
 				chService.updateChatrom(vo.getMsgContent(), user.getUserNum(), vo.getChatromnum());
 			}
 
 			List<MsgVO> conversation = service.readConversation(user.getUserNum(), vo.getUnumTo());
-			if(conversation.size()!=0) {
-			
-			for (MsgVO msg : conversation) {
-				if (msg.getUnumTo().contentEquals(user.getUserNum())) {
-					service.marksRead(msg.getMsgNum());
+			if (conversation.size() != 0) {
+
+				for (MsgVO msg : conversation) {
+					if (msg.getUnumTo().contentEquals(user.getUserNum())) {
+						service.marksRead(msg.getMsgNum());
+					}
 				}
-			}
 			}
 			ResponseEntity<List<MsgVO>> result = new ResponseEntity<List<MsgVO>>(conversation, HttpStatus.OK);
 			return result;

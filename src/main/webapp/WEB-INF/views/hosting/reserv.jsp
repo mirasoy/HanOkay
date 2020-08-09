@@ -170,6 +170,9 @@
 	      		   console.log("제이슨이가지고 돌아와따:"+data);
 					
 	      		   var romSelect=document.getElementById("ROM_NUM");
+	      		   
+	      		  // $("#ROM_NUM").empty();
+	      		   
 	     			console.log("길이:"+data.length);	
 	      		   for(var i=0;i<data.length;i++){
 	      			   //alert(data[i]);
