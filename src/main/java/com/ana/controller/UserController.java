@@ -49,9 +49,9 @@ public class UserController {
 	}
 	
 	//account/myAccount/findPwd 를 보여주는 메서드
-	@GetMapping("/account/myAccount/findPwd")
+	@GetMapping("/account/findPwd")
 	public String showFindPasswordPage() {
-		return "/account/myAccount/findPwd";
+		return "/account/findPwd";
 	}
 	
 	//내 프로필 보여주는 메서드
@@ -100,7 +100,7 @@ public class UserController {
 	}
 	
 	//pwd를 찾기위해 이메일 보내는 메서드
-	@RequestMapping(value="/account/myAccount/accountRecovery", method=RequestMethod.POST)
+	@RequestMapping(value="/account/accountRecovery", method=RequestMethod.POST)
 	@ResponseBody
 	public void sendEmailToFindPwd(String email, HttpServletResponse response) throws IOException {
 		log.info("::::::email in UserController: "+ email);
@@ -122,19 +122,19 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value="/account/myAccount/emailAuth", method=RequestMethod.POST)
+	@RequestMapping(value="/account/emailAuth", method=RequestMethod.POST)
 	public ModelAndView showEmailAuthPagetoEnterCode(String hiddenEmail) {
 		log.info("#######email 주소 in UserContoroller::submitAuth : " + hiddenEmail);
 		ModelAndView mv= new ModelAndView();
 		
 		mv.addObject("email", hiddenEmail);
-		mv.setViewName("/account/myAccount/emailAuth");
+		mv.setViewName("/account/emailAuth");
 		
 		return mv;
 	}
 	
 	//인증코드를 재생성하고 이메일을 다시보내는 메서드
-	@RequestMapping(value="/account/myAccount/sendAgain", method=RequestMethod.POST)
+	@RequestMapping(value="/account/sendAgain", method=RequestMethod.POST)
 	@ResponseBody
 	public void sendAuthCodeAgain(String email, HttpServletResponse response) throws IOException {
 		log.info(":::USERCONTROLLER sendAgain에 email 왔냐: "+ email);
@@ -154,7 +154,7 @@ public class UserController {
 	
 	}
 	
-	@RequestMapping(value="/account/myAccount/submitAuth", method=RequestMethod.POST)
+	@RequestMapping(value="/account/submitAuth", method=RequestMethod.POST)
 	@ResponseBody
 	public void submitAuthCodeToGetPwd(String email, String enteredAuthCode, HttpServletResponse response, HttpSession session) throws IOException {
 		log.info(":::USERCONTROLLER submitAuth에 email 왔냐: "+ email);

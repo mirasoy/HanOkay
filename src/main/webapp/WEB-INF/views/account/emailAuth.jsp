@@ -1,15 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
-<%@include file="../../includes/header1.jspf"%>
+<%@include file="../includes/header1.jspf"%>
 <title>Han:Ok - 비밀번호 찾기 인증코드 확인</title>
 <style>
 #sendAgainBtn:hover{
 	cursor:pointer;
 }
 </style>
-<%@include file="../../includes/header2.jspf"%>
-<%@include file="../../includes/header3.jspf"%>
+<%@include file="../includes/header2.jspf"%>
+<%@include file="../includes/header3.jspf"%>
 
 <!-- Register CSS -->
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/register.css" >
@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
 				<br>
 				<button type="button" id="registerBtn" class="btn btn-sumbit">인증코드 제출</button>
 			<br>
-			<div>
+			<div style="margin-top: 18px;">
 				<span>인증코드가 도착하지 않았나요? </span>
 				<a style="color:#007bff;" id="sendAgainBtn">인증코드 재발송</a>
 				<br>
@@ -66,7 +66,7 @@ pageEncoding="UTF-8"%>
 		
 		$.ajax({
 	            type: "POST",
-	            url: "/account/myAccount/submitAuth",
+	            url: "/account/submitAuth",
 	            dataType: "json",
 	            data: {
 	              email: email,
@@ -99,7 +99,7 @@ pageEncoding="UTF-8"%>
 		
 		$.ajax({
             type: "POST",
-            url: "/account/myAccount/sendAgain",
+            url: "/account/sendAgain",
             dataType: "json",
             data: {
               email: email,
@@ -126,4 +126,4 @@ pageEncoding="UTF-8"%>
 	});
 	</script>
 
-<%@include file="../../includes/footer.jsp"%>
+<%@include file="../includes/footer.jsp"%>
