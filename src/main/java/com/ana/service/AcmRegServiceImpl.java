@@ -207,6 +207,10 @@ public class AcmRegServiceImpl implements AcmRegService{
 		return amapper.removeAcm(acmNum)*amapper.removeAcmso(acmNum);//몇개의 방이 지워졌나
 	}
 
+	@Override
+	public boolean reregAcm(String acmNum) {
+		return amapper.reregAcm(acmNum)==1;
+	}
 
 	
 	

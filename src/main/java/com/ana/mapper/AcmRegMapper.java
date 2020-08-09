@@ -38,6 +38,9 @@ public interface AcmRegMapper {
 	public int removeAcmso(String acmNum);//지운다
 	
 	
+	public int reregAcm(String acmNum);
+	
+	
 	////////////어드민단////////////
 	public List<UserAcmVO> getadminListAcms(String acmActi);
 	

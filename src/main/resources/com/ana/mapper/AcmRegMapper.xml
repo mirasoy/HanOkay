@@ -99,8 +99,14 @@
 		delete from trom where acm_Num = #{acmNum}
 	</delete>
 	
+	<!-- 숙소재신청 -->
+ 	<update id="reregAcm">
+		update tacm 
+		set acm_status='REREG'
+		where acm_Num = #{acmNum} 
+	</update>
 	
-
+	
 	<!-- 숙소1_6 정보(opt, desc) 수정 -->
 	<update id="update1_6">
 		update tacm 

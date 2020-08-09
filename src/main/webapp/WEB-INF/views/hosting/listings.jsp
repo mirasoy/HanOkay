@@ -96,7 +96,7 @@
                            <c:out value="${pendingacm.acmName}" />
                         </a>
                      </td>
-                     <td><c:out value="${pendingacm.acmStatus}" /></td>
+                     <td style="color:red;"><c:out value="${pendingacm.acmStatus}" /></td>
                      <td id="<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>"></td>
                      <td><c:out value="${pendingacm.acmDetailaddr}" /></td>
                      

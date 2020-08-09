@@ -113,6 +113,7 @@
 		<button class="btn btn-default" type="button" data-oper='backtolist'>숙소 목록으로</button>
 		<button class="btn btn-default" type="button" data-oper='viewMyacm'>숙소 미리보기</button>
 		<button class="btn btn-danger" type="button" data-oper='removeAcm'>숙소 삭제하기</button>
+		<button id="isDenied" class="btn btn-info" type="button" data-oper='reregAcm'>숙소 재신청</button>
 		</div>
 		<br><br><br>
 		
@@ -179,11 +180,12 @@
  	
 		<div class="col-lg-9">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				숙소 정보 <span class="pull-right"><c:out value="${acm.acmNum}" />&nbsp;<span id="<c:out value="${acm.acmActi}" />"></span>&nbsp;&nbsp;&nbsp;<button type="button" data-oper='editAcm'>숙소 정보 변경</button></span>
-			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
+			<div class="form-group">
+				<label>숙소 정보</label> <span class="pull-right"><c:out value="${acm.acmNum}" />&nbsp;<span id="<c:out value="${acm.acmActi}" />"></span>&nbsp;&nbsp;&nbsp;<button type="button" data-oper='editAcm'>숙소 정보 변경</button></span>
+				
+				<br><br>
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
@@ -230,6 +232,7 @@
 							<td colspan="5"><div id="acmOpt">&nbsp;</div></td>
 						</tr>
 				</table>
+				</div>
 				</div>
 				<!--  end panel-body -->
 			</div>
@@ -291,6 +294,12 @@
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	//getAcm 페이지가 켜질때
+	var stat='<c:out value="${acm.acmStatus}" />';
+	if(stat!="DENIED"){
+		$("#isDenied").css("display","none"); 
+	}
+	
 	
 	//사진크게보기
 	var img = document.getElementsByTagName("img");
@@ -384,6 +393,8 @@ $(document).ready(function(){
 	
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
+		var acmNum="<c:out value='${acm.acmNum}'/>";
+
 		$('button').on("click", function(e){
 			e.preventDefault();
 			
@@ -402,9 +413,14 @@ $(document).ready(function(){
 				alert("==숙소정보 변경(팝업으로)===")
 			}else if(operation==='editRom'){
 				alert("==객실정보 변경(팝업으로)===")
+			}else if(operation==='reregAcm'){
+				alert("숙소를 재신청합니다");
+				formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
+				formObj.attr("method","post");
+				formObj.attr("action","/hosting/reregAcm");
+				formObj.submit();
 			}else if(operation==='removeAcm'){
 				if(confirm("객실을 정말 삭제하시겠습니까?")==true){//숙소, 객실 INACTIVE되어야함
-					var acmNum="<c:out value='${acm.acmNum}'/>";
 					alert(acmNum);
 					formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
 					formObj.attr("method","post");
@@ -416,7 +432,7 @@ $(document).ready(function(){
 			}  
 		});
 	});
-
+	
 
 	$(document).ready(function(){
 		$(".move").on("click", function(e){
