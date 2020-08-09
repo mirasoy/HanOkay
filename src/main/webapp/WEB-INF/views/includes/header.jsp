@@ -127,6 +127,9 @@ if (user != null) {
 .ringbell{
     animation: ringbell 0.5s ease 0s 2 normal none;
 }
+.wishopt{
+margin : 1em !important;
+}
 </style>
 
 <script type="text/javascript">
