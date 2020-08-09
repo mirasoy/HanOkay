@@ -272,15 +272,15 @@
 			let perDay = Math.ceil(subtotal / days);
 			
 			// 예약페이지 화면 우측의 금액 부분
-			document.getElementById("lblPrice").innerHTML = price;
-			document.getElementById("lblVat").innerHTML = vat; 
-			document.getElementById("lblSubtotal").innerHTML = subtotal;
-			document.getElementById("lblCoupon").innerHTML = coupon;
-			document.getElementById("lblMileage").innerHTML = mileage;
-			document.getElementById("lblDiscount").innerHTML = discount;
-			document.getElementById("lblTotal").innerHTML = total;
+			document.getElementById("lblPrice").innerHTML = price.toLocaleString();
+			document.getElementById("lblVat").innerHTML = vat.toLocaleString(); 
+			document.getElementById("lblSubtotal").innerHTML = subtotal.toLocaleString();
+			document.getElementById("lblCoupon").innerHTML = coupon.toLocaleString();
+			document.getElementById("lblMileage").innerHTML = mileage.toLocaleString();
+			document.getElementById("lblDiscount").innerHTML = discount.toLocaleString();
+			document.getElementById("lblTotal").innerHTML = total.toLocaleString();
 			
-			document.getElementById("lblPerDay").innerHTML = perDay;
+			document.getElementById("lblPerDay").innerHTML = perDay.toLocaleString();
 			
 			// 예약하기 버튼을 눌렀을 때 저장할 정보 셋팅			
 			document.getElementById("vat").value = vat;

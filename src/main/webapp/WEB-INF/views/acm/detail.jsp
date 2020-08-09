@@ -237,6 +237,49 @@ String checkout = request.getParameter("out");
 	</div> <!-- end of contents -->
 	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
 
+	<!-- wishList 모달창 -->
+		<div class="modal fade wishmodal" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content1">
+					<div class="modal-header">
+						<h1 class="h1Name">당신의 여행을 찜하세요</h1>
+						<button type="button" class="closeBtn" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">				
+						<div class="form-group info-group sr-only">
+							<label>#유저번호</label> <input class="form-control" name='userNum'
+								value='<%=userNum%>' readonly="readonly">
+						</div>
+						<div class="form-group info-group sr-only">
+							<label>#숙소번호</label> <input class="form-control acmNum"  name='acmNum' readonly="readonly" > 					
+						</div>
+						<div class="form-group info-group">
+							<label>#타이틀</label> 
+							<select class="form-control" name='listTitle' value=''>
+							    <option value="분류없음" hidden>분류선택</option>
+							    <option value="관광">관광</option>
+							    <option value="휴식">휴식</option>
+							    <option value="쇼핑">쇼핑</option>
+							</select>
+						</div>
+						<div class="form-group info-group">
+							<label>#내용</label> <input class="form-control" name='listContent'
+								value=''>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id='modalRegisterBtn' type="button"
+							class="btn btn-primary">Register</button>
+						<button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- /.modal -->
+		
 </div><!-- end of page -->
 <script type="text/javascript" src="/resources/js/wishlist.js"></script>
 	<script>
@@ -270,17 +313,17 @@ String checkout = request.getParameter("out");
 		
 		
 		// 리뷰 모달창
-		let modal = document.getElementById("reviewModal");
+		let rewiewModal = document.getElementById("reviewModal");
 		let modalBtn = document.getElementById("modalBtn");
 		let modalSpan = document.getElementsByClassName("close")[0];
 		let reviewPst = document.getElementsByClassName("reveiwPst");
 		
 		if(document.getElementById("modalBtn")){
 			modalBtn.onclick = function() {
-				modal.style.display = "block";
+				reviewModal.style.display = "block";
 			}
 			modalSpan.onclick = function() {
-				modal.style.display = "none";
+				reviewModal.style.display = "none";
 			}
 		}
 		
