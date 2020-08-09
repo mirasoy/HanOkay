@@ -76,7 +76,7 @@ public class HostController {
 		CalendarVO today = new CalendarVO(); 
 		today.setYear(cal.get(Calendar.YEAR));
 		today.setMonth(cal.get(Calendar.MONTH) + 1);
-		today.setDay(cal.get(Calendar.MONTH) + 1);
+		today.setDay(cal.get(Calendar.DAY_OF_MONTH));
 		today.setYoilInt(cal.get(Calendar.DAY_OF_WEEK));
 		today.setYoil(getTodayYoil(today.getYoilInt()));
 		

@@ -42,7 +42,7 @@
 			<div class="acm" id="acm">
 				<h4>게스트가 묵게 될 숙소의 유형을 골라주세요!</h4>
 				<input type="radio" id="acmType_house" name="acmTypes" value="H"><label for="rentType1">집 천제</label> 
-				<input type="radio" id="acmType_priv" name="acmTypes" value="P"><label for="rentType2">객실별 대여</label>
+				<input type="radio" id="acmType_priv" name="acmTypes" value="PD"><label for="rentType2">객실별 대여</label>
 			
 		<form id="actionForm" action="/hosting/become-host" method="post">
 			<br>	

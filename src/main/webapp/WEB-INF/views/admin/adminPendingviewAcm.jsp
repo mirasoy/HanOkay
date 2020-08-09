@@ -119,6 +119,14 @@
 <!-- /.row -->
 
 <div class="row">
+ <div class="col-lg-12">
+    <div class="panel panel-default" style="border:0px;" >
+ 
+		<button data-oper='apprAcm' class="btn btn-default">숙소 승인</button><!-- 이유를 써서 알림으로 가게끔 하자2.5차 -->
+			<button data-oper='denyAcm' class="btn btn-danger">숙소 거절</button><!-- 이유를 써서 알림으로 가게끔 하자2.5차 -->
+			<button data-oper='backtoIndex' class="btn btn-info" >뒤로가기</button>
+	</div>
+</div>	
   <div class="col-lg-3">
     <div class="panel panel-default" >
 
@@ -126,13 +134,9 @@
       <!-- /.panel-heading -->
 	      <div class="panel-body">
 			<div class="form-group">
-	          <label>회원번호</label> <input class="form-control" name='userNum' id='userNum'
-	            value='<c:out value="${getuseracm.userNum }"/>' readonly="readonly">
+	          <label>회원정보</label> <input class="form-control" name='userNum' id='userNum'
+	            value='<c:out value="${getuseracm.userNum }"/>_<c:out value="${getuseracm.userFstName }"/><c:out value="${getuseracm.userLastName }"/>' readonly="readonly">
 	        </div>	
-	        <div class="form-group">
-	          <label>회원이름</label> <input class="form-control" name='userFstName' id='userFstName'
-	            value='<c:out value="${getuseracm.userFstName }"/><c:out value="${getuseracm.userLastName }"/>' readonly="readonly">
-	        </div>
 	        <div class="form-group">
 	          <label>회원 권한</label> <input class="form-control" name='userPiv'
 	            value='<c:out value="${getuseracm.userPriv }"/>' readonly="readonly">
@@ -146,14 +150,13 @@
 	          <label>회원 사업자번호</label> <input class="form-control" name='bizRegnum' id='bizRegnum'
 	            value='<c:out value="${getuseracm.bizRegnum }"/>' readonly="readonly">
 	        </div>
-			
+			<label>숙소상태</label> <input class="form-control" name='acmStatus' id='acmStatus' style="color:red;"
+	            value='<c:out value="${getuseracm.acmStatus }"/>' readonly="readonly">
+	        </div>
 		</div>
-		</div>
+		</div><!-- col-lg-4 end -->
 		
-			<button data-oper='apprAcm' class="btn btn-default">숙소 승인</button><!-- 이유를 써서 알림으로 가게끔 하자2.5차 -->
-			<button data-oper='denyAcm' class="btn btn-danger">숙소 거절</button><!-- 이유를 써서 알림으로 가게끔 하자2.5차 -->
-			<button data-oper='backtoIndex' class="btn btn-info" >뒤로가기</button>
-	</div><!-- col-lg-4 end -->
+	
 	
 	
 	
@@ -204,62 +207,57 @@
 			
 	        <div class="form-group">
 	          <label>숙소대표사진</label> 
-	          <div class="slideshow-container">
-					
-					<div class="mySlides">
-					  <div class="numbertext">1 / 3</div>
-					  <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
-							
+	     <div class="slideshow-container">
+					<br><br>
+
+					<div class="mySlides" id="mySlide0">
+					  <div class="numbertext">1 / 6</div>
 					</div>
 					
-					<div class="mySlides">
-					  <div class="numbertext">2 / 3</div>
-					 <img style='width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
+					<div class="mySlides" id="mySlide1">
+					  <div class="numbertext">2 / 6</div>
+					  
 					</div>
-					
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					  <img style='width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
-					
-					  <!--  <div class="text">Caption Three</div>-->
+
+					<div class="mySlides" id="mySlide2">
+					  <div class="numbertext">3 / 6</div>
 					</div>
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					  <img style='width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
-					
-					  <!--  <div class="text">Caption Three</div>-->
+
+					<div class="mySlides" id="mySlide3">
+					  <div class="numbertext">4 / 6</div>
 					</div>
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					  <img style='width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
-					
-					  <!--  <div class="text">Caption Three</div>-->
+
+					<div class="mySlides" id="mySlide4">
+					  <div class="numbertext">5 / 6</div>
+					</div>
+
+					<div class="mySlides" id="mySlide5">
+					  <div class="numbertext">6 / 6</div>
 					</div>
 					
 					
 					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 					<a class="next" onclick="plusSlides(1)">&#10095;</a>
-					
-					</div>
+				<!-- 여기에 넣쟈 -->	
 					<br>
 					
-					<div style="text-align:center">
-					  <span class="dot" onclick="currentSlide(1)"></span> 
-					  <span class="dot" onclick="currentSlide(2)"></span> 
-					  <span class="dot" onclick="currentSlide(3)"></span> 
-					  <span class="dot" onclick="currentSlide(4)"></span> 
-					  <span class="dot" onclick="currentSlide(5)"></span> 
-					  <span class="dot" onclick="currentSlide(6)"></span> 
-					</div>
+			<div id="dots" style="text-align:center">
+	           <span class="dot" onclick="currentSlide(1)"></span> 
+			   <span class="dot" onclick="currentSlide(2)"></span> 
+			   <span class="dot" onclick="currentSlide(3)"></span> 
+			   <span class="dot" onclick="currentSlide(4)"></span> 
+			   <span class="dot" onclick="currentSlide(5)"></span> 
+			   <span class="dot" onclick="currentSlide(6)"></span> 
+			</div>
 	          
-	          
-              </div>
+          </div>
 			
 		</div>
 		</div>
 	</div><!-- col-lg-3 end -->
 	
-		
+</div>
+	
 		
 	 <div class="col-lg-3">
     <div class="panel panel-default" >
@@ -277,9 +275,9 @@
 					<c:forEach items="${roms}" var="rom">
 						<tr>
 							<td>
-								<a class='move' href='<c:out value="${rom.romNum}"/>'>
+								<!-- <a class='move' href='<c:out value="${rom.romNum}"/>'/> -->
 									<c:out value="${rom.romName}" />
-								</a>
+								
 							</td>
 						
 						</tr>
@@ -290,11 +288,10 @@
 		
 		
 	</div><!-- col-lg-4 end -->	
+	</div>	
 	
 	
 	
-	
-</div>
 </div>
 		<!-- 빈 폼 -->
 		<form id="actionForm">
@@ -335,7 +332,27 @@
 	$(document).ready(function(){
 		getAcmOpt();
 		
+		//사진크게보기
+		var img = document.getElementsByTagName("img");
+	    for (var x = 0; x < img.length; x++) {
+	      img.item(x).onclick=function() {window.open(this.src)}; 
+	    }
 		
+	  //사진슬라이드 펑션 부르기
+		let mySlides=new Array();
+
+		for(let i=0;i<6;i++){
+			mySlides[i]=document.getElementById("mySlide"+ i);//넣는곳
+		}
+		
+		let j=0;
+		<c:forEach items="${acmPics}" var="pic">
+			mySlides[j].innerHTML+="<img style='align:center;max-width:250px;width: auto; height:200px;' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }"/>'>";
+			j++;
+		</c:forEach>
+	    
+	    
+	    
 		var formObj = $("#actionForm");
 		
 		$('button').on("click", function(e){
@@ -364,8 +381,14 @@
 					alert("숙소가 활성화됩니다");
 								
 					}else if(operation==='denyAcm'){//숙소거절
-						formObj.attr("action","/admin/inactiveAcm");
-						alert("숙소가 비활성화됩니다");
+						var acmStatus=document.getElementById("acmStatus").value;
+						if(acmStatus=="DENIED"){
+							alert("이미 승인 거절된 숙소입니다");
+							return;
+						}else{
+							formObj.attr("action","/admin/denyAcm");
+							alert("숙소활성화를 거절합니다");
+						}
 					}
 				
 			}

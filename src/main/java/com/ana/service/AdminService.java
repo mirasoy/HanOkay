@@ -34,7 +34,7 @@ public interface AdminService {
 
 	//숙소측 활성화/비활성화
 	public boolean activeAcm(String acmNum);
-	public boolean inactiveAcm(String acmNum);
+	public boolean denyAcm(String acmNum);
 
 	
 
