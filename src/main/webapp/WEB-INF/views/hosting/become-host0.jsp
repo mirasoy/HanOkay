@@ -242,7 +242,6 @@ function sample6_execDaumPostcode() {
                   if (status === kakao.maps.services.Status.OK) {
                       var result = results[0]; //첫번째 결과의 값을 활용
                       // 해당 주소에 대한 좌표를 받아서
-               	   alert(result);
                       var coords = new kakao.maps.LatLng(result.y, result.x);
    					
                      var latitude=document.getElementById("latitude");

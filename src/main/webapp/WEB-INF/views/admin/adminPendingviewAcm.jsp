@@ -298,7 +298,7 @@
 		</form>
 				
 </div>
-
+<script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	var slideIndex = 1;
 	showSlides(slideIndex);
@@ -430,7 +430,7 @@
 		
 	
 		for(let k=0; k<option.length; k++){
-			if(option.charAt(k) == 1){
+			if(option.charAt(option.length-1-k) == 1){
 				document.getElementById("acmOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
 				
 			}

@@ -294,6 +294,7 @@
 </div>
 </div>
 
+<script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	var slideIndex = 1;
 	showSlides(slideIndex);
