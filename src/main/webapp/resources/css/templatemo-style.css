@@ -13,7 +13,8 @@
 
 
 body {
-	background: #f8f9fa;
+	background: #e2e7ed;
+	/* background: #f9f9f9; */
 	margin-top: 120px;
 	-ms-overflow-style: none;
 }
@@ -1144,6 +1145,7 @@ footer p { color: white; }
 
 /* The popup form - hidden by default */
 .form-popup {
+	    z-index: 20000;
 	display: none;
 	position: fixed;
 	padding-top: 100px;

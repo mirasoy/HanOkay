@@ -18,5 +18,7 @@ public class BookVO {
 	private Integer bookPrice;
 	private String acmPurl;
 	private String acmPname;
+	private String payMethod;
+	private String acmNum;
 
 }

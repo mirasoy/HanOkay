@@ -42,8 +42,8 @@ String name = (String)session.getAttribute("loginUserNum");
 	            <div class="clickable-card">
 	                <div class="hotel-picture">
 	                    <figure>
-	                        <img src="${request.contextPath}/resources/img/room.jpg" alt="호텔사진">
-	                    </figure>
+	                     <img alt='객실사진'	src='/display?fileName=<c:out value="${board.acmPurl}" />s/<c:out value="${board.acmPname}" />' /> 
+	                   </figure>
 	                </div>
 	                <div class="info-container">
 	                    <div class="checkin-checkout-info-panel">
@@ -87,15 +87,20 @@ String name = (String)session.getAttribute("loginUserNum");
 	        </div>
 	            <div class="button-item">
 	                <div class="button-item-1">
-	                
-	                    <a class="button-txt button-txt-1" href="">이용후기 작성하기</a>
-	                    <a class="button-txt" href="">다시 예약하기</a>
+	               
+	                 
+	               <%--      <a class="button-txt button-txt-1" href="/review/register?bookNum=${board.bookNum}">이용후기 작성하기</a> --%>
+	                    <a class="button-txt button-txt-1" href="/review/list">이용후기 작성하기</a>
+	                    <!-- <a class="button-txt" href="">다시 예약하기</a> -->
+	                    <a href="/acm/detail?pageNum=2&amount=10&type=A&keyword=&person=1&in=2020-08-10&out=2020-08-11&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=${board.acmNum}">다시예약하기</a>
+	                    
+	          <!--           <a class="button-txt" href="">다시 예약하기</a> -->
 	                    
 	                </div>
 	
 	                <div class="button-item-2">
 	                   	<span class="button-item-2" id="<c:out value="${board.bookNum}" />"></span>
-	                    <button>정보보기</button>
+	               		<button><a href="/mypage/info3?bookNum=${board.bookNum}">정보보기</a></button>
 	                </div>
 	            </div>
 	    </div>

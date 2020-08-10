@@ -65,15 +65,21 @@ int i = 0;
 	                    </div>
 	                    <ul class="hotel-info-top">
 	                        <li class="hotel-title"><c:out value="${board.acmName}" /></li>
-	                        <li class="booking-id" data-selenium="booking-id">예약 번호: <span class="booking-id-value"><c:out value="${board.bookNum}" /></span></li>
+	                        
 	                       
-	                       <li class="booking-id" data-selenium="booking-id">결제 상태 : 현장 결제</li>
-	                        <li>
-		                        <div class="booking-status-panel" data-selenium="booking-status-label">
-			                        <i class="ficon ficon-16 ficon-check-circle mmb-booking-status-icon-green"></i>
-			                     
-		                        </div>
+	                        <li class="booking-id" data-selenium="booking-id"> <i class="fa fa-arrow-circle-right"></i>  예약 번호: <span class="booking-id-value"><c:out value="${board.bookNum}" /></span></li>
+	                       
+	                      
+	                       
+	                       
+	                     <li class="payMethod" data-selenium="booking-id" id="<c:out value="${board.bookNum}" />3">
 	                        </li>
+	                
+	                
+	                 	<li class="bookstatus" data-selenium="booking-id" id="<c:out value="${board.bookNum}" />">
+	                      </li>
+	                
+	                
 	                    </ul>
 	            
 	                    <div class="booking-info-bottom">
@@ -83,9 +89,9 @@ int i = 0;
 	                        </div>
 	                    </div>
 	                    
-	                    <div class="bookstatus">
-	                    	<span class="button-item-2" id="<c:out value="${board.bookNum}" />"></span>
-	                    </div>	                    	                    
+	              
+	                    
+	                                       	                    
 	                </div>
 	            </div>
 	        </div>
@@ -98,8 +104,7 @@ int i = 0;
 	                </div>
 	
 	                <div class="button-item-2">
-	                   <button class="button-item-2" id="<c:out value="${board.bookNum}" />2"></button>
-	                   
+	                   <button class="button-item-2" id="<c:out value="${board.bookNum}" />2"></button>	                   
 	                </div>
 	            </div>
 	    </div>
@@ -127,15 +132,34 @@ int i = 0;
 	<c:forEach items="${bookListAll}" var="board">
 
 	var bookStatus = '<c:out value="${board.bookStatus} "/>'
+	var payMethod = '<c:out value="${board.payMethod} "/>'
+	
 
 	console.log(bookStatus);
+	
+	console.log(payMethod);
+	
+	if (payMethod.trim() == 'PY_METHOD_PAYPAL') {
+		$('#<c:out value="${board.bookNum}" />3')
+		.append(
+				"<input class='form-control' name='payMethod' value='결제 상태 : 페이팔로 결제하기' readonly='readonly'>");
+	} else if (payMethod.trim() == 'PY_METHOD_LATER') {
+		$('#<c:out value="${board.bookNum}" />3')
+		.append(
+				"<input class='form-control' name='payMethod' value='결제 상태 : 현장에서 결제하기' readonly='readonly'>");
+	}else if (payMethod.trim() == 'PY_METHOD_CARD') {
+		$('#<c:out value="${board.bookNum}" />3')
+		.append(
+				"<input class='form-control' name='payMethod' value='결제 상태 : 카드로 결제하기' readonly='readonly'>");
+	}
+	
 
 	//만약에, 내 예약상태가 "RS_STT_BK" 이라면, "투숙예정"을 출력하게끔 + 페이지는 info로 이동한다.
 	if (bookStatus.trim() == 'RS_STT_BK') {
 
 		$('#<c:out value="${board.bookNum}" />')
 				.append(
-						"<input class='form-control' name='bookStatus' value='투숙예정' readonly='readonly'>");
+						"<input class='form-control' name='bookStatus' value='예약 상태 : 투숙예정' readonly='readonly'>");
 		$('#<c:out value="${board.bookNum}" />2')
 				.append(
 						"<a href='/mypage/info?bookNum=<c:out value="${board.bookNum}" />'>정보보기");
@@ -144,7 +168,7 @@ int i = 0;
 	} else if (bookStatus.trim() == 'RS_STT_BC') {
 		$('#<c:out value="${board.bookNum}" />')
 				.append(
-						"<input class='form-control' name='bookStatus' value='예약취소' readonly='readonly'>");
+						"<input class='form-control' name='bookStatus' value='예약 상태 : 예약취소' readonly='readonly'>");
 		$('#<c:out value="${board.bookNum}" />2')
 				.append(
 						"<a href='/mypage/info3?bookNum=<c:out value="${board.bookNum}" />'>정보보기");
@@ -153,7 +177,7 @@ int i = 0;
 	} else if (bookStatus.trim() == 'RS_STT_AC') {
 		$('#<c:out value="${board.bookNum}" />')
 				.append(
-						"<input class='form-control' name='bookStatus' value='투숙완료' readonly='readonly'>");
+						"<input class='form-control' name='bookStatus' value='예약 상태 : 투숙완료' readonly='readonly'>");
 		$('#<c:out value="${board.bookNum}" />2')
 				.append(
 						"<a href='/mypage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기");
@@ -162,7 +186,7 @@ int i = 0;
 	} else if (bookStatus.trim() == 'RS_STT_CI') {
 		$('#<c:out value="${board.bookNum}" />')
 				.append(
-						"<input class='form-control' name='bookStatus' value='체크아웃' readonly='readonly'>");
+						"<input class='form-control' name='bookStatus' value='예약 상태 : 체크아웃' readonly='readonly'>");
 		$('#<c:out value="${board.bookNum}" />2')
 				.append(
 						"<a href='/mypage/info2?bookNum=<c:out value="${board.bookNum}" />'>정보보기");

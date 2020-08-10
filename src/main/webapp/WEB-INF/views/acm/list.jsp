@@ -11,6 +11,11 @@
 <link rel="stylesheet" type="text/css"
 	href="${request.contextPath}/resources/css/result.css">
 
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/suhee.css">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="${request.contextPath}/resources/css/t-datepicker-blue.css" rel="stylesheet" type="text/css">
+<script src="${request.contextPath}/resources/js/t-datepicker.js"></script>
+<script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 
 <style>
 
@@ -247,6 +252,73 @@ display: block;
     animation-iteration-count: infinite;
 }
 
+/* 달력에 대한 CSS무효화 */
+
+
+.t-datepicker {
+ font-size: 13px;
+ line-height: 1.5;
+ display: block;
+ position: relative;
+ float: none !important; 
+ 
+ }
+
+.t-check-in, .t-check-out {
+    width: 100%;
+}
+
+.t-dates {
+    position: inline;
+    background-color: transparent;
+       height: 23px;
+    padding: 0;
+    padding-top: 0;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 4px;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+}
+
+.t-check-in, .t-check-out, .t-datepicker {
+
+ 
+    float: none; 
+}
+
+.t-arrow-top::after {
+    top: -2px;
+    left: -10px;
+    content: '';
+    border-width: 10px;
+    border-bottom-color: #fff;
+}
+
+
+.t-check-in {
+    /* border-right-width: 1px; */
+    /* border-radius: 4px 0 0 4px; */
+    padding: 0;
+       
+}
+
+.t-date-info-title{
+    display: none !important;
+}
+
+.t-check-out .t-datepicker-day {
+   
+    top: 39px;
+}
+
+.t-datepicker-day{
+ top: 39px;
+}
+
 </style>
 
 
@@ -282,8 +354,8 @@ display: block;
 					<section class="search_section">
 						<div class="row1">
 							<div class="booking-container">
-								<form class="booking-form1" action="/acm/result" method='get'
-									onsubmit="return checkValidation()">
+								<form class="booking-form1" id= "actionForm" action="/acm/result" method='get'
+									>
 									<div class="result-container">
 										<div>
 											<div class="no-margin1">
@@ -303,30 +375,44 @@ display: block;
 												</div>
 
 												<div class="formLayout1">
-													<div class="form-group1 pt8px">
+													<div class="t-datepicker form-group1 pt8px">
 														<span>Check In</span>
-														<div class="ui calendar" id="rangestart">
+														 <div class="t-check-in"></div>
+													<%-- 	<div class="ui calendar" id="rangestart">
 															<div class="ui input left icon width400">
 																<i class="calendar icon"></i> <input type="text"
 																	placeholder="Start" id="in" name="in"
 																	value="<c:out value="${pageMaker.cri.in}"/>">
 															</div>
-														</div>
+														</div> --%>
 													</div>
 												</div>
+						<!-- 						
+						<div class="booking-group2"  >
+							<div class="t-datepicker">
+							  <div class="t-check-in"></div>
+							  <div class="t-check-out"></div>
+							</div>
+						</div> -->
 
 												<div class="formLayout1">
-													<div class="form-group1 pt8px">
+													<div class="t-datepicker form-group1 pt8px">
 														<span>Check out</span>
+														
+														<div class="t-check-out"></div>
+													<%-- 	
 														<div class="ui calendar" id="rangeend">
 															<div class="ui input left icon width400">
 																<i class="calendar icon"></i> <input type="text"
 																	placeholder="End" id="out" name="out"
 																	value="<c:out value="${pageMaker.cri.out}"/>">
 															</div>
-														</div>
+														</div> --%>
 													</div>
 												</div>
+												
+												
+												
 
 											</div>
 										</div>
@@ -367,7 +453,7 @@ display: block;
 
 												<button
 													class="submit-btn btn btn-primary btn btn-search text-uppercase"
-													id="submitBtn" type="submit">
+													id="submitBtn" type="button">
 													<i class="fa fa-search"></i>
 
 
@@ -785,6 +871,14 @@ function showSlides() {
 	});
 </script>
 
+	<script>
+	 $(document).ready(function(){
+	    // Call global the function
+	    $('.t-datepicker').tDatePicker({
+	      // options here
+	    });
+	  });
+	</script>
 <!-- 달력 변경. 끝 -->
 
 
@@ -861,6 +955,25 @@ window.onclick = function(event) {
 		}
 	}
 
+	
+	
+	$("#submitBtn").click(function(e) {
+		e.preventDefault();
+		if($("#in").val() =='null'){
+			let today = new Date();   
+
+			let year = today.getFullYear(); // 년도
+			let month = today.getMonth() + 1;  // 월
+			let date = today.getDate();  // 날짜
+			let day = today.getDay();  // 요일
+
+			
+			$("#in").val(year+'-'+month+'-'+date);
+			$("#out").val(year+'-'+month+'-'+(date+1));
+		}
+		$("#actionForm").submit();
+	})
+	
 	//참고 끝
 </script>
 </html>

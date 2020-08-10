@@ -2,6 +2,11 @@
 pageEncoding="UTF-8"%> 
 <%@include file="../includes/header1.jspf"%>
 <style type="text/css">
+
+.cards_SR>div{
+    background-color: #fff;
+}
+
   .container {
     width: 100%;
     padding-right: 15px;
