@@ -24,14 +24,14 @@
 .clickable-card{
 	width: 100%;
     height: 100%;
-	border: 1px solid red;
+
 }
 
 .hotel-picture{
 	
     float: left;
        width: 30%;
-	border: 1px solid black;}
+	}
 
 .hotel-picture>figure{
    
@@ -52,13 +52,13 @@
 .info-container{
     width: 70%;
     float: right;
-    border: 1px solid blue;
+   
     height: 100%;
 }
 
 .checkin-checkout-info-panel{
     float: right;
-    padding-right: 106px;
+    padding-right: 92px;
     padding-top: 31px;
     font-size: 10px;
 }
@@ -73,13 +73,14 @@
 .hotel-info-top{
     vertical-align: top;
     padding: 30px 16px 30px;
+        padding-bottom: 0;
     margin-bottom: 0;
     list-style: none;
 }
 
 .hotel-title{
     color: #2a2a2e;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     overflow: hidden;
     line-height: 1.1;
@@ -87,10 +88,63 @@
 }
 
 .booking-id{
-    line-height: 2;
+   line-height: 2;
     font-size: 14px;
-    font-weight: 200;
+    font-weight: 800;
+    border-radius: 16px;
+    margin-top: 7px;
+    /* padding-top: 6px; */
+    color: #fff;
+    border: 1px solid;
+    width: 129px;
+    /* padding-left: 11px; */
+    text-align: center;
+    /* padding-right: 11px; */
+    padding: 0 auto;
+    padding: 1px auto;
+    background-color: #61dafb; 
+    /* color: #fff; */
 }
+
+.booking-info-bottom>div{
+	
+float: left;
+    padding-top: 50px;
+}
+
+.booking-info-bottom{
+	
+padding-top: 59px;
+}
+
+.bookstatus>.button-item-2{
+	float: left;
+    padding-top: 50px;
+	
+}
+
+.button-item-2> .form-control{
+	
+    background-color: #fff;
+    padding-left: 16px;
+        /* width: 20%; */
+    /* border: 1px solid #ccc; */
+    width: 50%;
+    border-radius: 32px;
+    /* height: 10%; */
+    /* margin: 0 auto; */
+    height: 36px;
+    font-weight: 800;
+    color: #fff;
+    padding: 0;
+    margin-left: 17px;
+    padding-left: 24px;
+    background-color: #5392f9;
+    display: inline-block;
+	
+}
+
+
 
 .booking-status-panel{
     font-size: 14px;
@@ -224,3 +278,33 @@
     padding: 8px 32px;
     display: block;
 }
+
+/* .payMethod , .bookstatus{
+	float: left;
+}
+
+.payMethod>span , .bookstatus>span{
+	float: right;
+}
+
+.payMethod>span>.form-control , .bookstatus>span>.form-control{
+	
+    background-color: #fff;
+    padding: 0;
+    padding-left: 5px;
+}
+ */
+
+.payMethod>.form-control , .bookstatus>.form-control{
+	
+    padding: 0;
+    background-color: #fff;
+}
+
+.bookstatus>.form-control{
+	
+    color: #4978ce;
+}
+    
+
+

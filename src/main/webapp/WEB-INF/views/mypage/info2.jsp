@@ -4,24 +4,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 
-<div class="row">
-  <div class="col-lg-12">
-    <h1 class="page-header">투숙 완료 상세 페이지 (수정 불가능)</h1>
-  </div>
-  <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
+<!-- 사이트바 CSS -->
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
+<style>
 
-<div class="row">
-   <div class="col-lg-12">
-      <div class="panel panel-default">
-         <div class="panel-heading">
-            예약 수정 가능            
-         </div>
+.page-header-content{
+padding-bottom: 20px;
+}
 
-      
-      <div class="panel-body">
-       
+
+.contents_info{
+    width: 100%;
+    height: 525px;
+}
+
+	.contents_info>.form-group{
+	width: 33.333336%;
+	}
+
+</style>
+
+<div class="container">
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">투숙완료 페이지</h1>
+			<p><%=userFstName %>님, 즐거운 여행 다녀오셨나요?</p>
+		</div>
+	</div>
+
+
+<section class="contents_info">
+		
+	<section class="contents_info">
 
         <div class="form-group info-group">
           <label>#예약번호</label> <input class="form-control" name='bookNum'
@@ -109,18 +129,29 @@
         </div>
 
 
+		</section>
+</section>
+
+
+<div class="info_btn">
 <button data-oper='bookList' class="btn btn-info" onclick="location.href='/mypage/checkout'">List</button>
 
 
-      </div>
-      <!--  end panel-body -->
-    </div>
-    <!--  end panel-body -->
-  </div>
-  <!-- end panel -->
+
 </div>
-<!-- /.row -->
+</div>
+
+
+
+
+
+
+
+
+
+
 <script>
+
 	var s = '<c:out value="${info.smoking} "/>';
 	var s2 = s.trim();
 	if(s2=='1'){

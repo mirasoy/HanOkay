@@ -9,7 +9,44 @@
 <%@include file="../includes/header.jsp"%>
 <head>
 
+<link href="${request.contextPath}/resources/css/t-datepicker-blue.css" rel="stylesheet" type="text/css">
+
 <style>
+
+input:invalid {
+  border-color: red;
+}
+
+
+/* 요금 검색  */
+
+#slider-range{
+    margin-bottom: 20px;
+}
+
+
+.priceModalDiv{
+margin: 0 0 15px;
+}
+
+#priceModal{
+
+display: none;
+    overflow: hidden;
+}
+
+/* .modal-content{
+
+    
+    height: 150px;
+
+} */
+
+
+/* 요금검색 끝 */
+
+
+
 .map_section>div>div>div>div:nth-child(3)>div:last-child>div>div {
 	visibility: visible !important;
 	
@@ -47,12 +84,12 @@
 }
 
 .modal-body{
-	border: 1px solid red;
+
 	height: 120px;
 }
 
 .modal-footer{
-    border: 1px solid black;
+  
 }
 
 .h1Name{
@@ -292,10 +329,10 @@ color: inherit !important;
 
    
     left: 50%;
-    margin-left: -138px;
+       margin-left: -219px;
 
 position: fixed;
-    bottom: 100px;
+    bottom: 114px;
     width: 100%;
 
  
@@ -321,7 +358,7 @@ position: fixed;
 .price-slider {
     
     width: 300px;
-  margin: 40vh auto;
+
 }
 /*
 input, label {
@@ -331,6 +368,7 @@ input, label {
 
 .btn-pink{
 	        width: 127px;
+	        margin-right: 16px;
     background-color: #f9b6bb;
 	    
 }
@@ -338,10 +376,16 @@ input, label {
 
 .btn-sky{
 margin-right: 16px;
+width: 127px;
 background-color: #a7e0f4;
 
 }
 
+
+.btn-gray{
+    width: 127px;
+background-color: #ccc;
+}
 
   .custom-slider {
     height: 5px !important;
@@ -496,9 +540,9 @@ background-color: #a7e0f4;
 				</div>
 				<!-- end : main_text -->
 
-				<div id="priceModal" class="modal">
-					<div class="modal-content">
-    					<span class="closePrice">&times;</span>
+				<div id="priceModal" >
+					<div class="modal-content priceModalDiv">
+    					<!-- <span class="closePrice">&times;</span> -->
     					<form method="GET" action="/acm/result">
 							    <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'><input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 							    <input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
@@ -519,6 +563,8 @@ background-color: #a7e0f4;
 					    	<input type='hidden' id='max' name='maxPrice' >
 					    	<!--  <button class="apply" onclick="getSliderValues()">apply</button>-->
 					    	<input id="priceTotal" class="btn-sky" type="submit" value="개의 숙소보기" />
+					    <!-- 	<input id="priceTotal" class="btn-sky closePrice" type="submit" value="close" /> -->
+					    	<button type="button" class="closePrice btn-filter btn-gray" >close</button>
 			    	   </div>
 			    	   </form>
 			       </div>
@@ -532,8 +578,7 @@ background-color: #a7e0f4;
 					
 					<div class="modal-header filterText">
 						<h1 class="h1Name">당신의 필터를 골라주세요</h1>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
+						
 
 					</div>
 							<form method="GET" action="/acm/result">
@@ -675,9 +720,12 @@ background-color: #a7e0f4;
 							    <input id="total_sum" name="acmOpt" type="hidden" size="20" value='<c:out value="${pageMaker.cri.acmOpt}"/>' readonly /> 
 							    <input id="total" class="btn-filter btn-sky" type="submit" value="개의 숙소보기" />
 
-							    <p>
-							        <button type="button" id="reset" class="btn-filter btn-pink">reset</button>
-							    </p>
+							  
+							   <button type="button" id="reset" class="btn-filter btn-pink">reset</button>
+							   <button type="button" class="close2 btn-filter btn-gray" >close</button>
+							  
+							<!--   <button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button> -->
 							    
 							    </div>
 							   
@@ -870,11 +918,11 @@ background-color: #a7e0f4;
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 
-				<div class="modal-content1">
+				<form class="modal-content1">
 					<div class="modal-header">
 						<h1 class="h1Name">당신의 여행을 찜하세요</h1>
-						<button type="button" class="closeBtn" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
+						<!-- <button type="button" class="closeBtn" data-dismiss="modal"
+							aria-hidden="true">&times;</button> -->
 
 					</div>
 
@@ -903,18 +951,26 @@ background-color: #a7e0f4;
 
 						</div>
 						<div class="form-group info-group">
-							<label>#내용</label> <input class="form-control" name='listContent'
-								value=''>
+							<label>#내용</label>
+								 <input class="form-control" name='listContent'
+								value='' required />
 						</div>
 
 
 					</div>
 					<div class="modal-footer">
-						<button id='modalRegisterBtn' type="button"
-							class="btn btn-primary">Register</button>
+					
+				
+						<button id='modalRegisterBtn'
+							class="btn btn-primary" type="submit">Register</button>
 						<button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+					
+			
 					</div>
-				</div>
+					
+					
+					
+				</form>
 
 				<!-- /.modal-content -->
 			</div>
@@ -1484,7 +1540,7 @@ function getAcmOpt2(arrOpt,acmNumArr) {
   var btn = document.getElementById("myBtn");
 
   // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+  var span = document.getElementsByClassName("close2")[0];
   
   var base = $('.body');
 
@@ -1623,7 +1679,9 @@ $(document).ready(function(){
 	var btn = document.getElementsByClassName("wishButton");
 	for(var i=0; i<btn.length; i++){btn[i].onclick=function(e){
 		var modalInputuserNum = modal.find("input[name='userNum']").val();
-		var modalInputacmNum = $("#acmTest").val();				
+		var modalInputacmNum = $("#acmTest").val();	
+
+		
 		var heartbtn = $(".fa-heart");
 		var thisbtn = this;
 		 e.stopImmediatePropagation();
@@ -1642,7 +1700,8 @@ $(document).ready(function(){
 				alert("하트를 눌렀습니다!"); 
  				
 				
-			
+				
+				
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 									
@@ -1657,7 +1716,7 @@ $(document).ready(function(){
 						
 
 						}else{
-							alert("찜합니다.");
+							/* alert("찜합니다."); */
 							$(this).children().attr('class','fa fa-heart fa-2x');
 							$(".wishmodal").modal("show"); 
 		 					modal.addClass("show") ;
@@ -1673,6 +1732,8 @@ $(document).ready(function(){
 	/* btn의 자식인 i클래스의 .attr('class','fa fa-heart fa-2x');의 상태라면 */
 	
  
+	
+	
 		
 	 modalRegisterBtn.on("click", function(e){	 	
 		 
@@ -1684,27 +1745,32 @@ $(document).ready(function(){
 		var modalInputlistTitle = $("select[name='listTitle']").val();
 		var modalInputlistContent = modal.find("input[name='listContent']").val();
 		
-	
+		var heartbtn = $(".fa-heart");
 		
-		
-		alert(1);
+		if(modalInputlistContent==""){
+			
+			/* 빈 값을 입력한다면, 리턴한다 */
+			/* heartbtn.attr('class','fa fa-heart-o fa-2x'); */
+			return;
+		}
+			
 		
 		 wishService.add({
 			 userNum : modalInputuserNum, acmNum: modalInputacmNum, listTitle: modalInputlistTitle, listContent: modalInputlistContent 
 		 }, function(result){
 			 modal.modal('hide');
-			 //console.log("Result : " + result)
 			 
 			 
-			 if(result==("fail..")){
+			 
+			  if(result==("fail..")){
 				 alert("이미 등록된 숙소입니다.")
 			 }
 		 }
 		)
 		 
+		
+		
 	 });
-	 
-
 })
 
 

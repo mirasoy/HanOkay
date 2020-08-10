@@ -33,15 +33,12 @@ String name = (String) session.getAttribute("loginUserNum");
 	<section class="contents-2">
 		
    <c:forEach items="${bookList}" var="board">
-	    <div class="card">
+    <div class="card">
 	        <div class="item">
 	            <div class="clickable-card">
 	                <div class="hotel-picture">
 	                    <figure>
-	                    
-	                   
-	                    
-	                       <img alt='객실사진'	src='/display?fileName=<c:out value="${board.acmPurl}" />s/<c:out value="${board.acmPname}" />' /> 
+	                  <img alt='객실사진'	src='/display?fileName=<c:out value="${board.acmPurl}" />s/<c:out value="${board.acmPname}" />' /> 
 	                    </figure>
 	                </div>
 	                <div class="info-container">
@@ -66,13 +63,19 @@ String name = (String) session.getAttribute("loginUserNum");
 	                    </div>
 	                    <ul class="hotel-info-top">
 	                        <li class="hotel-title"><c:out value="${board.acmName}" /></li>
-	                        <li class="booking-id" data-selenium="booking-id">예약 번호: <span class="booking-id-value"><c:out value="${board.bookNum}" /></span></li>
-	                        <li>
-		                        <div class="booking-status-panel" data-selenium="booking-status-label">
-			                        <i class="ficon ficon-16 ficon-check-circle mmb-booking-status-icon-green"></i>
-			                        <span class="button-item-2" id="<c:out value="${board.bookNum}" />"></span>
-		                        </div>
+	                        
+	                       
+	                        <li class="booking-id" data-selenium="booking-id"> <i class="fa fa-arrow-circle-right"></i>  예약 번호: <span class="booking-id-value"><c:out value="${board.bookNum}" /></span></li>
+	                       
+	                      
+	                       
+	                       
+	                     <li class="payMethod" data-selenium="booking-id" id="<c:out value="${board.bookNum}" />3">
 	                        </li>
+	                
+	                
+	                
+	                
 	                    </ul>
 	            
 	                    <div class="booking-info-bottom">
@@ -81,26 +84,30 @@ String name = (String) session.getAttribute("loginUserNum");
 	                            <div class="price-ammount" data-selenium="payment-ammount"><c:out value="${board.bookPrice}" /></div>
 	                        </div>
 	                    </div>
+	                    
+	              
+	                    
+	                                       	                    
 	                </div>
 	            </div>
 	        </div>
 	            <div class="button-item">
-	                <div class="button-item-1">
-	                	<a href="/mypage/info?bookNum=${board.bookNum}">예약관리하기</a>
+	            <!--    <div class="button-item-1">
+	                	
 	                    <a class="button-txt button-txt-1" data-oper='myBtn' id="myBtn" class="myBtn">예약 확정서 받기</a>
 	                    <a class="button-txt" id="myMap">숙소 위치 확인</a>
 	                    
-	                </div>
+	                </div> -->
 	
 	                <div class="button-item-2">
-	                    <button>정보보기</button>
+	                    <button><a href="/mypage/info?bookNum=${board.bookNum}">예약관리하기</a></button>
 	                </div>
 	            </div>
-	            </div>
-	</c:forEach>
-
+	    </div>
+	    </c:forEach>
+	       
+		</section>
 	</section>
-</section>
 
 
 				<!-- The Modal (메일) -->
@@ -148,7 +155,7 @@ String name = (String) session.getAttribute("loginUserNum");
 					<div class="modal-content">
 						<span id="close" class="close2">&times;</span>
 						<h1>지도 확인하기</h1>
-						<h1>미구현 (2차 개발 예정 사항입니다.)</h1>
+						<h1>미구현</h1>
 						<div id="map"></div>
 						<!-- 지도가 붙을 위치 -->
 					</div>
@@ -167,10 +174,31 @@ String name = (String) session.getAttribute("loginUserNum");
 <!-------------------------------------------- 사이드 메뉴에 대한 JS ---------------------------------------------->
 	<script>	
 
+	// 예약상태를 확인 하기 위해, 값을 불러오는 반복문을 여기에 둔다.
+
+	<c:forEach items="${bookList}" var="board">
+
+	var payMethod = '<c:out value="${board.payMethod} "/>'
+	
+		if (payMethod.trim() == 'PY_METHOD_PAYPAL') {
+			$('#<c:out value="${board.bookNum}" />3')
+			.append(
+					"<input class='form-control' name='payMethod' value='결제 상태 : 페이팔로 결제하기' readonly='readonly'>");
+		} else if (payMethod.trim() == 'PY_METHOD_LATER') {
+			$('#<c:out value="${board.bookNum}" />3')
+			.append(
+					"<input class='form-control' name='payMethod' value='결제 상태 : 현장에서 결제하기' readonly='readonly'>");
+		}else if (payMethod.trim() == 'PY_METHOD_CARD') {
+			$('#<c:out value="${board.bookNum}" />3')
+			.append(
+					"<input class='form-control' name='payMethod' value='결제 상태 : 카드로 결제하기' readonly='readonly'>");
+		}
 	
 	
-		
-		
+
+			
+
+	</c:forEach>	
 	
 		// 모달창 가져오기
 		var modal = document.getElementById("myModal");
@@ -208,8 +236,8 @@ String name = (String) session.getAttribute("loginUserNum");
 				console.log(e);
 				modal.style.display = "block";
 				
-				/* var operation=$(this).data("oper");
-				console.log(operation); */
+				var operation=$(this).data("oper");
+				console.log(operation); 
 			
 			};	
 		}
@@ -220,19 +248,16 @@ String name = (String) session.getAttribute("loginUserNum");
 		
 		
 		
-/* 		
+	
 
 		// 사용자가 버튼을 클릭하면 모달을 연다
 		btn.onclick = function() {
 			modal.style.display = "block";
 			
-			console.log("여기는 가능");
-			
-		
-			
-			
+			alert("여기는 가능");
+	
 
-		} */
+		} 
 
 		btn2.onclick = function() {
 			modal2.style.display = "block";

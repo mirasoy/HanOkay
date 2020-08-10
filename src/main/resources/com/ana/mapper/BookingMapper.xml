@@ -34,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="book_Status" property="bookStatus" />
 		<result column=	"ACM_PURL"	property=	"acmPurl"	/>
 		<result column=	"ACM_PNAME"	property=	"acmPname"	/>
+		<result column=	"ACM_NUM"	property=	"acmNum"	/>
 		
 		<result column=	"pay_method"	property=	"payMethod"	/>
 	</resultMap>
@@ -58,6 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column=	"ACM_PURL"	property=	"acmPurl"	/>
 		<result column=	"ACM_PNAME"	property=	"acmPname"	/>
 		<result column=	"pay_method"	property=	"payMethod"	/>
+		<result column=	"ACM_NUM"	property=	"acmNum"	/>
 	</resultMap>
 
 	<!-- 예약취소상태 -->
@@ -72,6 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column=	"ACM_PURL"	property=	"acmPurl"	/>
 		<result column=	"ACM_PNAME"	property=	"acmPname"	/>
 		<result column=	"pay_method"	property=	"payMethod"	/>
+		<result column=	"ACM_NUM"	property=	"acmNum"	/>
+		
 	</resultMap>
 
 
@@ -173,7 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getBookListAll" resultMap="BookVOResult">	
 	<![CDATA[
 	SELECT distinct
-  A.ACM_NAME,
+    A.ACM_NAME,
     B.BOOK_NUM,
     B.checkin_Date,
     B.cheCkout_Date,
@@ -183,7 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     b.book_price,
     p.pay_method
 	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R, TPAYMENT P
-	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM b.book_num=P.book_num AND AND B.user_num=#{loginUserNum}
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND b.book_num=P.book_num AND B.user_num=#{loginUserNum}
 	order by to_number(substr(B.BOOK_NUM,2)) 
 	]]>
 	</select>
@@ -197,12 +201,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     B.BOOK_NUM,
     B.checkin_Date,
     B.cheCkout_Date,
-    B.book_Price,
     A.acm_purl,
     A.acm_pname,
-    b.book_price
-	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
-	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BK' AND B.user_num=#{loginUserNum}
+    b.book_price,
+    p.pay_method
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R, TPAYMENT P
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BK' AND b.book_num=P.book_num AND B.user_num=#{loginUserNum}
 	order by to_number(substr(B.BOOK_NUM,2)) 
 	]]>
 	</select>
@@ -215,18 +219,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     B.BOOK_NUM,
     B.checkin_Date,
     B.cheCkout_Date,
-    B.book_Price,
     A.acm_purl,
     A.acm_pname,
-    b.book_price
-	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
-	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BC' AND B.user_num=#{loginUserNum}
-	order by to_number(substr(B.BOOK_NUM,2)) 
+    b.book_price,
+    p.pay_method
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R, TPAYMENT P
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_BC' AND b.book_num=P.book_num AND B.user_num=#{loginUserNum}
+	order by to_number(substr(B.BOOK_NUM,2))
 	</select>
 
 	<!-- 4. 예약완료 리스트 -->
 	<select id="getCheckoutList" resultMap="BookVOResult">
-		SELECT distinct
+    SELECT distinct
     A.ACM_NAME,
     B.BOOK_NUM,
     B.checkin_Date,
@@ -234,9 +238,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     B.book_Price,
     A.acm_purl,
     A.acm_pname,
-    b.book_price
-	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R
-	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_AC' AND B.user_num=#{loginUserNum}
+    b.book_price,
+    p.pay_method,
+    A.acm_num
+	FROM TBOOKING B, TBOOK_STATUS S, TACM A, TROM R, TPAYMENT P
+	WHERE B.BOOK_NUM=S.BOOK_NUM AND B.ROM_NUM=R.ROM_NUM AND R.ACM_NUM=A.ACM_NUM AND B.BOOK_STATUS='RS_STT_AC' AND b.book_num=P.book_num AND B.user_num=#{loginUserNum}
 	order by to_number(substr(B.BOOK_NUM,2)) 
 	</select>
 

@@ -36,7 +36,7 @@ String name = (String)session.getAttribute("loginUserNum");
 	            <div class="clickable-card">
 	                <div class="hotel-picture">
 	                    <figure>
-	                        <img src="${request.contextPath}/resources/img/room.jpg" alt="호텔사진">
+	                      <img alt='객실사진'	src='/display?fileName=<c:out value="${board.acmPurl}" />s/<c:out value="${board.acmPname}" />' /> 
 	                    </figure>
 	                </div>
 	                <div class="info-container">
@@ -82,14 +82,14 @@ String name = (String)session.getAttribute("loginUserNum");
 	            <div class="button-item">
 	                <div class="button-item-1">
 	                
-	                    <a class="button-txt button-txt-1" href="">이용후기 작성하기</a>
+	                   <!--  <a class="button-txt button-txt-1" href="">이용후기 작성하기</a> -->
 	                    <a class="button-txt" href="">다시 예약하기</a>
 	                    
 	                </div>
 	
 	                <div class="button-item-2">
 	                   	<span class="button-item-2" id="<c:out value="${board.bookNum}" />"></span>
-	                    <button>정보보기</button>
+	                    <button><a href="/mypage/info3?bookNum=${board.bookNum}">정보보기</a></button>
 	                </div>
 	            </div>
 	    </div>
