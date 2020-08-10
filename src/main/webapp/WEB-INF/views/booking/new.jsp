@@ -21,7 +21,7 @@
 				<tr><td class="acm-pic" rowspan="4">
 						<img alt='숙소사진' src='/display?fileName=<c:out value="${info.acmPurl}" /><c:out value="${info.acmPname}" />' />
 					</td>
-					<td>&nbsp;</td><td class="acm-title"><c:out value="${info.acmName}" /></td></tr>
+					<td>&nbsp;</td><td class="title"><c:out value="${info.acmName}" /></td></tr>
 				<tr><td></td><td><span id="stisf">&nbsp;</span>
 					<span id="stisf-num">
 						<c:choose>
@@ -32,17 +32,20 @@
 				<tr><td></td><td><c:out value="${info.acmCity} "/> <c:out value="${info.acmDistr} "/> <c:out value="${info.acmDetailaddr} "/></td></tr>
 			</table>
 			</br>
-			<table class = "tb-booker">
-				<tr><td rowspan="4" class="td-title">예약</br>정보</td><td colspan="2"><p class="info"><input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</p></td><td colspan="2"><p class="info"><label class="label-required"></label>표시는 필수 입력사항입니다.</p></td></tr>
+			<table class = "tb-booker tb-request">
+				<tr><td class="bk-title"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></td>
+					<td class="bk-title">예약정보</td></tr>
+				<tr><td style="height: 5px;"></td></tr>
+				<tr><td colspan="2"><p class="info"><input type="checkbox" id="cb" checked="checked" onclick="setInfo()">회원정보와 동일</p></td><td colspan="2"><p class="info"><label class="label-required"></label>표시는 필수 입력사항입니다.</p></td></tr>
 				<tr><td><label class="table-lb label-required">First Name</label></td><td><input id="userInfo1" name="bookerFirstname" required type="text" value='<%=user.getUserFstName()%>' readonly="readonly"/></td>
 					<td><label class="table-lb label-required">Last Name</label></td><td><input id="userInfo2" name="bookerLastname" required type="text" value='<%=user.getUserLastName()%>' readonly="readonly"/></td>
 				<tr><td><label class="table-lb label-required">Email</label></td><td colspan="3"><input id="userInfo3" name="bookerEmail" required type="email" value='<%=user.getUserEmail()%>' readonly="readonly"/></td></tr>
 				<tr><td><label class="table-lb ">Phone</label></td><td colspan="3"><input id="userInfo4" name="bookerPhone" type="tel" value='<%=user.getUserPhone()%>' readonly="readonly" /></td></tr>
-			</table>
-			</br>
-			<table class = "tb-request">
-				<tr><td rowspan="5" class="td-title">추가</br>요청</td>
-					<td><label class="table-lb">도착 예정시간</label></td>
+				<tr><td style="height: 10px;"></td></tr>
+				<tr><td class="bk-title"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></td>
+					<td class="bk-title">요청사항</td></tr>
+				<tr><td style="height: 5px;"></td></tr>
+				<tr><td><label class="table-lb">도착 예정시간</label></td>
 					<td colspan="2"><select id="expArr">
 							<option value="">-----</option>
 							<option value="PM02">PM02</option>
@@ -110,17 +113,20 @@
 				<tr class = "tr-title"><td>인원 <%=person %>명&nbsp;(최대: ${info.romCapa}명)</td></tr>
 			</table>
 			</br>
-			<table>
-				<tr><td class = "td-title2">객실 요금(${days}박 x <i class="fa fa-krw" aria-hidden="true"></i><%=romPrice%>)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPrice"></label></td></tr>
-				<tr><td class = "td-title2">세금 10%</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblVat"></label></td></tr>
-				<tr class="tr-line"><td class = "td-title3">총액</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblSubtotal"></label></td></tr>
+			<table class="price">
+				<tr><td class="bk-title" style="width:105px"><i class="fa fa-credit-card" aria-hidden="true"></i></td>
+					<td class="bk-title">이용요금</td><td></td></tr>
+				<tr><td style="height: 10px;"></td></tr>
+				<tr><td class = "td-title2" colspan="2">객실 요금(${days}박 x <i class="fa fa-krw" aria-hidden="true"></i><%=romPrice%>)</td><td class="right"><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPrice"></label></td></tr>
+				<tr><td class = "td-title2" colspan="2">세금 10%</td><td class="right"><i class="fa fa-krw" aria-hidden="true"></i><label id="lblVat"></label></td></tr>
+				<tr class="tr-line"><td class = "td-title3"  colspan="2">총액</td><td class="right"><i class="fa fa-krw" aria-hidden="true"></i><label id="lblSubtotal"></label></td></tr>
 				<tr><td></td></tr>
-				<tr><td class = "td-title2">쿠폰</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblCoupon"></label></td></tr>
-				<tr><td class = "td-title2">마일리지</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblMileage"></label></td></tr>
-				<tr class="tr-line"><td class = "td-title3">할인액</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblDiscount"></label></td></tr>
+				<tr><td class = "td-title2" colspan="2">쿠폰</td><td class="right"><i class="fa fa-krw" aria-hidden="true"></i><label id="lblCoupon"></label></td></tr>
+				<tr><td class = "td-title2" colspan="2">마일리지</td><td class="right"><i class="fa fa-krw" aria-hidden="true"></i><label id="lblMileage"></label></td></tr>
+				<tr class="tr-line"><td class = "td-title3" colspan="2">할인액</td><td class="right"><i class="fa fa-krw" aria-hidden="true"></i><label id="lblDiscount"></label></td></tr>
 				<tr><td></td></tr>
-				<tr><td class = "td-title4">결제금액</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblTotal"></label></td></tr>
-				<tr><td class = "td-title2">(1박당)</td><td><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPerDay"></label></td></tr>
+				<tr><td class = "td-title4" colspan="2">결제금액</td><td class="right"><i class="fa fa-krw" aria-hidden="true"></i><label id="lblTotal"></label></td></tr>
+				<tr><td class = "td-title2" colspan="2">(1박당)</td><td class="right"><i class="fa fa-krw" aria-hidden="true"></i><label id="lblPerDay"></label></td></tr>
 			</table>
 			</br>
 			<table>
