@@ -198,4 +198,7 @@ from
 ]]>
 </select>
 
+<select id="getSeoulList" resultMap="AcmVOResult">
+SELECT * FROM TACM where acm_city = '서울'
+</select>
 </mapper>

@@ -12,7 +12,7 @@
 		<div class = "detail-navigation-list container-navigation box">
 			<div class = "detail-navigation-list">
 				<a href="../../acm/list">홈</a>
-				<a href="../../acm/detail?person=&in=&out=&acmNum=${book.acmNum}">숙소정보</a>
+				<a href="/acm/detail?pageNum=2&amount=10&type=A&keyword=&person=1&in=2020-08-10&out=2020-08-11&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=${book.acmNum}">숙소정보</a>
 				<a href="../../mypage/bookListAll">나의예약</a>
 				<!-- <a href="../../acm/list" target='blank'>예약확정서</a> -->
 			</div>

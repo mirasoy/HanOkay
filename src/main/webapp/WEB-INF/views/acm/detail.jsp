@@ -235,7 +235,7 @@ String checkout = request.getParameter("out");
 		</form>
 		
 	</div> <!-- end of contents -->
-	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+<!-- 	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a> -->
 
 	<!-- wishList 모달창 -->
 		<div class="modal fade wishmodal" id="myModal" tabindex="-1" role="dialog"

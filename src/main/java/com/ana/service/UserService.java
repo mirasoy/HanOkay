@@ -82,6 +82,9 @@ public interface UserService {
 	@Transactional
 	public boolean matchAuthCodeAndGiveSession(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session);
 	
+	
+	@Transactional
+	public UserProfileVO getUserProfileBy(String userNum);
 	////////////////////////림쨩 ////////////////
 	
 	//세션리뉴얼

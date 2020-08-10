@@ -56,9 +56,9 @@ padding: 0;
 		<div id="accommodation">
 			<div class="container">
 			<div class="row">
-				<a href="/wishlist/list"><button class = 'btn wishopt' value="" style="margin :1%;background-color: #999999;">모두보기</button></a>
+				<a href="/wishlist/list"><button class = 'btn wishopt' value="" style="margin :1%;">모두보기</button></a>
 				<a href="/wishlist/list1"><button class = 'btn wishopt'  style="margin :1%; ">관광</button></a>
-				<a href="/wishlist/list2"><button class = 'btn wishopt' style="margin :1%;">휴식</button></a>
+				<a href="/wishlist/list2"><button class = 'btn wishopt' style="margin :1%; background-color: #999999;">휴식</button></a>
 				<a href="/wishlist/list3"><button class = 'btn wishopt'  style="margin :1%;">쇼핑</button></a>
 				<input type='hidden' id= 'wishoptval'>
 			</div>	
@@ -113,6 +113,7 @@ padding: 0;
 		<c:forEach items="${list}" var="board">
 
 		var str = "";
+			if ('<c:out value="${board.listTitle}" />' == '휴식') {
 				
 				str = '<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">'
 						+ '<div href="#">'
@@ -125,6 +126,7 @@ padding: 0;
 						+ '</div>	</div></div>';
 
 				$('#listarea').append(str);
+		}
 		</c:forEach>
 	</script>
 

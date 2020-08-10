@@ -135,9 +135,9 @@
 	</form>
 	
 	</div>
-	
+	<!-- 
 	<a class="button_scrolltop" href="#" onclick="window.scrollTo(0,0); return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
-
+ -->
 </div><!-- end of page -->
 	<script>
 	

@@ -67,4 +67,10 @@ public class AcmServiceImpl implements AcmService{
 		return mapper.getTotalCount(romNumList,cri);
 	}
 
+	@Override
+	public List<AcmVO> getSeoulList() {
+		// TODO Auto-generated method stub
+		return mapper.getSeoulList();
+	}
+
 }

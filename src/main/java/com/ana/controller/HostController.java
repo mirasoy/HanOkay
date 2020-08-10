@@ -179,7 +179,7 @@ public class HostController {
 					
 			if (list!=null) {//return List<RomVO>
 				for(int i=0;i<list.size();i++) {
-					String set=list.get(i).getRomName()+"="+list.get(i).getRomNum();
+					String set=list.get(i).getRomName()+"="+list.get(i).getRomSize()+"="+list.get(i).getRomPrice();
 					System.out.println("*겟i:"+set);
 					
 					jarr.add(set);
@@ -234,42 +234,7 @@ public class HostController {
 		
 		
 		
-		
-		//객실이 선택되면 선택된 객실의 예약정보를 다 가져오자
-		/*@RequestMapping(value = "/returnRsrvs", method = RequestMethod.POST)
-		@ResponseBody
-		public void returnRsrvsPost(String romNum,HttpServletRequest request, HttpServletResponse response)
-				throws IOException{	
-			System.out.println("객실이 선택되었다!!예약정보를 뒤져오자");
-			
-			//제이슨에 List<RomVO>를 담아오자
-			//JSONObject job= new JSONObject();
-			JSONArray jarr= new JSONArray();
-			log.info("romNum check: " +  romNum);
-			
-			//한글 깨짐 방지
-			response.setContentType("text/plain;charset=UTF-8");
-			
-			//service에게 acmNum을 주고 rom들을 뒤져오게한다
-			List<BookingVO> list=bservice.getBookinfoRoms(romNum);
-			System.out.println(list);		
-			if (list!=null) {//return List<RomVO>
-				for(int i=0;i<list.size();i++) {
-					String set=list.get(i).getCheckinDate()+"="+list.get(i).getCheckoutDate()+"="+list.get(i).getUserNum()+"="+list.get(i).getBookerFirstname()+"="+list.get(i).getBookPrice();
-					System.out.println("*겟i:"+set);
-					
-					jarr.add(set);
-				}
-				System.out.println("***"+jarr.toJSONString());
-			} 
-			else {
-				System.out.println("선택한 숙소에 객실이 없습니다");
-			}
-			PrintWriter out = response.getWriter();
-			out.print(jarr);
-		}*/
 	
-
 	@GetMapping("/listings")
 	public void listingsGet(Model model,HttpSession session) {
 		System.out.println("===숙소보기 페이지! listingsGet===");
@@ -382,6 +347,39 @@ public class HostController {
 		return "/hosting/getAcm";
 	}
 	
+	@GetMapping("/modiAcm")
+	public void modiAcmGet(String acmNum,Model model,HttpSession session) {
+		System.out.println("=====modiAcmGet====");
+		
+		//선택된 숙소 보기
+		AcmVO selectacm = aservice.getnewAcm(acmNum);
+		model.addAttribute("acm", selectacm);
+		
+		//선택된 숙소의 
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
+		
+
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
+		model.addAttribute("romCode", codeService.getRomCode());
+		
+		//숙소사진List<AcmDetailPicVO>
+		List<AcmDetailPicVO> acmPics = pservice.getPicList(acmNum);
+		System.out.println(acmPics.size());
+		model.addAttribute("acmPics", acmPics);
+
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+	
+	@PostMapping("/modiAcm")
+	public String modiAcmPost(AcmVO vo) {
+		System.out.println("===modiAcm post===");
+		System.out.println(vo);
+		
+		aservice.modiAcm(vo);
+		return "redirect:/hosting/listings";
+	}
 	
 	
 	@GetMapping("/progress/reviews")
@@ -443,25 +441,76 @@ public class HostController {
 		return "/hosting/become-host2_6";
 	}
 	
+	@GetMapping("/modiRompop")
+	public void modiRompopGet(String acmNum,Model model,HttpSession session) {
+		System.out.println("========modiRompop Get========");
+		acmNum=acmNum.trim();
+		System.out.println(acmNum);
+		model.addAttribute("acmNum", acmNum);
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+	
+	
+	@PostMapping("/modiRompop")//객실추가할때
+	public String modiRompopPost(
+			RomVO vo,Model model
+		) {
+	
+		System.out.println("========modiRompop Post========");		
+		System.out.println(vo);
+		rservice.modiRom(vo);
+		
+		model.addAttribute("acmNum", vo.getAcmNum());
+		
+		
+		return "redirect:/hosting/getAcm"; //겟인가
+	}
+	
+	@GetMapping("/newRompop")
+	public void newRompopGet(String acmNum,Model model,HttpSession session) {
+		System.out.println("========modiRompop Get========");
+		acmNum=acmNum.trim();
+		System.out.println(acmNum);
+		model.addAttribute("acmNum", acmNum);
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+	
+	
+	@PostMapping("/newRompop")//객실추가할때
+	public String newRompopPost(
+			RomVO vo,Model model
+		) {
+	
+		System.out.println("========modiRompop Post========");		
+		
+		rservice.register(vo);
+		
+		
+		List<RomVO> romList=rservice.getList(vo.getAcmNum());///??
+		System.out.println(romList);
+		model.addAttribute("list", romList);
+		model.addAttribute("acmNum", vo.getAcmNum().trim());
+		model.addAttribute("size", romList.size());
+		
+		return "/hosting/become-host2_6"; //겟인가
+	}
+	
 	@GetMapping("/removeRom")//객실 삭제버튼을 받으면===================================================
 	public String removeRomGet(@RequestParam("romNum") String romNum,@RequestParam("acmNum") String acmNum, Model model,HttpSession session) {
 		System.out.println("삭제하자 롬넘이 넘어온다~~~"+romNum);
 		
-		model.addAttribute("acmNum", acmNum);
 		
 		
 		boolean removeokay=rservice.remove(romNum);
 		System.out.println("removeokay"+removeokay);
 		
-		List<RomVO> romList=rservice.getList(acmNum);
+		model.addAttribute("acmNum", acmNum);
 		
-		model.addAttribute("list", romList);
-		model.addAttribute("size", romList.size());
-		
-
-		model.addAttribute("userFstname", getUser(session).getUserFstName());
-		
-		return "redirect:/hosting/become-host2_6";
+		return "redirect:/hosting/getAcm";
 	}
 	
 	
@@ -757,7 +806,7 @@ public class HostController {
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
-		return "/hosting/listings";//호스트가 가진 숙소 쪽으로 감
+		return "redirect:/hosting/listings";//호스트가 가진 숙소 쪽으로 감
 	}
 	
 	@GetMapping("/reregAcm")

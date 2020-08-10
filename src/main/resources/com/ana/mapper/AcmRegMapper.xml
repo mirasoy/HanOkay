@@ -89,7 +89,10 @@
 		select acm_Name from TACM where ACM_NUM = #{acmNum}
 	</select> 
 	 
-	 
+	 <!-- 슥소 삭제에 따른 사진테이블삭제 -->
+	<delete id="removeAcmPic">
+		delete from tacm_pic where acm_Num = #{acmNum}
+	</delete>
 	<!-- 슥소 삭제 -->
 	<delete id="removeAcm">
 		delete from tacm where acm_Num = #{acmNum}
@@ -103,6 +106,14 @@
  	<update id="reregAcm">
 		update tacm 
 		set acm_status='REREG'
+		where acm_Num = #{acmNum} 
+	</update>
+	<!-- 숙소재신청 -->
+ 	<update id="modiAcm">
+		update tacm set 
+		acm_type=#{acmType},rep_phone=#{repPhone},sub_phone=#{subPhone},acm_fax=#{acmFax},
+		checkin_time=#{checkinTime},checkout_time=#{checkoutTime},acm_email=#{acmEmail},
+		acm_desc=#{acmDesc},acm_optcode=#{acmOptcode}
 		where acm_Num = #{acmNum} 
 	</update>
 	

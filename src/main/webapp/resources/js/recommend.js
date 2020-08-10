@@ -81,7 +81,7 @@ var latitude;
 
 						//관광지 검색 펑션 실행
 
-                        //visitkorea(visitkoreaUri);
+                        visitkorea(visitkoreaUri);
 
                     },
                     error: function (resultArr) {

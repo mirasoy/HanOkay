@@ -81,9 +81,9 @@
 			   <input class="form-control"  style="width:200px;display:inline-block;"" id="acmEmail" name="acmEmail" placeholder="숙소  이메일 주소"><br>
 			   <input class="form-control"  style="width:200px;display:inline-block;" id="acmFax" name="acmFax" value="" placeholder="숙소  팩스번호(필수아님)" numberOnly><br><br>
 
-				<!-- 위도경도 임시로 넣어줌 ********* 위도경도 바꾸는 api 넣어야함
-				<input type="hidden" id="latitude" name="latitude" value="36.7307216">
-				<input type="hidden" id="longitude" name="longitude" value="128.6216116">-->
+				<!-- 위도경도 임시로 넣어줌 ********* 위도경도 바꾸는 api 넣어야함-->
+				<input type="hidden" id="latitude" name="latitude" value="">
+				<input type="hidden" id="longitude" name="longitude" value="">
 			
 				
 			 
@@ -141,7 +141,7 @@
 		</div>
 
 <%@include file="../includes/footer.jsp"%>
-<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00edf13596a79c29680f481ec4a2fc03&libraries=services"></script> -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b49d47b4e1110388c2fd14416e1319b2&libraries=services"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
@@ -235,29 +235,28 @@ function sample6_execDaumPostcode() {
           	 });
     	     
     	     
-    	   //주소-좌표 변환 객체를 생성
-    	  /* var geocoder = new kakao.maps.services.Geocoder();
-    	   geocoder.addressSearch(addr, function(results, status) {
-               // 정상적으로 검색이 완료됐으면
-               if (status === kakao.maps.services.Status.OK) {
-                   var result = results[0]; //첫번째 결과의 값을 활용
-                   // 해당 주소에 대한 좌표를 받아서
-                   var coords = new kakao.maps.LatLng(result.y, result.x);
-                  
-                  var latitude=document.getElementById("latitude");
-                  var longitude=document.getElementById("longitude");
-                  
-	     	    	if(latitude==null && longitude==null){//없으면 추가시켜주고
-		     	    	formObj.append("<input type='text' id='latitude' name='latitude' value='"+result.y+"'>");
-		     	    	formObj.append("<input type='text' id='longitude' name='longitude' value='"+result.x+"'>");
-	     	    	} else {
-	     	    		latitude.value=result.y;//이미 있으면 바꿔치기
-	     	    		longitude.value=result.x;
-	     	    	}
-                  
-               }
-           });  
-    	  */   
+    	     //주소-좌표 변환 객체를 생성
+       	  var geocoder = new kakao.maps.services.Geocoder();
+       	   geocoder.addressSearch(addr, function(results, status) {
+                  // 정상적으로 검색이 완료됐으면
+                  if (status === kakao.maps.services.Status.OK) {
+                      var result = results[0]; //첫번째 결과의 값을 활용
+                      // 해당 주소에 대한 좌표를 받아서
+                      var coords = new kakao.maps.LatLng(result.y, result.x);
+   					
+                     var latitude=document.getElementById("latitude");
+                     var longitude=document.getElementById("longitude");
+                     
+   	     	    	if(latitude==null || longitude==null){//없으면 추가시켜주고
+   		     	    	formObj.append("<input type='hidden' id='latitude' name='latitude' value='"+result.y+"'>");
+   		     	    	formObj.append("<input type='hidden' id='longitude' name='longitude' value='"+result.x+"'>");
+   	     	    	} else {
+   	     	    		latitude.value=result.y;//이미 있으면 바꿔치기
+   	     	    		longitude.value=result.x;
+   	     	    	}
+                     
+                  }
+              });   
     	     
         }
     }).open();

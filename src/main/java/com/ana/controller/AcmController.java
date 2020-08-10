@@ -66,6 +66,9 @@ public class AcmController {
 			//log.info("여기1");
 			int total = service.getTotal(cri);
 			log.info("total: " + total);
+			if(total ==0 ) {
+				model.addAttribute("Nolist", service.getSeoulList());
+			}
 			model.addAttribute("acmNum", acmNum);
 			model.addAttribute("pageMaker", new PageDTO(cri, total));
 			model.addAttribute("drawValue", drawValue(service.getList(cri), session));
