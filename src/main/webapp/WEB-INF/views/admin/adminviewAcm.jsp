@@ -398,7 +398,7 @@
 		
 	
 		for(let k=0; k<option.length; k++){
-			if(option.charAt(k) == 1){
+			if(option.charAt(option.length-1-k) == 1){
 				document.getElementById("acmOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
 				
 			}
