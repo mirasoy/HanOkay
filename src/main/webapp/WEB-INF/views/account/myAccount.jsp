@@ -1,6 +1,9 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
+
 <%@include file="../includes/header1.jspf"%>
+<title>Han:Ok - 내 계정</title>
 <style type="text/css">
 
 .cards_SR>div{
@@ -436,7 +439,6 @@ pageEncoding="UTF-8"%>
   //페이지가 다시 그려졌을 때 두번 submit되는 것을 방지
   if ( window.history.replaceState ) {
          window.history.replaceState( null, null, window.location.href );
-
 
      }
   });
