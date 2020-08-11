@@ -321,7 +321,6 @@ $(".btn-primary").on('click', function(){
         	        },
         	        success: 
         	        	function(data, profile) {
-        	        	
         	        	console.log(data);
         	        	console.log("data.profile: "+data.profile.userIntroduction);
         	        	$("#selfIntrod").text(data.profile.userIntroduction);
