@@ -159,8 +159,6 @@
 	
 	
 	
-	
-	
   <div class="col-lg-6">
     <div class="panel panel-default" >
 
@@ -191,7 +189,6 @@
 	        </div>
 	        <div class="form-group">
 				<label>숙소 옵션</label><div id="acmOpt"></div>
-
 	        </div>
 	
 			
