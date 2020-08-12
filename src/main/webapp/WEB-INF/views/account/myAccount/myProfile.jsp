@@ -256,7 +256,6 @@ margin-left: -2px;
 						</div>
 						</div>
 					</li>
-						
 					
 					<button class="btn btn-primary">수정하기</button>																							
 					<button class="btn btn-red">취소하기</button>																							
@@ -304,7 +303,9 @@ $(".btn-primary").on('click', function(){
         data: {
           userNum: '<%=userNum %>',
           userIntroduction : selfIntro,
-          userLanguage : lang
+          userLanguage : lang,
+          userPictureName :$("#pimg").data("filename"),
+          userPictureUrl :$("#pimg").data("path")
         },
         async: false,
         success: function (data) {
@@ -325,6 +326,8 @@ $(".btn-primary").on('click', function(){
         	        	console.log("data.profile: "+data.profile.userIntroduction);
         	        	$("#selfIntrod").text(data.profile.userIntroduction);
         	        	$("#langu").text(data.profile.userLanguage);
+        	        	
+        	        	$("#user-pic").attr('src','/display?fileName='+data.profile.userPictureUrl+data.profile.userPictureName);
         	        	}, 
         	        });
         	 
@@ -364,7 +367,7 @@ function regiPhoto() {
 	let formObj = $("#roomForm");
 	var str2 = "";
 
-	$(".uploadResult ul li").each(function (i, obj) {
+	$(".uploadResult ul div").each(function (i, obj) {
 
 		var jobj = $(obj);
 		console.dir(jobj);
@@ -397,16 +400,22 @@ function showUploadedFile(uplodResultArr) {
 
 			originPath = originPath.replace(new RegExp(/\\/g), "/");
 
-			str += "<li data-path='" + obj.purl + "'";
+			str += "<div id='pimg' data-path='" + obj.purl + "'";
 			str += "data-filename='" + obj.pname + "'";
 			str += "data-type='" + obj.image + "'><div>";
-			str += "<img src = '/display?fileName=" + fileCallPath + "'>";
+			str += "<img style='width :200px;' src = '/display?fileName=" + fileCallPath + "'>";
 			str += "<button type='button' data-file=\'" + fileCallPath + "\' "
 			str += "data-type = 'image' class ='btn'><i class='fa fa-times'></i></button><br>"
-			str += "</div></li>";
+			str += "</div></div";
 		}
+		
+		
+		
 	});
 	uploadResult.append(str);
+	
+	
+	
 }
 
 //파일 삭제관련

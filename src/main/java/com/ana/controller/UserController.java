@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.print.attribute.standard.Severity;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -83,6 +85,10 @@ public class UserController {
 		service.updateProfile(prof);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		
+		
 		map.put("msg", "success");
 	
 		return map;
