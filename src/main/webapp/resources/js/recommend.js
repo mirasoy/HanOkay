@@ -140,7 +140,7 @@ var latitude;
         	var numSet = new Set()
         	
         	while (numSet.size<3) {
-        		numSet.add(Math.trunc(Math.random()*count));
+        		numSet.add(Math.trunc(Math.random()*50));
        			}	
         	
         	
