@@ -196,6 +196,9 @@ $(document).ready(function(){
    if(pendingacmStatus.trim()=="PENDING"){//
 	      $("#<c:out value='${pendingacm.acmStatus}'/><c:out value='${pendingacm.acmNum}'/>").append("승인대기중");
 	   }
+   else if(pendingacmStatus.trim()=="DENIED"){//집천체
+     $("#<c:out value='${pendingacm.acmStatus}'/><c:out value='${pendingacm.acmNum}'/>").append("숙소거절");
+  	}
 	      
  	else if(pendingacmStatus.trim()=="REREG"){//집천체
      $("#<c:out value='${pendingacm.acmStatus}'/><c:out value='${pendingacm.acmNum}'/>").append("재승인대기중");
