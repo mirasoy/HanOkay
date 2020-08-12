@@ -792,10 +792,6 @@ background-color: #ccc;
 										</div> -->
 								</div>
 
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-
 								<div class="room-ect" value='<c:out value="${acm.acmNum}" />'>
 									<button id="wishButton" class="wishButton" value='<c:out value="${acm.acmNum}" />'>
 										<i></i>
@@ -805,8 +801,7 @@ background-color: #ccc;
 									</p>
 								</div>
 
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+
 								<input type="hidden" id="latitude"
 									value='<c:out value="${acm.latitude }" />'> <input
 									type="hidden" id="longitude"
@@ -918,7 +913,7 @@ background-color: #ccc;
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 
-				<form class="modal-content1">
+				<div class="modal-content1">
 					<div class="modal-header">
 						<h1 class="h1Name">당신의 여행을 찜하세요</h1>
 						<!-- <button type="button" class="closeBtn" data-dismiss="modal"
@@ -937,7 +932,7 @@ background-color: #ccc;
  							<%-- <label>#숙소번호</label> <input class="form-control" name='acmNum' value='<c:out value="${acmNum}" />' readonly="readonly" >  --%>					
 						</div>
 						<div class="form-group info-group">
-							<label>#타이틀</label> 
+							<label>목록</label> 
 							<!-- <input class="form-control" name='listTitle' value='' > -->
 							<select class="form-control" name='listTitle' value=''>
 							    <option value="분류없음" hidden>분류선택</option>
@@ -951,9 +946,8 @@ background-color: #ccc;
 
 						</div>
 						<div class="form-group info-group">
-							<label>#내용</label>
-								 <input class="form-control" name='listContent'
-								value='' required />
+							<label>메모</label>
+								 <input class="form-control" name='listContent' value=''/>
 						</div>
 
 
@@ -970,7 +964,7 @@ background-color: #ccc;
 					
 					
 					
-				</form>
+				</div>
 
 				<!-- /.modal-content -->
 			</div>
@@ -1697,27 +1691,16 @@ $(document).ready(function(){
  			alert("로그인이 필요합니다.")
  			}else{
  				
-				alert("하트를 눌렀습니다!"); 
- 				
-				
-				
-				
-/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
-									
-			
+				alert("하트를 눌렀습니다!"); 																						
 
 					if($(this).children(0).hasClass("fa-heart")==1){
 
 						alert("이미 추가한 숙소입니다.");
-						
-						
-						
-						
+											
 
 						}else{
 							/* alert("찜합니다."); */
-							$(this).children().attr('class','fa fa-heart fa-2x');
+							 $(this).children().attr('class','fa fa-heart fa-2x');  
 							$(".wishmodal").modal("show"); 
 		 					modal.addClass("show") ;
 							
@@ -1730,37 +1713,37 @@ $(document).ready(function(){
 
  
 	/* btn의 자식인 i클래스의 .attr('class','fa fa-heart fa-2x');의 상태라면 */
-	
- 
-	
-	
-		
+			
 	 modalRegisterBtn.on("click", function(e){	 	
 		 
 		var modal = $(".wishmodal");
-		var modalRegisterBtn = $("#modalRegisterBtn");				
+		var modalRegisterBtn = $("#modalRegisterBtn");	
+		var btn = document.getElementsByClassName("wishButton");
 			
 		var modalInputuserNum = modal.find("input[name='userNum']").val();
 		var modalInputacmNum = modal.find("input[name='acmNum']").val();		
 		var modalInputlistTitle = $("select[name='listTitle']").val();
 		var modalInputlistContent = modal.find("input[name='listContent']").val();
 		
-		var heartbtn = $(".fa-heart");
+
+	/* 	 $( '#wishButton' ).attr('class','fa fa-heart fa-2x'); */
+	
 		
 		if(modalInputlistContent==""){
 			
 			/* 빈 값을 입력한다면, 리턴한다 */
-			/* heartbtn.attr('class','fa fa-heart-o fa-2x'); */
+			
+			alert("비어있는 항목이 있습니다.");
 			return;
 		}
 			
+
 		
 		 wishService.add({
 			 userNum : modalInputuserNum, acmNum: modalInputacmNum, listTitle: modalInputlistTitle, listContent: modalInputlistContent 
 		 }, function(result){
-			 modal.modal('hide');
-			 
-			 
+			 modal.modal('hide');		 
+			
 			 
 			  if(result==("fail..")){
 				 alert("이미 등록된 숙소입니다.")

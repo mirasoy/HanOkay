@@ -157,10 +157,17 @@ String checkout = request.getParameter("out");
 				<div class="modal-content">
 					<span class="close">&times;</span>
 					<c:forEach items="${rev}" var="rev">
-						<div class="reviewPst" style='box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: white;margin: 1%; padding: 1%"'>
-						<a href="/review/get?pstNum=<c:out value='${rev.revPstnum}'/>">
-							[글 번호: <c:out value='${rev.revPstnum}'/>] <c:out value="${rev.revPtitle}" />&nbsp;<fmt:formatDate value="${rev.revPregdate}" pattern="(작성일: yyyy년 M월)"/>
-						</a>
+						<div class="postRV"
+							style="border: 3px solid #f1f1f1; background-color: white; border-radius: 5em; margin: 1%; padding: 3%;">
+							<b style="font-size: 1em; border-right: 5px solid #f1f1f1; margin-right: 1em; padding-right: 1em;">
+								<c:out value="${rev.revPtitle}" />
+							</b> 
+							<span style="padding-right: 1em; color: gray; font-size:0.6em; margin-right: 1em;">
+								<fmt:formatDate value="${rev.revPregdate}" pattern="(작성일: yyyy년 M월)"/>
+							</span>
+							<hr style="border: 3px solid #f1f1f1">
+							<span style="font-size: 0.8em; "><c:out value="${rev.revContent}" /></span>
+							<hr style="border: 3px solid #f1f1f1">
 						</div>
 					</c:forEach>
 				</div>
