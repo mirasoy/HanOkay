@@ -15,6 +15,10 @@ String userEmail="";
 String userNum = "";
 String userPriv ="";
 String userStatusCode="";
+String userProfilePicUrl="";
+String userProfilePicName="";
+ 
+
 
 
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
@@ -26,9 +30,20 @@ if (user != null) {
    userNum = user.getUserNum();
    userPriv=user.getUserPriv();
    userStatusCode=user.getUserStatusCode();
+   userProfilePicUrl=user.getUserProfilePicUrl();
+   userProfilePicName=user.getUserProfilePicName();
    
+   if(userProfilePicUrl==null ||userProfilePicName == null){
+   
+   userProfilePicName="user.png";
+   userProfilePicUrl= "C:/upload/";
+   
+   }
    
 }
+	
+	
+	
 %>
 
 
