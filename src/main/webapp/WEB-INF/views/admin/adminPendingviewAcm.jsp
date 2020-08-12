@@ -252,7 +252,6 @@
 			   <span class="dot" onclick="currentSlide(6)"></span> 
 			    <span class="dot" onclick="currentSlide(7)"></span> 
 			</div>
-	          
           </div>
 			
 		</div>
