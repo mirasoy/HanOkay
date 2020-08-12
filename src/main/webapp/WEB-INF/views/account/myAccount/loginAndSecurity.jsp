@@ -378,8 +378,9 @@ div[Attributes Style] {
 		    				<div class="rightOfContent2_SR">
 		    					<div class="right2OfContent2_SR">
 		    						<div class="right3OfContent2_SR">
-		    							<button type="button" class="updateBtn_SR" aria-busy="false">
+		    							<button type="button" class="updateBtn_SR" aria-busy="false" onclick="changeInnerText(this);">
 		    								업데이트
+		    								<!--  클릭하면 취소로 바뀌어야함 -->
 		    							</button>
 		    						</div>
 		    					</div>
@@ -387,8 +388,12 @@ div[Attributes Style] {
 		    			
 		    			</div>
 		    			
+		    			<div id="msgSite" style="display:none;">
+		    			<span id="msg" name="msg">하이루</span>
+		    			</div>
+		    			
 		    			<!-- 업데이트 누르면 생기고 -->
-		    			<div style="margin-top: 8px; margin-bottom: 24px;">
+		    			<div style="display:none; margin-top: 8px; margin-bottom: 24px;" id="modifyContent">
 		    				<form>
 		    					<div style="margin-bottom: 16px;">
 		    						<div class="_9hxttoo">
@@ -446,7 +451,7 @@ div[Attributes Style] {
 		    					
 		    					<div id="airlock-inline-container">
 		    					</div>
-		    					<button type="submit" class="_kt3i5a4" aria-busy="false">
+		    					<button type="button" id="changePasswordSubmitBtn" class="_kt3i5a4" aria-busy="false" >
 		    						<span class="_ftj2sg4">
 		    							비밀번호 변경
 		    						</span>
@@ -504,6 +509,59 @@ div[Attributes Style] {
 	if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
+	});
+	
+	
+	//버튼의 innerText를 변경해주고 인풋을 보여주고 안보여주고를 조작하는 기능
+	function changeInnerText(btnVal){
+		
+		if(btnVal.innerText==='업데이트'){
+			$("#msgSite").show();
+			$("#modifyContent").show();
+			btnVal.innerText='취소';
+			
+		}
+		else{
+			$("#msgSite").hide();
+			$("#modifyContent").hide();
+			btnVal.innerText='업데이트';
+		}
+	}
+	
+	$("#changePasswordSubmitBtn").on("click", function(){
+		
+		let currentPassword=$("#old_password").val();
+		let newPassword=$("#user_password").val();
+		let newPasswordConfirm= $("user_passwordConfirm").val();
+		let userNum=<%=userNum %>;
+		
+           $.ajax({
+         	   type: 'POST',
+         	   url: '/account/myAccount/security',
+         	   dataType: 'json',
+         	   data: {
+         		   'userNum': userNum,
+         		   'currentPassword': currentPassword,
+         		   'newPassword': newPassword,
+         		   'newPasswordConfirm': newPasswordConfirm,
+         	   },
+         	   
+         	   success: function(data){
+         		   
+         		   /* if(data.msg==='fail'){
+         			  $('.container3_SR').css("height","376px");
+         			  $('#msg').text("입력한 이메일은 등록되어있지 않습니다!");
+         		   }
+         		   else if(data.msg ==='success'){
+         			 
+         		   } */
+         		  
+         	   },
+         	   error: function(data){
+         		  window.location.href ="../error/error";
+         	   }
+         	 });
+		
 	});
 	</script>
 

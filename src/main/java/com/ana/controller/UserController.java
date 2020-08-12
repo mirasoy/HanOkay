@@ -193,4 +193,14 @@ public class UserController {
 		  return map;
 		
  	}
+	
+	@RequestMapping(value="/account/myAccount/security", method=RequestMethod.POST)
+	@ResponseBody
+	public void updatePassword(String userNum, String currentPassword, String newPassword, String newPasswordConfirm) {
+		log.info("업데이트 비번 컨트롤러 userNum: "+ userNum);
+		log.info("currentPassword: "+ currentPassword);
+		log.info("newPassword: "+ newPassword);
+		log.info("newPasswordConfirm: "+ newPasswordConfirm);
+	}
+	
 }
