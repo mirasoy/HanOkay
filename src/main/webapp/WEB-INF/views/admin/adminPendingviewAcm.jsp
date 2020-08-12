@@ -211,30 +211,32 @@
 					<br><br>
 
 					<div class="mySlides" id="mySlide0">
-					  <div class="numbertext">1 / 6</div>
+					  <div class="numbertext">1 / 7</div>
 					</div>
 					
 					<div class="mySlides" id="mySlide1">
-					  <div class="numbertext">2 / 6</div>
+					  <div class="numbertext">2 / 7</div>
 					  
 					</div>
 
 					<div class="mySlides" id="mySlide2">
-					  <div class="numbertext">3 / 6</div>
+					  <div class="numbertext">3 / 7</div>
 					</div>
 
 					<div class="mySlides" id="mySlide3">
-					  <div class="numbertext">4 / 6</div>
+					  <div class="numbertext">4 / 7</div>
 					</div>
 
 					<div class="mySlides" id="mySlide4">
-					  <div class="numbertext">5 / 6</div>
+					  <div class="numbertext">5 / 7</div>
 					</div>
 
 					<div class="mySlides" id="mySlide5">
-					  <div class="numbertext">6 / 6</div>
+					  <div class="numbertext">6 / 7</div>
 					</div>
-					
+					<div class="mySlides" id="mySlide6">
+					  <div class="numbertext">6 / 7</div>
+					</div>
 					
 					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 					<a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -248,6 +250,7 @@
 			   <span class="dot" onclick="currentSlide(4)"></span> 
 			   <span class="dot" onclick="currentSlide(5)"></span> 
 			   <span class="dot" onclick="currentSlide(6)"></span> 
+			    <span class="dot" onclick="currentSlide(7)"></span> 
 			</div>
 	          
           </div>
@@ -341,7 +344,7 @@
 	  //사진슬라이드 펑션 부르기
 		let mySlides=new Array();
 
-		for(let i=0;i<6;i++){
+		for(let i=0;i<7;i++){
 			mySlides[i]=document.getElementById("mySlide"+ i);//넣는곳
 		}
 		
