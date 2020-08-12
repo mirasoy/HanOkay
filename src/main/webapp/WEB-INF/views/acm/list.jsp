@@ -950,7 +950,7 @@ window.onclick = function(event) {
 	
 	$("#submitBtn").click(function(e) {
 		e.preventDefault();
-		if($("#in").val() =='null'){
+		if($("#in").val() =='null'||$("#out").val() =='null'){
 			let today = new Date();   
 
 			let year = today.getFullYear(); // 년도

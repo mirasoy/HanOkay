@@ -224,8 +224,8 @@ function sample6_execDaumPostcode() {
 		     	    	
 		     	    	
 		     	    	//임시
-		     	    	formObj.append("<input type='hidden' id='latitude' name='latitude' value='"+35.8133295+"'>");
-		     	    	formObj.append("<input type='hidden' id='longitude' name='longitude' value='"+129.1894108+"'>");
+		     	    	//formObj.append("<input type='hidden' id='latitude' name='latitude'>");
+		     	    	//formObj.append("<input type='hidden' id='longitude' name='longitude'>");
 	     	    	}
 	     	    		else chkaddr.value=data.msg;//이미 있으면 바꿔치기
           	   },
@@ -251,6 +251,9 @@ function sample6_execDaumPostcode() {
    		     	    	formObj.append("<input type='hidden' id='latitude' name='latitude' value='"+result.y+"'>");
    		     	    	formObj.append("<input type='hidden' id='longitude' name='longitude' value='"+result.x+"'>");
    	     	    	} else {
+   	     	    		latitude.value='';
+   	     	    		longitude.value='';
+   	     	    		
    	     	    		latitude.value=result.y;//이미 있으면 바꿔치기
    	     	    		longitude.value=result.x;
    	     	    	}

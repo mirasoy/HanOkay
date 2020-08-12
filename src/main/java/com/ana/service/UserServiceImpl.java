@@ -240,24 +240,37 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean updateProfile(UserProfileVO profile) {
 		log.info("service impl에서의 profile: "+ profile);
-		  try { 
-			  //만약 profileVO의 변수값 중에 null이 있으면 empty string으로 변경시켜준다
-			  //myBatis error를 피하기 위해서
-				for(Field field :profile.getClass().getDeclaredFields()){
-			            field.setAccessible(true);
-			            String name = field.getName();
-			            Object value = field.get(profile);
-			            
-			            if(value== null) {
-			            	value="";
-			            	field.set(profile, "");
-			            }
-			            System.out.println(name+" : "+value.toString());
-			          
-			        }    
-			    }catch(Exception e){
-			        log.info("VO 변수, 값 추출 에러");
-			    }
+		
+		
+//		  try { 
+//			  //만약 profileVO의 변수값 중에 null이 있으면 empty string으로 변경시켜준다
+//			  //myBatis error를 피하기 위해서
+//				for(Field field :profile.getClass().getDeclaredFields()){
+//			            field.setAccessible(true);
+//			            String name = field.getName();
+//			            Object value = field.get(profile);
+//			            
+//			            if(value== null) {
+//			            	value="";
+//			            	field.set(profile, "");
+//			            }
+//			            
+//			            System.out.println(name+" : "+value.toString());
+//			          
+//			        }    
+//			    }catch(Exception e){
+//			        log.info("VO 변수, 값 추출 에러");
+//			    }
+		
+		
+		if(null==profile.getUserPictureUrl()|| null==profile.getUserPictureName()) {
+			
+			profile.setUserPictureName("user.png");
+			profile.setUserPictureUrl("/resources/img/");
+			
+		}
+		
+		
 			    System.out.println("profile ****"+ profile);
 		
 		return mapper.updateProfile(profile)==1;
