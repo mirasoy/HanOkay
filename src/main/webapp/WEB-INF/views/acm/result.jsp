@@ -1284,7 +1284,7 @@ if(maxPriceRange>500000){
 	    });
 	$('#min').val($( "#slider-range" ).slider( "values", 0));
 	$('#max').val($( "#slider-range" ).slider( "values", 1));
-	    // 初期表示
+	    
 	if($('#max').val()==500000){
 		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0) +
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) +"+");
