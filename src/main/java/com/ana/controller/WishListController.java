@@ -154,18 +154,6 @@ public class WishListController {
     }
     
   
-//    @DeleteMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE })
-//	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
-//
-//		log.info("remove: " + String);
-//
-//		return service.wishRemove(rno) == 1 
-//				? new ResponseEntity<>("success", HttpStatus.OK)
-//				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//
-//	}
-
-
 	
 	
 }
