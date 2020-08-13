@@ -168,7 +168,6 @@
 			<version>2.7.8</version>
 		</dependency>
 
-
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

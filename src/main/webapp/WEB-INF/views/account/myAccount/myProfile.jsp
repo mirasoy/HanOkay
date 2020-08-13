@@ -247,7 +247,7 @@ margin-left: -2px;
 						<div class="textToggle">
 							<p>프로필 사진 업로드</p>
 							<div class="uploadDiv">
-								<input type="file" name="uploadFile" multiple="multiple">
+								<input type="file" name="uploadFile">
 							<div class="uploadResult">
 								<ul>
 
@@ -256,7 +256,6 @@ margin-left: -2px;
 						</div>
 						</div>
 					</li>
-						
 					
 					<button class="btn btn-primary">수정하기</button>																							
 					<button class="btn btn-red">취소하기</button>																							
@@ -304,7 +303,9 @@ $(".btn-primary").on('click', function(){
         data: {
           userNum: '<%=userNum %>',
           userIntroduction : selfIntro,
-          userLanguage : lang
+          userLanguage : lang,
+          userPictureName :$("#pimg").data("filename"),
+          userPictureUrl :$("#pimg").data("path")
         },
         async: false,
         success: function (data) {
@@ -321,11 +322,12 @@ $(".btn-primary").on('click', function(){
         	        },
         	        success: 
         	        	function(data, profile) {
-        	        	
         	        	console.log(data);
         	        	console.log("data.profile: "+data.profile.userIntroduction);
         	        	$("#selfIntrod").text(data.profile.userIntroduction);
         	        	$("#langu").text(data.profile.userLanguage);
+        	        	
+        	        	$("#user-pic").attr('src','/display?fileName='+data.profile.userPictureUrl+data.profile.userPictureName);
         	        	}, 
         	        });
         	 
@@ -338,6 +340,141 @@ $(".btn-primary").on('click', function(){
    });
 });
 
+
+
+//사진업로드 관련 부분//by.mira
+
+
+// 파일유효성체크
+let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)$")
+let maxSize = 5242880;
+function checkExtension(fileName, fileSize) {
+	if (fileSize > maxSize) {
+		alert("파일사이즈초과");
+		return false;
+	}
+	if (!(regex.test(fileName))) {
+		alert("그림파일만 가능합니다.")
+		return false;
+	}
+	return true;
+}
+
+
+
+//사진 배열로 정리해서 보내는 함수
+function regiPhoto() {
+	let formObj = $("#roomForm");
+	var str2 = "";
+
+	$(".uploadResult ul div").each(function (i, obj) {
+
+		var jobj = $(obj);
+		console.dir(jobj);
+
+		str2 += "<input type = 'hidden' name = 'romPname' value='" + jobj.data("filename") + "'>";
+		str2 += "<input type = 'hidden' name = 'romPurl' value='" + jobj.data("path") + "'>";
+	});
+
+	//alert(str2);
+	formObj.append(str2);
+
+
+}
+
+
+//파일 미리보기 관련()
+var uploadResult = $(".uploadResult ul");
+function showUploadedFile(uplodResultArr) {
+	var str = "";
+	$(uplodResultArr).each(function (i, obj) {
+		if (!obj.image) {
+			//이거는 이미지 외 파일도 받을때
+			//str += "<li><img src='../resources/img/logo.png'>" + obj.fileName + "</li>"
+			alert("그림파일만 가능합니다.")
+			return false;
+		} else {
+
+			var fileCallPath = encodeURIComponent(obj.purl + "/" + obj.pname);
+			var originPath = obj.purl + "/" + obj.pname;
+
+			originPath = originPath.replace(new RegExp(/\\/g), "/");
+
+			str += "<div id='pimg' data-path='" + obj.purl + "'";
+			str += "data-filename='" + obj.pname + "'";
+			str += "data-type='" + obj.image + "'><div>";
+			str += "<img style='width :200px;' src = '/display?fileName=" + fileCallPath + "'>";
+			str += "<button type='button' data-file=\'" + fileCallPath + "\' "
+			str += "data-type = 'image' class ='btn'><i class='fa fa-times'></i></button><br>"
+			str += "</div></div";
+		}
+		
+		
+		
+	});
+	uploadResult.append(str);
+	
+	
+	
+}
+
+//파일 삭제관련
+$(".uploadResult").on("click", "button", function (e) {
+	var targetFile = $(this).data("file");
+	var type = $(this).data("type");
+	var targetLi = $(this).closest("li");
+
+	$.ajax({
+		url: '/deleteFile',
+		data: { fileName: targetFile, type: type },
+		dataType: 'text',
+		type: 'POST',
+		success: function (result) {
+			alert("삭제되었습니다.");
+			targetLi.remove();
+		}
+	});
+})
+
+//파일 업로드
+var cloneObj = $(".uploadDiv").clone();
+
+$("input[type='file']").change(function (e) {
+	var formData = new FormData;
+	
+	var inputFile = $("input[name='uploadFile']");
+	var files = inputFile[0].files;
+
+	console.log(files);
+
+	// 총 갯수 구하기
+	var total = $(".uploadResult ul >li").length+files.length
+	if(total>1){
+		alert("1장의 사진만 등록이 가능합니다.")
+		return false;
+	}
+	
+	for (let i = 0; i < files.length; i++) {
+		if (!checkExtension(files[i].name, files[i].size)) {
+			return false;
+		}
+
+		formData.append("uploadFile", files[i]);
+	}
+
+	$.ajax({
+		url: '/review/uploadAjaxAction',
+		processData: false,
+		contentType: false,
+		data: formData,
+		type: 'POST',
+		dataType: 'json',
+		success: function (result) {
+			console.log(result);
+			showUploadedFile(result);
+		}
+	});
+});
 
 
 

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
 
@@ -11,7 +9,7 @@
 	<section class="sidebar">
 	    <div class="sidebar_detail">	
 	        <div class="sidebar-header">
-	            <div class="user-pic"> <img src="${request.contextPath}/resources/img/user.jpg" alt="유저이미지"></div>
+	            <div class="user-pic"> <img  id= "user-pic" src="/display?fileName=<%=userProfilePicUrl %><%=userProfilePicName %>" alt="유저이미지"></div>
 	            <div class="user-info">
 	                <span class="user-name">	               
 	             		<strong><%=userFstName %></strong>님

@@ -37,6 +37,7 @@ public class AcmDetailServiceImpl implements AcmDetailService{
 	public List<AcmDetailRomVO> getRomAll(String checkin,String checkout,String acmNum) {
 		log.info("■■■■■■■■■■■■▶ getRomAll: "+ acmNum);
 		List<String> romNumList = mapper.getRomNum(checkin,checkout);
+		
 		return mapper.getRomAll(romNumList,acmNum);
 	}
 	
