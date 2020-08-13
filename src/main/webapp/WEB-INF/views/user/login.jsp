@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <%@page import="javax.mail.Session"%> 
 
 <%@include file="../includes/header1.jspf"%>
-<title>Han:Ok - 로그인</title>
+<title>HanOkay 한오케이 - 로그인</title>
 
 <style>
 body {

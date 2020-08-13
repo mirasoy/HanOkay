@@ -3,7 +3,7 @@
 pageEncoding="UTF-8"%> 
 
 <%@include file="../includes/header1.jspf"%>
-<title>Han:Ok - 회원가입</title>
+<title>HanOkay 한오케이 - 회원가입</title>
 <%@include file="../includes/header2.jspf"%>
 <%@include file="../includes/header3.jspf"%>
 

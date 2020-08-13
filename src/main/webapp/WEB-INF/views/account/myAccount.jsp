@@ -3,7 +3,7 @@
 pageEncoding="UTF-8"%> 
 
 <%@include file="../includes/header1.jspf"%>
-<title>Han:Ok - 내 계정</title>
+<title>HanOkay - 내 계정</title>
 <style type="text/css">
 
 .cards_SR>div{
