@@ -193,4 +193,34 @@ public class UserController {
 		  return map;
 		
  	}
+	
+	@RequestMapping(value="/account/myAccount/security", method=RequestMethod.POST)
+	@ResponseBody
+	public void updatePassword(HttpServletResponse response, String userNum, String currentPassword, String newPassword, String newPasswordConfirm) throws IOException {
+		JSONObject jso= new JSONObject();
+		
+		
+		log.info("업데이트 비번 컨트롤러 세션의 유저userNum: "+ userNum);
+		/*
+		 * log.info("currentPassword: "+ currentPassword); 
+		 * log.info("newPassword: "+ newPassword); 
+		 * log.info("newPasswordConfirm: "+ newPasswordConfirm);
+		 */
+		
+		if(userNum == null || userNum.equals("")) {
+			jso.put("msg", "fail");
+		}
+		
+		else if(service.updatePassword(userNum, currentPassword, newPassword)) {
+			jso.put("msg", "success");
+		} 
+		//비번이 틀린 경우
+		else {
+			jso.put("msg", "fail");
+		}
+		
+		PrintWriter out=response.getWriter();
+		out.print(jso);
+	}
+	
 }

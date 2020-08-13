@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
       >
       <h1><div class="header2_SR">회원가입</div></h1>
     </div>
-    <!--  action= "/register/emailAuth" -->
+
   </section>
 </div>
 

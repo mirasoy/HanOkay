@@ -378,8 +378,9 @@ div[Attributes Style] {
 		    				<div class="rightOfContent2_SR">
 		    					<div class="right2OfContent2_SR">
 		    						<div class="right3OfContent2_SR">
-		    							<button type="button" class="updateBtn_SR" aria-busy="false">
+		    							<button id="updateOrCancelBtn" type="button" class="updateBtn_SR" aria-busy="false" onclick="changeInnerText(this);">
 		    								업데이트
+		    								<!--  클릭하면 취소로 바뀌어야함 -->
 		    							</button>
 		    						</div>
 		    					</div>
@@ -387,8 +388,12 @@ div[Attributes Style] {
 		    			
 		    			</div>
 		    			
+		    			<div id="msgSite" style="display:none;">
+		    			<span id="msg" name="msg" style="font-color:red;"></span>
+		    			</div>
+		    			
 		    			<!-- 업데이트 누르면 생기고 -->
-		    			<div style="margin-top: 8px; margin-bottom: 24px;">
+		    			<div style="display:none; margin-top: 8px; margin-bottom: 24px;" id="modifyContent">
 		    				<form>
 		    					<div style="margin-bottom: 16px;">
 		    						<div class="_9hxttoo">
@@ -403,7 +408,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input class="_14fdu48d" id="old_password" name="old_password" type="text">
+		    										<input type="text" class="_14fdu48d" id="oldPassword" name="oldPassword">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -420,7 +425,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input class="_14fdu48d" id="user_password" name="user_password" type="text">
+		    										<input type="text" class="_14fdu48d" id="userPassword" name="userPassword">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -437,7 +442,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input class="_14fdu48d" id="user_passwordConfirm" name="user_passwordConfirm" type="text">
+		    										<input type="text" class="_14fdu48d" id="userPasswordConfirm" name="userPasswordConfirm">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -446,7 +451,7 @@ div[Attributes Style] {
 		    					
 		    					<div id="airlock-inline-container">
 		    					</div>
-		    					<button type="submit" class="_kt3i5a4" aria-busy="false">
+		    					<button type="button" id="changePasswordSubmitBtn" class="_kt3i5a4" aria-busy="false" >
 		    						<span class="_ftj2sg4">
 		    							비밀번호 변경
 		    						</span>
@@ -504,6 +509,118 @@ div[Attributes Style] {
 	if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
+	});
+	
+	
+	//버튼의 innerText를 변경해주고 인풋을 보여주고 안보여주고를 조작하는 기능
+	function changeInnerText(btnVal){
+		
+		if(btnVal.innerText==='업데이트'){
+			$("#msgSite").show();
+			$("#modifyContent").show();
+			btnVal.innerText='취소';
+			
+		}
+		else{
+			$("#msgSite").hide();
+			$("#modifyContent").hide();
+			btnVal.innerText='업데이트';
+		}
+	}
+	
+	//빈값체크
+	function isEmpty(target) {
+	    if (
+	      target === null ||
+	      target == null ||
+	      target === undefined ||
+	      target === "" ||
+	      target == ""
+	    ) {
+	      return true;
+	    }
+	    return false;
+	  }
+	
+	
+	//입력한 새 비밀번호의 유효성 검사
+	function checkPwd(str, repeatedStr) {
+    	var pw = str;
+	    var repeatedPw = repeatedStr;
+	    var num = pw.search(/[0-9]/g);
+	    var eng = pw.search(/[a-z]/gi);
+	    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+	    //비밀번호 글자수 8~20자로 제한
+	    if (pw.length<8 || pw.length>20) {
+	      document.getElementById("msg").innerHTML =
+	        "8자리 ~ 20자리 이내로 영문 대소문자,숫자,특수문자를 혼합하여 입력해주세요.";
+	      return false;
+	    }
+	    //비밀번호 공백제한
+	    if (pw.search(/\s/) != -1) {
+	      document.getElementById("msg").innerHTML = "공백 없이 입력해주세요.";
+	      return false;
+	    }
+	    //영문 숫자 특수문자 확인
+	    if (num < 0 || eng < 0 || spe < 0) {
+	      document.getElementById("msg").innerHTML =
+	        "영문 대소문자,숫자,특수문자를 혼합하여 입력해주세요.";
+	      return false;
+	    }
+	    //비밀번호와 비밀번호 재확인의 값이 동일한지 확인
+	    if (pw !== repeatedPw) {
+	      document.getElementById("msg").innerHTML =
+	        "비밀번호와 비밀번호 확인이 다릅니다.";
+	      return false;
+	    }
+	    return true;
+	  }	
+	
+	//password업데이트 버튼 눌렀을 때 
+	$("#changePasswordSubmitBtn").on("click", function(){
+		
+		let currentPassword=$("#oldPassword").val();
+		let newPassword=$("#userPassword").val();
+		let newPasswordConfirm= $("#userPasswordConfirm").val();
+		let userNum= '<%=userNum %>';
+		
+	
+		if(!isEmpty(newPassword, newPasswordConfirm) && checkPwd(newPassword, newPasswordConfirm)){
+			
+           $.ajax({
+         	   type: 'POST',
+         	   url: '/account/myAccount/security',
+         	   dataType: 'json',
+         	   data: {
+         		   'userNum': userNum,
+         		   'currentPassword': currentPassword,
+         		   'newPassword': newPassword,
+         		   'newPasswordConfirm': newPasswordConfirm,
+         	   },
+         	   
+         	   success: function(data){
+         		  
+         		   
+         		   //비밀번호가 db와 일치하지 않는경우 혹은 session이 끊겨버린 경우
+         		   if(data.msg==='fail'){
+         			 window.alert("비밀번호 변경에 실패하였습니다. 다시 시도해주세요");
+         		   }
+         		   else if(data.msg ==='success'){
+         			 window.alert("비밀번호가 성공적으로 변경되었습니다!");
+         			 $("#updateOrCancelBtn").text("업데이트");
+         			 $("#modifyContent").hide();
+         		   } 
+         		  
+         	   },
+         	   error: function(data){
+         		  window.location.href ="../error/error";
+         	   }
+         	 });
+             
+            
+		} 
+	
+		
 	});
 	</script>
 
