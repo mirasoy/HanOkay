@@ -85,6 +85,10 @@ public interface UserService {
 	
 	@Transactional
 	public UserProfileVO getUserProfileBy(String userNum);
+	
+	@Transactional
+	public boolean updatePassword(@Param("userNum")String userNum, @Param("currentPassword")String oldPassword, @Param("newPassword") String newPassword);
+	
 	////////////////////////림쨩 ////////////////
 	
 	//세션리뉴얼

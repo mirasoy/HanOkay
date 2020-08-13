@@ -33,6 +33,14 @@
 		<result property="userPictureUrl" column="U_PURL"/>
 	</resultMap>
 	
+	<update id="updatePassword">
+	update tuser 
+	set 
+	u_pwd=#{newPassword}
+	where user_num=#{userNum}
+	and u_pwd=#{currentPassword}
+	</update>
+	
 	<select id="getUserProfile" resultMap="UserProfileVO">
 	select USER_NUM, U_INTRO, U_LANG, U_PICNAME, U_PURL from tuser where USER_NUM=#{userNum}
 	</select>

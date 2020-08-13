@@ -378,7 +378,7 @@ div[Attributes Style] {
 		    				<div class="rightOfContent2_SR">
 		    					<div class="right2OfContent2_SR">
 		    						<div class="right3OfContent2_SR">
-		    							<button type="button" class="updateBtn_SR" aria-busy="false" onclick="changeInnerText(this);">
+		    							<button id="updateOrCancelBtn" type="button" class="updateBtn_SR" aria-busy="false" onclick="changeInnerText(this);">
 		    								업데이트
 		    								<!--  클릭하면 취소로 바뀌어야함 -->
 		    							</button>
@@ -389,7 +389,7 @@ div[Attributes Style] {
 		    			</div>
 		    			
 		    			<div id="msgSite" style="display:none;">
-		    			<span id="msg" name="msg">하이루</span>
+		    			<span id="msg" name="msg" style="font-color:red;"></span>
 		    			</div>
 		    			
 		    			<!-- 업데이트 누르면 생기고 -->
@@ -408,7 +408,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input class="_14fdu48d" id="old_password" name="old_password" type="text">
+		    										<input type="text" class="_14fdu48d" id="oldPassword" name="oldPassword">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -425,7 +425,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input class="_14fdu48d" id="user_password" name="user_password" type="text">
+		    										<input type="text" class="_14fdu48d" id="userPassword" name="userPassword">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -442,7 +442,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input class="_14fdu48d" id="user_passwordConfirm" name="user_passwordConfirm" type="text">
+		    										<input type="text" class="_14fdu48d" id="userPasswordConfirm" name="userPasswordConfirm">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -528,13 +528,65 @@ div[Attributes Style] {
 		}
 	}
 	
+	//빈값체크
+	function isEmpty(target) {
+	    if (
+	      target === null ||
+	      target == null ||
+	      target === undefined ||
+	      target === "" ||
+	      target == ""
+	    ) {
+	      return true;
+	    }
+	    return false;
+	  }
+	
+	
+	//입력한 새 비밀번호의 유효성 검사
+	function checkPwd(str, repeatedStr) {
+    	var pw = str;
+	    var repeatedPw = repeatedStr;
+	    var num = pw.search(/[0-9]/g);
+	    var eng = pw.search(/[a-z]/gi);
+	    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+	    //비밀번호 글자수 8~20자로 제한
+	    if (pw.length<8 || pw.length>20) {
+	      document.getElementById("msg").innerHTML =
+	        "8자리 ~ 20자리 이내로 영문 대소문자,숫자,특수문자를 혼합하여 입력해주세요.";
+	      return false;
+	    }
+	    //비밀번호 공백제한
+	    if (pw.search(/\s/) != -1) {
+	      document.getElementById("msg").innerHTML = "공백 없이 입력해주세요.";
+	      return false;
+	    }
+	    //영문 숫자 특수문자 확인
+	    if (num < 0 || eng < 0 || spe < 0) {
+	      document.getElementById("msg").innerHTML =
+	        "영문 대소문자,숫자,특수문자를 혼합하여 입력해주세요.";
+	      return false;
+	    }
+	    //비밀번호와 비밀번호 재확인의 값이 동일한지 확인
+	    if (pw !== repeatedPw) {
+	      document.getElementById("msg").innerHTML =
+	        "비밀번호와 비밀번호 확인이 다릅니다.";
+	      return false;
+	    }
+	    return true;
+	  }	
+	
+	//password업데이트 버튼 눌렀을 때 
 	$("#changePasswordSubmitBtn").on("click", function(){
 		
-		let currentPassword=$("#old_password").val();
-		let newPassword=$("#user_password").val();
-		let newPasswordConfirm= $("user_passwordConfirm").val();
-		let userNum=<%=userNum %>;
+		let currentPassword=$("#oldPassword").val();
+		let newPassword=$("#userPassword").val();
+		let newPasswordConfirm= $("#userPasswordConfirm").val();
+		let userNum= '<%=userNum %>';
 		
+	
+		if(!isEmpty(newPassword, newPasswordConfirm) && checkPwd(newPassword, newPasswordConfirm)){
+			
            $.ajax({
          	   type: 'POST',
          	   url: '/account/myAccount/security',
@@ -547,20 +599,27 @@ div[Attributes Style] {
          	   },
          	   
          	   success: function(data){
+         		  
          		   
-         		   /* if(data.msg==='fail'){
-         			  $('.container3_SR').css("height","376px");
-         			  $('#msg').text("입력한 이메일은 등록되어있지 않습니다!");
+         		   //비밀번호가 db와 일치하지 않는경우 혹은 session이 끊겨버린 경우
+         		   if(data.msg==='fail'){
+         			 window.alert("비밀번호 변경에 실패하였습니다. 다시 시도해주세요");
          		   }
          		   else if(data.msg ==='success'){
-         			 
-         		   } */
+         			 window.alert("비밀번호가 성공적으로 변경되었습니다!");
+         			 $("#updateOrCancelBtn").text("업데이트");
+         			 $("#modifyContent").hide();
+         		   } 
          		  
          	   },
          	   error: function(data){
          		  window.location.href ="../error/error";
          	   }
          	 });
+             
+            
+		} 
+	
 		
 	});
 	</script>
