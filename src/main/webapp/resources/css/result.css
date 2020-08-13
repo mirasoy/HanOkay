@@ -505,8 +505,30 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
         max-width: 720px;
     }
     
+ /*    #pac-container> */
+    
+    
+    .box1 {
+    width: 100% !important;
+}
+    
+    #pac-container>span{
+        margin-top: 8px;
+    float: left;
+    width: 30%;
+    }
+    
+    #pac-container>input{
+        float: right;
+    width: 70%;
+    }
+    
+    .weatherText > .mx-auto{
+    display: none;
+    }
+    
     #section-0{
-    	height: 446px;
+    	    height: 571px !important;
         background-color: #474e5d !important;
     }
     
@@ -560,7 +582,7 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
    
     
     .pac-target-input{
-        width: 78%;
+        width: 100%;
    
     height: 30px;
     }
@@ -580,12 +602,16 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
     .formLayout1:nth-child(2){
     	display:none;
     }
-    .formLayout1:nth-child(3){
+    .formLayout3{
     	display:none;
     }
-	.formLayout1:nth-child(4){
-		display:none;
-    }
+    
+    .box1 {
+    width: 100%;
+	}
+	
+	
+	
     
 }
 
