@@ -342,10 +342,22 @@ public class UserServiceImpl implements UserService{
 			System.out.println("세션에 있는 유저는!!"+ user );
 			return true;
 		}
-		System.out.println("인증코드가 틀려버렸네 ㅠ");
+		System.out.println("인증코드 틀림");
 		return false;
 	}
 	
+	
+	@Override
+	public boolean updatePassword(String userNum, String currentPassword, String newPassword) {
+		System.out.println("service에 온 userNum: "+ userNum);
+		System.out.println("service에 온 currentPassword: "+ currentPassword);
+		System.out.println("service에 온 newPassword: "+ newPassword);
+		
+		return mapper.updatePassword(userNum, currentPassword, newPassword)==1;
+	}
+
+
+
 	//인증번호 생성 메서드
 	 public static String numberGen(int len, int dupCd ) {
 	        
@@ -387,7 +399,6 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return mapper.getAcmOwner(bizregnum);
 	}
-
 
 
 	

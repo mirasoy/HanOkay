@@ -376,7 +376,7 @@ file="../../includes/header3.jspf"%>
                             <div style="margin-bottom: 8px;">
                               <label class="label_SR">
                                 <div class="divBeforeLabelVal_SR">
-                                  이름
+                                  	이름
                                 </div>
                               </label>
                             </div>
@@ -553,12 +553,12 @@ file="../../includes/header3.jspf"%>
      let userBdayValue = document.getElementsByClassName("realInfo_SR")[1];
      let userEmailValue = document.getElementsByClassName("realInfo_SR")[2];
      let userPhoneNumberValue = document.getElementsByClassName("realInfo_SR")[3];
-
-  let btnModifyArr= document.getElementsByClassName("btn_modify");
-  let nameModifyDiv=document.getElementById("inputBeforeForm_SR");
-  let showHide= document.getElementById("showAndHide");
-  let nameFromS=document.getElementsByClassName("nameFromSession")[0];
-  
+	
+	 let btnModifyArr= document.getElementsByClassName("btn_modify");
+	 let nameModifyDiv=document.getElementById("inputBeforeForm_SR");
+	 let showHide= document.getElementById("showAndHide");
+	 let nameFromS=document.getElementsByClassName("nameFromSession")[0];
+	  
   
    });
 
