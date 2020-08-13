@@ -450,8 +450,9 @@ label { font-weight: 700; }
 
 
 .btn-white { background: white; }
-.btn-white-primary { color: #61dafb; }
-.btn-white-highlight { color: #0056b3; }
+.btn-white-primary {     color: #61dafb;
+    font-weight: 800; }
+.btn-white-highlight { color: #0056b3;  font-weight: 800; }
 
 .btn-white-primary:hover,
 .btn-white-primary:focus,
