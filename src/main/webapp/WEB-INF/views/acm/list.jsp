@@ -19,6 +19,36 @@
 
 <style>
 
+.formLayout3{
+    padding: 10px 12px !important;
+    width: 330px;
+}
+
+.t-check-in{
+
+   
+    float: left;
+    width: 150px;
+}
+
+.t-check-out{
+
+    float: right;
+    width: 150px;
+}
+
+.t-arrow-top, .t-arrow-top::after{
+border-color: transparent transparent #fff !important;
+}
+
+.spanGroup>span:nth-child(2){
+    margin-left: 100px;
+}
+
+.box1{
+	    width: 20%;
+}
+
 
 @media screen and (max-width: 991px) {
  
@@ -264,9 +294,9 @@ display: block;
  
  }
 
-.t-check-in, .t-check-out {
+/* .t-check-in, .t-check-out {
     width: 100%;
-}
+} */
 
 .t-dates {
     position: inline;
@@ -312,12 +342,20 @@ display: block;
 
 .t-check-out .t-datepicker-day {
    
-    top: 39px;
+    top: 50px;
 }
 
-.t-datepicker-day{
- top: 39px;
+
+
+.t-datepicker-day {
+    top: 50px;
+    left: -135%;
 }
+
+.t-check-out .t-datepicker-day {
+    left: -237% !important;
+}
+
 
 </style>
 
@@ -346,9 +384,6 @@ display: block;
 				<!-- End : banner-row-header -->
 
 
-				<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■여기부터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
-
 
 				<div class="container1">
 					<section class="search_section">
@@ -360,7 +395,7 @@ display: block;
 										<div>
 											<div class="no-margin1">
 												<div class="formLayout1">
-													<div class="form-group1 pt8px">
+													<div class="form-group1 pt8px box1">
 														<div id="pac-container">
 															<span>Location</span> <input class="form-control2"
 																id="pac-input" type="text" name="keyword"
@@ -373,43 +408,37 @@ display: block;
 													</div>
 
 												</div>
-
-												<div class="formLayout1">
-													<div class="t-datepicker form-group1 pt8px">
-														<span>Check In</span>
-														 <div class="t-check-in"></div>
-													<%-- 	<div class="ui calendar" id="rangestart">
-															<div class="ui input left icon width400">
-																<i class="calendar icon"></i> <input type="text"
-																	placeholder="Start" id="in" name="in"
-																	value="<c:out value="${pageMaker.cri.in}"/>">
-															</div>
-														</div> --%>
+	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■여기부터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+												<div class="formLayout3 ">
+												
+													<div class="booking-group2">
+														<div class="spanGroup form-group1">
+															<span>Check In</span>
+															<span>Check out</span>
+														
+														</div>
+														
+														<div class="t-datepicker">													
+															 <div class="t-check-in"></div>														
+															 <div class="t-check-out"></div>														 
+														</div>
 													</div>
 												</div>
-						<!-- 						
-						<div class="booking-group2"  >
-							<div class="t-datepicker">
-							  <div class="t-check-in"></div>
-							  <div class="t-check-out"></div>
-							</div>
-						</div> -->
+												
+												
+										<!-- 		<div class="t-datepicker form-group1 pt8px">
+													<span>Check In</span>
+													 <div class="t-check-in"></div>													
+												</div>
+																		
 
 												<div class="formLayout1">
 													<div class="t-datepicker form-group1 pt8px">
 														<span>Check out</span>
 														
-														<div class="t-check-out"></div>
-													<%-- 	
-														<div class="ui calendar" id="rangeend">
-															<div class="ui input left icon width400">
-																<i class="calendar icon"></i> <input type="text"
-																	placeholder="End" id="out" name="out"
-																	value="<c:out value="${pageMaker.cri.out}"/>">
-															</div>
-														</div> --%>
+														<div class="t-check-out"></div>													
 													</div>
-												</div>
+												</div> -->
 												
 												
 												
@@ -754,9 +783,9 @@ display: block;
 		<div class="container-outer">
 			<section class="slideshow-section">
 				<div class="slideshow">
-					<img src="/display?fileName=C:/upload/review/rev_p_36.jpg" alt="Image"> <img
-						src="/display?fileName=C:/upload/review/rev_p_35.jpg" alt="Image"> <img
-						src="/display?fileName=C:/upload/review/rev_p_34.jpg" alt="Image">
+					<img src="/display?fileName=C:/upload/review/rev_p_33.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_25.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_45.jpg" alt="Image">
 				</div>
 				<div class="slideshow-description bg-primary1">
 					<h2 class="">[교동게하]따뜻하고 전통적인 한옥게스트하우스!</h2>
@@ -769,9 +798,9 @@ display: block;
 			<section class="clearfix slideshow-section slideshow-section-reverse">
 
 				<div class="right slideshow slideshow-highlight">
-					<img src="/display?fileName=C:/upload/review/rev_p_26.jpg" alt="Image"> <img
-						src="/display?fileName=C:/upload/review/rev_p_26.jpg" alt="Image"> <img
-						src="/display?fileName=C:/upload/review/rev_p_26.jpg" alt="Image">
+					<img src="/display?fileName=C:/upload/review/rev_p_40.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_41.jpg" alt="Image"> <img
+						src="/display?fileName=C:/upload/review/rev_p_39.jpg" alt="Image">
 				</div>
 
 				<div
@@ -788,9 +817,9 @@ display: block;
 			</section>
 			<section class="slideshow-section">
 				<div class="slideshow">
-					<img src="/display?fileName=C:/upload/review/rev_p_3.jpg" alt="Image"> <img
-						src="/display?fileName=C:/upload/review/rev_p_28.jpg" alt="Image"> <img
-						src="/display?fileName=C:/upload/review/rev_p_3.jpg" alt="Image">
+					<img src="/display?fileName=C:/upload/review/rev_p_44.jpg" alt="Image"> 
+					<img src="/display?fileName=C:/upload/review/rev_p_43.jpg" alt="Image">
+					<img src="/display?fileName=C:/upload/review/rev_p_34.jpg" alt="Image">
 				</div>
 				<div class="slideshow-description bg-primary1">
 					<h2 class="">[낙안제]정원이 아름다운 숙소 </h2>

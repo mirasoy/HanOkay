@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
 
-<%@include file="../../includes/header.jsp"%>
+<%@include file="../../includes/header1.jspf"%>
+<title>HanOkay 한오케이 - 나의 프로필</title>
+
 
 <!-- 사이트바 CSS -->
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
 
 <style>
-
-body{
-height: 800px;
-}
-
-.mouse-icon{
-display:none;
-}
+	body{
+	height: 800px;
+	}
+	
+	.mouse-icon{
+	display:none;
+	}
 
 	.container-1{
 	  
@@ -26,14 +27,13 @@ display:none;
 	}
 	
 	.contents-2{
-
 		box-shadow: none !important;
 	}
 
 
 .card1{
     margin-bottom: 50px;
-position: relative;
+	position: relative;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
@@ -50,16 +50,13 @@ position: relative;
 
 .items{
     border-bottom: 1px solid rgb(221, 221, 221) !important;
-   margin-bottom: 30px;
+    margin-bottom: 30px;
     padding-bottom: 30px;
 
 }
 
 
-
-
 .item1>h1{
-
     font-size: 30px;
     font-weight: 800;
     line-height: 40px;
@@ -77,7 +74,7 @@ position: relative;
 
 
 .item2>.user_profile_edit_button{
-font-weight: 800;
+	font-weight: 800;
     appearance: none !important;
     background: transparent !important;
     border: 0px !important;
@@ -108,7 +105,6 @@ font-size: 22px;
 #peek {
 	height : 100%;
 	position : relative;
-	
 	display: none;
 	list-style: none;
 	padding: 0;
@@ -139,7 +135,6 @@ color: #fff;
 }
 
 .textToggleArea{
-
     color: inherit !important;
     min-width: 100% !important;
     max-width: 100% !important;
@@ -175,11 +170,9 @@ margin-left: -5px;
 margin-left: -2px;
 }
 
-
-
-
 </style>
-
+<%@include file="../../includes/header2.jspf"%>
+<%@include file="../../includes/header3.jspf"%>
 
 
 <div class="container">

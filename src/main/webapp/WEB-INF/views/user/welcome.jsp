@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
 <%@ include file="../includes/header1.jspf"%>
-<title>Han:Ok - 어서오세요</title>
+<title>HanOkay 한오케이 - 어서오세요</title>
 <style>
 *, ::after, ::before {
     box-sizing: border-box;

@@ -13,6 +13,15 @@
 
 <style>
 
+.wishModals{
+    width: 100% !important;
+}
+
+#modalCloseBtn{
+margin-right: 127px;
+}
+
+
 input:invalid {
   border-color: red;
 }
@@ -931,7 +940,7 @@ background-color: #ccc;
 							<label>#숙소번호</label> <input class="form-control acmNum"  name='acmNum' readonly="readonly" > 					
  							<%-- <label>#숙소번호</label> <input class="form-control" name='acmNum' value='<c:out value="${acmNum}" />' readonly="readonly" >  --%>					
 						</div>
-						<div class="form-group info-group">
+						<div class="form-group info-group wishModals">
 							<label>목록</label> 
 							<!-- <input class="form-control" name='listTitle' value='' > -->
 							<select class="form-control" name='listTitle' value=''>
@@ -945,7 +954,7 @@ background-color: #ccc;
 								
 
 						</div>
-						<div class="form-group info-group">
+						<div class="form-group info-group wishModals">
 							<label>메모</label>
 								 <input class="form-control" name='listContent' value=''/>
 						</div>
