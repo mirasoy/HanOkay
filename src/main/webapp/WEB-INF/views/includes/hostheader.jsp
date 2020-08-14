@@ -26,13 +26,7 @@
 		}
 		
 %>
-	<style>
-	.panel-heading {
-	    color: #333;
-	    background-color: #f7cac2 !important;
-	    border-color: #ddd;
-	 }
-	</style>
+	
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -74,7 +68,14 @@
 			width:50px;
 			height:20px;
 		}
-	</style>
+		
+		.panel-heading {
+		    color: #333;
+		    background-color: #f7cac2 !important;
+		    border-color: #ddd;
+		 }
+			
+			</style>
 </head>
 
 <body>
@@ -161,6 +162,8 @@
                             </a>
                         </li>
                      </ul>
+                  </li>
+             </ul>
         </nav>
 </div>
         
@@ -183,6 +186,10 @@
       } else if(userStatusCode=="HO_PENDING"){
    		$("#hostonly").css("display","none"); 
 	  }
+      
+  	
+      
+      
    });
 </script>
 

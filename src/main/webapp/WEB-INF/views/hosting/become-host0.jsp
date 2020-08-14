@@ -123,7 +123,7 @@
 					</select>
 				 </div> 
 				 <br><br> <br><br>
-				  <h4>대표사진 한 장을 포함해 최대 7개의 숙소사진을 업로드해주세요!</h4>
+				  <h4>대표사진 한 장을 포함해 7개의 숙소사진을 업로드해주세요!</h4>
 			  <div class="uploadDiv" style="display:inline-block;">
                     <input type="file" name="uploadFile" multiple="multiple">
                  <div class="uploadResult" style="border-style: dashed;border-color: #337AB7; width:1235px; height:224px;">
@@ -396,6 +396,15 @@ function sample6_execDaumPostcode() {
 			return false;		
 		}
 		
+		
+		// 총 갯수 구하기
+		var total = $(".uploadResult ul >li").length;
+			console.log(total);
+		
+		if(total!=7){
+			alert("7장의 사진을 등록해주세요")
+			return false;
+		}
 		
 		
 		if($("input[name='rep']:checked").val()==undefined){
