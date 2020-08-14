@@ -328,10 +328,66 @@ pageEncoding="UTF-8"%>
     padding-top: var(--font-button-padding-top, undefined) !important;
     padding-bottom: var(--font-button-padding-bottom, undefined) !important;
   }
+  
+._9hxttoo {
+    display: block !important;
+    width: 100% !important;
+}
+
+._krjbj {
+    border: 0px !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(100%) !important;
+    clip-path: inset(100%) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    padding: 0px !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+}
+
+._2h22gn {
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+}
+
+._1q8ezn3a {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    min-height: 1px !important;
+    position: relative !important;
+    width: 33.3333% !important;
+    float: left !important;
+}
+
+@media (min-width: 744px){
+._1q8ezn3a {
+    width: 41.6667% !important;
+    float: left !important;
+}
+}
+
+._wlf6154 {
+    font-size: var(--font-form-element-font-size, 16px) !important;
+    line-height: var(--font-form-element-line-height, 24px) !important;
+    letter-spacing: var(--font-form-element-letter-spacing, normal) !important;
+    font-family: var(--font-form-element-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
+    text-transform: var(--font-form-element-text-transform, undefined) !important;
+    color: #484848 !important;
+    padding-top: var(--font-form-element-padding-top, undefined) !important;
+    padding-bottom: var(--font-form-element-padding-bottom, undefined) !important;
+    background-color: #ffffff !important;
+    margin-bottom: var(--spacing-form-element-margin-bottom, 8px) !important;
+}
+
+._y9ev9r {
+    overflow: hidden !important;
+}
 </style>
 
-<%@include file="../../includes/header2.jspf"%> <%@include
-file="../../includes/header3.jspf"%>
+<%@include file="../../includes/header2.jspf"%> 
+<%@include file="../../includes/header3.jspf"%>
 
 <div class="container">
   <div class="out_SR">
@@ -458,9 +514,39 @@ file="../../includes/header3.jspf"%>
               <div style="margin-top: 8px; margin-bottom: 24px;">
                 <div class="realInfo_SR">
                   <!-- 유저 생년월일 -->
-                  <!--                     <form >
-                    <input type="text">
-                    </form> -->
+                  <div style="margin-top: 8px; margin-bottom:24px;">
+                  	<form>
+                  	 <div style="margin-top: 8px; margin-bottom: 16px;">
+                  	 	<div class="_9hxttoo">
+                  	 		<label class="_krjbj" for="birthday">
+                  	 		생년월일
+                  	 			<div role="group" aria-label="생년월일">
+                  	 				<div class="_2h22gn">
+                  	 					<div class="_1q8ezn3a">
+                  	 						<div class="_9hxttoo ">
+	                  	 						<label class="_krjbj" for="birthdateuser[birthday_month]">
+	                  	 						</label>
+	                  	 						<div class="_wlf6154">
+	                  	 						
+	                  	 						</div>
+                  	 						</div>
+                  	 					</div>
+                  	 					
+                  	 					
+                  	 				</div>
+                  	 			</div>
+                  	 		</label>
+                  	 	</div>
+                  	 
+                  	 </div>
+                  	 
+                  	 
+                  	 
+                  	 
+                  	</form>
+                  </div>
+                    
+                    <!-- 끝 -->
                 </div>
               </div>
             </div>
