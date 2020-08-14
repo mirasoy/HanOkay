@@ -82,10 +82,10 @@ display: none;
 	z-index: 12000;
 }
 
-/* 확대/축소 등 구글 지도의 기본 UI 감추기 */
+/* 확대/축소 등 구글 지도의 기본 UI 감추기 
 .gmnoprint, .gm-control-active.gm-fullscreen-control {
 	display: none;
-}
+}*/
 
 
 .modal-content1{
@@ -1004,9 +1004,12 @@ background-color: #ccc;
       function initMap() {
     	  var acmNum = "${acmNum}";
 			//console.log(acmNum);
-			var latitude = document.getElementById("latitude").value;
-			var longitude = document.getElementById("longitude").value;
-			
+			var latitude =37.5703306;
+			var longitude =126.9850353;
+			if(document.getElementById("latitude")!=null){
+				latitude = document.getElementById("latitude").value;
+				longitude = document.getElementById("longitude").value;
+			}
 			var arrOpt = new Array();
 			var acmNumArr = new Array();
 			//숙소번호로 해당 위도,경도 값 가져옴
@@ -1073,7 +1076,7 @@ background-color: #ccc;
         var list = new Array();
         <c:forEach items="${list}" var="acm">
         list[j] = {
-        		"acmName" : '${acm.acmName}' ,
+        		"acmName" : '${acm.acmName}',
         		"latitude" :${acm.latitude},
         		"longitude" :${acm.longitude},
         		"acmPrice" :${acm.acmPrice},
@@ -1194,8 +1197,9 @@ background-color: #ccc;
           map: map,
           anchorPoint: new google.maps.Point(0, -29)
         }); */
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
+        
+        /* autocomplete.addListener('place_changed', function() {
+          infoWindow.close();
           marker.setVisible(false);
           var place = autocomplete.getPlace();
           if (!place.geometry) {
@@ -1224,8 +1228,9 @@ background-color: #ccc;
           infowindowContent.children['place-icon'].src = place.icon;
           infowindowContent.children['place-name'].textContent = place.name;
           infowindowContent.children['place-address'].textContent = address;
-          infowindow.open(map, marker);
-        });
+          infoWindow.open(map, marker);
+        }); */
+        
         // Sets a listener on a radio button to change the filter type on Places
         // Autocomplete.
         /* function setupClickListener(id, types) {
@@ -1255,11 +1260,16 @@ background-color: #ccc;
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+$("#pac-input").keypress(function(e){
+	if(event.keyCode == '13'){
+		e.preventDefault();
+		$('.t-date-check-in').trigger('click');
+	}
+});
 
 //필터 모달창
-
 $(function () { //=$(document).ready(function(){
-	
+
 var maxPriceRange= ${pageMaker.cri.maxPrice};
 if(maxPriceRange>500000){
 	maxPriceRange=500000;

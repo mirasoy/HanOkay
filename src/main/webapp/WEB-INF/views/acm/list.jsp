@@ -419,7 +419,7 @@ display: block;
 														</div>
 														
 														<div class="t-datepicker">													
-															 <div class="t-check-in"></div>														
+															 <div id="cin" class="t-check-in" ></div>														
 															 <div class="t-check-out"></div>														 
 														</div>
 													</div>
@@ -862,10 +862,13 @@ function showSlides() {
 
 
 <script>
-	$(document).ready(function() {
-		$("#e1").select2();
-	});
-
+$("#pac-input").keypress(function(e){
+	if(event.keyCode == '13'){
+		e.preventDefault();
+		$('.t-date-check-in').trigger('click');
+	}
+	
+});
 	// 날짜 선택
 	var today = new Date();
 	$("#out").datepicker({
