@@ -98,17 +98,15 @@
 					<a href="/hosting/reserv">예약</a><!-- 예약관리 -->
 				</li>
 				<li class="nav-menu">
-					<a href="/hosting/listings">숙소</a>
+					<a href="/hosting/listings">숙소관리</a>
+				</li>
+				<li class="nav-menu">
+					<a href="/hosting/stats/statsChart">매출관리</a>
 				</li>
 				<li class="nav-menu">
 					<a href="/chat/chatList2">메시지</a>
 				</li>
-				<li class="nav-menu">
-					<a href="/hosting/stats/statsChart">성취도</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/hosting/help">도움말</a>
-				</li>
+				
 			</ul>
 			
 			<!-- 오른쪽 nav -->

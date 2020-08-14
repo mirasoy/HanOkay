@@ -89,14 +89,12 @@
 					<a href="/admin/adminlistings">숙소관리</a>
 				</li>
 				<li class="nav-menu">
+					<a href="#">매출관리</a>
+				</li>
+				<li class="nav-menu">
 					<a href="#">메시지</a>
 				</li>
-				<li class="nav-menu">
-					<a href="#">성취도</a>
-				</li>
-				<li class="nav-menu">
-					<a href="#">도움말</a>
-				</li>
+				
 			</ul>
 			
 			
