@@ -238,7 +238,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean updateProfile(UserProfileVO profile) {
+	public boolean updateProfile(UserProfileVO profile, HttpSession session) {
 		log.info("service impl에서의 profile: "+ profile);
 		
 		
@@ -266,14 +266,18 @@ public class UserServiceImpl implements UserService{
 		if(null==profile.getUserPictureUrl()|| null==profile.getUserPictureName()) {
 			
 			profile.setUserPictureName("user.png");
-			profile.setUserPictureUrl("/resources/img/");
+			profile.setUserPictureUrl("C:/upload/");
 			
 		}
-		
-		
-			    System.out.println("profile ****"+ profile);
-		
-		return mapper.updateProfile(profile)==1;
+	
+			 	System.out.println("profile ****"+ profile);
+			 	if(mapper.updateProfile(profile)==1) {
+			 		session.setAttribute("user", get(profile.getUserNum()));
+			 		System.out.println("여기서 세션은!!!!"+ session.getAttribute("user"));
+			 		
+			 	}
+			 	
+		return true;
 	}
 
 	

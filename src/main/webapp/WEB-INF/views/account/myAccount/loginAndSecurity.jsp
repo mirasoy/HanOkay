@@ -50,7 +50,7 @@ div {
 }
 
 .titleOfHeader1_SR{
-    margin: 0px !important;
+    margin: 0px;
     word-wrap: break-word !important;
     font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
     font-size: 32px !important;
@@ -335,7 +335,10 @@ div[Attributes Style] {
 	   	 <div style="margin-top: 12px;">   
 	      <h1 tabindex="-1" class="header1_SR">
 	       <div class="titleOfHeader1_SR">
-	                로그인 및 보안
+	       	<label style="margin-top: 61px;">
+	       		 로그인 및 보안
+	       	</label>
+	               
 	       </div>
 	      </h1>
 	     
@@ -349,6 +352,7 @@ div[Attributes Style] {
 	    		<div class="headerOfContent_SR">
 	    			<h2 class="header2OfContent_SR">
 		    			<div class="header3OfContent_SR">
+		    			
 		    			로그인    			
 		    			</div>    			
 	    			</h2>
