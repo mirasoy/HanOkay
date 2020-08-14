@@ -47,13 +47,13 @@ public class AcmController {
 	private CodeService codeService;
 	
 	//검색 결과 
-	@GetMapping({ "/list", "/result" })
-	public void list(Criteria cri, String acmNum, Model model , HttpSession session) {
+	@GetMapping("/list")
+	public String list(Criteria cri, String acmNum, Model model , HttpSession session) {
 
 		try {
 			// 날짜 유효성 검사
 			if (!checkDate(cri)) {
-				return;
+				return "/error/error";
 			}
 			log.info("cri1:" + cri);
 			//지역 문자열핸들링&타입셋팅
@@ -72,7 +72,7 @@ public class AcmController {
 			model.addAttribute("acmNum", acmNum);
 			model.addAttribute("pageMaker", new PageDTO(cri, total));
 			model.addAttribute("drawValue", drawValue(service.getList(cri), session));
-			
+			return "/acm/list";
 			//log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + total);
 			
 			//log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + drawValue(service.getList(cri), session).size());
@@ -80,7 +80,44 @@ public class AcmController {
 		} catch (Exception e) {
 			System.out.println("오류가 발생했습니다 : "+e.getMessage());
 			log.info("error@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			return;
+			return "/error/error";
+		}
+	}
+	
+	@GetMapping("/result")
+	public String result(Criteria cri, String acmNum, Model model , HttpSession session) {
+
+		try {
+			// 날짜 유효성 검사
+			if (!checkDate(cri)) {
+				return "/error/error";
+			}
+			log.info("cri1:" + cri);
+			//지역 문자열핸들링&타입셋팅
+			chkLocation(cri);
+			log.info("cri2:" + cri);
+			model.addAttribute("acmCode", codeService.getAcmCode());
+			
+			model.addAttribute("list", service.getList(cri));
+
+			//log.info("여기1");
+			int total = service.getTotal(cri);
+			log.info("total: " + total);
+			if(total ==0 ) {
+				model.addAttribute("Nolist", service.getSeoulList());
+			}
+			model.addAttribute("acmNum", acmNum);
+			model.addAttribute("pageMaker", new PageDTO(cri, total));
+			model.addAttribute("drawValue", drawValue(service.getList(cri), session));
+			return "/acm/result";
+			//log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + total);
+			
+			//log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■total: " + drawValue(service.getList(cri), session).size());
+			
+		} catch (Exception e) {
+			System.out.println("오류가 발생했습니다 : "+e.getMessage());
+			log.info("error@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			return "/error/error";
 		}
 	}
 	

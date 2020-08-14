@@ -80,9 +80,9 @@ public class UserController {
 	//프로필 수정하는 메서드
 	@ResponseBody
 	@PostMapping("/account/myAccount/updateMyProfile")
-	public Map<String, Object> updateProfile(UserProfileVO prof) {
+	public Map<String, Object> updateProfile(UserProfileVO prof, HttpSession session) {
 		log.info("prof::::"+ prof);
-		service.updateProfile(prof);
+		service.updateProfile(prof, session);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		

@@ -419,7 +419,7 @@ display: block;
 														</div>
 														
 														<div class="t-datepicker">													
-															 <div class="t-check-in"></div>														
+															 <div id="cin" class="t-check-in" ></div>														
 															 <div class="t-check-out"></div>														 
 														</div>
 													</div>
@@ -823,7 +823,7 @@ display: block;
 				</div>
 				<div class="slideshow-description bg-primary1">
 					<h2 class="">[낙안제]정원이 아름다운 숙소 </h2>
-					<p>[한옥 정원이 너무 아름다웠고, 숙소 내부도 안락하고 따뜻하니 좋았습니다.
+					<p>한옥 정원이 너무 아름다웠고, 숙소 내부도 안락하고 따뜻하니 좋았습니다.
 이불보도 굉장히 두꺼워 푹신하고 편하게 잠들 수 있었어요!
 직원분들도 친절하고 깨끗해서 재방문하고싶습니다.</p>
 					<a href="http://localhost/review/get?pstNum=RV8" class="text-uppercase btn btn-white btn-white-primary">Continue
@@ -862,10 +862,13 @@ function showSlides() {
 
 
 <script>
-	$(document).ready(function() {
-		$("#e1").select2();
-	});
-
+$("#pac-input").keypress(function(e){
+	if(event.keyCode == '13'){
+		e.preventDefault();
+		$('.t-date-check-in').trigger('click');
+	}
+	
+});
 	// 날짜 선택
 	var today = new Date();
 	$("#out").datepicker({

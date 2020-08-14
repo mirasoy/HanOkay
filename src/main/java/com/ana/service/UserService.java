@@ -77,7 +77,7 @@ public interface UserService {
 	public boolean registerThis(UserVO user);
 	
 	//프로필 정보를 업데이트 하는 메서드
-	public boolean updateProfile(UserProfileVO profile);
+	public boolean updateProfile(UserProfileVO profile, HttpSession session);
 	
 	@Transactional
 	public boolean matchAuthCodeAndGiveSession(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session);
