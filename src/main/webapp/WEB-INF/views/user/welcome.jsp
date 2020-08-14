@@ -7,13 +7,11 @@ pageEncoding="UTF-8"%>
 *, ::after, ::before {
     box-sizing: border-box;
 }
-
 @media (min-width: 992px){
 .container {
     max-width: 960px;
 	}
 }
-
 .container_SR {
     margin-left: auto !important;
     margin-right: auto !important;
@@ -21,12 +19,10 @@ pageEncoding="UTF-8"%>
     padding-right: 24px !important;
     padding-left: 24px !important;
 }
-
 .out_SR {
     margin-left: -8px !important;
     margin-right: -8px !important;
 }
-
 .header1_SR {
     color: inherit !important;
     font-size: 1em !important;
@@ -44,14 +40,12 @@ pageEncoding="UTF-8"%>
     color: rgb(72, 72, 72) !important;
     margin: 0px !important;
 }
-
 .outerbox_SR {
     padding-left: 8px !important;
     padding-right: 8px !important;
     min-height: 1px !important;
     position: relative !important;
 }
-
 .container3_SR {
     padding-left: 24px !important;
     padding-right: 24px !important;
@@ -62,11 +56,9 @@ pageEncoding="UTF-8"%>
     height: 480px;
     width: 446px;
 }
-
 #goBackIndex:hover{
 	cursor:pointer;
 }
-
 </style>
 <%@ include file="../includes/header2.jspf"%>
 <%@ include file="../includes/header3.jspf"%>
@@ -77,10 +69,10 @@ pageEncoding="UTF-8"%>
 		<div class="out_SR">
 		
 		<section style="display: block;">		
-		<div style="margin-top: 64px; margin-bottom: 56px; margin-left: 16px;">
+		<div style="position: relative; margin-top: 64px; margin-bottom: 56px; margin-left: 16px;">
 			<h1 tabindex="-1" class="header1_SR">
 				<div class="header2_SR">
-				<label>	<%=userLastName %><%=userFstName %>님 환영합니다. </label>
+				<label style="margin-top:69px;"><%=userLastName %><%=userFstName %>님 환영합니다. </label>
 				</div>
 			</h1>
 		</div>
