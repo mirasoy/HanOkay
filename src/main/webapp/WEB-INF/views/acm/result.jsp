@@ -13,6 +13,15 @@
 
 <style>
 
+.wishModals{
+    width: 100% !important;
+}
+
+#modalCloseBtn{
+margin-right: 127px;
+}
+
+
 input:invalid {
   border-color: red;
 }
@@ -931,7 +940,7 @@ background-color: #ccc;
 							<label>#숙소번호</label> <input class="form-control acmNum"  name='acmNum' readonly="readonly" > 					
  							<%-- <label>#숙소번호</label> <input class="form-control" name='acmNum' value='<c:out value="${acmNum}" />' readonly="readonly" >  --%>					
 						</div>
-						<div class="form-group info-group">
+						<div class="form-group info-group wishModals">
 							<label>목록</label> 
 							<!-- <input class="form-control" name='listTitle' value='' > -->
 							<select class="form-control" name='listTitle' value=''>
@@ -945,7 +954,7 @@ background-color: #ccc;
 								
 
 						</div>
-						<div class="form-group info-group">
+						<div class="form-group info-group wishModals">
 							<label>메모</label>
 								 <input class="form-control" name='listContent' value=''/>
 						</div>
@@ -1268,11 +1277,11 @@ if(maxPriceRange>500000){
 	      values: [ ${pageMaker.cri.minPrice}, maxPriceRange ],
 	      slide: function( event, ui ) {
 	    	  
-	        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+	        $( "#amount" ).val( "￦" + ui.values[ 0 ] + " - ￦" + ui.values[ 1 ] );
 	        $('#min').val(ui.values[ 0 ]);
 	    	$('#max').val(ui.values[ 1 ]);
 	    	if($('#max').val()==500000){
-	    		  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"+");
+	    		  $( "#amount" ).val( "￦" + ui.values[ 0 ] + " - ￦" + ui.values[ 1 ] +"+");
 	    	}
 	      }
 	    });
@@ -1280,11 +1289,11 @@ if(maxPriceRange>500000){
 	$('#max').val($( "#slider-range" ).slider( "values", 1));
 	    // 初期表示
 	if($('#max').val()==500000){
-		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0) +
-                " - $" + $( "#slider-range" ).slider( "values", 1 ) +"+");
+		$( "#amount" ).val( "￦" + $( "#slider-range" ).slider( "values", 0) +
+                " - ￦" + $( "#slider-range" ).slider( "values", 1 ) +"+");
 	  }else{
-	    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0) +
-	                       " - $" + $( "#slider-range" ).slider( "values", 1 ) );	
+	    $( "#amount" ).val( "￦" + $( "#slider-range" ).slider( "values", 0) +
+	                       " - ￦" + $( "#slider-range" ).slider( "values", 1 ) );	
 	  }
 	    $('#slider-range').on('mouseup', function(){ // 이벤트 
 
