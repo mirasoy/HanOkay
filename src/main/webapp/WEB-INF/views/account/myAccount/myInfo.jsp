@@ -33,7 +33,7 @@ form {
     display: table !important;
 }
 
-.header1_SR {
+._14i3z6h {
     color: inherit !important;
     font-size: 1em !important;
     font-weight: inherit !important;
@@ -42,23 +42,22 @@ form {
     padding: 0px !important;
 }
 
-.header2_SR {
-    overflow-wrap: break-word !important;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-      "Helvetica Neue", sans-serif !important;
+._1yrl4d7p {
+    margin: 0px !important;
+    word-wrap: break-word !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
     font-size: 32px !important;
     font-weight: 800 !important;
     line-height: 1.125em !important;
-    color: rgb(72, 72, 72) !important;
-    margin-left: 4px !important;
+    color: #484848 !important;
 }
 
-.content_SR {
+._2h22gn {
     margin-left: -8px !important;
     margin-right: -8px !important;
 }
 
-.content_SR::before {
+._2h22gn::before {
     content: " " !important;
     display: table !important;
 }
@@ -77,7 +76,7 @@ form {
     position: relative !important;
 }
 
-.oneInfo_SR {
+._s50zru {
     border-bottom: 1px solid rgb(235, 235, 235) !important;
 }
 
@@ -93,26 +92,10 @@ form {
     vertical-align: top !important;
 }
 
-._1p3joamp {
-    overflow-wrap: break-word !important;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-      "Helvetica Neue", sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    line-height: 1.375em !important;
-    color: rgb(72, 72, 72) !important;
-    margin: 0px !important;
-}
-
-.realInfo_SR {
-    overflow-wrap: break-word !important;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-      "Helvetica Neue", sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    line-height: 1.375em !important;
-    color: rgb(72, 72, 72) !important;
-    margin: 0px !important;
+._edoeiqi {
+    border-bottom: 0px !important;
+    padding-top: 16px !important;
+    padding-bottom: 0px !important;
 }
 
 ._1rtgmd8y {
@@ -128,6 +111,21 @@ form {
     font-weight: 600 !important;
     line-height: 1.375em !important;
     color: #484848 !important;
+}
+
+._uhll0py {
+    font-size: var(--font-button-font-size, 16px) !important;
+    line-height: var(--font-button-line-height, 24px) !important;
+    letter-spacing: var(--font-button-letter-spacing, normal) !important;
+    font-family: var(--font-button-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
+    text-transform: var(--font-button-text-transform, undefined) !important;
+    padding-top: var(--spacing-button-vertical, 10px) !important;
+    padding-bottom: var(--spacing-button-vertical, 10px) !important;
+    font-weight: var(--font-bold-font-weight, 800) !important;
+    padding-left: var(--spacing-button-horizontal, 22px) !important;
+    padding-right: var(--spacing-button-horizontal, 22px) !important;
+    box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+    color: #008489 !important;
 }
 ._1asnseo {
     --color-text-muted: #EBEBEB !important;
@@ -152,20 +150,6 @@ form {
 
 .btn_box3 {
     --color-text-muted: #ebebeb !important;
-}
-
-.btn_modify {
-    color: #008489 !important;
-    font-family: var(
-      --font-font_family,
-      Circular,
-      -apple-system,
-      BlinkMacSystemFont,
-      Roboto,
-      Helvetica Neue,
-      sans-serif
-    ) !important;
-    text-decoration: var(--font-link-text-decoration, none) !important;
 }
 
 ._b0ybw8s {
@@ -256,6 +240,12 @@ form {
     width: 100% !important;
 }
 
+._kf28kaj {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    border-bottom: 0px !important;
+}
+
 ._rin72m {
     cursor: pointer !important;
     display: block !important;
@@ -303,6 +293,10 @@ form {
     ) !important;
     background-color: #ffffff !important;
     margin-bottom: var(--unit, 8px) !important;
+}
+._1iti0ju {
+    display: inline-block !important;
+    vertical-align: middle !important;
 }
 
 ._178faes {
@@ -448,6 +442,11 @@ option {
     color: var(--color-buttons-default-text, #ffffff) !important;
 }
 
+span[Attributes Style] {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
 ._ftj2sg4 {
     font-size: var(--font-button-font-size, 16px) !important;
     line-height: var(--font-button-line-height, 24px) !important;
@@ -465,38 +464,38 @@ option {
 <div class="container">
 <section>
 	<!-- 타이틀 -->
-  <div class="out_SR"> <!-- _2h22gn -->
+  <div style="margin-top:40px;margin-bottom:40px"> <!-- _2h22gn -->
       <div style="
           position: relative;
           margin-top: 64px;
           margin-bottom: 56px;
           margin-left: 16px;
         ">
-        <h1 tabindex="-1" class="header1_SR">
-          <div class="header2_SR">개인정보</div>
+        <h1 tabindex="-1" class="_14i3z6h">
+          <div class="_1yrl4d7p">개인정보</div>
         </h1>
       </div>
   </div>
 
 <!-- 타이틀 아래 내용물 -->
-  <div class="content_SR"> <!-- _2h22gn -->
-    <div class="contentOfInfo_SR"> <!-- _169grxv2 -->
+  <div class="_2h22gn"> 
+    <div class="_169grxv2"> 
     
       <!-- 하나의 정보칸 -->
-      <div class="oneInfo_SR"> <!-- _s50zru -->
+      <div class="_s50zru"> <!-- _s50zru -->
         <div style="margin-top: 24px;">
           <div class="_hgs47m">
             <div class="_n5lh69r">
               <div class="_1p3joamp">실명</div>
-              <div style="margin-top: 8px; margin-bottom: 24px;">
-                  <div class="_czm8crp">  <!-- 세션에서 이름 --></div>
+              <div id="showName" style="margin-top: 8px; margin-bottom: 24px;" >
+                  <div class="_czm8crp" id="userName">세린</div>
               </div>
             </div>
 
             <div class="_1rtgmd8y">
               <div class="_1p3joamp">
                 <div class="_1asnseo">
-                  <button type="button" class="_b0ybw8s" aria-busy="false" onclick='showAndHideInputSection(this);'>
+                  <button type="button" class="_b0ybw8s" aria-busy="false" onclick="changeTextAndShowOrHide(this,0);">
                     수정
                   </button>
                 </div>
@@ -504,12 +503,12 @@ option {
             </div>
             
           </div>
-          
+         
           <!-- 여기에 붙어야해 -->
-                    <!--수정 눌렸을 때 새로 생성되어야함-->
+              <!--수정 눌렸을 때 새로 생성되어야함-->
                   
                   
-                  <div id="showAndHide" style="display:none;">
+                  <div id="inputNameDiv" style="display:none;">
                   <div
                     style="margin-top: 8px; margin-bottom: 24px;"
                     id="inputBeforeForm_SR"
@@ -601,26 +600,27 @@ option {
                   <!--수정 눌렀을 때 끝-->
           
         </div>
-      </div> <!-- _s50zru 끝-->
-
+      </div> 
+	</div> 
+	
       <!-- 하나의 정보칸 -->
-      <div class="oneInfo_SR"> <!-- _s50zru -->
+      <div class="_s50zru">
         <div style="margin-top: 24px;">
-          <div class="_hgs47m"> <!-- _hgs47m -->
-            <div class="_n5lh69r"> <!-- _n5lh69r -->
-              <div class="_1p3joamp">생년월일</div> <!-- _1p3joamp -->
+          <div class="_hgs47m"> 
+            <div class="_n5lh69r"> 
+              <div class="_1p3joamp">생년월일</div> 
               
               <div style="margin-top: 8px; margin-bottom: 24px;">
-                <div class="realInfo_SR"> <!-- _czm8crp -->
+                <div class="_czm8crp"> 
                 	<!-- 생년월일 쓰기 -->
                 </div>
               </div>
             </div>
 
-            <div class="btn_box"> <!-- _1rtgmd8y -->
-              <div class="btn_box2"> <!-- _1p3joamp -->
-                <div class="btn_box3"> <!-- _1asnseo -->
-                  <button type="button" class="btn_modify" aria-busy="false" onclick="showAndHideBirthdaySelection(this);">
+            <div class="_1rtgmd8y"> <!-- _1rtgmd8y -->
+              <div class="_1p3joamp"> <!-- _1p3joamp -->
+                <div class="_1asnseo"> <!-- _1asnseo -->
+                  <button type="button" class="_b0ybw8s" aria-busy="false"onclick="changeTextAndShowOrHide(this,1);">
                     수정
                   </button> <!-- _b0ybw8s -->
                 </div>
@@ -648,12 +648,13 @@ option {
 	                  	 						생년월일
 	                  	 						</label>
 	                  	 						<div class="_wlf6154">
-	                  	 							<div class="._y9ev9r ">
+	                  	 							<div class="_y9ev9r ">
 	                  	 								<select class="_bwyiq2l" id ="userBirthMonth" 
-	                  	 								name="userBirthdayMonth">
+	                  	 									name="userBirthdayMonth">
 	                  	 									<option>선택하세요</option>
 	                  	 								</select>
 	                  	 							</div>
+	                  	 							
 	                  	 							<span class="_1idvclr">
 	                  	 								<svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false" style="height: 16px; width: 16px; display: block; fill: rgb(72, 72, 72);">
 	                  	 								<path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fill-rule="evenodd">
@@ -661,9 +662,9 @@ option {
 	                  	 								</svg>
 	                  	 							</span>
 	                  	 							
-	                  	 						</div>
-                  	 						</div>
-                  	 					</div>
+	                  	 						</div> <!-- _wlf6154  -->
+                  	 						</div> <!-- _9hxttoo  -->
+                  	 					</div> <!--_1q8ezn3a  -->
                   	 					
                   	 					<div class="_1hvy1uuv">
                   	 						<div class="_9hxttoo">
@@ -683,7 +684,7 @@ option {
                   	 								</span>
                   	 							</div>
                   	 						</div>
-                  	 					</div>
+                  	 					</div> <!-- _1idvclr -->
                   	 					
                   	 					
                   	 					<div class="_170x3337">
@@ -697,6 +698,14 @@ option {
                   	 										<option>선택하세요</option>
                   	 									</select>
                   	 								</div>
+                  	 								
+                  	 								<span class="_1idvclr">
+                  	 									<svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false" style="height: 16px; width: 16px; display: block; fill: rgb(72, 72, 72);">
+                  	 										<path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fill-rule="evenodd">
+                  	 										</path>
+                  	 									</svg>
+                  	 								</span>
+                  	 								
                   	 							</div>
                   	 						</div>
                   	 					</div>
@@ -710,14 +719,14 @@ option {
                   	 
                   	 <div class="airlock-inline-container"></div>
                   	 <button type="button" class="_kt3i5a4" aira-busy="false">
-                  	 	<span class="._ftj2sg4 ">저장</span>
+                  	 	<span class="_ftj2sg4 ">저장</span>
                   	 </button>                 	
                   	</form>
                   </div>
                   	<!-- 생기는거 끝 -->
-                  	
-                  </div>        
-              
+                 
+                 	
+           </div>        
         </div> <!-- _s50zru -->
     
       
@@ -725,72 +734,212 @@ option {
       
       
       <!-- 하나의 정보칸 -->
-      <div class="oneInfo_SR" > <!-- _s50zru -->
+      <div class="_s50zru" > <!-- _s50zru -->
         <div style="margin-top: 24px;">
           <div class="_hgs47m">
-            <div class="tableCell_SR">
-              <div class="titleOfOneInfo_SR">이메일 주소</div>
+            <div class="_n5lh69r">
+              <div class="_1p3joamp">이메일 주소</div>
               <div style="margin-top: 8px; margin-bottom: 24px;">
-                <div class="realInfo_SR">
-                 	 <!-- 여기에 세션의 이메일 들어가게 -->
-                    <!--  <form>
-                  <input type="text">
-                    </form> -->
+                <div class="_czm8crp">
+                 	 serin@nag.com
                 </div>
               </div>
             </div>
 
-            <div class="btn_box">
-              <div class="btn_box2">
-                <div class="btn_box3">
-                  <button type="button" class="btn_modify" aria-busy="false">
+            <div class="_1rtgmd8y">
+              <div class="_1p3joamp">
+                <div class="_1asnseo">
+                  <button type="button" class="_b0ybw8s" aria-busy="false" onclick="changeTextAndShowOrHide(this,2);">
                     수정
                   </button>
                 </div>
               </div>
             </div>
-          </div>
+            
+            
+            
+            
+          </div> <!-- -_hgs47m -->
+          
+          
+          <!-- 새로 생기는 이메일 인풋 -->
+          <div id="emailInput" style="margin-top: 8px; margin-bottom: 24px;">
+          	<form>
+          		<div style="margin-top: 8px; margin-bottom: 24px;">
+          			<div class="_czm8crp">
+          				언제든지 확인하실 수 있는 주소를 사용하세요
+          			</div>
+          		</div>
+          		
+          		<div style="margin-bottom: 24px;">
+          			<div class="_9hxttoo">
+          				<label class="_krjbj">
+          					이메일
+          				</label>
+          				
+          				<div>
+          					<div class="_1wcr140x">
+          					 <div class="_178faes">
+          					 	<input class="_14fdu48d" id="userEmail" name="userEmail" type="text" />
+          					 </div> <!-- _178faes -->
+          					</div> <!-- _1wcr140x -->
+          				</div>
+          				
+          			</div>
+          		</div>
+          		 
+          		 
+          		 <div id="airlock-inline-container"></div>
+          		 
+          		 <button type="button" class="_kt3i5a4" aria-busy="false">
+          		 	<span class="_ftj2sg4">
+          		 		저장
+          		 	</span>	 
+          		 </button>
+          	</form>
+          </div> <!-- 새로 생기는 이메일 인풋  끝-->
+          
+          
         </div>
       </div> <!-- _s50zru -->
       
       
       <!--하나의 정보칸  -->
-      <div class="oneInfo_SR"> <!-- _s50zru -->
+      <div class="_s50zru"> <!-- _s50zru -->
         <div style="margin-top: 24px;">
           <div class="_hgs47m">
-            <div class="tableCell_SR">
-              <div class="titleOfOneInfo_SR">연락처</div>
+            <div class="_n5lh69r">
+              <div class="_1p3joamp">연락처</div>
               <div style="margin-top: 8px; margin-bottom: 24px;">
-                <div class="realInfo_SR">
-                 	<!-- 여기에 유저의 연락처 들어가게  -->
-                   <!--  <form >
-                    	<input type="text">
-                    </form> -->
-                </div>
+                <div style="margin-top:-16px">
+                
+                <div class="_edoeiqi">
+                 <div class="_12d0llg5">
+                  <div class="_qo24lwc">
+                   <span class="_czm8crp">
+                   	<span dir="ltr">
+                   	<!-- 연락처~~ -->
+                   	</span>
+                   </span>
+                  </div> <!-- _qo24lwc -->
+               
+                 </div> <!-- _12d0llg5 -->
+                </div> <!-- _edoeiqi -->
+                
               </div>
-            </div>
-            <div class="btn_box">
-              <div class="btn_box2">
-                <div class="btn_box3">
-                  <button type="button" class="btn_modify" aria-busy="false">
+              </div>
+              
+            </div> <!-- _n5lh69r -->
+            
+            
+            <div class="_1rtgmd8y">
+              <div class="_1p3joamp">
+                <div class="_1asnseo">
+                  <button type="button" class="_b0ybw8s" aria-busy="false">
                     수정
                   </button>
                 </div>
               </div>
             </div>
+            
+          </div> <!-- _hgs47m -->
+          
+          
+          
+          <!-- 사라지고 생기고 -->
+          <div style="margin-top: 8px; margin-bottom: 24px;">
+          	<form>
+          		<div style="margin-bottom: 8px;">
+          			<div class="_czm8crp">
+          			 알림, 미리 알림 및 로그인에 도움이 됩니다.
+          			</div>
+          		</div>
+          		
+          		<div class="_kf28kaj">
+          			<div class="_12d0llg5">
+          				<div class="_qo24lwc">
+          					<span class="_czm8crp">
+          						<span dir="ltr">
+          						<!-- 여기 연락처~! -->
+          						</span>
+          					</span>
+          				</div> <!-- _qo24lwc -->
+          			
+          			</div> <!-- _12d0llg5 -->
+          		
+          		</div> <!--_kf28kaj -->
+          		
+          		
+          		<div>
+          			<div style="margin-top: 24px; margin-bottom: 24px;">
+          				<div class="_1p3joamp">
+          					전화번호를 새로 입력해주세요.
+          				</div>
+          			</div>
+          			<div style="margin-top: 16px; margin-bottom: 16px;">
+          				<div class="_9hxttoo">
+          					<label class="_krjbj">
+          					Phone Country Select
+          					</label>
+          					<div class="_wlf6154">
+          						<div class="_y9ev9r">
+          							<select id="phone-country-select" class="_bwyiq2l">
+          							
+          							</select>
+          						</div>
+          					</div>
+          				</div>
+          			</div>
+          			<div style="margin-top: 16px; margin-bottom: 16px;">
+          				<div class="_9hxttoo">
+          					<label class="_krjbj">
+          						Phone Number Input
+          					</label>
+          					<div dir="ltr">
+          						<div class="_1wcr140x">
+          							<div class="_ncmdki">
+          								<div class="_55316h" style="visibility: visible; height: 46px;">
+          									<div class="_nncr1bm">
+          										<div class="_ni9axhe">
+          											<div class="_1y2zxv">
+          											 <div class="_czm8crp">
+          											 <span class="_10k87om">
+          											 	<!-- 국가번호 -->
+          											 </span>
+          											 </div>
+          											</div>
+          										</div>
+          									</div>
+          								</div>
+          							</div>
+          						</div>
+          					</div>
+          				</div>
+          			</div>
+          			
+          		</div>
+          		
+          		<div id="airlock-inline-container">
+          		</div>
+          		
+          		
+          		
+          	</form>          
           </div>
+          <!-- 사라지고 생기고 끝 -->
+          
+          
         </div>
       </div>  <!-- _s50zru -->
       
       
-      	</div> <!-- contentOfInfo_SR -->
-      </div>
+      	
+      </div> <!-- _169grxv2 -->
+      </div> <!-- _2h22gn -->
    </section>
 </div>
 
 <script>
-
-
 
    //DOM이 만들어지면
    $(document).ready(function () {
@@ -871,43 +1020,50 @@ option {
 
 
   	function showAndHideInputSection(btnVal){
-  	  let nameFromS=document.getElementsByClassName("nameFromSession")[0];
-
+  	  
   	if(btnVal.innerText === '수정'){
-  		$("#showAndHide").show();
-  	  	nameFromS.innerHTML="세린";
+  		$("#inputNameDiv").show();
+  		$("#showName").hide();
   		btnVal.innerText='취소';
   	} else{
-  		$("#showAndHide").hide();
-    	nameFromS.innerHTML='세린';
+  		$("#inputNameDiv").hide();
+  		$("#showName").show();
   		btnVal.innerText='수정';
   	}
   }
   	
-  	function showAndHideBirthdaySelection(btnVal){
-  		
-  		if(btnVal.innerText === '수정'){
-  			$("#showAndHideBday").show();
-  			btnVal.innerText='취소';
-  		} 
-  		else
-  		{
-  			$("#showAndHideBday").hide();
-  			btnVal.innerText='수정';
-  		}
-  	}
-  	
-  	function submitChangedName(){
-  		let changedLastName=$("#last_name").val();
-  		let changedFstName=$("#first_name").val();
-  		
-  		
-  	}
-  	
-  	
-
-
-
+ 
+	function changeTextAndShowOrHide(btn, btnValue){
+		console.log(btn);
+	   	let thisB= btn;
+	   	
+	    if(btn.innerText=="수정"){	  
+	  	btn.innerText='취소';
+	    } 
+	    
+	    else if(btn.innerHTML=="취소"){ 
+	    btn.innerText='수정';
+	    }
+	
+		switch(btnValue){
+		
+		case 0:
+			alert("you clicked 0");
+			break;
+		
+		case 1:
+			
+			break;
+		
+		case 2:
+		
+			break;
+			
+		case 3:
+			
+			break;
+		}
+}
 </script>
 
 <%@include file="../../includes/footer.jsp" %>
