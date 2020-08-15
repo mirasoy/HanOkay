@@ -412,7 +412,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input type="text" class="_14fdu48d" id="oldPassword" name="oldPassword">
+		    										<input type="password" class="_14fdu48d" id="oldPassword" name="oldPassword">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -429,7 +429,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input type="text" class="_14fdu48d" id="userPassword" name="userPassword">
+		    										<input type="password" class="_14fdu48d" id="userPassword" name="userPassword">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -446,7 +446,7 @@ div[Attributes Style] {
 		    							<div dir="ltr">
 		    								<div class="_1wcr140x ">
 		    									<div class="_178faes">
-		    										<input type="text" class="_14fdu48d" id="userPasswordConfirm" name="userPasswordConfirm">
+		    										<input type="password" class="_14fdu48d" id="userPasswordConfirm" name="userPasswordConfirm">
 		    									</div>
 		    								</div>
 		    							</div>
