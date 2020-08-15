@@ -86,9 +86,6 @@ public class UserController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		
-		
-		
 		map.put("msg", "success");
 	
 		return map;
