@@ -197,15 +197,13 @@ function onMessage(resultArr){  //변수 안에 function자체를 넣음.
 		
 	if(obj.unumFrom==$('#callUsernum').val()){
 			str += "<div class='chatContainer darker'>"
-			str += "<img src='http://www.jisadong.com/data/file/fun/3034803641_BYV8GFmL_2391224.jpeg'  class ='right' style='width:100%;'>"
+			str += "<img src='/resources/img/you.png'  class ='right' style='width:100%;'>"
 			str += "<p id='"+obj.msgNum+"'>"+"</p>"
-			str += "<span class='time-right'>"+month+"/"+day+" "+hour+":"+minute+"</span></div>"
 	
 	}else{
 			str += "<div class='chatContainer '>"
 			str += "<img src='http://www.jisadong.com/data/file/fun/3034803641_BYV8GFmL_2391224.jpeg' class  style='width:100%;'>"
 			str += "<p id='"+obj.msgNum+"'>"+"</p>"
-			str += "<span class='time-right'>"+month+"/"+day+" "+hour+":"+minute+"</span></div>"
 	}
 	$(".chatList").append(str);
 	
