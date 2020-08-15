@@ -52,7 +52,7 @@ pageEncoding="UTF-8"%>
     margin: 5px auto!important;
     border: 1px solid #dadfe6;
     border-radius: 16px;
-    background-color: #ffffff !important;
+    background-color: rgba(256,256,256,0.5);
     height: 480px;
     width: 446px;
 }
@@ -63,8 +63,9 @@ pageEncoding="UTF-8"%>
 <%@ include file="../includes/header2.jspf"%>
 <%@ include file="../includes/header3.jspf"%>
 
-<main style="display: block;">
-	<div class="container">
+<div style="display: block; background-image: url('../../resources/img/backGroundOfWelcome.jpg'); padding-bottom: 14.1%;
+">
+	<div class="container" >
 		<div class="container_SR">
 		<div class="out_SR">
 		
@@ -106,7 +107,7 @@ pageEncoding="UTF-8"%>
 		</div>
 		</div>
 	</div>
-</main>			
+</div>			
 
 
 <%@include file="../includes/footer.jsp"%>
