@@ -35,7 +35,6 @@ public class MsgServiceImpl implements MsgService{
 	@Override
 	public int marksRead(String MsgNum) {
 		
-		System.out.println("읽음처리도미"+MsgNum);
 		// TODO Auto-generated method stub
 		return mapper.marksRead(MsgNum);
 	}

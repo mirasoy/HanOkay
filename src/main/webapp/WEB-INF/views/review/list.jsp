@@ -16,6 +16,7 @@
   padding: 0;
   -webkit-transition: 0.3s;
   transition: 0.3s;
+      background-color: white;
 }
 
 .acmname:hover {
