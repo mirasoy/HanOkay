@@ -19,7 +19,7 @@
 					<a href="/hosting/stats/statsChart"><i class="fa fa-camera fa-fw"></i> 한눈에 보기</a>
 				</li>
 				<li>
-					<a href="/hosting/stats/statsRank"><i class="fa fa-arrow-circle-up"></i> 내숙소 랭킹</a>
+					<a href="/hosting/stats/statsRank"><i class="fa fa-arrow-circle-up"></i> 숙소 랭킹</a>
 				</li>
 				<li>
 					<a href="/hosting/stats/stats"><i class="fa fa-krw fa-fw"></i> 매출 </a>
@@ -241,7 +241,7 @@ $(function(){
 	      });
 	    }
 	    function drawPieSegments (animationDecimal) {
-	      var startRadius = -PI / 2,//-90 degree
+	      var startRadius = -PI / 2, //-90 degree
 	          rotateAnimation = 1;
 	      if (settings.animation && settings.animateRotate) rotateAnimation = animationDecimal;//count up between0~1
 

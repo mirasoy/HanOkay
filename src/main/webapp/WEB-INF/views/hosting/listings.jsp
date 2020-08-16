@@ -100,7 +100,7 @@
 				</a>
 				<a class="card-description">
 					<h3><c:out value="${pendingacm.acmName}" /></h3>
-					<p><span id="<c:out value='${pendingacm.acmType}'/><c:out value='${pendingacm.acmNum}'/>"></span></p>
+					<p><span style="color:red;"> <c:out value='${pendingacm.acmStatus}'/></span></p>
 				</a>
 			</li>
 		 </c:forEach>
@@ -113,7 +113,7 @@
 				</a>
 				<a class="card-description">
 					<h3>새객실 추가하기</h3>
-					<p></p>
+					
 				</a>
 			</li>
 		
@@ -125,7 +125,7 @@
 				</a>
 				<a class="card-description">
 					<h3><c:out value="${activeacm.acmName}" /></h3>
-					<p><span id="<c:out value='${activeacm.acmType}'/><c:out value='${activeacm.acmNum}'/>"></span></p>
+					<p><p><span style="color:red;"> <c:out value='${activeacm.acmStatus}'/></span></p></p>
 				</a>
 			</li>
 		 </c:forEach>
@@ -144,7 +144,7 @@
 				</a>
 				<a class="card-description">
 					<h3><c:out value="${inactiveacm.acmName}" /></h3>
-					<p><span id="<c:out value='${inactiveacm.acmType}'/><c:out value='${inactiveacm.acmNum}'/>"></span></p>
+					<p><span style="color:red;"> <c:out value='${inactiveacm.acmStatus}'/></span></p>
 				</a>
 			</li>
 		 </c:forEach>

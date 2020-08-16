@@ -52,7 +52,7 @@ public class HostController {
 	@Autowired
 	private AcmRegService aservice;//숙소등록관련서비스
 	@Autowired
-	private UserService uservice;//호스트 사업등록증관련
+	private UserService uservice;//호스트 사업등록증관련A
 	@Autowired
 	private CodeService codeService;
 	@Autowired
@@ -258,7 +258,7 @@ public class HostController {
 			List<AcmVO> pendinglist= aservice.getListAcms(ownerUserNum,acmActi);
 			model.addAttribute("pendinglist", pendinglist);//
 			size+=pendinglist.size();
-			
+			model.addAttribute("newnotallowed", "true");
 		} else if(userPriv.equals("HOST")){
 			//호스트면
 			acmActi="PENDING";
@@ -267,7 +267,7 @@ public class HostController {
 			
 			if(pendinglist.size()!=0) {//심사대기가 하나라도 있으면 안된다
 				System.out.println("펜딩있음!");
-				model.addAttribute("newnotallowed", true);//
+				model.addAttribute("newnotallowed", "true");//
 			}
 			size+=pendinglist.size();
 			
@@ -288,7 +288,6 @@ public class HostController {
 		model.addAttribute("size", size);//
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());//
-		System.out.println("전체리스트뀨뀨뀨뀨뀨뀨뀨갯수:");
 	}
 	
 

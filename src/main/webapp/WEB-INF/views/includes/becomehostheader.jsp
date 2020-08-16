@@ -98,7 +98,8 @@
 	
 	.panel-heading {
 		color: #333;
-		background-color: #D2AC70 !important;
+		background-color: #0B6DB7 !important;
+		border-radius: 0px !important;
 		border-color: #ddd;
 	}
 	.containerMR{

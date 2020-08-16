@@ -70,10 +70,11 @@
 		}
 		
 		.panel-heading {
-		    color: #333;
-		    background-color: #f7cac2 !important;
-		    border-color: #ddd;
-		 }
+		color: #333;
+		background-color: #0B6DB7 !important;
+		border-radius: 0px !important;
+		border-color: #ddd;
+	}
 			
 			</style>
 </head>
@@ -120,22 +121,7 @@
                         	<c:out value="${userFstname}"/>님 환영합니다!<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="/memmode/profile">
-                                <div>
-                                    	프로필
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/memmode/account">
-                                <div>
-                                    	계정
-                                </div>
-                            </a>
-                        </li>
-                        
-                        <li class="divider"></li>
+                                               
                         <li>
                             <a href="#">
                                 <div>

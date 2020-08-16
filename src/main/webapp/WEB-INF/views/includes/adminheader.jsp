@@ -83,13 +83,13 @@
 					<a href="/admin/adminindex">알림판</a><!-- 예약관리 -->
 				</li>
 				<li class="nav-menu">
-					<a href="/admin/userStat">회원관리</a>
-				</li>
-				<li class="nav-menu">
 					<a href="/admin/adminlistings">숙소관리</a>
 				</li>
 				<li class="nav-menu">
-					<a href="#">매출관리</a>
+					<a href="/admin/userStat">회원관리</a>
+				</li>
+				<li class="nav-menu">
+					<a href="/admin/stats/mapChart">매출관리</a>
 				</li>
 				<li class="nav-menu">
 					<a href="#">메시지</a>
