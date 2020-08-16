@@ -260,7 +260,7 @@ margin-left: -2px;
 			
 			<div class="item3 items">
 				<h1>★ 후기 <c:out value="${reviewCount}" />개 </h1>
-				<button type="button" class="review_edit_button" >내가 작성한 후기</button>
+				<button type="button" class="review_edit_button" onclick="location.href='../../review/list'">내가 작성한 후기</button>
 			</div>											
 		</div>
 	</section>

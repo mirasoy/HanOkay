@@ -63,7 +63,7 @@ pageEncoding="UTF-8"%>
 <%@ include file="../includes/header2.jspf"%>
 <%@ include file="../includes/header3.jspf"%>
 
-<div style="display: block; background-image: url('../../resources/img/backGroundOfWelcome.jpg'); padding-bottom: 14.1%;
+<div style="display: block; background-image: url('../../resources/img/backGroundOfWelcome.jpg'); background-size : 100%; padding-bottom: 24.1%;
 ">
 	<div class="container" >
 		<div class="container_SR">
@@ -96,7 +96,7 @@ pageEncoding="UTF-8"%>
 					</div>
 				
 					<div style="margin-top:106px; margin-left:215px; font-size: 20px;">
-					<a href="../acm/list" style="color:#077bff" id="goBackIndex">한옥 검색하러 가기</a>
+					<a href="../acm/list" style="color:#077bff ; font-weight:700;" id="goBackIndex">한옥 검색하러 가기</a>
 					</div>
 				
 				</div>

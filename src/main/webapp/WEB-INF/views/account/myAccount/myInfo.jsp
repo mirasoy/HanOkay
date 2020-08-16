@@ -10,27 +10,47 @@ header {
     display: block;
 }
 
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -ms-flex: 0 1 auto;
+}
+
 form {
     display: block;
     margin-top: 0em;
 }
-
+button {
+    appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(buttontext, rgb(170, 170, 170));
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(74, 74, 74));
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(195, 195, 195));
+    border-image: initial;
+}
 .container {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-}
-
-.out_SR {
-    margin-left: -8px !important;
-    margin-right: -8px !important;
-}
-
-.out_SR:before {
-    content: " " !important;
-    display: table !important;
 }
 
 ._14i3z6h {
@@ -60,20 +80,6 @@ form {
 ._2h22gn::before {
     content: " " !important;
     display: table !important;
-}
-
-@media (min-width: 744px) {
-    .contentOfInfo_SR {
-      width: 58.3333% !important;
-      float: left !important;
-  }
-}
-
-.contentOfInfo_SR {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-    min-height: 1px !important;
-    position: relative !important;
 }
 
 ._s50zru {
@@ -107,7 +113,7 @@ form {
     margin: 0px !important;
     word-wrap: break-word !important;
     font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-    font-size: 16px !important;
+    font-size: 27px !important;
     font-weight: 600 !important;
     line-height: 1.375em !important;
     color: #484848 !important;
@@ -137,95 +143,24 @@ form {
     color: var(--color-text-muted, #767676) !important;
 }
 
-.btn_box2 {
-    overflow-wrap: break-word !important;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-      "Helvetica Neue", sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    line-height: 1.375em !important;
-    color: rgb(72, 72, 72) !important;
-    margin: 0px !important;
-}
-
-.btn_box3 {
-    --color-text-muted: #ebebeb !important;
-}
-
 ._b0ybw8s {
-    color: var(--color-text-link, #008489) !important;
+	font-size: 22px;
+	appearance: none !important;
+    cursor: pointer !important;
+    user-select: auto !important;
+    text-align: left !important;
+    font: inherit inherit inherit inherit inherit inherit inherit inherit inherit !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border-width: 0px !important;
+    border-style: initial !important;
+    border-color: initial !important;
+    border-image: initial !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    color: var(--color-text-link, #007bff) !important;
     font-family: var(--font-font_family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
     text-decoration: var(--font-link-text-decoration, none) !important;
-}
-
-.saveBtn_SR {
-    border-radius: var(--border-button-border-radius, 4px) !important;
-    font-size: var(--font-button-font-size, 16px) !important;
-    line-height: var(--font-button-line-height, 24px) !important;
-    letter-spacing: var(--font-button-letter-spacing, normal) !important;
-    font-family: var(
-      --font-button-font-family,
-      Circular,
-      -apple-system,
-      BlinkMacSystemFont,
-      Roboto,
-      Helvetica Neue,
-      sans-serif
-    ) !important;
-    text-transform: var(--font-button-text-transform, undefined) !important;
-    padding-top: var(--spacing-button-vertical, 10px) !important;
-    padding-bottom: var(--spacing-button-vertical, 10px) !important;
-    font-weight: var(--font-bold-font-weight, 800) !important;
-    border-width: var(--border-button-border-width, 2px) !important;
-    padding-left: var(--spacing-button-horizontal, 22px) !important;
-    padding-right: var(--spacing-button-horizontal, 22px) !important;
-    box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
-    background: var(--color-buttons-default-color, #008489) !important;
-    border-color: var(--color-buttons-default-border, transparent) !important;
-    color: var(--color-buttons-default-text, #ffffff) !important;
-}
-
-.saveBtn_SR {
-    display: inline-block !important;
-    margin: 0px !important;
-    position: relative !important;
-    text-align: center !important;
-    text-decoration: none !important;
-    -webkit-transition-property: background, border-color, color !important;
-    -moz-transition-property: background, border-color, color !important;
-    transition-property: background, border-color, color !important;
-    -webkit-transition-duration: 0.2s !important;
-    transition-duration: 0.2s !important;
-    -webkit-transition-timing-function: ease-out !important;
-    transition-timing-function: ease-out !important;
-    width: auto !important;
-    cursor: pointer !important;
-    border-radius: 4px !important;
-    font-size: 16px !important;
-    line-height: 24px !important;
-    letter-spacing: normal !important;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-      Helvetica Neue, sans-serif !important;
-    text-transform: undefined !important;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-    font-weight: 800 !important;
-    border-width: 2px !important;
-    border-style: solid !important;
-    padding-left: 22px !important;
-    padding-right: 22px !important;
-    min-width: 71.19349550499538px !important;
-    box-shadow: none !important;
-    background: #008489 !important;
-    border-color: transparent !important;
-    color: #ffffff !important;
-}
-
-@media (min-width: 744px) {
-    .inputName_SR {
-      width: 50% !important;
-      float: left !important;
-  }
 }
 
 ._en5l15m {
@@ -233,11 +168,6 @@ form {
     padding-right: 8px !important;
     min-height: 1px !important;
     position: relative !important;
-}
-
-.inputNameDetail_SR {
-    display: block !important;
-    width: 100% !important;
 }
 
 ._kf28kaj {
@@ -255,17 +185,6 @@ form {
     border-color: initial !important;
     border-image: initial !important;
     padding: 0px !important;
-}
-
-  .divBeforeLabelVal_SR {
-    margin: 0px !important;
-    word-wrap: break-word !important;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-      Helvetica Neue, sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    line-height: 1.375em !important;
-    color: #484848 !important;
 }
 
 ._1wcr140x {
@@ -328,6 +247,12 @@ form {
     background-color: transparent !important;
     padding-left: var(--spacing-form-element-horizontal, 11px) !important;
     padding-right: var(--spacing-form-element-horizontal, 11px) !important;
+    width: 100% !important;
+    border-width: 0px !important;
+    border-style: initial !important;
+    border-color: initial !important;
+    border-image: initial !important;
+    margin: 0px !important;
 }
   
 ._9hxttoo {
@@ -346,11 +271,6 @@ form {
     position: absolute !important;
     white-space: nowrap !important;
     width: 1px !important;
-}
-
-._2h22gn {
-    margin-left: -8px !important;
-    margin-right: -8px !important;
 }
 
 ._1q8ezn3a {
@@ -380,6 +300,14 @@ form {
     padding-bottom: var(--font-form-element-padding-bottom, undefined) !important;
     background-color: #ffffff !important;
     margin-bottom: var(--spacing-form-element-margin-bottom, 8px) !important;
+display: block !important;
+    width: 100% !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: rgb(235, 235, 235) !important;
+    border-radius: 4px !important;
+        position: relative !important;
+    
 }
 
 ._y9ev9r {
@@ -392,13 +320,24 @@ form {
     letter-spacing: var(--font-form-element-letter-spacing, normal) !important;
     font-family: var(--font-form-element-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
     text-transform: var(--font-form-element-text-transform, undefined) !important;
-    color: #484848 !important;
+    color: #007bff !important;
     padding-top: var(--spacing-form-element-vertical, 11px) !important;
     padding-bottom: var(--spacing-form-element-vertical, 11px) !important;
     font-weight: var(--font-light-font-weight, normal) !important;
     background-color: transparent !important;
     padding-left: var(--spacing-form-element-horizontal, 11px) !important;
     padding-right: var(--spacing-select-arrow, 40px) !important;
+        appearance: none !important;
+	    text-indent: 0px !important;
+	    height: unset !important;
+	    display: block !important;
+	    width: 100% !important;
+	    border-width: initial !important;
+	    border-style: none !important;
+	    border-color: initial !important;
+	    border-image: initial !important;
+	    border-radius: 0px !important;
+	    margin: 0px !important;
 }
 
 option {
@@ -412,6 +351,9 @@ option {
 ._1idvclr {
     top: var(--spacing-select-arrow-margin-top, 16px) !important;
     right: var(--spacing-select-arrow-margin-outside, 16px) !important;
+        position: absolute !important;
+    	line-height: 0 !important;
+    	pointer-events: none !important;
 }
 
 ._170x3337 {
@@ -437,9 +379,39 @@ option {
     padding-left: var(--spacing-button-horizontal, 22px) !important;
     padding-right: var(--spacing-button-horizontal, 22px) !important;
     box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
-    background: var(--color-buttons-default-color, #008489) !important;
+    background: var(--color-buttons-default-color, #007bff) !important;
     border-color: var(--color-buttons-default-border, transparent) !important;
     color: var(--color-buttons-default-text, #ffffff) !important;
+}
+
+._kt3i5a4 {
+    display: inline-block !important;
+    position: relative !important;
+    text-align: center !important;
+    transition-property: background, border-color, color !important;
+    transition-duration: 0.2s !important;
+    transition-timing-function: ease-out !important;
+    width: auto !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    letter-spacing: normal !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    font-weight: 800 !important;
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+    min-width: 71.1935px !important;
+    box-shadow: none !important;
+    color: rgb(255, 255, 255) !important;
+    margin: 0px !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    border-width: 2px !important;
+    border-style: solid !important;
+    background: #007bff !important;
+    border-color: transparent !important;
 }
 
 span[Attributes Style] {
@@ -456,6 +428,23 @@ span[Attributes Style] {
     padding-top: var(--font-button-padding-top, undefined) !important;
     padding-bottom: var(--font-button-padding-bottom, undefined) !important;
 }
+._1hvy1uuv {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    min-height: 1px !important;
+    position: relative !important;
+    width: 33.3333% !important;
+    float: left !important;
+}
+._czm8crp {
+    margin: 0px !important;
+    word-wrap: break-word !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    line-height: 1.375em !important;
+    color: #484848 !important;
+}
 </style>
 
 <%@include file="../../includes/header2.jspf"%> 
@@ -466,7 +455,7 @@ span[Attributes Style] {
 	<!-- 타이틀 -->
   <div style="margin-top:40px;margin-bottom:40px"> <!-- _2h22gn -->
       <div style="
-          position: relative;
+          position: absolute;
           margin-top: 64px;
           margin-bottom: 56px;
           margin-left: 16px;
@@ -478,7 +467,7 @@ span[Attributes Style] {
   </div>
 
 <!-- 타이틀 아래 내용물 -->
-  <div class="_2h22gn"> 
+  <div class="_2h22gn" style="padding-top: 16%; padding-left: 3%;"> 
     <div class="_169grxv2"> 
     
       <!-- 하나의 정보칸 -->
@@ -488,7 +477,7 @@ span[Attributes Style] {
             <div class="_n5lh69r">
               <div class="_1p3joamp">실명</div>
               <div id="showName" style="margin-top: 8px; margin-bottom: 24px;" >
-                  <div class="_czm8crp" id="userName">세린</div>
+                  <div class="_czm8crp" id="userName"><!-- 여기 이름 --></div>
               </div>
             </div>
 
@@ -508,7 +497,7 @@ span[Attributes Style] {
               <!--수정 눌렸을 때 새로 생성되어야함-->
                   
                   
-                  <div id="inputNameDiv" style="display:none;">
+                  <div id="hideNShow0" style="display:none;">
                   <div
                     style="margin-top: 8px; margin-bottom: 24px;"
                     id="inputBeforeForm_SR"
@@ -620,7 +609,7 @@ span[Attributes Style] {
             <div class="_1rtgmd8y"> <!-- _1rtgmd8y -->
               <div class="_1p3joamp"> <!-- _1p3joamp -->
                 <div class="_1asnseo"> <!-- _1asnseo -->
-                  <button type="button" class="_b0ybw8s" aria-busy="false"onclick="changeTextAndShowOrHide(this,1);">
+                  <button type="button" class="_b0ybw8s" aria-busy="false" onclick="changeTextAndShowOrHide(this,1);">
                     수정
                   </button> <!-- _b0ybw8s -->
                 </div>
@@ -628,11 +617,12 @@ span[Attributes Style] {
             </div>
             
             
-          </div> <!-- hsg47m 끝 -->
+          </div> <!-- hgs47m 끝 -->
           
           
             <!-- 유저 생년월일 -->
-                  <div id="showAndHideBday" style=" margin-top: 8px; margin-bottom:24px;">
+            <div id="hideNShow1"  style=" display: none;">
+                  <div style="margin-top: 8px; margin-bottom:24px;">
                   	<form>
                   	 <div style="margin-top: 8px; margin-bottom: 16px;">
                   	 	<div class="_9hxttoo">
@@ -710,18 +700,19 @@ span[Attributes Style] {
                   	 						</div>
                   	 					</div>
                   	 					
-                  	 					
-                  	 					
                   	 			</div>
                   	 		</div>
                   	 	</div>
                   	 </div>
                   	 
                   	 <div class="airlock-inline-container"></div>
+                  	 
                   	 <button type="button" class="_kt3i5a4" aira-busy="false">
                   	 	<span class="_ftj2sg4 ">저장</span>
-                  	 </button>                 	
+                  	 </button>  
+                  	                	
                   	</form>
+                  </div>
                   </div>
                   	<!-- 생기는거 끝 -->
                  
@@ -734,14 +725,14 @@ span[Attributes Style] {
       
       
       <!-- 하나의 정보칸 -->
-      <div class="_s50zru" > <!-- _s50zru -->
+      <div class="_s50zru" >
         <div style="margin-top: 24px;">
           <div class="_hgs47m">
             <div class="_n5lh69r">
               <div class="_1p3joamp">이메일 주소</div>
               <div style="margin-top: 8px; margin-bottom: 24px;">
-                <div class="_czm8crp">
-                 	 serin@nag.com
+                <div class="_czm8crp" id="userEmail">
+                 	 <!-- 여기 이메일 주소 -->
                 </div>
               </div>
             </div>
@@ -763,7 +754,7 @@ span[Attributes Style] {
           
           
           <!-- 새로 생기는 이메일 인풋 -->
-          <div id="emailInput" style="margin-top: 8px; margin-bottom: 24px;">
+          <div id="hideNShow2" style="display: none; margin-top: 8px; margin-bottom: 24px;">
           	<form>
           		<div style="margin-top: 8px; margin-bottom: 24px;">
           			<div class="_czm8crp">
@@ -816,10 +807,10 @@ span[Attributes Style] {
                 <div class="_edoeiqi">
                  <div class="_12d0llg5">
                   <div class="_qo24lwc">
-                   <span class="_czm8crp">
-                   	<span dir="ltr">
-                   	<!-- 연락처~~ -->
-                   	</span>
+                   <span class="_czm8crp" id="userPhone">
+                   	<!-- <span dir="ltr">
+                   	연락처~~
+                   	</span> -->
                    </span>
                   </div> <!-- _qo24lwc -->
                
@@ -835,7 +826,7 @@ span[Attributes Style] {
             <div class="_1rtgmd8y">
               <div class="_1p3joamp">
                 <div class="_1asnseo">
-                  <button type="button" class="_b0ybw8s" aria-busy="false">
+                  <button type="button" class="_b0ybw8s" aria-busy="false" onclick="changeTextAndShowOrHide(this,3);">
                     수정
                   </button>
                 </div>
@@ -847,7 +838,7 @@ span[Attributes Style] {
           
           
           <!-- 사라지고 생기고 -->
-          <div style="margin-top: 8px; margin-bottom: 24px;">
+          <div id="hideNShow3" style="display: none; margin-top: 8px; margin-bottom: 24px;">
           	<form>
           		<div style="margin-bottom: 8px;">
           			<div class="_czm8crp">
@@ -876,7 +867,7 @@ span[Attributes Style] {
           					전화번호를 새로 입력해주세요.
           				</div>
           			</div>
-          			<div style="margin-top: 16px; margin-bottom: 16px;">
+          		<!--<div style="margin-top: 16px; margin-bottom: 16px;">
           				<div class="_9hxttoo">
           					<label class="_krjbj">
           					Phone Country Select
@@ -889,7 +880,7 @@ span[Attributes Style] {
           						</div>
           					</div>
           				</div>
-          			</div>
+          			</div>  -->
           			<div style="margin-top: 16px; margin-bottom: 16px;">
           				<div class="_9hxttoo">
           					<label class="_krjbj">
@@ -917,11 +908,16 @@ span[Attributes Style] {
           				</div>
           			</div>
           			
+          			<button type="button" class="_kt3i5a4" aria-busy="false" >
+          				<span class="_ftj2sg4">
+          					저장
+          				</span>
+          			</button>
+          			
           		</div>
           		
           		<div id="airlock-inline-container">
           		</div>
-          		
           		
           		
           	</form>          
@@ -949,27 +945,17 @@ span[Attributes Style] {
      }
 
      //실명에 세션에 있는 정보들을을 넣어주자
-     let userNameValue = document.getElementsByClassName("realInfo_SR")[0];
-     let userBdayValue = document.getElementsByClassName("realInfo_SR")[1];
-     let userEmailValue = document.getElementsByClassName("realInfo_SR")[2];
-     let userPhoneNumberValue = document.getElementsByClassName("realInfo_SR")[3];
-	
-	 let btnModifyArr= document.getElementsByClassName("btn_modify");
-	 let nameModifyDiv=document.getElementById("inputBeforeForm_SR");
-	 let showHide= document.getElementById("showAndHide");
-	 let nameFromS=document.getElementsByClassName("nameFromSession")[0];
-	  
+     $("#userName").text('<%=userFstName %> <%= userLastName%>');
+     $("#userEmail").text('<%=userEmail%>');
+     $("#userPhone").text('<%=userPhone%>');
+     
+	 
 	  	//날짜
 	  	function appendYear(){
-
 	  		var date = new Date();
-
 	  		var year = date.getFullYear();
-
 	  		var selectValue = document.getElementById("userBirthYear");
-
 	  		var optionIndex = 0;
-
 
 
 	  		for(var i=year-100;i<=year;i++){
@@ -980,17 +966,9 @@ span[Attributes Style] {
 
 	  	}
 
-
-
-
-
 	  	function appendMonth(){
-
 	  		var selectValue = document.getElementById("userBirthMonth"); 
-
 	  		var optionIndex = 0;
-
-
 
 	  		for(var i=1;i<=12;i++){
 
@@ -1001,15 +979,10 @@ span[Attributes Style] {
 	  	}
 
 
-
-
-
 	  	function appendDay(){
 
 	  		var selectValue = document.getElementById("userBirthDate");
 	  		var optionIndex = 0;
-
-
 
 	  		for(var i=1;i<=31;i++){
 	  				selectValue.add(new Option(i+"일",i),optionIndex++);
@@ -1019,48 +992,59 @@ span[Attributes Style] {
    });
 
 
-  	function showAndHideInputSection(btnVal){
-  	  
-  	if(btnVal.innerText === '수정'){
-  		$("#inputNameDiv").show();
-  		$("#showName").hide();
-  		btnVal.innerText='취소';
-  	} else{
-  		$("#inputNameDiv").hide();
-  		$("#showName").show();
-  		btnVal.innerText='수정';
-  	}
-  }
-  	
- 
+ 	//수정 버튼 클릭 시
 	function changeTextAndShowOrHide(btn, btnValue){
-		console.log(btn);
-	   	let thisB= btn;
 	   	
-	    if(btn.innerText=="수정"){	  
-	  	btn.innerText='취소';
-	    } 
-	    
-	    else if(btn.innerHTML=="취소"){ 
-	    btn.innerText='수정';
-	    }
-	
 		switch(btnValue){
 		
 		case 0:
-			alert("you clicked 0");
+		    if(btn.innerText=="수정"){	  
+			  	btn.innerText='취소';
+			  	 $("#hideNShow0").show();
+			    } 
+			    
+			    else if(btn.innerHTML=="취소"){ 
+			    btn.innerText='수정';
+			  	 $("#hideNShow0").hide();
+			    }
+			
 			break;
 		
 		case 1:
+			if(btn.innerText=="수정"){	  
+			  	btn.innerText='취소';
+			  	 $("#hideNShow1").show();
+			    } 
+			    
+			    else if(btn.innerHTML=="취소"){ 
+			    btn.innerText='수정';
+			  	 $("#hideNShow1").hide();
+			    }
 			
 			break;
 		
 		case 2:
-		
+			if(btn.innerText=="수정"){	  
+			  	btn.innerText='취소';
+			  	 $("#hideNShow2").show();
+			    } 
+			    
+			    else if(btn.innerHTML=="취소"){ 
+			    btn.innerText='수정';
+			  	 $("#hideNShow2").hide();
+			    }
 			break;
 			
 		case 3:
-			
+			if(btn.innerText=="수정"){	  
+			  	btn.innerText='취소';
+			  	 $("#hideNShow3").show();
+			    } 
+			    
+			    else if(btn.innerHTML=="취소"){ 
+			    btn.innerText='수정';
+			  	 $("#hideNShow3").hide();
+			    }
 			break;
 		}
 }

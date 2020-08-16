@@ -8,11 +8,12 @@
 <!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
 <%
    UserVO user = (UserVO) session.getAttribute("user");
+String userNum = "";
 String userLastName = "";
 String userFstName = "";
 String userPwd = "";
 String userEmail="";
-String userNum = "";
+String userPhone="";
 String userPriv ="";
 String userStatusCode="";
 String userProfilePicUrl="";
@@ -23,11 +24,12 @@ String userProfilePicName="";
 
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
+   userNum = user.getUserNum();
    userLastName = user.getUserLastName();
    userFstName = user.getUserFstName();
    userPwd = user.getUserPwd();
    userEmail = user.getUserEmail();
-   userNum = user.getUserNum();
+   userPhone= user.getUserPhone();
    userPriv=user.getUserPriv();
    userStatusCode=user.getUserStatusCode();
    userProfilePicUrl=user.getUserProfilePicUrl();

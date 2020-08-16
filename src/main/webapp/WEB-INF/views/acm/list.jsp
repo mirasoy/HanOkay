@@ -655,7 +655,7 @@ display: block;
 		<div class="text-2 bgwhite">
 			<div class="mx-auto about-text-wrap text-center">
 				<h2 class="text-uppercase mb-4">
-					한국의 <strong>한옥</strong>에서 더 특별한 여행 즐기기
+					고즈넉한 <strong>한옥</strong>에서 더 특별한 여행 즐기기
 				</h2>
 				<p class="">다양한 한옥을 소개 하는 페이지 입니다.</p>
 

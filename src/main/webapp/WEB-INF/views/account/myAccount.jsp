@@ -286,8 +286,9 @@ pageEncoding="UTF-8"%>
                 </a>
               </div>
             </div>
-
-            <div class="cards_SR">
+            
+            
+    <!--     <div class="cards_SR">
               <div class=".card">
                 <a href="#" class="aTag_SR">
                   <div>
@@ -417,7 +418,9 @@ pageEncoding="UTF-8"%>
                   </div>
                 </a>
               </div>
-            </div>
+            </div> -->
+            
+            
           </div>
         </div>
       </div>
