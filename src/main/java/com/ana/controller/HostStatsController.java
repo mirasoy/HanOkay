@@ -73,9 +73,9 @@ public class HostStatsController {
 	        beforeM.add(Calendar.MONTH , -1);
 	        String beforeMonth = new java.text.SimpleDateFormat("yyyy-MM-dd").format(beforeM.getTime());
 
-	        Calendar yesterdayC = Calendar.getInstance();
-	        yesterdayC.add(Calendar.DATE , -1);
-	        String yesterday = new java.text.SimpleDateFormat("yyyy-MM-dd").format(yesterdayC.getTime());
+	        Calendar tomorrowC = Calendar.getInstance();
+	        tomorrowC.add(Calendar.DATE , +1);
+	        String tomorrow = new java.text.SimpleDateFormat("yyyy-MM-dd").format(tomorrowC.getTime());
 	        
 	        //지난한달매출
 	        List<PaymentVO> beforeMonthList = sService.getPeriodAllSales(user.getUserNum(), beforeMonth,strToday);
@@ -88,7 +88,7 @@ public class HostStatsController {
 	        
 	        
 	        //오늘 매출
-	        List<PaymentVO> todaylist = sService.getPeriodAllSales(user.getUserNum(), strToday, yesterday);
+	        List<PaymentVO> todaylist = sService.getPeriodAllSales(user.getUserNum(), strToday, tomorrow);
 	        
 	        int todaysum = 0;
 	        for(PaymentVO vo :todaylist) {
@@ -100,7 +100,7 @@ public class HostStatsController {
 	 
 		model.addAttribute("beforeMonthSum",beforeMonthSum);
 		model.addAttribute("beforeMonthCount",beforeMonthList.size());
-		model.addAttribute("PaymentVO",todaysum);
+		model.addAttribute("todaysum",todaysum);
 		model.addAttribute("count",sService.getAllSales(user.getUserNum()).size());
 		model.addAttribute("list",rankList);
 		}

@@ -41,7 +41,7 @@ public class HstStatsMapperTest {
 	}
 	
 	
-	//@Test
+	@Test
 	public void test3() {
 		mapper.getPeriodAllSales("U10","2019/5/29","2020/4/29");
 	}
@@ -58,7 +58,7 @@ public class HstStatsMapperTest {
 	}
 	
 	
-	@Test
+	//@Test
 	public void test6() {
 		mapper.getAcmRank("U10","STISF");
 	}
