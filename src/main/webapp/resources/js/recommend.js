@@ -141,14 +141,13 @@ var latitude;
         	
         	while (numSet.size<3) {
 
-        		numSet.add(Math.trunc(Math.random()*30));
+        		numSet.add(Math.trunc(Math.random()*count));
 
        			}	
         	
         	
         	var setNum = 1;
         	numSet.forEach(function(element){
-        		
         		
         		$("#cardImg"+setNum).attr("src", result[element].firstimage);
         		$("#btn"+setNum).val(result[element].addr1.split(" ")[1]);
