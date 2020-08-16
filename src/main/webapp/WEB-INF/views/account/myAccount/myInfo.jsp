@@ -144,6 +144,7 @@ button {
 }
 
 ._b0ybw8s {
+	font-size: 22px;
 	appearance: none !important;
     cursor: pointer !important;
     user-select: auto !important;
@@ -157,8 +158,7 @@ button {
     border-image: initial !important;
     margin: 0px !important;
     padding: 0px !important;
-    
-    color: var(--color-text-link, #008489) !important;
+    color: var(--color-text-link, #007bff) !important;
     font-family: var(--font-font_family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
     text-decoration: var(--font-link-text-decoration, none) !important;
 }
@@ -320,7 +320,7 @@ display: block !important;
     letter-spacing: var(--font-form-element-letter-spacing, normal) !important;
     font-family: var(--font-form-element-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
     text-transform: var(--font-form-element-text-transform, undefined) !important;
-    color: #484848 !important;
+    color: #007bff !important;
     padding-top: var(--spacing-form-element-vertical, 11px) !important;
     padding-bottom: var(--spacing-form-element-vertical, 11px) !important;
     font-weight: var(--font-light-font-weight, normal) !important;
@@ -379,7 +379,7 @@ option {
     padding-left: var(--spacing-button-horizontal, 22px) !important;
     padding-right: var(--spacing-button-horizontal, 22px) !important;
     box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
-    background: var(--color-buttons-default-color, #008489) !important;
+    background: var(--color-buttons-default-color, #007bff) !important;
     border-color: var(--color-buttons-default-border, transparent) !important;
     color: var(--color-buttons-default-text, #ffffff) !important;
 }
@@ -410,7 +410,7 @@ option {
     border-radius: 4px !important;
     border-width: 2px !important;
     border-style: solid !important;
-    background: rgb(0, 132, 137) !important;
+    background: #007bff !important;
     border-color: transparent !important;
 }
 
@@ -477,7 +477,7 @@ span[Attributes Style] {
             <div class="_n5lh69r">
               <div class="_1p3joamp">실명</div>
               <div id="showName" style="margin-top: 8px; margin-bottom: 24px;" >
-                  <div class="_czm8crp" id="userName">세린</div>
+                  <div class="_czm8crp" id="userName"><!-- 여기 이름 --></div>
               </div>
             </div>
 
@@ -725,14 +725,14 @@ span[Attributes Style] {
       
       
       <!-- 하나의 정보칸 -->
-      <div class="_s50zru" > <!-- _s50zru -->
+      <div class="_s50zru" >
         <div style="margin-top: 24px;">
           <div class="_hgs47m">
             <div class="_n5lh69r">
               <div class="_1p3joamp">이메일 주소</div>
               <div style="margin-top: 8px; margin-bottom: 24px;">
-                <div class="_czm8crp">
-                 	 serin@nag.com
+                <div class="_czm8crp" id="userEmail">
+                 	 <!-- 여기 이메일 주소 -->
                 </div>
               </div>
             </div>
@@ -807,10 +807,10 @@ span[Attributes Style] {
                 <div class="_edoeiqi">
                  <div class="_12d0llg5">
                   <div class="_qo24lwc">
-                   <span class="_czm8crp">
-                   	<span dir="ltr">
-                   	<!-- 연락처~~ -->
-                   	</span>
+                   <span class="_czm8crp" id="userPhone">
+                   	<!-- <span dir="ltr">
+                   	연락처~~
+                   	</span> -->
                    </span>
                   </div> <!-- _qo24lwc -->
                
@@ -945,27 +945,17 @@ span[Attributes Style] {
      }
 
      //실명에 세션에 있는 정보들을을 넣어주자
-     let userNameValue = document.getElementsByClassName("realInfo_SR")[0];
-     let userBdayValue = document.getElementsByClassName("realInfo_SR")[1];
-     let userEmailValue = document.getElementsByClassName("realInfo_SR")[2];
-     let userPhoneNumberValue = document.getElementsByClassName("realInfo_SR")[3];
-	
-	 let btnModifyArr= document.getElementsByClassName("btn_modify");
-	 let nameModifyDiv=document.getElementById("inputBeforeForm_SR");
-	 let showHide= document.getElementById("showAndHide");
-	 let nameFromS=document.getElementsByClassName("nameFromSession")[0];
-	  
+     $("#userName").text('<%=userFstName %> <%= userLastName%>');
+     $("#userEmail").text('<%=userEmail%>');
+     $("#userPhone").text('<%=userPhone%>');
+     
+	 
 	  	//날짜
 	  	function appendYear(){
-
 	  		var date = new Date();
-
 	  		var year = date.getFullYear();
-
 	  		var selectValue = document.getElementById("userBirthYear");
-
 	  		var optionIndex = 0;
-
 
 
 	  		for(var i=year-100;i<=year;i++){
@@ -976,17 +966,9 @@ span[Attributes Style] {
 
 	  	}
 
-
-
-
-
 	  	function appendMonth(){
-
 	  		var selectValue = document.getElementById("userBirthMonth"); 
-
 	  		var optionIndex = 0;
-
-
 
 	  		for(var i=1;i<=12;i++){
 
@@ -997,15 +979,10 @@ span[Attributes Style] {
 	  	}
 
 
-
-
-
 	  	function appendDay(){
 
 	  		var selectValue = document.getElementById("userBirthDate");
 	  		var optionIndex = 0;
-
-
 
 	  		for(var i=1;i<=31;i++){
 	  				selectValue.add(new Option(i+"일",i),optionIndex++);
@@ -1015,20 +992,7 @@ span[Attributes Style] {
    });
 
 
-  	function showAndHideInputSection(btnVal){
-  	  
-  	if(btnVal.innerText === '수정'){
-  		$("#inputNameDiv").show();
-  		$("#showName").hide();
-  		btnVal.innerText='취소';
-  	} else{
-  		$("#inputNameDiv").hide();
-  		$("#showName").show();
-  		btnVal.innerText='수정';
-  	}
-  }
-  	
- 
+ 	//수정 버튼 클릭 시
 	function changeTextAndShowOrHide(btn, btnValue){
 	   	
 		switch(btnValue){
