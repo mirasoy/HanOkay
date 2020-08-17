@@ -16,6 +16,9 @@
 		background-color:white !important; 
 	
 	}
+
+	/*모달*/
+
 	
 </style>
 
@@ -41,11 +44,11 @@
                     			<span>예약완료</span>
                     		</div>
                     		<div>
-	                        	<div style="font-size:30px;">${payed }</div>
+	                        	<div style="font-size:30px;"id="incomp">${payed }</div>
                     			<span>결제완료</span>
                     		</div>
 	                        <div>
-	                        	<div style="font-size:30px;">${payLater }</div>
+	                        	<div style="font-size:30px;" id="laterr">${payLater }</div>
                     			<span>현장결제</span>
                     		</div>
                     		 <div >
@@ -116,8 +119,7 @@
                     </div>
                 </div> <!-- /.col-lg-2 -->
                
-                
-                
+                              
                
                 <div class="col-lg-6">
                     <div class="panel panel-default">
@@ -134,6 +136,7 @@
                                             <th>예약상태</th>
                                             <th>숙소명/객실명</th>
                                             <th>예약자/인원</th>
+                                            <th>비고</th>
                                             
                                         </tr>
                                     </thead>
@@ -141,10 +144,14 @@
                                     <c:forEach items="${chkin}" var="chkin">
                                         <tr>
                                             <td><c:out value="${chkin.bookNum}" /></td>
-                                            <td id="<c:out value='${chkin.bookStatus}'/><c:out value='${chkin.bookNum}'/>"></td>
+                                            <td id="st<c:out value='${chkin.bookNum}'/>"></td>
                                              <td>[<c:out value="${chkin.acmName}" />]<c:out value="${chkin.romName}" /></td>
                                             <td><c:out value="${chkin.bookerFirstname}" />&nbsp;<c:out value="${chkin.bookerLastname}" />/<c:out value="${chkin.guest}" />명</td>
-                                        
+                                       <td> 
+                                       	<input type="button" id="<c:out value='${chkin.bookNum}'/>bt" data-toggle="modal" data-target="#inmyModal" value='입실' onclick="modal_view('<c:out value="${chkin.bookNum}"/>')"></button>
+
+                                       </td>
+                      
                                         </tr>
                                       </c:forEach>   
                                     </tbody>
@@ -175,6 +182,7 @@
                                             <th>예약상태</th>
                                             <th>숙소명/객실명</th>
                                             <th>예약자/인원</th>
+                                            <th>비고</th>
                                             
                                         </tr>
                                     </thead>
@@ -182,10 +190,11 @@
                                     <c:forEach items="${chkout}" var="chkout">
                                         <tr>
                                             <td><c:out value="${chkout.bookNum}" /></td>
-                                             <td id="<c:out value='${chkout.bookStatus}'/><c:out value='${chkout.bookNum}'/>"></td>
+                                             <td id="st<c:out value='${chkout.bookNum}'/>"></td>
                                              <td>[<c:out value="${chkout.acmName}" />]<c:out value="${chkout.romName}" /></td>
                                             <td><c:out value="${chkout.bookerFirstname}" />&nbsp;<c:out value="${chkout.bookerLastname}" />/<c:out value="${chkout.guest}" />명</td>
-                                        
+                                         <td> <input type="button" id="<c:out value='${chkout.bookNum}'/>bt" data-toggle="modal" data-target="#outmyModal" value='퇴실' onclick="modal_view2('<c:out value="${chkout.bookNum}"/>')"></button></td>
+                      
                                         </tr>
                                       </c:forEach>   
                                     </tbody>
@@ -198,9 +207,82 @@
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-6 -->  
-                
-                
-                
+
+
+
+
+
+				<!-- Modal -->
+				<div class="modal fade" id="inmyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				        <h4 class="modal-title" id="myModalLabel">입실처리</h4>
+				      </div>
+				      <div class="modal-body" id="content">
+				      	<table class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>예약번호</th>
+										<th>객실번호</th>
+										<th>방번호</th>
+										
+									</tr>
+								</thead>
+									<tr>
+										<td id="ibookNum"></td>
+										<td id="iacmNum"></td>
+										<td id="iromNum"></td>
+										
+									</tr>
+								<thead>
+									<tr>
+										<th>예약기간</th>
+										<th>숙박가격</th>
+										<th>지불방식</th>
+									</tr>
+								</thead>
+			
+									<tr>
+										<td id="istaydays"></td>
+										<td id="iprice"></td>
+										<td id="ipayMethod" style="color:red;"></td>
+
+									</tr>
+								</table>
+				      			<p id="paylater">나중에..</p>
+				      
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				        <button type="button" class="btn btn-primary" onclick="enter()">입실 승인</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+				<!-- 퇴실모달 -->
+				<div class="modal fade" id="outmyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					        <h4 class="modal-title" id="myModalLabel">퇴실처리</h4>
+					      </div>
+					      <div class="modal-body">
+					      		<p>퇴실처리 하시겠습니까?</p>
+					      		<input type="hidden" id="obooknum">
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					        <button type="button" class="btn btn-primary" onclick="out()">퇴실승인</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+             
                 
                 
                 
@@ -209,9 +291,78 @@
 
 		</div>
 	</div>
+	
+	
+	
 <script type="text/javascript">
 var latitude;
 var longitude;
+	function modal_view(bookNum){
+		
+		$.ajax({
+	         url : '/hosting/getTpayment',
+	         data : {bookNum : bookNum},
+	         type : 'GET',
+	         dataType : 'json',
+	         success : function(result) {
+	        	 console.log(result.bookNum);
+	        	 console.log(result.staydays);
+	        	 
+	        	 $("#ibookNum").text(result.bookNum);
+	            $("#iacmNum").text(result.acmNum);
+	            $("#iromNum").text(result.romNum);
+	            $("#iprice").text(result.price);
+	            $("#istaydays").text(result.staydays);
+	            $("#ipayMethod").text(result.payMethod);
+	            
+	            console.log(result.payMethod);
+	            if(result.payMethod=="PY_METHOD_LATER"){
+	            	$("#paylater").text("현장 지불이 필요한 고객입니다. 결제하시겠습니까?");
+	            } else {
+	            	$("#paylater").text("이미 결제한 고객입니다");
+		            	
+	            }
+	         }
+	      }); // $.ajax
+		
+		
+	}
+	
+	function modal_view2(bookNum){
+		//alert(bookNum+"나가라~~");
+		$("#obooknum").val(bookNum);
+	}
+	
+	//입실승인을 누르면
+	function enter(){
+		var booknum=$("#ibookNum").text();
+		console.log(booknum+"이시다");
+		var letschange="#st"+booknum;
+		var letschange2="#"+booknum+"bt";
+		$(letschange).text("입실완료");
+		 $(letschange2).prop("disabled", true);		
+		 
+		 //현장결제 결제완료 바꿈
+		 $("#incomp").text(Number($("#incomp").text())+1);
+		 $("#laterr").text(Number($("#laterr").text())-1);
+		 
+		 $('#inmyModal').modal('hide');   
+	}
+
+	//퇴실승인을 누르면
+	function out(){
+		var booknum=$("#obooknum").val();
+		alert("out"+booknum);
+		var letschange="#st"+booknum;
+		var letschange2="#"+booknum+"bt";
+		
+		$(letschange).text("퇴실완료");
+		 $(letschange2).prop("disabled", true);		
+		 
+		 $('#outmyModal').modal('hide');  
+		
+	}
+
 
  
 $(document).ready(function(){
@@ -222,12 +373,17 @@ $(document).ready(function(){
 	   var bookStatus='<c:out value="${chkin.bookStatus}" />';
 	   console.log(bookStatus);
 	   if(bookStatus.trim()=="RS_STT_BK"){//입실자:RS_STT_BK(예약중 투숙예정) RS_STT_CI(체크인)
-	      $("#<c:out value='${chkin.bookStatus}'/><c:out value='${chkin.bookNum}'/>").append("입실대기");
+	      $("#st<c:out value='${chkin.bookNum}'/>").append("입실대기");
 	   }
+	   else if(bookStatus.trim()=="RS_STT_AC"){//체크인
+		      $("#st<c:out value='${chkin.bookNum}'/>").append("입실대기");
+		   }
 	      
 	   else if(bookStatus.trim()=="RS_STT_CI"){//체크인
-	      $("#<c:out value='${chkin.bookStatus}'/><c:out value='${chkin.bookNum}'/>").append("체크인완료");
+	      $("#st<c:out value='${chkin.bookNum}'/>").append("입실완료");
+	      $("#<c:out value='${chkin.bookNum}'/>bt").prop("disabled", true);
 	   }   
+	   
    </c:forEach>
 	   
    //퇴실자
@@ -235,11 +391,16 @@ $(document).ready(function(){
    var bookStatus='<c:out value="${chkout.bookStatus}" />';
    console.log(bookStatus);
    if(bookStatus.trim()=="RS_STT_BK"){//입실자:RS_STT_BK(투숙중) RS_STT_AC(체크아웃)
-      $("#<c:out value='${chkout.bookStatus}'/><c:out value='${chkout.bookNum}'/>").append("퇴실대기");
+      $("#st<c:out value='${chkout.bookNum}'/>").append("퇴실대기");
    }
-      
+   
+   else if(bookStatus.trim()=="RS_STT_CI"){//체크인
+	      $("#st<c:out value='${chkout.bookNum}'/>").append("퇴실대기");
+	   }  
+   
    else if(bookStatus.trim()=="RS_STT_AC"){//체크아웃완료
-      $("#<c:out value='${chkout.bookStatus}'/><c:out value='${chkout.bookNum}'/>").append("체크아웃완료");
+      $("#st<c:out value='${chkout.bookNum}'/>").append("퇴실완료");
+      $("#<c:out value='${chkout.bookNum}'/>bt").prop("disabled", true);
    }   
 	</c:forEach>
 

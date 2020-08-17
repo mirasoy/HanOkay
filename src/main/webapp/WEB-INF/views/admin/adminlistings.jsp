@@ -16,11 +16,11 @@
 	  height: 36px;
 	  border-radius: 5px 0 0 5px;
 	  outline: none;
-	  color: #9DBFAF;
+	  color: #2B1B17;
 	}
 	
 	.searchTerm:focus{
-	  color: #00B4CC;
+	   color: #2B1B17;
 	}
 	
 	.searchButton {
@@ -48,10 +48,10 @@
 		<div class="wrap">
    <div class="search pull-right">
 	      <input type="text" class="searchTerm" placeholder="숙소이름 혹은 숙소번호로 검색하세요">
-	      <button type="submit" class="searchButton">
+	      <button type="button" class="searchButton">
 	        <i class="fa fa-search"></i>
 	     </button>
-	   </div>
+	</div>
 	</div>
 	<br><br><br>
 		

@@ -124,7 +124,7 @@
                <a href="/chat/chatList2" class="testbtn">메시지</a>
             </li>
             <li class="nav-menu">
-               <a href="/hosting/stats/statsChart" class="testbtn">성취도</a>
+               <a href="/hosting/stats/statsChart" class="testbtn">매출관리</a>
             </li>
          </ul>
          
