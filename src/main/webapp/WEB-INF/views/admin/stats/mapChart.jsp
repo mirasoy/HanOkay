@@ -7,7 +7,9 @@
 		}
 	</style>	
 
-	<%@include file="../../includes/hostheader.jsp"%>
+	<%@include file="../../includes/adminheader.jsp"%>
+	
+	
  	<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
     <script type='text/javascript'>
      google.charts.load('current', {
@@ -55,26 +57,6 @@
 
 
 
-	<div class="navbar-default sidebar" role="navigation">
-		<div class="sidebar-nav navbar-collapse">
-			<!-- 사업자 등록도 받을것 -->
-
-			<ul class="nav" id="side-menu">
-				<li>
-					<a href="/admin/stats/mapChart"><i class="fa fa-camera fa-fw"></i> 숙소 한눈에 보기</a>
-				</li>
-				<li>
-					<a href="/admin/stats/statsRank"><i class="fa fa-arrow-circle-up"></i> 내숙소 랭킹</a>
-				</li>
-				<li>
-					<a href="/admin/stats/stats"><i class="fa fa-krw fa-fw"></i> 매출 </a>
-				</li>
-				
-			</ul>
-
-		</div>
-		<!-- /.sidebar-collapse -->
-	</div>
 	<!-- /.navbar-static-side -->
 	<!-- nav-end -->
 	<div id="page-wrapper" style="padding-bottom:50px; margin-left: 0px;">
