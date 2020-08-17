@@ -1,6 +1,7 @@
 package com.ana.controller;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ana.domain.AcmDetailPicVO;
 import com.ana.domain.AcmVO;
+import com.ana.domain.BookVO;
+import com.ana.domain.CalendarVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserAcmVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AcmDetailService;
+import com.ana.service.AcmRegService;
 import com.ana.service.AdminService;
 import com.ana.service.CodeService;
 import com.ana.service.UserService;
@@ -34,9 +38,11 @@ import lombok.extern.log4j.Log4j;
 public class AdminController {
 	
 	@Autowired
-	private AdminService aservice;//호스트 사업등록증관련
+	private AdminService aservice;//
 	@Autowired
-	private UserService uservice;//호스트 사업등록증관련
+	private UserService uservice;//
+	@Autowired
+	private AcmRegService adservice;
 	@Autowired
 	private CodeService codeService;
 	@Autowired
@@ -49,6 +55,37 @@ public class AdminController {
 		return user;
 	}
 	
+	//오늘의 날짜를 갔다줌
+		public CalendarVO getCal() {
+			///오늘의 날짜
+			Calendar cal = Calendar.getInstance();
+			//System.out.println(cal);
+			
+			CalendarVO today = new CalendarVO(); 
+			today.setYear(cal.get(Calendar.YEAR));
+			today.setMonth(cal.get(Calendar.MONTH) + 1);
+			today.setDay(cal.get(Calendar.DAY_OF_MONTH));
+			today.setYoilInt(cal.get(Calendar.DAY_OF_WEEK));
+			today.setYoil(getTodayYoil(today.getYoilInt()));
+			
+			return today;
+		}
+		
+		//요일값 한글로 반환
+		public String getTodayYoil(int yoilInt) {
+			String yoil = null;
+			System.out.println(yoilInt);
+			if(yoilInt==1)yoil="일";
+			else if(yoilInt==2)yoil="월";
+			else if(yoilInt==3)yoil="화";
+			else if(yoilInt==4)yoil="수";
+			else if(yoilInt==5)yoil="목";
+			else if(yoilInt==6)yoil="금";
+			else if(yoilInt==7)yoil="토";
+			
+			return yoil;
+		}
+	
 	///////////////////////
 	
 
@@ -58,6 +95,37 @@ public class AdminController {
 	@GetMapping("/adminindex")
 	public void indexGet(Model model,HttpSession session) {
 		System.out.println("adminindex get");
+		
+	System.out.println("호스트 인덱스다~~ ");
+		
+		//호스트 주인
+		String ownerUser= getUser(session).getUserNum();
+		
+		CalendarVO today = getCal();
+		//가라임
+		//String todays="2020-8-7";
+		
+		String todayform=today.getYear()+"년 "+ today.getMonth()+"월 "+ today.getDay()+"일 ("+today.getYoil()+")";
+		String todays=today.getYear()+"-"+today.getMonth()+"-"+today.getDay();
+		
+		System.out.println("출력 오늘의 날짜:"+todayform);
+		System.out.println("Date형식으로 끌어올 오늘의 날짜:"+todays);
+		
+		model.addAttribute("todayform",todayform);
+		
+		/////////////////////////////////////////////////////
+		
+		String userStat;
+		userStat="HO_PENDING";
+		List<UserVO> hopendinglist= aservice.getadminListUsers(userStat);
+		System.out.println(hopendinglist);
+		model.addAttribute("hopendinglist", hopendinglist);
+		int hopensize=hopendinglist.size();
+		
+		model.addAttribute("hopensize", hopensize);
+		
+		
+		
 		
 		
 		model.addAttribute("adminFstname", getUser(session).getUserFstName());
@@ -172,8 +240,9 @@ public class AdminController {
 	
 	@PostMapping("/userStatPending")
 	public String userStatPendingPost(String userNum,Model model,HttpSession session) {
-		System.out.println("userStatPending Post");
+		UserVO user=aservice.getUser(userNum);//유저 정보 뿌린다
 		
+		model.addAttribute("user", user);
 		model.addAttribute("adminFstname", getUser(session).getUserFstName());
 		return "/admin/userStatPending";
 	}
@@ -182,8 +251,10 @@ public class AdminController {
 	public void userStathostGet(String userNum,Model model,HttpSession session) {
 		System.out.println("userStathost Get");
 		UserVO user=aservice.getUser(userNum);//유저 정보 뿌린다
-		
+		List<AcmVO> acms=adservice.getListAcms(user.getUserNum(), "ACTIVE");
 		model.addAttribute("user", user);
+		model.addAttribute("acms", acms);
+		
 		model.addAttribute("adminFstname", getUser(session).getUserFstName());
 		
 	}
