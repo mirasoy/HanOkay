@@ -376,7 +376,7 @@ display: block;
 							<p class="banner-subtitle">We assist you to choose the best</p>
 							<a href="javascript:void(0)" class="down-arrow-link"><i
 								class="fa fa-2x fa-angle-down down-arrow"></i></a>
-							<a class="scrollPlz">scroll</a>
+						
 						</div>
 					</div>
 					<!-- col-xs-12 -->
