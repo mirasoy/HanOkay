@@ -174,7 +174,7 @@ form {
           postion: relative;
         ">
       <h1>
-      <div class="header2_SR" >Han:Ok에서 그동안 몰랐던 국내여행지의 아름다움을 발견해보세요 </div>
+      <div class="header2_SR" >HanOkay에서 그동안 몰랐던 국내여행지의 아름다움을 발견해보세요 </div>
       </h1>
     </div>
     <!--  action= "/register/emailAuth" -->
@@ -284,8 +284,8 @@ form {
     </div>
 
     <div style="margin-top:45px; font-weight: 500">
-      	<div style="margin-left: 104px;">
-          Han:Ok의 회원이 되어 더 많은 혜택을 누려보세요!
+      	<div style="margin-left: 75px;">
+          HanOkay의 회원이 되어 더 많은 혜택을 누려보세요!
      	</div>
       <div style="margin-left:310px; font-size:14px;">
          <a href="../register/signUp" style="color:#007bff;">회원가입하기</a>
