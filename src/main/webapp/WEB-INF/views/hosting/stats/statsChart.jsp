@@ -419,3 +419,4 @@ jQuery(function ($) {
   }
 });
 </script>
+<%@include file="../../includes/footer.jsp"%>

@@ -150,4 +150,10 @@ public class BookingServiceImpl implements BookingService{
 		return mapper.getBookinfoRoms(romNum);
 	}
 
+	@Override
+	public PaymentVO getPayment(String bookNum) {
+		// TODO Auto-generated method stub
+		return mapper.getPayment(bookNum);
+	}
+
 }

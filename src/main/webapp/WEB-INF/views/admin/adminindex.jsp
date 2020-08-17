@@ -179,11 +179,11 @@
                     			<span>호스트 대기자</span>
                     		</div>
 	                        <div>
-	                        	<div style="font-size:30px;">0</div>
+	                        	<div style="font-size:30px;">1</div>
                     			<span>신고 현황</span>
                     		</div>
                     		 <div >
-	                        	<div style="font-size:30px;">0</div>
+	                        	<div style="font-size:30px;">1</div>
                     			<span>1:1 문의</span>
                     		</div>
                     		
@@ -404,14 +404,14 @@
                                     <thead>
                                         <tr>
                                             <th>회원</th>
-                                            <th>제목</th>
+                                            <th>카테고리</th>
                                             <th>문의내용</th>
                                             <th>작성시간</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     	<td>U1</td>
-                                     	<td>숙소등록시</td>
+                                     	<td>숙소 등록</td>
                                      	<td>사업자회원이 등록이안됩니다</td>
                                    	    <td>2020-08-15 00:13</td>
                                     </tbody>

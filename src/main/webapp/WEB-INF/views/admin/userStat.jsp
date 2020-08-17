@@ -18,11 +18,11 @@
 	  height: 36px;
 	  border-radius: 5px 0 0 5px;
 	  outline: none;
-	  color: #9DBFAF;
+	  color: #2B1B17;
 	}
 	
 	.searchTerm:focus{
-	  color: #00B4CC;
+	   color: #2B1B17;
 	}
 	
 	.searchButton {

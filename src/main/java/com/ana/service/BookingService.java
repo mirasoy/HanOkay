@@ -50,7 +50,7 @@ public interface BookingService {
 
 	public List<BookingVO> getBookinfoRoms(String romNum);
 
-
+	public PaymentVO getPayment(String bookNum);
 
 
 
