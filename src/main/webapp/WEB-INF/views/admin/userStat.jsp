@@ -4,7 +4,38 @@
 <%@include file="../includes/adminheader.jsp"%>
 
 <style>
+	.search {
+	  width: 30%;
+	  position: relative;
+	  display: flex;
+	}
 	
+	.searchTerm {
+	  width: 100%;
+	  border: 3px solid #775062;
+	  border-right: none;
+	  padding: 5px;
+	  height: 36px;
+	  border-radius: 5px 0 0 5px;
+	  outline: none;
+	  color: #9DBFAF;
+	}
+	
+	.searchTerm:focus{
+	  color: #00B4CC;
+	}
+	
+	.searchButton {
+	  width: 40px;
+	  height: 36px;
+	  border: 1px solid #775062;
+	  background: #775062;
+	  text-align: center;
+	  color: #fff;
+	  border-radius: 0 5px 5px 0;
+	  cursor: pointer;
+	  font-size: 20px;
+	}
 
 </style>
 
@@ -16,6 +47,16 @@
 <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
   <h3 align="left">총 <c:out value="${size}"/>명의 회원</h3>
 	<div class="hostpendingisseo" style="color:red;">호스트 대기자가 '<c:out value="${hopensize}"/>'명 있습니다!</div><br>		
+	
+	<div class="wrap">
+   <div class="search pull-right">
+	      <input type="text" class="searchTerm" placeholder="회원이름 혹은 회원이메일로 검색하세요">
+	      <button type="submit" class="searchButton">
+	        <i class="fa fa-search"></i>
+	     </button>
+	   </div>
+	</div>
+	<br><br><br>
 		
 	<div class="col-lg-12">
 		<div class="panel panel-default">
