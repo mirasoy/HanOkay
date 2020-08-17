@@ -158,7 +158,7 @@
   <div class="col-lg-3">
     <div class="panel panel-default">
 
-      <div class="panel-heading"><c:out value="${user.userFstName }"/> 회원님의 정보</div>
+      <div class="panel-heading"><c:out value="${user.userFstName }"/> 회원님</div>
       <!-- /.panel-heading -->
 	      <div class="panel-body">
 			<div class="form-group">
@@ -173,7 +173,7 @@
 	<div class="col-lg-5">
     <div class="panel panel-default">
 
-      <div class="panel-heading"><c:out value="${user.userFstName }"/> 회원님의</div>
+      <div class="panel-heading">상세 정보</div>
       <!-- /.panel-heading -->
 	      <div class="panel-body">
 			<div class="form-group">
