@@ -7,7 +7,7 @@ body {
 }
 
 .top-bar {
-	box-shadow: 0 4px 10px 0 #bec2c9;
+	/* box-shadow: 0 4px 10px 0 #bec2c9; */
 }
 
 #map {
@@ -314,7 +314,7 @@ body {
  }
  
 .room-ect {
-	width: calc(20% - 2.125rem);
+	width: calc(10% - 2.125rem);
 	padding-top: 20px;
 	font-size: 17px;
 	font-weight: 800;
@@ -458,7 +458,7 @@ body {
 	width: 100%;
     margin: 0 auto;
  
-    width: 384px;
+    width: 50%;
 
 }
 
