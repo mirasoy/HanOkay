@@ -335,6 +335,9 @@ var longitude;
 	
 	//입실승인을 누르면
 	function enter(){
+		
+		var paymethod=$("#ipayMethod").text();
+		
 		var booknum=$("#ibookNum").text();
 		console.log(booknum+"이시다");
 		var letschange="#st"+booknum;
@@ -342,9 +345,11 @@ var longitude;
 		$(letschange).text("입실완료");
 		 $(letschange2).prop("disabled", true);		
 		 
-		 //현장결제 결제완료 바꿈
-		 $("#incomp").text(Number($("#incomp").text())+1);
-		 $("#laterr").text(Number($("#laterr").text())-1);
+		 if(paymethod=="PY_METHOD_LATER"){
+			 //현장결제 결제완료 바꿈
+			 $("#incomp").text(Number($("#incomp").text())+1);
+			 $("#laterr").text(Number($("#laterr").text())-1);
+		 }
 		 
 		 $('#inmyModal').modal('hide');   
 	}
