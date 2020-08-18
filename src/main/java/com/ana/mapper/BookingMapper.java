@@ -44,8 +44,8 @@ public interface BookingMapper {
 	///호스트단
 	public List<BookVO> dateGetinBooking(@Param("ownerUser") String ownerUser,@Param("checkinDate") String checkinDate); 
 	public List<BookVO> dateGetoutBooking(@Param("ownerUser") String ownerUser,@Param("checkoutDate") String checkoutDate); 
-	
-	
-	
+	public int dateGetinPayLater(@Param("ownerUser") String ownerUser,@Param("checkinDate") String checkinDate);
+	public List<BookingVO> getBookinfoRoms(String romNum);
+	public PaymentVO getPayment(String bookNum);
 	
 }

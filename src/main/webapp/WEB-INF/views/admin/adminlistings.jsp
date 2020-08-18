@@ -1,7 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/adminheader.jsp"%>
+<style>
+	.search {
+	  width: 30%;
+	  position: relative;
+	  display: flex;
+	}
+	
+	.searchTerm {
+	  width: 100%;
+	  border: 3px solid #775062;
+	  border-right: none;
+	  padding: 5px;
+	  height: 36px;
+	  border-radius: 5px 0 0 5px;
+	  outline: none;
+	  color: #2B1B17;
+	}
+	
+	.searchTerm:focus{
+	   color: #2B1B17;
+	}
+	
+	.searchButton {
+	  width: 40px;
+	  height: 36px;
+	  border: 1px solid #775062;
+	  background: #775062;
+	  text-align: center;
+	  color: #fff;
+	  border-radius: 0 5px 5px 0;
+	  cursor: pointer;
+	  font-size: 20px;
+	}
 
+</style>
 
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 	<br>			
@@ -11,6 +45,15 @@
   <h3 align="left">총 <c:out value="${size}"/>개의 숙소</h3><br>
 		
 		<!-- 대기중인 숙소 -->
+		<div class="wrap">
+   <div class="search pull-right">
+	      <input type="text" class="searchTerm" placeholder="숙소이름 혹은 숙소번호로 검색하세요">
+	      <button type="button" class="searchButton">
+	        <i class="fa fa-search"></i>
+	     </button>
+	</div>
+	</div>
+	<br><br><br>
 		
 		<div class="col-lg-12" id="pendingacm">
 		<div class="panel panel-default">
@@ -24,6 +67,7 @@
 						<tr>
 							<th>호스트 </th>
 							<th>숙소 번호</th>
+							<th>숙소 상태</th>
 							<th>숙소 이름</th>
 							<th>숙소 유형</th>
 							<th>대표 번호 </th>
@@ -38,6 +82,8 @@
 						<tr>
 							<td><c:out value="${pendingacm.userNum}" /></td>
 							<td><c:out value="${pendingacm.acmNum}" /></td>
+							<td><div id="<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />">&nbsp;</div></td>
+							
 							<td>
 								<a class='pendingmove' href='<c:out value="${pendingacm.acmNum}"/>'>
 									<c:out value="${pendingacm.acmName}" />
@@ -267,6 +313,26 @@ $(document).ready(function(){
 
 	//해당 숙소 상세보기(권한 수정 페이지로)
 	$(document).ready(function(){
+	
+		//대기 숙소들 
+	  <c:forEach items="${pendinglist}" var="pendingacm">
+	   var pendingacmType='<c:out value="${pendingacm.acmStatus}" />';
+	   console.log(pendingacmType);
+	   if(pendingacmType.trim()=="PENDING"){//객실별
+	      $("#<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />").append("신청");
+	   }
+	      
+	   else if(pendingacmType.trim()=="DENIED"){//집천체
+	      $("#<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />").append("승인거절");
+	   }   
+	   else if(pendingacmType.trim()=="REREG"){//집천체
+		      $("#<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />").append("재신청");
+		   } 
+	   </c:forEach>
+		   
+		
+		
+		
 		var actionForm = $("#actionForm");
 		
 		$(".pendingmove").on("click", function(e){

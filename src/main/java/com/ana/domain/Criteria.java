@@ -24,6 +24,8 @@ public class Criteria {
 	private String city;
 	private String distr;
 	private String detail;
+	private String maxPrice;
+	private String minPrice;
 	
 	
 	public Criteria() {
@@ -36,6 +38,8 @@ public class Criteria {
 		this.keyword="";
 		this.person="1";
 		this.acmOpt="0";
+		this.maxPrice="500000";
+		this.minPrice="0";
 	}
 	
 	public String[] getTypeArr() {

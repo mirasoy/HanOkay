@@ -76,7 +76,7 @@
 	padding: 20px;
 	font-size: 1rem;
 	width: 600px;
-    height: 370px;
+    height: 350px;
 }
 
 .container-location{
@@ -84,8 +84,8 @@
 	grid-row: 1/3;
 	grid-column: 2;
 	padding: 20px;
-    width: 450px;
-    height: 465px;
+    width: 480px;
+    height: 440px;
 }
 
 .container-roomlist{
@@ -95,14 +95,14 @@
 
 .container-payment{
     font-size: 0.8rem;
-	height: 700px;
+    height: 550px;
     padding: 10px;
 }
 
 .container-new{
 	padding: 20px;
     font-size: 0.9rem;
-    height: 700px;
+    height: 550px;;
 }
 
 .page-wrapper table{
@@ -118,23 +118,25 @@
     padding: 1%;
 }
 
+.page-new .acm-pic img{
+	width: 200px;
+    height: 150px;
+}
+
 .page-new .acm-pic{
 	background: black;
     width: 100px;
+    padding: 0px;
 }
-
-.page-new .acm-pic img{
-	width: 35vh;
-    height: 25vh;
-}
-
 .page-get .acm-pic{
 	background: black;
     width: 100px;
+    padding: 0px;
 }
 
 .page-get .acm-pic img{
-	width: 50vh;
+	width: 200px;
+	height: 150px;
 }
 
 .page-new .container-info{
@@ -180,6 +182,13 @@ p.info{
 	font-size: 0.8rem;
 }
 
+.tb-booker #request{
+	background-color: white; 
+	opacity: 1;
+	width: 100%;
+	font-size: 0.8rem;
+}
+
 .tb-request	input[type="text"]{
 	width: 100%;
 	font-size: 0.8rem;
@@ -191,7 +200,7 @@ p.info{
   margin-left: 5px;
 }
 
-.page-new .td-title{
+.page-new .td-title, .page-get .td-title{
     font-size: 1rem;
     font-weight: bold;
 	text-align: center;
@@ -199,49 +208,69 @@ p.info{
     width: 10px;
 }
 
-.page-new .tr-title{
-    font-size: 1.1rem;
+.page-new .tr-title, .page-get .tr-title{
+    font-size: 1rem;
     font-weight: bold;
 	text-align: center;
     padding: 1vh;
 }
 
-.page-new .td-title2{
+.page-new .tr-title2, .page-get .tr-title2{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.page-new .td-title2, .page-get .td-title2{
     font-size: 0.7rem;
     font-weight: 500;
 	text-align: left;
 }
 
-.page-new .td-title3{
+.page-new .td-title3,  .page-get .td-title3{
     font-size: 0.7rem;
     font-weight: 500;
 	text-align: left;
 	color: crimson;
 }
 
-.page-new .td-title4{
+.page-new .td-title4,  .page-get .td-title4{
     font-size: 0.9rem;
     font-weight: 500;
 	text-align: left;
 	color: crimson;
 }
 
-.page-new .tr-line{
+.page-new .td-title5,  .page-get .td-title5{
+    font-size: 0.9rem;
+    font-weight: bold;
+	text-align: center;
+    padding: 17px 10px 10px 10px;
+}
+.page-new .td-title6,  .page-get .td-title6{
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.page-new .tr-line,  .page-get .tr-line{
 	border-bottom: 1px solid #404040;
 }
 
-.page-get button{
-    background-color: #61dafb;
-    color: #fff;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    border-radius: 3px;
-    border: none;
-    margin: 2px;
-    width: 115px;
-    height: 40px;
+.page-get .box{
+    padding: 20px;
+}
+
+.bk-title{
+	font-weight: bold;
+    color: #61dafb;
+}
+
+.td-days{
+    text-align: center;
+    width: 170px;
+}
+
+.page-new .right, .page-get .right{
+	text-align: right;
 }
 
 .box {
@@ -254,9 +283,40 @@ p.info{
 }
 
 .box .booking-group {
-	position: relative;
-    width: 33%;
-    padding: 15px 15px 15px;
+    position: relative;
+    width: 300px;
+    padding: 15px 15px 15px 15px;
+}
+
+.box .booking-group2 {
+    position: relative;
+    width: 710px;
+    padding: 15px 15px 15px 15px;
+    margin: 0px 0px 0px 20px;
+}
+
+.box .booking-group0 {
+    position: relative;
+    width: 30px;
+}
+
+.box .booking-group2 {
+    position: relative;
+    width: 710px;
+    padding: 15px 15px 15px 15px;
+    margin: 0px 0px 0px 20px;
+}
+
+.booking-search-row button {
+	background-color: white;
+    position: relative !important;
+    cursor: pointer !important;
+    border: none;
+    padding: 14px;
+    color: #61dafb;
+    font-size: 30px;
+    left: 20px;
+    top: 20px;
 }
 
 .form-control {
@@ -267,7 +327,7 @@ p.info{
 	padding-top: 24px;
 	color: #191a1e;
 	border: 2px solid #dfe5e9;
-    font-size: 1rem;
+    font-size: 0.8rem;
 	font-weight: 700;
 	-webkit-box-shadow: none;
 	box-shadow: none;
@@ -575,7 +635,7 @@ details{
 
 
 
-.modal {
+.page-wrapper .modal {
 	font-size: 1rem;
   display: none; 
   position: fixed;
@@ -590,30 +650,28 @@ details{
   background-color: rgba(0,0,0,0.4);
 }
 
-.modal-content {
+.page-wrapper .modal-content {
 	 background-color: #fefefe;
 	 margin: auto;
 	 padding: 20px;
 	 border: 1px solid #888;
 	 width: 90%;
-	 height: 80%;
-	 top: 10%;
+	 top: 5%;
 }
 
-.close {
+.page-wrapper .close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.close:hover, .close:focus {
+.page-wrapper .close:hover, .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
-/*@*/
 .accordion {
   width: 100%;
   height: 100%;
@@ -1028,3 +1086,303 @@ details{
     transform: rotateY(180deg);
 }
 
+/*리뷰*/
+.reveiwPst{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    margin: 2%;
+    padding: 2%
+}
+
+.details-summary{
+	font-weight: bold;
+}
+
+.reviewPst a{
+    color: black;
+    margin: 10px;
+}
+
+#wishButton{
+	background-color: white;
+}
+
+#message{
+	background-color: white;
+}
+
+.table-rom-td {
+    padding: 0px 0px 0px 10px;
+}
+
+.page-get table tr td{
+	padding: 2px 10px 2px 10px;
+	font-size: 0.8rem;
+}
+
+.page-get .top{
+	font-size: 1rem;
+}
+
+.page-get .title, .page-new .title{
+	font-size: 2rem;
+}
+
+.t-check-in, .t-check-out, .t-datepicker {
+	display: inline-block;
+	position: relative;
+	float: left
+}
+
+.t-datepicker {
+	clear: both;
+	width: 100%;
+	font-size: 14px;
+	line-height: 1.4em;
+}
+
+.t-check-in, .t-check-out {
+	width: 50%;
+	height: 65px;
+	box-sizing: border-box
+}
+
+.t-check-in .t-date-info-title, .t-check-out .t-date-info-title {
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+    cursor: pointer;
+    position: absolute;
+    font-weight: bold;
+    color:  #61dafb;
+}
+
+.t-check-in .fa, .t-check-out .fa {
+	top: -1px;
+	position: relative
+}
+
+.t-check-in {
+	border-right-width: 1px;
+	border-radius: 4px 0 0 4px;
+	padding: 0px 30px 0px 0px;
+}
+
+.t-picker-only {
+	border-radius: 4px;
+	width: 100%
+}
+
+.t-check-out {
+	border-left-width: 0;
+	border-radius: 0 4px 4px 0
+}
+
+.t-check-out .t-datepicker-day {
+	left: -100%
+}
+
+.t-arrow-top {
+	top: 32px;
+	z-index: 9999
+}
+
+.t-arrow-top, .t-arrow-top::after {
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent transparent #ddd;
+	display: inline-block;
+	position: absolute
+}
+
+.t-arrow-top::after {
+	top: -9px;
+	left: -10px;
+	content: '';
+	border-width: 10px;
+	border-bottom-color: #fff
+}
+
+.t-dates {
+	position: inline;
+	background-color: #fff;
+	height: 65px;
+	padding: 0px 15px;
+	padding-top: 24px;
+	border: 2px solid #dfe5e9;
+	font-size: 0.8rem;
+	font-weight: 700;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 4px;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+}
+
+.t-datepicker-day {
+	border-width: 1px;
+	border-style: solid;
+	top: 51px;
+	overflow: hidden;
+	position: absolute;
+	z-index: 9998;
+	padding: 10px 0;
+	border-radius: 4px;
+	box-shadow: 0 7px 15px rgba(0, 0, 0, .25)
+}
+
+.t-table-wrap {
+	width: 100%;
+	padding: 0 10px;
+	font-size: inherit;
+	display: inline-block;
+	vertical-align: top
+}
+
+.t-datepicker-days {
+	width: 650px
+}
+
+.t-datepicker-days .t-table-wrap {
+	padding: 0;
+	width: 47%;
+	margin-left: 2%
+}
+
+@media ( max-width :480px) {
+	.t-datepicker-days {
+		width: 300px
+	}
+	.t-datepicker-days .t-table-wrap {
+		margin-left: 0;
+		width: 100%;
+		padding: 0 10px
+	}
+}
+
+@media ( max-width :320px) {
+	.t-datepicker-days {
+		width: 290px
+	}
+	.t-datepicker-days .t-table-wrap {
+		padding: 0 5px
+	}
+}
+
+.t-table-condensed {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	vertical-align: top
+}
+
+.t-next, .t-prev, .t-table-condensed td, .t-table-condensed th {
+	text-align: center;
+	padding: 10px
+}
+
+.t-date-title {
+	clear: both;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+	margin: 0;
+	padding: 15px 0 10px
+}
+
+.t-day, .t-disabled, .t-end, .t-range, .t-start {
+	border-width: 2px;
+	border-style: solid
+}
+
+.t-arrow {
+	border: none
+}
+
+.t-hover-day::after, .t-special-day:before {
+	content: '';
+	border-style: solid
+}
+
+.t-arrow, .t-dates, .t-day, .t-end, .t-end-limit, .t-range, .t-start {
+	cursor: pointer
+}
+
+.t-special-day {
+	position: relative
+}
+
+.t-special-day:before {
+	height: 3px;
+	width: 3px;
+	top: 0;
+	right: 0;
+	position: absolute;
+	display: block;
+	border-width: 3px;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box
+}
+
+.t-hover-day {
+	position: relative
+}
+
+.t-hover-day-content {
+	top: -30px;
+	width: 70px;
+	right: calc(50% - 35px);
+	position: absolute;
+	font-size: 12px;
+	font-weight: 700;
+	padding: 3px 5px;
+	border-radius: 4px;
+	z-index: 9999
+}
+
+.t-hover-day::after {
+	position: absolute;
+	top: -8px;
+	right: calc(50% - 7px);
+	border-width: 7px
+}
+
+.t-today .t-hover-day-content {
+	z-index: 9998
+}
+
+.t-check-in .t-end-limit, .t-disabled {
+	opacity: .25;
+	cursor: auto
+}
+
+.modal-content1 {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 100% display: flex;
+	flex-direction: column;
+	pointer-events: auto;
+}
+
+.modal-content2 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal {
+	z-index: 12000;
+}
+
+.container-bkMap{
+	margin: 7px; 
+	height: 300px
+}

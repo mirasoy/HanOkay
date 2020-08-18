@@ -19,7 +19,7 @@
 					<a href="/hosting/stats/statsChart"><i class="fa fa-camera fa-fw"></i> 한눈에 보기</a>
 				</li>
 				<li>
-					<a href="/hosting/stats/statsRank"><i class="fa fa-arrow-circle-up"></i> 내숙소 랭킹</a>
+					<a href="/hosting/stats/statsRank"><i class="fa fa-arrow-circle-up"></i> 숙소 랭킹</a>
 				</li>
 				<li>
 					<a href="/hosting/stats/stats"><i class="fa fa-krw fa-fw"></i> 매출 </a>
@@ -49,13 +49,11 @@
       <h2 class="timer count-title count-number" data-to="${beforeMonthCount }" data-speed="1500"></h2>
       <p class="count-text ">최근 한달 예약 건수</p>
     </div>
-
-    <div class="counter col_fourth">
-      <i class="fa fa-star fa-2x"></i>
-      <h2 class="timer count-title count-number" data-to="${star }" data-speed="1500"></h2>
-      <p class="count-text ">평균 별점</p>
+	<div class="counter col_fourth end">
+      <i class="fa  fa-bar-chart fa-2x"></i>
+      <h2 class="timer count-title count-number" data-to="${todaysum }" data-speed="1500"></h2>
+      <p class="count-text ">오늘 매출액</p>
     </div>
-
     <div class="counter col_fourth end">
       <i class="fa  fa-bar-chart fa-2x"></i>
       <h2 class="timer count-title count-number" data-to="${count }" data-speed="1500"></h2>
@@ -243,7 +241,7 @@ $(function(){
 	      });
 	    }
 	    function drawPieSegments (animationDecimal) {
-	      var startRadius = -PI / 2,//-90 degree
+	      var startRadius = -PI / 2, //-90 degree
 	          rotateAnimation = 1;
 	      if (settings.animation && settings.animateRotate) rotateAnimation = animationDecimal;//count up between0~1
 
@@ -337,7 +335,7 @@ $(function(){
 			}, options);
 			
 			// how many times to update the value, and how much to increment the value on each update
-			var loops = Math.ceil(settings.speed / settings.refreshInterval),
+			var loops = (settings.speed / settings.refreshInterval),
 				increment = (settings.to - settings.from) / loops;
 			
 			// references & variables that will change with each update
@@ -421,3 +419,4 @@ jQuery(function ($) {
   }
 });
 </script>
+<%@include file="../../includes/footer.jsp"%>

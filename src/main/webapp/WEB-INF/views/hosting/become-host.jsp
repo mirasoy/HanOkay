@@ -42,7 +42,7 @@
 			<div class="acm" id="acm">
 				<h4>게스트가 묵게 될 숙소의 유형을 골라주세요!</h4>
 				<input type="radio" id="acmType_house" name="acmTypes" value="H"><label for="rentType1">집 천제</label> 
-				<input type="radio" id="acmType_priv" name="acmTypes" value="P"><label for="rentType2">객실별 대여</label>
+				<input type="radio" id="acmType_priv" name="acmTypes" value="PD"><label for="rentType2">객실별 대여</label>
 			
 		<form id="actionForm" action="/hosting/become-host" method="post">
 			<br>	
@@ -82,8 +82,8 @@
 			   <input class="form-control"  style="width:200px;display:inline-block;" id="acmFax" name="acmFax" value="" placeholder="숙소  팩스번호(필수아님)" numberOnly><br><br>
 
 				<!-- 위도경도 임시로 넣어줌 ********* 위도경도 바꾸는 api 넣어야함-->
-				<input type="hidden" id="latitude" name="latitude" value="36.7307216">
-				<input type="hidden" id="longitude" name="longitude" value="128.6216116">
+				<input type="hidden" id="latitude" name="latitude" value="">
+				<input type="hidden" id="longitude" name="longitude" value="">
 			
 				
 			 
@@ -126,7 +126,7 @@
 					</select>
 				 </div> 
 				 <br><br> <br><br>
-				  <h4>대표사진 한 장을 포함해 최대 7개의 숙소사진을 업로드해주세요!</h4>
+				  <h4>대표사진 한 장을 포함해 7개의 숙소사진을 업로드해주세요!</h4>
 			  <div class="uploadDiv" style="display:inline-block;">
                     <input type="file" name="uploadFile" multiple="multiple">
                  <div class="uploadResult" style="border-style: dashed;border-color: #337AB7; width:1235px; height:224px;">
@@ -227,8 +227,8 @@ function sample6_execDaumPostcode() {
 		     	    	
 		     	    	
 		     	    	//임시
-		     	    	formObj.append("<input type='hidden' id='latitude' name='latitude' value='"+35.8133295+"'>");
-		     	    	formObj.append("<input type='hidden' id='longitude' name='longitude' value='"+129.1894108+"'>");
+		     	    	//formObj.append("<input type='hidden' id='latitude' name='latitude'>");
+		     	    	//formObj.append("<input type='hidden' id='longitude' name='longitude'>");
 	     	    	}
 	     	    		else chkaddr.value=data.msg;//이미 있으면 바꿔치기
           	   },
@@ -245,7 +245,6 @@ function sample6_execDaumPostcode() {
                if (status === kakao.maps.services.Status.OK) {
                    var result = results[0]; //첫번째 결과의 값을 활용
                    // 해당 주소에 대한 좌표를 받아서
-            	   alert(result);
                    var coords = new kakao.maps.LatLng(result.y, result.x);
 					
                   var latitude=document.getElementById("latitude");
@@ -255,6 +254,9 @@ function sample6_execDaumPostcode() {
 		     	    	formObj.append("<input type='hidden' id='latitude' name='latitude' value='"+result.y+"'>");
 		     	    	formObj.append("<input type='hidden' id='longitude' name='longitude' value='"+result.x+"'>");
 	     	    	} else {
+	     	    		latitude.value='';
+   	     	    		longitude.value='';
+	     	    		
 	     	    		latitude.value=result.y;//이미 있으면 바꿔치기
 	     	    		longitude.value=result.x;
 	     	    	}
@@ -436,6 +438,15 @@ function sample6_execDaumPostcode() {
 			return false;		
 		}
 		
+		
+		// 총 갯수 구하기
+		var total = $(".uploadResult ul >li").length;
+			console.log(total);
+		
+		if(total!=7){
+			alert("7장의 사진을 등록해주세요")
+			return false;
+		}
 		
 		
 		if($("input[name='rep']:checked").val()==undefined){

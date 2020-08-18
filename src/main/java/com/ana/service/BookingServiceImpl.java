@@ -140,4 +140,20 @@ public class BookingServiceImpl implements BookingService{
 		return mapper.dateGetoutBooking(ownerUser,checkoutDate);
 	}
 
+	@Override
+	public int dateGetinPayLater(String ownerUser, String today) {
+		return mapper.dateGetinPayLater(ownerUser,today);
+	}
+
+	@Override
+	public List<BookingVO> getBookinfoRoms(String romNum) {
+		return mapper.getBookinfoRoms(romNum);
+	}
+
+	@Override
+	public PaymentVO getPayment(String bookNum) {
+		// TODO Auto-generated method stub
+		return mapper.getPayment(bookNum);
+	}
+
 }

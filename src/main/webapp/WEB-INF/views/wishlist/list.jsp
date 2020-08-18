@@ -16,8 +16,13 @@
 padding: 0;
 }
 
+.contents {
+    margin-left: 0;
+    padding: 0px 10px;
+}
+
 .contents-2 {
-    margin-left: 45px;
+   
  
     margin-top: 26px;
 
@@ -42,46 +47,6 @@ padding: 0;
 
 
 
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■사이드바■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-	
-	<section class="sidebar">
-	    <div class="sidebar_detail">	
-	        <div class="sidebar-header">
-	            <div class="user-pic"> <img src="${request.contextPath}/resources/img/user.jpg" alt="유저이미지"></div>
-	            <div class="user-info">
-	                <span class="user-name">	               
-	             		<strong><%=userFstName%></strong>님
-	                </span>
-	                <span class="user-role">Administrator</span>
-	                <span class="user-status">
-	                    <i class="fa fa-circle"></i>
-	                    <span>Online</span>
-	                </span>
-	            </div>
-	        </div>
-	        <button class="mypage_btn nav_btn">마이페이지</button>	     
-	        <button class="noaccordion nav_btn">프로필</button>	        
-	        <button class="accordion nav_btn">나의 예약</button>
-	        <div class="side-panel">
-	          <ul>	       	              
-				<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
-				<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
-				<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>	              	              
-	          </ul>
-	        </div>
-	        
-	        <button class="accordion nav_btn">나의 리뷰</button>
-	        <div class="side-panel">
-	          <ul>	       	              
-				<li class="item1"><a href="/review/list">전체목록</a></li>
-				<li class="item2"><a href="/review/writtenReviewlist">작성한 리뷰</a></li>
-				<li class="item3"><a href="/review/unwrittenReviewlist">미작성 리뷰</a></li>             	              
-	          </ul>
-	        </div>           	            
-	         <button class="noaccordion nav_btn nav_btn_last" onclick="location.href='/chat/chatList'">나의 채팅</button>	
-	    </div>
-	</section>
 	
 
 	<section class="contents">
@@ -90,24 +55,15 @@ padding: 0;
 		<!-- Start : accommodation -->
 		<div id="accommodation">
 			<div class="container">
-				<div class="row">
-					<c:forEach items="${list}" var="board">
-						<div class="col-md-4 col-sm-6 fh5co-tours animate-box"
-							data-animate-effect="fadeIn">
-							<div href="#">
-								<img src="../resources/img/place-1.jpg"
-									alt="Free HTML5 Website Template by FreeHTML5.co"
-									class="img-responsive">
-								<div class="desc">
-									<span></span>
-									<h3><c:out value="${board.listTitle}" /></h3>
-									<span><c:out value="${board.listContent}" /></span> <span class="price">$1,000</span>																
-									<a href="${path}/wishlist/remove.do?wishNum=${board.wishNum}" id="deleteBtn" class="deleteBtn btn btn-outline">삭제</a>							
-										
-								</div>
-							</div>
-						</div>
-					</c:forEach>											
+			<div class="row">
+				<a href="/wishlist/list"><button class = 'btn wishopt' value="" style="margin :1%;background-color: #999999;">모두보기</button></a>
+				<a href="/wishlist/list1"><button class = 'btn wishopt'  style="margin :1%; ">관광</button></a>
+				<a href="/wishlist/list2"><button class = 'btn wishopt' style="margin :1%;">휴식</button></a>
+				<a href="/wishlist/list3"><button class = 'btn wishopt'  style="margin :1%;">쇼핑</button></a>
+				<input type='hidden' id= 'wishoptval'>
+			</div>	
+				<div class="row" id="listarea">
+															
 				</div>
 			</div>
 		</div>
@@ -123,7 +79,10 @@ padding: 0;
 <!-- end of container-1 --> 
 
 
+<script type="text/javascript">
 
+
+</script>
 
 
 
@@ -145,6 +104,28 @@ padding: 0;
 	}
 	
 	
+/* 	$('.wishopt').click(function () {
+		var opt =$(this).val();
+		$('#wishoptval').val(opt)
+	})
+	 */
+
+		<c:forEach items="${list}" var="board">
+
+		var str = "";
+				
+				str = '<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">'
+						+ '<div href="#">'
+						+ '<img src="/display?fileName=<c:out value="${board.acm.acmPurl}" /><c:out value="${board.acm.acmPname}" />" class="img-responsive">'
+						+ ' <div class="desc">'
+						+ '<h3><c:out value="${board.listTitle}" /></h3>'
+						+ '<span><c:out value="${board.listContent}" /></span> <span class="price"><c:out value="${board.acm.acmName}" /></span>		'
+						+ '<a href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=<c:out value='${board.acmNum}' />" id="deleteBtn" class="deleteBtn btn btn-outline">자세히보기</a>		'
+						+ '<a href="${path}/wishlist/remove.do?wishNum=${board.wishNum}" id="deleteBtn" class="deleteBtn btn btn-outline">삭제</a>	'
+						+ '</div>	</div></div>';
+
+				$('#listarea').append(str);
+		</c:forEach>
 	</script>
 
 

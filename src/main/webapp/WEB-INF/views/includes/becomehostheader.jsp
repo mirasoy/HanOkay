@@ -97,8 +97,9 @@
 	}
 	
 	.panel-heading {
-		color: #333;
-		background-color: #D2AC70 !important;
+		color: white !important;
+		background-color: #3f7e95 !important;
+		border-radius: 0px !important;
 		border-color: #ddd;
 	}
 	.containerMR{
@@ -138,22 +139,7 @@
 
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="/memmode/profile">
-                                <div>
-                                    	프로필
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/memmode/account">
-                                <div>
-                                    	계정
-                                </div>
-                            </a>
-                        </li>
-                        
-                        <li class="divider"></li>
+                      
                         <li>
                             <a href="#">
                                 <div>

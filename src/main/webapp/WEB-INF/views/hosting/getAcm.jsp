@@ -1,6 +1,237 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" >
 
-<%@include file="../includes/hostheader.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="com.ana.domain.UserVO"%>
+<!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
+<%
+      UserVO user = (UserVO) session.getAttribute("user");
+      String userLastName = "";
+      String userFstName = "";
+      String userPwd = "";
+      String userNum = "";
+      String userPriv ="";
+      String userStatusCode ="";//이걸로 새 숙소등록하기가 보이던지 사업자등록증이 보이던지 결정할거임
+      //userNum = "U1";
+      
+      //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+      if (user != null) {
+         userLastName = user.getUserLastName();
+         userFstName = user.getUserFstName();
+         userPwd = user.getUserPwd();
+         userNum = user.getUserNum();
+         userPriv=user.getUserPriv();
+         userStatusCode=user.getUserStatusCode();
+      }
+      
+%>
+   <style>
+   
+   
+.testbtn {
+  border:none;
+  outline: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 18px;
+  color : #000;
+  background-color:#fff;
+  
+}
+
+
+.acttive{   
+  border-bottom: 5px solid #235d6e; 
+}
+   
+   
+   
+   
+   .panel-heading {
+       color: #333;
+       background-color: #235d6e !important;
+       border-color: #ddd;
+    }
+   </style>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Han:ok- host's place for better places</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- 미라 css -->
+    <link rel="stylesheet" type="text/css" href="/resources/css/stats.css">
+   <style>
+      html,body{
+         font-family:Verdana, sans-serif;
+         background-color:white;
+      }
+      
+      #logo{
+         width:50px;
+         height:20px;
+      }
+   </style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:20px;margin-bottom:0;background-color:white;">
+
+            <div class="navbar-header" style="margin-bottom:15px;">     
+            <!-- 로고자리 -->
+                <a class="navbar-brand" href="/hosting/hostindex">Han:Ok for Host</a>
+            </div>
+            <!-- /.navbar-header -->
+
+         <!-- 왼쪽 nav -->
+        <ul class="nav navbar-top-links navbar-left" id="hostonly">
+            <li class="nav-menu">
+               <a href="/hosting/reserv">예약</a><!-- 예약관리 -->
+            </li>
+            <li class="nav-menu">
+               <a href="/hosting/listings" class="acttive">숙소</a>
+            </li>
+            <li class="nav-menu">
+               <a href="/chat/chatList2" class="testbtn">메시지</a>
+            </li>
+            <li class="nav-menu">
+               <a href="/hosting/stats/statsChart" class="testbtn">성취도</a>
+            </li>
+         </ul>
+         
+         <!-- 오른쪽 nav -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="nav-menu">
+             	  <a id="adminonly" href='/admin/adminindex'>관리자 모드 보기</a>
+            	</li>
+                 
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                           <c:out value="${userFstname}"/>님 환영합니다!<i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="/memmode/profile">
+                                <div>
+                                       프로필
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/memmode/account">
+                                <div>
+                                       계정
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                       커뮤니티 센터
+                                </div>
+                            </a>
+                        </li>
+                       
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/acm/list">
+                                <div>
+                                       Han:ok 메인페이지로
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href='/user/logout'>
+                                <div>
+                                       로그아웃
+                                </div>
+                            </a>
+                        </li>
+                     </ul>
+                     
+                     </li>
+                     </ul>
+                     
+        </nav>
+</div>
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+   $(document).ready(function() {
+     var user='<%=user%>';
+      if(user==null){
+         alert("회원만 접근할 수 있습니다");
+         location.href="/acm/list";
+      }
+     var priv ='<%=userPriv%>';
+      var userStatusCode='<%=userStatusCode%>';        
+               
+      if(priv!="ADMIN")$("#adminonly").css("display","none"); 
+      if(userStatusCode=="ACTIVE"){
+         alert("숙소등록을 한 회원만 접근할 수 있습니다");
+         location.href="/acm/list";
+
+      } else if(userStatusCode=="HO_PENDING"){
+         $("#hostonly").css("display","none"); 
+     }
+   });
+   
+/*    
+   $('#hostonly li').click(function(e) {
+       console.log("잘된다");
+       e.preventDefault();
+       $('#hostonly li').removeClass('acttive');
+       $(this).addClass('acttive');
+    });      
+ }); */
+
+ 
+
+   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 	<style>
 		a{
 			color: #21292d;
@@ -113,6 +344,7 @@
 		<button class="btn btn-default" type="button" data-oper='backtolist'>숙소 목록으로</button>
 		<button class="btn btn-default" type="button" data-oper='viewMyacm'>숙소 미리보기</button>
 		<button class="btn btn-danger" type="button" data-oper='removeAcm'>숙소 삭제하기</button>
+		<button id="isDenied" class="btn btn-info" type="button" data-oper='reregAcm'>숙소 재신청</button>
 		</div>
 		<br><br><br>
 		
@@ -124,33 +356,36 @@
 	      <div class="panel-body">
 			
 	        <div class="form-group">
-	          <label>숙소대표사진</label> <div class="pull-right"><button type="button" data-oper='editAcm'>사진 편집</button></div>
+	          <label>숙소대표사진</label> <div class="pull-right"></div>
 	          <div class="slideshow-container">
 					<br><br>
 
 					<div class="mySlides" id="mySlide0">
-					  <div class="numbertext">1 / 6</div>
+					  <div class="numbertext">1 / 7</div>
 					</div>
 					
 					<div class="mySlides" id="mySlide1">
-					  <div class="numbertext">2 / 6</div>
+					  <div class="numbertext">2 / 7</div>
 					  
 					</div>
 
 					<div class="mySlides" id="mySlide2">
-					  <div class="numbertext">3 / 6</div>
+					  <div class="numbertext">3 / 7</div>
 					</div>
 
 					<div class="mySlides" id="mySlide3">
-					  <div class="numbertext">4 / 6</div>
+					  <div class="numbertext">4 / 7</div>
 					</div>
 
 					<div class="mySlides" id="mySlide4">
-					  <div class="numbertext">5 / 6</div>
+					  <div class="numbertext">5 / 7</div>
 					</div>
 
 					<div class="mySlides" id="mySlide5">
-					  <div class="numbertext">6 / 6</div>
+					  <div class="numbertext">6 / 7</div>
+					</div>
+					<div class="mySlides" id="mySlide6">
+					  <div class="numbertext">7 / 7</div>
 					</div>
 					
 					
@@ -166,6 +401,7 @@
 			   <span class="dot" onclick="currentSlide(4)"></span> 
 			   <span class="dot" onclick="currentSlide(5)"></span> 
 			   <span class="dot" onclick="currentSlide(6)"></span> 
+			   <span class="dot" onclick="currentSlide(7)"></span> 
 			</div>
 	          
           </div>
@@ -179,11 +415,15 @@
  	
 		<div class="col-lg-9">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				숙소 정보 <span class="pull-right"><c:out value="${acm.acmNum}" />&nbsp;<span id="<c:out value="${acm.acmActi}" />"></span>&nbsp;&nbsp;&nbsp;<button type="button" data-oper='editAcm'>숙소 정보 변경</button></span>
-			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
+			<div class="form-group">
+				<label>숙소 정보</label> 
+				<span class="pull-right"><c:out value="${acm.acmNum}" />&nbsp;<span id="<c:out value="${acm.acmActi}" />"></span>
+				&nbsp;<button type="button" data-oper='editAcm'>숙소 정보 변경</button>
+				</span>
+				<input type="hidden" name="acmNum" id="acmNum" value='<c:out value="${acm.acmNum}" />'>
+				<br><br>
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
@@ -210,7 +450,7 @@
 							<th>숙소 팩스</th>
 							<th>체크인/체크아웃</th>
 							<th>숙소 이메일</th>
-							<th colspan="2">숙소 소개</th>
+							<th colspan="2">숙소 위치</th>
 						</tr>
 					</thead>
 
@@ -218,9 +458,16 @@
 							<td><c:out value="${acm.acmFax}" /></td>
 							<td><c:out value="${acm.checkinTime}" />&nbsp;/&nbsp;<c:out value="${acm.checkoutTime}" /></td>
 							<td><c:out value="${acm.acmEmail}" /></td>							
-							<td colspan="2"><c:out value="${acm.acmDesc}" /></td>
+							<td colspan="2"><c:out value="${acm.acmCity}" />&nbsp;<c:out value="${acm.acmDistr}" />&nbsp;<c:out value="${acm.acmDetailaddr}" /></td>
 						</tr>
-						
+					<thead>
+						<tr>
+							<th colspan="5">숙소 소개</th>
+						</tr>
+					</thead>	
+						<tr>
+							<td colspan="5"><c:out value="${acm.acmDesc}" /></td>
+						</tr>	
 					<thead>
 						<tr>
 							<th colspan="5">숙소 옵션</th>
@@ -230,6 +477,7 @@
 							<td colspan="5"><div id="acmOpt">&nbsp;</div></td>
 						</tr>
 				</table>
+				</div>
 				</div>
 				<!--  end panel-body -->
 			</div>
@@ -242,7 +490,7 @@
 		<div class="col-lg-9">
 		<div class="panel panel-default hostonly">
 			<div class="panel-heading">
-				객실 정보
+				객실 정보<span class="pull-right"><button type="button" data-oper='editRom'>객실 정보 변경</button>&nbsp;<button type="button" data-oper='newRom'>객실 추가</button></span>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -291,6 +539,19 @@
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	//getAcm 페이지가 켜질때
+	var stat='<c:out value="${acm.acmStatus}" />';
+	if(stat!="DENIED"){
+		$("#isDenied").css("display","none"); 
+	}
+	
+	
+	//사진크게보기
+	var img = document.getElementsByTagName("img");
+    for (var x = 0; x < img.length; x++) {
+      img.item(x).onclick=function() {window.open(this.src)}; 
+    }
+	
 		
 	var acmAc='<c:out value="${acm.acmActi}" />';//숙소ACTIVE여부
 		console.log(acmAc);
@@ -311,7 +572,7 @@ $(document).ready(function(){
 			$('#<c:out value="${acm.acmType}"/>').append("집전체");
 		}
 			
-		else if(acmType.trim()=="PD"){//집천체
+		else if(acmType.trim()=="PD"||acmType.trim()=="P"){//집천체
 			$('#<c:out value="${acm.acmType}"/>').append("객실별");
 		}
 	
@@ -321,13 +582,13 @@ $(document).ready(function(){
 		//사진슬라이드 펑션 부르기
 		let mySlides=new Array();
 
-		for(let i=0;i<6;i++){
+		for(let i=0;i<7;i++){
 			mySlides[i]=document.getElementById("mySlide"+ i);//넣는곳
 		}
 		
 		let j=0;
 		<c:forEach items="${acmPics}" var="pic">
-			mySlides[j].innerHTML+="<img style='align:center;width: 300px; height:auto;' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }"/>'>";
+			mySlides[j].innerHTML+="<img style='align:center;max-width: 250px; width:auto;height:300px;' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }"/>'>";
 			j++;
 		</c:forEach>
 	
@@ -368,7 +629,7 @@ $(document).ready(function(){
 		
 	
 		for(let k=0; k<option.length; k++){
-			if(option.charAt(k) == 1){
+			if(option.charAt(option.length-1-k) == 1){
 				document.getElementById("acmOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
 			}
 		}
@@ -377,6 +638,8 @@ $(document).ready(function(){
 	
 	$(document).ready(function(){
 		var formObj = $("#actionForm");
+		var acmNum=$('#acmNum').val();
+
 		$('button').on("click", function(e){
 			e.preventDefault();
 			
@@ -388,16 +651,54 @@ $(document).ready(function(){
 				alert("숙소목록으로 돌아갑니다");
 				location.href="/hosting/listings";
 			} else if(operation==='viewMyacm'){
-				alert("==준비중(팝업으로)===")
-			} else if(operation==='editAcmPic'){
-				alert("==사진수정(팝업으로)===")
-			} else if(operation==='editAcm'){
-				alert("==숙소정보 변경(팝업으로)===")
+				alert("==준비중(검색시 객실 연출 페이지)===");
+			}else if(operation==='editAcm'){
+				formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
+				formObj.attr("action","/hosting/modiAcm");
+				formObj.submit();					
+			} else if(operation==='newRom'){
+				var openWin;//자식창
+				
+				var _width='800';
+				var _height='800';
+				
+				var _left=Math.ceil((window.screen.width-_width)/2);
+				var _top=Math.ceil((window.screen.width-_height)/2);
+				
+				
+		        window.name = "parentForm";
+		        
+
+		        // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+		        openWin = window.open('/hosting/newRompop?acmNum='+acmNum,'childForm',
+		        		'width='+_width+', height='+_height+', left='+_left+', top='+_top+', resizable = no, scrollbars = no');   
+		        
 			}else if(operation==='editRom'){
-				alert("==객실정보 변경(팝업으로)===")
+				var openWin;//자식창
+				
+				var _width='800';
+				var _height='800';
+				
+				var _left=Math.ceil((window.screen.width-_width)/2);
+				var _top=Math.ceil((window.screen.width-_height)/2);
+				
+				
+		        window.name = "parentForm";
+		        
+
+		        // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+		        openWin = window.open('/hosting/modiRompop?acmNum='+acmNum,'childForm',
+		        		'width='+_width+', height='+_height+', left='+_left+', top='+_top+', resizable = no, scrollbars = no');   
+		        
+				
+			}else if(operation==='reregAcm'){
+				alert("숙소를 재신청합니다");
+				formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
+				formObj.attr("method","post");
+				formObj.attr("action","/hosting/reregAcm");
+				formObj.submit();
 			}else if(operation==='removeAcm'){
-				if(confirm("객실을 정말 삭제하시겠습니까?")==true){//숙소, 객실 INACTIVE되어야함
-					var acmNum="<c:out value='${acm.acmNum}'/>";
+				if(confirm("숙소를 정말 삭제하시겠습니까?")==true){//숙소, 객실 INACTIVE되어야함
 					alert(acmNum);
 					formObj.append("<input type='hidden' name='acmNum' value='"+acmNum+"'>");
 					formObj.attr("method","post");
@@ -409,7 +710,7 @@ $(document).ready(function(){
 			}  
 		});
 	});
-
+	
 
 	$(document).ready(function(){
 		$(".move").on("click", function(e){

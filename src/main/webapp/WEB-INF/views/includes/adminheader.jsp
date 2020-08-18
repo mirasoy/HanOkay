@@ -59,6 +59,17 @@
 			width:50px;
 			height:20px;
 		}
+		
+		.active{   
+		  border-bottom: 5px solid #775062; 
+		}
+		
+		.panel-heading {
+			color: white !important;
+			background-color: #775062 !important;
+			border-radius: 0px !important;
+			border-color: #ddd;
+		}
 	</style>
 </head>
 
@@ -73,30 +84,25 @@
             <div class="navbar-header" style="margin-bottom:15px;">
                 
 				<!-- 로고자리 -->
-                <a class="navbar-brand" href="/admin/adminindex">Han:Ok</a>
+                <a class="navbar-brand" href="/admin/adminindex">Han:Ok for Admin</a>
             </div>
             <!-- /.navbar-header -->
 
 			<!-- 왼쪽 nav -->
             <ul class="nav navbar-top-links navbar-left">
 				<li class="nav-menu">
-					<a href="/admin/adminindex">알림판</a><!-- 예약관리 -->
+					<a href="/admin/adminlistings" class="testbtn">숙소관리</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/admin/userStat">회원관리</a>
+					<a href="/admin/userStat" class="testbtn">회원관리</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/admin/adminlistings">숙소관리</a>
+					<a href="#" class="testbtn">메시지</a>
 				</li>
 				<li class="nav-menu">
-					<a href="#">메시지</a>
+					<a href="/admin/stats/mapChart" class="testbtn">매출관리</a>
 				</li>
-				<li class="nav-menu">
-					<a href="#">성취도</a>
-				</li>
-				<li class="nav-menu">
-					<a href="#">도움말</a>
-				</li>
+				
 			</ul>
 			
 			
@@ -131,5 +137,22 @@
 	    	  location.href="/acm/list";
 	      } 
 	 });
+	 
+	//Get the container element
+	 var btnContainer = document.getElementsByClassName("navbar-left");
+
+	 // Get all buttons with class="btn" inside the container
+	 var btns = btnContainer.getElementsByClassName("testbtn");
+
+	 // Loop through the buttons and add the active class to the current/clicked button
+	 for (var i = 0; i < btns.length; i++) {
+	   btns[i].addEventListener("click", function() {
+	      
+	    console.log("잘된다");
+	     var current = document.getElementsByClassName("active");
+	     current[0].className = current[0].className.replace(" active", "");
+	     this.className += " active";
+	   });
+	 }
 	   
 	</script>

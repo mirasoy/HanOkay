@@ -153,7 +153,7 @@ from
    from
       (select a.acm_purl, a.acm_pname, a.acm_num, a.acm_name, a.acm_city, a.acm_distr, a.acm_detailaddr, a.rep_phone, a.acm_desc, a.latitude, a.longitude, a.ACM_OPTCODE, min(r.rom_price) acm_price
         from tacm a, trom r
-        where a.acm_num = r.acm_num and (rom_capa >= to_number(#{cri.person})) and 
+        where a.acm_num = r.acm_num and (rom_capa >= to_number(#{cri.person})) and ACM_ACTI='ACTIVE' and ROM_ACTI='ACTIVE' and (rom_price BETWEEN #{cri.minPrice} and #{cri.maxPrice}) and 
         ]]>
            ROM_NUM not in 
         	<foreach collection='romNum' index='index' item='romNum' open='(' close=')' separator=','>
@@ -183,7 +183,7 @@ from
    from
       (select a.acm_purl, a.acm_pname, a.acm_num, a.acm_name, a.acm_city, a.acm_distr, a.acm_detailaddr, a.rep_phone, a.acm_desc, a.latitude, a.longitude, a.ACM_OPTCODE, min(r.rom_price) acm_price
         from tacm a, trom r
-        where a.acm_num = r.acm_num and (rom_capa >= to_number(#{cri.person})) and 
+        where a.acm_num = r.acm_num and (rom_capa >= to_number(#{cri.person}))  and ACM_ACTI='ACTIVE' and ROM_ACTI='ACTIVE' and (rom_price BETWEEN #{cri.minPrice} and #{cri.maxPrice}) and  
         ]]>
            ROM_NUM not in 
         	<foreach collection='romNum' index='index' item='romNum' open='(' close=')' separator=','>
@@ -198,4 +198,7 @@ from
 ]]>
 </select>
 
+<select id="getSeoulList" resultMap="AcmVOResult">
+SELECT * FROM TACM where acm_city = '서울'
+</select>
 </mapper>

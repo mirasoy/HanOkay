@@ -27,6 +27,11 @@ public class BookingVO {
 	private String bookerEmail;
 	private String bookerPhone;
 	private String bookStatus;
+	private String acmPurl;
+	private String acmPname;
+	private String payMethod;
+
+	
 	
 	//소림추가
 	private String acmName;

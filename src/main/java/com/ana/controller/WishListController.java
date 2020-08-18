@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ana.domain.UserVO;
 import com.ana.domain.WishListVO;
+import com.ana.service.AcmService;
 import com.ana.service.WishListService;
 
 import lombok.AllArgsConstructor;
@@ -37,6 +39,8 @@ import lombok.extern.log4j.Log4j;
 public class WishListController {
 
 	private WishListService service;
+	private AcmService acmService;
+	
 	
 	//세션에서 유저 이름을 가져오는 메서드
 	public String getUsername(HttpSession session) {
@@ -50,7 +54,7 @@ public class WishListController {
 	}
 	
 	//조회
-	@GetMapping("/list")
+	@GetMapping({"/list","/list2","/list3","/list1"})
 	public void list(Model model, HttpSession session) {
 		
 		String loginUserNum = (String) session.getAttribute("loginUserNum");
@@ -66,9 +70,14 @@ public class WishListController {
 		userPwd= user.getUserPwd();
 		userNum= user.getUserNum();
 		} 
+		List<WishListVO> list = service.getWishList(userNum);
+		
+		for(WishListVO vo : list) {
+			vo.setAcm(acmService.get(vo.getAcmNum()));
+		}
 		
 		log.info("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■list");
-		model.addAttribute("list", service.getWishList(userNum));
+		model.addAttribute("list", list);
 	}
 	
 	
@@ -145,18 +154,6 @@ public class WishListController {
     }
     
   
-//    @DeleteMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE })
-//	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
-//
-//		log.info("remove: " + String);
-//
-//		return service.wishRemove(rno) == 1 
-//				? new ResponseEntity<>("success", HttpStatus.OK)
-//				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//
-//	}
-
-
 	
 	
 }

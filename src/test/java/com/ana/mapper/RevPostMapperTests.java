@@ -7,6 +7,7 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,9 +23,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 
 public class RevPostMapperTests {
-	
-	@Setter(onMethod_= @Autowired)
-	private RevPostMapper mapper;
+	/*
+	 * @Setter(onMethod_= @Autowired) private RevPostMapper mapper;
+	 */
 	
 	/*
 	
@@ -55,7 +56,7 @@ public class RevPostMapperTests {
 	
 	
 	
-	@Test
+	//@Test
 	public void testInsert() {
 		RevVO post = new RevVO();
 		post.setBrdCode("REV");
@@ -72,17 +73,14 @@ public class RevPostMapperTests {
 		log.info(post);
 	}
 	
-	 @Test
+	// @Test
 	public void testReadByBookNum() {
 		RevVO post = mapper.readByBookNum("B5");
 		log.info(post);
 	}
 	
 
-    @Test
-public void testGetMyList() {
-	mapper.getUserBookingACList("U1").forEach(post -> log.info(post));
-}
+
 
 
  
@@ -97,47 +95,26 @@ public void testGetMyList() {
 	*/
 	
 	
-	//@Test
-	public void testGetList2() {
-		mapper.getAcmList("A2").forEach(post -> log.info(post));
-	}
-	
-	
-//	@Test
-    public void testGetList() {
-		mapper.getList().forEach(post -> log.info(post));
-	}
-	
-	//@Test
-    public void insertPhoto() {
-    	
-		RevPicVO vo = new RevPicVO();
-		vo.setPstNum("RV44");
-		vo.setPname("e0d2fa25-c60c-4980-a3d9-3cd185db8616_2.gif");
-		vo.setPurl("c:/upload/review/2020/07/20/");
-		
-		mapper.insertPhoto(vo);
-    }
-	@Test
-	public void deletePhoto() {
-		
-		RevPicVO vo = new RevPicVO();
-		vo.setPstNum("RV44");
-		vo.setPname("e0d2fa25-c60c-4980-a3d9-3cd185db8616_2.gif");
-		vo.setPurl("c:/upload/review/2020/07/20/");
-		
-		mapper.deletePhoto(vo);
-	}
-    
+//	//@Test
+//	public void testGetList2() {
+//		mapper.getAcmList("A2").forEach(post -> log.info(post));
+//	}
+//	
+//	
+//	//@Test
+//    public void testGetList() {
+//		mapper.getList().forEach(post -> log.info(post));
+//	}
+//	
+//	//@Test
+//    public void insertPhoto() {
+//    	
+//		RevPicVO vo = new RevPicVO();
+//		vo.setPstNum("RV44");
+//		vo.setPname("e0d2fa25-c60c-4980-a3d9-3cd185db8616_2.gif");
+//		vo.setPurl("c:/upload/review/2020/07/20/");
+//		
+//		mapper.insertPhoto(vo);
 
-
-
-
-
-	
-	
-
-	
-	
 
 }

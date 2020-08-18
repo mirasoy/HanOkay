@@ -1,9 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
-<title>HanOkay-회원가입</title>
+pageEncoding="UTF-8"%> 
 
-<!-- Register CSS -->
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/register.css" >
+<%@include file="../includes/header1.jspf"%>
+<title>HanOkay 한오케이 - 회원가입</title>
+<style>
+
+  body {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  main,
+  section,
+  header,
+  div {
+    display: block;
+  }
+
+  form {
+    display: block;
+    margin-top: 0em;
+  }
+
+  *,
+  ::after,
+  ::before {
+    box-sizing: border-box;
+  }
+
+  .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+ 
+ .container2_SR{
+    width: 600px;
+    border: 1px solid #dadfe6;
+    border-radius: 16px;
+    z-index: 1;
+    margin: 7% 13%;
+    background: #fff;
+    overflow-x: hidden;
+    padding: 8px 0;
+    position: absolute;
+    padding-left: 0.5%;
+  }
+  
+  @media (min-width: 744px){
+.container2_SR {
+    width: 100% !important;
+    max-width: 568px !important;
+    border-radius: 12px !important;
+	}
+}
+
+  .out_SR {
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+  }
+  .header1_SR {
+    position: relative;
+    margin-top: 64px;
+    margin-bottom: 56px;
+    margin-left: 16px;
+  }
+
+  .h1Tag_SR {
+    color: inherit !important;
+    font-size: 1em !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+
+  .header2_SR {
+    overflow-wrap: break-word !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+      "Helvetica Neue", sans-serif !important;
+    font-size: 32px !important;
+    font-weight: 800 !important;
+    line-height: 1.125em !important;
+    color: rgb(72, 72, 72) !important;
+    margin-left: 4px !important;
+  }
+
+  .content_SR {
+    overflow-y: auto !important;
+    padding: 24px !important;
+    padding-top: 24px !important;
+    padding-right: 24px !important;
+    padding-bottom: 24px !important;
+    padding-left: 24px !important;
+    flex: 1 1 auto !important;
+    outline: none !important;
+  }
+  .shapeOfForm{
+    width: 600px;
+    height: 500px;
+    border: 1px solid #dadfe6;
+    border-radius: 16px;
+    z-index: 1;
+    margin: 0 auto;
+    background: #fff;
+    overflow-x: hidden;
+    padding: 8px 0;
+    text-align: center;
+    max-width: 1140px;
+  }
+
+  .shapeOfForm2{
+    margin: 30px auto;
+  }  
+
+  .contentOfInfo_SR {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    min-height: 1px !important;
+    position: relative !important;
+  }
+
+.inputBox_SR{
+  	display: block !important;
+    width: 100% !important;
+}
+
+.inputBox2_SR{
+    font-size: var(--font-form-element-font-size, 16px) !important;
+    line-height: var(--font-form-element-line-height, 24px) !important;
+    letter-spacing: var(--font-form-element-letter-spacing, normal) !important;
+    font-family: var(--font-form-element-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
+    text-transform: var(--font-form-element-text-transform, undefined) !important;
+    color: #484848 !important;
+    padding-top: var(--font-form-element-padding-top, undefined) !important;
+    padding-bottom: var(--font-form-element-padding-bottom, undefined) !important;
+    background-color: #ffffff !important;
+    margin-bottom: var(--unit, 8px) !important;
+}
+
+.titleOfOneInfo_SR{
+    overflow-wrap: break-word !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.375em !important;
+    color: rgb(72, 72, 72) !important;
+    margin: 0px !important;
+}
+
+.btn btn-sendEmail{
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    padding: 12px 20px;
+    width: 498px;
+}
+
+
+
+.contents_out{
+    padding-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+	
+}
+
+.fa-envelope{
+	background-color: #eee;
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    line-height: 116px;
+    border-radius: 96px;
+	
+}
+
+.contents_img{
+	text-align: center;
+    max-width: 568px !important;
+   	padding: 25px;
+	
+}
+
+.contents_txt{
+	    text-align: center;
+    
+}
+
+.red{
+	color: red;
+}
+
+
+.Emailform{
+	    text-align: center;
+}
+
+#enteredAuthCode{
+	border: 0;
+    background-color: #eee;
+    height: 36px;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 292px;
+}
+
+.btn-sumbit{
+ 	color: #fff;
+	background-color: #007bff;
+    height: 36px;
+    text-align: center;
+    line-height: 10px;
+    font-weight: 800;
+}
+
+#sendAgain{
+	  /* height: 21px; */
+    /* line-height: 1px; */
+    background-color: #fff;
+    cursor: pointer;
+    /* display: inline-block; */
+    /* font-size: 0.85rem; */
+    /* font-weight: 400; */
+    border: 1px solid transparent;
+    padding: 12px 8px;
+    border-radius: 10px;
+    color: #007bff;
+}
+
+  
+</style>
+<%@include file="../includes/header2.jspf"%>
+<%@include file="../includes/header3.jspf"%>
+
 
 
 
@@ -13,7 +253,7 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
     <section>
       <div
       style="
-          position: relative;
+          position: absolute;
           margin-top: 64px;
           margin-bottom: 56px;
           margin-left: 16px;
@@ -21,7 +261,7 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
       >
       <h1><div class="header2_SR">회원가입</div></h1>
     </div>
-    <!--  action= "/register/emailAuth" -->
+
   </section>
 </div>
 
@@ -29,12 +269,20 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
   <div class="content_SR">   
     <form class="contentOfInfo_SR" method="post" id="form">
       <div style="margin-bottom: 16px;">
+      
+          <div>
+        	<span style="color: red; font-size: 18px" id="msg1">
+              <c:out value="${msg1 }" />
+            </span>
+              <br />   
+          </div>
+      
         <div class="titleOfOneInfo_SR">
             Email(*)
       </div>
             <div class="inputBox_SR">   
             <div class="inputBox2_SR">
-            
+                      
             <input
               type="text"
               size="57"
@@ -45,17 +293,10 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
               value="${userEmail }"
             />
             </div>  
-            <button data-oper="checkEmail" class="btn btn-default"  style="width: 500px;">
+            <button data-oper="checkEmail" class="btn btn-default"  style="width: 488px;">
               이메일 중복체크
             </button>
           </div>
-      </div>
-
-          
-      <div>
-        <span style="color: red;" id="msg1"
-              ><c:out value="${msg1 }" /></span
-            ><br />   
       </div>
 
       <div style="margin-bottom: 16px;">
@@ -94,17 +335,25 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
      </div>
     </div>
        
-    <div style="margin-bottom: 16px;">
+  <div style="margin-bottom: 16px;">
+  
+  	<div>
       <span style="color: black;" id="msg2"
-      ><c:out value="${msg2 }" /></span
-    ><br />
-    <span style="color: black;" id="msg3"
-      ><c:out value="${msg3 }" /></span
-    ><br />
-      <div class="titleOfOneInfo_SR">
+      ><c:out value="${msg2 }" />
+      </span>
+  	</div>
+  	
+ 	<div>
+      <span style="color: black;" id="msg3">
+      <c:out value="${msg3 }" />
+     </span>
+    </div>
+    
+    <div class="titleOfOneInfo_SR">
         성(*)
-      </div>
-        <div class="inputBox_SR">
+    </div>
+    
+    <div class="inputBox_SR">
       <div class="inputBox2_SR"> 
        <input
        type="text"
@@ -140,8 +389,8 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
   <div class="titleOfOneInfo_SR">
     생년월일(*)
   </div>
-<div class="inputBox_SR">
-<div class="inputBox2_SR"> 
+  <div class="inputBox_SR">
+  <div class="inputBox2_SR"> 
   <input type="text" size="57" id="date" placeholder="생년월일을 선택하세요"/>
 </div>
 </div>
@@ -165,7 +414,7 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
     data-oper="sendEmail"
       class="btn btn-default"
       id="sendEmail"
-      style="width: 500px;"
+      style="width: 488px;"
     >
       인증메일 발송
     </button>
@@ -189,15 +438,14 @@ pageEncoding="UTF-8"%> <%@include file="../includes/header.jsp"%>
         value="${assureEmail}"
         />
       </form>
-      
-      이미 HanOkay의 계정이 있나요? <a href="../user/login">로그인으로 돌아가기</a>
-      
-    </div>
-  	</div>
+      <div style="font-size: 18px; display:inline; margin-left: 80px;">
+     	 이미 Han:Ok의 계정이 있나요? 
+      	<a href="../user/login" style="color: #007bff">로그인으로 돌아가기</a>
+      </div>
     </div>
   </div>
- </div>
 </div>
+
 <script>
   //빈값체크
   function isEmpty(target) {

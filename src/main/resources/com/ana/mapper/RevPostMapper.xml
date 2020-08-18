@@ -43,8 +43,14 @@
 		<result column="PST_PURL" property="purl" />
 		<result column="PST_PNAME" property="pname" />
 		<result column="PST_PREGDATE" property="pregdate" />
+		<result column="ACM_PURL" property="acmpurl" />
+		<result column="ACM_PNAME" property="acmpname" />
 	</resultMap>
 
+	<!-- 내가 쓴 리뷰 갯수 by 세린 -->
+	<select id="getMyReviewCount" resultType="int">
+	select count (*) from treview where user_num=#{userNum}	
+	</select>
 
 	<resultMap id="RevPicVo" type="com.ana.domain.RevPicVO">
 		<result column="PST_NUM" property="pstNum" />
@@ -139,7 +145,7 @@
 		J.book_num = #{bookNum}
 
 		ORDER BY
-		J.checkin_Date
+		J.checkin_Date DESC
 
 	</select>
 
@@ -160,12 +166,16 @@
 		J.BOOK_NUM ,
 		J.ACM_NAME ,
 		J.CHECKIN_DATE ,
-		J.CHECKOUT_DATE
+		J.CHECKOUT_DATE,
+		J.ACM_PURL ,
+		J.ACM_PNAME
 
 		FROM
 		(
 		SELECT
 		A.ACM_NUM ,
+		A.ACM_PURL ,
+		A.ACM_PNAME ,
 		B.BOOK_NUM ,
 		A.ACM_NAME ,
 		B.CHECKIN_DATE ,
@@ -188,10 +198,10 @@
 		J.BOOK_NUM =
 		pst.BOOK_NUM(+)
 		AND
-		J.user_num ='U1'
+		J.user_num =#{loginUser}
 
 		ORDER BY
-		J.checkin_Date
+		J.checkin_Date  DESC
 
 	</select>
 
@@ -227,8 +237,7 @@
 		B.ROM_NUM=R.ROM_NUM
 		AND
 		R.ACM_NUM=A.ACM_NUM
-		AND
-		B.BOOK_STATUS='RS_STT_AC'
+		
 		)J,
 
 		TREVIEW PST

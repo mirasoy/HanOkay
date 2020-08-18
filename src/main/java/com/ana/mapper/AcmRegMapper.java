@@ -34,8 +34,12 @@ public interface AcmRegMapper {
 	//가져온다
 	public int getNotPendingAcms(@Param("acmNum")String acmNum,@Param("ownerUserNum")String ownerUserNum, @Param("acmActi")String acmActi);
 	
+	public int removeAcmPic(String acmNum);//지운다
 	public int removeAcm(String acmNum);//지운다
 	public int removeAcmso(String acmNum);//지운다
+	//숙소 수정
+	public int modiAcm(AcmVO vo);
+	public int reregAcm(String acmNum);
 	
 	
 	////////////어드민단////////////

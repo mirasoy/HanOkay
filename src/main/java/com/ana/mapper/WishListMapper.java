@@ -30,8 +30,5 @@ public interface WishListMapper {
 	public Integer countCart(WishListVO board);		
 	
 	public List<WishListVO> drawValue(@Param("userNum")String userNum, @Param("acmNum") String acmNum);
-	
-	
-	
 
 }

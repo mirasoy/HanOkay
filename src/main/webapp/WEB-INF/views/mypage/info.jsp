@@ -4,77 +4,100 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 
-<div class="row">
-  <div class="col-lg-12">
-    <h1 class="page-header">예약 상세 페이지</h1>
-  </div>
-  <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
+<!-- 사이트바 CSS -->
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
+<style>
 
-<div class="row">
-   <div class="col-lg-12">
-      <div class="panel panel-default">
-         <div class="panel-heading">
-            예약 수정 가능            
-         </div>
+.page-header-content{
+padding-bottom: 20px;
+}
 
-      
-      <div class="panel-body">
-       
 
-        <div class="form-group info-group">
-          <label>#예약번호</label> <input class="form-control" name='bookNum'
-            value='<c:out value="${info.bookNum}"/>' readonly="readonly">
-        </div>
+.contents_info{
+    width: 100%;
+    height: 525px;
+}
 
-        <div class="form-group info-group sr-only">
-          <label>#회원번호</label> <input class="form-control" name='userNum'
-            value='<c:out value="${info.userNum}"/>' readonly="readonly">
-        </div>
+	.contents_info>.form-group{
+	width: 33.333336%;
+	}
 
-        <div class="form-group info-group">
-          <label>방번호</label> <input class="form-control" name='romNum'
-            value='<c:out value="${info.romNum}"/>' readonly="readonly">
-        </div>
-        
-        <div class ="form-group info-group">
-             <label>예약일자</label>
-             <input class="form-control" name='bookDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.bookDate}" />' readonly> 
-        </div>
+</style>
 
-      
-        <div class ="form-group info-group">
-             <label>체크인날짜</label>
-             <input class="form-control" name='checkinDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkinDate}" />' readonly> 
-        </div>
-        
-        <div class ="form-group info-group">
-             <label>체크아웃날짜</label>
-             <input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkoutDate}" />' readonly> 
-        </div>                   
-      
-        <div class="form-group info-group sr-only">
-          <label>예약숙박일수</label> <input class="form-control" name='staydays'
-            value='<c:out value=" ${info.staydays}"/>' readonly="readonly">
-        </div>
-        <div class="form-group info-group">
-          <label>예약인원수</label> <input class="form-control" name='guest'
-            value='<c:out value="${info.guest} "/>' readonly="readonly">
-        </div>                             
-       <div class="form-group info-group">
-          <label>객실요금</label> <input class="form-control" name='bookPrice'
-            value='<c:out value="${info.bookPrice} "/>' readonly="readonly">
-        </div>
-   
-        <div class="form-group info-group">
-          <label>도착예정시간</label> <input class="form-control" name='expectedArr'
-            value='<c:out value="${info.expectedArr} "/>' readonly="readonly">
-        </div>
-        <div class="form-group info-group">
-          <label>흡연여부</label> 
-          <input class="form-control" name='smoking' value='' readonly="readonly">
-        </div> 
+
+<div class="container">
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">예약 상세 페이지</h1>
+			<p><%=userFstName %>의 예약 상세페이지입니다. 예약 수정 가능 합니다.</p>
+		</div>
+	</div>
+
+
+<section class="contents_info">
+		
+	<section class="contents_info">
+		
+		  
+		  
+	        <div class="form-group info-group">
+	          <label>#예약번호</label> <input class="form-control" name='bookNum'
+	            value='<c:out value="${info.bookNum}"/>' readonly="readonly">
+	        </div>
+	
+	        <div class="form-group info-group sr-only">
+	          <label>#회원번호</label> <input class="form-control" name='userNum'
+	            value='<c:out value="${info.userNum}"/>' readonly="readonly">
+	        </div>
+	
+	        <div class="form-group info-group">
+	          <label>방번호</label> <input class="form-control" name='romNum'
+	            value='<c:out value="${info.romNum}"/>' readonly="readonly">
+	        </div>
+	        
+	        <div class ="form-group info-group">
+	             <label>예약일자</label>
+	             <input class="form-control" name='bookDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.bookDate}" />' readonly> 
+	        </div>
+	
+	      
+	        <div class ="form-group info-group">
+	             <label>체크인날짜</label>
+	             <input class="form-control" name='checkinDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkinDate}" />' readonly> 
+	        </div>
+	        
+	        <div class ="form-group info-group">
+	             <label>체크아웃날짜</label>
+	             <input class="form-control" name='checkoutDate' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${info.checkoutDate}" />' readonly> 
+	        </div>                   
+	      
+	        <div class="form-group info-group sr-only">
+	          <label>예약숙박일수</label> <input class="form-control" name='staydays'
+	            value='<c:out value=" ${info.staydays}"/>' readonly="readonly">
+	        </div>
+	        <div class="form-group info-group">
+	          <label>예약인원수</label> <input class="form-control" name='guest'
+	            value='<c:out value="${info.guest} "/>' readonly="readonly">
+	        </div>                             
+	       <div class="form-group info-group">
+	          <label>객실요금</label> <input class="form-control" name='bookPrice'
+	            value='<c:out value="${info.bookPrice} "/>' readonly="readonly">
+	        </div>
+	   
+	        <div class="form-group info-group">
+	          <label>도착예정시간</label> <input class="form-control" name='expectedArr'
+	            value='<c:out value="${info.expectedArr} "/>' readonly="readonly">
+	        </div>
+	        <div class="form-group info-group">
+	          <label>흡연여부</label> 
+	          <input class="form-control" name='smoking' value='' readonly="readonly">
+	        </div> 
        
         
         
@@ -107,20 +130,31 @@
           <label>예약상태</label>           
           <input class="form-control" name='bookStatus' value='' readonly="readonly">
         </div>
+		  
+	
+		  
+		  
+		</section>
+</section>
 
-
+<div class="info_btn">
 <button data-oper='modify' class="btn btn-default" onclick="location.href='/mypage/modify?bookNum=<c:out value="${info.bookNum}"/>'">Modify</button>
 <button data-oper='bookList' class="btn btn-info" onclick="location.href='/mypage/bookList'">List</button>
 
-
-      </div>
-      <!--  end panel-body -->
-    </div>
-    <!--  end panel-body -->
-  </div>
-  <!-- end panel -->
 </div>
-<!-- /.row -->
+
+
+		  
+		  
+		  
+
+			
+      
+</div>
+       
+
+
+
 <script>
 
 

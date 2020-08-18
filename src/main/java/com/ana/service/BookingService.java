@@ -46,11 +46,11 @@ public interface BookingService {
 	public List<BookVO> dateGetinBooking(String ownerUser,String checkinDate);
 	public List<BookVO> dateGetoutBooking(String ownerUser,String checkoutDate);
 
+	public int dateGetinPayLater(String ownerUser,String today);
 
+	public List<BookingVO> getBookinfoRoms(String romNum);
 
-
-
-
+	public PaymentVO getPayment(String bookNum);
 
 
 

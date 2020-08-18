@@ -3,9 +3,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
+<!-- 사이트바 CSS -->
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
 
 
+<style>
 
+.page-header-content{
+padding-bottom: 20px;
+}
+
+.contents_info{
+    width: 100%;
+    height: 525px;
+}
+
+	.contents_info .form-group{
+	width: 33.333336%;
+	}
+
+
+.form-popup {
+	    z-index: 20000;}
+</style>
 <!-- 자바스크립트 정규식 체크 -->
 <script language="javascript">
 	function validate() {
@@ -174,20 +195,22 @@
 			});
 </script>
 
+<div class="container">
 
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">예약 수정 페이지</h1>
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">예약 수정 페이지</h1>
+			<p><%=userFstName %>님 여행의 수정사항이 있습니까? 정보를 입력해주세요! 최선을 다하겠습니다.</p>
+		</div>
 	</div>
-	<!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
 
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">예약 수정 하세요.</div>
-
+<section class="contents_info">
+		
+	<section class="contents_info">
 
 			<div class="panel-body">
 
@@ -325,13 +348,8 @@
 
 
 			</div>
-			<!--  end panel-body -->
-		</div>
-		<!--  end panel-body -->
-	</div>
-	<!-- end panel -->
-</div>
-<!-- /.row -->
+			</section>
+</section>
 
 
 

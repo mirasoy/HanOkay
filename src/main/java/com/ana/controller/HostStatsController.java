@@ -64,33 +64,50 @@ public class HostStatsController {
 		user = (UserVO) session.getAttribute("user");
 		if (user != null) {
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	        Calendar c1 = Calendar.getInstance();
-	        String strToday = sdf.format(c1.getTime());
-	        c1.add(Calendar.MONTH , -1);
-	        String beforeMonth = new java.text.SimpleDateFormat("yyyy-MM-dd").format(c1.getTime());
+	        Calendar taday = Calendar.getInstance();
+	   
+	        String strToday = sdf.format(taday.getTime());
+	       
 	        
+	        Calendar beforeM = Calendar.getInstance();
+	        beforeM.add(Calendar.MONTH , -1);
+	        String beforeMonth = new java.text.SimpleDateFormat("yyyy-MM-dd").format(beforeM.getTime());
+
+	        Calendar tomorrowC = Calendar.getInstance();
+	        tomorrowC.add(Calendar.DATE , +1);
+	        String tomorrow = new java.text.SimpleDateFormat("yyyy-MM-dd").format(tomorrowC.getTime());
+	        
+	        //지난한달매출
 	        List<PaymentVO> beforeMonthList = sService.getPeriodAllSales(user.getUserNum(), beforeMonth,strToday);
-	        
+	        //지난한달매출 다더하기
 	        int beforeMonthSum = 0;
 	        for(PaymentVO vo :beforeMonthList) {
 	        	beforeMonthSum += Integer.parseInt(vo.getTotal()); 
 	        }
-	        Double star = 0.0;
-	        List<AcmVO> rankList =sService.getAcmRank(user.getUserNum(),"sumt");
-	        for(AcmVO vo :  rankList) {
-	        	star+=vo.getStarPoint();
+	        
+	        
+	        
+	        //오늘 매출
+	        List<PaymentVO> todaylist = sService.getPeriodAllSales(user.getUserNum(), strToday, tomorrow);
+	        
+	        int todaysum = 0;
+	        for(PaymentVO vo :todaylist) {
+	        	System.out.println(vo);
+	        	todaysum += Integer.parseInt(vo.getTotal()); 
 	        }
-	        
-	        star = star/rankList.size();
-	        
-	        
+
+	        List<AcmVO> rankList =sService.getAcmRank(user.getUserNum(),"sumt");
+	 
 		model.addAttribute("beforeMonthSum",beforeMonthSum);
 		model.addAttribute("beforeMonthCount",beforeMonthList.size());
-		model.addAttribute("star",star);
+		model.addAttribute("todaysum",todaysum);
 		model.addAttribute("count",sService.getAllSales(user.getUserNum()).size());
 		model.addAttribute("list",rankList);
 		}
 		
+	    
+		
+		model.addAttribute("userFstname", user.getUserFstName());
 	}
 	@GetMapping("/stats")
 	public void modipendingAcmGet(Model model,HttpSession session) {
@@ -105,6 +122,7 @@ public class HostStatsController {
 			model.addAttribute("salesList",sService.getAllSales(user.getUserNum()));
 		}
 		
+		model.addAttribute("userFstname", user.getUserFstName());
 	}
 	
 	
@@ -137,8 +155,8 @@ public class HostStatsController {
 	}
 	
 	@GetMapping("/statsRank")
-	public void statsRank() {
-		
+	public void statsRank(Model model,HttpSession session) {
+		model.addAttribute("userFstname", user.getUserFstName());
 	}
 	
 	

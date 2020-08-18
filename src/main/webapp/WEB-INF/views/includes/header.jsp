@@ -8,30 +8,45 @@
 <!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
 <%
    UserVO user = (UserVO) session.getAttribute("user");
+String userNum = "";
 String userLastName = "";
 String userFstName = "";
 String userPwd = "";
 String userEmail="";
-String userNum = "";
+String userPhone="";
 String userPriv ="";
 String userStatusCode="";
+String userProfilePicUrl="";
+String userProfilePicName="";
+ 
+
 
 
 //user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
 if (user != null) {
+   userNum = user.getUserNum();
    userLastName = user.getUserLastName();
    userFstName = user.getUserFstName();
    userPwd = user.getUserPwd();
    userEmail = user.getUserEmail();
-   userNum = user.getUserNum();
+   userPhone= user.getUserPhone();
    userPriv=user.getUserPriv();
    userStatusCode=user.getUserStatusCode();
+   userProfilePicUrl=user.getUserProfilePicUrl();
+   userProfilePicName=user.getUserProfilePicName();
    
+   if(userProfilePicUrl==null ||userProfilePicName == null){
+   
+   userProfilePicName="user.png";
+   userProfilePicUrl= "C:/upload/";
+   
+   }
    
 }
+	
+	
+	
 %>
-
-
 
 
 
@@ -72,7 +87,7 @@ if (user != null) {
 <link rel="stylesheet" type="text/css" href="../resources/css/review.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/recommend.css"> 
 
-<!-- 메인 CSS style -->
+
 
 <!-- load JS files -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -104,7 +119,35 @@ if (user != null) {
 
 
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/select2.css" >
+<style type="text/css">
 
+
+@keyframes ringbell{
+    0.0%{
+        transform: rotate(45deg);
+    }
+    100%{
+        transform: rotate(45deg);
+    }
+    25.4%{
+        transform: rotate(-45deg);
+    }
+    49.7%{
+        transform: rotate(45deg);
+    }
+    74.7%{
+        transform: rotate(-45deg);
+    }
+}
+
+/* Add the animation: property to whichever element you want to animate */
+.ringbell{
+    animation: ringbell 0.5s ease 0s 2 normal none;
+}
+.wishopt{
+margin : 1em !important;
+}
+</style>
 
 <script type="text/javascript">
    $(document)
@@ -121,12 +164,15 @@ if (user != null) {
                     
                      //알림 드랍 다운 내부 텍스트를 모두 지우고
                      $('#myMenuIcon').removeAttr("data-toggle");
-                     $('#notification').empty();
+
+
                      //회원 가입하라고 메세지 주기
+                    
                      //드랍 다운 상자를 responsive로 변경하면 좋겠다
-                     $('#notification')
-                           .append(
-                                 "<li><a href='#'>ana의 회원이 되셔서 <br>더 많은 혜택을 누려보세요!</a></li>");
+                     $('#msgText')
+                           .html(
+                                 "ana의 회원이 되셔서 더 많은 혜택을 누려보세요!");
+                     
                      //내 메뉴 드랍다운 상자는 없애버리고 클릭하면 로그인 사이트로 이동하게 하자
                      $('#myMenuIcon').attr("href", "/user/login");
                      
@@ -139,10 +185,11 @@ if (user != null) {
                         
                      }else if(priv=="HOST"){
                         $('#mode').html("<a href='/hosting/hostindex'   style='cursor: pointer'>호스트 모드</a>");
-                     }else if(priv=="GUEST"){
-                    	 if(userStatusCode=="ACTIVE")
+                     }else if(priv=="GUEST"){ 
                         $('#mode').html("<a href='/hosting/become-host'   style='cursor: pointer'>호스트 되기</a>");
-                    	 else $('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
+                     }
+                     else if(priv=="HO_PENDING"){
+                    	$('#mode').html("<a href='/hosting/listings' style='cursor: pointer'>호스트 등록중</a>");	  
                      }
                     
                   };    
@@ -331,11 +378,32 @@ if (user != null) {
 	   			    
 	        
 	      }
-	        
+
+	      
+	//안읽메세지갯수
+   		  $.ajax({
+				type:'POST',
+				url: '/unreadMsg',
+				dataType: 'text',
+				data: {
+					'userNum':'d',
+				},
+				success: function(data){
+					if(data>0){
+					$("#bell").addClass("ringbell")		
+					$('#notification').empty();
+					 $('#notification')
+                     .append(
+                           "<li><a href='/chat/chatList'>안읽은 메세지 : "+data+"개</a></li>");
+					}
+				}
+	      
+	      
+				}); 	
+			    
+	      
 </script>
-
 </head>
-
 <!-- 뒤로가기 방지 -->
 <!-- 
 <script type="text/javascript">
@@ -348,6 +416,9 @@ if (user != null) {
  -->
 
 <body>
+
+
+
    <!-- main-content -->
    <div class="main-content" id="top">
       <div class="top-bar-bg"></div>
@@ -383,18 +454,17 @@ if (user != null) {
                            class="nav-link dropdown-toggle" data-toggle="dropdown"
                            href="#"> <i class="fa fa-globe fa-2x"></i></a>
                            <ul class="dropdown-menu">
-                              <li><a href="#">ENGLISH(미구현)</a></li>
+                              <li><a href="#">ENGLISH</a></li>
                               <li><a href="#">KOREAN</a></li>
                            </ul></li>
 
                         <!-- Start : mainNav2 - 알림-->
                         <li class="nav-item dropdown"><a
                            class="nav-link dropdown-toggle" data-toggle="dropdown"
-                           href="#"> <i class="fa fa-bell fa-2x"></i></a>
+                           href="#"> <i class="fa fa-bell fa-2x" id="bell"></i></a>
                            <ul class="dropdown-menu" id="notification">
-                              <li><a href="#">예약이 완료되었습니다</a></li>
-                              <li><a href="#">ana의 회원가입을 환영합니다!</a></li>
-
+                           
+							<li><a href='/chat/chatList' id="msgText">도착한 메세지가 없습니다.</a></li>
                            </ul></li>
 
                         <!-- Start : mainNav3 - 마이페이지-->
@@ -438,4 +508,10 @@ if (user != null) {
          <!-- End :  container -->
       </div>
       <!-- End : top-bar - 메인 네비게이션 바 -->
+      
+      <div class="mouse-icon aside">
+			<div class="wheel">스크롤을 내리면 작품을 감상할 수 있습니다.</div>
+		</div>
+      
+      
    </div>

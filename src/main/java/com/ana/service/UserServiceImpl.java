@@ -1,15 +1,18 @@
 package com.ana.service;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ana.domain.UserProfileVO;
 import com.ana.domain.UserVO;
 import com.ana.mapper.UserHisMapper;
 import com.ana.mapper.UserMapper;
@@ -24,6 +27,8 @@ public class UserServiceImpl implements UserService{
 	private UserMapper mapper;
 	
 	private EmailService emailService;
+	
+	private RevService revService;
 	
 	private UserHisMapper userHisMapper;
 	
@@ -95,7 +100,9 @@ public class UserServiceImpl implements UserService{
 				return result;
 			}
 			//1.2회원가입 경로가 G가 아니면 
-			
+			//이미 해당이메일로 id/pw 가입한 적이 있다.
+			//이럴때는 그 해당 이메일로 로그인하게 해야함
+			//return 1;
 		}	
 	
 		//2.없으면 회원가입 시키고 경로에 G를 붙여준다
@@ -202,14 +209,7 @@ public class UserServiceImpl implements UserService{
 		}
 	 }
 
-
-	 //user의 인증코드를 업데이트 하게하는 메서드
-	@Override
-	public boolean updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode")String authCode) {
-		return mapper.updateAuthCode(email ,authCode)==1;
 	
-	
-	}
 	//중복되는 이메일이 없고 난수를 생성하여 user객체의 setUserAuthCode로 넣어주고 service.register(user)한다 
 	@Transactional
 	@Override
@@ -226,11 +226,142 @@ public class UserServiceImpl implements UserService{
 		}
 		
 			return false;
+	}
+	
+	//session에 담긴 user객체의 userNum으로 프로필 정보를 가져오는 
+	@Override
+	public UserProfileVO showProfile(HttpSession session) {
+		UserVO user= (UserVO)session.getAttribute("user");
+		log.info("session에 담겨있던 user는!!: "+ user);	
+	
+		return mapper.getUserProfile(user.getUserNum());
+	}
+
+	@Override
+	public boolean updateProfile(UserProfileVO profile, HttpSession session) {
+		log.info("service impl에서의 profile: "+ profile);
 		
+		
+//		  try { 
+//			  //만약 profileVO의 변수값 중에 null이 있으면 empty string으로 변경시켜준다
+//			  //myBatis error를 피하기 위해서
+//				for(Field field :profile.getClass().getDeclaredFields()){
+//			            field.setAccessible(true);
+//			            String name = field.getName();
+//			            Object value = field.get(profile);
+//			            
+//			            if(value== null) {
+//			            	value="";
+//			            	field.set(profile, "");
+//			            }
+//			            
+//			            System.out.println(name+" : "+value.toString());
+//			          
+//			        }    
+//			    }catch(Exception e){
+//			        log.info("VO 변수, 값 추출 에러");
+//			    }
+		
+		
+		if(null==profile.getUserPictureUrl()|| null==profile.getUserPictureName()) {
+			
+			profile.setUserPictureName("user.png");
+			profile.setUserPictureUrl("C:/upload/");
+			
+		}
+	
+			 	System.out.println("profile ****"+ profile);
+			 	if(mapper.updateProfile(profile)==1) {
+			 		session.setAttribute("user", get(profile.getUserNum()));
+			 		System.out.println("여기서 세션은!!!!"+ session.getAttribute("user"));
+			 		
+			 	}
+			 	
+		return true;
+	}
+
+	
+	@Override
+	public UserProfileVO getUserProfileBy(String userNum) {
+		System.out.println("userNum in SErviceIMPL: "+ userNum);
+		UserProfileVO profile=mapper.getUserProfile(userNum);
+		System.out.println("profile: "+ profile);
+		return profile;
+	}
+	
+	//user의 인증코드를 업데이트 하게하는 메서드
+	@Override
+	public boolean updateAuthCode(@Param("email") String email, @Param("authCode") String authCode) {
+		return mapper.updateAuthCode(email, authCode) == 1;
+	}
+	
+	//해당 email의 유저에게 인증코드를 발송하는 메서드(회원가입 인증코드 재발송 / 비밀번호 찾기)
+	@Override
+	public boolean sendAuthCode(String email) {
+		System.out.println("email 왔니 서비스에:: "+ email);
+		
+		//db에 해당 이메일이 있으면
+		if(!canRegister(email)) {
+			//난수를 다시 생성
+			String authCode=numberGen(6,2);
+			if(updateAuthCode(email, authCode)) {
+				emailService.sendAuthEmail(email, authCode);
+				return true;
+			}
+
+		}
+		//db에 해당 이메일이 없음!
+		return false;
+	}
+
+
+	@Override
+	public boolean sendAuthCode2FindPwd(String email) {
+		System.out.println("email 왔니 서비스에:: "+ email);
+		
+		//db에 해당 이메일이 있으면
+		if(!canRegister(email)) {
+			//난수를 다시 생성
+			String authCode=numberGen(6,2);
+			if(updateAuthCode(email, authCode)) {
+				emailService.sendAuthEmail2FindPwd(email, authCode);
+				return true;
+			}
+
+		}
+		//db에 해당 이메일이 없음!
+		return false;
+	}
+
+	@Transactional
+	@Override
+	public boolean matchAuthCodeAndGiveSession(@Param("email") String email, @Param("enteredAuthCode")String authCode, HttpSession session) {
+		
+		if(matchAuthCode(email, authCode)) {
+			UserVO user= getUserById(email);
+			user.setUserPwd("");
+			System.out.println("인증코드 맞으니까 로그인 시켜주께~~~");
+			
+			session.setAttribute("user", user);
+			System.out.println("세션에 있는 유저는!!"+ user );
+			return true;
+		}
+		System.out.println("인증코드 틀림");
+		return false;
 	}
 	
 	
-	
+	@Override
+	public boolean updatePassword(String userNum, String currentPassword, String newPassword) {
+		System.out.println("service에 온 userNum: "+ userNum);
+		System.out.println("service에 온 currentPassword: "+ currentPassword);
+		System.out.println("service에 온 newPassword: "+ newPassword);
+		
+		return mapper.updatePassword(userNum, currentPassword, newPassword)==1;
+	}
+
+
+
 	//인증번호 생성 메서드
 	 public static String numberGen(int len, int dupCd ) {
 	        
@@ -273,8 +404,8 @@ public class UserServiceImpl implements UserService{
 		return mapper.getAcmOwner(bizregnum);
 	}
 
+
 	
-	
-  
-  
+
+
 }

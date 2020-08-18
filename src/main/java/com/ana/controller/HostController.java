@@ -1,5 +1,7 @@
 package com.ana.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ana.domain.AcmDetailPicVO;
 import com.ana.domain.AcmVO;
 import com.ana.domain.BookVO;
+import com.ana.domain.BookingVO;
+import com.ana.domain.CalendarVO;
+import com.ana.domain.PaymentVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AcmDetailService;
@@ -47,7 +53,7 @@ public class HostController {
 	@Autowired
 	private AcmRegService aservice;//숙소등록관련서비스
 	@Autowired
-	private UserService uservice;//호스트 사업등록증관련
+	private UserService uservice;//호스트 사업등록증관련A
 	@Autowired
 	private CodeService codeService;
 	@Autowired
@@ -61,33 +67,37 @@ public class HostController {
 		if(user==null)return null;
 		return user;
 	}
-	static String koryoil="";
 	 
 	//오늘의 날짜를 갔다줌
-	public String getCal() {
+	public CalendarVO getCal() {
 		///오늘의 날짜
 		Calendar cal = Calendar.getInstance();
 		//System.out.println(cal);
 		
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int day = cal.get(Calendar.DAY_OF_MONTH);
-		int dayo=cal.get(Calendar.DAY_OF_WEEK);
+		CalendarVO today = new CalendarVO(); 
+		today.setYear(cal.get(Calendar.YEAR));
+		today.setMonth(cal.get(Calendar.MONTH) + 1);
+		today.setDay(cal.get(Calendar.DAY_OF_MONTH));
+		today.setYoilInt(cal.get(Calendar.DAY_OF_WEEK));
+		today.setYoil(getTodayYoil(today.getYoilInt()));
 		
-		
-		if(dayo==0)koryoil="일";
-		else if(dayo==1)koryoil="월";
-		else if(dayo==2)koryoil="화";
-		else if(dayo==3)koryoil="수";
-		else if(dayo==4)koryoil="목";
-		else if(dayo==5)koryoil="금";
-		else if(dayo==6)koryoil="토";
-		
-		String today=year+"-"+month+"-"+day;
 		return today;
 	}
 	
-	
+	//요일값 한글로 반환
+	public String getTodayYoil(int yoilInt) {
+		String yoil = null;
+		System.out.println(yoilInt);
+		if(yoilInt==1)yoil="일";
+		else if(yoilInt==2)yoil="월";
+		else if(yoilInt==3)yoil="화";
+		else if(yoilInt==4)yoil="수";
+		else if(yoilInt==5)yoil="목";
+		else if(yoilInt==6)yoil="금";
+		else if(yoilInt==7)yoil="토";
+		
+		return yoil;
+	}
 	
 	///////////////////////
 	@GetMapping("/hostindex")
@@ -97,24 +107,76 @@ public class HostController {
 		//호스트 주인
 		String ownerUser= getUser(session).getUserNum();
 		
-
+		CalendarVO today = getCal();
 		//가라임
-		//String today="2020-8-7";
+		//String todays="2020-8-7";
 		
-		model.addAttribute("todayform",getCal()+"("+koryoil+")");
-
-		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,getCal());
+		String todayform=today.getYear()+"년 "+ today.getMonth()+"월 "+ today.getDay()+"일 ("+today.getYoil()+")";
+		String todays=today.getYear()+"-"+today.getMonth()+"-"+today.getDay();
+		
+		System.out.println("출력 오늘의 날짜:"+todayform);
+		System.out.println("Date형식으로 끌어올 오늘의 날짜:"+todays);
+		
+		model.addAttribute("todayform",todayform);
+		
+		//입실수
+		List<BookVO> chkin=bservice.dateGetinBooking(ownerUser,todays);
+		model.addAttribute("chkin", chkin);
 		if(chkin.size()==0)model.addAttribute("chkinSize", 0);
 		else model.addAttribute("chkinSize", chkin.size());
 		
-		
-		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,getCal());
-		model.addAttribute("chkin", chkin);
+		//퇴실수
+		List<BookVO> chkout=bservice.dateGetoutBooking(ownerUser,todays);
 		model.addAttribute("chkout", chkout);
+		model.addAttribute("chkoutSize", chkout.size());
 		
+		//워크인 결제 갯수
+		int payLater=bservice.dateGetinPayLater(ownerUser,todays);
+		System.out.println("결제대기자"+payLater);
+		model.addAttribute("payLater", payLater);
+		
+		//결제완료한 사람수
+		int payed=chkin.size()-payLater;
+		model.addAttribute("payed", payed);
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
+	
+	//숙소가 선택될때마다 숙소에대한 객실들을 가져오자
+			@RequestMapping(value = "getTpayment", method = RequestMethod.GET)
+			@ResponseBody
+			public void getTpayment(String bookNum,HttpServletRequest request, HttpServletResponse response)
+					throws IOException{	
+				System.out.println("tbooknum을 가지고 payment를 받아오자");
+				
+				//제이슨에 List<RomVO>를 담아오자
+				JSONObject job= new JSONObject();
+				log.info("bookNum check: " +  bookNum);
+				
+				//한글 깨짐 방지
+				response.setContentType("text/plain;charset=UTF-8");
+				
+				PaymentVO payment=bservice.getPayment(bookNum);
+				System.out.println(payment);		
+				if (payment!=null) {//return List<RomVO>
+					job.put("payNum", payment.getPayNum());
+					job.put("bookNum", payment.getBookNum());
+					job.put("payMethod", payment.getPayMethod());
+					job.put("acmNum", payment.getAcmNum());
+					job.put("romNum", payment.getRomNum());
+					job.put("price", payment.getPrice());
+					job.put("staydays", payment.getStaydays());
+					System.out.println(job.get("staydays"));
+					
+					System.out.println("***"+job);
+				} 
+				else {
+					System.out.println("없을리가 없지만 없다");
+				}
+				PrintWriter out = response.getWriter();
+				out.print(job);
+			}
+	
 	
 	@GetMapping("/reserv")
 	public void reservGet(Model model,HttpSession session) {
@@ -126,6 +188,11 @@ public class HostController {
 		List<AcmVO> acms=aservice.getListAcms(user.getUserNum(), acmActi);
 		model.addAttribute("acms", acms);
 		
+		//오늘 날짜 삽입
+		CalendarVO today = getCal();
+		String todays=today.getYear()+"-"+today.getMonth()+"-"+today.getDay();
+		System.out.println("예약단 todays:"+todays);
+		model.addAttribute("todays",todays);
 		
 		model.addAttribute("userFstname", user.getUserFstName());
 	}
@@ -133,29 +200,78 @@ public class HostController {
 	//숙소가 선택될때마다 숙소에대한 객실들을 가져오자
 		@RequestMapping(value = "/returnRoms", method = RequestMethod.POST)
 		@ResponseBody
-		public void selAcmPost(String acmDetailaddr,HttpServletRequest request, HttpServletResponse response)
+		public void returnRomsPost(String acmNum,HttpServletRequest request, HttpServletResponse response)
 				throws IOException{	
-			System.out.println("주소중복체크 Post다!");
-			JSONObject jso= new JSONObject();
-			log.info("acmDetailaddr check: " +  acmDetailaddr);
+			System.out.println("숙소가 선택되었다!!객실을 가져오자");
+			
+			//제이슨에 List<RomVO>를 담아오자
+			JSONArray jarr= new JSONArray();
+			log.info("acmNum check: " +  acmNum);
+			
 			//한글 깨짐 방지
 			response.setContentType("text/plain;charset=UTF-8");
-			String msg="";
-			//service에게 email을 주고 db를 뒤져오게한다
-			if (aservice.chkaddr(acmDetailaddr)) {
-				msg="해당 주소를 사용하실 수 있습니다";
-				jso.put("msg", msg);		
+			
+			//service에게 acmNum을 주고 rom들을 뒤져오게한다
+			List<RomVO> list=rservice.getList(acmNum);
+					
+			if (list!=null) {//return List<RomVO>
+				for(int i=0;i<list.size();i++) {
+					String set=list.get(i).getRomName()+"="+list.get(i).getRomSize()+"="+list.get(i).getRomPrice();
+					System.out.println("*겟i:"+set);
+					
+					jarr.add(set);
+				}
+				System.out.println("***"+jarr.toJSONString());
 			} 
 			else {
-				msg="*같은 주소지에 이미 등록된 숙소가 있습니다!";
-				jso.put("msg", msg);
+				System.out.println("선택한 숙소에 객실이 없습니다");
 			}
 			PrintWriter out = response.getWriter();
-			out.print(jso);
+			out.print(jarr);
 		}
-	
-	
+		
+		@RequestMapping(value = "/returnRsrvs", method = RequestMethod.POST)
+		@ResponseBody
+		public void returnRsrvsPost(String acmNum,HttpServletRequest request, HttpServletResponse response)
+				throws IOException{	
+			
+			System.out.println("객실이 선택되었다!!예약정보를 뒤져오자");
+			log.info("acmNum check: " +  acmNum);
 
+			//한글 깨짐 방지
+			response.setContentType("text/plain;charset=UTF-8");
+		
+			List<String> list=rservice.getRomList(acmNum);
+			System.out.println("갖고나온 romNum드을:"+list+"/"+list.size()+"개");
+			
+			//제이슨에 List<BookingVO>를 담아오자
+			//JSONObject job= new JSONObject();
+			JSONArray jarr= new JSONArray();
+			if(list!=null) {
+				for(int i=0;i<list.size();i++) {
+					List<BookingVO> rsvs=bservice.getBookinfoRoms(list.get(i).trim());//romNum당
+					System.out.println("rom"+i+"의.."+rsvs.size()+"개"+rsvs);
+					for(int j=0;j<rsvs.size();j++) {
+						BookingVO rsv=rsvs.get(j);
+						String set=rsv.getCheckinDate()+"="+rsv.getCheckoutDate()+"="+rsv.getBookNum()+"="+rsv.getUserNum()+"="+rsv.getBookerFirstname()+"="+rsv.getBookPrice()+"="+rsv.getRomNum()+"="+rsv.getRomName();
+						System.out.println("set"+j+":"+set);
+						jarr.add(set);
+					}
+				}
+				
+				System.out.println("***"+jarr.toJSONString());
+				
+			}else {
+				System.out.println("선택한 숙소에 객실이 없습니다");
+			}
+			
+			PrintWriter out = response.getWriter();
+			out.print(jarr);
+		}
+		
+		
+		
+	
 	@GetMapping("/listings")
 	public void listingsGet(Model model,HttpSession session) {
 		System.out.println("===숙소보기 페이지! listingsGet===");
@@ -179,7 +295,7 @@ public class HostController {
 			List<AcmVO> pendinglist= aservice.getListAcms(ownerUserNum,acmActi);
 			model.addAttribute("pendinglist", pendinglist);//
 			size+=pendinglist.size();
-			
+			model.addAttribute("newnotallowed", "true");
 		} else if(userPriv.equals("HOST")){
 			//호스트면
 			acmActi="PENDING";
@@ -188,7 +304,7 @@ public class HostController {
 			
 			if(pendinglist.size()!=0) {//심사대기가 하나라도 있으면 안된다
 				System.out.println("펜딩있음!");
-				model.addAttribute("newnotallowed", true);//
+				model.addAttribute("newnotallowed", "true");//
 			}
 			size+=pendinglist.size();
 			
@@ -209,7 +325,6 @@ public class HostController {
 		model.addAttribute("size", size);//
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());//
-		System.out.println("전체리스트뀨뀨뀨뀨뀨뀨뀨갯수:");
 	}
 	
 
@@ -268,6 +383,39 @@ public class HostController {
 		return "/hosting/getAcm";
 	}
 	
+	@GetMapping("/modiAcm")
+	public void modiAcmGet(String acmNum,Model model,HttpSession session) {
+		System.out.println("=====modiAcmGet====");
+		
+		//선택된 숙소 보기
+		AcmVO selectacm = aservice.getnewAcm(acmNum);
+		model.addAttribute("acm", selectacm);
+		
+		//선택된 숙소의 
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
+		
+
+		//옵션코드List<codeVO>
+		model.addAttribute("acmCode", codeService.getAcmCode());
+		model.addAttribute("romCode", codeService.getRomCode());
+		
+		//숙소사진List<AcmDetailPicVO>
+		List<AcmDetailPicVO> acmPics = pservice.getPicList(acmNum);
+		System.out.println(acmPics.size());
+		model.addAttribute("acmPics", acmPics);
+
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+	
+	@PostMapping("/modiAcm")
+	public String modiAcmPost(AcmVO vo) {
+		System.out.println("===modiAcm post===");
+		System.out.println(vo);
+		
+		aservice.modiAcm(vo);
+		return "redirect:/hosting/listings";
+	}
 	
 	
 	@GetMapping("/progress/reviews")
@@ -329,25 +477,76 @@ public class HostController {
 		return "/hosting/become-host2_6";
 	}
 	
+	@GetMapping("/modiRompop")
+	public void modiRompopGet(String acmNum,Model model,HttpSession session) {
+		System.out.println("========modiRompop Get========");
+		acmNum=acmNum.trim();
+		System.out.println(acmNum);
+		model.addAttribute("acmNum", acmNum);
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+	
+	
+	@PostMapping("/modiRompop")//객실추가할때
+	public String modiRompopPost(
+			RomVO vo,Model model
+		) {
+	
+		System.out.println("========modiRompop Post========");		
+		System.out.println(vo);
+		rservice.modiRom(vo);
+		
+		model.addAttribute("acmNum", vo.getAcmNum());
+		
+		
+		return "redirect:/hosting/getAcm"; //겟인가
+	}
+	
+	@GetMapping("/newRompop")
+	public void newRompopGet(String acmNum,Model model,HttpSession session) {
+		System.out.println("========modiRompop Get========");
+		acmNum=acmNum.trim();
+		System.out.println(acmNum);
+		model.addAttribute("acmNum", acmNum);
+		List<RomVO> roms=rservice.getList(acmNum);
+		model.addAttribute("roms", roms);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+	}
+	
+	
+	@PostMapping("/newRompop")//객실추가할때
+	public String newRompopPost(
+			RomVO vo,Model model
+		) {
+	
+		System.out.println("========modiRompop Post========");		
+		
+		rservice.register(vo);
+		
+		
+		List<RomVO> romList=rservice.getList(vo.getAcmNum());///??
+		System.out.println(romList);
+		model.addAttribute("list", romList);
+		model.addAttribute("acmNum", vo.getAcmNum().trim());
+		model.addAttribute("size", romList.size());
+		
+		return "/hosting/become-host2_6"; //겟인가
+	}
+	
 	@GetMapping("/removeRom")//객실 삭제버튼을 받으면===================================================
 	public String removeRomGet(@RequestParam("romNum") String romNum,@RequestParam("acmNum") String acmNum, Model model,HttpSession session) {
 		System.out.println("삭제하자 롬넘이 넘어온다~~~"+romNum);
 		
-		model.addAttribute("acmNum", acmNum);
 		
 		
 		boolean removeokay=rservice.remove(romNum);
 		System.out.println("removeokay"+removeokay);
 		
-		List<RomVO> romList=rservice.getList(acmNum);
+		model.addAttribute("acmNum", acmNum);
 		
-		model.addAttribute("list", romList);
-		model.addAttribute("size", romList.size());
-		
-
-		model.addAttribute("userFstname", getUser(session).getUserFstName());
-		
-		return "redirect:/hosting/become-host2_6";
+		return "redirect:/hosting/getAcm";
 	}
 	
 	
@@ -643,6 +842,21 @@ public class HostController {
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 		
-		return "/acm/list";//호스트가 가진 숙소 쪽으로 감
+		return "redirect:/hosting/listings";//호스트가 가진 숙소 쪽으로 감
 	}
+	
+	@GetMapping("/reregAcm")
+	public void reregAcmGet() {
+		System.out.println("reregAcm페이지를 띄운다**");
+	}
+	
+	@PostMapping("/reregAcm")//재신청~
+	public String reregAcm(String acmNum,Model model,HttpSession session) {
+		System.out.println("reregAcmPost");
+		aservice.reregAcm(acmNum);
+		model.addAttribute("userFstname", getUser(session).getUserFstName());
+		
+		return "redirect:/hosting/listings";//호스트가 가진 숙소 쪽으로 감
+	}
+	
 }

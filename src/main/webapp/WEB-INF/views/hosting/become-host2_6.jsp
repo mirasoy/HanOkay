@@ -12,6 +12,10 @@
 	}
 </style>
 
+
+	
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	
 <%@include file="../includes/becomehostheader.jsp"%>
 <!-- nav-sidebar -->
 <nav>
@@ -52,7 +56,6 @@
   <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
   <h3 align="left">총 <span><c:out value='${size}'/></span>개의 객실</h3>
 			
-			  
 		
 	<div class="col-lg-12">
 		<div class="panel panel-default">
@@ -76,8 +79,8 @@
 
 					<c:forEach items="${list}" var="room">
 						<tr style = "height: 220px;">
-							<td style="width: 350px;">
-							<img style=' width: auto; height: 200px; max-width: 300px; margin-left :20px; border-radius:10px;' id='rPicture' src='/review/display?fileName=<c:out value="${room.romPurl}" /><c:out value="${room.romPname }" />'>
+							<td style="width: 240px;">
+							<img style=' width: 200px; height: 200px; margin-left :20px; border-radius:100px;' id='rPicture' src='/review/display?fileName=<c:out value="${room.romPurl}" /><c:out value="${room.romPname }" />'>
 							</td>
 							<td>
 								<a class='move' href='<c:out value="${room.romNum}"/>'>
@@ -101,6 +104,8 @@
 			
 			
 		</form>	
+		
+		
 			
 		<!-- 빈 폼 -->
 		<form id="actionForm">

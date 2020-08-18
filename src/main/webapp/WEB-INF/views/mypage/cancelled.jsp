@@ -7,74 +7,98 @@
 String name = (String)session.getAttribute("loginUserNum");
 %>
 <%@include file="../includes/header.jsp"%>
+<!-- 사이트바 CSS -->
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
+
+<div class="container">
 
 
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">나의 예약</h1>
-	</div>
-	<!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-		
-		<div>
-			<ul class="bookbar">
-				<li class="item1"><a href="/mypage/bookListAll">전체목록</a></li>
-				<li class="item2"><a href="/mypage/bookList">투숙예정</a></li>
-				<li class="item3"><a href="/mypage/checkout">투숙완료</a></li>
-				<li class="item4"><a href="/mypage/cancelled">취소된 예약</a></li>		
-
-						
-			</ul>
+	<div class="page-header-content">
+		<div class="page-header-top">
+			<h1 class="page-header">나의 취소 예약</h1>
+			<p><%=userFstName %>님 취소하신 예약이에요.</p>
 		</div>
-		
-		<div class="panel-heading">
-				  <%=userFstName %>의 예약취소 목록입니다.	
-			</div>
+	</div>
+
+
+<%@include file="../includes/sidebar.jsp"%>
 			
+<section class="contents">
+		
+		<section class="contents-2">
+	
+	  <c:forEach items="${cancelled}" var="board">
+	    <div class="card">
+	        <div class="item">
+	            <div class="clickable-card">
+	                <div class="hotel-picture">
+	                    <figure>
+	                      <img alt='객실사진'	src='/display?fileName=<c:out value="${board.acmPurl}" />s/<c:out value="${board.acmPname}" />' /> 
+	                    </figure>
+	                </div>
+	                <div class="info-container">
+	                    <div class="checkin-checkout-info-panel">
+	                        <div class="check-dates">
+	                            <div class="check-info">
+	                                <div class="check-title">체크인</div>
+	                                <div class="check-date">
+	                                    <p><fmt:formatDate pattern="yyyy-MM-dd"
+											value="${board.checkinDate}" /></p>
+	                                </div>
+	                            </div>
+	                            <div class="check-spacer"></div>
+	                            <div class="check-info">
+	                                <div class="check-title">체크아웃</div>
+	                                <div class="check-date">
+	                                    <p><fmt:formatDate pattern="yyyy-MM-dd"
+											value="${board.checkoutDate}" /></p>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <ul class="hotel-info-top">
+	                        <li class="hotel-title"><c:out value="${board.acmName}" /></li>
+	                        <li class="booking-id" data-selenium="booking-id">예약 번호: <span class="booking-id-value"><c:out value="${board.bookNum}" /></span></li>
+	                        <li>
+		                        <div class="booking-status-panel" data-selenium="booking-status-label">
+			                        <i class="ficon ficon-16 ficon-check-circle mmb-booking-status-icon-green"></i>
+			                     
+		                        </div>
+	                        </li>
+	                    </ul>
+	            
+	                    <div class="booking-info-bottom">
+	                        <div class="price m150-price">
+	                            <div class="price-currency" data-selenium="payment-currency">KRW</div>
+	                           <div class="price-ammount" data-selenium="payment-ammount"><c:out value="${board.bookPrice}" /></div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	            <div class="button-item">
+	                <div class="button-item-1">
+	                
+	                   <!--  <a class="button-txt button-txt-1" href="">이용후기 작성하기</a> -->
+	                    <a class="button-txt" href="">다시 예약하기</a>
+	                    
+	                </div>
+	
+	                <div class="button-item-2">
+	                   	<span class="button-item-2" id="<c:out value="${board.bookNum}" />"></span>
+	                    <button><a href="/mypage/info3?bookNum=${board.bookNum}">정보보기</a></button>
+	                </div>
+	            </div>
+	    </div>
+	    </c:forEach>
+	       
+		</section>
+	</section>
 
-			<!-- /.panel-heading -->
-			<div class="panel-body">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>숙소이름</th>
-							<th>#예약번호</th>										
-							<th>체크인날짜</th>
-							<th>체크아웃날짜</th>							
-							<th>객실요금</th>																
-							<th>버튼</th>																
-						</tr>
-					</thead>
-
-					<c:forEach items="${cancelled}" var="board">
-						<tr>
-							<td><c:out value="${board.acmName}" /></td>																			
-							<td><c:out value="${board.bookNum}" /></td>																
-					
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.checkinDate}" /></td>
-									
-							<td><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${board.checkoutDate}" /></td>
-							<td><c:out value="${board.bookPrice}" /></td>			
-							
-							<td><a href="/mypage/info3?bookNum=${board.bookNum}">정보보기</a></td>
-					
-						</tr>																				
-					</c:forEach>
-				</table>
-			</div>
-			<!--  end panel-body -->
-		</div>	
-		<!-- end panel -->
-	</div>	
 </div>
-<!-- /.row -->
 
 
 

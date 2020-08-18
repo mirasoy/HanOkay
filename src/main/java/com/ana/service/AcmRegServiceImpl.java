@@ -153,7 +153,7 @@ public class AcmRegServiceImpl implements AcmRegService{
 		else return false; //등록중인 bizRegnum
 	}
 
-
+	@Transactional(rollbackFor={Exception.class})
 	@Override
 	public int removeAcm(String acmNum, String userNum, String userPriv) {
 		//해당 숙소외 active나 inactive숙소가 여러개 남아있는 사람이면 host/ho_active
@@ -204,9 +204,20 @@ public class AcmRegServiceImpl implements AcmRegService{
 		}
 		
 		//숙소, 객실 삭제
-		return amapper.removeAcm(acmNum)*amapper.removeAcmso(acmNum);//몇개의 방이 지워졌나
+		return amapper.removeAcmPic(acmNum)*amapper.removeAcmso(acmNum)*amapper.removeAcm(acmNum);//몇개의 방이 지워졌나
 	}
 
+	@Override
+	public boolean reregAcm(String acmNum) {
+		return amapper.reregAcm(acmNum)==1;
+	}
+
+
+	@Override
+	public boolean modiAcm(AcmVO vo) {
+		// TODO Auto-generated method stub
+		return amapper.modiAcm(vo)==1;
+	}
 
 	
 	

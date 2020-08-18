@@ -1,7 +1,145 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="com.ana.domain.UserVO"%>
+<!-- 세션에 user라는 키로 저장된 userVO 인스턴스를 가져온다 -->
+<%
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userLastName = "";
+		String userFstName = "";
+		String userPriv="";
+		
+		//user에서 가져온 userVO인스턴스의 정보 주소를 iv에 저장한다.
+		if (user != null) {
+			userLastName = user.getUserLastName();
+			userFstName = user.getUserFstName();
+			userPriv = user.getUserPriv();
+			
+		}
+%>
 
-<%@include file="../includes/adminheader.jsp"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Han:ok- Make yourself at home in Korea</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/resources/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<style>
+		html,body{
+			font-family:Verdana, sans-serif;
+			background-color:white;
+		}
+		
+		#logo{
+			width:50px;
+			height:20px;
+		}
+		
+		.acttive{   
+		  border-bottom: 5px solid #775062; 
+		}
+		
+		.panel-heading {
+			color: white !important;
+			background-color: #775062 !important;
+			border-radius: 0px !important;
+			border-color: #ddd;
+		}
+	</style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:20px;margin-bottom:0;background-color:white;">
+
+            <div class="navbar-header" style="margin-bottom:15px;">
+                
+				<!-- 로고자리 -->
+                <a class="navbar-brand" href="/admin/adminindex">Han:Ok for Admin</a>
+            </div>
+            <!-- /.navbar-header -->
+
+			<!-- 왼쪽 nav -->
+            <ul class="nav navbar-top-links navbar-left">
+				<li class="nav-menu">
+					<a href="/admin/adminlistings" class="acttive">숙소관리</a>
+				</li>
+				<li class="nav-menu">
+					<a href="/admin/userStat">회원관리</a>
+				</li>
+				<li class="nav-menu" class="testbtn">
+					<a href="#">메시지</a>
+				</li>
+				<li class="nav-menu">
+					<a href="/admin/stats/mapChart">매출관리</a>
+				</li>
+				
+			</ul>
+			
+			
+			<!-- 오른쪽 nav -->
+            <ul class="nav navbar-top-links navbar-right">
+           		<li class="nav-menu">
+					<a href='/acm/list'>메인으로</a>
+				</li>
+				<li class="nav-menu">
+					<a href='/hosting/listings'>호스트 모드 보기</a>
+				</li>
+				
+					
+            </ul>
+        </nav>
+        </div>
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	 $(document).ready(function() {
+		  var user='<%=user%>';
+		   if(user==null){
+			   alert("회원만 접근할 수 있습니다");
+			   location.href="/acm/list";
+		   }
+		   
+		   
+		  var priv ='<%=userPriv%>';
+	      if(priv!="ADMIN"){
+	    	  alert("관리자만 접속할수 있습니다");
+	    	  location.href="/acm/list";
+	      } 
+	 });
+
+	   
+	</script>
 <style>
 	* {box-sizing: border-box}
 	body {font-family: Verdana, sans-serif; margin:0}
@@ -126,13 +264,9 @@
       <!-- /.panel-heading -->
 	      <div class="panel-body">
 			<div class="form-group">
-	          <label>회원번호</label> <input class="form-control" name='userNum' id='userNum'
-	            value='<c:out value="${getuseracm.userNum }"/>' readonly="readonly">
+	          <label>회원정보</label> <input class="form-control" name='userNum' id='userNum'
+	            value='<c:out value="${getuseracm.userNum }"/>_<c:out value="${getuseracm.userFstName }"/><c:out value="${pendinghostacm.userLastName }"/>' readonly="readonly">
 	        </div>	
-	        <div class="form-group">
-	          <label>회원이름</label> <input class="form-control" name='userFstName' id='userFstName'
-	            value='<c:out value="${getuseracm.userFstName }"/><c:out value="${pendinghostacm.userLastName }"/>' readonly="readonly">
-	        </div>
 	        <div class="form-group">
 	          <label>회원 권한</label> <input class="form-control" name='userPiv'
 	            value='<c:out value="${getuseracm.userPriv }"/>' readonly="readonly">
@@ -146,7 +280,10 @@
 	          <label>회원 사업자번호</label> <input class="form-control" name='bizRegnum' id='bizRegnum'
 	            value='<c:out value="${getuseracm.bizRegnum }"/>' readonly="readonly">
 	        </div>
-			
+			<div class="form-group">
+	          <label>숙소상태</label> <input class="form-control" name='acmStatus' id='acmStatus' style="color:red;"
+	            value='<c:out value="${getuseracm.acmStatus }"/> ' readonly="readonly">
+	        </div>
 		</div>
 		</div>
 		
@@ -161,11 +298,14 @@
     <div class="panel panel-default" >
 
       <div class="panel-heading">
-      	'<c:out value="${getuseracm.acmName}"/>' 숙소정보<label class="pull-right"><c:out value="${getuseracm.acmNum }"/>&nbsp;<c:out value="${getuseracm.acmType}"/></label>
+      	'<c:out value="${getuseracm.acmName}"/>' 숙소정보<label class="pull-right"><c:out value="${getuseracm.acmNum }"/>&nbsp;<c:out value="${getuseracm.acmActi}"/></label>
       </div>
       <!-- /.panel-heading -->
 	      <div class="panel-body">
-			
+			<div class="form-group">
+	          <label>숙소 시작일</label> <input class="form-control" name='acmRegdate'
+	            value='<c:out value="${getuseracm.acmRegdate}"/>' readonly="readonly"> 
+	        </div>
 	        <div class="form-group">
 	          <label>숙소 주소</label> <input class="form-control" name='acmAddr'
 	            value='<c:out value="${getuseracm.acmCity}"/>&nbsp;<c:out value="${getuseracm.acmDistr}"/>&nbsp;<c:out value="${getuseracm.acmDetailaddr}"/>' readonly="readonly"> 
@@ -203,61 +343,54 @@
 			
 	        <div class="form-group">
 	          <label>숙소대표사진</label> 
-	          <div class="slideshow-container">
-					
-					<div class="mySlides">
-					  <div class="numbertext">1 / 3</div>
-					  <img style='align:center;width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
-							
+	           <div class="slideshow-container">
+					<br><br>
+
+					<div class="mySlides" id="mySlide0">
+					  <div class="numbertext">1 / 6</div>
 					</div>
 					
-					<div class="mySlides">
-					  <div class="numbertext">2 / 3</div>
-					 <img style='width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
+					<div class="mySlides" id="mySlide1">
+					  <div class="numbertext">2 / 6</div>
+					  
 					</div>
-					
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					  <img style='width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
-					
-					  <!--  <div class="text">Caption Three</div>-->
+
+					<div class="mySlides" id="mySlide2">
+					  <div class="numbertext">3 / 6</div>
 					</div>
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					  <img style='width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
-					
-					  <!--  <div class="text">Caption Three</div>-->
+
+					<div class="mySlides" id="mySlide3">
+					  <div class="numbertext">4 / 6</div>
 					</div>
-					<div class="mySlides">
-					  <div class="numbertext">3 / 3</div>
-					  <img style='width: 250px; height:auto;' id='rPicture' src='/review/display?fileName=<c:out value="${getuseracm.acmPurl}" /><c:out value="${getuseracm.acmPname }" />'>
-					
-					  <!--  <div class="text">Caption Three</div>-->
+
+					<div class="mySlides" id="mySlide4">
+					  <div class="numbertext">5 / 6</div>
+					</div>
+
+					<div class="mySlides" id="mySlide5">
+					  <div class="numbertext">6 / 6</div>
 					</div>
 					
 					
 					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 					<a class="next" onclick="plusSlides(1)">&#10095;</a>
-					
-					</div>
+				<!-- 여기에 넣쟈 -->	
 					<br>
 					
-					<div style="text-align:center">
-					  <span class="dot" onclick="currentSlide(1)"></span> 
-					  <span class="dot" onclick="currentSlide(2)"></span> 
-					  <span class="dot" onclick="currentSlide(3)"></span> 
-					  <span class="dot" onclick="currentSlide(4)"></span> 
-					  <span class="dot" onclick="currentSlide(5)"></span> 
-					  <span class="dot" onclick="currentSlide(6)"></span> 
-					</div>
+			<div id="dots" style="text-align:center">
+	           <span class="dot" onclick="currentSlide(1)"></span> 
+			   <span class="dot" onclick="currentSlide(2)"></span> 
+			   <span class="dot" onclick="currentSlide(3)"></span> 
+			   <span class="dot" onclick="currentSlide(4)"></span> 
+			   <span class="dot" onclick="currentSlide(5)"></span> 
+			   <span class="dot" onclick="currentSlide(6)"></span> 
+			</div>
 	          
-	          
-              </div>
-			
+          </div>
 		</div>
 		</div>
 	</div><!-- col-lg-3 end -->
-	
+	</div>
 		
 		
 	 <div class="col-lg-3">
@@ -276,9 +409,9 @@
 					<c:forEach items="${roms}" var="rom">
 						<tr>
 							<td>
-								<a class='move' href='<c:out value="${rom.romNum}"/>'>
+								<!-- <a class='move' href='<c:out value="${rom.romNum}"/>'> -->
 									<c:out value="${rom.romName}" />
-								</a>
+								
 							</td>
 						
 						</tr>
@@ -293,14 +426,16 @@
 	
 	
 	
-</div>
+
 </div>
 		<!-- 빈 폼 -->
 		<form id="actionForm">
 		</form>
 				
 </div>
+</div>
 
+<script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	var slideIndex = 1;
 	showSlides(slideIndex);
@@ -334,6 +469,25 @@
 	$(document).ready(function(){
 		getAcmOpt();
 		
+		//사진크게보기
+		var img = document.getElementsByTagName("img");
+	    for (var x = 0; x < img.length; x++) {
+	      img.item(x).onclick=function() {window.open(this.src)}; 
+	    }
+		
+	  //사진슬라이드 펑션 부르기
+		let mySlides=new Array();
+
+		for(let i=0;i<6;i++){
+			mySlides[i]=document.getElementById("mySlide"+ i);//넣는곳
+		}
+		
+		let j=0;
+		<c:forEach items="${acmPics}" var="pic">
+			mySlides[j].innerHTML+="<img style='align:center;max-width:250px;width: auto; height:200px;' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }"/>'>";
+			j++;
+		</c:forEach>
+	    
 		
 		var formObj = $("#actionForm");
 		
@@ -385,7 +539,7 @@
 		
 	
 		for(let k=0; k<option.length; k++){
-			if(option.charAt(k) == 1){
+			if(option.charAt(option.length-1-k) == 1){
 				document.getElementById("acmOpt").innerHTML += '<span id="'+ codeArr[k] +'"><i class="fa '+iconArr[k]+'" aria-hidden="true"></i>'+nameArr[k]+'</span>'+'&nbsp;';
 				
 			}

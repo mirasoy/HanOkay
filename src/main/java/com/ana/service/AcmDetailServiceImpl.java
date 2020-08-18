@@ -34,15 +34,18 @@ public class AcmDetailServiceImpl implements AcmDetailService{
 	}
 
 	@Override
-	public List<AcmDetailRomVO> getRomAll(String acmNum) {
+	public List<AcmDetailRomVO> getRomAll(String checkin,String checkout,String acmNum) {
 		log.info("■■■■■■■■■■■■▶ getRomAll: "+ acmNum);
-		return mapper.getRomAll(acmNum);
+		List<String> romNumList = mapper.getRomNum(checkin,checkout);
+		
+		return mapper.getRomAll(romNumList,acmNum);
 	}
 	
 	@Override
-	public List<AcmDetailRomVO> getRomList(String acmNum, String person) {
+	public List<AcmDetailRomVO> getRomList(String checkin,String checkout,String acmNum, String person) {
 		log.info("■■■■■■■■■■■■▶ getRomList: "+ acmNum + "/" + person);
-		return mapper.getRomList(acmNum, person);
+		List<String> romNumList = mapper.getRomNum(checkin,checkout);
+		return mapper.getRomList(romNumList,acmNum, person);
 	}
 
 	@Override

@@ -48,11 +48,13 @@
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 		<br>
-	<div style="margin-left:15%;margin-right:15%;">	
+	<div style="margin-left:20%;margin-right:15%;">	
 			 <!-- 숙소설명 -->
-	 		<h4><c:out value="${userFstname}"/>님의 새 숙소 "<c:out value="${acmName}"/>"가 등록되었습니다</h4>
-	 		작성하신 숙소는 승인 전 확인과 수정이 가능합니다<br>
-	 		24시간 내에 문자와 카카오톡 메세지로 승인여부를 확인하실수 있습니다♡<br><br>
+	 		<h3><c:out value="${userFstname}"/>님의 새 숙소</h3>
+	 		<h3> <span style="font-size:40px;">"<c:out value="${acmName}"/>"</span>가 등록되었습니다</h3>
+	 		<br>
+	 		<h4>작성하신 숙소는 승인 전 확인과 수정이 가능합니다<br>
+	 		24시간 내에 승인여부를 확인하실수 있습니다♡</h4><br><br>
 			<button data-oper='pendingAcm' class="btn btn-default">숙소 신청 확인/수정</button> 
 			<button data-oper='home' class="btn btn-default">Han:ok 메인페이지로</button> 
 			

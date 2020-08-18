@@ -65,6 +65,18 @@ button:focus {
 }
 
 
+.mypro_btn{
+	 padding: 0;
+}
+
+.mypro_btn>a{
+	
+	  width: 100%;
+    height: 100%;
+    padding: 18px;
+    display: block;
+}
+
 .accordion {
     
  
@@ -142,10 +154,11 @@ color: #000;
 }
 
 .user-pic{
-    float: left;
-    width: 60px;
+   float: left;
+    width: 70px;
+    height: 100%;
     border-radius: 50px;
-/*     border-radius: 12px; */
+    /* border-radius: 12px; */
     margin-right: 15px;
     overflow: hidden;
 }

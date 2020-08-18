@@ -34,6 +34,13 @@
 		]]>
 	</select>
 	
+	<select id="getRomList" resultType="String">
+		<![CDATA[
+		select rom_num from TROM where ACM_NUM=#{acmNum}
+		]]>
+	</select>
+	
+	
 	<!-- 객실 하나하나의 정보 가져오기 -->
 	<select id="getRom" resultMap="RomVOResult">
 		select * from TROM where ROM_NUM =#{romNum}
@@ -44,7 +51,7 @@
 	<insert id="registerRom">
 		<selectKey keyProperty="romNum" order="BEFORE"
 			resultType="String">
-			select concat('R',seq_tacm.nextval) from dual
+			select concat('R',SEQ_TROM.nextval) from dual
 		</selectKey>
 
 		insert into TROM(ACM_NUM, ROM_NUM, ROM_NAME, ROM_CAPA, 
@@ -64,19 +71,17 @@
 	
 
 	<!-- 객실 수정 -->
-	<update id="modify">
-		update trom
-		set rom_name=#{romName},
+	<update id="modiRom">
+		update trom set
 		rom_type=#{romType},
 		rom_capa=#{romCapa},
 		bed_type=#{bedType},
 		bed_cnt=#{bedCnt},
 		rom_size=#{romSize},
 		rom_price=#{romPrice},
-		rom_purl=#{romPurl},
-		rom_loca = #{romLoca}
+		rom_pname=#{romPname},
+		rom_purl=#{romPurl}
 		where rom_Num = #{romNum} 
-		
 	</update>
 
 	<!-- ********** 어드민단 ********** -->

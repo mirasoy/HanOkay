@@ -2,12 +2,14 @@ package com.ana.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ana.domain.UserProfileVO;
 import com.ana.domain.UserVO;
 
 public interface UserService {
@@ -55,13 +57,38 @@ public interface UserService {
 	public boolean grantActive(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session);
 	
 	//해당 이메일을 가진 회원의 authCode를 업데이트 시키는 메서드
+	@Transactional 
+	public boolean updateAuthCode(@Param("email") String email, @Param("authCode") String authCode);
+	 
+	//pwd 찾기에서 authcode
 	@Transactional
-	public boolean updateAuthCode(String email, String authCode);
-
+	public boolean sendAuthCode2FindPwd(@Param("email")String email);
+	
+	
+	@Transactional
+	public boolean sendAuthCode(String email);
+	
+	//세션에 있는 유저의 profile 정보들을 가져오는 메서드
+	@Transactional
+	public UserProfileVO showProfile(HttpSession session);
 	
 	//user를 db에 등록
 	@Transactional
 	public boolean registerThis(UserVO user);
+	
+	//프로필 정보를 업데이트 하는 메서드
+	public boolean updateProfile(UserProfileVO profile, HttpSession session);
+	
+	@Transactional
+	public boolean matchAuthCodeAndGiveSession(@Param("email") String email, @Param("enteredAuthCode") String authCode, HttpSession session);
+	
+	
+	@Transactional
+	public UserProfileVO getUserProfileBy(String userNum);
+	
+	@Transactional
+	public boolean updatePassword(@Param("userNum")String userNum, @Param("currentPassword")String oldPassword, @Param("newPassword") String newPassword);
+	
 	////////////////////////림쨩 ////////////////
 	
 	//세션리뉴얼
