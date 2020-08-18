@@ -605,6 +605,9 @@ body{overflow-x:hidden; overflow-y:auto; background: #f1f3f4;}
     .formLayout3{
     	display:none;
     }
+    ._xgnsug{
+    	display:none;
+    }
     
     .box1 {
     width: 100%;

@@ -357,6 +357,140 @@ display: block;
 }
 
 
+/* 인원 +- */
+.qty .count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px
+    ;min-width: 35px;
+    text-align: center;
+}
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: #61dafb;
+    width: 30px;
+    height: 30px;
+    font: 24px/1 Arial,sans-serif;
+    text-align: center;
+    border-style: solid;
+    border-color: #61dafb;
+    border-radius: 50%;
+    }
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: #61dafb;
+    width: 30px;
+    height: 30px;
+    font: 24px/1 Arial,sans-serif;
+    text-align: center;
+    border-style: solid;
+    border-color: #61dafb;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+div {
+    text-align: center;
+}
+.minus:hover{
+    background-color: #61dafb !important;
+    color: white;
+}
+.plus:hover{
+    background-color: #61dafb !important;
+    color: white;
+}
+/*Prevent text selection*/
+span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+input{  
+    border: 0;
+    width: 2%;
+}
+nput::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input:disabled{
+    background-color:white;
+}
+._1573fat:not(:last-child) {
+    border-bottom: 1px solid rgb(235, 235, 235) !important;
+}
+._1573fat {
+    -webkit-box-pack: justify !important;
+    -webkit-box-align: center !important;
+    color: rgb(34, 34, 34) !important;
+    /* padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    padding-right: 4px !important; */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-width: 240px !important;
+}
+._t0tx82 {
+    -webkit-box-flex: 1 !important;
+    flex-grow: 1 !important;
+}
+._1lmb2fq {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 600 !important;
+}
+._ebqknn {
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 400 !important;
+    color: rgb(113, 113, 113) !important;
+}
+._3zlfom {
+    -webkit-box-pack: justify !important;
+    -webkit-box-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 104px !important;
+    height: 32px !important;
+    color: rgb(34, 34, 34) !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+._xgnsug {
+    position: absolute !important;
+    left: 540px !important;
+    top: 100% !important;
+    z-index: 1 !important;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px !important;
+    margin-top: 12px !important;
+    max-height: calc(100vh - 220px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    background: rgb(255, 255, 255) !important;
+    border-radius: 32px !important;
+    padding: 16px 32px !important;
+    display:none;
+}
+/* 인원 +-끝 */
+.pac-target-input:not(:-webkit-autofill) {
+    animation-name: endBrowserAutofill;
+    width: 100px;
+}
 </style>
 
 
@@ -448,8 +582,13 @@ display: block;
 										<div class="formLayout1">
 											<div class="form-group1 pt8px">
 												<span>Guests</span>
-  
-		 										 <select class="form-control1"
+  												<input class="form-control1"
+																id="personView" type="text"
+																placeholder="게스트 추가" readonly>
+												<input class="form-control1"
+																id="person" type="hidden" name="person"
+																readonly>			
+		 										 <!-- <select class="form-control1"
 		 
 													id="person" name="person">
 													<option value="1">1</option>
@@ -460,13 +599,43 @@ display: block;
 													<option value="6">6</option>
 													<option value="7">7</option>
 													<option value="8">8</option>
-												</select> 
+												</select>  
 												
 												
-												<span class="select-arrow"></span>
+												<span class="select-arrow"></span>-->
 
 											</div>
 										</div>
+										
+<!-- 인원 +- -->						
+<div class="_xgnsug tog">
+<div class="_3hmsj tog">
+    <div class="_1573fat tog">
+        <div class="_t0tx82 tog">
+            <div class="_1lmb2fq tog">성인</div>
+	        <div class="_ebqknn tog">만 13세 이상</div>
+	    </div>
+	    <div class="qty mt-5 _3zlfom tog">
+            <span class="minus adultMinus bg-white tog">-</span>
+            <input type="number" class="count adultCnt tog" name="qty" value="0">
+            <span class="plus adultPlus bg-white tog">+</span>
+        </div>
+    </div>
+    <div class="_1573fat tog">
+        <div class="_t0tx82 tog">
+            <div class="_1lmb2fq tog">어린이</div>
+	        <div class="_ebqknn tog">만 13세 미만</div>
+	    </div>
+	    <div class="qty mt-5 _3zlfom tog">
+            <span class="minus childMinus bg-white tog">-</span>
+            <input type="number" class="count childCnt tog" name="qty" value="0">
+            <span class="plus childPlus bg-white tog">+</span>
+        </div>
+    </div>
+</div>
+</div>
+<!-- 인원 +-끝 -->	
+
 
 										<div class="">
 											<div class="form-btn1">
@@ -751,7 +920,7 @@ display: block;
 								<span></span>
 								<h3>돈암서원 한옥마을</h3>
 								<span>충남 논산시 / 럭셔리 1인실</span> <span class="price">70,000 원</span>
-								<a class="btn  btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A55">Book Now <i
+								<a class="btn  btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A55">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -869,29 +1038,7 @@ $("#pac-input").keypress(function(e){
 	}
 	
 });
-	// 날짜 선택
-	var today = new Date();
-	$("#out").datepicker({
-		minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
-		maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
-		numberOfMonths: 1,
-		dateFormat: 'yy-mm-dd'
-	});
-	$("#in").datepicker({
-		minDate: 0,
-		maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
-		numberOfMonths: 1,
-		dateFormat: 'yy-mm-dd',
-		onSelect: function(selectedDate) {
-			var nextDay = new Date(selectedDate);
-			nextDay.setDate(nextDay.getDate() + 1);
-		  $("#out").datepicker("option","minDate", nextDay);
-			var nextMonth = new Date(selectedDate);
-			nextMonth.setDate(nextMonth.getDate() + 90);
-		  $("#out").datepicker("option","maxDate", nextMonth);
-		  $("#out").datepicker("open");
-		}
-	});
+	
 </script>
 
 	<script>
@@ -900,10 +1047,54 @@ $("#pac-input").keypress(function(e){
 	    $('.t-datepicker').tDatePicker({
 	      // options here
 	    });
+	    
+	    //인원+-
+	    $('.adultCnt').prop('disabled', true);
+		$(document).on('click','.adultPlus',function(){
+			$('.adultCnt').val(parseInt($('.adultCnt').val()) + 1 );
+			if ($('.adultCnt').val() >8) {
+					$('.adultCnt').val(8);
+				}
+			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
+			$('#personView').val($('#person').val()+ '명');
+			
+		});
+    	$(document).on('click','.adultMinus',function(){
+			$('.adultCnt').val(parseInt($('.adultCnt').val()) - 1 );
+				if ($('.adultCnt').val() < 0) {
+					$('.adultCnt').val(0);
+				}
+			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
+			$('#personView').val($('#person').val()+ '명');
+	    });
+	    
+	    $('.childCnt').prop('disabled', true);
+		$(document).on('click','.childPlus',function(){
+			$('.childCnt').val(parseInt($('.childCnt').val()) + 1 );
+			if ($('.childCnt').val() >8) {
+					$('.childCnt').val(8);
+				}
+			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
+			$('#personView').val($('#person').val()+ '명');
+		});
+    	$(document).on('click','.childMinus',function(){
+			$('.childCnt').val(parseInt($('.childCnt').val()) - 1 );
+				if ($('.childCnt').val() <0) {
+					$('.childCnt').val(0);
+				}
+			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
+			$('#personView').val($('#person').val()+ '명');
+	    });
 	  });
+	 
+	 $('#personView').click(function(){
+		 $('._xgnsug').show();
+	 });
+	 $(document).click(function(e){ //문서 body를 클릭했을때 해당 클래스이름이 없으면 인원창 숨김
+		 if(!$(e.target).hasClass("tog")&&!$(e.target).hasClass("form-control1")) {$("._xgnsug").hide(); }
+		  		
+	});
 	</script>
-<!-- 달력 변경. 끝 -->
-
 
 </body>
 
