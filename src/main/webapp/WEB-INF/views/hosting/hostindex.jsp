@@ -357,7 +357,7 @@ var longitude;
 	//퇴실승인을 누르면
 	function out(){
 		var booknum=$("#obooknum").val();
-		alert("out"+booknum);
+		//alert("out"+booknum);
 		var letschange="#st"+booknum;
 		var letschange2="#"+booknum+"bt";
 		
