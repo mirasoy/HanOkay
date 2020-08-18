@@ -8,7 +8,7 @@ import com.ana.domain.AcmVO;
 import com.ana.domain.CodeVO;
 import com.ana.domain.PaymentVO;
 
-public interface HostStatsService {
+public interface AdminStatsService {
 	
 	
 	public List<AcmVO> getAcmRank(@Param("user")String user,@Param("criteria")String criteria );
@@ -21,6 +21,15 @@ public interface HostStatsService {
 	public List<AcmVO> getAllAcm(String bizRegisterNumber);
 	
 	
+	/////////어드민//////////
+	public List<PaymentVO> getPeriodAllSalesAd(@Param("start")String start, @Param("end")String end);
+	public List<AcmVO> getAcmRankAd(@Param("criteria")String criteria);
 	
 	
+	public List<PaymentVO> getAllSalesAd();//누적매출 다 가져오기
+	public List<AcmVO> getAllAcmAd();
+	
+
+
+
 }

@@ -7,7 +7,7 @@
 		}
 	</style>	
 
-	<%@include file="../../includes/hostheader.jsp"%>
+	<%@include file="../../includes/adminheader.jsp"%>
 
 
 	<div class="navbar-default sidebar" role="navigation">
@@ -16,13 +16,13 @@
 
 			<ul class="nav" id="side-menu">
 				<li>
-					<a href="/hosting/stats/statsChart"><i class="fa fa-camera fa-fw"></i> 한눈에 보기</a>
+					<a href="/admin/stats/statsChart"><i class="fa fa-camera fa-fw"></i> 한눈에 보기</a>
 				</li>
 				<li>
-					<a href="/hosting/stats/statsRank"><i class="fa fa-arrow-circle-up"></i> 숙소 랭킹</a>
+					<a href="/admin/stats/statsRank"><i class="fa fa-arrow-circle-up"></i> 숙소 랭킹</a>
 				</li>
 				<li>
-					<a href="/hosting/stats/stats"><i class="fa fa-krw fa-fw"></i> 매출 </a>
+					<a href="/admin/stats/stats"><i class="fa fa-krw fa-fw"></i> 매출 </a>
 				</li>
 				
 			</ul>
@@ -39,23 +39,23 @@
 		
 		<div class="wrapper">
 		    <div class="counter col_fourth">
-		      <i class="fa fa-won fa-2x"></i>
+		      <i class="fa fa-won fa-2x" style="color:#c93546 !important;"></i>
 		      <h2 class="timer count-title count-number" data-to="${beforeMonthSum }" data-speed="1500">원</h2>
 		       <p class="count-text ">최근 한달 매출액</p>
 		    </div>
 		
 		    <div class="counter col_fourth">
-		      <i class="fa fa-pencil-square-o fa-2x"></i>
+		      <i class="fa fa-pencil-square-o fa-2x" style="color:#c93546 !important;"></i>
 		      <h2 class="timer count-title count-number" data-to="${beforeMonthCount }" data-speed="1500"></h2>
 		      <p class="count-text ">최근 한달 예약 건수</p>
 		    </div>
 			<div class="counter col_fourth end">
-		      <i class="fa  fa-bar-chart fa-2x"></i>
+		      <i class="fa  fa-bar-chart fa-2x" style="color:#c93546 !important;"></i>
 		      <h2 class="timer count-title count-number" data-to="${todaysum }" data-speed="1500"></h2>
 		      <p class="count-text ">오늘 매출액</p>
 		    </div>
 		    <div class="counter col_fourth end">
-		      <i class="fa  fa-bar-chart fa-2x"></i>
+		      <i class="fa  fa-bar-chart fa-2x" style="color:#c93546 !important;"></i>
 		      <h2 class="timer count-title count-number" data-to="${count }" data-speed="1500"></h2>
 		      <p class="count-text ">누적 예약수</p>
 		    </div>
@@ -68,20 +68,20 @@
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 <script type="text/javascript">
-	var colorArr = ['#B0F7FF','#B4FBFF','#B9FFFF','#C0FFFF','#32F1FF','#3CFBFF','#46FFFF','#96FFFF','#C8FFFF',
-		'#00D7FF','#00E1FF','#00EBFF','#00F5FF','#00FFFF','#93DAFF','#98DFFF','#9DE4FF','#A2E9FF','#A7EEFF',
-		'#00BFFF','#0AC9FF','#14D3FF','#1EDDFF','#28E7FF','#00A5FF','#00AFFF','#00B9FF','#00C3FF','#00CDFF',
-		'#BECDFF','#C8D7FF','#D2E1FF','#DCEBFF','#E8F5FF','#90AFFF','#9AB9FF','#A4C3FF','#AECDFF','#B8D7FF',
-		'#6495ED','#6E9FED','#78A9ED','#82B3ED','#8CBDED','#96C7ED','#A0D1F7','#AADBFF','#B4E5FF','#BEEFFF',
-		'#0078FF','#0A82FF','#148CFF','#1E96FF','#28A0FF','#32AAFF','#3CB4FF','#46BEFF','#50C8FF','#5AD2FF',
-		'#0078FF','#0A82FF','#148CFF','#1E96FF','#28A0FF']
+	var colorArr = ['#c89791','#e25d75','#eccbd0','#944847','#9a5bc','#c93546','#d03957','#c79199','#f7cac2',
+		'#775062','#fbedea','#c79199','#d2a7b0','#7a6d81','#7c5b5a','#f5d4cb','#d45b41','#fa8a5f','#f7ab89',
+		'#c89791','#e25d75','#eccbd0','#944847','#9a5bc','#c93546','#d03957','#c79199','#f7cac2',
+		'#775062','#fbedea','#c79199','#d2a7b0','#7a6d81','#7c5b5a','#f5d4cb','#d45b41','#fa8a5f','#f7ab89',
+		'#c89791','#e25d75','#eccbd0','#944847','#9a5bc','#c93546','#d03957','#c79199','#f7cac2',
+		'#775062','#fbedea','#c79199','#d2a7b0','#7a6d81','#7c5b5a','#f5d4cb','#d45b41','#fa8a5f','#f7ab89',
+		'#5c1513','#a7121d','#c62139']
 	
 $(function(){
 	  $("#doughnutChart").drawDoughnutChart([
 		  
 		  <c:forEach items="${list}" var="list">
 		  
-		  { title: "<c:out value="${list.acmName}" />", value : <c:out value="${list.sumTotal}" />,color:colorArr[Math.round(Math.random() *64)] },
+		  { title: "<c:out value='${list.acmName}' />", value : <c:out value="${list.sumTotal}" />,color:colorArr[Math.round(Math.random() *64)] },
 		  </c:forEach>
 	  ]);
 	});
@@ -138,13 +138,16 @@ $(function(){
 	            window.setTimeout(callback, 1000 / 60);
 	          };
 	      }();
+
 	    settings.beforeDraw.call($this);
+
 	    var $svg = $('<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>').appendTo($this),
 	        $paths = [],
 	        easingFunction = animationOptions[settings.animationEasing],
 	        doughnutRadius = Min([H / 2,W / 2]) - settings.edgeOffset,
 	        cutoutRadius = doughnutRadius * (settings.percentageInnerCutout / 100),
 	        segmentTotal = 0;
+
 	    //Draw base doughnut
 	    var baseDoughnutRadius = doughnutRadius + settings.baseOffset,
 	        baseCutoutRadius = cutoutRadius - settings.baseOffset;
@@ -154,13 +157,16 @@ $(function(){
 	        "fill": settings.baseColor
 	      })
 	      .appendTo($svg);
+
 	    //Set up pie segments wrapper
 	    var $pathGroup = $(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
 	    $pathGroup.attr({opacity: 0}).appendTo($svg);
+
 	    //Set up tooltip
 	    var $tip = $('<div class="' + settings.tipClass + '" />').appendTo('body').hide(),
 	        tipW = $tip.width(),
 	        tipH = $tip.height();
+
 	    //Set up center text area
 	    var summarySize = (cutoutRadius - (doughnutRadius - cutoutRadius)) * 2,
 	        $summary = $('<div class="' + settings.summaryClass + '" />')
@@ -173,6 +179,7 @@ $(function(){
 	                   });
 	    var $summaryTitle = $('<p class="' + settings.summaryTitleClass + '">' + settings.summaryTitle + '</p>').appendTo($summary);
 	    var $summaryNumber = $('<p class="' + settings.summaryNumberClass + '"></p>').appendTo($summary).css({opacity: 0});
+
 	    for (var i = 0, len = data.length; i < len; i++) {
 	      segmentTotal += data[i].value;
 	      $paths[i] = $(document.createElementNS('http://www.w3.org/2000/svg', 'path'))
@@ -187,8 +194,10 @@ $(function(){
 	        .on("mouseleave", pathMouseLeave)
 	        .on("mousemove", pathMouseMove);
 	    }
+
 	    //Animation start
 	    animationLoop(drawPieSegments);
+
 	    //Functions
 	    function getHollowCirclePath(doughnutRadius, cutoutRadius) {
 	        //Calculate values for the path.
@@ -235,8 +244,11 @@ $(function(){
 	      var startRadius = -PI / 2, //-90 degree
 	          rotateAnimation = 1;
 	      if (settings.animation && settings.animateRotate) rotateAnimation = animationDecimal;//count up between0~1
+
 	      drawDoughnutText(animationDecimal, segmentTotal);
+
 	      $pathGroup.attr("opacity", animationDecimal);
+
 	      //If data have only one value, we draw hollow circle(#1).
 	      if (data.length === 1 && (4.7122 < (rotateAnimation * ((data[0].value / segmentTotal) * (PI * 2)) + startRadius))) {
 	        $paths[0].attr("d", getHollowCirclePath(doughnutRadius, cutoutRadius));
@@ -304,6 +316,7 @@ $(function(){
 	    return $this;
 	  };
 	})(jQuery);
+
 	
 	//다른 부분
 	
@@ -387,6 +400,7 @@ $(function(){
 		return value.toFixed(settings.decimals);
 	}
 }(jQuery));
+
 jQuery(function ($) {
   // custom formatting example
   $('.count-number').data('countToOptions', {
