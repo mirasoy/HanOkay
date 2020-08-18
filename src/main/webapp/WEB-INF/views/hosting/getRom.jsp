@@ -47,29 +47,14 @@
   <input type="hidden" id="romNum" name="romNum" value=" <c:out value='${thisrom.romNum}'/>" readonly="readonly">
 	</div><!-- col-lg-4 end -->
 	<div class="col-lg-3">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				객실 '<c:out value="${thisrom.romName}" />'
+		<div class="panel panel-default" style="height:270px;">
+				<br> &nbsp;<label>객실 '<c:out value="${thisrom.romName}" />'</label>
 				
 				<button type="button" class="btn btn-xs pull-right" data-oper='editAcmPic'>숙소 사진 편집</button>
-			</div>
 			<!-- /.panel-heading -->
-			<div class="panel-body">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>대표 객실 사진</th>
-						</tr>
-					</thead>
-						<tr>
-							<th height="210px;">
-								<img style=' width: auto; height: 150px; max-width: 300px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${thisrom.romPurl}" /><c:out value="${thisrom.romPname }" />'>
-							</th>
-						</tr>
-				</table>
-				
-				
-				</div>
+			<div class="panel-body" style="text-align: center;">
+				<img style='width: auto; height: 180px; max-width: 250px; margin-left :20px;' id='rPicture' src='/review/display?fileName=<c:out value="${thisrom.romPurl}" /><c:out value="${thisrom.romPname }" />'>
+			</div>
 				<!--  end panel-body -->
 			</div>
 			<!-- end panel -->
@@ -134,6 +119,13 @@
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		//사진크게보기
+		var img = document.getElementsByTagName("img");
+	    for (var x = 0; x < img.length; x++) {
+	      img.item(x).onclick=function() {window.open(this.src)}; 
+	    }
+		
 		getRomOpt();
 		
 		var formObj = $("#actionForm");
@@ -185,14 +177,12 @@
 		var nameArr = new Array(); 
 		let option;
 		let j = 0;
-
 		<c:forEach items="${romCode}" var="romCode">
 		
 			iconArr[j] = '<c:out value="${romCode.codeIcon}" />';
 			codeArr[j] = 'acm' + '<c:out value="${romCode.codeFull}" />';
 			nameArr[j] = '<c:out value="${romCode.codeCont}" />';
 			j++;
-
 		</c:forEach>
 		
 		
@@ -209,18 +199,5 @@
 	
 	}
 	
-
-
 </script>
 <%@include file="../includes/footer.jsp"%>
-
-
-
-
-
-
-
-
-
-
-

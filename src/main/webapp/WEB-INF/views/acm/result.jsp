@@ -441,8 +441,8 @@ background-color: #ccc;
 
 
 	<div id="wrap">
-		<div class="container1">
-			<section class="search_section">
+		<div class="container1 container2">
+			<section class="search_section search2">
 				<div class="row1">
 					<div class="booking-container">
 						<form class="booking-form1" action="/acm/result" method='get'
@@ -546,6 +546,9 @@ background-color: #ccc;
 						<li><input type="button" id="myBtn" name="filterAjax"
 							value="필터 추가하기"></li>
 					</ul>
+					
+					<p class="toyou"><span class="alarm"></span>고객님만을 위해 엄선한 숙소 목록입니다. <span class="letgo"> 여기 이 숙소는 어떠신가요? 지금 확인해 보세요!</span></p>
+					
 				</div>
 				<!-- end : main_text -->
 
@@ -829,6 +832,10 @@ background-color: #ccc;
 
 					<div class='pull-right'>
 						<ul class="pagination">
+
+
+					
+						
 
 							<c:if test="${pageMaker.prev}">
 								<li class="paginate_button previous"><a
@@ -1798,11 +1805,36 @@ str +='<div class="room room1 move"  href="<c:out value="${acm.acmNum}"/>" style
 	$("#myTable").append(str);													
 	</c:forEach>
 }
+
+//Scroll-up
+$(function(){
+	$(window).on("scroll",function() {
+	    if ($(this).scrollTop() > 100) {
+	        $('.aside').fadeIn();
+	    } else {
+	        $('.aside').fadeOut();
+	    }
+	});
+});
+
+$(".aside").on("click",function(evt){
+	$("html,body").stop().animate({
+		scrollTop : 0
+	},400);
+
+	evt.preventDefault();
+});
+
+
+
+
+
 </script>
 
 
 
 <%@include file="../includes/footer.jsp"%>
+
 
 
 </html>

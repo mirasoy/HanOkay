@@ -41,26 +41,24 @@ public class ChatController {
 	private UserService uService;
 	@Autowired
 	private ChatRomService chService;
-//
-//	@RequestMapping(value = "chat/chattingView", method = RequestMethod.GET)
-//	public ModelAndView chat(@RequestParam("toID") String toID, ModelAndView mv, HttpSession session) {
-//
-//		user = (UserVO) session.getAttribute("user");
-//		if (user != null) {
-//
-//			UserVO toUser = uService.getUserById(toID);
-//
-//			mv.setViewName("chat/chatRoom");
-//			mv.addObject("user", user);
-//			mv.addObject("conversation", service.readConversation(user.getUserNum(), toID));
-//			System.out.println("toUser ---->>>>" + toUser);
-//			mv.addObject("toUser", toUser);
-//
-//		} else {
-//			mv.setViewName("acm/list");
-//		}
-//		return mv;
-//	}
+	
+	
+	@RequestMapping(value = "chat/chattingView",  method = RequestMethod.GET)
+	public ModelAndView chat(ModelAndView mv, HttpSession session) {
+		user = (UserVO) session.getAttribute("user");
+		
+		if(user!=null) {
+		System.out.println("<D<D<F>D<D>D<D>"+user.getUserEmail());
+		
+		mv.setViewName("chat/chattingView");
+		mv.addObject("Userid",user.getUserEmail());
+		}else {
+			mv.setViewName("acm/list");
+		}
+		return mv;
+	}
+
+
 
 	@PostMapping(value = "chat/chatRoom")
 	public ModelAndView chatRoom

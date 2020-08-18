@@ -178,7 +178,10 @@ text-align: center;
 	width: 90%;
     height: 40px;
 }
-    
+   
+   a{
+      color: #21292d !important;
+      } 
 </style>
 
 <div class="container">

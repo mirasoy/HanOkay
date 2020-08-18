@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -510,7 +510,7 @@ input:disabled{
 							<p class="banner-subtitle">We assist you to choose the best</p>
 							<a href="javascript:void(0)" class="down-arrow-link"><i
 								class="fa fa-2x fa-angle-down down-arrow"></i></a>
-							<a class="scrollPlz">scroll</a>
+						
 						</div>
 					</div>
 					<!-- col-xs-12 -->
@@ -824,7 +824,7 @@ input:disabled{
 		<div class="text-2 bgwhite">
 			<div class="mx-auto about-text-wrap text-center">
 				<h2 class="text-uppercase mb-4">
-					한국의 <strong>한옥</strong>에서 더 특별한 여행 즐기기
+					고즈넉한 <strong>한옥</strong>에서 더 특별한 여행 즐기기
 				</h2>
 				<p class="">다양한 한옥을 소개 하는 페이지 입니다.</p>
 

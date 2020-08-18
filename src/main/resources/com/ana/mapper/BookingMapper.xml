@@ -450,7 +450,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	</select>
 	
+	<resultMap id="PaymentVOResult"
+		type="com.ana.domain.PaymentVO">
+		<result column="pay_num" property="payNum" />
+		<result column="book_num" property="bookNum" />
+		<result column="pay_method" property="payMethod" />
+		<result column="pay_time" property="payTime" />
+		<result column="acm_num" property="acmNum" />
+		<result column="rom_num" property="romNum" />
+		<result column="price" property="price" />
+		<result column="staydays" property="staydays" />
+	</resultMap>
 	
+	<select id="getPayment" resultMap="PaymentVOResult">
+		SELECT * from tpayment WHERE  BOOK_NUM= #{bookNum}
+	</select>
 	
 	
 	

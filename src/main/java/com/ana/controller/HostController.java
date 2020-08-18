@@ -28,6 +28,7 @@ import com.ana.domain.AcmVO;
 import com.ana.domain.BookVO;
 import com.ana.domain.BookingVO;
 import com.ana.domain.CalendarVO;
+import com.ana.domain.PaymentVO;
 import com.ana.domain.RomVO;
 import com.ana.domain.UserVO;
 import com.ana.service.AcmDetailService;
@@ -52,7 +53,7 @@ public class HostController {
 	@Autowired
 	private AcmRegService aservice;//숙소등록관련서비스
 	@Autowired
-	private UserService uservice;//호스트 사업등록증관련
+	private UserService uservice;//호스트 사업등록증관련A
 	@Autowired
 	private CodeService codeService;
 	@Autowired
@@ -140,6 +141,42 @@ public class HostController {
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());
 	}
+	
+	//숙소가 선택될때마다 숙소에대한 객실들을 가져오자
+			@RequestMapping(value = "getTpayment", method = RequestMethod.GET)
+			@ResponseBody
+			public void getTpayment(String bookNum,HttpServletRequest request, HttpServletResponse response)
+					throws IOException{	
+				System.out.println("tbooknum을 가지고 payment를 받아오자");
+				
+				//제이슨에 List<RomVO>를 담아오자
+				JSONObject job= new JSONObject();
+				log.info("bookNum check: " +  bookNum);
+				
+				//한글 깨짐 방지
+				response.setContentType("text/plain;charset=UTF-8");
+				
+				PaymentVO payment=bservice.getPayment(bookNum);
+				System.out.println(payment);		
+				if (payment!=null) {//return List<RomVO>
+					job.put("payNum", payment.getPayNum());
+					job.put("bookNum", payment.getBookNum());
+					job.put("payMethod", payment.getPayMethod());
+					job.put("acmNum", payment.getAcmNum());
+					job.put("romNum", payment.getRomNum());
+					job.put("price", payment.getPrice());
+					job.put("staydays", payment.getStaydays());
+					System.out.println(job.get("staydays"));
+					
+					System.out.println("***"+job);
+				} 
+				else {
+					System.out.println("없을리가 없지만 없다");
+				}
+				PrintWriter out = response.getWriter();
+				out.print(job);
+			}
+	
 	
 	@GetMapping("/reserv")
 	public void reservGet(Model model,HttpSession session) {
@@ -258,7 +295,7 @@ public class HostController {
 			List<AcmVO> pendinglist= aservice.getListAcms(ownerUserNum,acmActi);
 			model.addAttribute("pendinglist", pendinglist);//
 			size+=pendinglist.size();
-			
+			model.addAttribute("newnotallowed", "true");
 		} else if(userPriv.equals("HOST")){
 			//호스트면
 			acmActi="PENDING";
@@ -267,7 +304,7 @@ public class HostController {
 			
 			if(pendinglist.size()!=0) {//심사대기가 하나라도 있으면 안된다
 				System.out.println("펜딩있음!");
-				model.addAttribute("newnotallowed", true);//
+				model.addAttribute("newnotallowed", "true");//
 			}
 			size+=pendinglist.size();
 			
@@ -288,7 +325,6 @@ public class HostController {
 		model.addAttribute("size", size);//
 		
 		model.addAttribute("userFstname", getUser(session).getUserFstName());//
-		System.out.println("전체리스트뀨뀨뀨뀨뀨뀨뀨갯수:");
 	}
 	
 
