@@ -20,21 +20,28 @@
 <style>
 
 .formLayout3{
-    padding: 10px 12px !important;
-    width: 330px;
+    padding: 13px 53px !important;
+    width: 360px;
 }
+
+
+.formLayout1 {
+
+	padding: 10px 50px !important;
+}
+
 
 .t-check-in{
 
    
     float: left;
-    width: 150px;
+    width: 160px;
 }
 
 .t-check-out{
 
     float: right;
-    width: 150px;
+    width: 90px;
 }
 
 .t-arrow-top, .t-arrow-top::after{
@@ -42,11 +49,15 @@ border-color: transparent transparent #fff !important;
 }
 
 .spanGroup>span:nth-child(2){
-    margin-left: 100px;
+    margin-left: 110px;
 }
 
 .box1{
 	    width: 20%;
+}
+
+  .submit-btn {
+	padding: 20px;
 }
 
 
@@ -396,9 +407,7 @@ display: block;
     border-radius: 50%;
     background-clip: padding-box;
 }
-div {
-    text-align: center;
-}
+
 .minus:hover{
     background-color: #61dafb !important;
     color: white;
@@ -542,7 +551,7 @@ input:disabled{
 													</div>
 
 												</div>
-	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■여기부터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
 												<div class="formLayout3 ">
 												
 													<div class="booking-group2">
@@ -558,28 +567,8 @@ input:disabled{
 														</div>
 													</div>
 												</div>
-												
-												
-										<!-- 		<div class="t-datepicker form-group1 pt8px">
-													<span>Check In</span>
-													 <div class="t-check-in"></div>													
-												</div>
-																		
-
+																																
 												<div class="formLayout1">
-													<div class="t-datepicker form-group1 pt8px">
-														<span>Check out</span>
-														
-														<div class="t-check-out"></div>													
-													</div>
-												</div> -->
-												
-												
-												
-
-											</div>
-										</div>
-										<div class="formLayout1">
 											<div class="form-group1 pt8px">
 												<span>Guests</span>
   												<input class="form-control1"
@@ -588,25 +577,12 @@ input:disabled{
 												<input class="form-control1"
 																id="person" type="hidden" name="person"
 																readonly>			
-		 										 <!-- <select class="form-control1"
-		 
-													id="person" name="person">
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-													<option value="6">6</option>
-													<option value="7">7</option>
-													<option value="8">8</option>
-												</select>  
-												
-												
-												<span class="select-arrow"></span>-->
+		 							
 
 											</div>
 										</div>
-										
+											</div>	
+										</div>
 <!-- 인원 +- -->						
 <div class="_xgnsug tog">
 <div class="_3hmsj tog">
