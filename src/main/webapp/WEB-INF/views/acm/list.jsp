@@ -821,7 +821,7 @@ input:disabled{
 								<span></span>
 								<h3>게스트하우스 바리</h3>
 								<span>서울시 종로구 / 1인 1박 특별가 </span> <span class="price"> 17,000원 </span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A12">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A12">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -836,7 +836,7 @@ input:disabled{
 								<span></span>
 								<h3>공산성게스트하우스</h3>
 								<span>충남 공주시  / 8인 특별가! </span> <span class="price"> 50,000 원 </span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A7">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A7">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -851,7 +851,7 @@ input:disabled{
 								<span></span>
 								<h3>무위(無爲) </h3>
 								<span>서울시 종로구 / 1인실 1박 가격 </span> <span class="price"> 13,000 원</span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-02-09&out=2020-02-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A21">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-02-09&out=2020-02-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A21">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -866,7 +866,7 @@ input:disabled{
 								<span></span>
 								<h3>1900s Hanok </h3>
 								<span>고즈넉한 분위기의 한옥 스테이</span> <span class="price"> 50,000 원</span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A68">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A68">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -881,7 +881,7 @@ input:disabled{
 								<span></span>
 								<h3>무렵</h3>
 								<span>전주의 최신 숙소</span> <span class="price">150,000원</span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=%EC%A0%84%EC%A3%BC&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A82">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=%EC%A0%84%EC%A3%BC&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A82">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -936,7 +936,7 @@ input:disabled{
 					<h2 class="">[교동게하]따뜻하고 전통적인 한옥게스트하우스!</h2>
 					<p>부모님 모시고 한옥 두 게스트하우스 방문했는데 한옥의 매력 제대로 느끼고 갑니다~<br>
 북촌 마을이 내려다보여서 전망도 좋고 방도 깔끔하고 통풍 잘 되서 정말정말 좋았어요!</p>
-					<a href="http://localhost/review/get?pstNum=RV17" class="text-uppercase btn btn-white btn-white-primary">Continue
+					<a href="/review/get?pstNum=RV17" class="text-uppercase btn btn-white btn-white-primary">Continue
 						Reading</a>
 				</div>
 			</section>
@@ -954,7 +954,7 @@ input:disabled{
 					<p>Loved our stay in this lovely, old area of Seoul. Felt like a proper, authentic Korean experience.<br>
 					 Well worth paying an extra few Won for en suite wet-room as I couldnt be doing with all the shoes-on, shoes-off business!<br>
 					  Sleeping on the futons (i.e. on the floor) with buckwheat pillows was surprisingly comfortable and the under-floor heating much appreciated.</p>
-					<a href="http://localhost/review/get?pstNum=RV22"
+					<a href="/review/get?pstNum=RV22"
 						class="text-uppercase btn btn-white btn-white-highlight">Continue
 						Reading</a>
 				</div>
@@ -971,7 +971,7 @@ input:disabled{
 					<p>한옥 정원이 너무 아름다웠고, 숙소 내부도 안락하고 따뜻하니 좋았습니다.
 이불보도 굉장히 두꺼워 푹신하고 편하게 잠들 수 있었어요!
 직원분들도 친절하고 깨끗해서 재방문하고싶습니다.</p>
-					<a href="http://localhost/review/get?pstNum=RV8" class="text-uppercase btn btn-white btn-white-primary">Continue
+					<a href="/review/get?pstNum=RV8" class="text-uppercase btn btn-white btn-white-primary">Continue
 						Reading</a>
 				</div>
 			</section>

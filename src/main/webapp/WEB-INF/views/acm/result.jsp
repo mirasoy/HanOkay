@@ -795,7 +795,7 @@ background-color: #ccc;
 									<a href="#">
 										<figure>
 											<img alt='객실사진'
-												src='/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />' />
+												src='/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname}" />' />
 										</figure>
 									</a>
 								</div>
