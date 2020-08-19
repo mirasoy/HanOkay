@@ -359,18 +359,7 @@
 			<br><br>-->
 			
  <div class="row">
- 				<div class="col-lg-6">
-                    <div class="panel panel-default" style="height:420px;">
- 						오늘의 새회원/새호스트               
-				 	</div>
-				 </div>
- 				<div class="col-lg-6" style="height:450px;">
-                    <div class="panel panel-default" style="height:420px;">
-                		오늘의 예약(전체)
-				 	</div>
-				 </div>
-  
- 
+ 				
 			   <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
