@@ -101,7 +101,7 @@
 					<a href="/admin/userStat" class="testbtn">회원관리</a>
 				</li>
 				<li class="nav-menu">
-					<a href="#" class="testbtn">메시지</a>
+					<a href="/chat/chatList3" class="testbtn">메시지</a>
 				</li>
 				<li class="nav-menu">
 					<a href="/admin/stats/statsChart" class="testbtn">매출관리</a>

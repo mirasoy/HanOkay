@@ -77,7 +77,7 @@ var latitude;
 						apiKey1 + "&contentTypeId="
                             + weatherMap.get(resp.weather[0].main)[0]
                             + "&mapX=" + longitude + "&mapY=" + latitude +
-                            "&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=O&numOfRows=50&pageNo=1&_type=json"
+                            "&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=P&numOfRows=200&pageNo=1&_type=json"
 
 						//관광지 검색 펑션 실행
 
@@ -117,7 +117,7 @@ var latitude;
                     if(resp.response.header.resultCode=='0000'){
                     	
                     var result = resp.response.body.items.item;
-                    console.log("검색된갯수" + resp.response.body.totalCount);
+                    console.log("검색된   갯수" + resp.response.body.totalCount);
 
                     //정보 화면에 넣는 펑션에 넘기기
                     write(result,resp.response.body.totalCount);
@@ -136,19 +136,18 @@ var latitude;
 
 
         function write(result,count) {
-        	
         	var numSet = new Set()
         	
         	while (numSet.size<3) {
 
-        		numSet.add(Math.trunc(Math.random()*count));
+        		numSet.add(Math.trunc(Math.random()*result.length));
 
        			}	
         	
         	
         	var setNum = 1;
         	numSet.forEach(function(element){
-        		
+        		console.log(element);
         		$("#cardImg"+setNum).attr("src", result[element].firstimage);
         		$("#btn"+setNum).val(result[element].addr1.split(" ")[1]);
         		$("#placeTitle"+setNum).text(result[element].title);

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../includes/hostheader.jsp"%>
+<%@include file="../includes/adminheader.jsp"%>
 
 <style>
 
@@ -74,7 +74,7 @@
 
 <div class="container">
 <div class ="wrapCon">
-	<a href="/chat/chatList2"><button class = "btn"><i class="fa fa-angle-double-left" style="font-size: 2em;" aria-hidden="true"></i></button></a>
+	<a href="/chat/chatList3"><button class = "btn"><i class="fa fa-angle-double-left" style="font-size: 2em;" aria-hidden="true"></i></button></a>
 	<b class = "right" style="font-size: 2em;">${toUser.userFstName }님과 대화중</b>
 	<div> 
 	<div class="chatList">
@@ -197,15 +197,13 @@ function onMessage(resultArr){  //변수 안에 function자체를 넣음.
 		
 	if(obj.unumFrom==$('#callUsernum').val()){
 			str += "<div class='chatContainer darker'>"
-			str += "<img src='https://cdn.mos.cms.futurecdn.net/tE6kcHGGicucPKG5X3r3zj-650-80.jpg.webp'  class ='right' style='width:100%;'>"
+			str += "<img src='/resources/img/you.png'  class ='right' style='width:100%;'>"
 			str += "<p id='"+obj.msgNum+"'>"+"</p>"
-			str += "<span class='time-right'>"+month+"/"+day+" "+hour+":"+minute+"</span></div>"
 	
 	}else{
 			str += "<div class='chatContainer '>"
 			str += "<img src='http://www.jisadong.com/data/file/fun/3034803641_BYV8GFmL_2391224.jpeg' class  style='width:100%;'>"
 			str += "<p id='"+obj.msgNum+"'>"+"</p>"
-			str += "<span class='time-right'>"+month+"/"+day+" "+hour+":"+minute+"</span></div>"
 	}
 	$(".chatList").append(str);
 	
@@ -226,4 +224,15 @@ function onClose(evt){
 	$("#data").append("연결 끊김");
 }    
 </script>
+
+<%@include file="../includes/footer.jsp"%>
+
+
+
+
+
+
+
+
+
 </html>
