@@ -426,7 +426,7 @@ input{
     border: 0;
     width: 2%;
 }
-nput::-webkit-outer-spin-button,
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -545,7 +545,7 @@ input:disabled{
 																value='<c:out value="${pageMaker.cri.keyword}"/>'
 																placeholder="Enter a location">
 														</div>
-														<input type="hidden" value="CW" name="type">
+														<input type="hidden" value="A" name="type">
 
 
 													</div>
@@ -573,7 +573,7 @@ input:disabled{
 												<span>Guests</span>
   												<input class="form-control1"
 																id="personView" type="text"
-																placeholder="게스트 추가" readonly>
+																placeholder="Add guests" readonly>
 												<input class="form-control1"
 																id="person" type="hidden" name="person"
 																readonly>			
@@ -593,7 +593,7 @@ input:disabled{
 	    </div>
 	    <div class="qty mt-5 _3zlfom tog">
             <span class="minus adultMinus bg-white tog">-</span>
-            <input type="number" class="count adultCnt tog" name="qty" value="0">
+            <input type="number" class="count adultCnt tog" name="qty" value="1">
             <span class="plus adultPlus bg-white tog">+</span>
         </div>
     </div>
@@ -610,7 +610,7 @@ input:disabled{
     </div>
 </div>
 </div>
-<!-- 인원 +-끝 -->	
+<!-- 인원 +-끝 -->	 
 
 
 										<div class="">
@@ -1037,8 +1037,8 @@ $("#pac-input").keypress(function(e){
 		});
     	$(document).on('click','.adultMinus',function(){
 			$('.adultCnt').val(parseInt($('.adultCnt').val()) - 1 );
-				if ($('.adultCnt').val() < 0) {
-					$('.adultCnt').val(0);
+				if ($('.adultCnt').val() < 1) {
+					$('.adultCnt').val(1);
 				}
 			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
 			$('#personView').val($('#person').val()+ '명');
