@@ -184,7 +184,6 @@ String checkout = request.getParameter("out");
 							<td class="rom-title"><span ><c:out value="${rom.romName}" /></span></td>
 							<td class="rom-pic"><img alt='객실사진' src='/display?fileName=<c:out value="${rom.romPurl}" /><c:out value="${rom.romPname}" />' />
 							</td>
-							
 							<td class="table-rom-td"><span class="rom-type"><c:out value="${rom.romType}" /></span>&nbsp;
 							<span class="rom-size"><c:out value="${rom.romSize}" />(m²)</span>
 							</br>
