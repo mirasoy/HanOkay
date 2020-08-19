@@ -260,10 +260,12 @@ public class AcmController {
 		if(cri.getMaxPrice().equals("500000")) {
 			cri.setMaxPrice("9999999");
 		}
-//		//요금필터 사용시(초기값(0,500000)이 아닐시)
-//		if(!cri.getMinPrice().equals("0")||!cri.getMaxPrice().equals("9999999")) {
-//			cri.setType(cri.getType().concat("M"));
-//		}
+		//인원이 0일 경우 1
+		if(cri.getPerson().equals("0")) {
+			cri.setPerson("1");
+		}
+		
+
 		
 	}
 	
