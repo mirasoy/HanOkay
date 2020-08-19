@@ -313,7 +313,19 @@ var longitude;
 	            $("#iromNum").text(result.romNum);
 	            $("#iprice").text(result.price);
 	            $("#istaydays").text(result.staydays);
-	            $("#ipayMethod").text(result.payMethod);
+	            
+	            var paymmethod=result.payMethod;
+	            
+	            if(paymmethod=="PY_METHOD_CARD"){
+		            $("#ipayMethod").text("결제완료(카드)");
+	            }else if(paymmethod=="PY_METHOD_LATER"){
+	            	$("#ipayMethod").text("현장결제");
+	            }else if(paymmethod=="PY_METHOD_PAYPAL"){
+	            	$("#ipayMethod").text("결제완료(페이팔)");
+	            }
+	            	
+	            
+	            
 	            
 	            console.log(result.payMethod);
 	            if(result.payMethod=="PY_METHOD_LATER"){
