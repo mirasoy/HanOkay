@@ -417,6 +417,33 @@ background-color: #ccc;
   button.apply {
     margin-top: 2rem;
   }
+  
+  
+  .formLayout1{
+      padding: 10px 10px !important;
+  }
+  
+  
+   .formLayout1:nth-child(1){
+         padding-left: 83px !important;
+  }
+  
+    .formLayout1:nth-child(4){
+         padding-right: 41px !important;
+  }
+  
+  .formLayout5{
+      padding-right: 41px !important;
+  }
+  
+  
+
+  .top-bar{
+  box-shadow: 0 4px 10px 0 #bec2c9;
+  }
+  
+  
+  
 /*가격 슬라이더 끝*/
 
 
@@ -508,7 +535,7 @@ background-color: #ccc;
 
 									</div>
 								</div>
-								<div class="">
+								<div class="formLayout5">
 									<div class="form-btn1">
 
 										<button
