@@ -41,31 +41,26 @@ public class ChatController {
 	private UserService uService;
 	@Autowired
 	private ChatRomService chService;
-	
-	
-	@RequestMapping(value = "chat/chattingView",  method = RequestMethod.GET)
+
+	@RequestMapping(value = "chat/chattingView", method = RequestMethod.GET)
 	public ModelAndView chat(ModelAndView mv, HttpSession session) {
 		user = (UserVO) session.getAttribute("user");
-		
-		if(user!=null) {
-		System.out.println("<D<D<F>D<D>D<D>"+user.getUserEmail());
-		
-		mv.setViewName("chat/chattingView");
-		mv.addObject("Userid",user.getUserEmail());
-		}else {
+
+		if (user != null) {
+			System.out.println("<D<D<F>D<D>D<D>" + user.getUserEmail());
+
+			mv.setViewName("chat/chattingView");
+			mv.addObject("Userid", user.getUserEmail());
+		} else {
 			mv.setViewName("acm/list");
 		}
 		return mv;
 	}
 
+	@PostMapping({ "chat/chatRoom", "chat/chatRoom2", "chat/chatRoom3" })
+	public ModelAndView chatRoom(@RequestParam("chatromnum") String chatromnum,
+			@RequestParam("requestURL") String requestURL, ModelAndView mv, HttpSession session) {
 
-
-	@PostMapping(value = "chat/chatRoom")
-	public ModelAndView chatRoom
-			(@RequestParam("chatromnum") String chatromnum, @RequestParam("requestURL") String requestURL, ModelAndView mv, HttpSession session) {
-
-		
-		
 		String otherUser = "";
 		user = (UserVO) session.getAttribute("user");
 		// 로그인여부확인
@@ -147,13 +142,7 @@ public class ChatController {
 			mv.addObject("chatromnum", chatromnum);
 			mv.addObject("toUser", uService.get(otherUser));
 			mv.addObject("conversation", conversation);
-			
-			if(requestURL.equals("hosting")) {
-				mv.setViewName("chat/chatRoom2");
-				
-				}else {
-					mv.setViewName("chat/chatRoom");
-				}
+
 		} else {
 			// 비로그인 로그인시키기
 			mv.setViewName("/user/login");
@@ -161,7 +150,7 @@ public class ChatController {
 		return mv;
 	}
 
-	@GetMapping({"chat/chatList","chat/chatList2"})
+	@GetMapping({ "chat/chatList", "chat/chatList2", "chat/chatList3" })
 	public ModelAndView chatList(ModelAndView mv, HttpSession session, HttpServletRequest request) {
 		log.info("__");
 		user = (UserVO) session.getAttribute("user");
@@ -169,15 +158,13 @@ public class ChatController {
 
 			// 넘어온 위치 파악하기
 			String url = request.getHeader("referer").split("/")[3]; // => acm/list
-			
 
 			// 채팅방받아오기
-			
-			
-			if (null!= chService.readChatlist(user.getUserNum()) ) {
-				
+
+			if (null != chService.readChatlist(user.getUserNum())) {
+
 				List<ChatRomVO> chattingRoomList = chService.readChatlist(user.getUserNum());
-				
+
 				for (ChatRomVO vo : chattingRoomList) {
 					// 채팅 방 상대편알려주기
 
@@ -188,8 +175,7 @@ public class ChatController {
 					}
 
 					// 안읽은 메세지 몇개인지 알려주기
-					
-					
+
 					List<MsgVO> conversation = service.readConversation(user.getUserNum(),
 							vo.getOtherUser().getUserNum());
 
@@ -205,30 +191,21 @@ public class ChatController {
 						}
 					}
 					// 다음 메세지들 중에서 니가 보낸거 고르기
-					
+
 					log.info("4");
-					log.info(vo.getOtherUser().getUserFstName()+":unread::" + count);
+					log.info(vo.getOtherUser().getUserFstName() + ":unread::" + count);
 					vo.setUnread("" + count);
 				}
 				mv.addObject("requestURL", url);
 				mv.addObject("chatList", chattingRoomList);
 
-				if(url.equals("hosting")) {
-				mv.setViewName("chat/chatList2");
-				
-				}else {
-					mv.setViewName("chat/chatList");
-				}
 				return mv;
-				
-				
-				
-			}else {
+
+			} else {
 				mv.setViewName("/user/login");
 				return mv;
 			}
-			
-			
+
 		} else {
 			mv.setViewName("/user/login");
 			return mv;
@@ -274,18 +251,15 @@ public class ChatController {
 	@PostMapping(value = "/unreadMsg")
 	@ResponseBody
 	public ResponseEntity<String> unreadMsg(HttpSession session) {
-		
+
 		user = (UserVO) session.getAttribute("user");
 		// 로그인 여부확인하기
 		if (user != null) {
-		service.unreadMsg(user.getUserNum());
-		return new ResponseEntity<String>(""+(service.unreadMsg(user.getUserNum())),HttpStatus.OK);
+			service.unreadMsg(user.getUserNum());
+			return new ResponseEntity<String>("" + (service.unreadMsg(user.getUserNum())), HttpStatus.OK);
 		}
 		return null;
-		
+
 	}
-	
-	
-	
-	
+
 }

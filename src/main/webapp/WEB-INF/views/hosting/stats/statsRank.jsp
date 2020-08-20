@@ -41,8 +41,6 @@
 	  background-color:#fff;
 	  
 	}
-
-
 	.active{   
 	  border-bottom: 5px solid #235d6e; 
 	}
@@ -110,7 +108,6 @@
       if(userStatusCode=="ACTIVE"){
          alert("숙소등록을 한 회원만 접근할 수 있습니다");
          location.href="/acm/list";
-
       } else if(userStatusCode=="HO_PENDING"){
          $("#hostonly").css("display","none"); 
      }
@@ -250,14 +247,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-
 $(document).ready(function () {
 	sendoption();
-
 })
-
-
-
 function sendoption(){   
 	
 	var criteria;
@@ -285,8 +277,6 @@ function sendoption(){
   	   }
   	 });
 }
-
-
 function updateList(result) {
 	$("#salesList").empty();
 	
@@ -300,5 +290,4 @@ function updateList(result) {
 	});
 	$("#salesList").append(updateListstr);
 }
-
 </script>

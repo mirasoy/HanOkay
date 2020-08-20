@@ -49,10 +49,6 @@
 
     <!-- Custom Fonts -->
     <link href="/resources/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
-	
-	<!-- 미라 css -->
-    <link rel="stylesheet" type="text/css" href="/resources/css/stats.css">
-	
 	<style>
 		html,body{
 			font-family:Verdana, sans-serif;
@@ -95,16 +91,16 @@
 			<!-- 왼쪽 nav -->
             <ul class="nav navbar-top-links navbar-left">
 				<li class="nav-menu">
-					<a href="/admin/adminlistings" class="testbtn">숙소관리</a>
+					<a href="/admin/adminlistings">숙소관리</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/admin/userStat" class="testbtn">회원관리</a>
+					<a href="/admin/userStat">회원관리</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/chat/chatList3" class="testbtn">메시지</a>
+					<a href="#">메시지</a>
 				</li>
 				<li class="nav-menu">
-					<a href="/admin/stats/statsChart" class="testbtn">매출관리</a>
+					<a href="/admin/stats/statsChart" class="active">매출관리</a>
 				</li>
 				
 			</ul>
@@ -141,22 +137,115 @@
 	    	  location.href="/acm/list";
 	      } 
 	 });
-	 
-	//Get the container element
-	 var btnContainer = document.getElementsByClassName("navbar-left");
+	 </script>
+	 	<div class="navbar-default sidebar" role="navigation">
+		<div class="sidebar-nav navbar-collapse">
+			<!-- 사업자 등록도 받을것 -->
 
-	 // Get all buttons with class="btn" inside the container
-	 var btns = btnContainer.getElementsByClassName("testbtn");
+			<ul class="nav" id="side-menu">
+				<li>
+					<a href="/admin/stats/statsChart"><i class="fa fa-camera fa-fw"></i> 한눈에 보기</a>
+				</li>
+				<li>
+					<a href="/admin/stats/statsRank"><i class="fa fa-arrow-circle-up"></i> 숙소 랭킹</a>
+				</li>
+				<li>
+					<a href="/admin/stats/stats"><i class="fa fa-krw fa-fw"></i> 매출 </a>
+				</li>
+				
+			</ul>
 
-	 // Loop through the buttons and add the active class to the current/clicked button
-	 for (var i = 0; i < btns.length; i++) {
-	   btns[i].addEventListener("click", function() {
-	      
-	    console.log("잘된다");
-	     var current = document.getElementsByClassName("active");
-	     current[0].className = current[0].className.replace(" active", "");
-	     this.className += " active";
-	   });
-	 }
-	   
-	</script>
+		</div>
+		<!-- /.sidebar-collapse -->
+	</div>
+	<!-- /.navbar-static-side -->
+	<!-- nav-end -->
+	<div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
+		<div class=" containerMR">
+			<br>
+			<div style="margin-left:15%;margin-right:15%;">
+				<h3>숙소 순위</h3>
+				<div id="optChoice">
+					<button class="btn opt"  onclick="$('#criteria').val('sumt');sendoption(); ">매출순</button>
+					<button class="btn opt"  onclick="$('#criteria').val('stisf');sendoption();">별점순</button>
+					<input type="hidden" id="criteria">
+				</div>
+				<div class = "containBody">
+					<table class="table table-striped table-bordered table-hover salesList ">
+						<thead>
+							<tr class='fixed_top'>
+								<th style="width: 10%">순위</th>
+								<th style="width: 50%">숙소이름</th>
+								<!-- 여기 호스트 이름도 있으면 좋겠다 -->
+								<th style="width: 10%">평점</th>
+								<th style="width: 30%">총 결제금액</th>
+							</tr>
+						</thead>
+					</table>
+					<div class="tableArea" id="acm">
+						<table class="table table-striped table-bordered table-hover salesList" id="salesList">
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<%@include file="../../includes/footer.jsp"%>
+<script src="/resources/js/datepicker.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+	sendoption();
+
+})
+
+
+
+function sendoption(){   
+	
+	var criteria;
+	
+	if($('#criteria').val()==""){
+		criteria = 'sumt'
+	}else{
+		criteria=$('#criteria').val();
+	}
+	
+	
+	 $.ajax({
+  	   type: 'POST',
+  	   url: '/admin/stats/change2',
+  	  data:{
+  		  "criteria" : criteria
+  	   },
+  	   dataType: 'json',
+  	   success: function(result){
+  		   console.log("성공...");
+  		   updateList(result);
+  	   },
+  	   error: function(){
+  		   console.log("실패...");
+  	   }
+  	 });
+}
+
+
+function updateList(result) {
+	$("#salesList").empty();
+	
+	var updateListstr = "";
+	
+	$(result).each(function (i,obj) {
+		updateListstr +=("<tr><td >"+(i+1)+"</td>");
+		updateListstr +=("<td>"+obj.acmName+"</td>");
+		updateListstr +=("<td>"+numeral(obj.starPoint).format('0.0[0000]')+"</td>");
+		updateListstr +=("<td>"+numeral(obj.sumTotal).format('0,0')+"</td></tr>");
+	});
+	$("#salesList").append(updateListstr);
+}
+
+</script>

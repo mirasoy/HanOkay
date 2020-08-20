@@ -313,7 +313,19 @@ var longitude;
 	            $("#iromNum").text(result.romNum);
 	            $("#iprice").text(result.price);
 	            $("#istaydays").text(result.staydays);
-	            $("#ipayMethod").text(result.payMethod);
+	            
+	            var paymmethod=result.payMethod;
+	            
+	            if(paymmethod=="PY_METHOD_CARD"){
+		            $("#ipayMethod").text("결제완료(카드)");
+	            }else if(paymmethod=="PY_METHOD_LATER"){
+	            	$("#ipayMethod").text("현장결제");
+	            }else if(paymmethod=="PY_METHOD_PAYPAL"){
+	            	$("#ipayMethod").text("결제완료(페이팔)");
+	            }
+	            	
+	            
+	            
 	            
 	            console.log(result.payMethod);
 	            if(result.payMethod=="PY_METHOD_LATER"){
@@ -337,7 +349,7 @@ var longitude;
 	function enter(){
 		
 		var paymethod=$("#ipayMethod").text();
-		
+		//alert(paymethod);
 		var booknum=$("#ibookNum").text();
 		console.log(booknum+"이시다");
 		var letschange="#st"+booknum;
@@ -345,7 +357,7 @@ var longitude;
 		$(letschange).text("입실완료");
 		 $(letschange2).prop("disabled", true);		
 		 
-		 if(paymethod=="PY_METHOD_LATER"){
+		 if(paymethod=="현장결제"){
 			 //현장결제 결제완료 바꿈
 			 $("#incomp").text(Number($("#incomp").text())+1);
 			 $("#laterr").text(Number($("#laterr").text())-1);
@@ -357,7 +369,7 @@ var longitude;
 	//퇴실승인을 누르면
 	function out(){
 		var booknum=$("#obooknum").val();
-		alert("out"+booknum);
+		//alert("out"+booknum);
 		var letschange="#st"+booknum;
 		var letschange2="#"+booknum+"bt";
 		

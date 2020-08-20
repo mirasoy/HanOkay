@@ -20,21 +20,28 @@
 <style>
 
 .formLayout3{
-    padding: 10px 12px !important;
-    width: 330px;
+    padding: 13px 53px !important;
+    width: 360px;
 }
+
+
+.formLayout1 {
+
+	padding: 10px 50px !important;
+}
+
 
 .t-check-in{
 
    
     float: left;
-    width: 150px;
+    width: 160px;
 }
 
 .t-check-out{
 
     float: right;
-    width: 150px;
+    width: 90px;
 }
 
 .t-arrow-top, .t-arrow-top::after{
@@ -42,11 +49,15 @@ border-color: transparent transparent #fff !important;
 }
 
 .spanGroup>span:nth-child(2){
-    margin-left: 100px;
+    margin-left: 110px;
 }
 
 .box1{
 	    width: 20%;
+}
+
+  .submit-btn {
+	padding: 20px;
 }
 
 
@@ -357,6 +368,138 @@ display: block;
 }
 
 
+/* 인원 +- */
+.qty .count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px
+    ;min-width: 35px;
+    text-align: center;
+}
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: #61dafb;
+    width: 30px;
+    height: 30px;
+    font: 24px/1 Arial,sans-serif;
+    text-align: center;
+    border-style: solid;
+    border-color: #61dafb;
+    border-radius: 50%;
+    }
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: #61dafb;
+    width: 30px;
+    height: 30px;
+    font: 24px/1 Arial,sans-serif;
+    text-align: center;
+    border-style: solid;
+    border-color: #61dafb;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+
+.minus:hover{
+    background-color: #61dafb !important;
+    color: white;
+}
+.plus:hover{
+    background-color: #61dafb !important;
+    color: white;
+}
+/*Prevent text selection*/
+span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+input{  
+    border: 0;
+    width: 2%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input:disabled{
+    background-color:white;
+}
+._1573fat:not(:last-child) {
+    border-bottom: 1px solid rgb(235, 235, 235) !important;
+}
+._1573fat {
+    -webkit-box-pack: justify !important;
+    -webkit-box-align: center !important;
+    color: rgb(34, 34, 34) !important;
+    /* padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    padding-right: 4px !important; */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-width: 240px !important;
+}
+._t0tx82 {
+    -webkit-box-flex: 1 !important;
+    flex-grow: 1 !important;
+}
+._1lmb2fq {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 600 !important;
+}
+._ebqknn {
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 400 !important;
+    color: rgb(113, 113, 113) !important;
+}
+._3zlfom {
+    -webkit-box-pack: justify !important;
+    -webkit-box-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 104px !important;
+    height: 32px !important;
+    color: rgb(34, 34, 34) !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+._xgnsug {
+    position: absolute !important;
+    left: 540px !important;
+    top: 100% !important;
+    z-index: 1 !important;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px !important;
+    margin-top: 12px !important;
+    max-height: calc(100vh - 220px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    background: rgb(255, 255, 255) !important;
+    border-radius: 32px !important;
+    padding: 16px 32px !important;
+    display:none;
+}
+/* 인원 +-끝 */
+.pac-target-input:not(:-webkit-autofill) {
+    animation-name: endBrowserAutofill;
+    width: 100px;
+}
 </style>
 
 
@@ -402,13 +545,13 @@ display: block;
 																value='<c:out value="${pageMaker.cri.keyword}"/>'
 																placeholder="Enter a location">
 														</div>
-														<input type="hidden" value="CW" name="type">
+														<input type="hidden" value="A" name="type">
 
 
 													</div>
 
 												</div>
-	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■여기부터 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+
 												<div class="formLayout3 ">
 												
 													<div class="booking-group2">
@@ -424,49 +567,51 @@ display: block;
 														</div>
 													</div>
 												</div>
-												
-												
-										<!-- 		<div class="t-datepicker form-group1 pt8px">
-													<span>Check In</span>
-													 <div class="t-check-in"></div>													
-												</div>
-																		
-
+																																
 												<div class="formLayout1">
-													<div class="t-datepicker form-group1 pt8px">
-														<span>Check out</span>
-														
-														<div class="t-check-out"></div>													
-													</div>
-												</div> -->
-												
-												
-												
-
-											</div>
-										</div>
-										<div class="formLayout1">
 											<div class="form-group1 pt8px">
 												<span>Guests</span>
-  
-		 										 <select class="form-control1"
-		 
-													id="person" name="person">
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-													<option value="6">6</option>
-													<option value="7">7</option>
-													<option value="8">8</option>
-												</select> 
-												
-												
-												<span class="select-arrow"></span>
+  												<input class="form-control1"
+																id="personView" type="text"
+																placeholder="Add guests" readonly>
+												<input class="form-control1"
+																id="person" type="hidden" name="person"
+																readonly>			
+		 							
 
 											</div>
 										</div>
+											</div>	
+										</div>
+<!-- 인원 +- -->						
+<div class="_xgnsug tog">
+<div class="_3hmsj tog">
+    <div class="_1573fat tog">
+        <div class="_t0tx82 tog">
+            <div class="_1lmb2fq tog">성인</div>
+	        <div class="_ebqknn tog">만 13세 이상</div>
+	    </div>
+	    <div class="qty mt-5 _3zlfom tog">
+            <span class="minus adultMinus bg-white tog">-</span>
+            <input type="number" class="count adultCnt tog" name="qty" value="1">
+            <span class="plus adultPlus bg-white tog">+</span>
+        </div>
+    </div>
+    <div class="_1573fat tog">
+        <div class="_t0tx82 tog">
+            <div class="_1lmb2fq tog">어린이</div>
+	        <div class="_ebqknn tog">만 13세 미만</div>
+	    </div>
+	    <div class="qty mt-5 _3zlfom tog">
+            <span class="minus childMinus bg-white tog">-</span>
+            <input type="number" class="count childCnt tog" name="qty" value="0">
+            <span class="plus childPlus bg-white tog">+</span>
+        </div>
+    </div>
+</div>
+</div>
+<!-- 인원 +-끝 -->	 
+
 
 										<div class="">
 											<div class="form-btn1">
@@ -676,7 +821,7 @@ display: block;
 								<span></span>
 								<h3>게스트하우스 바리</h3>
 								<span>서울시 종로구 / 1인 1박 특별가 </span> <span class="price"> 17,000원 </span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A12">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A12">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -691,7 +836,7 @@ display: block;
 								<span></span>
 								<h3>공산성게스트하우스</h3>
 								<span>충남 공주시  / 8인 특별가! </span> <span class="price"> 50,000 원 </span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A7">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A7">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -706,7 +851,7 @@ display: block;
 								<span></span>
 								<h3>무위(無爲) </h3>
 								<span>서울시 종로구 / 1인실 1박 가격 </span> <span class="price"> 13,000 원</span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-02-09&out=2020-02-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A21">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-02-09&out=2020-02-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A21">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -721,7 +866,7 @@ display: block;
 								<span></span>
 								<h3>1900s Hanok </h3>
 								<span>고즈넉한 분위기의 한옥 스테이</span> <span class="price"> 50,000 원</span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A68">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A68">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -736,7 +881,7 @@ display: block;
 								<span></span>
 								<h3>무렵</h3>
 								<span>전주의 최신 숙소</span> <span class="price">150,000원</span>
-								<a class="btn btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=%EC%A0%84%EC%A3%BC&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A82">Book Now <i
+								<a class="btn btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=%EC%A0%84%EC%A3%BC&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A82">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -751,7 +896,7 @@ display: block;
 								<span></span>
 								<h3>돈암서원 한옥마을</h3>
 								<span>충남 논산시 / 럭셔리 1인실</span> <span class="price">70,000 원</span>
-								<a class="btn  btn-outline" href="http://localhost/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A55">Book Now <i
+								<a class="btn  btn-outline" href="/acm/detail?pageNum=1&amount=10&type=A&keyword=&person=1&in=2020-08-09&out=2020-08-10&acmOpt=0&minPrice=0&maxPrice=9999999&acmNum=A55">Book Now <i
 									class="icon-arrow-right22"></i></a>
 							</div>
 						</div>
@@ -791,7 +936,7 @@ display: block;
 					<h2 class="">[교동게하]따뜻하고 전통적인 한옥게스트하우스!</h2>
 					<p>부모님 모시고 한옥 두 게스트하우스 방문했는데 한옥의 매력 제대로 느끼고 갑니다~<br>
 북촌 마을이 내려다보여서 전망도 좋고 방도 깔끔하고 통풍 잘 되서 정말정말 좋았어요!</p>
-					<a href="http://localhost/review/get?pstNum=RV17" class="text-uppercase btn btn-white btn-white-primary">Continue
+					<a href="/review/get?pstNum=RV17" class="text-uppercase btn btn-white btn-white-primary">Continue
 						Reading</a>
 				</div>
 			</section>
@@ -809,7 +954,7 @@ display: block;
 					<p>Loved our stay in this lovely, old area of Seoul. Felt like a proper, authentic Korean experience.<br>
 					 Well worth paying an extra few Won for en suite wet-room as I couldnt be doing with all the shoes-on, shoes-off business!<br>
 					  Sleeping on the futons (i.e. on the floor) with buckwheat pillows was surprisingly comfortable and the under-floor heating much appreciated.</p>
-					<a href="http://localhost/review/get?pstNum=RV22"
+					<a href="/review/get?pstNum=RV22"
 						class="text-uppercase btn btn-white btn-white-highlight">Continue
 						Reading</a>
 				</div>
@@ -826,7 +971,7 @@ display: block;
 					<p>한옥 정원이 너무 아름다웠고, 숙소 내부도 안락하고 따뜻하니 좋았습니다.
 이불보도 굉장히 두꺼워 푹신하고 편하게 잠들 수 있었어요!
 직원분들도 친절하고 깨끗해서 재방문하고싶습니다.</p>
-					<a href="http://localhost/review/get?pstNum=RV8" class="text-uppercase btn btn-white btn-white-primary">Continue
+					<a href="/review/get?pstNum=RV8" class="text-uppercase btn btn-white btn-white-primary">Continue
 						Reading</a>
 				</div>
 			</section>
@@ -869,29 +1014,7 @@ $("#pac-input").keypress(function(e){
 	}
 	
 });
-	// 날짜 선택
-	var today = new Date();
-	$("#out").datepicker({
-		minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()+1),
-		maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()),
-		numberOfMonths: 1,
-		dateFormat: 'yy-mm-dd'
-	});
-	$("#in").datepicker({
-		minDate: 0,
-		maxDate: new Date(today.getFullYear()+1, today.getMonth(), today.getDate()-1),
-		numberOfMonths: 1,
-		dateFormat: 'yy-mm-dd',
-		onSelect: function(selectedDate) {
-			var nextDay = new Date(selectedDate);
-			nextDay.setDate(nextDay.getDate() + 1);
-		  $("#out").datepicker("option","minDate", nextDay);
-			var nextMonth = new Date(selectedDate);
-			nextMonth.setDate(nextMonth.getDate() + 90);
-		  $("#out").datepicker("option","maxDate", nextMonth);
-		  $("#out").datepicker("open");
-		}
-	});
+	
 </script>
 
 	<script>
@@ -900,10 +1023,54 @@ $("#pac-input").keypress(function(e){
 	    $('.t-datepicker').tDatePicker({
 	      // options here
 	    });
+	    
+	    //인원+-
+	    $('.adultCnt').prop('disabled', true);
+		$(document).on('click','.adultPlus',function(){
+			$('.adultCnt').val(parseInt($('.adultCnt').val()) + 1 );
+			if ($('.adultCnt').val() >8) {
+					$('.adultCnt').val(8);
+				}
+			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
+			$('#personView').val($('#person').val()+ '명');
+			
+		});
+    	$(document).on('click','.adultMinus',function(){
+			$('.adultCnt').val(parseInt($('.adultCnt').val()) - 1 );
+				if ($('.adultCnt').val() < 1) {
+					$('.adultCnt').val(1);
+				}
+			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
+			$('#personView').val($('#person').val()+ '명');
+	    });
+	    
+	    $('.childCnt').prop('disabled', true);
+		$(document).on('click','.childPlus',function(){
+			$('.childCnt').val(parseInt($('.childCnt').val()) + 1 );
+			if ($('.childCnt').val() >8) {
+					$('.childCnt').val(8);
+				}
+			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
+			$('#personView').val($('#person').val()+ '명');
+		});
+    	$(document).on('click','.childMinus',function(){
+			$('.childCnt').val(parseInt($('.childCnt').val()) - 1 );
+				if ($('.childCnt').val() <0) {
+					$('.childCnt').val(0);
+				}
+			$('#person').val(parseInt($('.adultCnt').val()) + parseInt($('.childCnt').val()));
+			$('#personView').val($('#person').val()+ '명');
+	    });
 	  });
+	 
+	 $('#personView').click(function(){
+		 $('._xgnsug').show();
+	 });
+	 $(document).click(function(e){ //문서 body를 클릭했을때 해당 클래스이름이 없으면 인원창 숨김
+		 if(!$(e.target).hasClass("tog")&&!$(e.target).hasClass("form-control1")) {$("._xgnsug").hide(); }
+		  		
+	});
 	</script>
-<!-- 달력 변경. 끝 -->
-
 
 </body>
 

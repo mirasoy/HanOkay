@@ -61,7 +61,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				객실 목록
-				<button data-oper='openpop'  class="btn btn-xs pull-right">새 객실 등록</button>
+				<button data-oper='openpop'  class="btn btn-xs pull-right" style="color:black;">새 객실 등록</button>
 			</div>
 
 			<!-- /.panel-heading -->
