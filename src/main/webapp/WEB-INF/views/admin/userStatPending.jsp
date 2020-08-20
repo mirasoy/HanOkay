@@ -70,6 +70,107 @@
 			border-radius: 0px !important;
 			border-color: #ddd;
 		}
+		
+		
+		/*사진*/
+		
+	* {box-sizing: border-box}
+	body {font-family: Verdana, sans-serif; margin:0}
+	.mySlides {display: none}
+	img {vertical-align: middle;}
+	
+	/* Slideshow container */
+	.slideshow-container {
+	  max-width: 1000px;
+	  position: relative;
+	  margin: auto;
+	}
+	
+	/* Next & previous buttons */
+	.prev, .next {
+	  cursor: pointer;
+	  position: absolute;
+	  top: 50%;
+	  width: auto;
+	  padding: 16px;
+	  margin-top: -22px;
+	  color: white;
+	  font-weight: bold;
+	  font-size: 18px;
+	  transition: 0.6s ease;
+	  border-radius: 0 3px 3px 0;
+	}
+	
+	/* Position the "next button" to the right */
+	.next {
+	  right: 0;
+	  border-radius: 3px 0 0 3px;
+	}
+	
+	/* On hover, add a black background color with a little bit see-through */
+	.prev:hover, .next:hover {
+	  background-color: rgba(0,0,0,0.8);
+	}
+	
+	/* Caption text */
+	.text {
+	  color: #f2f2f2;
+	  font-size: 15px;
+	  padding: 8px 12px;
+	  position: absolute;
+	  bottom: 8px;
+	  width: 100%;
+	  text-align: center;
+	}
+	
+	/* Number text (1/3 etc) */
+	.numbertext {
+	  color: #f2f2f2;
+	  font-size: 12px;
+	  padding: 8px 12px;
+	  position: absolute;
+	  top: 0;
+	}
+	
+	/* The dots/bullets/indicators */
+	.dot {
+	  cursor: pointer;
+	  height: 15px;
+	  width: 15px;
+	  margin: 0 2px;
+	  background-color: #bbb;
+	  border-radius: 50%;
+	  display: inline-block;
+	  transition: background-color 0.6s ease;
+	}
+	
+	.active, .dot:hover {
+	  background-color: #717171;
+	}
+	
+	/* Fading animation */
+	.fade {
+	  -webkit-animation-name: fade;
+	  -webkit-animation-duration: 1.5s;
+	  animation-name: fade;
+	  animation-duration: 1.5s;
+	}
+	
+	@-webkit-keyframes fade {
+	  from {opacity: .4} 
+	  to {opacity: 1}
+	}
+	
+	@keyframes fade {
+	  from {opacity: .4} 
+	  to {opacity: 1}
+	}
+	
+	/* On smaller screens, decrease text size */
+	@media only screen and (max-width: 300px) {
+	  .prev, .next,.text {font-size: 11px}
+	}
+		
 	</style>
 </head>
 
@@ -170,10 +271,7 @@
 	        <div class="form-group">
 	          <label>회원이름</label>&nbsp; <c:out value="${pendinghostacm.userFstName }"/><c:out value="${pendinghostacm.userLastName }"/></div>
 	        <div class="form-group">
-	          <label>회원 권한</label>&nbsp;<c:out value="${pendinghostacm.userPriv }"/>
-	        </div>
-	        <div class="form-group">
-	          <label>회원 상태</label>&nbsp; <c:out value="${pendinghostacm.userStatusCode }"/>
+	          <label>회원 권한/상태</label>&nbsp;<c:out value="${pendinghostacm.userPriv }"/>/<c:out value="${pendinghostacm.userStatusCode }"/>
 	        </div>
 	        <div class="form-group">
 	          <label>숙소 상태</label>&nbsp; <span style="color:red;"><c:out value="${pendinghostacm.acmStatus }"/></span>
@@ -196,7 +294,7 @@
     <div class="panel panel-default" >
 
       <div class="panel-heading">
-      	숙소정보<label class="pull-right"><c:out value="${pendinghostacm.acmNum }"/></label>
+      	숙소정보<label class="pull-right"><c:out value="${pendinghostacm.acmNum }"/>&nbsp;<c:out value="${pendinghostacm.acmType}"/></label>
       </div>
       <input type="hidden" name="acmNum" id="acmNum" value="<c:out value='${pendinghostacm.acmNum }'/>">
       <!-- /.panel-heading -->
@@ -207,32 +305,20 @@
 	            value='<c:out value="${pendinghostacm.acmName}"/>' size="20" readonly="readonly">
 	        </div>
 	        <div class="form-group">
-	          <label>숙소유형</label> <input class="form-control" name='acmType' id='acmType'
-	            value='<c:out value="${pendinghostacm.acmType}"/>' readonly="readonly">
-	        </div>
-	        <div class="form-group">
 	          <label>숙소 주소</label> <input class="form-control" name='acmAddr'
 	            value='<c:out value="${pendinghostacm.acmCity}"/>&nbsp;<c:out value="${pendinghostacm.acmDistr}"/>&nbsp;<c:out value="${pendinghostacm.acmDetailaddr}"/>' readonly="readonly"> 
 	        </div>
 	        <div class="form-group">
-	          <label>숙소 대표번호</label> <input class="form-control" name='repPhone'
-	            value='<c:out value="${pendinghostacm.repPhone }"/>' readonly="readonly">
-	        </div>
-			<div class="form-group">
-	          <label>호스트 연락처</label> <input class="form-control" name='subPhone'
-	            value='<c:out value="${pendinghostacm.subPhone }"/>' readonly="readonly">
+	          <label>숙소 대표번호/호스트연락처</label> <input class="form-control" name='repPhone'
+	            value='<c:out value="${pendinghostacm.repPhone }"/>/<c:out value="${pendinghostacm.subPhone }"/>' readonly="readonly">
 	        </div>
 			<div class="form-group">
 	          <label>체크인, 체크아웃 시간</label> <input class="form-control" name='checkTime'
 	            value='<c:out value="${pendinghostacm.checkinTime }"/>/<c:out value="${pendinghostacm.checkoutTime }"/>' readonly="readonly">
 	        </div>
 	        <div class="form-group">
-	          <label>숙소 이메일</label> <input class="form-control" name='acmEmail'
-	            value='<c:out value="${pendinghostacm.acmEmail }"/>' readonly="readonly">
-	        </div>
-	        <div class="form-group">
-	          <label>숙소 팩스번호</label> <input class="form-control" name='acmFax'
-	            value='<c:out value="${pendinghostacm.acmFax }"/>' readonly="readonly">
+	          <label>숙소 이메일/팩스번호</label> <input class="form-control" name='acmEmail'
+	            value='<c:out value="${pendinghostacm.acmEmail }"/>/<c:out value="${pendinghostacm.acmFax }"/>' readonly="readonly">
 	        </div>
 			<div class="form-group">
 	          <label>숙소 설명</label> <textarea class="form-control" name='acmDesc' readonly="readonly"><c:out value="${pendinghostacm.acmDesc }"/></textarea>
@@ -246,6 +332,68 @@
 		</div>
 		</div>
 	</div><!-- col-lg-4 end -->
+		
+		
+	<div class="col-lg-3">
+    <div class="panel panel-default" >
+
+      <!-- /.panel-heading -->
+	      <div class="panel-body">
+			
+	        <div class="form-group">
+	          <label>숙소대표사진</label> 
+	     <div class="slideshow-container">
+					<br><br>
+
+					<div class="mySlides" id="mySlide0">
+					  <div class="numbertext">1 / 7</div>
+					</div>
+					
+					<div class="mySlides" id="mySlide1">
+					  <div class="numbertext">2 / 7</div>
+					  
+					</div>
+
+					<div class="mySlides" id="mySlide2">
+					  <div class="numbertext">3 / 7</div>
+					</div>
+
+					<div class="mySlides" id="mySlide3">
+					  <div class="numbertext">4 / 7</div>
+					</div>
+
+					<div class="mySlides" id="mySlide4">
+					  <div class="numbertext">5 / 7</div>
+					</div>
+
+					<div class="mySlides" id="mySlide5">
+					  <div class="numbertext">6 / 7</div>
+					</div>
+					<div class="mySlides" id="mySlide6">
+					  <div class="numbertext">6 / 7</div>
+					</div>
+					
+					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+					<a class="next" onclick="plusSlides(1)">&#10095;</a>
+				<!-- 여기에 넣쟈 -->	
+					<br>
+					
+			<div id="dots" style="text-align:center">
+	           <span class="dot" onclick="currentSlide(1)"></span> 
+			   <span class="dot" onclick="currentSlide(2)"></span> 
+			   <span class="dot" onclick="currentSlide(3)"></span> 
+			   <span class="dot" onclick="currentSlide(4)"></span> 
+			   <span class="dot" onclick="currentSlide(5)"></span> 
+			   <span class="dot" onclick="currentSlide(6)"></span> 
+			    <span class="dot" onclick="currentSlide(7)"></span> 
+			</div>
+          </div>
+			
+		</div>
+		</div>
+	</div><!-- col-lg-3 end -->
+	
+</div>	
 		
 		
 	 <div class="col-lg-3">
@@ -290,9 +438,61 @@
 				
 </div>
 
+<script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
+	var slideIndex = 1;
+	showSlides(slideIndex);
+	
+	function plusSlides(n) {
+	  showSlides(slideIndex += n);
+	}
+	
+	function currentSlide(n) {
+	  showSlides(slideIndex = n);
+	}
+	
+	function showSlides(n) {
+	  var i;
+	  var slides = document.getElementsByClassName("mySlides");
+	  var dots = document.getElementsByClassName("dot");
+	  if (n > slides.length) {slideIndex = 1}    
+	  if (n < 1) {slideIndex = slides.length}
+	  for (i = 0; i < slides.length; i++) {
+	      slides[i].style.display = "none";  
+	  }
+	  for (i = 0; i < dots.length; i++) {
+	      dots[i].className = dots[i].className.replace(" active", "");
+	  }
+	  slides[slideIndex-1].style.display = "block";  
+	  dots[slideIndex-1].className += " active";
+	}
+	
+	
+	
 	$(document).ready(function(){
 		getAcmOpt();
+		
+		//사진크게보기
+		var img = document.getElementsByTagName("img");
+	    for (var x = 0; x < img.length; x++) {
+	      img.item(x).onclick=function() {window.open(this.src)}; 
+	    }
+		
+	  //사진슬라이드 펑션 부르기
+		let mySlides=new Array();
+
+		for(let i=0;i<7;i++){
+			mySlides[i]=document.getElementById("mySlide"+ i);//넣는곳
+		}
+		
+		let j=0;
+		<c:forEach items="${acmPics}" var="pic">
+			mySlides[j].innerHTML+="<img style='align:center;max-width:250px;width: auto; height:200px;' src='/display?fileName=<c:out value="${pic.picAcmpurl}" /><c:out value="${pic.picAcmpname }"/>'>";
+			j++;
+		</c:forEach>
+	    
+	    
+	    		getAcmOpt();
 		var formObj = $("#actionForm");
 		
 		$('button').on("click", function(e){
