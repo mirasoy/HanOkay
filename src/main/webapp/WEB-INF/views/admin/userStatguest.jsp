@@ -196,11 +196,11 @@
 	        <div class="form-group">
 	          <label>회원 언어</label>
 	          <input class="form-control" name='userStatusCode'
-	            value='<c:out value="${user.userLanguage }"/>' readonly="readonly">
+	            value='한국어 ,ENGLISH' readonly="readonly">
 	        </div>
 			<div class="form-group">
 	          <label>회원 자기소개</label>
-	          <textarea class="form-control" readonly="readonly"><c:out value="${user.userIntroduction }"/></textarea>
+	          <textarea class="form-control" readonly="readonly">안녕하세요 한옥에 빠져 버린 <c:out value="${user.userFstName }"/>입니다. 잘부탁드려용 </textarea>
 	        </div>
 	
 			<button data-oper='sendMessage' class="btn btn-default">알림보내기</button>
