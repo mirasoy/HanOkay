@@ -12,58 +12,55 @@
 	}
 	
 	button{
-		width:250px;
-		height:40px;
+		width:350px;
+		height:50px;
 	}
 </style>
 <%@include file="../includes/becomehostheader.jsp"%>
 
 <!-- nav-sidebar -->
 <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
- 
-                    <ul class="nav" id="side-menu">
-                         <li>
-                           <a><c:out value="${userFstname}"/>님 !<br> 숙소 등록이 완료되었습니다</a> 
-                        </li>
-                        <li>
-                            <a><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
-                        </li>
-                        <li>
-                            <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
-                        </li>
-                        <li>
-                            <a><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
-                        </li>
-                        <li>
-                            <a class="active"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
-                        </li>
-                    </ul>
-                </div>
+       <div class="sidebar-nav navbar-collapse">
+       <input type="hidden" id="acmNum" name="acmNum" value=" <c:out value='${acmNum}'/>" readonly="readonly">
+
+           <ul class="nav" id="side-menu">
+                <li>
+                  <a><c:out value="${userFstname}"/>님 !<br> 숙소 등록이 완료되었습니다</a> 
+               </li>
+               <li>
+                   <a><i class="fa fa-gear fa-fw"></i> 숙소정보</a>
+               </li>
+               <li>
+                   <a><i class="fa fa-male fa-fw"></i> 상세 정보</a>
+               </li>
+               <li>
+                   <a><i class="fa fa-camera fa-fw"></i> 객실 추가</a>
+               </li>
+               <li>
+                   <a class="active"><i class="fa fa-files-o fa-fw"></i> 검토하기</a>
+               </li>
+           </ul>
+       </div>
                 <!-- /.sidebar-collapse -->
-            </div>
+</div>
             <!-- /.navbar-static-side -->
-        </nav>
+        
 	<!-- nav-end -->
 <div id="page-wrapper" style="padding-bottom:50px;margin-left: 0px;">
 		<br>
 	<div style="margin-left:20%;margin-right:15%;">	
 			 <!-- 숙소설명 -->
-	 		<h3><c:out value="${userFstname}"/>님의 새 숙소</h3>
-	 		<h3> <span style="font-size:40px;">"<c:out value="${acmName}"/>"</span>가 등록되었습니다</h3>
-	 		<br>
-	 		<h4>작성하신 숙소는 승인 전 확인과 수정이 가능합니다<br>
-	 		24시간 내에 승인여부를 확인하실수 있습니다♡</h4><br><br>
-			<button data-oper='pendingAcm' class="btn btn-default">숙소 신청 확인/수정</button> 
-			<button data-oper='home' class="btn btn-default">Han:ok 메인페이지로</button> 
-			
-		</div>
+		 		<img style='position: relative;margin-bottom: 3%;left: 20px;width: auto;height: 500px;' src='/resources/img/welcomehome.gif'>
+			 <div style="margin-left:20%;">
+				<button data-oper='pendingAcm' class="btn btn-default">숙소 신청 확인/수정</button>&nbsp;&nbsp; 
+				<button data-oper='home' class="btn btn-default">Han:ok 메인페이지로</button> 
+			</div>
 		
 		<!-- 빈 폼 -->
 		<form id="actionForm">
 		</form>
-
+		</div>
+</div>
 
 <%@include file="../includes/footer.jsp"%>
 <script type="text/javascript">
