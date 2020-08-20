@@ -82,7 +82,7 @@
 						<tr>
 							<td><c:out value="${pendingacm.userNum}" /></td>
 							<td><c:out value="${pendingacm.acmNum}" /></td>
-							<td><div id="<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />">&nbsp;</div></td>
+							<td style="color:red"><div id="<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />">&nbsp;</div></td>
 							
 							<td>
 								<a class='pendingmove' href='<c:out value="${pendingacm.acmNum}"/>'>
