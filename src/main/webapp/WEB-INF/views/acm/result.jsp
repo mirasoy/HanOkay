@@ -1817,18 +1817,17 @@ if(${pageMaker.total} == 0){
 	$("#myTable").append("<h4><img src='../resources/img/crying.png' style='width:3em;margin: 1em;'> 조건에 맞는 숙소가 없습니다!</h4>	<hr style='border:2px solid #333333'> <h4>서울의 이런 숙소는 어떠세요?</h4>");
 	<c:forEach items="${Nolist}" var="acm">
 	var str = ""
-str +='<div class="room room1 move"  href="<c:out value="${acm.acmNum}"/>" style="cursor: pointer;">	'	
-	str +='<input type="hidden" id="acmTest"	value="<c:out value="${acm.acmNum}" />">'
+		str +='<div class="room room1 move"  href="<c:out value="${acm.acmNum}"/>" style="cursor: pointer;">	'	
+		str +='<input type="hidden" id="acmTest"	value="<c:out value="${acm.acmNum}" />">'
 		str +='<div class="room-images" style="height: 14em;" ><a href="#">'
-		str +='<figure><img alt="객실사진"src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" /></figure></a></div>'
-			str +='<div class="room-details"><h2 class="title"><a href="#"><c:out value="${acm.acmName}" /></a></h1>			'
-			str +='<p class="address">'		
+		str +='<figure><img alt="객실사진"src="/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname}" />" /></figure></a></div>'
+		str +='<div class="room-details"><h2 class="title"><a href="#"><c:out value="${acm.acmName}" /></a></h1>			'
+		str +='<p class="address">'		
 		str +='<c:out value="${acm.acmCity }" />'	
-			str +='<c:out value="${acm.acmDistr }" />	'
-			str +='<c:out value="${acm.acmDetailaddr }" /></p>	</div>	'
-			str +='<input type="hidden" id="latitude"	value="<c:out value="${acm.latitude }" />">'	 
-			str +='<input	type="hidden" id="longitude"value="<c:out value="${acm.longitude }" />"></div>	'										
-													
+		str +='<c:out value="${acm.acmDistr }" />	'
+		str +='<c:out value="${acm.acmDetailaddr }" /></p>	</div>	'
+		str +='<input type="hidden" id="latitude"	value="<c:out value="${acm.latitude }" />">'	 
+		str +='<input	type="hidden" id="longitude"value="<c:out value="${acm.longitude }" />"></div>	'										
 	$("#myTable").append(str);													
 	</c:forEach>
 }
