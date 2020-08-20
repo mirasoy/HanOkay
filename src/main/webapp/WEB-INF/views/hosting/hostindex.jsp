@@ -349,7 +349,7 @@ var longitude;
 	function enter(){
 		
 		var paymethod=$("#ipayMethod").text();
-		
+		//alert(paymethod);
 		var booknum=$("#ibookNum").text();
 		console.log(booknum+"이시다");
 		var letschange="#st"+booknum;
@@ -357,7 +357,7 @@ var longitude;
 		$(letschange).text("입실완료");
 		 $(letschange2).prop("disabled", true);		
 		 
-		 if(paymethod=="PY_METHOD_LATER"){
+		 if(paymethod=="현장결제"){
 			 //현장결제 결제완료 바꿈
 			 $("#incomp").text(Number($("#incomp").text())+1);
 			 $("#laterr").text(Number($("#laterr").text())-1);
