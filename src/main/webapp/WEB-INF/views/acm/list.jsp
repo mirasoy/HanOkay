@@ -936,8 +936,7 @@ input:disabled{
 					<h2 class="">[교동게하]따뜻하고 전통적인 한옥게스트하우스!</h2>
 					<p>부모님 모시고 한옥 두 게스트하우스 방문했는데 한옥의 매력 제대로 느끼고 갑니다~<br>
 북촌 마을이 내려다보여서 전망도 좋고 방도 깔끔하고 통풍 잘 되서 정말정말 좋았어요!</p>
-					<a href="/review/get?pstNum=RV17" class="text-uppercase btn btn-white btn-white-primary">Continue
-						Reading</a>
+					<a href="/review/get?pstNum=RV17" class="text-uppercase btn btn-white btn-white-primary">리뷰 더보기</a>
 				</div>
 			</section>
 			<section class="clearfix slideshow-section slideshow-section-reverse">
@@ -955,8 +954,7 @@ input:disabled{
 					 Well worth paying an extra few Won for en suite wet-room as I couldnt be doing with all the shoes-on, shoes-off business!<br>
 					  Sleeping on the futons (i.e. on the floor) with buckwheat pillows was surprisingly comfortable and the under-floor heating much appreciated.</p>
 					<a href="/review/get?pstNum=RV22"
-						class="text-uppercase btn btn-white btn-white-highlight">Continue
-						Reading</a>
+						class="text-uppercase btn btn-white btn-white-highlight">리뷰 더보기</a>
 				</div>
 
 			</section>
@@ -971,8 +969,7 @@ input:disabled{
 					<p>한옥 정원이 너무 아름다웠고, 숙소 내부도 안락하고 따뜻하니 좋았습니다.
 이불보도 굉장히 두꺼워 푹신하고 편하게 잠들 수 있었어요!
 직원분들도 친절하고 깨끗해서 재방문하고싶습니다.</p>
-					<a href="/review/get?pstNum=RV8" class="text-uppercase btn btn-white btn-white-primary">Continue
-						Reading</a>
+					<a href="/review/get?pstNum=RV8" class="text-uppercase btn btn-white btn-white-primary">리뷰 더보기</a>
 				</div>
 			</section>
 		</div>
