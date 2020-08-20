@@ -70,77 +70,8 @@
 			border-radius: 0px !important;
 			border-color: #ddd;
 		}
-	</style>
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:20px;margin-bottom:0;background-color:white;">
-
-            <div class="navbar-header" style="margin-bottom:15px;">
-                
-				<!-- 로고자리 -->
-                <a class="navbar-brand" href="/admin/adminindex">Han:Ok for Admin</a>
-            </div>
-            <!-- /.navbar-header -->
-
-			<!-- 왼쪽 nav -->
-            <ul class="nav navbar-top-links navbar-left">
-				<li class="nav-menu">
-					<a href="/admin/adminlistings" class="acttive">숙소관리</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/admin/userStat">회원관리</a>
-				</li>
-				<li class="nav-menu" class="testbtn">
-					<a href="#">메시지</a>
-				</li>
-				<li class="nav-menu">
-					<a href="/admin/stats/mapChart">매출관리</a>
-				</li>
-				
-			</ul>
-			
-			
-			<!-- 오른쪽 nav -->
-            <ul class="nav navbar-top-links navbar-right">
-           		<li class="nav-menu">
-					<a href='/acm/list'>메인으로</a>
-				</li>
-				<li class="nav-menu">
-					<a href='/hosting/listings'>호스트 모드 보기</a>
-				</li>
-				
-					
-            </ul>
-        </nav>
-        </div>
-
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
-	 $(document).ready(function() {
-		  var user='<%=user%>';
-		   if(user==null){
-			   alert("회원만 접근할 수 있습니다");
-			   location.href="/acm/list";
-		   }
-		   
-		   
-		  var priv ='<%=userPriv%>';
-	      if(priv!="ADMIN"){
-	    	  alert("관리자만 접속할수 있습니다");
-	    	  location.href="/acm/list";
-	      } 
-	 });
-
-	   
-	</script>
-<style>
+		
+		
 	* {box-sizing: border-box}
 	body {font-family: Verdana, sans-serif; margin:0}
 	.mySlides {display: none}
@@ -237,9 +168,77 @@
 	@media only screen and (max-width: 300px) {
 	  .prev, .next,.text {font-size: 11px}
 	}
+		
+	</style>
+</head>
 
+<body>
 
-</style>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top:20px;margin-bottom:0;background-color:white;">
+
+            <div class="navbar-header" style="margin-bottom:15px;">
+                
+				<!-- 로고자리 -->
+                <a class="navbar-brand" href="/admin/adminindex">Han:Ok for Admin</a>
+            </div>
+            <!-- /.navbar-header -->
+
+			<!-- 왼쪽 nav -->
+            <ul class="nav navbar-top-links navbar-left">
+				<li class="nav-menu">
+					<a href="/admin/adminlistings" class="acttive">숙소관리</a>
+				</li>
+				<li class="nav-menu">
+					<a href="/admin/userStat">회원관리</a>
+				</li>
+				<li class="nav-menu" class="testbtn">
+					<a href="#">메시지</a>
+				</li>
+				<li class="nav-menu">
+					<a href="/admin/stats/mapChart">매출관리</a>
+				</li>
+				
+			</ul>
+			
+			
+			<!-- 오른쪽 nav -->
+            <ul class="nav navbar-top-links navbar-right">
+           		<li class="nav-menu">
+					<a href='/acm/list'>메인으로</a>
+				</li>
+				<li class="nav-menu">
+					<a href='/hosting/listings'>호스트 모드 보기</a>
+				</li>
+				
+					
+            </ul>
+        </nav>
+        </div>
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	 $(document).ready(function() {
+		  var user='<%=user%>';
+		   if(user==null){
+			   alert("회원만 접근할 수 있습니다");
+			   location.href="/acm/list";
+		   }
+		   
+		   
+		  var priv ='<%=userPriv%>';
+	      if(priv!="ADMIN"){
+	    	  alert("관리자만 접속할수 있습니다");
+	    	  location.href="/acm/list";
+	      } 
+	 });
+
+	   
+	</script>
   <!-- 숙소 방 추가 모달로 띄우기-->
 <div id="page-wrapper" style="padding-bottom:50px;margin-left:0px;">
  

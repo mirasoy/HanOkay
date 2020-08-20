@@ -142,6 +142,7 @@ public class ChatController {
 			mv.addObject("chatromnum", chatromnum);
 			mv.addObject("toUser", uService.get(otherUser));
 			mv.addObject("conversation", conversation);
+			mv.addObject("userFstname", user.getUserFstName());
 
 		} else {
 			// 비로그인 로그인시키기
@@ -198,6 +199,7 @@ public class ChatController {
 				}
 				mv.addObject("requestURL", url);
 				mv.addObject("chatList", chattingRoomList);
+				mv.addObject("userFstname", user.getUserFstName());
 
 				return mv;
 

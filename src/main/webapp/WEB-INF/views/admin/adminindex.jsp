@@ -175,7 +175,7 @@
                     			<span>새 회원 수</span>
                     		</div>
                     		<div>
-	                        	<div style="font-size:30px;cursor:pointer;" onclick="gouser()">${hopensize}</div>
+	                        	<div style="font-size:30px;cursor:pointer;" onclick="gouser()" >${hopensize}</div>
                     			<span>호스트 대기자</span>
                     		</div>
 	                        <div>
@@ -434,6 +434,10 @@
 var latitude;
 var longitude;
 
+function gouser(){
+	window.location.href="/admin/userStat";
+
+}
  
 $(document).ready(function(){
 	

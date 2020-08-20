@@ -42,7 +42,7 @@
 			</table>
 		</div>
 		
-		<div class = "container-bkPrice box">
+		<div class = "container-bkPrice box" style="height: 40%;">
 			<table>
 				<tr><td class="bk-title"><i class="fa fa-credit-card" aria-hidden="true"></i></td>
 					<td class="bk-title">결제내역</td></tr>
