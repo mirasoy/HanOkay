@@ -295,7 +295,7 @@ function updateList(result) {
 	
 	$(result).each(function (i,obj) {
 		
-		updateListstr +=("<tr><td class= 'col1'>"+obj.acmName+"</td>");
+		updateListstr +=("<tr><td class= 'col1' style='text-align: left;'>"+obj.acmName+"</td>");
 		updateListstr +=("<td class= 'col2'>"+obj.bookNum+"</td>");
 		
 		var paymathod = ""
@@ -310,7 +310,7 @@ function updateList(result) {
 		var date = new Date(time)
 		var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
 		
-		updateListstr +=("<td class= 'col3'>"+paymathod+"</td>");
+		updateListstr +=("<td class= 'col3' >"+paymathod+"</td>");
 		updateListstr +=("<td class= 'col4'>"+fdate+"</td>");
 		updateListstr +=("<td class= 'col5'>"+numeral(obj.price).format('0,0')+"</td>");
 		updateListstr +=("<td class= 'col3'>"+obj.staydays+"</td>");
