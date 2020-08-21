@@ -142,7 +142,7 @@ if (user != null) {
 
 /* Add the animation: property to whichever element you want to animate */
 .ringbell{
-    animation: ringbell 0.5s ease 0s 2 normal none;
+    animation: ringbell 0.5s ease 0s 10 normal none;
 }
 .wishopt{
 margin : 1em !important;
