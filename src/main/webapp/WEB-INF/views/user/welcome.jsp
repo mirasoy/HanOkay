@@ -95,7 +95,7 @@ pageEncoding="UTF-8"%>
 					</div>
 					</div>
 				
-					<div style="margin-top:106px; margin-left:215px; font-size: 20px;">
+					<div style="margin-top:70px; margin-left:215px; font-size: 20px;">
 					<a href="../acm/list" style="color:#077bff ; font-weight:700;" id="goBackIndex">한옥 검색하러 가기</a>
 					</div>
 				
