@@ -10,6 +10,14 @@ int i = 0;
 %>
 <%@include file="../includes/header.jsp"%>
 
+
+<style>
+.booking-info-bottom {
+    padding-top: 65px !important;
+}
+
+</style>
+
 <!-- 사이트바 CSS -->
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >

@@ -12,6 +12,15 @@
 <link href="${request.contextPath}/resources/css/t-datepicker-blue.css" rel="stylesheet" type="text/css">
 
 <style>
+
+
+.selectTitle{
+	font-size: 12px;
+    height: calc(3rem) !important;
+}
+
+
+
 .wishModals{
     width: 100% !important;
 }
@@ -886,7 +895,7 @@ background-color: #ccc;
 						<div class="form-group info-group wishModals">
 							<label>목록</label> 
 							<!-- <input class="form-control" name='listTitle' value='' > -->
-							<select class="form-control" name='listTitle' value=''>
+							<select class="form-control selectTitle" name='listTitle' value=''>
 							    <option value="분류없음" hidden>분류선택</option>
 							    <option value="관광">관광</option>
 							    <option value="휴식">휴식</option>
