@@ -175,7 +175,7 @@
                     			<span>새 회원 수</span>
                     		</div>
                     		<div>
-	                        	<div style="font-size:30px;cursor:pointer;" onclick="gouser()">${hopensize}</div>
+	                        	<div style="font-size:30px;cursor:pointer;" onclick="gouser()" >${hopensize}</div>
                     			<span>호스트 대기자</span>
                     		</div>
 	                        <div>
@@ -359,18 +359,7 @@
 			<br><br>-->
 			
  <div class="row">
- 				<div class="col-lg-6">
-                    <div class="panel panel-default" style="height:420px;">
- 						오늘의 새회원/새호스트               
-				 	</div>
-				 </div>
- 				<div class="col-lg-6" style="height:450px;">
-                    <div class="panel panel-default" style="height:420px;">
-                		오늘의 예약(전체)
-				 	</div>
-				 </div>
-  
- 
+ 				
 			   <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -445,6 +434,10 @@
 var latitude;
 var longitude;
 
+function gouser(){
+	window.location.href="/admin/userStat";
+
+}
  
 $(document).ready(function(){
 	

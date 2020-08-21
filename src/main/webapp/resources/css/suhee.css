@@ -105,6 +105,14 @@
     height: 550px;;
 }
 
+.container-bkPice{
+	height: 313px;
+}
+
+.container-bkInfo{
+	height: 210px;
+}
+
 .page-wrapper table{
 	width: 100%;
 }
@@ -256,6 +264,7 @@ p.info{
 }
 
 .page-get .box{
+    width: 102%;
     padding: 20px;
 }
 
@@ -511,13 +520,13 @@ details{
 }
 
 .pic img {
-	height: 130px;
-    width: 205px;
+	height: 134px;
+    width: 210px;
 }
 
 #pic1 img{
-	width: 618px;
-    height: 400px;
+	width: 650px;
+    height: 404px;
 }
 
 .rom-pic img{

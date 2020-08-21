@@ -42,7 +42,7 @@
 			</table>
 		</div>
 		
-		<div class = "container-bkPrice box">
+		<div class = "container-bkPrice box" style="height: 40%;">
 			<table>
 				<tr><td class="bk-title"><i class="fa fa-credit-card" aria-hidden="true"></i></td>
 					<td class="bk-title">결제내역</td></tr>
@@ -65,11 +65,11 @@
 
 	</div>
 	
-	<div class = "page-bottom">
-		<div class="container-bkMap box">
-			공사중
-		</div>
-	</div>
+<!-- 	<div class = "page-bottom">
+		<div class="container-bkMap box"> -->
+			<img class = "page-bottom container-bkMap box" style="height: auto;" src="${request.contextPath}/resources/img/wecomebanner.jpg">
+<!-- 		</div>
+	</div> -->
 </div>
 <script type="text/javascript">
 	//뒤로가기 방지

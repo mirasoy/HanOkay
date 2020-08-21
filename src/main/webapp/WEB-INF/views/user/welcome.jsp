@@ -90,7 +90,7 @@ pageEncoding="UTF-8"%>
 					</div>
 					<div style="margin-top:5px; text-align:center;">
 					<p>
-					저희 한오케이가 <br> <%=userFstName %>님이 그동안 모르고 지냈던<br>
+					저희 한오케이가 <br> <strong><%=userFstName %></strong>님이 그동안 모르고 지냈던<br>
 					아름다운 우리나라를 보여드릴게요.</p>
 					</div>
 					</div>

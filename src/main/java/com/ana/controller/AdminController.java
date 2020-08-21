@@ -206,6 +206,12 @@ public class AdminController {
 		//옵션코드List<codeVO>
 		model.addAttribute("acmCode", codeService.getAcmCode());
 		
+		//숙소사진List<AcmDetailPicVO>
+		List<AcmDetailPicVO> acmPics = pservice.getPicList(acmNum);
+		System.out.println(acmPics.size());
+		model.addAttribute("acmPics", acmPics);
+		
+		
 	}
 	
 	@GetMapping("/adminPendingviewAcm")

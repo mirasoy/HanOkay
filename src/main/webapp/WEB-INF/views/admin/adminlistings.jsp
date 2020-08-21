@@ -77,12 +77,12 @@
 						</tr>
 					</thead>
 					<c:forEach items="${pendinglist}" var="pendingacm">
-					<input type="hidden" name="pendingacmuserPriv" id="pendingacmuserPriv" value="<c:out value='${pendingacm.userPriv }'/>">
+					<input type="hidden" name="pendingacmuserPriv" id="pr<c:out value='${pendingacm.acmNum}'/>" value="<c:out value='${pendingacm.userPriv }'/>">
 					<input type="hidden" name="pendingacmbizRegnum" id="pendingacmbizRegnum" value="<c:out value='${pendingacm.bizRegnum }'/>">
 						<tr>
 							<td><c:out value="${pendingacm.userNum}" /></td>
 							<td><c:out value="${pendingacm.acmNum}" /></td>
-							<td><div id="<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />">&nbsp;</div></td>
+							<td style="color:red"><div id="<c:out value='${pendingacm.acmNum}' /><c:out value='${pendingacm.acmStatus}' />">&nbsp;</div></td>
 							
 							<td>
 								<a class='pendingmove' href='<c:out value="${pendingacm.acmNum}"/>'>
@@ -337,8 +337,11 @@ $(document).ready(function(){
 		
 		$(".pendingmove").on("click", function(e){
 			e.preventDefault();
-			var userPriv=$("#pendingacmuserPriv").val();
+			var userid="#pr"+$(this).attr("href");
+			var userPriv=$(userid).val();
+			//alert(userPriv);		
 			var bizRegnum=$("#pendingacmbizRegnum").val();
+
 			
 			if(userPriv!="HOST"){//회원권한을 업시켜야하는경우(guest일때)
 				alert("회원권한 부여가 먼저 필요합니다!");

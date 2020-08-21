@@ -13,60 +13,43 @@
 
 <style>
 
+
 .selectTitle{
 	font-size: 12px;
     height: calc(3rem) !important;
 }
 
 
+
 .wishModals{
     width: 100% !important;
 }
-
 #modalCloseBtn{
 margin-right: 127px;
 }
-
-
 input:invalid {
   border-color: red;
 }
-
-
 /* 요금 검색  */
-
 #slider-range{
     margin-bottom: 20px;
 }
-
-
 .priceModalDiv{
 margin: 0 0 15px;
 }
-
 #priceModal{
-
 display: none;
     overflow: hidden;
 }
-
 /* .modal-content{
-
     
     height: 150px;
-
 } */
-
-
 /* 요금검색 끝 */
-
-
-
 .map_section>div>div>div>div:nth-child(3)>div:last-child>div>div {
 	visibility: visible !important;
 	
 }
-
 .modal-content1 {
 	background-color: #fefefe;
 	margin: auto;
@@ -83,30 +66,22 @@ display: none;
   border: 1px solid #888;
   width: 80%;
 }
-
 .modal {
 	z-index: 12000;
 }
-
 /* 확대/축소 등 구글 지도의 기본 UI 감추기 
 .gmnoprint, .gm-control-active.gm-fullscreen-control {
 	display: none;
 }*/
-
-
 .modal-content1{
     border-radius: 12px !important;
 }
-
 .modal-body{
-
 	height: 120px;
 }
-
 .modal-footer{
   
 }
-
 .h1Name{
 		font-size: 14px;
     font-weight: 800;
@@ -115,9 +90,7 @@ display: none;
     margin: 0 auto;
     padding-left: 20px;
 }
-
 .closeBtn{
-
         float: right;
     font-size: 1.5rem;
     font-weight: 700;
@@ -132,9 +105,6 @@ display: none;
 .move{
 background-color: red;
 }
-
-
-
 .resultModal{
     -webkit-box-align: center !important;
     padding: 30px 20px 80px 20px !important;
@@ -145,10 +115,7 @@ background-color: red;
     left: 25%;
     border-radius: 20px;
 }
-
-
 .filterText{
-
    
     position: relative;
     margin: 0 auto;
@@ -164,13 +131,11 @@ background-color: red;
     display: flex !important;
     /* justify-content: center !important; */
     flex-shrink: 0 !important;
-
 }
 .filterText>h1{
     font-size: 22px;
     margin-bottom: 13px;
 }
-
 /* .filterText>.close{
     border: 1px solid red;
     position: absolute;
@@ -193,8 +158,6 @@ background-color: red;
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 .resultModal>form{
-
-
 padding-top: 8px !important;
     padding-bottom: 8px !important;
     padding-left: 48px !important;
@@ -204,8 +167,6 @@ padding-top: 8px !important;
     overflow: auto !important;
     border-top: 1px solid rgb(235, 235, 235);
 }
-
-
 .checkDiv{
 	
 	display: flex !important;
@@ -216,24 +177,18 @@ padding-top: 8px !important;
     padding-bottom: 28px !important;
     border-bottom: 1px solid rgb(235, 235, 235) !important;
 }
-
 .checkTitle{
 	
 }
-
 .checkTitle>p{
 color: inherit !important;
     font-size: 21px;
     font-weight: 800;
     line-height: inherit !important;
-
     margin-bottom: 10px;
    
 }
-
-
 .checkSub{
-
 	-webkit-box-direction: normal !important;
     -webkit-box-orient: horizontal !important;
     display: flex !important;
@@ -241,9 +196,6 @@ color: inherit !important;
     flex-wrap: wrap !important;
     width: 100% !important;
 }
-
-
-
 .checkSub>.container{
      display: block;
     position: relative;
@@ -257,7 +209,6 @@ color: inherit !important;
     -ms-user-select: none;
     user-select: none;
 }
-
 .checkSub> .container input {
   position: absolute;
   opacity: 0;
@@ -265,7 +216,6 @@ color: inherit !important;
   height: 0;
   width: 0;
 }
-
 .checkmark {
   position: absolute;
   top: 0;
@@ -277,30 +227,25 @@ color: inherit !important;
     border: 1px solid #ccc;
   
 }
-
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
   background-color: #ccc;
 }
-
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
   background-color: #61dafb;
     border: 1px solid transparent;
 }
-
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
-
 /* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
   display: block;
 }
-
 /* Style the checkmark/indicator */
 .container .checkmark:after {
      left: 8px;
@@ -314,18 +259,12 @@ color: inherit !important;
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-
-
-
 .checkSub>label{
     flex-basis: 50%;
 }
-
 .labelLast{
     flex-basis: 100% !important;
 }
-
-
 .btn-sky{
     float: left;
     padding: 12px;
@@ -338,26 +277,16 @@ color: inherit !important;
     
     margin-right: 9px;
 }
-
-
 .btnDiv{
-
    
     left: 50%;
        margin-left: -219px;
-
 position: fixed;
     bottom: 114px;
     width: 100%;
-
  
-
-
 }
-
-
 .btn-filter{
-
     float: left;
     padding: 12px;
     border: 0;
@@ -366,46 +295,34 @@ position: fixed;
     color: #fff;
     cursor: pointer;
     font-weight: 600;
-
-
 }
 /*가격 슬라이더 시작*/
 .price-slider {
     
     width: 300px;
-
 }
 /*
 input, label {
     font-family: fantasy !important;
   }*/
-
-
 .btn-pink{
 	        width: 127px;
 	        margin-right: 16px;
     background-color: #f9b6bb;
 	    
 }
-
-
 .btn-sky{
 margin-right: 16px;
 width: 127px;
 background-color: #a7e0f4;
-
 }
-
-
 .btn-gray{
     width: 127px;
 background-color: #ccc;
 }
-
   .custom-slider {
     height: 5px !important;
   }
-
   .custom-handle {
     background: #fff !important;
     border-color: #54a0c1 !important;
@@ -415,11 +332,9 @@ background-color: #ccc;
     top: -0.6em !important;
     box-shadow: 0px 0px 3px #3c6d59;
   }
-
   .custom-range {
     background: #54a0c1;
   }
-
   button.apply {
     margin-top: 2rem;
   }
@@ -451,8 +366,6 @@ background-color: #ccc;
   
   
 /*가격 슬라이더 끝*/
-
-
 </style>
 <!-- 가격 슬라이더 시작-->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -801,7 +714,7 @@ background-color: #ccc;
 									<a href="#">
 										<figure>
 											<img alt='객실사진'
-												src='/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />' />
+												src='/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname}" />' />
 										</figure>
 									</a>
 								</div>
@@ -842,7 +755,7 @@ background-color: #ccc;
 										<i></i>
 									</button>
 									<p>
-										<span> ₩ ${acm.acmPrice}</span> / 1박
+										<span> ₩ ${acm.acmPrice} / 1박</span> 
 									</p>
 								</div>
 
@@ -923,7 +836,6 @@ background-color: #ccc;
 						<div id="type-selector" class="pac-controls">
 							<input type="radio" name="type" id="changetype-all"
 								checked="checked"> <label for="changetype-all">All</label>
-
 							<input type="radio" name="type" id="changetype-establishment">
 							<label for="changetype-establishment">Establishments</label> <input
 								type="radio" name="type" id="changetype-address"> <label
@@ -1027,17 +939,11 @@ background-color: #ccc;
 </body>
 
 <script>
-
-
 /* var hidenBtn = document.getElementsByClassName("hidenBtn").value; */
-
-
-
 </script>
 <script src="https://kit.fontawesome.com/48e68a7030.js" crossorigin="anonymous"></script>
 
 <script>
-
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
@@ -1154,6 +1060,11 @@ background-color: #ccc;
 		
 		      
 		markers[k].addListener('click', function(){
+			//중심 위치를 클릭된 마커의 위치로 변경
+            //map.setCenter(this.getPosition());
+
+            //마커 클릭 시의 줌 변화
+            map.setZoom(16);
 			infoWindow.setContent(list[k].contentString);
 			infoWindow.open(map,markers[k]);
 			
@@ -1306,10 +1217,8 @@ $("#pac-input").keypress(function(e){
 		$('.t-date-check-in').trigger('click');
 	}
 });
-
 //필터 모달창
 $(function () { //=$(document).ready(function(){
-
 var maxPriceRange= ${pageMaker.cri.maxPrice};
 if(maxPriceRange>500000){
 	maxPriceRange=500000;
@@ -1346,7 +1255,6 @@ if(maxPriceRange>500000){
 	                       " - ￦" + $( "#slider-range" ).slider( "values", 1 ) );	
 	  }
 	    $('#slider-range').on('mouseup', function(){ // 이벤트 
-
 	    	var keyword = $("#pac-input").val();
 	        var type = $("#type").val();
 	        var cin = $("#in").val();
@@ -1387,33 +1295,26 @@ if(maxPriceRange>500000){
 	     	 });
 	    	
 	    });
-
 	    	
 	    
 	 // Get the modal
 	    var priceModal = document.getElementById("priceModal");
 	    
 	   
-
 	    // Get the button that opens the modal
 	    var priceBtn = document.getElementById("priceBtn");
-
 	    // Get the <span> element that closes the modal
 	    var spanPrice = document.getElementsByClassName("closePrice")[0];
 	    
 	
-
 	    // When the user clicks the button, open the modal
 	    priceBtn.onclick = function () {
 	    	priceModal.style.display = "block";
 	  	
-
 	    };
-
 	    // When the user clicks on <span> (x), close the modal
 	    spanPrice.onclick = function () {
 	    	priceModal.style.display = "none";
-
 	    };
 	    
 	   
@@ -1423,7 +1324,6 @@ if(maxPriceRange>500000){
 	    	  priceModal.style.display = "none";
 	      }
 	    };
-
 	$("#reset").click(function(){
 		var chkbox = $('input[type="checkbox"]');
 		for(let i=0; i<chkbox.length; i++){
@@ -1522,16 +1422,12 @@ if(maxPriceRange>500000){
     getAcmOpt();
    
   });
-
-
 function dec2bin(codeNum){
 	return (codeNum >>> 0).toString(2); 
 }
-
 function pad(code) {
 	return code.length >= 16? code : new Array(16 - code.length+1).join('0') + code;
 }
-
 function getAcmOpt() {
 	let option;
 	var acmOpt = $("#total_sum").val();
@@ -1544,9 +1440,7 @@ function getAcmOpt() {
 			chkbox[15-i].checked = true;
 		}
 	}
-
 }
-
 //숙소 옵션
 function getAcmOpt2(arrOpt,acmNumArr) {
 	let iconArr = new Array(); 
@@ -1583,32 +1477,25 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 		opt[h].innerHTML += '<br>';
 	}
 }
-
   // Get the modal
   var filterModal = document.getElementById("filterModal");
   
   var body = document.getElementsByTagName("body");
-
   // Get the button that opens the modal
   var btn = document.getElementById("myBtn");
-
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close2")[0];
   
   var base = $('.body');
-
   // When the user clicks the button, open the modal
   btn.onclick = function () {
 	  filterModal.style.display = "block";
 	
 	  base.addClass('modal-open');
-
   };
-
   // When the user clicks on <span> (x), close the modal
   span.onclick = function () {
 	  filterModal.style.display = "none";
-
 	  base.removeClass('modal-open');
   };
   
@@ -1687,11 +1574,7 @@ function getAcmOpt2(arrOpt,acmNumArr) {
 
 <script type="text/javascript" src="/resources/js/wishlist.js"></script>
 <script>
-
-
-
 $(document).ready(function(){	
-
 	
 	/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■찜하면 하트에 불이 들어오게끔 하는 코드를 적용한다. ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 	
@@ -1710,7 +1593,6 @@ $(document).ready(function(){
 	
 	/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/	
 	
-
 	
 	var modal = $(".wishmodal");
 	var modalRegisterBtn = $("#modalRegisterBtn");	
@@ -1733,7 +1615,6 @@ $(document).ready(function(){
 	for(var i=0; i<btn.length; i++){btn[i].onclick=function(e){
 		var modalInputuserNum = modal.find("input[name='userNum']").val();
 		var modalInputacmNum = $("#acmTest").val();	
-
 		
 		var heartbtn = $(".fa-heart");
 		var thisbtn = this;
@@ -1751,12 +1632,9 @@ $(document).ready(function(){
  			}else{
  				
 				alert("하트를 눌렀습니다!"); 																						
-
 					if($(this).children(0).hasClass("fa-heart")==1){
-
 						alert("이미 추가한 숙소입니다.");
 											
-
 						}else{
 							/* alert("찜합니다."); */
 							 $(this).children().attr('class','fa fa-heart fa-2x');  
@@ -1768,8 +1646,6 @@ $(document).ready(function(){
 			}		
 	}
 	
-
-
  
 	/* btn의 자식인 i클래스의 .attr('class','fa fa-heart fa-2x');의 상태라면 */
 			
@@ -1784,7 +1660,6 @@ $(document).ready(function(){
 		var modalInputlistTitle = $("select[name='listTitle']").val();
 		var modalInputlistContent = modal.find("input[name='listContent']").val();
 		
-
 	/* 	 $( '#wishButton' ).attr('class','fa fa-heart fa-2x'); */
 	
 		
@@ -1796,7 +1671,6 @@ $(document).ready(function(){
 			return;
 		}
 			
-
 		
 		 wishService.add({
 			 userNum : modalInputuserNum, acmNum: modalInputacmNum, listTitle: modalInputlistTitle, listContent: modalInputlistContent 
@@ -1814,31 +1688,26 @@ $(document).ready(function(){
 		
 	 });
 })
-
-
-
 </script>
 <script type="text/javascript">
 if(${pageMaker.total} == 0){
 	$("#myTable").append("<h4><img src='../resources/img/crying.png' style='width:3em;margin: 1em;'> 조건에 맞는 숙소가 없습니다!</h4>	<hr style='border:2px solid #333333'> <h4>서울의 이런 숙소는 어떠세요?</h4>");
 	<c:forEach items="${Nolist}" var="acm">
 	var str = ""
-str +='<div class="room room1 move"  href="<c:out value="${acm.acmNum}"/>" style="cursor: pointer;">	'	
-	str +='<input type="hidden" id="acmTest"	value="<c:out value="${acm.acmNum}" />">'
+		str +='<div class="room room1 move"  href="<c:out value="${acm.acmNum}"/>" style="cursor: pointer;">	'	
+		str +='<input type="hidden" id="acmTest"	value="<c:out value="${acm.acmNum}" />">'
 		str +='<div class="room-images" style="height: 14em;" ><a href="#">'
-		str +='<figure><img alt="객실사진"src="/display?fileName=<c:out value="${acm.acmPurl}" />s/<c:out value="${acm.acmPname}" />" /></figure></a></div>'
-			str +='<div class="room-details"><h2 class="title"><a href="#"><c:out value="${acm.acmName}" /></a></h1>			'
-			str +='<p class="address">'		
+		str +='<figure><img alt="객실사진"src="/display?fileName=<c:out value="${acm.acmPurl}" /><c:out value="${acm.acmPname}" />" /></figure></a></div>'
+		str +='<div class="room-details"><h2 class="title"><a href="#"><c:out value="${acm.acmName}" /></a></h1>			'
+		str +='<p class="address">'		
 		str +='<c:out value="${acm.acmCity }" />'	
-			str +='<c:out value="${acm.acmDistr }" />	'
-			str +='<c:out value="${acm.acmDetailaddr }" /></p>	</div>	'
-			str +='<input type="hidden" id="latitude"	value="<c:out value="${acm.latitude }" />">'	 
-			str +='<input	type="hidden" id="longitude"value="<c:out value="${acm.longitude }" />"></div>	'										
-													
+		str +='<c:out value="${acm.acmDistr }" />	'
+		str +='<c:out value="${acm.acmDetailaddr }" /></p>	</div>	'
+		str +='<input type="hidden" id="latitude"	value="<c:out value="${acm.latitude }" />">'	 
+		str +='<input	type="hidden" id="longitude"value="<c:out value="${acm.longitude }" />"></div>	'										
 	$("#myTable").append(str);													
 	</c:forEach>
 }
-
 //Scroll-up
 $(function(){
 	$(window).on("scroll",function() {
@@ -1849,19 +1718,12 @@ $(function(){
 	    }
 	});
 });
-
 $(".aside").on("click",function(evt){
 	$("html,body").stop().animate({
 		scrollTop : 0
 	},400);
-
 	evt.preventDefault();
 });
-
-
-
-
-
 </script>
 
 

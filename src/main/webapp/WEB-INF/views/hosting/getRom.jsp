@@ -66,7 +66,7 @@
 		<div class="col-lg-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				객실 정보 <span class="pull-right"><c:out value="${thisrom.romNum}" />&nbsp;&nbsp;<button type="button" data-oper='editRom'>객실 정보 변경</button></span>
+				객실 정보 <span class="pull-right"><c:out value="${thisrom.romNum}" />&nbsp;&nbsp;<button type="button" data-oper='editRom' style="color:black;">객실 정보 변경</button></span>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">

@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<%@include file="../includes/hostheader.jsp"%>
-<!-- 사이트바 CSS -->
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/sidebar.css" >
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/resources/css/booklist.css" >
-
+<%@include file="../includes/adminheader.jsp"%>
 
 <style>
 
@@ -178,21 +174,8 @@ text-align: center;
 	width: 90%;
     height: 40px;
 }
-   
-   a{
-      color: #21292d !important;
-      } 
+    
 </style>
-
-<div class="container">
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■대제목■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
-	<div class="page-header-content">
-		<div class="page-header-top">
-			<h1 class="page-header">채팅하기</h1>
-			<p><%=userFstName %>님,대화를 시작해보세요! </p>
-		</div>	
-	</div>
 
 
 <section class="contents">
@@ -236,35 +219,40 @@ function messageListLoad(){  //변수 안에 function자체를 넣음.
 	var dateArr= sysdate.split(' ');
 	
 	
-	var other ="";
-	if('<%=userNum%>'=='<c:out value="${chatList.participant1 }" />'){
-		other = '<c:out value="${chatList.participant2 }" />'
-	}else{
-		other = '<c:out value="${chatList.participant1 }" />'
-	}		
-	
-	
-		if(<c:out value="${chatList.unread }" />!=0){
+
+	var other = "";
+		if ('ADMIN' == '<c:out value="${chatList.participant1 }" />') {
+			other = '<c:out value="${chatList.participant2 }" />'
+		} else {
+			other = '<c:out value="${chatList.participant1 }" />'
+		}
+
+		str2 += "<div class='chatContainer chatrom' value='<c:out value="${chatList.chatromnum }" />'>"
+		if (<c:out value="${chatList.unread }" /> != 0) {
 			str2 += "<div class='unread'><p><c:out value="${chatList.unread }" /></p></div>"
 		}
-		
-			str2 += "<div class='chatContainer chatrom' value='<c:out value="${chatList.chatromnum }" />'>"
-			str2 += "<img src='http://www.jisadong.com/data/file/fun/3034803641_BYV8GFmL_2391224.jpeg'  class ='right' style='width:100%;'>"
-			str2 += "<p><h5><c:out value="${chatList.otherUser.userFstName }" /><c:out value="${chatList.otherUser.userLastName }" /></h5></p>"
-			str2 += "<p><c:out value="${chatList.lastchat }" /></p> "
-			str2 += "<span class='time-left'>"+dateArr[3]+"</span></div>"
-			str2 += "<form name='<c:out value="${chatList.chatromnum }" />'action='/chat/chatRoom2' method='POST'>"
-			str2 += "<input type='hidden' name=chatromnum value='<c:out value="${chatList.chatromnum }" />'>"
-			str2 += "<input type='hidden' name=requestURL value='${requestURL }'>"
-			str2 += "</form>"
-	
-			
-	</c:forEach>
-	
-	$(".chatList").append(str2);
-}
-    
-  
+		str2 += "<img src='http://www.jisadong.com/data/file/fun/3034803641_BYV8GFmL_2391224.jpeg'  class ='right' style='width:100%;'>"
+		str2 += "<p><h5><c:out value="${chatList.otherUser.userFstName }" /><c:out value="${chatList.otherUser.userLastName }" /></h5></p>"
+		str2 += "<p><c:out value="${chatList.lastchat }" /></p> "
+		str2 += "<span class='time-left'>" + dateArr[3] + "</span></div>"
+		str2 += "<form name='<c:out value="${chatList.chatromnum }" />'action='/chat/chatRoom3' method='POST'>"
+		str2 += "<input type='hidden' name=chatromnum value='<c:out value="${chatList.chatromnum }" />'>"
+		str2 += "<input type='hidden' name=requestURL value='${requestURL }'>"
+		str2 += "</form>"
+
+		</c:forEach>
+
+		$(".chatList").append(str2);
+	}
 </script>
-	<%@include file="../includes/footer.jsp"%>
+
+
+
+
+
+
+
+
+
+
 </html>

@@ -81,7 +81,9 @@ body {
 .search2{
 	position: absolute !important;
     top: 0;
+
     left: 2%;
+
 
 
 }
@@ -638,6 +640,9 @@ body {
 		display: none;
 	}
 	.formLayout3 {
+		display: none;
+	}
+	._xgnsug{
 		display: none;
 	}
 	.box1 {
