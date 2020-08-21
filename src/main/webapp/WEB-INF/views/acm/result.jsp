@@ -364,6 +364,12 @@ background-color: #ccc;
   }
   
   
+  .selectTitle{
+   font-size: 12px;
+    height: calc(3rem) !important;
+}
+  
+  
   
 /*가격 슬라이더 끝*/
 </style>

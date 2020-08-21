@@ -152,6 +152,9 @@ var latitude;
         		$("#btn"+setNum).val(result[element].addr1.split(" ")[1]);
         		$("#placeTitle"+setNum).text(result[element].title);
         		$("#placeTitle1-"+setNum).text(result[element].addr1);
+        		if($("#cardImg"+setNum).attr("src")==""){
+        			$("#cardImg"+setNum).attr("src", "https://www.carbonbrief.org/wp-content/uploads/2020/04/southKoreaHero.jpg");
+        		}
         		setNum++;
         	});
         

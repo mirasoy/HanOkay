@@ -414,6 +414,9 @@ $(document).ready(function(){
    else if(bookStatus.trim()=="RS_STT_CI"){//체크인
 	      $("#st<c:out value='${chkout.bookNum}'/>").append("퇴실대기");
 	   }  
+   else if(bookStatus.trim()=="RS_STT_BC"){//체크인
+	      $("#st<c:out value='${chkout.bookNum}'/>").append("퇴실대기");
+	   }
    
    else if(bookStatus.trim()=="RS_STT_AC"){//체크아웃완료
       $("#st<c:out value='${chkout.bookNum}'/>").append("퇴실완료");
